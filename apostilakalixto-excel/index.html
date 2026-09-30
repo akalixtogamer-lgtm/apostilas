@@ -1,0 +1,1875 @@
+<!doctype html>
+<html lang="pt-BR"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Apostila de Excel — do Iniciante ao Avançado</title>
+<meta name="description" content="Do básico às funções de busca, lógica e análise, com exercícios ligados à prova.">
+<meta property="og:title" content="Apostila de Excel — do Iniciante ao Avançado"><meta property="og:description" content="Do básico às funções de busca, lógica e análise, com exercícios ligados à prova.">
+<link rel="icon" href="data:image/webp;base64,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">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Unbounded:wght@600;700&family=Sora:wght@600&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap">
+<style>/* =====================================================================
+   KALIXTO DESIGN SYSTEM — tokens espelhados do arquivo Figma
+   "Kalixto — Design System" (coleções Primitives, Theme, Spacing & Radius;
+   estilos de texto, efeitos Glass/Glow/Elevation e gradientes).
+   Tema padrão: Dark. Light via prefers-color-scheme ou data-theme.
+   ===================================================================== */
+:root{
+  /* Primitives */
+  --black-950:#050505; --gray-900:#1B1B1B; --gray-800:#2D2D2D; --gray-500:#6E6E80; --gray-300:#B3B3C2; --gray-100:#F5F7FA; --white:#FFFFFF;
+  --ink-900:#120B24; --ink-600:#4A4560;
+  --purple-700:#5A12D6; --purple-500:#7B2EFF; --purple-300:#B899FF; --purple-100:#EADFFF;
+  --pink-700:#D6127F; --pink-500:#FF2DAA; --pink-100:#FFD5F1;
+  --cyan-700:#0089A8; --cyan-500:#00D9FF; --cyan-100:#D8F7FF;
+  --gold-700:#B7791F; --gold-500:#FFC53D;
+  --green-700:#0E9F6E; --green-500:#22E3A0;
+  --amber-700:#B86E00; --amber-500:#FFB020;
+  --red-700:#D92D4A; --red-500:#FF4D6A;
+
+  /* Theme · Dark (padrão) */
+  --bg-base:var(--black-950); --bg-surface:var(--gray-900); --bg-elevated:var(--gray-800);
+  --text-primary:var(--white); --text-secondary:var(--gray-300); --text-muted:var(--gray-500);
+  --brand-primary:var(--purple-500); --brand-secondary:var(--pink-500); --brand-tertiary:var(--cyan-500);
+  --accent-gold:var(--gold-500); --support-lilac:var(--purple-300);
+  --fb-success:var(--green-500); --fb-warning:var(--amber-500); --fb-error:var(--red-500); --fb-info:var(--cyan-500);
+  --glass-fill:rgba(255,255,255,.06); --glass-stroke:rgba(255,255,255,.14); --glass-tint:rgba(123,46,255,.10);
+  --glass-shadow:0 24px 64px rgba(0,0,0,.45), inset 0 1px 0 rgba(255,255,255,.12);
+  --glass-shadow-s:0 12px 32px rgba(0,0,0,.35), inset 0 1px 0 rgba(255,255,255,.10);
+  --on-accent:var(--black-950);
+  --code-bg:rgba(0,0,0,.35);
+  --aura-1:rgba(123,46,255,.34); --aura-2:rgba(255,45,170,.16); --aura-3:rgba(0,217,255,.10);
+
+  /* Gradientes (Paint styles) */
+  --g-neon:linear-gradient(90deg,#7B2EFF 0%,#FF2DAA 100%);
+  --g-tech:linear-gradient(90deg,#00D9FF 0%,#7B2EFF 100%);
+  --g-ia:linear-gradient(90deg,#00D9FF 0%,#B899FF 50%,#FF2DAA 100%);
+  --g-gamer:linear-gradient(90deg,#FF2DAA 0%,#7B2EFF 50%,#00D9FF 100%);
+  --g-ancestral:linear-gradient(90deg,#FFC53D 0%,#FF2DAA 50%,#7B2EFF 100%);
+
+  /* Glow (Effect styles) */
+  --glow-purple:0 0 40px rgba(123,46,255,.55); --glow-pink:0 0 40px rgba(255,45,170,.50); --glow-cyan:0 0 40px rgba(0,217,255,.50);
+
+  /* Spacing & Radius */
+  --s1:4px; --s2:8px; --s3:12px; --s4:16px; --s6:24px; --s8:32px; --s12:48px; --s16:64px; --s24:96px;
+  --r-sm:8px; --r-md:16px; --r-alert:20px; --r-lg:24px; --r-card:28px; --r-xl:32px; --r-pill:999px;
+  --blur-sm:12px; --blur-md:24px;
+
+  /* Tipografia (Text styles) */
+  --f-display:"Unbounded","Sora",system-ui,sans-serif;
+  --f-heading:"Sora","Inter",system-ui,sans-serif;
+  --f-body:"Inter",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --f-code:"JetBrains Mono",ui-monospace,Consolas,monospace;
+  color-scheme:dark;
+}
+/* Theme · Light */
+@media (prefers-color-scheme: light){
+  :root:not([data-theme="dark"]){
+    --bg-base:var(--gray-100); --bg-surface:var(--white); --bg-elevated:var(--purple-100);
+    --text-primary:var(--ink-900); --text-secondary:var(--ink-600); --text-muted:var(--gray-500);
+    --brand-secondary:var(--pink-700); --brand-tertiary:var(--cyan-700);
+    --accent-gold:var(--gold-700); --support-lilac:var(--purple-700);
+    --fb-success:var(--green-700); --fb-warning:var(--amber-700); --fb-error:var(--red-700); --fb-info:var(--cyan-700);
+    --glass-fill:rgba(255,255,255,.55); --glass-stroke:rgba(255,255,255,.85); --glass-tint:rgba(184,153,255,.18);
+    --glass-shadow:0 24px 64px rgba(90,18,214,.10), inset 0 1px 0 rgba(255,255,255,.7);
+    --glass-shadow-s:0 12px 32px rgba(90,18,214,.08), inset 0 1px 0 rgba(255,255,255,.7);
+    --on-accent:var(--white);
+    --code-bg:rgba(255,255,255,.7);
+    --aura-1:rgba(234,223,255,.9); --aura-2:rgba(255,213,241,.8); --aura-3:rgba(216,247,255,.8);
+    color-scheme:light;
+  }
+}
+:root[data-theme="light"]{
+  --bg-base:var(--gray-100); --bg-surface:var(--white); --bg-elevated:var(--purple-100);
+  --text-primary:var(--ink-900); --text-secondary:var(--ink-600); --text-muted:var(--gray-500);
+  --brand-secondary:var(--pink-700); --brand-tertiary:var(--cyan-700);
+  --accent-gold:var(--gold-700); --support-lilac:var(--purple-700);
+  --fb-success:var(--green-700); --fb-warning:var(--amber-700); --fb-error:var(--red-700); --fb-info:var(--cyan-700);
+  --glass-fill:rgba(255,255,255,.55); --glass-stroke:rgba(255,255,255,.85); --glass-tint:rgba(184,153,255,.18);
+  --glass-shadow:0 24px 64px rgba(90,18,214,.10), inset 0 1px 0 rgba(255,255,255,.7);
+  --glass-shadow-s:0 12px 32px rgba(90,18,214,.08), inset 0 1px 0 rgba(255,255,255,.7);
+  --on-accent:var(--white);
+  --code-bg:rgba(255,255,255,.7);
+  --aura-1:rgba(234,223,255,.9); --aura-2:rgba(255,213,241,.8); --aura-3:rgba(216,247,255,.8);
+  color-scheme:light;
+}
+
+/* ---------- Base ---------- */
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important}}
+body{background:var(--bg-base);color:var(--text-primary);font:400 16px/24px var(--f-body);
+  background-image:
+    radial-gradient(900px 620px at 92% -8%,var(--aura-1),transparent 62%),
+    radial-gradient(760px 520px at -12% 38%,var(--aura-2),transparent 60%),
+    radial-gradient(700px 500px at 80% 110%,var(--aura-3),transparent 60%);
+  background-attachment:fixed}
+a{color:var(--brand-tertiary)}
+:focus-visible{outline:2px solid var(--brand-tertiary);outline-offset:3px}
+strong{font-weight:600;color:var(--text-primary)}
+
+/* ---------- Tipografia (Text styles do Figma, escalados para web) ---------- */
+.t-display{font:700 clamp(40px,7vw,72px)/1.1 var(--f-display);letter-spacing:-.02em;margin:0;text-wrap:balance}
+.t-h1{font:600 clamp(30px,4.6vw,48px)/1.16 var(--f-display);letter-spacing:-.01em;margin:0;text-wrap:balance}
+.t-h2{font:600 clamp(26px,3.6vw,36px)/1.22 var(--f-display);letter-spacing:-.01em;margin:0;text-wrap:balance}
+.t-h3{font:600 clamp(22px,2.8vw,28px)/1.28 var(--f-heading);margin:0;text-wrap:balance}
+.t-sub-l{font:600 22px/30px var(--f-heading);margin:0}
+.t-sub-m{font:600 18px/26px var(--f-heading);margin:0}
+.t-overline{font:600 13px/16px var(--f-heading);letter-spacing:.14em;text-transform:uppercase}
+.t-body-l{font:400 18px/28px var(--f-body)}
+.t-body-s{font:400 14px/20px var(--f-body)}
+.t-caption{font:500 12px/16px var(--f-body);letter-spacing:.02em}
+.t-code{font:400 13px/20px var(--f-code)}
+.grad-text{background:var(--g-neon);-webkit-background-clip:text;background-clip:text;color:transparent}
+
+/* ---------- Cabeçalho de seção (padrão das páginas do DS) ---------- */
+.kx-eyebrow{display:flex;align-items:center;gap:var(--s2);color:var(--text-muted)}
+.kx-eyebrow .num{font:600 11px/1 var(--f-heading);color:#fff;background:var(--g-neon);border-radius:var(--r-pill);padding:4px 8px;letter-spacing:.04em}
+.kx-rule{width:72px;height:2px;border-radius:2px;background:var(--g-ia);border:0;margin:0}
+
+/* ---------- Glass (Effect Glass/Dark · M | S) ---------- */
+.glass{background:var(--glass-fill);border:1px solid var(--glass-stroke);box-shadow:var(--glass-shadow);
+  -webkit-backdrop-filter:blur(var(--blur-md));backdrop-filter:blur(var(--blur-md))}
+.glass-s{background:var(--glass-fill);border:1px solid var(--glass-stroke);box-shadow:var(--glass-shadow-s);
+  -webkit-backdrop-filter:blur(var(--blur-sm));backdrop-filter:blur(var(--blur-sm))}
+
+/* ---------- Button (Primary · Secondary · Glass · Ghost) ---------- */
+.btn{display:inline-flex;align-items:center;gap:var(--s3);font:600 17px/21px var(--f-heading);text-decoration:none;cursor:pointer;
+  border-radius:var(--r-pill);padding:16px 30px;border:0;color:#fff;transition:box-shadow .2s,transform .2s,filter .2s}
+.btn .arrow{transition:transform .2s}
+.btn:hover .arrow{transform:translateX(3px)}
+.btn--primary{background:var(--g-neon)}
+.btn--primary:hover{box-shadow:var(--glow-pink)}
+.btn--secondary{background:var(--brand-primary)}
+.btn--secondary:hover{box-shadow:var(--glow-purple)}
+.btn--glass{background:var(--glass-fill);border:1px solid var(--glass-stroke);color:var(--text-primary);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px)}
+.btn--glass .arrow{color:var(--brand-tertiary)}
+.btn--ghost{background:transparent;border:1.5px solid var(--brand-tertiary);color:var(--brand-tertiary)}
+.btn--ghost:hover{box-shadow:var(--glow-cyan)}
+.btn--sm{font-size:15px;padding:12px 22px}
+
+/* ---------- Badge (Tech · Dança · IA · Gamer · Evento · Aula) ---------- */
+.badge{--c:var(--brand-tertiary);display:inline-flex;align-items:center;gap:var(--s2);padding:8px 16px 8px 14px;border-radius:var(--r-pill);
+  background:color-mix(in srgb,var(--c) 16%,transparent);border:1px solid color-mix(in srgb,var(--c) 45%,transparent);color:var(--c);
+  font:600 13px/16px var(--f-heading);letter-spacing:.06em;text-transform:uppercase;white-space:nowrap}
+.badge i{font:500 13px/16px var(--f-code);font-style:normal}
+.badge--tech{--c:var(--brand-tertiary)} .badge--danca{--c:var(--brand-secondary)} .badge--ia{--c:var(--support-lilac)}
+.badge--gamer{--c:var(--brand-primary)} .badge--evento{--c:var(--accent-gold)} .badge--aula{--c:var(--fb-success)}
+
+/* ---------- Alert (Success · Warning · Error · Info) ---------- */
+.alert{--c:var(--fb-info);display:flex;gap:var(--s4);align-items:flex-start;padding:20px 24px;border-radius:var(--r-alert);
+  background:var(--glass-fill);border:1px solid color-mix(in srgb,var(--c) 40%,transparent);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px)}
+.alert .ico{flex:none;width:28px;height:28px;border-radius:50%;background:var(--c);color:var(--on-accent);display:grid;place-items:center;font:500 15px/1 var(--f-code)}
+.alert .ttl{font:600 17px/24px var(--f-heading);margin:0 0 2px;color:var(--text-primary)}
+.alert p{margin:0;font:400 15px/22px var(--f-body);color:var(--text-secondary)}
+.alert--success{--c:var(--fb-success)} .alert--warning{--c:var(--fb-warning)} .alert--error{--c:var(--fb-error)} .alert--info{--c:var(--fb-info)}
+
+/* ---------- Destaque / Callout ---------- */
+.callout{display:flex;gap:var(--s6);border-radius:var(--r-lg);overflow:hidden}
+.callout::before{content:"";flex:none;width:4px;background:var(--g-neon)}
+.callout .in{padding:24px 32px 24px 0}
+.callout .t-overline{color:var(--brand-secondary);font-size:12px}
+.callout .q{font:600 clamp(17px,2vw,21px)/1.45 var(--f-heading);margin:8px 0 0;color:var(--text-primary)}
+
+/* ---------- Stat ---------- */
+.stat{padding:var(--s8);border-radius:var(--r-card);display:grid;gap:10px;min-width:0}
+.stat .t-overline{color:var(--text-muted);font-size:12px}
+.stat .num{font:700 clamp(40px,6vw,56px)/1 var(--f-display);background:var(--g-neon);-webkit-background-clip:text;background-clip:text;color:transparent}
+.stat .delta{font:500 13px/16px var(--f-code);color:var(--fb-success)}
+
+/* ---------- Chamada / CTA ---------- */
+.cta{border-radius:var(--r-xl);padding:36px 44px;display:flex;align-items:center;justify-content:space-between;gap:var(--s8);flex-wrap:wrap;
+  background:linear-gradient(100deg,rgba(123,46,255,.28),rgba(255,45,170,.16) 55%,rgba(255,197,61,.10)),var(--bg-surface);
+  border:1px solid var(--glass-stroke);box-shadow:var(--glass-shadow)}
+.cta h2{font:600 clamp(22px,3vw,28px)/1.25 var(--f-display);margin:0 0 6px;text-wrap:balance}
+.cta p{margin:0;color:var(--text-secondary)}
+
+/* ---------- Código ---------- */
+pre{font:400 13px/20px var(--f-code);background:var(--code-bg);border:1px solid var(--glass-stroke);border-radius:var(--r-md);padding:var(--s4) 20px;overflow-x:auto;margin:0;color:var(--text-primary)}
+code{font-family:var(--f-code);font-size:.9em;color:var(--brand-tertiary);background:color-mix(in srgb,var(--brand-tertiary) 12%,transparent);padding:1px 6px;border-radius:6px}
+pre code{background:none;color:inherit;padding:0;font-size:inherit}
+.tk-k{color:var(--brand-secondary)} .tk-s{color:var(--fb-success)} .tk-c{color:var(--text-muted)} .tk-n{color:var(--accent-gold)}
+
+/* ---------- Logo oficial ---------- */
+.kx-logo{border-radius:50%;flex:none;display:block;box-shadow:var(--glow-purple)}
+
+
+.wrap{max-width:900px;margin:0 auto;padding-inline:16px;padding-block:var(--s12) var(--s16);display:grid;gap:var(--s6)}
+.top{display:flex;align-items:center;gap:var(--s4);flex-wrap:wrap}
+.top a{text-decoration:none;font:600 14px/20px var(--f-heading)}
+.doc{display:grid;grid-template-columns:minmax(0,1fr);gap:var(--s4);color:var(--text-secondary)}
+.doc > *{min-width:0;margin:0}
+.doc h1{font:600 clamp(30px,5vw,44px)/1.15 var(--f-display);color:var(--text-primary);text-wrap:balance}
+.doc h2{font:600 clamp(22px,3vw,28px)/1.25 var(--f-display);color:var(--text-primary);margin-top:var(--s8);display:flex;gap:12px;align-items:center}
+.doc h2::before{content:"";width:18px;height:3px;border-radius:3px;background:var(--g-neon);flex:none}
+.doc h3{font:600 20px/28px var(--f-heading);color:var(--text-primary);margin-top:var(--s4)}
+.doc h4{font:600 17px/24px var(--f-heading);color:var(--text-primary)}
+.doc p,.doc li{max-width:72ch}
+.doc ul,.doc ol{padding-left:22px}.doc li{margin-bottom:6px}.doc li::marker{color:var(--brand-secondary)}
+.doc .meta{font:500 13px/16px var(--f-code);color:var(--text-muted)}
+.tbl{border-radius:var(--r-lg);overflow-x:auto;padding:6px}
+table{border-collapse:collapse;width:100%;font:400 15px/22px var(--f-body)}
+th,td{text-align:left;padding:10px 14px;vertical-align:top;border-bottom:1px solid var(--glass-stroke)}
+tr:last-child td{border-bottom:0}
+th{font:600 12px/16px var(--f-heading);letter-spacing:.12em;text-transform:uppercase;color:var(--text-muted)}
+td{color:var(--text-secondary)} td:first-child{color:var(--text-primary)}
+.doc img{max-width:100%;height:auto;border-radius:var(--r-md);border:1px solid var(--glass-stroke);background:#fff}
+.doc blockquote{margin:0;padding:16px 20px;border-radius:var(--r-alert);background:var(--glass-fill);border:1px solid color-mix(in srgb,var(--fb-info) 40%,transparent)}
+.mermaid{background:var(--glass-fill);border:1px solid var(--glass-stroke);border-radius:var(--r-lg);padding:var(--s4);overflow-x:auto;text-align:center}
+.checklist{list-style:none;padding-left:0!important;display:grid;gap:8px}
+.checklist label{display:flex;gap:12px;align-items:flex-start}
+.checklist input{appearance:none;flex:none;width:20px;height:20px;margin-top:2px;border-radius:6px;border:1.5px solid var(--glass-stroke);background:var(--glass-fill);display:grid;place-items:center;cursor:pointer}
+.checklist input:checked{background:var(--g-neon);border-color:transparent}
+.checklist input:checked::after{content:"✓";color:#fff;font:600 13px/1 var(--f-code)}
+footer.sig{padding:var(--s6);border-radius:var(--r-card);display:flex;align-items:center;gap:var(--s4);flex-wrap:wrap;justify-content:space-between}
+footer.sig .who{display:flex;gap:var(--s3);align-items:center}
+footer.sig b{font:600 16px/22px var(--f-heading);display:block}
+footer.sig small{font:500 12px/16px var(--f-body);color:var(--text-muted)}
+</style></head><body>
+<div class="wrap">
+  <div class="top"><img class="kx-logo" src="data:image/webp;base64,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" width="56" height="56" alt="Logo Kalixto">
+    <div class="kx-eyebrow"><span class="num">XL</span><span class="t-overline">Dev-Kalixto</span></div>
+    <a href="../" style="margin-left:auto">← Todos os materiais</a></div>
+  <hr class="kx-rule">
+  <article class="doc"><h1>Apostila de Excel — do Iniciante ao Avançado</h1>
+<p class="meta">23 set 2026 · Wallace Toledo</p>
+<h2>Como usar esta apostila</h2>
+<p>O objetivo final é resolver sozinho as 14 questões da Prova_Excel: contagens, somas condicionais, buscas entre tabelas, faturamento, lucro, margem e crescimento. Cada módulo ensina uma peça desse raciocínio e termina com um exercício ligado à prova.</p>
+<pre class="mermaid">flowchart LR
+    A[Fundamentos] --&gt; B[Agregação]
+    B --&gt; C[Lógica SE]
+    C --&gt; D[CONT.SE / SOMASE]
+    D --&gt; E[Datas]
+    E --&gt; F[PROCV / ÍNDICE]
+    F --&gt; G[Limpeza de dados]
+    G --&gt; H[Várias tabelas]
+    H --&gt; I[Tabela dinâmica]
+    I --&gt; J[Raciocínio de prova]
+</pre>
+
+<p>Siga a trilha na ordem: cada módulo usa o anterior. Os módulos 1 a 3 são iniciante, 4 a 6 intermediário, 7 a 10 avançado.</p>
+<h3>Convenções usadas aqui</h3>
+<ul>
+<li><strong>Excel em português (pt-BR).</strong> Os argumentos são separados por <strong>ponto e vírgula</strong> (<code>;</code>), e a vírgula é o separador decimal: <code>=ARRED(3,14159;2)</code>.</li>
+<li><strong>Nomes das funções em português.</strong> A tabela de referência no fim traz o equivalente em inglês (no Excel em inglês o separador é a vírgula).</li>
+<li><strong>Referência a outra aba:</strong> <code>'Nome da Aba'!A:A</code>. As aspas simples são obrigatórias quando o nome tem espaço ou ponto (como <code>'Q6.1'</code>).</li>
+<li><strong>Colunas inteiras</strong> (<code>A:A</code>) funcionam bem em provas: o Excel ignora células vazias e cabeçalhos de texto nas somas e médias.</li>
+</ul>
+<h3>Como estudar cada módulo</h3>
+<ol>
+<li>Leia a explicação e digite os exemplos numa planilha em branco.</li>
+<li>Mude um valor e veja o resultado mudar: é assim que se entende uma fórmula.</li>
+<li>Faça o exercício do módulo antes de olhar a resolução comentada.</li>
+</ol>
+<h2>Módulo 1 — Fundamentos</h2>
+<p>Toda análise no Excel parte de três ideias: células guardam valores, fórmulas calculam a partir de células, e referências dizem ao Excel <em>onde</em> olhar.</p>
+<h3>1.1 A planilha</h3>
+<ul>
+<li><strong>Pasta de trabalho</strong> = o arquivo (.xlsx). <strong>Planilha</strong> ou <strong>aba</strong> = cada folha dentro dele (Q1, Q2, Base Vendas…).</li>
+<li><strong>Célula</strong> = cruzamento de coluna (letra) com linha (número): <code>B2</code> é coluna B, linha 2.</li>
+<li><strong>Intervalo</strong> = bloco de células: <code>B2:B300</code> (de B2 até B300), <code>A:A</code> (coluna A inteira), <code>2:2</code> (linha 2 inteira).</li>
+<li><strong>Caixa de nome</strong> (à esquerda da barra de fórmulas) mostra a célula selecionada. <strong>Barra de fórmulas</strong> mostra o que realmente está dentro dela.</li>
+</ul>
+<h3>1.2 Tipos de dados</h3>
+<div class="tbl glass-s"><table>
+<thead>
+<tr>
+<th>Tipo</th>
+<th>Exemplo</th>
+<th>Alinhamento padrão</th>
+<th>Observação</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Número</td>
+<td>399,5</td>
+<td>Direita</td>
+<td>Pode ser somado</td>
+</tr>
+<tr>
+<td>Texto</td>
+<td>Produto Ouro</td>
+<td>Esquerda</td>
+<td>Não entra em SOMA</td>
+</tr>
+<tr>
+<td>Data</td>
+<td>08/07/2020</td>
+<td>Direita</td>
+<td>É um número por baixo (Módulo 5)</td>
+</tr>
+<tr>
+<td>Lógico</td>
+<td>VERDADEIRO</td>
+<td>Centro</td>
+<td>Resultado de comparações</td>
+</tr>
+<tr>
+<td>Erro</td>
+<td>#N/D, #VALOR!</td>
+<td>Centro</td>
+<td>Sinal de problema na fórmula ou no dado</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>Dica de ouro:</strong> um número alinhado à esquerda geralmente está guardado como texto. Foi exatamente o que aconteceu com os preços da aba Cadastro Produto (Módulo 7).</p>
+<h3>1.3 Fórmulas e operadores</h3>
+<p>Toda fórmula começa com <code>=</code>.</p>
+<div class="tbl glass-s"><table>
+<thead>
+<tr>
+<th>Operador</th>
+<th>Uso</th>
+<th>Exemplo</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>+ - * /</code></td>
+<td>Aritmética</td>
+<td><code>=B2*C2</code></td>
+</tr>
+<tr>
+<td><code>^</code></td>
+<td>Potência</td>
+<td><code>=2^3</code> → 8</td>
+</tr>
+<tr>
+<td><code>&amp;</code></td>
+<td>Junta textos</td>
+<td><code>=A2&amp;" - "&amp;B2</code></td>
+</tr>
+<tr>
+<td><code>= &lt;&gt; &gt; &lt; &gt;= &lt;=</code></td>
+<td>Comparação (dá VERDADEIRO/FALSO)</td>
+<td><code>=B2&gt;35000</code></td>
+</tr>
+<tr>
+<td><code>%</code></td>
+<td>Porcentagem</td>
+<td><code>=B2*15%</code></td>
+</tr>
+</tbody>
+</table></div>
+<p>Ordem de cálculo: parênteses, potência, multiplicação/divisão, soma/subtração. <code>=10+5*2</code> dá 20; <code>=(10+5)*2</code> dá 30.</p>
+<h3>1.4 Referências relativas, absolutas e mistas</h3>
+<p>Quando você <strong>arrasta</strong> uma fórmula (alça de preenchimento, o quadradinho no canto da célula), o Excel ajusta as referências.</p>
+<div class="tbl glass-s"><table>
+<thead>
+<tr>
+<th>Tipo</th>
+<th>Escrita</th>
+<th>Ao arrastar para baixo</th>
+<th>Ao arrastar para o lado</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Relativa</td>
+<td><code>A2</code></td>
+<td>vira A3, A4…</td>
+<td>vira B2, C2…</td>
+</tr>
+<tr>
+<td>Absoluta</td>
+<td><code>$A$2</code></td>
+<td>fica A2</td>
+<td>fica A2</td>
+</tr>
+<tr>
+<td>Mista (linha fixa)</td>
+<td><code>A$2</code></td>
+<td>fica A2</td>
+<td>vira B2</td>
+</tr>
+<tr>
+<td>Mista (coluna fixa)</td>
+<td><code>$A2</code></td>
+<td>vira A3</td>
+<td>fica A2</td>
+</tr>
+</tbody>
+</table></div>
+<p>Aperte <strong>F4</strong> com o cursor sobre a referência para alternar entre os quatro tipos.</p>
+<p>Exemplo: preço com desconto, desconto guardado em F1.</p>
+<pre><code>C2: =B2*(1-$F$1)
+</code></pre>
+<p>Arrastando até C300, <code>B2</code> vira B3, B4… mas <code>$F$1</code> continua apontando para o desconto. Sem o <code>$</code>, a fórmula da linha 3 procuraria o desconto em F2 (vazia) e daria o preço cheio.</p>
+<p>Colunas inteiras (<code>A:A</code>) não mudam de linha ao arrastar para baixo, por isso não precisam de <code>$</code> nesse caso.</p>
+<h3>1.5 Atalhos que economizam tempo em prova</h3>
+<ul>
+<li><strong>Ctrl + Seta</strong> pula para o fim dos dados; <strong>Ctrl + Shift + Seta</strong> seleciona até o fim.</li>
+<li><strong>Duplo clique na alça de preenchimento</strong> copia a fórmula até a última linha com dados ao lado.</li>
+<li><strong>Ctrl + T</strong> transforma o intervalo em Tabela (Módulo 8).</li>
+<li><strong>Barra de status</strong> (rodapé): selecione uma coluna e veja Soma, Média e Contagem sem escrever fórmula. Ótimo para conferir resultados.</li>
+</ul>
+<h3>Exercício 1</h3>
+<p>Na aba Q1, sem escrever fórmulas, selecione B2:B300 e leia na barra de status a contagem, a soma e a média. Compare com a alternativa 1 da prova (299; R$119.450; R$399).</p>
+<h2>Módulo 2 — Funções de agregação</h2>
+<p>Agregar é transformar uma coluna inteira em um único número: quantos, quanto no total, qual a média, qual o maior. É o que a questão 1 da prova pede.</p>
+<h3>2.1 As funções essenciais</h3>
+<div class="tbl glass-s"><table>
+<thead>
+<tr>
+<th>Função</th>
+<th>O que faz</th>
+<th>Exemplo</th>
+<th>Resultado na Q1</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>SOMA</code></td>
+<td>Soma números</td>
+<td><code>=SOMA(B:B)</code></td>
+<td>119.450</td>
+</tr>
+<tr>
+<td><code>CONT.NÚM</code></td>
+<td>Conta células com <strong>número</strong></td>
+<td><code>=CONT.NÚM(B:B)</code></td>
+<td>299</td>
+</tr>
+<tr>
+<td><code>CONT.VALORES</code></td>
+<td>Conta células <strong>não vazias</strong> (qualquer tipo)</td>
+<td><code>=CONT.VALORES(A:A)</code></td>
+<td>300 (inclui o cabeçalho)</td>
+</tr>
+<tr>
+<td><code>CONTAR.VAZIO</code></td>
+<td>Conta células vazias num intervalo</td>
+<td><code>=CONTAR.VAZIO(C2:C300)</code></td>
+<td>299 (coluna C vazia)</td>
+</tr>
+<tr>
+<td><code>MÉDIA</code></td>
+<td>Média aritmética (ignora texto e vazio)</td>
+<td><code>=MÉDIA(B:B)</code></td>
+<td>399,50</td>
+</tr>
+<tr>
+<td><code>MÁXIMO</code> / <code>MÍNIMO</code></td>
+<td>Maior / menor valor</td>
+<td><code>=MÁXIMO(B:B)</code></td>
+<td>600</td>
+</tr>
+<tr>
+<td><code>MED</code></td>
+<td>Mediana (valor do meio)</td>
+<td><code>=MED(B:B)</code></td>
+<td>—</td>
+</tr>
+<tr>
+<td><code>MAIOR(int;k)</code> / <code>MENOR(int;k)</code></td>
+<td>k-ésimo maior / menor</td>
+<td><code>=MAIOR(B:B;2)</code></td>
+<td>2º maior valor</td>
+</tr>
+</tbody>
+</table></div>
+<h3>2.2 CONT.NÚM ou CONT.VALORES?</h3>
+<p>Essa é a primeira pegadinha clássica. <code>CONT.VALORES(A:A)</code> conta também o cabeçalho "Produto" e dá 300. <code>CONT.NÚM(B:B)</code> só conta números e dá 299, que é o número real de vendas.</p>
+<p>Regra prática: para contar registros, use <code>CONT.NÚM</code> numa coluna numérica ou <code>CONT.VALORES</code> num intervalo que comece na linha 2 (<code>A2:A300</code>).</p>
+<h3>2.3 Média = Soma ÷ Contagem</h3>
+<p><code>MÉDIA</code> é só um atalho:</p>
+<pre><code class="language-latex">\text{Média} = \frac{\text{Soma}}{\text{Quantidade}} = \frac{119.450}{299} \approx 399{,}50
+</code></pre>
+<p>Saber isso ajuda a conferir: se a soma e a contagem batem, a média também bate.</p>
+<h3>2.4 Arredondamento e formatação</h3>
+<p>Formatar e arredondar são coisas diferentes.</p>
+<ul>
+<li><strong>Formatar</strong> (Ctrl + 1 ou os botões de casas decimais) só muda a aparência. O valor guardado continua 399,4983…</li>
+<li><strong>Arredondar</strong> muda o valor: <code>=ARRED(MÉDIA(B:B);0)</code> guarda 399.</li>
+<li><code>ARREDONDAR.PARA.CIMA</code> e <code>ARREDONDAR.PARA.BAIXO</code> forçam a direção; <code>TRUNCAR</code> só corta as casas.</li>
+</ul>
+<p><strong>Porcentagem:</strong> 0,433 formatado como % vira 43,3%. Nunca multiplique por 100 <em>e</em> formate como %, senão aparece 4330%.</p>
+<p><strong>Casas decimais em provas:</strong> quando as alternativas são parecidas, aumente as casas. Na questão de margem por loja, Curitiba (45,99%) e Campinas (45,97%) só se separam com duas casas.</p>
+<h3>Exercício 2</h3>
+<p>Na aba Q1, calcule também o maior valor, o menor valor e o segundo maior valor de venda. Depois confira: <code>=SOMA(B:B)/CONT.NÚM(B:B)</code> dá o mesmo que <code>=MÉDIA(B:B)</code>?</p>
+<h2>Módulo 3 — Lógica condicional</h2>
+<p>A função <code>SE</code> faz a planilha tomar decisões linha a linha. É a base das questões 2 e 3 da prova (classificar produtos e estoques).</p>
+<h3>3.1 A estrutura do SE</h3>
+<pre><code>=SE(teste_lógico; valor_se_verdadeiro; valor_se_falso)
+</code></pre>
+<p>Leia em voz alta: "<strong>se</strong> isto for verdade, <strong>então</strong> isto, <strong>senão</strong> aquilo".</p>
+<pre><code>=SE(B2&gt;35000;&quot;Produto Ouro&quot;;&quot;Produto Prata&quot;)
+</code></pre>
+<ul>
+<li>Texto no resultado vai <strong>entre aspas</strong>; números e referências, sem aspas.</li>
+<li>Atenção ao limite: "acima de 35.000" é <code>&gt;35000</code>; "abaixo ou igual" é o que sobra no <em>senão</em>. Exatamente 35.000 vira Prata.</li>
+</ul>
+<h3>3.2 SE aninhado: classificar em faixas</h3>
+<p>Com mais de duas categorias, coloque um SE dentro do outro. Cada SE testa um limite e manda o resto para o próximo.</p>
+<p>Faixas da questão 3:</p>
+<div class="tbl glass-s"><table>
+<thead>
+<tr>
+<th>Mínimo</th>
+<th>Máximo</th>
+<th>Status</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0</td>
+<td>5.000</td>
+<td>Nível 1</td>
+</tr>
+<tr>
+<td>5.001</td>
+<td>30.000</td>
+<td>Nível 2</td>
+</tr>
+<tr>
+<td>30.001</td>
+<td>40.000</td>
+<td>Nível 3</td>
+</tr>
+<tr>
+<td>40.001</td>
+<td>—</td>
+<td>Nível 4</td>
+</tr>
+</tbody>
+</table></div>
+<pre><code>=SE(B2&lt;=5000;&quot;Nível 1&quot;;SE(B2&lt;=30000;&quot;Nível 2&quot;;SE(B2&lt;=40000;&quot;Nível 3&quot;;&quot;Nível 4&quot;)))
+</code></pre>
+<pre class="mermaid">flowchart LR
+    A[Estoque B2] --&gt; B{&lt;= 5.000?}
+    B -- sim --&gt; N1[Nível 1]
+    B -- não --&gt; C{&lt;= 30.000?}
+    C -- sim --&gt; N2[Nível 2]
+    C -- não --&gt; D{&lt;= 40.000?}
+    D -- sim --&gt; N3[Nível 3]
+    D -- não --&gt; N4[Nível 4]
+</pre>
+
+<p>O segredo é <strong>testar em ordem crescente usando só o limite superior</strong>. Quando chega ao segundo SE, já se sabe que o valor é maior que 5.000, então não precisa testar de novo.</p>
+<p>Conte os parênteses: cada <code>SE(</code> aberto precisa de um <code>)</code> no final. Três SEs, três parênteses fechando.</p>
+<h3>3.3 SES: a versão sem aninhamento</h3>
+<p>No Excel 2019/365 existe <code>SES</code>, que lista pares teste/resultado:</p>
+<pre><code>=SES(B2&lt;=5000;&quot;Nível 1&quot;;B2&lt;=30000;&quot;Nível 2&quot;;B2&lt;=40000;&quot;Nível 3&quot;;VERDADEIRO;&quot;Nível 4&quot;)
+</code></pre>
+<p>O último par <code>VERDADEIRO;"Nível 4"</code> funciona como o <em>senão</em>.</p>
+<h3>3.4 E, OU e NÃO: várias condições</h3>
+<div class="tbl glass-s"><table>
+<thead>
+<tr>
+<th>Função</th>
+<th>Verdadeiro quando</th>
+<th>Exemplo</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>E(c1;c2)</code></td>
+<td><strong>todas</strong> as condições são verdadeiras</td>
+<td><code>E(H2="F";I2&gt;=1)</code> = mulher <strong>e</strong> com filho</td>
+</tr>
+<tr>
+<td><code>OU(c1;c2)</code></td>
+<td><strong>pelo menos uma</strong> é verdadeira</td>
+<td><code>OU(C2="Recife";C2="Salvador")</code></td>
+</tr>
+<tr>
+<td><code>NÃO(c)</code></td>
+<td>a condição é falsa</td>
+<td><code>NÃO(C2="Recife")</code></td>
+</tr>
+</tbody>
+</table></div>
+<p>Dentro do SE:</p>
+<pre><code>=SE(E(H2=&quot;F&quot;;I2&gt;=1);F2*0,85;F2)
+</code></pre>
+<p>Isso aplica 15% de desconto só para mães (questão 11). Multiplicar por 0,85 é o mesmo que tirar 15%.</p>
+<h3>3.5 Erros comuns com SE</h3>
+<ul>
+<li><strong>Esquecer as aspas</strong> em texto: <code>=SE(B2&gt;35000;Ouro;Prata)</code> dá <code>#NOME?</code>.</li>
+<li><strong>Escrever o número com ponto de milhar</strong>: <code>35.000</code> numa fórmula pt-BR não é trinta e cinco mil. Escreva <code>35000</code>.</li>
+<li><strong>Faixas fora de ordem</strong>: se testar <code>B2&lt;=40000</code> primeiro, tudo até 40.000 vira Nível 3 e os Níveis 1 e 2 somem.</li>
+<li><strong>Texto com grafia diferente</strong>: "Nivel 2" sem acento não é igual a "Nível 2" na hora de contar.</li>
+</ul>
+<h3>Exercício 3</h3>
+<p>Na aba Q2, crie na coluna D uma classificação com três faixas: até 30.000 "Bronze", até 40.000 "Prata", acima "Ouro". Quantos produtos ficam em cada faixa? (Resposta no fim da apostila.)</p>
+<h2>Módulo 4 — Contagem e soma condicional</h2>
+<p><code>CONT.SE</code> e <code>SOMASE</code> respondem perguntas do tipo "quantos… que…" e "quanto… de quem…" sem precisar filtrar. Elas resolvem as questões 2, 3, 4 e 5 da prova.</p>
+<h3>4.1 CONT.SE: contar com uma condição</h3>
+<pre><code>=CONT.SE(intervalo; critério)
+</code></pre>
+<pre><code>=CONT.SE(C:C;&quot;Produto Ouro&quot;)        → 186
+=CONT.SE(B:B;&quot;&gt;35000&quot;)              → 186 (conta direto no valor, sem coluna auxiliar)
+=CONT.SE(B:B;&quot;Coordenador&quot;)
+</code></pre>
+<h3>4.2 CONT.SES: várias condições ao mesmo tempo</h3>
+<pre><code>=CONT.SES(intervalo1; critério1; intervalo2; critério2; ...)
+</code></pre>
+<p>Todas as condições precisam ser verdadeiras (funciona como um E). Os intervalos precisam ter o <strong>mesmo tamanho</strong>.</p>
+<pre><code>=CONT.SES(B:B;&quot;Coordenador&quot;;C:C;&quot;Financeiro&quot;)   → 2 coordenadores do Financeiro
+=CONT.SES(B:B;&quot;&gt;5000&quot;;B:B;&quot;&lt;=30000&quot;)           → uma faixa de valores
+</code></pre>
+<p>Na segunda fórmula, a mesma coluna aparece duas vezes: é assim que se conta "entre X e Y".</p>
+<h3>4.3 Como escrever critérios</h3>
+<div class="tbl glass-s"><table>
+<thead>
+<tr>
+<th>Quero</th>
+<th>Critério</th>
+<th>Observação</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Igual a um texto</td>
+<td><code>"Pedro"</code></td>
+<td>Não diferencia maiúsculas</td>
+</tr>
+<tr>
+<td>Igual a um número</td>
+<td><code>35000</code> ou <code>"35000"</code></td>
+<td></td>
+</tr>
+<tr>
+<td>Maior que</td>
+<td><code>"&gt;35000"</code></td>
+<td>Operador <strong>dentro</strong> das aspas</td>
+</tr>
+<tr>
+<td>Diferente de</td>
+<td><code>"&lt;&gt;Pedro"</code></td>
+<td></td>
+</tr>
+<tr>
+<td>Maior que o valor de uma célula</td>
+<td><code>"&gt;"&amp;F1</code></td>
+<td>Operador entre aspas, <code>&amp;</code>, a célula fora</td>
+</tr>
+<tr>
+<td>Depois de uma data</td>
+<td><code>"&gt;31/12/2018"</code> ou <code>"&gt;"&amp;DATA(2018;12;31)</code></td>
+<td>A segunda forma não depende do idioma</td>
+</tr>
+<tr>
+<td>Começa com</td>
+<td><code>"Analista*"</code></td>
+<td>Curinga</td>
+</tr>
+<tr>
+<td>Contém</td>
+<td><code>"*Pro*"</code></td>
+<td>Curinga</td>
+</tr>
+<tr>
+<td>Exatamente 4 caracteres</td>
+<td><code>"????"</code></td>
+<td><code>?</code> = um caractere qualquer</td>
+</tr>
+<tr>
+<td>Não vazio / vazio</td>
+<td><code>"&lt;&gt;"</code> / <code>""</code></td>
+<td></td>
+</tr>
+</tbody>
+</table></div>
+<h3>4.4 Curingas: a pegadinha dos analistas</h3>
+<p>Na aba Q4 não existe o cargo "Analista". Existem "Analista Pro" (7) e "Analista Pleno" (9).</p>
+<pre><code>=CONT.SE(B:B;&quot;Analista&quot;)    → 0   (procura texto exatamente igual)
+=CONT.SE(B:B;&quot;Analista*&quot;)   → 16  (começa com &quot;Analista&quot;)
+</code></pre>
+<p>Sempre olhe os valores reais da coluna antes de contar. Um filtro (Ctrl + Shift + L) mostra a lista de valores distintos.</p>
+<h3>4.5 SOMASE e SOMASES</h3>
+<pre><code>=SOMASE(intervalo_critério; critério; intervalo_soma)
+=SOMASES(intervalo_soma; intervalo_critério1; critério1; ...)
+</code></pre>
+<p><strong>Atenção à ordem dos argumentos:</strong> em <code>SOMASE</code> o que se soma vem <strong>por último</strong>; em <code>SOMASES</code> vem <strong>primeiro</strong>. É o erro mais comum.</p>
+<pre><code>=SOMASE(A:A;&quot;Pedro&quot;;C:C)                           → 98.727 (vendas do Pedro)
+=SOMASES(C:C;A:A;&quot;Fernanda&quot;;B:B;&quot;&gt;=01/01/2020&quot;;B:B;&quot;&lt;=31/01/2020&quot;)
+</code></pre>
+<p>A segunda soma as vendas da Fernanda em janeiro. Para "janeiro <strong>e</strong> junho" some duas SOMASES, uma por mês (Módulo 5).</p>
+<h3>4.6 MÉDIASE, MÁXIMOSES e MÍNIMOSES</h3>
+<p>Mesma lógica, outras agregações:</p>
+<pre><code>=MÉDIASE(B:B;&quot;Analista*&quot;;D:D)                 → salário médio dos analistas
+=MÁXIMOSES(D:D;C:C;&quot;Financeiro&quot;)               → maior salário do Financeiro
+</code></pre>
+<h3>4.7 Critério em célula: fórmulas que se arrastam</h3>
+<p>Em vez de digitar o nome, aponte para uma célula. Com os nomes dos vendedores em H2:H5:</p>
+<pre><code>I2: =SOMASE($A:$A;H2;$C:$C)
+</code></pre>
+<p>Arraste para baixo e cada linha soma um vendedor. Esse padrão (lista de categorias + SOMASE/CONT.SE ao lado) é uma "tabela dinâmica feita à mão" e aparece muito nas questões de ranking.</p>
+<h3>Exercício 4</h3>
+<p>Na aba Q4: (a) quantos gerentes há? (b) qual a média salarial dos analistas? (c) qual a soma dos salários do Marketing? Na aba Q5: (d) quanto a Luiza vendeu no total?</p>
+<h2>Módulo 5 — Datas</h2>
+<p>Para o Excel, uma data é um número: a quantidade de dias desde 01/01/1900. Entender isso resolve as questões de contratação (Q4), meses (Q5), trimestres (crescimento) e "gasto em 1 ano".</p>
+<h3>5.1 Datas são números</h3>
+<p>Digite <code>08/07/2020</code> numa célula e mude o formato para Geral: aparece 44020. Por isso dá para:</p>
+<ul>
+<li><strong>Comparar</strong>: <code>=E2&gt;DATA(2018;12;31)</code> → VERDADEIRO se contratado depois de 2018.</li>
+<li><strong>Subtrair</strong>: <code>=HOJE()-E2</code> → dias desde a contratação.</li>
+<li><strong>Somar dias</strong>: <code>=E2+30</code> → 30 dias depois.</li>
+</ul>
+<h3>5.2 Funções de data</h3>
+<div class="tbl glass-s"><table>
+<thead>
+<tr>
+<th>Função</th>
+<th>Resultado para 08/07/2020</th>
+<th>Uso</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>ANO(D2)</code></td>
+<td>2020</td>
+<td>Agrupar por ano</td>
+</tr>
+<tr>
+<td><code>MÊS(D2)</code></td>
+<td>7</td>
+<td>Agrupar por mês</td>
+</tr>
+<tr>
+<td><code>DIA(D2)</code></td>
+<td>8</td>
+<td></td>
+</tr>
+<tr>
+<td><code>DATA(2020;7;8)</code></td>
+<td>08/07/2020</td>
+<td>Montar uma data sem depender do idioma</td>
+</tr>
+<tr>
+<td><code>FIMMÊS(D2;0)</code></td>
+<td>31/07/2020</td>
+<td>Último dia do mês</td>
+</tr>
+<tr>
+<td><code>DIA.DA.SEMANA(D2)</code></td>
+<td>4 (quarta)</td>
+<td>1 = domingo</td>
+</tr>
+<tr>
+<td><code>HOJE()</code></td>
+<td>data atual</td>
+<td></td>
+</tr>
+<tr>
+<td><code>TEXTO(D2;"mmm/aaaa")</code></td>
+<td>jul/2020</td>
+<td>Rótulo para relatórios</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>Trimestre</strong> não tem função pronta. Calcule a partir do mês:</p>
+<pre><code>=ARREDONDAR.PARA.CIMA(MÊS(D2)/3;0)
+</code></pre>
+<p>Janeiro a março dá 1, abril a junho dá 2, e assim por diante.</p>
+<h3>5.3 Filtrar períodos com CONT.SES e SOMASES</h3>
+<p>Um período é um intervalo: "de" (&gt;=) "até" (&lt;=). Use a coluna de data duas vezes.</p>
+<pre><code>2º tri 2017: =SOMASES(B:B;D:D;&quot;&gt;=01/04/2017&quot;;D:D;&quot;&lt;=30/06/2017&quot;)   → 4.583
+2º tri 2018: =SOMASES(B:B;D:D;&quot;&gt;=01/04/2018&quot;;D:D;&quot;&lt;=30/06/2018&quot;)   → 6.576
+</code></pre>
+<p>Versão mais segura, que funciona em qualquer idioma:</p>
+<pre><code>=SOMASES(B:B;D:D;&quot;&gt;=&quot;&amp;DATA(2017;4;1);D:D;&quot;&lt;=&quot;&amp;DATA(2017;6;30))
+</code></pre>
+<p><strong>Cuidado com datas que têm hora.</strong> Se a coluna guarda 30/06/2017 14:00, o critério <code>&lt;=30/06/2017</code> deixa esse registro de fora. Nesses casos use <code>&lt;01/07/2017</code>.</p>
+<h3>5.4 "E" versus "a": a pegadinha dos meses</h3>
+<ul>
+<li>"Vendas de janeiro <strong>a</strong> junho" = um período contínuo → uma SOMASES de 01/01 até 30/06.</li>
+<li>"Vendas de janeiro <strong>e</strong> junho" = dois meses separados → duas SOMASES somadas.</li>
+</ul>
+<p>Na Q5, a primeira leitura dá R$65.596 (errado) e a segunda R$20.628 (certo).</p>
+<h3>5.5 Coluna auxiliar de ano e mês</h3>
+<p>Quando há muitos períodos, é mais fácil criar colunas auxiliares e contar por elas:</p>
+<pre><code>K2: =ANO(D2)
+L2: =MÊS(D2)
+M2: =ARREDONDAR.PARA.CIMA(MÊS(D2)/3;0)
+</code></pre>
+<p>Depois: <code>=SOMASES(B:B;K:K;2018;M:M;2)</code> soma o 2º trimestre de 2018. Essas colunas também alimentam tabelas dinâmicas (Módulo 9).</p>
+<h3>5.6 Crescimento percentual</h3>
+<pre><code class="language-latex">\text{Crescimento} = \frac{\text{Valor novo}}{\text{Valor antigo}} - 1 = \frac{6.576}{4.583} - 1 \approx 43{,}5\%
+</code></pre>
+<p>No Excel: <code>=N2/N1-1</code>, formatado como %. Um resultado negativo significa queda. O valor antigo sempre fica no denominador.</p>
+<h3>Exercício 5</h3>
+<p>Na Base Vendas, calcule a quantidade total de produtos vendidos em cada ano (2016, 2017 e 2018) e o crescimento de 2017 para 2018.</p>
+<h2>Módulo 6 — Busca e referência</h2>
+<p>Funções de busca trazem um dado de outra tabela usando uma chave em comum (um código, um SKU, um registro). Elas ligam as bases e são o coração das questões 6 a 15.</p>
+<h3>6.1 PROCV</h3>
+<pre><code>=PROCV(valor_procurado; tabela; nº_da_coluna; [procurar_intervalo])
+</code></pre>
+<div class="tbl glass-s"><table>
+<thead>
+<tr>
+<th>Argumento</th>
+<th>Significado</th>
+<th>Exemplo</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>valor_procurado</td>
+<td>A chave que você tem</td>
+<td><code>A2</code> (o SKU)</td>
+</tr>
+<tr>
+<td>tabela</td>
+<td>Onde procurar; a chave precisa estar na <strong>1ª coluna</strong> dela</td>
+<td><code>'Cadastro Produto'!A:E</code></td>
+</tr>
+<tr>
+<td>nº_da_coluna</td>
+<td>Qual coluna devolver, contando a partir da 1ª da tabela</td>
+<td><code>5</code> (Preço Unitário)</td>
+</tr>
+<tr>
+<td>procurar_intervalo</td>
+<td><code>0</code> = correspondência exata</td>
+<td><strong>sempre 0</strong> em buscas por código</td>
+</tr>
+</tbody>
+</table></div>
+<pre><code>=PROCV(A2;'Cadastro Produto'!A:E;5;0)   → preço unitário do SKU em A2
+</code></pre>
+<p><strong>Esquecer o 0</strong> é um erro silencioso: o Excel faz busca aproximada e devolve um valor errado sem avisar.</p>
+<h3>6.2 Limitações do PROCV</h3>
+<ol>
+<li><strong>Só busca para a direita.</strong> A chave tem que estar na primeira coluna da tabela. Na Q7.1 o código está na coluna E e a marca na C, então o PROCV não alcança.</li>
+<li><strong>Devolve só a primeira ocorrência.</strong> Se o código se repete, os outros são ignorados.</li>
+<li><strong>Número de coluna fixo.</strong> Se alguém inserir uma coluna na tabela, o <code>5</code> passa a apontar para o dado errado.</li>
+</ol>
+<h3>6.3 ÍNDICE + CORRESP</h3>
+<p>A dupla resolve as três limitações. Separe o problema em duas perguntas:</p>
+<ul>
+<li><code>CORRESP(valor; coluna_de_busca; 0)</code> → <strong>em qual linha</strong> está o valor?</li>
+<li><code>ÍNDICE(coluna_de_retorno; linha)</code> → <strong>o que tem</strong> nessa linha?</li>
+</ul>
+<pre><code>=ÍNDICE('Q7.1'!C:C;CORRESP(B3;'Q7.1'!E:E;0))
+</code></pre>
+<p>Leia de dentro para fora: o CORRESP acha em que linha da coluna E está o código de B3; o ÍNDICE devolve a marca (coluna C) dessa mesma linha. A coluna de busca pode estar à direita, à esquerda, até em outra aba.</p>
+<h3>6.4 PROCX (Excel 365 / 2021)</h3>
+<pre><code>=PROCX(valor; coluna_de_busca; coluna_de_retorno; [se_não_encontrado])
+=PROCX(B3;'Q7.1'!E:E;'Q7.1'!C:C;&quot;não achou&quot;)
+</code></pre>
+<p>Busca em qualquer direção, é exata por padrão e já trata o "não encontrado". Se o seu Excel tiver, é a opção mais simples. Em provas, saiba também o PROCV e o ÍNDICE+CORRESP, porque nem toda máquina tem PROCX.</p>
+<h3>6.5 Erros de busca e SEERRO</h3>
+<div class="tbl glass-s"><table>
+<thead>
+<tr>
+<th>Erro</th>
+<th>Causa comum</th>
+<th>Solução</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>#N/D</code></td>
+<td>A chave não existe na tabela</td>
+<td>Conferir a chave; tratar com SEERRO</td>
+</tr>
+<tr>
+<td><code>#N/D</code> com a chave "visível"</td>
+<td>Espaço sobrando ou número guardado como texto</td>
+<td><code>ARRUMAR</code>, <code>VALOR</code> (Módulo 7)</td>
+</tr>
+<tr>
+<td><code>#REF!</code></td>
+<td>nº_da_coluna maior que a tabela</td>
+<td>Ampliar a tabela</td>
+</tr>
+<tr>
+<td>Valor errado, sem erro</td>
+<td>Faltou o <code>0</code> no final</td>
+<td>Colocar <code>;0</code></td>
+</tr>
+</tbody>
+</table></div>
+<pre><code>=SEERRO(fórmula; valor_se_der_erro)
+</code></pre>
+<p><code>SEERRO</code> troca qualquer erro por outra coisa: um texto, um zero ou <strong>outra busca</strong>.</p>
+<h3>6.6 Busca em duas etapas: o código substituto</h3>
+<p>Na Q6, alguns códigos só existem na coluna "Cód substituto". A solução é tentar a busca principal e, se der erro, tentar a alternativa:</p>
+<pre><code>=SEERRO(PROCV(B3;'Q6.1'!A:C;3;0);PROCV(B3;'Q6.1'!B:C;2;0))
+</code></pre>
+<ul>
+<li>1ª tentativa: procura na coluna A (Cód) e devolve a 3ª coluna (Venda).</li>
+<li>Se der <code>#N/D</code>, a 2ª tentativa procura na coluna B (Cód substituto). Como a tabela agora começa em B, a Venda é a <strong>2ª</strong> coluna.</li>
+</ul>
+<p>Quem usa só a primeira busca chega a R$410.561; com as duas, R$504.385.</p>
+<p><strong>Cuidado:</strong> <code>SEERRO(PROCV(...);0)</code> esconde o problema e dá o resultado errado sem avisar. Use SEERRO para <strong>tratar</strong> um caso que você entendeu, nunca para sumir com erros que você não investigou.</p>
+<h3>6.7 CONT.SE como verificador</h3>
+<p>Antes de buscar, confira se a chave existe e se é única:</p>
+<pre><code>=CONT.SE('Q6.1'!A:A;B3)    → 0 = não existe; 1 = único; 2+ = repetido
+</code></pre>
+<h3>Exercício 6</h3>
+<p>Na aba Q6.2, crie uma coluna D que mostre "principal" ou "substituto" conforme o código foi encontrado na coluna Cód ou na coluna Cód substituto da Q6.1. Dica: <code>SE(CONT.SE(...)&gt;0;...)</code>.</p>
+<h2>Módulo 7 — Texto e limpeza de dados</h2>
+<p>Dados reais chegam sujos: números guardados como texto, espaços sobrando, códigos colados em nomes. Uma fórmula certa sobre um dado sujo dá resultado errado, então limpar vem antes de calcular.</p>
+<h3>7.1 Número guardado como texto</h3>
+<p>Na aba Cadastro Produto, os preços estão como texto: "2600.00", com <strong>ponto</strong> decimal. Num Excel em português, o ponto é separador de milhar, e isso causa três problemas:</p>
+<ul>
+<li><code>SOMA</code> ignora o valor (texto não é somado) e o total sai menor.</li>
+<li>A multiplicação pode dar <code>#VALOR!</code> ou converter para 260000.</li>
+<li><code>PROCV</code> falha se a chave for número numa tabela e texto na outra.</li>
+</ul>
+<p>Como reconhecer: alinhamento à esquerda, triângulo verde no canto da célula, ou <code>=ÉTEXTO(E2)</code> devolvendo VERDADEIRO.</p>
+<h3>7.2 Convertendo texto em número</h3>
+<div class="tbl glass-s"><table>
+<thead>
+<tr>
+<th>Situação</th>
+<th>Fórmula</th>
+<th>Resultado</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Texto com vírgula ("2600,00")</td>
+<td><code>=VALOR(E2)</code> ou <code>=E2*1</code></td>
+<td>2600</td>
+</tr>
+<tr>
+<td>Texto com ponto decimal ("2600.00") num Excel pt-BR</td>
+<td><code>=VALOR(SUBSTITUIR(E2;".";","))</code></td>
+<td>2600</td>
+</tr>
+<tr>
+<td>Qualquer formato, indicando os separadores</td>
+<td><code>=VALOR.NUMÉRICO(E2;".";",")</code></td>
+<td>2600</td>
+</tr>
+<tr>
+<td>Número que deveria ser texto (código)</td>
+<td><code>=TEXTO(A2;"0")</code></td>
+<td>"187"</td>
+</tr>
+</tbody>
+</table></div>
+<p>Sem fórmula: selecione a coluna, <strong>Dados &gt; Texto para Colunas &gt; Concluir</strong>. Em "Avançado" dá para dizer que o separador decimal é o ponto.</p>
+<h3>7.3 Funções de texto</h3>
+<div class="tbl glass-s"><table>
+<thead>
+<tr>
+<th>Função</th>
+<th>Exemplo</th>
+<th>Resultado</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>ARRUMAR</code></td>
+<td><code>=ARRUMAR("  iPhone 7  ")</code></td>
+<td>"iPhone 7" (tira espaços extras)</td>
+</tr>
+<tr>
+<td><code>ESQUERDA</code></td>
+<td><code>=ESQUERDA("HL1021";2)</code></td>
+<td>"HL"</td>
+</tr>
+<tr>
+<td><code>DIREITA</code></td>
+<td><code>=DIREITA("HL1021";4)</code></td>
+<td>"1021"</td>
+</tr>
+<tr>
+<td><code>EXT.TEXTO</code></td>
+<td><code>=EXT.TEXTO("FP15212";3;5)</code></td>
+<td>"15212"</td>
+</tr>
+<tr>
+<td><code>NÚM.CARACT</code></td>
+<td><code>=NÚM.CARACT("HL1021")</code></td>
+<td>6</td>
+</tr>
+<tr>
+<td><code>LOCALIZAR</code></td>
+<td><code>=LOCALIZAR(" - ";"iPhone 7 - Dourado")</code></td>
+<td>9 (posição do separador)</td>
+</tr>
+<tr>
+<td><code>SUBSTITUIR</code></td>
+<td><code>=SUBSTITUIR("2600.00";".";",")</code></td>
+<td>"2600,00"</td>
+</tr>
+<tr>
+<td><code>MAIÚSCULA</code> / <code>MINÚSCULA</code> / <code>PRI.MAIÚSCULA</code></td>
+<td><code>=PRI.MAIÚSCULA("ana paz")</code></td>
+<td>"Ana Paz"</td>
+</tr>
+<tr>
+<td><code>CONCAT</code> ou <code>&amp;</code></td>
+<td><code>=A2&amp;" - "&amp;B2</code></td>
+<td>junta textos</td>
+</tr>
+</tbody>
+</table></div>
+<h3>7.4 Separando nome e cor do produto</h3>
+<p>Os produtos vêm como "iPhone 7 - Dourado". Para separar o modelo:</p>
+<pre><code>=ESQUERDA(B2;LOCALIZAR(&quot; - &quot;;B2)-1)          → iPhone 7
+=EXT.TEXTO(B2;LOCALIZAR(&quot; - &quot;;B2)+3;50)      → Dourado
+</code></pre>
+<p>O LOCALIZAR diz onde está o separador; ESQUERDA e EXT.TEXTO cortam antes e depois dele. No Excel 365 existem atalhos: <code>TEXTOANTES(B2;" - ")</code> e <code>TEXTODEPOIS(B2;" - ")</code>.</p>
+<h3>7.5 Checklist de limpeza antes de uma prova</h3>
+<ol>
+<li>Números alinhados à esquerda? → converter (7.2).</li>
+<li>Chaves com espaços? → <code>ARRUMAR</code>.</li>
+<li>Mesma categoria escrita de jeitos diferentes ("Nivel"/"Nível", "SP"/"São Paulo")? → filtro para ver os valores distintos e padronizar.</li>
+<li>Colunas calculadas por fórmula (como o "Código Cliente" em Cadastro Clientes, que usa <code>=A3+1</code>)? → funcionam normalmente, mas não apague a célula de origem.</li>
+<li>Linhas totalmente vazias no meio? → quebram Ctrl + Seta e o duplo clique da alça.</li>
+</ol>
+<h3>Exercício 7</h3>
+<p>Na aba Cadastro Produto, crie a coluna G "Preço" convertendo a coluna E em número e a coluna H "Modelo" só com o nome antes do traço. Confira com <code>=SOMA(G:G)</code> que a coluna virou número de verdade.</p>
+<h2>Módulo 8 — Trabalhando com várias tabelas</h2>
+<p>As questões 8 a 14 usam três bases ligadas por chaves. A estratégia é sempre a mesma: <strong>trazer para a tabela de vendas tudo o que ela precisa, com colunas auxiliares, e só depois somar</strong>.</p>
+<h3>8.1 O modelo de dados da prova</h3>
+<pre class="mermaid">flowchart LR
+    P[Cadastro Produto&lt;br/&gt;SKU, Produto, Marca, Tipo,&lt;br/&gt;Preço, Custo] -- SKU --&gt; V[Base Vendas&lt;br/&gt;SKU, Qtd, Loja, Data,&lt;br/&gt;Código Cliente]
+    C[Cadastro Clientes&lt;br/&gt;Código, Nome, Sexo,&lt;br/&gt;Nº de Filhos] -- Código Cliente --&gt; V
+</pre>
+
+<ul>
+<li><strong>Tabela fato</strong> (Base Vendas): cada linha é um acontecimento. Tem muitas linhas (23.797) e se repete.</li>
+<li><strong>Tabelas de cadastro</strong> (Produto, Clientes): cada linha é uma coisa, descrita uma vez. A chave (SKU, Código) é única.</li>
+<li><strong>Chave</strong>: a coluna que existe nas duas tabelas e liga uma à outra.</li>
+</ul>
+<p>A busca vai sempre <strong>do fato para o cadastro</strong>: para cada venda, procure o preço do produto e o sexo do cliente.</p>
+<h3>8.2 As colunas auxiliares da Base Vendas</h3>
+<p>Monte estas colunas uma vez e elas respondem todas as questões seguintes:</p>
+<div class="tbl glass-s"><table>
+<thead>
+<tr>
+<th>Coluna</th>
+<th>Nome</th>
+<th>Fórmula (linha 2)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>F</td>
+<td>Faturamento</td>
+<td><code>=B2*VALOR(SUBSTITUIR(PROCV(A2;'Cadastro Produto'!A:F;5;0);".";","))</code></td>
+</tr>
+<tr>
+<td>G</td>
+<td>Custo</td>
+<td><code>=B2*VALOR(SUBSTITUIR(PROCV(A2;'Cadastro Produto'!A:F;6;0);".";","))</code></td>
+</tr>
+<tr>
+<td>H</td>
+<td>Sexo</td>
+<td><code>=PROCV(E2;'Cadastro Clientes'!A:D;3;0)</code></td>
+</tr>
+<tr>
+<td>I</td>
+<td>Filhos</td>
+<td><code>=PROCV(E2;'Cadastro Clientes'!A:D;4;0)</code></td>
+</tr>
+<tr>
+<td>J</td>
+<td>Fat. com desconto</td>
+<td><code>=SE(E(H2="F";I2&gt;=1);F2*0,85;F2)</code></td>
+</tr>
+<tr>
+<td>K</td>
+<td>Ano</td>
+<td><code>=ANO(D2)</code></td>
+</tr>
+<tr>
+<td>L</td>
+<td>Marca</td>
+<td><code>=PROCV(A2;'Cadastro Produto'!A:F;3;0)</code></td>
+</tr>
+<tr>
+<td>M</td>
+<td>Produto</td>
+<td><code>=PROCV(A2;'Cadastro Produto'!A:F;2;0)</code></td>
+</tr>
+</tbody>
+</table></div>
+<p>Se você já converteu os preços no Cadastro Produto (Exercício 7), o PROCV pode apontar direto para a coluna convertida e dispensar o VALOR/SUBSTITUIR.</p>
+<p>Dê duplo clique na alça de preenchimento para copiar cada fórmula até a linha 23.798.</p>
+<h3>8.3 As métricas de negócio</h3>
+<div class="tbl glass-s"><table>
+<thead>
+<tr>
+<th>Métrica</th>
+<th>Definição</th>
+<th>Fórmula na planilha</th>
+<th>Valor na prova</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Faturamento</td>
+<td>Quantidade × Preço unitário</td>
+<td><code>=SOMA(F:F)</code></td>
+<td>R$167.277.850</td>
+</tr>
+<tr>
+<td>Custo</td>
+<td>Quantidade × Custo unitário</td>
+<td><code>=SOMA(G:G)</code></td>
+<td>R$90.903.550</td>
+</tr>
+<tr>
+<td>Lucro</td>
+<td>Faturamento − Custo</td>
+<td><code>=SOMA(F:F)-SOMA(G:G)</code></td>
+<td>R$76.374.300</td>
+</tr>
+<tr>
+<td>Margem</td>
+<td>Lucro ÷ Faturamento</td>
+<td><code>=lucro/faturamento</code></td>
+<td>45,66%</td>
+</tr>
+<tr>
+<td>Participação</td>
+<td>Parte ÷ Total</td>
+<td><code>=SOMASE(H:H;"M";J:J)/SOMA(J:J)</code></td>
+<td>56,7%</td>
+</tr>
+<tr>
+<td>Crescimento</td>
+<td>Novo ÷ Antigo − 1</td>
+<td><code>=N2/N1-1</code></td>
+<td>43,5%</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>Por que calcular linha a linha?</strong> O faturamento de cada venda depende do preço <strong>daquele</strong> produto. Não dá para multiplicar a quantidade total pelo preço médio: produtos caros e baratos têm pesos diferentes.</p>
+<h3>8.4 Margem de um grupo: some antes, divida depois</h3>
+<p>A margem de uma loja é o lucro total da loja dividido pelo faturamento total da loja:</p>
+<pre><code class="language-latex">\text{Margem da loja} = \frac{\sum \text{Lucro das vendas da loja}}{\sum \text{Faturamento das vendas da loja}}
+</code></pre>
+<p><strong>Nunca</strong> tire a média das margens de cada venda. Uma venda de R$100 e uma de R$100.000 teriam o mesmo peso, e o resultado sai errado.</p>
+<h3>8.5 Descontos e cenários</h3>
+<p>Para simular um cenário ("e se a loja desse 15% para as mães?"), crie uma <strong>nova coluna</strong> com o valor ajustado e deixe a original intacta. Assim você compara o antes e o depois e não estraga as outras respostas.</p>
+<p>Na questão 11, o desconto muda o total para R$161.324.215. Os percentuais são calculados sobre esse novo total, e a parte feminina inclui <strong>todas</strong> as mulheres: as mães com desconto e as demais com preço cheio.</p>
+<h3>8.6 Formatar como Tabela (Ctrl + T)</h3>
+<p>Transformar a base em Tabela traz três vantagens:</p>
+<ul>
+<li>Fórmulas digitadas na primeira linha se copiam sozinhas para a coluna toda.</li>
+<li>Referências ficam legíveis: <code>=[@[Qtd Vendida]]*[@Preço]</code> em vez de <code>=B2*N2</code>.</li>
+<li>A tabela cresce sozinha quando entram linhas novas, e tabelas dinâmicas acompanham.</li>
+</ul>
+<h3>Exercício 8</h3>
+<p>Usando as colunas auxiliares, calcule o faturamento de cada ano (2016, 2017, 2018) e o faturamento por tipo de produto (Celular, Notebook, Televisão…). Qual tipo fatura mais?</p>
+<h2>Módulo 9 — Tabelas dinâmicas e análise</h2>
+<p>A tabela dinâmica faz em segundos o que dezenas de SOMASE fariam: agrupa, soma, conta e ordena. É a ferramenta mais rápida para perguntas de ranking ("qual loja", "qual produto", "qual cliente").</p>
+<h3>9.1 Montando uma tabela dinâmica</h3>
+<ol>
+<li>Clique em qualquer célula da base (com as colunas auxiliares já prontas).</li>
+<li><strong>Inserir &gt; Tabela Dinâmica &gt; Nova Planilha</strong>.</li>
+<li>Arraste os campos para as quatro áreas:</li>
+</ol>
+<div class="tbl glass-s"><table>
+<thead>
+<tr>
+<th>Área</th>
+<th>Para que serve</th>
+<th>Exemplo</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Linhas</td>
+<td>Categorias que viram linhas</td>
+<td>Loja</td>
+</tr>
+<tr>
+<td>Colunas</td>
+<td>Categorias que viram colunas</td>
+<td>Ano</td>
+</tr>
+<tr>
+<td>Valores</td>
+<td>O que é somado, contado ou calculado</td>
+<td>Soma de Faturamento</td>
+</tr>
+<tr>
+<td>Filtros</td>
+<td>Recorte da base inteira</td>
+<td>Marca = Apple</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>Uma pergunta, um formato:</strong> leia a pergunta e procure o "por". "Faturamento <strong>por</strong> loja" → Loja em Linhas, Faturamento em Valores.</p>
+<h3>9.2 Resumir valores por</h3>
+<p>Clique no campo em Valores &gt; <strong>Configurações do Campo de Valor</strong>:</p>
+<ul>
+<li><strong>Soma</strong>: faturamento, quantidade.</li>
+<li><strong>Contagem</strong>: número de vendas (conta linhas).</li>
+<li><strong>Média</strong>, <strong>Máx.</strong>, <strong>Mín.</strong></li>
+</ul>
+<p>Atenção: contar linhas não é somar quantidades. Na questão do crescimento, "produtos vendidos" é a <strong>soma</strong> da Qtd Vendida (43,5%), não a <strong>contagem</strong> de vendas (42,7%).</p>
+<h3>9.3 Mostrar valores como</h3>
+<p>Na mesma janela, a aba <strong>Mostrar Valores Como</strong> transforma números em percentuais:</p>
+<ul>
+<li><strong>% do Total Geral</strong>: participação de cada item. Com Sexo em Linhas e o faturamento com desconto em Valores, a questão 11 sai direto (56,7% / 43,3%).</li>
+<li><strong>% do Total da Linha / Coluna</strong>.</li>
+<li><strong>Diferença em %</strong> de um item base: crescimento de um ano para outro.</li>
+</ul>
+<h3>9.4 Ordenar, filtrar e agrupar</h3>
+<ul>
+<li><strong>Ordenar</strong>: botão direito num valor &gt; Classificar &gt; do Maior para o Menor. O primeiro da lista é a resposta das perguntas de "maior".</li>
+<li><strong>Filtro de rótulo e de valor</strong>: "10 primeiros", "maior que".</li>
+<li><strong>Agrupar datas</strong>: botão direito numa data em Linhas &gt; Agrupar &gt; Anos, Trimestres, Meses.</li>
+<li><strong>Dois campos em Linhas</strong> (Código Cliente e Ano) criam combinações: é assim que se acha o maior gasto de um cliente em <strong>um</strong> ano.</li>
+</ul>
+<h3>9.5 Campo calculado: a margem na tabela dinâmica</h3>
+<p>A margem não pode ser a soma nem a média de margens (Módulo 8.4). Crie um campo calculado:</p>
+<p><strong>Analisar da Tabela Dinâmica &gt; Campos, Itens e Conjuntos &gt; Campo Calculado</strong></p>
+<pre><code>Nome: Margem
+Fórmula: =(Faturamento-Custo)/Faturamento
+</code></pre>
+<p>O Excel soma Faturamento e Custo por loja <strong>antes</strong> de dividir, que é exatamente o cálculo correto. Formate com duas casas decimais.</p>
+<h3>9.6 Segmentação de dados</h3>
+<p><strong>Inserir &gt; Segmentação de Dados</strong> cria botões de filtro (por Marca, Loja, Ano). Clicar em "Apple" filtra a tabela inteira, útil para perguntas como "os produtos da Apple com maior faturamento".</p>
+<h3>9.7 Tabela dinâmica ou fórmula?</h3>
+<div class="tbl glass-s"><table>
+<thead>
+<tr>
+<th>Situação</th>
+<th>Melhor escolha</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Explorar, rankear, achar o maior</td>
+<td>Tabela dinâmica</td>
+</tr>
+<tr>
+<td>Um número exato para uma célula de resposta</td>
+<td>Fórmula (SOMASES, CONT.SES)</td>
+</tr>
+<tr>
+<td>Resultado que precisa atualizar sozinho</td>
+<td>Fórmula (a dinâmica exige <strong>Atualizar</strong>)</td>
+</tr>
+<tr>
+<td>Conferir um resultado</td>
+<td>Os dois: se baterem, a resposta está certa</td>
+</tr>
+</tbody>
+</table></div>
+<p>Depois de mudar a base, clique com o botão direito na tabela dinâmica &gt; <strong>Atualizar</strong>. Esquecer isso é outra fonte de resposta errada.</p>
+<h3>Exercício 9</h3>
+<p>Monte uma tabela dinâmica com Loja em Linhas, Ano em Colunas e Soma de Faturamento em Valores. Qual loja fatura mais no total? Ela é a mesma em todos os anos?</p>
+<h2>Módulo 10 — Raciocínio de prova</h2>
+<p>Saber as funções é metade do caminho. A outra metade é ler a pergunta com precisão e desconfiar das alternativas: toda prova desse tipo coloca, entre as opções, o resultado de cada erro comum.</p>
+<h3>10.1 O método em 6 passos</h3>
+<pre class="mermaid">flowchart TD
+    A[1. Traduzir a pergunta] --&gt; B[2. Olhar os dados]
+    B --&gt; C[3. Planejar as colunas]
+    C --&gt; D[4. Calcular]
+    D --&gt; E[5. Conferir]
+    E --&gt; F[6. Comparar com as alternativas]
+</pre>
+
+<ol>
+<li><strong>Traduzir a pergunta.</strong> Reescreva em uma frase: "somar <strong>o quê</strong>, <strong>de quem</strong>, <strong>quando</strong>". Sublinhe palavras-chave: <em>após</em>, <em>acima de</em>, <em>e</em>, <em>a</em>, <em>quantidade</em>, <em>valor</em>, <em>em 1 ano</em>.</li>
+<li><strong>Olhar os dados.</strong> Veja os cabeçalhos, os valores reais (filtro), o tipo de cada coluna (número ou texto?) e onde estão as chaves.</li>
+<li><strong>Planejar as colunas.</strong> Quais dados faltam na tabela de vendas? Cada um vira uma coluna auxiliar com PROCV/ÍNDICE.</li>
+<li><strong>Calcular.</strong> SOMASES/CONT.SES para números exatos; tabela dinâmica para rankings.</li>
+<li><strong>Conferir.</strong> Recalcule de outro jeito (fórmula × dinâmica × barra de status). Procure <code>#N/D</code> com <code>=CONT.SE(F:F;"#N/D")</code> ou um filtro.</li>
+<li><strong>Comparar com as alternativas.</strong> Se a sua resposta aparece, veja se a opção vizinha corresponde a um erro que você não cometeu. Se não aparece, revise o passo 1.</li>
+</ol>
+<h3>10.2 Tradutor de palavras-chave</h3>
+<div class="tbl glass-s"><table>
+<thead>
+<tr>
+<th>Na pergunta</th>
+<th>No Excel</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>"quantos", "quantidade de vendas"</td>
+<td><code>CONT.SE</code>, <code>CONT.NÚM</code>, Contagem</td>
+</tr>
+<tr>
+<td>"produtos vendidos", "quantidade vendida"</td>
+<td><strong>Soma</strong> da coluna de quantidade</td>
+</tr>
+<tr>
+<td>"total", "valor", "faturamento"</td>
+<td><code>SOMA</code>, <code>SOMASE(S)</code></td>
+</tr>
+<tr>
+<td>"acima de" / "a partir de"</td>
+<td><code>&gt;</code> / <code>&gt;=</code></td>
+</tr>
+<tr>
+<td>"abaixo ou igual" / "até"</td>
+<td><code>&lt;=</code></td>
+</tr>
+<tr>
+<td>"após 31/12/2018"</td>
+<td><code>&gt;31/12/2018</code> (o próprio dia fica de fora)</td>
+</tr>
+<tr>
+<td>"janeiro <strong>e</strong> junho"</td>
+<td>Dois meses separados, duas somas</td>
+</tr>
+<tr>
+<td>"janeiro <strong>a</strong> junho"</td>
+<td>Um período contínuo</td>
+</tr>
+<tr>
+<td>"analistas" (vários cargos)</td>
+<td>Curinga <code>"Analista*"</code></td>
+</tr>
+<tr>
+<td>"em 1 ano"</td>
+<td>Agrupar por cliente <strong>e</strong> ano</td>
+</tr>
+<tr>
+<td>"margem"</td>
+<td>Lucro ÷ Faturamento, somados antes</td>
+</tr>
+<tr>
+<td>"crescimento"</td>
+<td>Novo ÷ Antigo − 1</td>
+</tr>
+<tr>
+<td>"respectivamente"</td>
+<td>A ordem das respostas importa</td>
+</tr>
+</tbody>
+</table></div>
+<h3>10.3 Catálogo de pegadinhas desta prova</h3>
+<div class="tbl glass-s"><table>
+<thead>
+<tr>
+<th>Pegadinha</th>
+<th>Questão</th>
+<th>Resposta errada que ela gera</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Contar o cabeçalho junto</td>
+<td>Q1</td>
+<td>300 vendas</td>
+</tr>
+<tr>
+<td>Ordem invertida ("respectivamente")</td>
+<td>Q2</td>
+<td>113, 186</td>
+</tr>
+<tr>
+<td><code>&gt;=</code> em vez de <code>&gt;</code> na data</td>
+<td>Q4</td>
+<td>27 contratados</td>
+</tr>
+<tr>
+<td>Esquecer o curinga</td>
+<td>Q4</td>
+<td>0 ou 9 analistas</td>
+</tr>
+<tr>
+<td>"a" em vez de "e" nos meses</td>
+<td>Q5</td>
+<td>R$65.596</td>
+</tr>
+<tr>
+<td>Ignorar o código substituto</td>
+<td>Q6</td>
+<td>R$410.561</td>
+</tr>
+<tr>
+<td>PROCV para a esquerda</td>
+<td>Q7</td>
+<td><code>#N/D</code> em tudo</td>
+</tr>
+<tr>
+<td>Somar valores em vez de contar vendas</td>
+<td>Q7</td>
+<td>Marca com maior valor, não com mais vendas</td>
+</tr>
+<tr>
+<td>Preço como texto com ponto</td>
+<td>Q8, Q9</td>
+<td><code>#VALOR!</code> ou valores 100× maiores</td>
+</tr>
+<tr>
+<td>Confundir custo com lucro</td>
+<td>Q9</td>
+<td>R$90,9 milhões</td>
+</tr>
+<tr>
+<td>Contar linhas em vez de somar quantidades</td>
+<td>Q12</td>
+<td>42,7%</td>
+</tr>
+<tr>
+<td>Poucas casas decimais</td>
+<td>Q13</td>
+<td>Empate Curitiba/Campinas</td>
+</tr>
+<tr>
+<td>Confundir código com valor</td>
+<td>Q14</td>
+<td>"187 mil" (o código do cliente)</td>
+</tr>
+<tr>
+<td>Somar todos os anos juntos</td>
+<td>Q14</td>
+<td>R$382.750</td>
+</tr>
+</tbody>
+</table></div>
+<h3>10.4 Gestão de tempo</h3>
+<ul>
+<li>Monte <strong>todas</strong> as colunas auxiliares da Base Vendas logo no começo (Módulo 8.2). Elas servem para as questões 8 a 14.</li>
+<li>Deixe uma aba "Respostas" com uma célula por questão e a fórmula ao lado. Fica fácil revisar no fim.</li>
+<li>Se uma questão travar, pule e volte. As bases são as mesmas, então resolver as outras costuma destravar a difícil.</li>
+</ul>
+<h2>Resolução comentada da prova</h2>
+<p>Gabarito: Q1 → 1 · Q2 → 2 · Q3 → 2 · Q4 → 1 · Q5 → 4 · Q6 → 2 · Q7 → 4 · Q8 → 1 · Q9 → 2 · Q10 → 4 · Q11 → 2 · Q12 → 4 · Q13 → 4 · Q14 → 4. Tente resolver cada questão antes de ler a resolução.</p>
+<h3>Q1 — Quantidade, soma e média de vendas (Módulo 2)</h3>
+<p><strong>Raciocínio:</strong> três agregações simples sobre a coluna B da aba Q1.</p>
+<pre><code>=CONT.NÚM(B:B)   → 299
+=SOMA(B:B)       → 119.450
+=MÉDIA(B:B)      → 399,50
+</code></pre>
+<p><strong>Resposta:</strong> 299; R$119.450; R$399 (alternativa 1). Quem conta a coluna A com CONT.VALORES chega a 300 por causa do cabeçalho.</p>
+<h3>Q2 — Produtos Ouro e Prata (Módulos 3 e 4)</h3>
+<p><strong>Raciocínio:</strong> classificar cada linha com SE e depois contar cada categoria.</p>
+<pre><code>C2: =SE(B2&gt;35000;&quot;Produto Ouro&quot;;&quot;Produto Prata&quot;)
+=CONT.SE(C:C;&quot;Produto Ouro&quot;)    → 186
+=CONT.SE(C:C;&quot;Produto Prata&quot;)   → 113
+</code></pre>
+<p><strong>Resposta:</strong> 186, 113 (alternativa 2). A alternativa 3 traz os mesmos números invertidos: respeite o "respectivamente".</p>
+<h3>Q3 — Níveis de estoque (Módulos 3 e 4)</h3>
+<p><strong>Raciocínio:</strong> quatro faixas → SE aninhado testando os limites superiores em ordem crescente.</p>
+<pre><code>C2: =SE(B2&lt;=5000;&quot;Nível 1&quot;;SE(B2&lt;=30000;&quot;Nível 2&quot;;SE(B2&lt;=40000;&quot;Nível 3&quot;;&quot;Nível 4&quot;)))
+=CONT.SE(C:C;&quot;Nível 2&quot;)   → 2.280
+=CONT.SE(C:C;&quot;Nível 4&quot;)   → 840
+</code></pre>
+<p><strong>Resposta:</strong> 2280, 840 (alternativa 2). Conferência: 473 + 2.280 + 838 + 840 = 4.431 produtos, o total da base.</p>
+<h3>Q4 — Três perguntas com CONT.SE (Módulo 4)</h3>
+<pre><code>=CONT.SE(E:E;&quot;&gt;31/12/2018&quot;)                     → 26
+=CONT.SE(B:B;&quot;Analista*&quot;)                        → 16
+=CONT.SES(B:B;&quot;Coordenador&quot;;C:C;&quot;Financeiro&quot;)    → 2
+</code></pre>
+<p><strong>Resposta:</strong> 26, 16, 2 (alternativa 1). "Após" exclui o próprio dia 31/12/2018 (um coordenador foi contratado nessa data). Sem o curinga, a contagem de analistas dá 0.</p>
+<h3>Q5 — Somas condicionais (Módulos 4 e 5)</h3>
+<pre><code>=SOMASE(A:A;&quot;Pedro&quot;;C:C)                                              → 98.727
+=SOMASES(C:C;A:A;&quot;Fernanda&quot;;B:B;&quot;&gt;=01/01/2020&quot;;B:B;&quot;&lt;=31/01/2020&quot;)
+ +SOMASES(C:C;A:A;&quot;Fernanda&quot;;B:B;&quot;&gt;=01/06/2020&quot;;B:B;&quot;&lt;=30/06/2020&quot;)   → 20.628
+</code></pre>
+<p><strong>Resposta:</strong> R$98.727, R$20.628 (alternativa 4). Janeiro dá 13.054 e junho 7.574. R$65.596 é janeiro <strong>a</strong> junho.</p>
+<h3>Q6 — Busca com código substituto (Módulo 6)</h3>
+<p><strong>Raciocínio:</strong> 4 dos 15 códigos só existem na coluna "Cód substituto". Tente a busca principal; se der erro, busque no substituto.</p>
+<pre><code>C3: =SEERRO(PROCV(B3;'Q6.1'!A:C;3;0);PROCV(B3;'Q6.1'!B:C;2;0))
+=SOMA(C3:C17)   → 504.385
+</code></pre>
+<p><strong>Resposta:</strong> R$504.385 (alternativa 2). Só com o PROCV principal, os 4 códigos ficam de fora e o total cai para R$410.561.</p>
+<h3>Q7 — Marca com mais vendas (Módulos 4 e 6)</h3>
+<p><strong>Raciocínio:</strong> na Q7.1 o código está à direita da marca, então o PROCV não serve. Use ÍNDICE+CORRESP para trazer a marca e CONT.SE para contar as vendas de cada uma.</p>
+<pre><code>C3: =ÍNDICE('Q7.1'!C:C;CORRESP(B3;'Q7.1'!E:E;0))
+D3: =CONT.SE('Q7.1'!C:C;C3)
+</code></pre>
+<p><strong>Resposta:</strong> Marca 10, com 129 vendas (alternativa 4). A pergunta pede <strong>número</strong> de vendas: é CONT.SE, não SOMASE.</p>
+<h3>Q8 — Faturamento total (Módulos 7 e 8)</h3>
+<p><strong>Raciocínio:</strong> faturamento de cada venda = quantidade × preço do produto, trazido do cadastro. O preço está como texto com ponto, então precisa de conversão.</p>
+<pre><code>F2: =B2*VALOR(SUBSTITUIR(PROCV(A2;'Cadastro Produto'!A:F;5;0);&quot;.&quot;;&quot;,&quot;))
+=SOMA(F:F)   → 167.277.850
+</code></pre>
+<p><strong>Resposta:</strong> R$167,28 milhões (alternativa 1).</p>
+<h3>Q9 — Lucro total (Módulo 8)</h3>
+<pre><code>G2: =B2*VALOR(SUBSTITUIR(PROCV(A2;'Cadastro Produto'!A:F;6;0);&quot;.&quot;;&quot;,&quot;))
+=SOMA(F:F)-SOMA(G:G)   → 76.374.300
+</code></pre>
+<p><strong>Resposta:</strong> R$76,37 milhões (alternativa 2). R$90,9 milhões é o custo total, não o lucro.</p>
+<h3>Q10 — Produtos Apple com maior faturamento (Módulos 8 e 9)</h3>
+<p><strong>Raciocínio:</strong> faturamento por produto, filtrado pela marca Apple, ordenado do maior para o menor. Tabela dinâmica com Filtro Marca = Apple, Linhas = Produto, Valores = Soma de Faturamento.</p>
+<div class="tbl glass-s"><table>
+<thead>
+<tr>
+<th>Produto Apple</th>
+<th>Faturamento</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>iPhone XS - Preto</td>
+<td>R$19.896.500</td>
+</tr>
+<tr>
+<td>iPhone 7 - Dourado</td>
+<td>R$7.702.500</td>
+</tr>
+<tr>
+<td>iPhone 6S - Rosa</td>
+<td>R$5.515.700</td>
+</tr>
+<tr>
+<td>Apple Watch - Preto</td>
+<td>R$5.012.000</td>
+</tr>
+<tr>
+<td>iPad 32GB Wifi - Prata</td>
+<td>R$2.306.250</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>Resposta:</strong> iPhone XS, iPhone 7 (alternativa 4).</p>
+<h3>Q11 — Desconto para mães (Módulos 3, 6 e 8)</h3>
+<p><strong>Raciocínio:</strong> trazer sexo e número de filhos do cliente, aplicar 15% de desconto só quando as duas condições valem, e calcular a participação de cada sexo no novo total.</p>
+<pre><code>H2: =PROCV(E2;'Cadastro Clientes'!A:D;3;0)
+I2: =PROCV(E2;'Cadastro Clientes'!A:D;4;0)
+J2: =SE(E(H2=&quot;F&quot;;I2&gt;=1);F2*0,85;F2)
+=SOMASE(H:H;&quot;M&quot;;J:J)/SOMA(J:J)   → 56,7%
+=SOMASE(H:H;&quot;F&quot;;J:J)/SOMA(J:J)   → 43,3%
+</code></pre>
+<p><strong>Resposta:</strong> 56,7%; 43,3% (alternativa 2). Novo faturamento total: R$161.324.215.</p>
+<h3>Q12 — Crescimento do 2º trimestre (Módulo 5)</h3>
+<pre><code>N1: =SOMASES(B:B;D:D;&quot;&gt;=01/04/2017&quot;;D:D;&quot;&lt;=30/06/2017&quot;)   → 4.583
+N2: =SOMASES(B:B;D:D;&quot;&gt;=01/04/2018&quot;;D:D;&quot;&lt;=30/06/2018&quot;)   → 6.576
+=N2/N1-1                                                  → 43,5%
+</code></pre>
+<p><strong>Resposta:</strong> 43,5% (alternativa 4). "Produtos vendidos" é a soma da quantidade; contar linhas daria 42,7%.</p>
+<h3>Q13 — Loja com maior margem (Módulos 8 e 9)</h3>
+<p><strong>Raciocínio:</strong> margem = lucro da loja ÷ faturamento da loja, somando cada um antes de dividir.</p>
+<pre><code>=(SOMASE(C:C;&quot;Curitiba&quot;;F:F)-SOMASE(C:C;&quot;Curitiba&quot;;G:G))/SOMASE(C:C;&quot;Curitiba&quot;;F:F)
+</code></pre>
+<div class="tbl glass-s"><table>
+<thead>
+<tr>
+<th>Loja</th>
+<th>Margem</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Curitiba</td>
+<td>45,99%</td>
+</tr>
+<tr>
+<td>Campinas</td>
+<td>45,97%</td>
+</tr>
+<tr>
+<td>Fortaleza</td>
+<td>45,87%</td>
+</tr>
+<tr>
+<td>Recife</td>
+<td>45,78%</td>
+</tr>
+<tr>
+<td>Salvador</td>
+<td>45,74%</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>Resposta:</strong> Curitiba (alternativa 4). Com uma casa decimal, Curitiba e Campinas empatam.</p>
+<h3>Q14 — Maior gasto de um cliente em 1 ano (Módulos 5 e 9)</h3>
+<p><strong>Raciocínio:</strong> agrupar por cliente <strong>e</strong> por ano, somar o faturamento e pegar o maior valor. Tabela dinâmica com Código Cliente e Ano em Linhas, Soma de Faturamento em Valores, ordenada do maior para o menor.</p>
+<p>Com fórmula, crie a coluna K = <code>ANO(D2)</code> e uma coluna O com o total daquele cliente naquele ano:</p>
+<pre><code>O2: =SOMASES(F:F;E:E;E2;K:K;K2)
+=MÁXIMO(O:O)   → 258.850
+</code></pre>
+<p><strong>Resposta:</strong> 258 mil (alternativa 4), do cliente 187 em 2018. A alternativa "187 mil" usa o código do cliente como isca, e R$382.750 é o total do cliente somando todos os anos.</p>
+<h2>Exercícios extras e gabarito</h2>
+<h3>Gabarito dos exercícios dos módulos</h3>
+<div class="tbl glass-s"><table>
+<thead>
+<tr>
+<th>Exercício</th>
+<th>Resposta</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>Contagem 299, soma 119.450, média 399,50: bate com a alternativa 1</td>
+</tr>
+<tr>
+<td>2</td>
+<td>Maior 600, menor 200. Sim, SOMA/CONT.NÚM dá o mesmo que MÉDIA</td>
+</tr>
+<tr>
+<td>3</td>
+<td>Bronze 75, Prata 77, Ouro 147 (total 299)</td>
+</tr>
+<tr>
+<td>4</td>
+<td>(a) 10 gerentes; (b) R$4.393,75; (c) R$100.200; (d) R$123.027</td>
+</tr>
+<tr>
+<td>5</td>
+<td>2016: 18.233; 2017: 23.207; 2018: 30.002 produtos. Crescimento 2017→2018: 29,3%</td>
+</tr>
+<tr>
+<td>6</td>
+<td>"substituto" para H5216132, H2926444, H6995525 e H3485674; os outros 11 são "principal"</td>
+</tr>
+<tr>
+<td>7</td>
+<td>A soma dos 24 preços convertidos é 56.200. Se <code>SOMA</code> der 0, a coluna ainda é texto</td>
+</tr>
+<tr>
+<td>8</td>
+<td>2016: R$43.008.400; 2017: R$54.633.700; 2018: R$69.635.750. Celular fatura mais (R$67.453.000)</td>
+</tr>
+<tr>
+<td>9</td>
+<td>Guarulhos (R$23.084.900), e ela lidera em 2016, 2017 e 2018</td>
+</tr>
+</tbody>
+</table></div>
+<p>Fórmula do exercício 6:</p>
+<pre><code>D3: =SE(CONT.SE('Q6.1'!A:A;B3)&gt;0;&quot;principal&quot;;SE(CONT.SE('Q6.1'!B:B;B3)&gt;0;&quot;substituto&quot;;&quot;não encontrado&quot;))
+</code></pre>
+<h3>Desafios com as bases da prova</h3>
+<p>Resolva usando as colunas auxiliares do Módulo 8. As respostas estão logo abaixo.</p>
+<ol>
+<li>Qual o <strong>ticket médio</strong> por venda (faturamento total ÷ número de vendas)?</li>
+<li>Em 2018, qual <strong>mês</strong> teve o maior faturamento?</li>
+<li>Qual a <strong>participação</strong> da Samsung no faturamento total?</li>
+<li>Quantas <strong>vendas</strong> foram feitas para clientes mulheres com 2 filhos ou mais?</li>
+<li>Na loja do <strong>Rio de Janeiro</strong>, qual tipo de produto vendeu mais unidades?</li>
+</ol>
+<h3>Respostas dos desafios</h3>
+<div class="tbl glass-s"><table>
+<thead>
+<tr>
+<th>Desafio</th>
+<th>Resposta</th>
+<th>Caminho</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>R$7.029,37</td>
+<td><code>=SOMA(F:F)/CONT.VALORES(A2:A23798)</code></td>
+</tr>
+<tr>
+<td>2</td>
+<td>Novembro (R$8.169.150)</td>
+<td>Coluna de mês + tabela dinâmica filtrada por 2018</td>
+</tr>
+<tr>
+<td>3</td>
+<td>35,54%</td>
+<td><code>=SOMASE(L:L;"Samsung";F:F)/SOMA(F:F)</code></td>
+</tr>
+<tr>
+<td>4</td>
+<td>3.575 vendas</td>
+<td><code>=CONT.SES(H:H;"F";I:I;"&gt;=2")</code></td>
+</tr>
+<tr>
+<td>5</td>
+<td>Celular (1.738 unidades)</td>
+<td>Coluna de tipo + SOMASES com Loja = "Rio de Janeiro"</td>
+</tr>
+</tbody>
+</table></div>
+<p>No desafio 5, crie antes uma coluna de tipo de produto: <code>=PROCV(A2;'Cadastro Produto'!A:F;4;0)</code>.</p>
+<h2>Referência rápida</h2>
+<p>No Excel em inglês, troque o <code>;</code> por <code>,</code> entre os argumentos.</p>
+<div class="tbl glass-s"><table>
+<thead>
+<tr>
+<th>Português</th>
+<th>Inglês</th>
+<th>Módulo</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>SOMA</td>
+<td>SUM</td>
+<td>2</td>
+</tr>
+<tr>
+<td>CONT.NÚM</td>
+<td>COUNT</td>
+<td>2</td>
+</tr>
+<tr>
+<td>CONT.VALORES</td>
+<td>COUNTA</td>
+<td>2</td>
+</tr>
+<tr>
+<td>CONTAR.VAZIO</td>
+<td>COUNTBLANK</td>
+<td>2</td>
+</tr>
+<tr>
+<td>MÉDIA</td>
+<td>AVERAGE</td>
+<td>2</td>
+</tr>
+<tr>
+<td>MÁXIMO / MÍNIMO</td>
+<td>MAX / MIN</td>
+<td>2</td>
+</tr>
+<tr>
+<td>MAIOR / MENOR</td>
+<td>LARGE / SMALL</td>
+<td>2</td>
+</tr>
+<tr>
+<td>ARRED</td>
+<td>ROUND</td>
+<td>2</td>
+</tr>
+<tr>
+<td>SE / SES</td>
+<td>IF / IFS</td>
+<td>3</td>
+</tr>
+<tr>
+<td>E / OU / NÃO</td>
+<td>AND / OR / NOT</td>
+<td>3</td>
+</tr>
+<tr>
+<td>CONT.SE / CONT.SES</td>
+<td>COUNTIF / COUNTIFS</td>
+<td>4</td>
+</tr>
+<tr>
+<td>SOMASE / SOMASES</td>
+<td>SUMIF / SUMIFS</td>
+<td>4</td>
+</tr>
+<tr>
+<td>MÉDIASE / MÉDIASES</td>
+<td>AVERAGEIF / AVERAGEIFS</td>
+<td>4</td>
+</tr>
+<tr>
+<td>MÁXIMOSES / MÍNIMOSES</td>
+<td>MAXIFS / MINIFS</td>
+<td>4</td>
+</tr>
+<tr>
+<td>ANO / MÊS / DIA</td>
+<td>YEAR / MONTH / DAY</td>
+<td>5</td>
+</tr>
+<tr>
+<td>DATA / HOJE</td>
+<td>DATE / TODAY</td>
+<td>5</td>
+</tr>
+<tr>
+<td>FIMMÊS</td>
+<td>EOMONTH</td>
+<td>5</td>
+</tr>
+<tr>
+<td>PROCV / PROCH</td>
+<td>VLOOKUP / HLOOKUP</td>
+<td>6</td>
+</tr>
+<tr>
+<td>ÍNDICE / CORRESP</td>
+<td>INDEX / MATCH</td>
+<td>6</td>
+</tr>
+<tr>
+<td>PROCX</td>
+<td>XLOOKUP</td>
+<td>6</td>
+</tr>
+<tr>
+<td>SEERRO</td>
+<td>IFERROR</td>
+<td>6</td>
+</tr>
+<tr>
+<td>VALOR</td>
+<td>VALUE</td>
+<td>7</td>
+</tr>
+<tr>
+<td>SUBSTITUIR</td>
+<td>SUBSTITUTE</td>
+<td>7</td>
+</tr>
+<tr>
+<td>ARRUMAR</td>
+<td>TRIM</td>
+<td>7</td>
+</tr>
+<tr>
+<td>ESQUERDA / DIREITA / EXT.TEXTO</td>
+<td>LEFT / RIGHT / MID</td>
+<td>7</td>
+</tr>
+<tr>
+<td>LOCALIZAR</td>
+<td>SEARCH</td>
+<td>7</td>
+</tr>
+<tr>
+<td>TEXTO</td>
+<td>TEXT</td>
+<td>7</td>
+</tr>
+</tbody>
+</table></div>
+<h3>Atalhos</h3>
+<div class="tbl glass-s"><table>
+<thead>
+<tr>
+<th>Atalho</th>
+<th>Ação</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>F4</td>
+<td>Alterna $ nas referências</td>
+</tr>
+<tr>
+<td>Ctrl + Seta / Ctrl + Shift + Seta</td>
+<td>Ir / selecionar até o fim dos dados</td>
+</tr>
+<tr>
+<td>Ctrl + T</td>
+<td>Formatar como Tabela</td>
+</tr>
+<tr>
+<td>Ctrl + Shift + L</td>
+<td>Liga/desliga filtros</td>
+</tr>
+<tr>
+<td>Ctrl + 1</td>
+<td>Formatar células</td>
+</tr>
+<tr>
+<td>Ctrl + ;</td>
+<td>Insere a data de hoje</td>
+</tr>
+<tr>
+<td>Ctrl + ` (crase)</td>
+<td>Mostra as fórmulas em vez dos resultados</td>
+</tr>
+<tr>
+<td>Alt + =</td>
+<td>AutoSoma</td>
+</tr>
+<tr>
+<td>Duplo clique na alça</td>
+<td>Copia a fórmula até o fim da base</td>
+</tr>
+</tbody>
+</table></div></article>
+  <footer class="sig glass"><div class="who"><img class="kx-logo" src="data:image/webp;base64,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" width="40" height="40" alt=""><div><b>Kalixto — Professor • Programador • Gamer</b><small>Kalixto by Wallace Toledo · @dev.kalixto</small></div></div></footer>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/mermaid@10.9.1/dist/mermaid.min.js"></script>
+<script>
+const dark = !window.matchMedia('(prefers-color-scheme: light)').matches;
+if (window.mermaid) mermaid.initialize({startOnLoad:true, theme:'base', themeVariables:{
+  fontFamily:'Inter, sans-serif', primaryColor: dark?'#1B1B1B':'#FFFFFF', primaryTextColor: dark?'#FFFFFF':'#120B24',
+  primaryBorderColor:'#7B2EFF', lineColor: dark?'#B899FF':'#5A12D6', secondaryColor: dark?'#2D2D2D':'#EADFFF', tertiaryColor: dark?'#050505':'#F5F7FA'}});
+</script>
+</body></html>

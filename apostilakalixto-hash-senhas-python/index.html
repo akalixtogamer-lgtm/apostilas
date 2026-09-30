@@ -1,0 +1,803 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Apostila Kalixto — Hash de Senhas em Python</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+
+  :root{
+    --bg: #0a0a14;
+    --bg-elev: #13121f;
+    --bg-elev-2: #191828;
+    --fg: #f1eff9;
+    --fg-muted: #a9a6c4;
+    --fg-dim: #716e8f;
+    --magenta: #ff3fb0;
+    --purple: #8b5cf6;
+    --blue: #22d3ee;
+    --border: rgba(255,255,255,0.09);
+    --border-strong: rgba(255,255,255,0.16);
+    --code-bg: #0d0c18;
+    --ok: #34d399;
+    --warn: #fbbf24;
+    --font-display: 'Chakra Petch', sans-serif;
+    --font-body: 'Inter', sans-serif;
+    --font-mono: 'JetBrains Mono', monospace;
+    --grad: linear-gradient(100deg, var(--magenta), var(--purple) 55%, var(--blue));
+  }
+
+  :root:not([data-theme="light"]){
+    color-scheme: dark;
+  }
+
+  @media (prefers-color-scheme: light){
+    :root:not([data-theme="dark"]){
+      --bg: #f6f5fb;
+      --bg-elev: #ffffff;
+      --bg-elev-2: #edecf7;
+      --fg: #1a1830;
+      --fg-muted: #4c4968;
+      --fg-dim: #7d7a9c;
+      --border: rgba(20,15,50,0.10);
+      --border-strong: rgba(20,15,50,0.18);
+      --code-bg: #14132a;
+      color-scheme: light;
+    }
+  }
+
+  :root[data-theme="light"]{
+    --bg: #f6f5fb;
+    --bg-elev: #ffffff;
+    --bg-elev-2: #edecf7;
+    --fg: #1a1830;
+    --fg-muted: #4c4968;
+    --fg-dim: #7d7a9c;
+    --border: rgba(20,15,50,0.10);
+    --border-strong: rgba(20,15,50,0.18);
+    --code-bg: #14132a;
+    color-scheme: light;
+  }
+
+  :root[data-theme="dark"]{
+    color-scheme: dark;
+  }
+
+  *{ box-sizing: border-box; }
+
+  html{ scroll-behavior: smooth; }
+
+  body{
+    margin: 0;
+    background: var(--bg);
+    color: var(--fg);
+    font-family: var(--font-body);
+    line-height: 1.65;
+    font-size: 16px;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  body::before{
+    content: "";
+    position: fixed;
+    inset: 0;
+    background:
+      radial-gradient(600px 400px at 85% -10%, rgba(255,63,176,0.16), transparent 60%),
+      radial-gradient(700px 500px at -10% 20%, rgba(34,211,238,0.12), transparent 60%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  a{ color: var(--blue); }
+
+  .wrap{
+    max-width: 880px;
+    margin: 0 auto;
+    padding: 0 24px 120px;
+    position: relative;
+    z-index: 1;
+  }
+
+  /* ---------- NAV ---------- */
+  .topnav{
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    background: color-mix(in srgb, var(--bg) 88%, transparent);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--border);
+  }
+  .topnav-inner{
+    max-width: 880px;
+    margin: 0 auto;
+    padding: 14px 24px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+  }
+  .brand{
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 15px;
+    letter-spacing: 0.02em;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    white-space: nowrap;
+  }
+  .brand-dot{
+    width: 9px; height: 9px; border-radius: 50%;
+    background: var(--grad);
+    flex: none;
+  }
+  .navlinks{
+    display: flex;
+    gap: 4px;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+  .navlinks::-webkit-scrollbar{ display: none; }
+  .navlinks a{
+    font-size: 13px;
+    color: var(--fg-muted);
+    text-decoration: none;
+    padding: 7px 11px;
+    border-radius: 999px;
+    white-space: nowrap;
+    transition: background 0.15s, color 0.15s;
+  }
+  .navlinks a:hover{ background: var(--bg-elev-2); color: var(--fg); }
+
+  /* ---------- HERO ---------- */
+  .hero{
+    padding: 64px 0 40px;
+    border-bottom: 1px solid var(--border);
+  }
+  .hero-eyebrow{
+    font-family: var(--font-mono);
+    font-size: 12.5px;
+    color: var(--fg-dim);
+    margin: 0 0 18px;
+  }
+  .hero h1{
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: clamp(30px, 5vw, 46px);
+    line-height: 1.12;
+    margin: 0 0 18px;
+    background: var(--grad);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+  .hero p{
+    color: var(--fg-muted);
+    font-size: 17px;
+    max-width: 62ch;
+    margin: 0 0 22px;
+  }
+  .hero-meta{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+  .pill{
+    font-family: var(--font-mono);
+    font-size: 12px;
+    padding: 6px 12px;
+    border-radius: 999px;
+    border: 1px solid var(--border-strong);
+    color: var(--fg-muted);
+  }
+
+  /* ---------- SECTIONS ---------- */
+  section{
+    padding: 46px 0;
+    border-bottom: 1px solid var(--border);
+    scroll-margin-top: 70px;
+  }
+  section:last-of-type{ border-bottom: none; }
+
+  .kicker{
+    font-family: var(--font-mono);
+    font-size: 12.5px;
+    color: var(--magenta);
+    margin: 0 0 10px;
+  }
+  h2{
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 26px;
+    margin: 0 0 16px;
+  }
+  h3{
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 18px;
+    margin: 30px 0 10px;
+    color: var(--fg);
+  }
+  p{ margin: 0 0 14px; }
+  ul, ol{ margin: 0 0 14px; padding-left: 22px; }
+  li{ margin-bottom: 6px; }
+  strong{ color: var(--fg); }
+
+  code.inline{
+    font-family: var(--font-mono);
+    font-size: 0.88em;
+    background: var(--bg-elev-2);
+    border: 1px solid var(--border);
+    padding: 1px 6px;
+    border-radius: 5px;
+    color: var(--blue);
+  }
+
+  /* ---------- CONCEPT CARDS ---------- */
+  .cards{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 14px;
+    margin: 20px 0;
+  }
+  @media (max-width: 720px){ .cards{ grid-template-columns: 1fr; } }
+  .card{
+    background: var(--bg-elev);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 18px;
+    position: relative;
+    overflow: hidden;
+  }
+  .card::before{
+    content: "";
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    background: var(--grad);
+  }
+  .card h4{
+    font-family: var(--font-display);
+    font-size: 15px;
+    margin: 6px 0 8px;
+    color: var(--fg);
+  }
+  .card p{
+    font-size: 13.5px;
+    color: var(--fg-muted);
+    margin: 0;
+  }
+  .card .tag{
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--fg-dim);
+  }
+
+  /* ---------- CODE BLOCKS ---------- */
+  .codebox{
+    background: var(--code-bg);
+    border: 1px solid var(--border-strong);
+    border-radius: 12px;
+    overflow: hidden;
+    margin: 16px 0 20px;
+  }
+  .codebox-head{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 9px 14px;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+  }
+  .codebox-head span{
+    font-family: var(--font-mono);
+    font-size: 11.5px;
+    color: #8f8bb0;
+  }
+  .dots{ display:flex; gap: 6px; }
+  .dots i{ width: 8px; height: 8px; border-radius: 50%; display:block; }
+  .dots i:nth-child(1){ background: #ff5f56; }
+  .dots i:nth-child(2){ background: #ffbd2e; }
+  .dots i:nth-child(3){ background: #27c93f; }
+  pre{
+    margin: 0;
+    padding: 16px;
+    overflow-x: auto;
+    font-family: var(--font-mono);
+    font-size: 13px;
+    line-height: 1.6;
+    color: #e6e3f5;
+  }
+  pre .c{ color: #6f6b93; font-style: italic; }      /* comentário/docstring */
+  pre .k{ color: #ff7ad1; }                          /* palavra-chave */
+  pre .s{ color: #7ee787; }                          /* string */
+  pre .f{ color: #79c0ff; }                          /* nome de função/método */
+  pre .n{ color: #d2a8ff; }                          /* número/booleano */
+  pre .v{ color: #ffd166; }                          /* variável destacada */
+
+  /* ---------- CALLOUTS ---------- */
+  .callout{
+    border-radius: 12px;
+    padding: 16px 18px;
+    margin: 16px 0;
+    border: 1px solid var(--border-strong);
+    font-size: 14.5px;
+  }
+  .callout-term{
+    background: linear-gradient(120deg, rgba(255,63,176,0.10), rgba(139,92,246,0.08));
+    border-color: rgba(255,63,176,0.30);
+  }
+  .callout-term .lbl{ color: var(--magenta); }
+  .callout-warn{
+    background: rgba(251,191,36,0.08);
+    border-color: rgba(251,191,36,0.30);
+  }
+  .callout-warn .lbl{ color: var(--warn); }
+  .callout-ok{
+    background: rgba(52,211,153,0.08);
+    border-color: rgba(52,211,153,0.30);
+  }
+  .callout-ok .lbl{ color: var(--ok); }
+  .callout .lbl{
+    display: block;
+    font-family: var(--font-mono);
+    font-size: 11.5px;
+    letter-spacing: 0.02em;
+    margin-bottom: 6px;
+  }
+  .callout p{ margin: 0; color: var(--fg-muted); }
+  .callout p + p{ margin-top: 8px; }
+
+  /* ---------- GLOSSARY ---------- */
+  .gloss{
+    display: grid;
+    grid-template-columns: 200px 1fr;
+    gap: 4px 20px;
+    border-top: 1px solid var(--border);
+  }
+  .gloss dt{
+    font-family: var(--font-mono);
+    font-size: 13.5px;
+    color: var(--blue);
+    padding: 14px 0 4px;
+    border-bottom: 1px solid var(--border);
+  }
+  .gloss dd{
+    margin: 0;
+    padding: 14px 0;
+    border-bottom: 1px solid var(--border);
+    color: var(--fg-muted);
+    font-size: 14px;
+  }
+  @media (max-width: 620px){
+    .gloss{ grid-template-columns: 1fr; }
+    .gloss dt{ border-bottom: none; padding-bottom: 0; }
+    .gloss dd{ padding-top: 6px; }
+  }
+
+  /* ---------- FUNC/METHOD COMPARISON ---------- */
+  .vs{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin: 18px 0;
+  }
+  @media (max-width: 640px){ .vs{ grid-template-columns: 1fr; } }
+  .vs > div{
+    background: var(--bg-elev);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 20px;
+  }
+  .vs h4{
+    font-family: var(--font-display);
+    font-size: 16px;
+    margin: 0 0 10px;
+  }
+  .vs.func h4{ color: var(--blue); }
+  .vs.metodo h4{ color: var(--magenta); }
+  .vs p{ font-size: 14px; color: var(--fg-muted); }
+  .vs code.inline{ font-size: 0.82em; }
+
+  /* ---------- EXERCISES ---------- */
+  .exercise{
+    background: var(--bg-elev);
+    border: 1px solid var(--border);
+    border-left: 3px solid var(--purple);
+    border-radius: 10px;
+    padding: 16px 18px;
+    margin: 14px 0;
+  }
+  .exercise .num{
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--purple);
+    margin: 0 0 6px;
+  }
+  .exercise p{ margin: 0; font-size: 14.5px; }
+
+  /* ---------- CHECKLIST ---------- */
+  .checklist{ list-style: none; padding: 0; margin: 0; }
+  .checklist li{
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+    padding: 11px 0;
+    border-bottom: 1px solid var(--border);
+    font-size: 14.5px;
+    color: var(--fg-muted);
+  }
+  .checklist li:last-child{ border-bottom: none; }
+  .checklist .box{
+    flex: none;
+    width: 18px; height: 18px;
+    border-radius: 5px;
+    border: 1.5px solid var(--border-strong);
+    margin-top: 2px;
+  }
+
+  footer{
+    padding: 40px 0 10px;
+    color: var(--fg-dim);
+    font-size: 13px;
+    font-family: var(--font-mono);
+    text-align: center;
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    html{ scroll-behavior: auto; }
+  }
+</style>
+</head>
+<body>
+
+<nav class="topnav">
+  <div class="topnav-inner">
+    <div class="brand"><span class="brand-dot"></span> dev&#8209;Kalixto · Apostila</div>
+    <div class="navlinks">
+      <a href="#intro">Início</a>
+      <a href="#variavel">Variável</a>
+      <a href="#funcao-metodo">Função × Método</a>
+      <a href="#leitura">Leitura do código</a>
+      <a href="#glossario">Glossário</a>
+      <a href="#exercicios">Exercícios</a>
+      <a href="#revisao">Revisão</a>
+    </div>
+  </div>
+</nav>
+
+<div class="wrap">
+
+  <header class="hero" id="intro">
+    <p class="hero-eyebrow">// apostila · segurança da informação · python</p>
+    <h1>Hash de senhas em Python, explicado do zero</h1>
+    <p>Este material usa o seu próprio trabalho — o cadastro de usuários com SQLite e SHA-256 — como base para explicar variável, função, método e os termos de Python que aparecem no código, linha por linha.</p>
+    <div class="hero-meta">
+      <span class="pill">nível: iniciante → intermediário</span>
+      <span class="pill">linguagem: Python 3</span>
+      <span class="pill">tema: hashlib · sqlite3 · re</span>
+    </div>
+  </header>
+
+  <section id="variavel">
+    <p class="kicker">01 · o essencial</p>
+    <h2>O que é uma variável</h2>
+    <p>Uma <strong>variável</strong> é um nome que aponta para um valor guardado na memória do computador. Ela funciona como uma etiqueta: em vez de repetir o valor toda hora, você usa o nome.</p>
+
+    <div class="codebox">
+      <div class="codebox-head"><div class="dots"><i></i><i></i><i></i></div><span>trecho do seu código</span></div>
+      <pre><span class="v">NOME_BANCO</span> = <span class="s">"usuarios.db"</span></pre>
+    </div>
+
+    <p>Aqui, <code class="inline">NOME_BANCO</code> é a variável e <code class="inline">"usuarios.db"</code> é o valor (uma <strong>string</strong>, isto é, um texto). Sempre que o código precisar do nome do arquivo do banco, ele usa <code class="inline">NOME_BANCO</code> em vez de escrever <code class="inline">"usuarios.db"</code> de novo — se um dia você mudar o nome do arquivo, muda em um lugar só.</p>
+
+    <div class="callout callout-term">
+      <span class="lbl">CONVENÇÃO</span>
+      <p>Variáveis em <strong>MAIÚSCULAS</strong>, como <code class="inline">NOME_BANCO</code>, sinalizam por convenção que o valor é uma <strong>constante</strong>: algo que não deveria mudar durante a execução do programa. Python não impede a alteração — é um combinado entre programadores.</p>
+    </div>
+
+    <p>Dentro das funções aparecem outras variáveis: <code class="inline">email</code>, <code class="inline">senha</code>, <code class="inline">conexao</code>, <code class="inline">cursor</code>, <code class="inline">hash_da_senha</code>. Cada uma guarda um valor diferente — texto, número, ou até um <strong>objeto</strong> (explicado mais abaixo) — e o nome escolhido deveria sempre descrever o que está guardado ali, como o próprio código faz.</p>
+  </section>
+
+  <section id="funcao-metodo">
+    <p class="kicker">02 · o essencial</p>
+    <h2>Função vs. Método — qual é a diferença?</h2>
+    <p>Essa é a dúvida mais comum de quem está começando, e o seu código tem os dois lado a lado.</p>
+
+    <div class="vs">
+      <div class="func">
+        <h4>Função</h4>
+        <p>Um bloco de código reutilizável, definido com <code class="inline">def</code>, que existe "sozinho" e é chamado pelo próprio nome.</p>
+        <div class="codebox" style="margin-top:12px;">
+          <pre><span class="k">def</span> <span class="f">gerar_hash</span>(senha, algoritmo=<span class="s">"sha256"</span>):
+    ...
+    <span class="k">return</span> hash_gerado.hexdigest()</pre>
+        </div>
+        <p><code class="inline">gerar_hash(senha)</code> — chamada direta pelo nome.</p>
+      </div>
+      <div class="metodo">
+        <h4>Método</h4>
+        <p>Também é uma função — mas uma que <strong>pertence a um objeto</strong>. Você a chama "grudada" no objeto, com um ponto <code class="inline">.</code></p>
+        <div class="codebox" style="margin-top:12px;">
+          <pre>senha_em_bytes = senha.<span class="f">encode</span>(<span class="s">"utf-8"</span>)
+hash_gerado.<span class="f">hexdigest</span>()
+cursor.<span class="f">execute</span>(...)</pre>
+        </div>
+        <p><code class="inline">objeto.metodo()</code> — o objeto vem antes do ponto.</p>
+      </div>
+    </div>
+
+    <p>Em outras palavras: <strong>toda chamada com um ponto na frente é um método</strong> (<code class="inline">senha.encode(...)</code>, <code class="inline">conexao.commit()</code>, <code class="inline">conexao.close()</code>, <code class="inline">cursor.execute(...)</code>, <code class="inline">email.strip()</code>). <strong>Toda chamada sem objeto na frente é uma função</strong> (<code class="inline">gerar_hash(...)</code>, <code class="inline">print(...)</code>, <code class="inline">len(senha)</code>, <code class="inline">input(...)</code>).</p>
+
+    <div class="callout callout-term">
+      <span class="lbl">POR QUE ISSO IMPORTA</span>
+      <p>Método é a forma como <strong>orientação a objetos</strong> organiza comportamento: um <code class="inline">sqlite3.connect(...)</code> devolve um <strong>objeto de conexão</strong>, e esse objeto já vem com ações prontas — <code class="inline">.cursor()</code>, <code class="inline">.commit()</code>, <code class="inline">.close()</code> — porque foram programadas dentro da classe <code class="inline">Connection</code> da biblioteca <code class="inline">sqlite3</code>. Você não precisou escrever essas ações: elas já existiam no objeto.</p>
+    </div>
+  </section>
+
+  <section id="leitura">
+    <p class="kicker">03 · leitura guiada</p>
+    <h2>O código, parte por parte</h2>
+    <p>Agora sim: vamos passar pelo seu programa de cima a baixo, e cada termo novo ganha uma explicação no momento em que aparece.</p>
+
+    <h3>1. O cabeçalho e os imports</h3>
+    <div class="codebox">
+      <div class="codebox-head"><div class="dots"><i></i><i></i><i></i></div><span>topo do arquivo</span></div>
+      <pre><span class="c">"""
+Trabalho de Segurança - Hash e senhas em banco de dados
+...
+"""</span>
+
+<span class="k">import</span> sqlite3
+<span class="k">import</span> hashlib
+<span class="k">import</span> re</pre>
+    </div>
+    <div class="cards">
+      <div class="card"><span class="tag">docstring</span><h4>Texto entre <code class="inline">"""</code></h4><p>Um comentário de várias linhas, geralmente usado para explicar o que o arquivo, a função ou a classe faz. Python o ignora ao executar, mas ferramentas de documentação conseguem lê-lo.</p></div>
+      <div class="card"><span class="tag">módulo</span><h4><code class="inline">import</code></h4><p>Traz para o seu programa um "pacote de funções prontas" escrito por outra pessoa. <code class="inline">sqlite3</code> lida com banco de dados, <code class="inline">hashlib</code> gera hashes, <code class="inline">re</code> trabalha com expressões regulares.</p></div>
+      <div class="card"><span class="tag">comentário</span><h4>Linhas com <code class="inline">#</code></h4><p>Tudo depois do <code class="inline">#</code> na mesma linha é ignorado pelo Python. Serve só para o ser humano entender o código.</p></div>
+    </div>
+
+    <h3>2. <code class="inline">criar_banco()</code> — a primeira função</h3>
+    <div class="codebox">
+      <pre><span class="k">def</span> <span class="f">criar_banco</span>():
+    conexao = sqlite3.<span class="f">connect</span>(NOME_BANCO)
+    cursor = conexao.<span class="f">cursor</span>()
+
+    cursor.<span class="f">execute</span>(<span class="s">"""
+        CREATE TABLE IF NOT EXISTS usuarios (
+            email TEXT PRIMARY KEY,
+            hash_senha TEXT NOT NULL
+        )
+    """</span>)
+
+    conexao.<span class="f">commit</span>()
+    conexao.<span class="f">close</span>()</pre>
+    </div>
+    <p>Uma <strong>função</strong> é definida com <code class="inline">def nome():</code>. O corpo dela — tudo que vem indentado embaixo — só roda quando alguém a <em>chama</em> em outro lugar do código, com <code class="inline">criar_banco()</code>.</p>
+    <ul>
+      <li><code class="inline">sqlite3.connect(NOME_BANCO)</code> — função do módulo <code class="inline">sqlite3</code> que abre (ou cria) o arquivo de banco de dados e devolve um <strong>objeto de conexão</strong>, guardado na variável <code class="inline">conexao</code>.</li>
+      <li><code class="inline">conexao.cursor()</code> — <strong>método</strong> do objeto <code class="inline">conexao</code>. O <em>cursor</em> é o objeto que de fato envia comandos SQL e lê resultados.</li>
+      <li><code class="inline">cursor.execute("...")</code> — método que executa um comando SQL, aqui escrito como uma string de várias linhas.</li>
+      <li><code class="inline">conexao.commit()</code> — confirma (grava de fato) as mudanças no banco.</li>
+      <li><code class="inline">conexao.close()</code> — encerra a conexão, liberando o arquivo.</li>
+    </ul>
+
+    <div class="callout callout-warn">
+      <span class="lbl">PONTO DE ATENÇÃO</span>
+      <p>O comando dentro do <code class="inline">cursor.execute(...)</code> no seu arquivo está escrito parte em português — <code class="inline">"Criando tabela se ela não existir usuarios ("</code> — em vez do comando SQL real <code class="inline">CREATE TABLE IF NOT EXISTS usuarios (</code>. SQL não entende português: isso vai gerar um erro de sintaxe ao rodar. Acima mostrei a versão corrigida, que é a que o comentário do próprio código já descreve como intenção.</p>
+    </div>
+
+    <h3>3. <code class="inline">gerar_hash()</code> — parâmetros e valor padrão</h3>
+    <div class="codebox">
+      <pre><span class="k">def</span> <span class="f">gerar_hash</span>(senha, algoritmo=<span class="s">"sha256"</span>):
+    senha_em_bytes = senha.<span class="f">encode</span>(<span class="s">"utf-8"</span>)
+
+    <span class="k">if</span> algoritmo == <span class="s">"md5"</span>:
+        hash_gerado = hashlib.<span class="f">md5</span>(senha_em_bytes)
+    <span class="k">elif</span> algoritmo == <span class="s">"sha1"</span>:
+        hash_gerado = hashlib.<span class="f">sha1</span>(senha_em_bytes)
+    <span class="k">elif</span> algoritmo == <span class="s">"sha512"</span>:
+        hash_gerado = hashlib.<span class="f">sha512</span>(senha_em_bytes)
+    <span class="k">else</span>:
+        hash_gerado = hashlib.<span class="f">sha256</span>(senha_em_bytes)
+
+    <span class="k">return</span> hash_gerado.<span class="f">hexdigest</span>()</pre>
+    </div>
+    <ul>
+      <li><strong>Parâmetros</strong>: <code class="inline">senha</code> e <code class="inline">algoritmo</code> são os "espaços em branco" que a função espera receber quando é chamada. Quem chama a função fornece os <strong>argumentos</strong> — os valores reais que preenchem esses espaços.</li>
+      <li><strong>Valor padrão</strong>: <code class="inline">algoritmo="sha256"</code> significa que, se quem chamar a função não informar o algoritmo, o Python usa <code class="inline">"sha256"</code> automaticamente. Por isso <code class="inline">gerar_hash(senha)</code> funciona sem o segundo argumento.</li>
+      <li><code class="inline">senha.encode("utf-8")</code> — método de string que transforma texto em <strong>bytes</strong> (a forma binária que as funções de hash exigem). <code class="inline">"utf-8"</code> é a codificação de caracteres, importante aqui porque a senha pode ter acentos.</li>
+      <li><strong>Estrutura condicional</strong> <code class="inline">if / elif / else</code> — testa condições em sequência. Só o primeiro bloco cuja condição for verdadeira é executado; se nenhuma bater, cai no <code class="inline">else</code>.</li>
+      <li><code class="inline">==</code> é o operador de <strong>comparação de igualdade</strong> (diferente de <code class="inline">=</code>, que é atribuição de valor a uma variável).</li>
+      <li><code class="inline">hashlib.sha256(...)</code>, <code class="inline">hashlib.md5(...)</code> etc. são funções do módulo <code class="inline">hashlib</code> que devolvem um <strong>objeto de hash</strong>.</li>
+      <li><code class="inline">.hexdigest()</code> — método desse objeto de hash, que converte o resultado binário em uma string de letras e números (hexadecimal), pronta para guardar no banco.</li>
+      <li><code class="inline">return</code> — encerra a função e devolve um valor para quem a chamou.</li>
+    </ul>
+
+    <h3>4. <code class="inline">senha_e_valida()</code> — booleanos e expressões regulares</h3>
+    <div class="codebox">
+      <pre><span class="k">def</span> <span class="f">senha_e_valida</span>(senha):
+    <span class="k">if</span> len(senha) &lt;= 8:
+        print(<span class="s">"-&gt; A senha precisa ter de 8 a 16 caracteres."</span>)
+        <span class="k">return</span> <span class="n">False</span>
+
+    tem_maiuscula = re.<span class="f">search</span>(<span class="s">r"[A-Z]"</span>, senha)
+    tem_minuscula = re.<span class="f">search</span>(<span class="s">r"[a-z]"</span>, senha)
+    tem_especial  = re.<span class="f">search</span>(<span class="s">r"[^A-Za-z0-9]"</span>, senha)
+
+    <span class="k">if not</span> tem_maiuscula:
+        <span class="k">return</span> <span class="n">False</span>
+    <span class="k">if not</span> tem_minuscula:
+        <span class="k">return</span> <span class="n">False</span>
+    <span class="k">if not</span> tem_especial:
+        <span class="k">return</span> <span class="n">False</span>
+
+    <span class="k">return</span> <span class="n">True</span></pre>
+    </div>
+    <ul>
+      <li><code class="inline">len(senha)</code> — função embutida do Python que devolve o tamanho (quantidade de caracteres) de um texto.</li>
+      <li><strong>Booleano</strong> (<code class="inline">bool</code>) — tipo de dado com apenas dois valores possíveis: <code class="inline">True</code> (verdadeiro) ou <code class="inline">False</code> (falso). Toda a função devolve um booleano, respondendo "essa senha é válida? sim ou não".</li>
+      <li><code class="inline">re.search(padrão, texto)</code> — função do módulo <code class="inline">re</code> (expressões regulares) que procura um padrão dentro de um texto. Devolve algo "verdadeiro" se encontrar, e <code class="inline">None</code> se não encontrar.</li>
+      <li><strong>Expressão regular</strong> (regex) — uma mini-linguagem para descrever padrões de texto: <code class="inline">[A-Z]</code> significa "qualquer letra maiúscula", <code class="inline">[a-z]</code> "qualquer letra minúscula", e <code class="inline">[^A-Za-z0-9]</code> significa "qualquer caractere que <em>não</em> seja letra nem número" — ou seja, um caractere especial. O <code class="inline">r</code> antes das aspas (<code class="inline">r"..."</code>) marca uma <strong>raw string</strong>, que evita que o Python interprete a barra invertida de forma especial.</li>
+      <li><code class="inline">not</code> — operador lógico que inverte um valor booleano: <code class="inline">not tem_maiuscula</code> lê-se "se não tem maiúscula".</li>
+    </ul>
+
+    <div class="callout callout-warn">
+      <span class="lbl">PONTO DE ATENÇÃO</span>
+      <p>A regra pede senha de <strong>8 a 16 caracteres</strong>, mas <code class="inline">len(senha) &lt;= 8</code> rejeita também uma senha de exatamente 8 caracteres — o correto seria <code class="inline">&lt; 8</code>. Além disso, não existe nenhuma checagem para o limite máximo de 16 caracteres.</p>
+    </div>
+
+    <h3>5. <code class="inline">cadastrar_senha()</code> — laço de repetição e tratamento de erro</h3>
+    <div class="codebox">
+      <pre><span class="k">def</span> <span class="f">cadastrar_senha</span>():
+    email = input(<span class="s">"Digite o e-mail: "</span>).<span class="f">strip</span>()
+
+    <span class="k">while</span> <span class="n">True</span>:
+        senha = input(<span class="s">"Digite uma senha..."</span>)
+        <span class="k">if</span> senha_e_valida(senha):
+            <span class="k">break</span>
+
+    hash_da_senha = gerar_hash(senha, algoritmo=<span class="s">"sha256"</span>)
+
+    conexao = sqlite3.<span class="f">connect</span>(NOME_BANCO)
+    cursor = conexao.<span class="f">cursor</span>()
+
+    <span class="k">try</span>:
+        cursor.<span class="f">execute</span>(
+            <span class="s">"INSERT INTO usuarios (email, hash_senha) VALUES (?, ?)"</span>,
+            (email, hash_da_senha)
+        )
+        conexao.<span class="f">commit</span>()
+    <span class="k">except</span> sqlite3.IntegrityError:
+        print(<span class="s">"-&gt; Esse e-mail já está cadastrado!"</span>)
+
+    conexao.<span class="f">close</span>()</pre>
+    </div>
+    <ul>
+      <li><code class="inline">input(...)</code> — função embutida que pausa o programa, mostra uma mensagem e espera o usuário digitar algo, devolvendo sempre uma string.</li>
+      <li><code class="inline">.strip()</code> — método de string que remove espaços em branco do começo e do fim do texto.</li>
+      <li><strong>Laço de repetição</strong> <code class="inline">while True:</code> — repete o bloco indefinidamente. Aqui, cria um "loop infinito de propósito", que só é interrompido pelo <code class="inline">break</code> lá dentro, quando a senha finalmente é válida.</li>
+      <li><code class="inline">break</code> — sai imediatamente do laço em que está.</li>
+      <li><strong>Tupla</strong> <code class="inline">(email, hash_da_senha)</code> — uma coleção de valores agrupados entre parênteses, nessa ordem. É usada para preencher os dois <code class="inline">?</code> do comando SQL, um de cada vez.</li>
+      <li><strong>Parâmetros SQL (<code class="inline">?</code>)</strong> — em vez de colar o e-mail e o hash diretamente dentro da string SQL, o código usa <code class="inline">?</code> como espaço reservado e passa os valores separadamente. Essa é a forma correta e seria mais insegura se fosse feita com f-string, pois abriria brecha para <strong>SQL Injection</strong>.</li>
+      <li><strong>Tratamento de exceção</strong> <code class="inline">try / except</code> — tenta executar um bloco de código; se der um erro específico (aqui, <code class="inline">sqlite3.IntegrityError</code>, disparado quando o e-mail já existe por ser <code class="inline">PRIMARY KEY</code>), o programa não trava — ele executa o bloco <code class="inline">except</code> em vez de encerrar com um erro.</li>
+    </ul>
+
+    <h3>6. <code class="inline">validar_senha()</code> e <code class="inline">pesquisar_hash()</code></h3>
+    <div class="codebox">
+      <pre>cursor.<span class="f">execute</span>(<span class="s">"SELECT hash_senha FROM usuarios WHERE email = ?"</span>, (email,))
+resultado = cursor.<span class="f">fetchone</span>()
+
+<span class="k">if</span> resultado <span class="k">is</span> <span class="n">None</span>:
+    print(<span class="s">"-&gt; E-mail inexistente."</span>)
+    <span class="k">return</span>
+
+hash_salvo_no_banco = resultado[<span class="n">0</span>]</pre>
+    </div>
+    <ul>
+      <li><code class="inline">.fetchone()</code> — método do cursor que devolve a primeira linha encontrada pela consulta, ou <code class="inline">None</code> se não achar nada.</li>
+      <li><code class="inline">None</code> — um valor especial em Python que representa "nenhum valor" ou "ausência de valor". Comparar com <code class="inline">is None</code> (em vez de <code class="inline">== None</code>) é a forma recomendada.</li>
+      <li><strong>Indexação</strong> <code class="inline">resultado[0]</code> — como o resultado do banco vem como uma tupla (mesmo com uma coluna só), o <code class="inline">[0]</code> pega o primeiro item dessa tupla.</li>
+      <li><strong>f-string</strong> — aparece em <code class="inline">print(f"Hash da senha cadastrada: {resultado[0]}")</code>. O <code class="inline">f</code> antes das aspas permite colocar variáveis diretamente dentro do texto, entre chaves <code class="inline">{ }</code>, sem precisar concatenar com <code class="inline">+</code>.</li>
+    </ul>
+
+    <h3>7. <code class="inline">menu()</code> e o ponto de entrada</h3>
+    <div class="codebox">
+      <pre><span class="k">def</span> <span class="f">menu</span>():
+    criar_banco()
+    <span class="k">while</span> <span class="n">True</span>:
+        opcao = input(<span class="s">"Escolha uma opção: "</span>).<span class="f">strip</span>()
+        <span class="k">if</span> opcao == <span class="s">"1"</span>:
+            cadastrar_senha()
+        <span class="k">elif</span> opcao == <span class="s">"4"</span>:
+            <span class="k">break</span>
+
+<span class="k">if</span> __name__ == <span class="s">"__main__"</span>:
+    menu()</pre>
+    </div>
+    <ul>
+      <li><code class="inline">menu()</code> chama as outras funções pelo nome — isso é a essência de organizar um programa em funções: cada uma resolve uma parte pequena, e uma função "maestro" as conecta.</li>
+      <li><code class="inline">if __name__ == "__main__":</code> — um bloco condicional padrão em Python. <code class="inline">__name__</code> é uma variável especial que o próprio Python preenche: ela vale <code class="inline">"__main__"</code> quando o arquivo é executado diretamente, e outro valor quando o arquivo é apenas importado por outro programa. Esse teste garante que <code class="inline">menu()</code> só roda quando você executa <em>este</em> arquivo, não quando outro script importa suas funções.</li>
+    </ul>
+  </section>
+
+  <section id="glossario">
+    <p class="kicker">04 · referência rápida</p>
+    <h2>Glossário — todos os termos usados</h2>
+    <dl class="gloss">
+      <dt>variável</dt><dd>Nome que guarda um valor na memória, para reutilizá-lo depois (<code class="inline">NOME_BANCO</code>, <code class="inline">senha</code>).</dd>
+      <dt>função</dt><dd>Bloco de código reutilizável, definido com <code class="inline">def</code> e chamado pelo próprio nome (<code class="inline">gerar_hash()</code>).</dd>
+      <dt>método</dt><dd>Uma função que pertence a um objeto e é chamada com um ponto (<code class="inline">senha.encode()</code>).</dd>
+      <dt>parâmetro / argumento</dt><dd>Parâmetro é o nome esperado na definição da função; argumento é o valor real enviado na chamada.</dd>
+      <dt>valor padrão</dt><dd>Valor usado automaticamente quando um argumento não é informado (<code class="inline">algoritmo="sha256"</code>).</dd>
+      <dt>return</dt><dd>Palavra-chave que encerra a função e devolve um valor para quem a chamou.</dd>
+      <dt>módulo</dt><dd>Arquivo (ou pacote) de código pronto que se traz para o programa com <code class="inline">import</code>.</dd>
+      <dt>objeto</dt><dd>Um "pacote" de dados e comportamentos (métodos) juntos — como a conexão devolvida por <code class="inline">sqlite3.connect()</code>.</dd>
+      <dt>string (str)</dt><dd>Tipo de dado para texto, sempre entre aspas: <code class="inline">"usuarios.db"</code>.</dd>
+      <dt>bytes</dt><dd>Representação binária de dados, exigida pelas funções de hash. Obtida com <code class="inline">.encode()</code>.</dd>
+      <dt>booleano (bool)</dt><dd>Tipo de dado com apenas dois valores: <code class="inline">True</code> ou <code class="inline">False</code>.</dd>
+      <dt>None</dt><dd>Valor especial que representa "nenhum valor".</dd>
+      <dt>tupla</dt><dd>Coleção ordenada e fixa de valores entre parênteses: <code class="inline">(email, hash_da_senha)</code>.</dd>
+      <dt>condicional (if/elif/else)</dt><dd>Estrutura que executa um bloco de código só se uma condição for verdadeira.</dd>
+      <dt>laço de repetição (while)</dt><dd>Repete um bloco de código enquanto uma condição for verdadeira — ou, com <code class="inline">while True</code>, até um <code class="inline">break</code> explícito.</dd>
+      <dt>break</dt><dd>Interrompe imediatamente o laço em que está.</dd>
+      <dt>try / except</dt><dd>Tenta executar um bloco; se um erro específico acontecer, executa outro bloco em vez de travar o programa.</dd>
+      <dt>docstring</dt><dd>Texto entre <code class="inline">"""</code> usado para documentar um arquivo, função ou classe.</dd>
+      <dt>comentário</dt><dd>Texto após <code class="inline">#</code>, ignorado pelo Python, escrito para humanos entenderem o código.</dd>
+      <dt>f-string</dt><dd>String com prefixo <code class="inline">f</code> que permite inserir variáveis dentro de <code class="inline">{ }</code>.</dd>
+      <dt>raw string</dt><dd>String com prefixo <code class="inline">r</code>, usada em regex para evitar interpretação especial da barra invertida.</dd>
+      <dt>expressão regular (regex)</dt><dd>Padrão de texto usado para buscar ou validar formatos, via módulo <code class="inline">re</code>.</dd>
+      <dt>indexação</dt><dd>Acessar um item de uma sequência pela posição, começando em 0: <code class="inline">resultado[0]</code>.</dd>
+      <dt>hash</dt><dd>Resultado de uma função matemática de mão única que transforma qualquer texto em uma sequência fixa de caracteres, praticamente impossível de reverter.</dd>
+      <dt>chave primária</dt><dd>Coluna de uma tabela SQL que não pode se repetir e identifica cada linha (aqui, <code class="inline">email</code>).</dd>
+      <dt>__name__ == "__main__"</dt><dd>Bloco condicional padrão que garante que certo código só rode quando o arquivo é executado diretamente.</dd>
+    </dl>
+  </section>
+
+  <section id="exercicios">
+    <p class="kicker">05 · fixação</p>
+    <h2>Exercícios</h2>
+
+    <div class="exercise">
+      <p class="num">01</p>
+      <p>Aponte, no código, três chamadas que são <strong>métodos</strong> e três que são <strong>funções soltas</strong>. Justifique cada escolha pela presença ou ausência de um objeto antes do ponto.</p>
+    </div>
+    <div class="exercise">
+      <p class="num">02</p>
+      <p>Reescreva a condição <code class="inline">len(senha) &lt;= 8</code> para que uma senha de exatamente 8 caracteres seja aceita, e adicione a checagem que falta para o limite máximo de 16 caracteres.</p>
+    </div>
+    <div class="exercise">
+      <p class="num">03</p>
+      <p>Corrija o comando dentro de <code class="inline">criar_banco()</code>, trocando o texto em português pelo comando SQL <code class="inline">CREATE TABLE IF NOT EXISTS</code> correto.</p>
+    </div>
+    <div class="exercise">
+      <p class="num">04</p>
+      <p>Explique, com suas palavras, por que o código usa <code class="inline">cursor.execute("... VALUES (?, ?)", (email, hash_da_senha))</code> em vez de montar a string SQL com uma f-string incluindo o e-mail direto.</p>
+    </div>
+    <div class="exercise">
+      <p class="num">05</p>
+      <p>Escreva uma nova função <code class="inline">excluir_usuario(email)</code> seguindo o mesmo padrão de conexão, cursor, <code class="inline">try/except</code> e <code class="inline">commit</code> usado nas funções existentes.</p>
+    </div>
+  </section>
+
+  <section id="revisao">
+    <p class="kicker">06 · antes de entregar</p>
+    <h2>Checklist de revisão</h2>
+    <ul class="checklist">
+      <li><span class="box"></span> Corrigi o comando SQL de <code class="inline">criar_banco()</code> (estava em português).</li>
+      <li><span class="box"></span> Revisei a condição de tamanho mínimo/máximo da senha.</li>
+      <li><span class="box"></span> Sei explicar a diferença entre função e método com um exemplo do próprio código.</li>
+      <li><span class="box"></span> Sei explicar por que a senha nunca é guardada em texto puro.</li>
+      <li><span class="box"></span> Sei explicar por que <code class="inline">?</code> é mais seguro do que concatenar a string SQL manualmente.</li>
+      <li><span class="box"></span> Testei o cadastro, a validação e a pesquisa pelo menu, com e-mails repetidos e senhas inválidas.</li>
+    </ul>
+  </section>
+
+  <footer>dev&#8209;Kalixto · apostila gerada a partir do trabalho de segurança em Python</footer>
+</div>
+
+</body>
+</html>

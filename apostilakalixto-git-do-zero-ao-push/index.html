@@ -1,0 +1,407 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#faf9f5;color:#141413}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>Do Zero ao Push</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #F1F3F5;
+    --surface: #FFFFFF;
+    --ink: #16202A;
+    --ink-soft: #4B5A67;
+    --accent: #0E7C86;
+    --accent-2: #A9761E;
+    --border: #D8DEE3;
+    --term-bg: #12181C;
+    --term-ink: #DCE7E4;
+    --term-accent: #59D9C6;
+    --term-comment: #7C8A88;
+    --ok: #1E7B4D;
+    --warn: #B4482A;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #0D1216;
+      --surface: #141B20;
+      --ink: #E7EDEF;
+      --ink-soft: #9FB0B8;
+      --accent: #3FD1C9;
+      --accent-2: #E0AA4E;
+      --border: #253038;
+      --ok: #4FCE8E;
+      --warn: #FF8A65;
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #0D1216;
+    --surface: #141B20;
+    --ink: #E7EDEF;
+    --ink-soft: #9FB0B8;
+    --accent: #3FD1C9;
+    --accent-2: #E0AA4E;
+    --border: #253038;
+    --ok: #4FCE8E;
+    --warn: #FF8A65;
+  }
+
+  * { box-sizing: border-box; }
+  body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: "IBM Plex Sans", ui-sans-serif, system-ui, sans-serif;
+    line-height: 1.6;
+  }
+  .page {
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 56px 20px 80px;
+  }
+
+  h1, h2 {
+    font-family: "Fraunces", Georgia, serif;
+    text-wrap: balance;
+    font-weight: 600;
+    margin: 0;
+  }
+  em { font-style: italic; color: var(--accent); }
+
+  header.hero {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 40px;
+  }
+  .eyebrow {
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 0.78rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--accent-2);
+  }
+  header.hero h1 {
+    font-size: clamp(2.1rem, 5vw, 2.9rem);
+    line-height: 1.08;
+  }
+  header.hero p {
+    color: var(--ink-soft);
+    max-width: 60ch;
+    margin: 0;
+    font-size: 1.02rem;
+  }
+
+  /* terminal window */
+  .term {
+    background: var(--term-bg);
+    color: var(--term-ink);
+    border-radius: 10px;
+    overflow: hidden;
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 0.86rem;
+    box-shadow: 0 8px 24px -12px rgba(0,0,0,0.4);
+    margin: 16px 0;
+  }
+  .term-bar {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    padding: 9px 12px;
+    background: rgba(255,255,255,0.04);
+    border-bottom: 1px solid rgba(255,255,255,0.07);
+  }
+  .term-bar .dot { width: 10px; height: 10px; border-radius: 50%; }
+  .dot.r { background: #FF5F57; }
+  .dot.y { background: #FEBC2E; }
+  .dot.g { background: #28C840; }
+  .term-bar .path {
+    margin-left: 8px;
+    font-size: 0.74rem;
+    color: var(--term-comment);
+    overflow-x: auto;
+    white-space: nowrap;
+  }
+  .term-body {
+    padding: 14px 16px 18px;
+    overflow-x: auto;
+  }
+  .term-body .ln { white-space: pre; display: block; }
+  .term-body .prompt { color: var(--term-accent); }
+  .term-body .cmt { color: var(--term-comment); }
+  .term-body .out { color: var(--term-ink); opacity: 0.82; }
+
+  /* steps */
+  .step {
+    display: grid;
+    grid-template-columns: 44px 1fr;
+    gap: 4px 18px;
+    padding-block: 28px;
+    border-top: 1px solid var(--border);
+  }
+  .step:first-of-type { border-top: none; }
+  .step .num {
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 1.6rem;
+    color: var(--accent-2);
+    opacity: 0.55;
+    line-height: 1.1;
+  }
+  .step .content { min-width: 0; }
+  .step h2 { font-size: 1.35rem; margin-bottom: 8px; }
+  .step p { margin: 0 0 4px; color: var(--ink-soft); }
+
+  .why {
+    display: flex;
+    gap: 10px;
+    align-items: baseline;
+    margin-top: 10px;
+    padding: 10px 14px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-left: 3px solid var(--accent);
+    border-radius: 6px;
+    font-size: 0.92rem;
+  }
+  .why .tag {
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--accent);
+    flex-shrink: 0;
+  }
+  .why p { margin: 0; color: var(--ink-soft); }
+
+  section.block {
+    margin-top: 48px;
+  }
+  section.block h2 { font-size: 1.5rem; margin-bottom: 14px; }
+  section.block > p.lead { color: var(--ink-soft); margin: -6px 0 16px; }
+
+  .tbl-wrap { overflow-x: auto; border: 1px solid var(--border); border-radius: 8px; }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.9rem;
+    background: var(--surface);
+  }
+  thead th {
+    text-align: left;
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    padding: 10px 14px;
+    border-bottom: 1px solid var(--border);
+  }
+  tbody td {
+    padding: 11px 14px;
+    border-bottom: 1px solid var(--border);
+    vertical-align: top;
+  }
+  tbody tr:last-child td { border-bottom: none; }
+  code.inline {
+    font-family: "IBM Plex Mono", monospace;
+    background: var(--bg);
+    border: 1px solid var(--border);
+    padding: 1px 6px;
+    border-radius: 4px;
+    font-size: 0.86em;
+    white-space: nowrap;
+  }
+
+  .errors { display: flex; flex-direction: column; gap: 12px; }
+  .err {
+    display: grid;
+    grid-template-columns: 20px 1fr;
+    gap: 10px;
+    padding: 12px 14px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    font-size: 0.92rem;
+  }
+  .err .mark { color: var(--warn); font-weight: 600; font-family: "IBM Plex Mono", monospace; }
+  .err code.inline { display: inline-block; margin: 3px 0; }
+  .err .fix { color: var(--ink-soft); }
+  .err .fix strong { color: var(--ink); }
+
+  footer {
+    margin-top: 56px;
+    padding-top: 20px;
+    border-top: 1px solid var(--border);
+    font-size: 0.82rem;
+    color: var(--ink-soft);
+    font-family: "IBM Plex Mono", monospace;
+  }
+
+  @media (max-width: 480px) {
+    .step { grid-template-columns: 30px 1fr; gap: 4px 12px; }
+    .step .num { font-size: 1.2rem; }
+  }
+</style>
+
+<div class="page">
+
+  <header class="hero">
+    <span class="eyebrow">git · linha de comando</span>
+    <h1>Do zero ao <em>push</em></h1>
+    <p>Guia prático para conectar a pasta <code class="inline">trabalho-2-seguranca-cibernetica</code> ao Git e ao GitHub, e manter o fluxo de commits do trabalho de hashes de senha em dia.</p>
+  </header>
+
+  <div class="term">
+    <div class="term-bar">
+      <span class="dot r"></span><span class="dot y"></span><span class="dot g"></span>
+      <span class="path">PS C:\Users\walla\Downloads\trabalho-2-seguranca-cibernetica</span>
+    </div>
+    <div class="term-body">
+      <span class="ln"><span class="prompt">PS&gt;</span> git status</span>
+      <span class="ln out">On branch main</span>
+      <span class="ln cmt"># nenhum commit ainda — repositório iniciado, mas vazio</span>
+      <span class="ln out">Changes to be committed:</span>
+      <span class="ln out">&nbsp;&nbsp;new file:   trabalho_hash_senhas.py</span>
+    </div>
+  </div>
+
+  <section>
+    <div class="step">
+      <div class="num">01</div>
+      <div class="content">
+        <h2>Diga ao Git quem você é</h2>
+        <p>O Git carimba cada commit com um nome e um e-mail. Isso ainda não está configurado nesta máquina — sem isso, o commit do passo seguinte falha.</p>
+        <div class="term">
+          <div class="term-bar"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span class="path">identidade</span></div>
+          <div class="term-body">
+            <span class="ln"><span class="prompt">PS&gt;</span> git config --global user.name "Seu Nome"</span>
+            <span class="ln"><span class="prompt">PS&gt;</span> git config --global user.email "voce@exemplo.com"</span>
+          </div>
+        </div>
+        <div class="why"><span class="tag">por quê</span><p>Use o mesmo e-mail da sua conta no GitHub — assim os commits aparecem vinculados ao seu perfil lá.</p></div>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="num">02</div>
+      <div class="content">
+        <h2>Feche o primeiro commit</h2>
+        <p>O arquivo <code class="inline">trabalho_hash_senhas.py</code> já está na área de staging (visto no <code class="inline">git status</code> acima). Falta registrar essa mudança no histórico.</p>
+        <div class="term">
+          <div class="term-bar"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span class="path">primeiro commit</span></div>
+          <div class="term-body">
+            <span class="ln"><span class="prompt">PS&gt;</span> git add .</span>
+            <span class="ln cmt"># adiciona qualquer outro arquivo novo/alterado</span>
+            <span class="ln"><span class="prompt">PS&gt;</span> git commit -m "commit inicial: hashing de senhas"</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="num">03</div>
+      <div class="content">
+        <h2>Crie o repositório remoto</h2>
+        <p>No GitHub, clique em <strong>New repository</strong>. Dê um nome (ex.: <code class="inline">trabalho-2-seguranca-cibernetica</code>) e <strong>não</strong> marque "Add a README" — sua pasta local já tem conteúdo, e um README remoto geraria histórico conflitante.</p>
+        <p>Copie a URL que o GitHub mostrar na tela seguinte (formato <code class="inline">https://github.com/usuario/repo.git</code>).</p>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="num">04</div>
+      <div class="content">
+        <h2>Conecte local ↔ remoto</h2>
+        <p>Aponte seu repositório local para essa URL e envie o histórico pela primeira vez.</p>
+        <div class="term">
+          <div class="term-bar"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span class="path">conexão remota</span></div>
+          <div class="term-body">
+            <span class="ln"><span class="prompt">PS&gt;</span> git remote add origin https://github.com/SEU-USUARIO/SEU-REPO.git</span>
+            <span class="ln"><span class="prompt">PS&gt;</span> git branch -M main</span>
+            <span class="ln"><span class="prompt">PS&gt;</span> git push -u origin main</span>
+          </div>
+        </div>
+        <div class="why"><span class="tag">por quê</span><p><code class="inline">-u</code> memoriza a dupla origin/main, então nos próximos envios basta digitar <code class="inline">git push</code>.</p></div>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="num">05</div>
+      <div class="content">
+        <h2>Autentique-se</h2>
+        <p>O GitHub não aceita mais senha de conta no <code class="inline">git push</code>. Ao ser solicitado, use um <strong>Personal Access Token</strong> (Settings → Developer settings → Personal access tokens) no lugar da senha, ou configure uma chave SSH.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="block">
+    <h2>Fluxo do dia a dia</h2>
+    <p class="lead">Depois da conexão inicial, é este ciclo que se repete a cada mudança no trabalho.</p>
+    <div class="term">
+      <div class="term-bar"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span class="path">rotina</span></div>
+      <div class="term-body">
+        <span class="ln cmt"># 1. veja o que mudou</span>
+        <span class="ln"><span class="prompt">PS&gt;</span> git status</span>
+        <span class="ln cmt"># 2. selecione as mudanças</span>
+        <span class="ln"><span class="prompt">PS&gt;</span> git add trabalho_hash_senhas.py</span>
+        <span class="ln cmt"># 3. registre com uma mensagem clara</span>
+        <span class="ln"><span class="prompt">PS&gt;</span> git commit -m "adiciona verificação de força de senha"</span>
+        <span class="ln cmt"># 4. envie para o GitHub</span>
+        <span class="ln"><span class="prompt">PS&gt;</span> git push</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="block">
+    <h2>Referência rápida</h2>
+    <div class="tbl-wrap">
+      <table>
+        <thead>
+          <tr><th>Comando</th><th>Faz o quê</th><th>Quando usar</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><code class="inline">git status</code></td><td>Mostra o que mudou e o que está pendente</td><td>Antes de qualquer outro comando</td></tr>
+          <tr><td><code class="inline">git log --oneline</code></td><td>Lista o histórico de commits, resumido</td><td>Para ver o que já foi feito</td></tr>
+          <tr><td><code class="inline">git diff</code></td><td>Mostra linha a linha o que mudou</td><td>Antes de dar <code class="inline">add</code></td></tr>
+          <tr><td><code class="inline">git pull</code></td><td>Traz mudanças do GitHub para a pasta local</td><td>No início de cada sessão de trabalho</td></tr>
+          <tr><td><code class="inline">git restore &lt;arquivo&gt;</code></td><td>Descarta mudanças não commitadas de um arquivo</td><td>Quando você "estragou" algo local</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section class="block">
+    <h2>Erros comuns</h2>
+    <div class="errors">
+      <div class="err">
+        <span class="mark">!</span>
+        <div>
+          <code class="inline">fatal: not a git repository</code>
+          <p class="fix">Você não está dentro da pasta certa. Confira com <code class="inline">pwd</code> (ou <code class="inline">Get-Location</code>) se está em <strong>trabalho-2-seguranca-cibernetica</strong>.</p>
+        </div>
+      </div>
+      <div class="err">
+        <span class="mark">!</span>
+        <div>
+          <code class="inline">remote origin already exists</code>
+          <p class="fix">Você já rodou <code class="inline">git remote add origin</code> antes. Troque para <code class="inline">git remote set-url origin &lt;url&gt;</code>.</p>
+        </div>
+      </div>
+      <div class="err">
+        <span class="mark">!</span>
+        <div>
+          <code class="inline">Support for password authentication was removed</code>
+          <p class="fix">O GitHub exige token ou SSH — veja o passo <strong>05</strong> acima.</p>
+        </div>
+      </div>
+      <div class="err">
+        <span class="mark">!</span>
+        <div>
+          <code class="inline">Updates were rejected because the remote contains work...</code>
+          <p class="fix">Alguém (ou o próprio GitHub) tem commits que você não tem localmente. Rode <code class="inline">git pull</code> antes de tentar <code class="inline">git push</code> de novo.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>trabalho-2-seguranca-cibernetica · guia gerado para uso próprio</footer>
+
+</div>
+
+</body></html>

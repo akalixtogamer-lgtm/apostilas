@@ -1,0 +1,1986 @@
+<title>Apostila Completa de Probabilidade e Estatística</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Unbounded:wght@600;700&family=Sora:wght@600&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap">
+<style>
+/* =====================================================================
+   KALIXTO DESIGN SYSTEM — tokens espelhados do arquivo Figma
+   "Kalixto — Design System" (coleções Primitives, Theme, Spacing & Radius;
+   estilos de texto, efeitos Glass/Glow/Elevation e gradientes).
+   Tema padrão: Dark. Light via prefers-color-scheme ou data-theme.
+   ===================================================================== */
+:root{
+  /* Primitives */
+  --black-950:#050505; --gray-900:#1B1B1B; --gray-800:#2D2D2D; --gray-500:#6E6E80; --gray-300:#B3B3C2; --gray-100:#F5F7FA; --white:#FFFFFF;
+  --ink-900:#120B24; --ink-600:#4A4560;
+  --purple-700:#5A12D6; --purple-500:#7B2EFF; --purple-300:#B899FF; --purple-100:#EADFFF;
+  --pink-700:#D6127F; --pink-500:#FF2DAA; --pink-100:#FFD5F1;
+  --cyan-700:#0089A8; --cyan-500:#00D9FF; --cyan-100:#D8F7FF;
+  --gold-700:#B7791F; --gold-500:#FFC53D;
+  --green-700:#0E9F6E; --green-500:#22E3A0;
+  --amber-700:#B86E00; --amber-500:#FFB020;
+  --red-700:#D92D4A; --red-500:#FF4D6A;
+
+  /* Theme · Dark (padrão) */
+  --bg-base:var(--black-950); --bg-surface:var(--gray-900); --bg-elevated:var(--gray-800);
+  --text-primary:var(--white); --text-secondary:var(--gray-300); --text-muted:var(--gray-500);
+  --brand-primary:var(--purple-500); --brand-secondary:var(--pink-500); --brand-tertiary:var(--cyan-500);
+  --accent-gold:var(--gold-500); --support-lilac:var(--purple-300);
+  --fb-success:var(--green-500); --fb-warning:var(--amber-500); --fb-error:var(--red-500); --fb-info:var(--cyan-500);
+  --glass-fill:rgba(255,255,255,.06); --glass-stroke:rgba(255,255,255,.14); --glass-tint:rgba(123,46,255,.10);
+  --glass-shadow:0 24px 64px rgba(0,0,0,.45), inset 0 1px 0 rgba(255,255,255,.12);
+  --glass-shadow-s:0 12px 32px rgba(0,0,0,.35), inset 0 1px 0 rgba(255,255,255,.10);
+  --on-accent:var(--black-950);
+  --code-bg:rgba(0,0,0,.35);
+  --aura-1:rgba(123,46,255,.34); --aura-2:rgba(255,45,170,.16); --aura-3:rgba(0,217,255,.10);
+
+  /* Gradientes (Paint styles) */
+  --g-neon:linear-gradient(90deg,#7B2EFF 0%,#FF2DAA 100%);
+  --g-tech:linear-gradient(90deg,#00D9FF 0%,#7B2EFF 100%);
+  --g-ia:linear-gradient(90deg,#00D9FF 0%,#B899FF 50%,#FF2DAA 100%);
+  --g-gamer:linear-gradient(90deg,#FF2DAA 0%,#7B2EFF 50%,#00D9FF 100%);
+  --g-ancestral:linear-gradient(90deg,#FFC53D 0%,#FF2DAA 50%,#7B2EFF 100%);
+
+  /* Glow (Effect styles) */
+  --glow-purple:0 0 40px rgba(123,46,255,.55); --glow-pink:0 0 40px rgba(255,45,170,.50); --glow-cyan:0 0 40px rgba(0,217,255,.50);
+
+  /* Spacing & Radius */
+  --s1:4px; --s2:8px; --s3:12px; --s4:16px; --s6:24px; --s8:32px; --s12:48px; --s16:64px; --s24:96px;
+  --r-sm:8px; --r-md:16px; --r-alert:20px; --r-lg:24px; --r-card:28px; --r-xl:32px; --r-pill:999px;
+  --blur-sm:12px; --blur-md:24px;
+
+  /* Tipografia (Text styles) */
+  --f-display:"Unbounded","Sora",system-ui,sans-serif;
+  --f-heading:"Sora","Inter",system-ui,sans-serif;
+  --f-body:"Inter",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --f-code:"JetBrains Mono",ui-monospace,Consolas,monospace;
+  color-scheme:dark;
+}
+/* Theme · Light */
+@media (prefers-color-scheme: light){
+  :root:not([data-theme="dark"]){
+    --bg-base:var(--gray-100); --bg-surface:var(--white); --bg-elevated:var(--purple-100);
+    --text-primary:var(--ink-900); --text-secondary:var(--ink-600); --text-muted:var(--gray-500);
+    --brand-secondary:var(--pink-700); --brand-tertiary:var(--cyan-700);
+    --accent-gold:var(--gold-700); --support-lilac:var(--purple-700);
+    --fb-success:var(--green-700); --fb-warning:var(--amber-700); --fb-error:var(--red-700); --fb-info:var(--cyan-700);
+    --glass-fill:rgba(255,255,255,.55); --glass-stroke:rgba(255,255,255,.85); --glass-tint:rgba(184,153,255,.18);
+    --glass-shadow:0 24px 64px rgba(90,18,214,.10), inset 0 1px 0 rgba(255,255,255,.7);
+    --glass-shadow-s:0 12px 32px rgba(90,18,214,.08), inset 0 1px 0 rgba(255,255,255,.7);
+    --on-accent:var(--white);
+    --code-bg:rgba(255,255,255,.7);
+    --aura-1:rgba(234,223,255,.9); --aura-2:rgba(255,213,241,.8); --aura-3:rgba(216,247,255,.8);
+    color-scheme:light;
+  }
+}
+:root[data-theme="light"]{
+  --bg-base:var(--gray-100); --bg-surface:var(--white); --bg-elevated:var(--purple-100);
+  --text-primary:var(--ink-900); --text-secondary:var(--ink-600); --text-muted:var(--gray-500);
+  --brand-secondary:var(--pink-700); --brand-tertiary:var(--cyan-700);
+  --accent-gold:var(--gold-700); --support-lilac:var(--purple-700);
+  --fb-success:var(--green-700); --fb-warning:var(--amber-700); --fb-error:var(--red-700); --fb-info:var(--cyan-700);
+  --glass-fill:rgba(255,255,255,.55); --glass-stroke:rgba(255,255,255,.85); --glass-tint:rgba(184,153,255,.18);
+  --glass-shadow:0 24px 64px rgba(90,18,214,.10), inset 0 1px 0 rgba(255,255,255,.7);
+  --glass-shadow-s:0 12px 32px rgba(90,18,214,.08), inset 0 1px 0 rgba(255,255,255,.7);
+  --on-accent:var(--white);
+  --code-bg:rgba(255,255,255,.7);
+  --aura-1:rgba(234,223,255,.9); --aura-2:rgba(255,213,241,.8); --aura-3:rgba(216,247,255,.8);
+  color-scheme:light;
+}
+
+/* ---------- Base ---------- */
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important}}
+body{background:var(--bg-base);color:var(--text-primary);font:400 16px/24px var(--f-body);
+  background-image:
+    radial-gradient(900px 620px at 92% -8%,var(--aura-1),transparent 62%),
+    radial-gradient(760px 520px at -12% 38%,var(--aura-2),transparent 60%),
+    radial-gradient(700px 500px at 80% 110%,var(--aura-3),transparent 60%);
+  background-attachment:fixed}
+a{color:var(--brand-tertiary)}
+:focus-visible{outline:2px solid var(--brand-tertiary);outline-offset:3px}
+strong{font-weight:600;color:var(--text-primary)}
+
+/* ---------- Tipografia (Text styles do Figma, escalados para web) ---------- */
+.t-display{font:700 clamp(40px,7vw,72px)/1.1 var(--f-display);letter-spacing:-.02em;margin:0;text-wrap:balance}
+.t-h1{font:600 clamp(30px,4.6vw,48px)/1.16 var(--f-display);letter-spacing:-.01em;margin:0;text-wrap:balance}
+.t-h2{font:600 clamp(26px,3.6vw,36px)/1.22 var(--f-display);letter-spacing:-.01em;margin:0;text-wrap:balance}
+.t-h3{font:600 clamp(22px,2.8vw,28px)/1.28 var(--f-heading);margin:0;text-wrap:balance}
+.t-sub-l{font:600 22px/30px var(--f-heading);margin:0}
+.t-sub-m{font:600 18px/26px var(--f-heading);margin:0}
+.t-overline{font:600 13px/16px var(--f-heading);letter-spacing:.14em;text-transform:uppercase}
+.t-body-l{font:400 18px/28px var(--f-body)}
+.t-body-s{font:400 14px/20px var(--f-body)}
+.t-caption{font:500 12px/16px var(--f-body);letter-spacing:.02em}
+.t-code{font:400 13px/20px var(--f-code)}
+.grad-text{background:var(--g-neon);-webkit-background-clip:text;background-clip:text;color:transparent}
+
+/* ---------- Cabeçalho de seção (padrão das páginas do DS) ---------- */
+.kx-eyebrow{display:flex;align-items:center;gap:var(--s2);color:var(--text-muted)}
+.kx-eyebrow .num{font:600 11px/1 var(--f-heading);color:#fff;background:var(--g-neon);border-radius:var(--r-pill);padding:4px 8px;letter-spacing:.04em}
+.kx-rule{width:72px;height:2px;border-radius:2px;background:var(--g-ia);border:0;margin:0}
+
+/* ---------- Glass (Effect Glass/Dark · M | S) ---------- */
+.glass{background:var(--glass-fill);border:1px solid var(--glass-stroke);box-shadow:var(--glass-shadow);
+  -webkit-backdrop-filter:blur(var(--blur-md));backdrop-filter:blur(var(--blur-md))}
+.glass-s{background:var(--glass-fill);border:1px solid var(--glass-stroke);box-shadow:var(--glass-shadow-s);
+  -webkit-backdrop-filter:blur(var(--blur-sm));backdrop-filter:blur(var(--blur-sm))}
+
+/* ---------- Button (Primary · Secondary · Glass · Ghost) ---------- */
+.btn{display:inline-flex;align-items:center;gap:var(--s3);font:600 17px/21px var(--f-heading);text-decoration:none;cursor:pointer;
+  border-radius:var(--r-pill);padding:16px 30px;border:0;color:#fff;transition:box-shadow .2s,transform .2s,filter .2s}
+.btn .arrow{transition:transform .2s}
+.btn:hover .arrow{transform:translateX(3px)}
+.btn--primary{background:var(--g-neon)}
+.btn--primary:hover{box-shadow:var(--glow-pink)}
+.btn--secondary{background:var(--brand-primary)}
+.btn--secondary:hover{box-shadow:var(--glow-purple)}
+.btn--glass{background:var(--glass-fill);border:1px solid var(--glass-stroke);color:var(--text-primary);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px)}
+.btn--glass .arrow{color:var(--brand-tertiary)}
+.btn--ghost{background:transparent;border:1.5px solid var(--brand-tertiary);color:var(--brand-tertiary)}
+.btn--ghost:hover{box-shadow:var(--glow-cyan)}
+.btn--sm{font-size:15px;padding:12px 22px}
+
+/* ---------- Badge (Tech · Dança · IA · Gamer · Evento · Aula) ---------- */
+.badge{--c:var(--brand-tertiary);display:inline-flex;align-items:center;gap:var(--s2);padding:8px 16px 8px 14px;border-radius:var(--r-pill);
+  background:color-mix(in srgb,var(--c) 16%,transparent);border:1px solid color-mix(in srgb,var(--c) 45%,transparent);color:var(--c);
+  font:600 13px/16px var(--f-heading);letter-spacing:.06em;text-transform:uppercase;white-space:nowrap}
+.badge i{font:500 13px/16px var(--f-code);font-style:normal}
+.badge--tech{--c:var(--brand-tertiary)} .badge--danca{--c:var(--brand-secondary)} .badge--ia{--c:var(--support-lilac)}
+.badge--gamer{--c:var(--brand-primary)} .badge--evento{--c:var(--accent-gold)} .badge--aula{--c:var(--fb-success)}
+
+/* ---------- Alert (Success · Warning · Error · Info) ---------- */
+.alert{--c:var(--fb-info);display:flex;gap:var(--s4);align-items:flex-start;padding:20px 24px;border-radius:var(--r-alert);
+  background:var(--glass-fill);border:1px solid color-mix(in srgb,var(--c) 40%,transparent);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px)}
+.alert .ico{flex:none;width:28px;height:28px;border-radius:50%;background:var(--c);color:var(--on-accent);display:grid;place-items:center;font:500 15px/1 var(--f-code)}
+.alert .ttl{font:600 17px/24px var(--f-heading);margin:0 0 2px;color:var(--text-primary)}
+.alert p{margin:0;font:400 15px/22px var(--f-body);color:var(--text-secondary)}
+.alert--success{--c:var(--fb-success)} .alert--warning{--c:var(--fb-warning)} .alert--error{--c:var(--fb-error)} .alert--info{--c:var(--fb-info)}
+
+/* ---------- Destaque / Callout ---------- */
+.callout{display:flex;gap:var(--s6);border-radius:var(--r-lg);overflow:hidden}
+.callout::before{content:"";flex:none;width:4px;background:var(--g-neon)}
+.callout .in{padding:24px 32px 24px 0}
+.callout .t-overline{color:var(--brand-secondary);font-size:12px}
+.callout .q{font:600 clamp(17px,2vw,21px)/1.45 var(--f-heading);margin:8px 0 0;color:var(--text-primary)}
+
+/* ---------- Stat ---------- */
+.stat{padding:var(--s8);border-radius:var(--r-card);display:grid;gap:10px;min-width:0}
+.stat .t-overline{color:var(--text-muted);font-size:12px}
+.stat .num{font:700 clamp(40px,6vw,56px)/1 var(--f-display);background:var(--g-neon);-webkit-background-clip:text;background-clip:text;color:transparent}
+.stat .delta{font:500 13px/16px var(--f-code);color:var(--fb-success)}
+
+/* ---------- Chamada / CTA ---------- */
+.cta{border-radius:var(--r-xl);padding:36px 44px;display:flex;align-items:center;justify-content:space-between;gap:var(--s8);flex-wrap:wrap;
+  background:linear-gradient(100deg,rgba(123,46,255,.28),rgba(255,45,170,.16) 55%,rgba(255,197,61,.10)),var(--bg-surface);
+  border:1px solid var(--glass-stroke);box-shadow:var(--glass-shadow)}
+.cta h2{font:600 clamp(22px,3vw,28px)/1.25 var(--f-display);margin:0 0 6px;text-wrap:balance}
+.cta p{margin:0;color:var(--text-secondary)}
+
+/* ---------- Código ---------- */
+pre{font:400 13px/20px var(--f-code);background:var(--code-bg);border:1px solid var(--glass-stroke);border-radius:var(--r-md);padding:var(--s4) 20px;overflow-x:auto;margin:0;color:var(--text-primary)}
+code{font-family:var(--f-code);font-size:.9em;color:var(--brand-tertiary);background:color-mix(in srgb,var(--brand-tertiary) 12%,transparent);padding:1px 6px;border-radius:6px}
+pre code{background:none;color:inherit;padding:0;font-size:inherit}
+.tk-k{color:var(--brand-secondary)} .tk-s{color:var(--fb-success)} .tk-c{color:var(--text-muted)} .tk-n{color:var(--accent-gold)}
+
+/* ---------- Logo oficial ---------- */
+.kx-logo{border-radius:50%;flex:none;display:block;box-shadow:var(--glow-purple)}
+
+
+/* ===== Apostila completa: sumário em vidro fixo + coluna de leitura longa ===== */
+.shell{max-width:1220px;margin:0 auto;padding-inline:16px;padding-block:0 var(--s16);display:grid;grid-template-columns:250px minmax(0,1fr);gap:var(--s12)}
+@media (max-width:940px){.shell{grid-template-columns:minmax(0,1fr);gap:0}.toc{display:none}}
+.toc{position:sticky;top:calc(env(safe-area-inset-top,0px) + 24px);align-self:start;margin-top:var(--s6);padding:var(--s4);border-radius:var(--r-lg);max-height:calc(100vh - 48px);overflow:auto}
+.toc .brand{display:flex;align-items:center;gap:var(--s3);padding:4px 4px 14px;border-bottom:1px solid var(--glass-stroke);margin-bottom:10px}
+.toc .brand b{font:600 13px/16px var(--f-heading);display:block}
+.toc .brand small{font:500 11px/14px var(--f-body);color:var(--text-muted)}
+.toc ol{list-style:none;margin:0;padding:0;display:grid;gap:2px}
+.toc a{display:flex;gap:10px;align-items:baseline;text-decoration:none;color:var(--text-secondary);font:400 14px/20px var(--f-body);padding:6px 8px;border-radius:var(--r-sm)}
+.toc a:hover,.toc a.on{background:var(--glass-fill);color:var(--text-primary)}
+.toc a span{font:500 12px/1 var(--f-code);color:var(--brand-secondary);min-width:20px}
+.progress{position:fixed;top:0;left:0;height:3px;width:0;background:var(--g-gamer);z-index:10}
+main{min-width:0}
+
+/* Hero */
+.hero{padding-block:var(--s12) var(--s8);display:grid;gap:var(--s6)}
+.hero-top{display:flex;align-items:center;gap:var(--s4);flex-wrap:wrap}
+.hero .lead{max-width:62ch;color:var(--text-secondary);margin:0}
+.badges{display:flex;flex-wrap:wrap;gap:var(--s2)}
+.stats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:var(--s4)}
+@media (max-width:640px){.stats{grid-template-columns:minmax(0,1fr)}}
+.credits{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:var(--s4)}
+@media (max-width:640px){.credits{grid-template-columns:minmax(0,1fr)}}
+.credit{padding:var(--s4) 20px;border-radius:var(--r-alert)}
+.credit .t-overline{color:var(--text-muted);font-size:11px;display:block;margin-bottom:4px}
+.credit p{margin:0;font:400 15px/22px var(--f-body)}
+.flow{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:var(--s4)}
+@media (max-width:760px){.flow{grid-template-columns:minmax(0,1fr)}}
+.step{padding:var(--s6);border-radius:var(--r-card);display:grid;gap:var(--s2);align-content:start}
+.step p{margin:0;color:var(--text-secondary);font:400 15px/22px var(--f-body)}
+
+/* Seções */
+section.aula{padding-block:var(--s16) 0;display:grid;gap:var(--s6);scroll-margin-top:16px}
+.sec-head{display:grid;gap:var(--s3);padding-bottom:var(--s4);border-bottom:1px solid var(--glass-stroke)}
+.sec-meta{display:flex;align-items:center;gap:var(--s3);flex-wrap:wrap}
+.credit-line{margin:0;font:500 12px/16px var(--f-body);letter-spacing:.02em;color:var(--text-muted)}
+.content{display:grid;grid-template-columns:minmax(0,1fr);gap:var(--s4);min-width:0}
+.content > *,.gab-body > *,.alert > div{min-width:0}
+.content > p,.content > ul,.content > ol{max-width:70ch;color:var(--text-secondary);margin:0}
+.content ul,.content ol{padding-left:22px}
+.content li{margin-bottom:6px}
+.content li::marker{color:var(--brand-secondary)}
+.content h3.sub{margin-top:var(--s8);display:flex;align-items:center;gap:var(--s3);scroll-margin-top:16px}
+.content h3.sub::before{content:"";width:18px;height:3px;border-radius:3px;background:var(--g-neon);flex:none}
+.content h4{margin-top:var(--s4);color:var(--text-primary)}
+.tbl{border-radius:var(--r-lg);overflow-x:auto;padding:6px}
+table{border-collapse:collapse;width:100%;font:400 15px/22px var(--f-body)}
+th,td{text-align:left;padding:10px 14px;vertical-align:top;border-bottom:1px solid var(--glass-stroke)}
+tr:last-child td{border-bottom:0}
+th{font:600 12px/16px var(--f-heading);letter-spacing:.14em;text-transform:uppercase;color:var(--text-muted)}
+td{color:var(--text-secondary)} td:first-child{color:var(--text-primary)}
+.formula{font:500 clamp(14px,1.8vw,17px)/1.5 var(--f-code);padding:18px 22px;border-radius:var(--r-alert);overflow-x:auto;white-space:nowrap;max-width:100%}
+.formula b{font-weight:500;color:var(--brand-tertiary)}
+.alert p + p{margin-top:8px}
+.alert code,td code{overflow-wrap:anywhere}
+
+/* Código com highlight.js mapeado nos tokens */
+.hljs-keyword,.hljs-built_in,.hljs-meta{color:var(--brand-secondary)}
+.hljs-string{color:var(--fb-success)}
+.hljs-comment{color:var(--text-muted);font-style:italic}
+.hljs-number,.hljs-literal{color:var(--accent-gold)}
+.hljs-title,.hljs-title.function_,.hljs-params{color:var(--brand-tertiary)}
+.hljs-subst,.hljs-attr{color:var(--support-lilac)}
+
+/* Checklist */
+.checklist{list-style:none;padding-left:0!important;display:grid;gap:8px}
+.checklist label{display:flex;gap:12px;align-items:flex-start;cursor:pointer;color:var(--text-secondary)}
+.checklist input{appearance:none;flex:none;width:20px;height:20px;margin-top:2px;border-radius:6px;border:1.5px solid var(--glass-stroke);background:var(--glass-fill);display:grid;place-items:center;cursor:pointer}
+.checklist input:checked{background:var(--g-neon);border-color:transparent}
+.checklist input:checked::after{content:"✓";color:#fff;font:600 13px/1 var(--f-code)}
+.checklist input:checked + span{color:var(--text-primary)}
+.gab-link{margin:0}
+.gab-link a{font:600 15px/20px var(--f-heading);text-decoration:none}
+
+/* Gabarito recolhível */
+.gab-list{display:grid;gap:var(--s3)}
+details.gab{border-radius:var(--r-alert);scroll-margin-top:16px}
+details.gab summary{list-style:none;cursor:pointer;padding:18px 22px;display:flex;justify-content:space-between;align-items:center;gap:var(--s4)}
+details.gab summary::-webkit-details-marker{display:none}
+details.gab .chev{font:500 20px/1 var(--f-code);color:var(--brand-secondary);transition:transform .2s}
+details.gab[open] .chev{transform:rotate(45deg)}
+.gab-body{padding:0 22px 22px;display:grid;grid-template-columns:minmax(0,1fr);gap:var(--s3);color:var(--text-secondary)}
+.gab-body p{margin:0}
+
+/* Figuras */
+figure{margin:var(--s2) 0;max-width:680px}
+figure .frame{border-radius:var(--r-lg);padding:var(--s4)}
+figure svg{width:100%;height:auto;display:block}
+figcaption{font:500 12px/16px var(--f-body);letter-spacing:.02em;color:var(--text-muted);margin-top:10px}
+.sv-axis{stroke:var(--glass-stroke)} .sv-lbl{fill:var(--text-muted);font:500 11px var(--f-code)} .sv-txt{fill:var(--text-primary);font:500 12px var(--f-code)}
+.sv-box{fill:color-mix(in srgb,var(--brand-primary) 22%,transparent);stroke:var(--brand-primary)} .sv-med{stroke:var(--brand-secondary)}
+.sv-wh{stroke:var(--brand-tertiary)} .sv-out{fill:var(--brand-secondary)} .sv-fence{stroke:var(--accent-gold)} .sv-fence-t{fill:var(--accent-gold);font:500 11px var(--f-code)} .sv-out-t{fill:var(--brand-secondary);font:500 11px var(--f-code)}
+.sv-curve{fill:color-mix(in srgb,var(--brand-secondary) 12%,transparent)} .sv-band{stroke:var(--brand-tertiary)}
+.sv-node{fill:var(--glass-fill);stroke:var(--glass-stroke)} .sv-node-p{stroke:var(--brand-secondary)} .sv-node-c{stroke:var(--brand-tertiary)}
+.sv-ok{fill:color-mix(in srgb,var(--fb-success) 14%,transparent);stroke:var(--fb-success)} .sv-bad{fill:color-mix(in srgb,var(--fb-error) 14%,transparent);stroke:var(--fb-error)}
+.sv-body{fill:var(--text-primary);font:500 13px var(--f-body)} .sv-gold{fill:var(--accent-gold);font:500 12px var(--f-code)}
+
+.biblio .content ul{display:grid;gap:6px}
+footer.sig{margin-top:var(--s16);padding:var(--s6) var(--s8);border-radius:var(--r-card);display:flex;align-items:center;gap:var(--s6);flex-wrap:wrap;justify-content:space-between}
+footer.sig .who{display:flex;align-items:center;gap:var(--s4)}
+footer.sig b{font:600 17px/24px var(--f-heading);display:block}
+footer.sig small{color:var(--text-muted);font:500 12px/16px var(--f-body);letter-spacing:.02em}
+footer.sig p{margin:0;max-width:52ch;color:var(--text-secondary);font:400 14px/20px var(--f-body)}
+</style>
+
+<div class="progress" id="progress"></div>
+<div class="shell">
+  <nav class="toc glass" aria-label="Sumário">
+    <div class="brand"><img class="kx-logo" src="data:image/webp;base64,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" width="40" height="40" alt="Logo Kalixto"><div><b>Dev-Kalixto</b><small>Apostila completa</small></div></div>
+    <ol>
+      <li><a href="#como"><span>▸</span>Como estudar</a></li>
+      <li><a href="#a01"><span>01</span>O despertar dos dados e a mente estatística</a></li>
+<li><a href="#a02"><span>02</span>O DNA dos dados</a></li>
+<li><a href="#a03"><span>03</span>Estratégias de amostragem</a></li>
+<li><a href="#a04"><span>04</span>Distribuição de frequências</a></li>
+<li><a href="#a05"><span>05</span>Representação gráfica</a></li>
+<li><a href="#a06"><span>06</span>Medidas de posição</a></li>
+<li><a href="#a07"><span>07</span>Medidas de dispersão</a></li>
+<li><a href="#a08"><span>08</span>Introdução à probabilidade</a></li>
+<li><a href="#a09"><span>09</span>Probabilidade condicional e Teorema de Bayes</a></li>
+<li><a href="#revisao"><span>▸</span>Revisão geral</a></li>
+<li><a href="#gabarito"><span>▸</span>Gabarito comentado</a></li>
+<li><a href="#bib"><span>▸</span>Bibliografia</a></li>
+    </ol>
+  </nav>
+
+  <main>
+    <header class="hero">
+      <div class="hero-top">
+        <img class="kx-logo" src="data:image/webp;base64,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" width="72" height="72" alt="Logo Kalixto">
+        <div class="kx-eyebrow"><span class="num">01–09</span><span class="t-overline">Dev-Kalixto · Apostila completa</span></div>
+      </div>
+      <h1 class="t-display">Probabilidade &amp; Estatística <span class="grad-text">na Computação</span></h1>
+      <p class="lead t-body-l">O conteúdo inteiro do caderno em um só lugar: conceitos aprofundados, código em Python e Pandas, notas do professor, exercícios de fixação, revisão geral com simulado, gabarito comentado e bibliografia.</p>
+      <hr class="kx-rule">
+      <div class="badges">
+        <span class="badge badge--aula"><i>●</i>Aula</span>
+        <span class="badge badge--tech"><i>&lt;/&gt;</i>Tech</span>
+        <span class="badge badge--ia"><i>✦</i>IA</span>
+      </div>
+      <div class="stats">
+        <div class="stat glass"><span class="t-overline">Aulas</span><span class="num">09</span><span class="delta">▲ da mente estatística a Bayes</span></div>
+        <div class="stat glass"><span class="t-overline">Exercícios resolvidos</span><span class="num">61</span><span class="delta">▲ com gabarito comentado</span></div>
+        <div class="stat glass"><span class="t-overline">Figuras</span><span class="num">03</span><span class="delta">▲ boxplot, normal e Bayes</span></div>
+      </div>
+      <div class="credits">
+        <div class="credit glass-s"><span class="t-overline">Material-base</span><p>Prof. Clayton Escouper das Chagas · <em>Probabilidade e Estatística Aplicada</em></p></div>
+        <div class="credit glass-s"><span class="t-overline">Apostila</span><p>Kalixto by Wallace Toledo</p></div>
+      </div>
+    </header>
+
+    <section id="como" class="aula" style="padding-top:var(--s8)">
+      <div class="sec-head"><div class="kx-eyebrow"><span class="num">00</span><span class="t-overline">Como estudar</span></div><h2 class="t-h2">Bora destravar em 3 passos</h2></div>
+      <div class="flow">
+        <div class="step glass"><span class="badge badge--tech"><i>01</i>Leia</span><p>Estude a aula do professor e depois a seção correspondente aqui, com calma.</p></div>
+        <div class="step glass"><span class="badge badge--danca"><i>02</i>Pratique</span><p>Resolva os exercícios à mão, confira no Python e só então abra o gabarito.</p></div>
+        <div class="step glass"><span class="badge badge--aula"><i>03</i>Teste-se</span><p>Faça o <a href="https://akalixtogamer-lgtm.github.io/quizestudos/quizkalixto-probabilidade/" target="_blank" rel="noopener">quiz</a>. Errou? Faz parte do ensaio. Roda de novo.</p></div>
+      </div>
+      <div class="alert alert--info"><span class="ico">i</span><div><p class="ttl">Ambiente</p><p><code>pip install pandas numpy matplotlib seaborn scipy scikit-learn openpyxl</code> e um notebook no VS Code ou Jupyter.</p></div></div>
+    </section>
+
+    <section class="aula" id="a01"><div class="sec-head"><div class="sec-meta"><div class="kx-eyebrow"><span class="num">01</span><span class="t-overline">Aula 01</span></div><span class="badge badge--aula"><i>●</i>Fundamentos</span></div><h2 class="t-h2">O despertar dos dados e a mente estatística</h2><p class="credit-line">Base: material de aula do Prof. Clayton Escouper das Chagas — Aula 01.</p></div><div class="content">
+<h3 class="t-h3 sub" id="a01-1">Objetivos da aula</h3>
+<ul>
+<li>Entender o que é Estatística e para que um profissional de TI a usa.</li>
+<li>Diferenciar <strong>Estatística Descritiva</strong> de <strong>Estatística Indutiva (Inferencial)</strong>.</li>
+<li>Diferenciar <strong>população</strong> de <strong>amostra</strong>.</li>
+<li>Conhecer as etapas do <strong>método estatístico</strong>.</li>
+<li>Rodar seu primeiro <code>describe()</code> no Pandas e perceber o efeito de um <em>outlier</em>.</li>
+</ul>
+<h3 class="t-h3 sub" id="a01-2">Por que isso importa para quem programa?</h3>
+<p>Todo sistema produz dados: logs, tempos de resposta, cliques, erros, vendas. Sem Estatística, a decisão fica no "achismo" ("acho que o servidor está lento"). Com Estatística, a pergunta vira <strong>mensurável</strong> ("a mediana de latência subiu de 120 ms para 180 ms depois do deploy").</p>
+<div class="tbl glass-s"><table>
+<thead>
+<tr>
+<th>Área</th>
+<th>Pergunta estatística típica</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>IA / Machine Learning</td>
+<td>Qual a probabilidade de este e-mail ser spam?</td>
+</tr>
+<tr>
+<td>Performance</td>
+<td>Meu código ficou mais rápido ou foi sorte nessa execução?</td>
+</tr>
+<tr>
+<td>Testes A/B</td>
+<td>O botão verde converte <em>de verdade</em> mais que o azul?</td>
+</tr>
+<tr>
+<td>Recomendação</td>
+<td>Quem assistiu X tende a assistir Y?</td>
+</tr>
+</tbody>
+</table></div>
+<h3 class="t-h3 sub" id="a01-3">Conceitos</h3>
+<h4 class="t-sub-m">1. O que é Estatística</h4>
+<p>Estatística é a ciência de <strong>coletar, organizar, resumir, analisar e interpretar dados</strong> para tomar decisões sob incerteza.</p>
+<h4 class="t-sub-m">2. Descritiva × Indutiva</h4>
+<div class="tbl glass-s"><table>
+<thead>
+<tr>
+<th></th>
+<th>Estatística Descritiva</th>
+<th>Estatística Indutiva (Inferencial)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>O que faz</td>
+<td>Organiza e resume os dados que você <strong>já tem</strong></td>
+<td>Tira conclusões sobre o <strong>todo</strong> a partir de uma <strong>parte</strong></td>
+</tr>
+<tr>
+<td>Ferramentas</td>
+<td>Tabelas, gráficos, média, mediana, desvio padrão</td>
+<td>Probabilidade, intervalos de confiança, testes de hipótese</td>
+</tr>
+<tr>
+<td>Exemplo em TI</td>
+<td>Frequência de bugs por módulo no último sprint</td>
+<td>Estimar a taxa de erro de <em>todos</em> os usuários a partir de 10.000 logs</td>
+</tr>
+</tbody>
+</table></div>
+<div class="alert alert--info"><span class="ico">i</span><div><p class="ttl">Ponte</p><p>a Probabilidade (Aulas 08–09) é a "cola" que liga as duas: ela mede o quanto podemos confiar numa conclusão tirada de uma amostra.</p></div></div>
+<h4 class="t-sub-m">3. População × Amostra</h4>
+<ul>
+<li><strong>População (N):</strong> o conjunto completo que queremos entender (todos os 10 milhões de logs).</li>
+<li><strong>Amostra (n):</strong> o subconjunto que realmente analisamos (10.000 logs).</li>
+<li><strong>Parâmetro:</strong> número que descreve a população (ex.: média populacional <strong>μ</strong>).</li>
+<li><strong>Estatística:</strong> número calculado na amostra (ex.: média amostral <strong>x̄</strong>). Usamos a estatística para <strong>estimar</strong> o parâmetro.</li>
+</ul>
+<div class="alert alert--warning"><span class="ico">!</span><div><p class="ttl">Atenção</p><p>O desafio central: a amostra precisa ser <strong>representativa</strong>. Uma amostra enviesada gera conclusões erradas — não importa quão sofisticada seja a matemática.</p></div></div>
+<h4 class="t-sub-m">4. O método estatístico no dia a dia do dev</h4>
+<ol>
+<li><strong>Definição</strong> — qual pergunta meu código precisa responder?</li>
+<li><strong>Coleta</strong> — logs, scraping, consultas SQL.</li>
+<li><strong>Limpeza (data wrangling)</strong> — tratar nulos, tipos errados, duplicados. É onde se passa a maior parte do tempo.</li>
+<li><strong>Exposição</strong> — tabelas e gráficos que contam a história.</li>
+<li><strong>Análise</strong> — decidir o próximo passo com base nos números.</li>
+</ol>
+<h3 class="t-h3 sub" id="a01-4">Hands-on — primeiro relatório estatístico</h3>
+<pre><code class="language-python">import pandas as pd
+import matplotlib.pyplot as plt
+
+latencias = [120, 150, 110, 130, 450, 125, 140, 135, 120, 115]  # ms
+s = pd.Series(latencias)
+
+print(s.describe())
+print(&quot;Mediana:&quot;, s.median())
+
+plt.hist(latencias, bins=5, color=&quot;royalblue&quot;, edgecolor=&quot;white&quot;)
+plt.title(&quot;Distribuição de Performance&quot;)
+plt.xlabel(&quot;Latência (ms)&quot;)
+plt.ylabel(&quot;Frequência&quot;)
+plt.show()
+</code></pre>
+<p><strong>Saída esperada (resumo):</strong> <code>count 10</code>, <code>mean 159.5</code>, <code>50% 127.5</code>, <code>max 450</code>.</p>
+<div class="alert alert--warning"><span class="ico">!</span><div><p class="ttl">Nota do professor (errata)</p><p>o slide original cita média "~149 ms"; rodando o código, a média é <strong>159,5 ms</strong>. A mediana é <strong>127,5 ms</strong>. A lição continua a mesma — e fica ainda mais forte: um único valor de 450 ms puxou a média ~32 ms para cima da mediana.</p></div></div>
+<h4 class="t-sub-m">Lendo o <code>describe()</code></h4>
+<div class="tbl glass-s"><table>
+<thead>
+<tr>
+<th>Linha</th>
+<th>Significado</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>count</code></td>
+<td>quantidade de valores não nulos</td>
+</tr>
+<tr>
+<td><code>mean</code></td>
+<td>média aritmética</td>
+</tr>
+<tr>
+<td><code>std</code></td>
+<td>desvio padrão (amostral, divide por n − 1 — veremos na Aula 07)</td>
+</tr>
+<tr>
+<td><code>min</code> / <code>max</code></td>
+<td>menor e maior valor</td>
+</tr>
+<tr>
+<td><code>25%</code> / <code>50%</code> / <code>75%</code></td>
+<td>quartis (Q1, <strong>mediana</strong>, Q3) — veremos na Aula 05</td>
+</tr>
+</tbody>
+</table></div>
+<h3 class="t-h3 sub" id="a01-5">Exercícios de fixação</h3>
+<p class="gab-link"><a href="#gab-a01">Ver respostas no Gabarito comentado →</a></p>
+<p><strong>1.1</strong> Classifique cada situação como Estatística Descritiva ou Indutiva:<br />
+a) Calcular o tempo médio de build do último mês.<br />
+b) Estimar, a partir de 300 respostas, a porcentagem de todos os usuários que aprovariam uma nova feature.<br />
+c) Contar quantos bugs cada módulo teve no sprint atual.</p>
+<p><strong>1.2</strong> Se eu testar 5 mouses de um lote de 1.000, quem é a população e quem é a amostra? O "percentual de mouses defeituosos no lote" é parâmetro ou estatística?</p>
+<p><strong>1.3</strong> Remova o valor 450 da lista de latências e recalcule a média. Compare com a mediana original. O que isso ensina?</p>
+<p><strong>1.4</strong> Coloque as etapas na ordem correta: Coleta · Análise · Definição · Exposição · Limpeza.</p>
+<p><strong>1.5</strong> "Versão do Windows" é variável qualitativa ou quantitativa? (spoiler da Aula 02)</p>
+<h3 class="t-h3 sub" id="a01-6">Aprofunde</h3>
+<ul>
+<li>BUSSAB &amp; MORETTIN — <em>Estatística Básica</em>: capítulo introdutório sobre o que é Estatística e resumo de dados.</li>
+<li>TRIOLA — <em>Introdução à Estatística</em>: introdução ao pensamento estatístico e tipos de dados.</li>
+<li>OpenIntro Statistics (gratuito): introdução a dados e estudos.</li>
+<li>Documentação do Pandas: <code>Series.describe</code>.</li>
+</ul>
+<h3 class="t-h3 sub" id="a01-7">Checklist de saída</h3>
+<ul class="checklist">
+<li class="chk"><label><input type="checkbox"><span>Sei a diferença entre Estatística Descritiva e Indutiva.</span></label></li>
+<li class="chk"><label><input type="checkbox"><span>Sei o que é população, amostra, parâmetro e estatística.</span></label></li>
+<li class="chk"><label><input type="checkbox"><span>Consigo rodar <code>describe()</code> e ler cada linha da saída.</span></label></li>
+<li class="chk"><label><input type="checkbox"><span>Entendi por que a média pode enganar na presença de outliers.</span></label></li>
+</ul></div></section>
+<section class="aula" id="a02"><div class="sec-head"><div class="sec-meta"><div class="kx-eyebrow"><span class="num">02</span><span class="t-overline">Aula 02</span></div><span class="badge badge--tech"><i>&lt;/&gt;</i>Pandas</span></div><h2 class="t-h2">O DNA dos dados: variáveis e dados reais</h2><p class="credit-line">Base: material de aula do Prof. Clayton Escouper das Chagas — Aula 02.</p></div><div class="content">
+<h3 class="t-h3 sub" id="a02-1">Objetivos da aula</h3>
+<ul>
+<li>Classificar variáveis: <strong>qualitativa (nominal/ordinal)</strong> e <strong>quantitativa (discreta/contínua)</strong>.</li>
+<li>Revisar população × amostra e entender o <strong>erro amostral</strong>.</li>
+<li>Saber <strong>por que</strong> amostramos (custo, agilidade, testes destrutivos).</li>
+<li>Importar CSV/Excel com Pandas e <strong>inspecionar tipos</strong> (<code>info</code>, <code>dtypes</code>, <code>describe</code>).</li>
+</ul>
+<h3 class="t-h3 sub" id="a02-2">Conceitos</h3>
+<h4 class="t-sub-m">1. Classificação de variáveis</h4>
+<pre><code class="language-plaintext">Variável
+├── Qualitativa (categoria / rótulo)
+│   ├── Nominal  → sem ordem   (marca do teclado, SO, método de pagamento)
+│   └── Ordinal  → com ordem   (Júnior &lt; Pleno &lt; Sênior, 1★ a 5★)
+└── Quantitativa (número que mede ou conta)
+    ├── Discreta → contagem    (nº de requisições, carros no estoque)
+    └── Contínua → medição     (latência em ms, preço, altura)
+</code></pre>
+<div class="alert alert--info"><span class="ico">i</span><div><p class="ttl">Regra de ouro</p><p><em>"Faz sentido somar ou tirar média?"</em> Se não faz, a variável é qualitativa — <strong>mesmo que seja escrita com números</strong> (CEP, ID, CPF, código HTTP).</p></div></div>
+<h4 class="t-sub-m">2. O teste do código HTTP</h4>
+<p><code>status = 200, 404, 500</code> — são números, mas a "média dos status" não significa nada. <strong>Status HTTP é qualitativa nominal.</strong> Por isso no slide o status aparece como texto (<code>'200'</code>).</p>
+<h4 class="t-sub-m">3. Escalas de medida (acréscimo ao material)</h4>
+<p>Uma forma mais fina de classificar, muito cobrada em provas:</p>
+<div class="tbl glass-s"><table>
+<thead>
+<tr>
+<th>Escala</th>
+<th>Operações válidas</th>
+<th>Exemplo</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Nominal</td>
+<td>= , ≠</td>
+<td>SO, cor</td>
+</tr>
+<tr>
+<td>Ordinal</td>
+<td>+ ordem (&lt;, &gt;)</td>
+<td>prioridade, escolaridade</td>
+</tr>
+<tr>
+<td>Intervalar</td>
+<td>+ diferenças (sem zero absoluto)</td>
+<td>temperatura em °C, ano</td>
+</tr>
+<tr>
+<td>Razão</td>
+<td>+ razões (zero absoluto)</td>
+<td>latência, preço, peso</td>
+</tr>
+</tbody>
+</table></div>
+<div class="alert alert--info"><span class="ico">i</span><div><p class="ttl">Dica do professor</p><p>"30 °C não é o dobro de 15 °C" (zero é arbitrário), mas "200 ms é o dobro de 100 ms".</p></div></div>
+<h4 class="t-sub-m">4. População, amostra e erro amostral</h4>
+<ul>
+<li><strong>Erro amostral</strong> = diferença entre o valor calculado na amostra (x̄) e o valor real da população (μ).</li>
+<li>É <strong>inevitável</strong> porque cada amostra sorteada contém elementos diferentes. Pode ser <strong>reduzido</strong> aumentando <em>n</em> e usando boas técnicas de amostragem (Aula 03).</li>
+<li><strong>Não confunda</strong> com <strong>viés</strong> (erro sistemático): o viés não diminui aumentando a amostra.</li>
+</ul>
+<h4 class="t-sub-m">5. Por que amostrar?</h4>
+<ul>
+<li><strong>Custo computacional</strong> — processar 1 PB de logs é caro.</li>
+<li><strong>Agilidade</strong> — decisões não podem esperar dias.</li>
+<li><strong>Testes destrutivos</strong> — testar a durabilidade de todos os SSDs destrói o lote.</li>
+</ul>
+<h3 class="t-h3 sub" id="a02-3">Hands-on — importando e inspecionando</h3>
+<pre><code class="language-python">import pandas as pd
+
+df = pd.read_csv(&quot;vendas_nissan.csv&quot;)        # CSV
+# df = pd.read_excel(&quot;investimentos_etf.xlsx&quot;)  # Excel (precisa do openpyxl)
+# df = pd.read_json(&quot;api.json&quot;)               # JSON
+
+df.head()      # 5 primeiras linhas
+df.tail()      # 5 últimas
+df.shape       # (linhas, colunas)
+df.info()      # tipos, não-nulos, memória
+df.dtypes      # tipo de cada coluna
+df.describe()  # resumo das colunas numéricas
+</code></pre>
+<div class="tbl glass-s"><table>
+<thead>
+<tr>
+<th>dtype do Pandas</th>
+<th>O que costuma guardar</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>int64</code></td>
+<td>inteiros (discretas)</td>
+</tr>
+<tr>
+<td><code>float64</code></td>
+<td>decimais (contínuas) — <strong>ou inteiros com NaN!</strong></td>
+</tr>
+<tr>
+<td><code>object</code></td>
+<td>texto ou tipos misturados</td>
+</tr>
+<tr>
+<td><code>category</code></td>
+<td>categorias (nominal/ordinal)</td>
+</tr>
+<tr>
+<td><code>datetime64</code></td>
+<td>datas</td>
+</tr>
+</tbody>
+</table></div>
+<h4 class="t-sub-m">Corrigindo o tipo ordinal (desafio extra do slide)</h4>
+<pre><code class="language-python">ordem = [&quot;Baixa&quot;, &quot;Média&quot;, &quot;Alta&quot;, &quot;Crítica&quot;]
+df[&quot;priority&quot;] = pd.Categorical(df[&quot;priority&quot;], categories=ordem, ordered=True)
+
+print(df[&quot;priority&quot;].dtype)                 # category
+print(df[df[&quot;priority&quot;] &gt;= &quot;Alta&quot;])          # agora comparações funcionam!
+</code></pre>
+<h4 class="t-sub-m">Datas e dinheiro no tipo certo</h4>
+<pre><code class="language-python">df[&quot;Data_Compra&quot;] = pd.to_datetime(df[&quot;Data_Compra&quot;], dayfirst=True)
+df[&quot;Valor_Cota&quot;] = (df[&quot;Valor_Cota&quot;].astype(str)
+                    .str.replace(&quot;.&quot;, &quot;&quot;, regex=False)
+                    .str.replace(&quot;,&quot;, &quot;.&quot;, regex=False)
+                    .astype(float))   # &quot;1.234,56&quot; → 1234.56
+</code></pre>
+<h3 class="t-h3 sub" id="a02-4">Armadilhas comuns</h3>
+<ul>
+<li><strong>ID lido como <code>float</code></strong>: acontece quando a coluna tem valores faltantes (NaN é float). Solução: <code>dtype={"ID_Usuario": "string"}</code> na leitura ou <code>astype("Int64")</code>. Somar IDs não faz sentido.</li>
+<li><strong>CSV brasileiro</strong>: use <code>sep=";"</code> e <code>decimal=","</code> em <code>read_csv</code>.</li>
+<li><strong>Nota 1 a 10 de conservação</strong> parece quantitativa, mas é ordinal: a "distância" entre 7 e 8 não é garantida.</li>
+</ul>
+<h3 class="t-h3 sub" id="a02-5">Exercícios de fixação</h3>
+<p class="gab-link"><a href="#gab-a02">Ver respostas no Gabarito comentado →</a></p>
+<p><strong>2.1</strong> Classifique: a) CPF · b) nº de commits por dia · c) tempo de login em segundos · d) nível de log (DEBUG, INFO, WARN, ERROR) · e) sistema operacional.</p>
+<p><strong>2.2</strong> Parâmetro ou estatística? a) média de latência de <strong>todos</strong> os logs desde 2020 · b) média de latência de 5.000 logs sorteados.</p>
+<p><strong>2.3</strong> Explique a diferença entre <strong>erro amostral</strong> e <strong>viés</strong>. Qual dos dois diminui quando aumentamos a amostra?</p>
+<p><strong>2.4</strong> Escreva o código que transforma a coluna <code>senioridade</code> (Júnior, Pleno, Sênior) em uma variável ordinal no Pandas e filtra quem é Pleno ou acima.</p>
+<p><strong>2.5</strong> Por que "temperatura em °C" é intervalar e "latência em ms" é de razão?</p>
+<div class="alert alert--info"><span class="ico">i</span><div><p class="ttl">Lista 02 do Prof. Clayton</p><p>as 6 questões da lista oficial também estão resolvidas e comentadas no Gabarito.</p></div></div>
+<h3 class="t-h3 sub" id="a02-6">Aprofunde</h3>
+<ul>
+<li>BUSSAB &amp; MORETTIN — <em>Estatística Básica</em>: tipos de variáveis.</li>
+<li>MAGALHÃES &amp; LIMA — <em>Noções de Probabilidade e Estatística</em>: classificação de variáveis e organização de dados.</li>
+<li>McKINNEY — <em>Python para Análise de Dados</em>: leitura de arquivos e tipos no Pandas.</li>
+<li>Documentação Pandas: <code>read_csv</code>, <code>Categorical</code>, <code>to_datetime</code>.</li>
+</ul>
+<h3 class="t-h3 sub" id="a02-7">Checklist de saída</h3>
+<ul class="checklist">
+<li class="chk"><label><input type="checkbox"><span>Classifico variáveis em nominal, ordinal, discreta e contínua.</span></label></li>
+<li class="chk"><label><input type="checkbox"><span>Sei que número ≠ quantitativa (CEP, ID, HTTP).</span></label></li>
+<li class="chk"><label><input type="checkbox"><span>Sei o que é erro amostral e o que é viés.</span></label></li>
+<li class="chk"><label><input type="checkbox"><span>Uso <code>read_csv</code>, <code>info</code>, <code>dtypes</code> e <code>describe</code> com confiança.</span></label></li>
+<li class="chk"><label><input type="checkbox"><span>Sei criar uma variável ordinal com <code>pd.Categorical(..., ordered=True)</code>.</span></label></li>
+</ul></div></section>
+<section class="aula" id="a03"><div class="sec-head"><div class="sec-meta"><div class="kx-eyebrow"><span class="num">03</span><span class="t-overline">Aula 03</span></div><span class="badge badge--ia"><i>✦</i>Dados</span></div><h2 class="t-h2">Estratégias de amostragem</h2><p class="credit-line">Base: material de aula do Prof. Clayton Escouper das Chagas — Aula 03.</p></div><div class="content">
+<h3 class="t-h3 sub" id="a03-1">Objetivos da aula</h3>
+<ul>
+<li>Reconhecer o <strong>vício (viés) de seleção</strong>.</li>
+<li>Aplicar amostragem <strong>aleatória simples, estratificada, sistemática</strong> e conhecer a <strong>por conglomerados</strong>.</li>
+<li>Saber quando se usa amostragem <strong>não probabilística</strong> (conveniência, quotas) e seus riscos.</li>
+<li>Implementar com <code>df.sample</code>, <code>train_test_split(stratify=...)</code>, <code>np.arange</code> + <code>iloc</code>.</li>
+<li>Garantir <strong>reprodutibilidade</strong> com <code>random_state</code>.</li>
+</ul>
+<h3 class="t-h3 sub" id="a03-2">Conceitos</h3>
+<h4 class="t-sub-m">1. Vício de seleção (bias)</h4>
+<p>Acontece quando a amostra <strong>não representa</strong> a população. Exemplo: testar um app só em computadores de última geração → "funciona no laboratório, quebra na vida real".</p>
+<p>Outros vieses que aparecem em TI:</p>
+<ul>
+<li><strong>Viés de sobrevivência</strong> — analisar só os servidores que "sobreviveram" e ignorar os que caíram e foram desligados.</li>
+<li><strong>Viés de não resposta</strong> — só quem está muito satisfeito (ou muito irritado) responde a pesquisa.</li>
+<li><strong>Viés temporal</strong> — coletar logs só de madrugada e concluir sobre o dia todo.</li>
+</ul>
+<h4 class="t-sub-m">2. Técnicas probabilísticas (todo elemento tem chance conhecida de ser sorteado)</h4>
+<div class="tbl glass-s"><table>
+<thead>
+<tr>
+<th>Técnica</th>
+<th>Como funciona</th>
+<th>Quando usar</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Aleatória simples</strong></td>
+<td>sorteio puro, todos com a mesma chance</td>
+<td>população homogênea</td>
+</tr>
+<tr>
+<td><strong>Estratificada</strong></td>
+<td>divide em estratos e sorteia <strong>proporcionalmente</strong> em cada um</td>
+<td>grupos com comportamento diferente; minorias importantes</td>
+</tr>
+<tr>
+<td><strong>Sistemática</strong></td>
+<td>começa num ponto aleatório e pega 1 a cada <em>k</em></td>
+<td>listas/fluxos ordenados (pacotes, logs)</td>
+</tr>
+<tr>
+<td><strong>Por conglomerados</strong> <em>(acréscimo)</em></td>
+<td>sorteia <strong>grupos inteiros</strong> (ex.: 5 data centers) e analisa tudo dentro deles</td>
+<td>quando listar todos os elementos é caro</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>Salto da sistemática:</strong></p>
+<div class="formula glass-s"><b>k</b> = N / n = tamanho da população ÷ tamanho da amostra</div>
+<div class="alert alert--warning"><span class="ico">!</span><div><p class="ttl">Cuidado com periodicidade</p><p>se o log tem um padrão que se repete a cada 20 linhas (ex.: um job agendado) e você usa k = 20, pode pegar <strong>sempre o mesmo tipo de evento</strong>. Sorteie o ponto inicial e desconfie de dados cíclicos.</p></div></div>
+<h4 class="t-sub-m">3. Estratificada — tamanho de cada estrato</h4>
+<p>Alocação proporcional: <code>nᵢ = n × (Nᵢ / N)</code>.<br />
+Ex.: frota com 60% Etios, 25% Kicks, 15% T-Cross e amostra de 40 → 24, 10 e 6.</p>
+<h4 class="t-sub-m">4. Não probabilísticas</h4>
+<ul>
+<li><strong>Conveniência:</strong> os dados mais fáceis (quem está perto, o servidor mais próximo).</li>
+<li><strong>Quotas:</strong> quantidades fixas por grupo, mas escolhidas pelo pesquisador.</li>
+<li><strong>Risco:</strong> subjetividade → viés. Use só quando o rigor não é crítico (protótipo, sondagem rápida).</li>
+</ul>
+<h3 class="t-h3 sub" id="a03-3">Hands-on</h3>
+<pre><code class="language-python">import numpy as np
+import pandas as pd
+from sklearn.model_selection import train_test_split
+
+# 1) Aleatória simples
+am_simples = df.sample(n=100, random_state=42)
+am_10pct   = df.sample(frac=0.10, random_state=42)
+
+# 2) Estratificada — duas formas
+am_estrat, _ = train_test_split(df, train_size=0.2,
+                                stratify=df[&quot;marca&quot;], random_state=42)
+
+am_estrat2 = (df.groupby(&quot;marca&quot;, group_keys=False)
+                .sample(frac=0.2, random_state=42))   # só Pandas
+
+# confira as proporções
+print(df[&quot;marca&quot;].value_counts(normalize=True))
+print(am_estrat[&quot;marca&quot;].value_counts(normalize=True))
+
+# 3) Sistemática com início aleatório
+N, n = len(df), 50
+k = N // n
+rng = np.random.default_rng(42)
+inicio = rng.integers(0, k)
+am_sist = df.iloc[np.arange(inicio, N, k)]
+</code></pre>
+<div class="alert alert--warning"><span class="ico">!</span><div><p class="ttl">Nota do professor</p><p>no slide, <code>train_test_split(df, test_size=0.2, ...)</code> devolve <strong>80%</strong> na primeira variável. Para pegar a amostra de 20%, use <code>train_size=0.2</code> (como acima) ou fique com a segunda saída.</p></div></div>
+<h4 class="t-sub-m">Seed / <code>random_state</code></h4>
+<p>O computador gera números <strong>pseudoaleatórios</strong>. Fixar a semente faz o "sorteio" ser o mesmo em toda execução — essencial para que outra pessoa reproduza sua análise. <code>42</code> é só convenção (referência ao <em>Guia do Mochileiro das Galáxias</em>).</p>
+<h3 class="t-h3 sub" id="a03-4">Exercícios de fixação</h3>
+<p class="gab-link"><a href="#gab-a03">Ver respostas no Gabarito comentado →</a></p>
+<p><strong>3.1</strong> Data center com 1.000 servidores (800 Linux, 200 Windows). Para uma amostra estratificada de 50, quantos de cada? E na sistemática com k = 20, quantos servidores entram?</p>
+<p><strong>3.2</strong> Identifique a técnica: a) entrevistar os 20 primeiros que responderam no Slack · b) registrar 1 a cada 50 requisições · c) sortear usuários respeitando a proporção dos planos Free/Pro/Enterprise · d) sortear 3 filiais e auditar todos os computadores delas.</p>
+<p><strong>3.3</strong> População N = 1.200 e amostra n = 60. Calcule k e escreva o código da amostra sistemática com início aleatório.</p>
+<p><strong>3.4</strong> Dê um exemplo, na sua área, em que a amostragem sistemática geraria viés por periodicidade.</p>
+<p><strong>3.5</strong> Por que uma pesquisa de satisfação enviada só por e-mail pode ter viés? Que tipo de viés é?</p>
+<h3 class="t-h3 sub" id="a03-5">Aprofunde</h3>
+<ul>
+<li>BUSSAB &amp; MORETTIN — <em>Estatística Básica</em>: noções de amostragem.</li>
+<li>TRIOLA — <em>Introdução à Estatística</em>: coleta de dados e planejamento amostral.</li>
+<li>BRUCE, BRUCE &amp; GEDECK — <em>Estatística Prática para Cientistas de Dados</em>: amostragem aleatória e viés de amostra.</li>
+<li>scikit-learn: <code>train_test_split</code> (parâmetro <code>stratify</code>).</li>
+</ul>
+<h3 class="t-h3 sub" id="a03-6">Checklist de saída</h3>
+<ul class="checklist">
+<li class="chk"><label><input type="checkbox"><span>Reconheço viés de seleção, sobrevivência e não resposta.</span></label></li>
+<li class="chk"><label><input type="checkbox"><span>Sei escolher entre simples, estratificada, sistemática e conglomerados.</span></label></li>
+<li class="chk"><label><input type="checkbox"><span>Calculo k = N/n e evito periodicidade.</span></label></li>
+<li class="chk"><label><input type="checkbox"><span>Uso <code>df.sample</code>, <code>stratify</code> e <code>random_state</code>.</span></label></li>
+</ul></div></section>
+<section class="aula" id="a04"><div class="sec-head"><div class="sec-meta"><div class="kx-eyebrow"><span class="num">04</span><span class="t-overline">Aula 04</span></div><span class="badge badge--tech"><i>&lt;/&gt;</i>Pandas</span></div><h2 class="t-h2">Distribuição de frequências</h2><p class="credit-line">Base: material de aula do Prof. Clayton Escouper das Chagas — Aula 04.</p></div><div class="content">
+<h3 class="t-h3 sub" id="a04-1">Objetivos da aula</h3>
+<ul>
+<li>Transformar dados brutos (<strong>rol</strong>) em <strong>tabelas de frequência</strong>.</li>
+<li>Calcular frequência <strong>absoluta (fᵢ)</strong>, <strong>relativa (frᵢ)</strong>, <strong>percentual</strong> e <strong>acumulada (Fᵢ)</strong>.</li>
+<li>Agrupar variáveis contínuas em <strong>classes</strong> e escolher quantas usar (<strong>Regra de Sturges</strong>).</li>
+<li>Usar <code>value_counts</code>, <code>pd.cut</code> e <code>cumsum</code> sem cair na armadilha dos intervalos.</li>
+</ul>
+<h3 class="t-h3 sub" id="a04-2">Conceitos</h3>
+<h4 class="t-sub-m">1. Rol</h4>
+<p>Os dados brutos <strong>ordenados</strong>. Ordenar já ajuda a ver mínimo, máximo e repetições.</p>
+<h4 class="t-sub-m">2. Tipos de frequência</h4>
+<div class="tbl glass-s"><table>
+<thead>
+<tr>
+<th>Símbolo</th>
+<th>Nome</th>
+<th>Fórmula</th>
+<th>Pergunta que responde</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>fᵢ</td>
+<td>absoluta</td>
+<td>contagem</td>
+<td>quantas vezes aparece?</td>
+</tr>
+<tr>
+<td>frᵢ</td>
+<td>relativa</td>
+<td>fᵢ / n</td>
+<td>que fração do total?</td>
+</tr>
+<tr>
+<td>fᵢ%</td>
+<td>percentual</td>
+<td>frᵢ × 100</td>
+<td>que porcentagem?</td>
+</tr>
+<tr>
+<td>Fᵢ</td>
+<td>acumulada</td>
+<td>f₁ + … + fᵢ</td>
+<td>quantos até aqui?</td>
+</tr>
+<tr>
+<td>Frᵢ</td>
+<td>relativa acumulada</td>
+<td>Fᵢ / n</td>
+<td>"80% dos usuários carregam o app em até 3 s"</td>
+</tr>
+</tbody>
+</table></div>
+<div class="alert alert--success"><span class="ico">✓</span><div><p class="ttl">Checagem rápida</p><p>Σfᵢ = n e Σfrᵢ = 1 (100%). A última Fᵢ é sempre n.</p></div></div>
+<h4 class="t-sub-m">3. Distribuição por classes (dados contínuos)</h4>
+<p>Latências raramente se repetem → agrupamos em faixas.</p>
+<ul>
+<li><strong>Amplitude total:</strong> AT = máx − mín</li>
+<li><strong>Amplitude de classe:</strong> h = AT / k</li>
+<li><strong>Ponto médio:</strong> (limite inferior + limite superior) / 2 — usado como "representante" da classe.</li>
+</ul>
+<h4 class="t-sub-m">4. Regra de Sturges</h4>
+<div class="formula glass-s"><b>k</b> = 1 + 3,322 · log₁₀(n)</div>
+<div class="tbl glass-s"><table>
+<thead>
+<tr>
+<th>n</th>
+<th>k (arredondado)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>10</td>
+<td>4</td>
+</tr>
+<tr>
+<td>50</td>
+<td>7</td>
+</tr>
+<tr>
+<td>200</td>
+<td>9</td>
+</tr>
+<tr>
+<td>10.000</td>
+<td>14</td>
+</tr>
+</tbody>
+</table></div>
+<div class="alert alert--info"><span class="ico">i</span><div><p class="ttl">Dica do professor</p><p>É um <strong>ponto de partida</strong>, não lei. Para amostras muito grandes ou assimétricas, outras regras (Freedman–Diaconis, Scott) funcionam melhor. No NumPy: <code>np.histogram_bin_edges(dados, bins="sturges")</code>.</p></div></div>
+<h4 class="t-sub-m">5. Intervalos abertos e fechados — a pegadinha</h4>
+<p>Convenção do slide: <code>[a, b)</code> — <strong>fecha</strong> à esquerda, <strong>abre</strong> à direita.</p>
+<div class="alert alert--warning"><span class="ico">!</span><div><p class="ttl">Nota do professor</p><p>o <code>pd.cut</code> do Pandas faz o <strong>contrário por padrão</strong>: <code>(a, b]</code> (<code>right=True</code>). Com as classes 0–25k–50k–75k–100k, um carro com <strong>50.000 km</strong> cai na <strong>2ª classe</strong> no <code>pd.cut</code> padrão e na <strong>3ª classe</strong> pela convenção do slide. Para seguir o slide:<br />
+<code>python
+pd.cut(km, bins=[0, 25_000, 50_000, 75_000, 100_001], right=False)</code><br />
+(o <code>100_001</code> garante que 100.000 km entre na última classe).</p></div></div>
+<h3 class="t-h3 sub" id="a04-3">Hands-on — tabela completa</h3>
+<pre><code class="language-python">import pandas as pd
+import numpy as np
+
+tempos = [102, 150, 103, 158, 105, 145, 150, 110, 120, 148]
+df = pd.DataFrame({&quot;ms&quot;: tempos})
+
+df[&quot;classe&quot;] = pd.cut(df[&quot;ms&quot;], bins=3)
+
+tabela = (df[&quot;classe&quot;].value_counts().sort_index()
+            .rename_axis(&quot;Intervalo&quot;).reset_index(name=&quot;fi&quot;))
+tabela[&quot;fr_%&quot;] = (tabela[&quot;fi&quot;] / tabela[&quot;fi&quot;].sum() * 100).round(1)
+tabela[&quot;Fi&quot;]   = tabela[&quot;fi&quot;].cumsum()
+tabela[&quot;Fr_%&quot;] = tabela[&quot;fr_%&quot;].cumsum()
+print(tabela)
+</code></pre>
+<p>Saída:</p>
+<pre><code class="language-plaintext">            Intervalo  fi  fr_%  Fi   Fr_%
+0  (101.944, 120.667]   5  50.0   5   50.0
+1  (120.667, 139.333]   0   0.0   5   50.0
+2    (139.333, 158.0]   5  50.0  10  100.0
+</code></pre>
+<div class="alert alert--info"><span class="ico">i</span><div><p class="ttl">Leitura de analista</p><p>a classe do meio ficou <strong>vazia</strong>. Isso não é erro — é informação! Há <strong>dois grupos</strong> de tempos (≈100–120 ms e ≈145–158 ms), típico de <em>cache hit</em> × <em>cache miss</em>. Distribuições com dois "morros" são <strong>bimodais</strong> (Aula 06).</p></div></div>
+<h4 class="t-sub-m">Qualitativas: uma linha resolve</h4>
+<pre><code class="language-python">df_log[&quot;status&quot;].value_counts()                     # absoluta
+df_log[&quot;status&quot;].value_counts(normalize=True) * 100 # percentual
+pd.crosstab(df_log[&quot;status&quot;], df_log[&quot;servidor&quot;])   # tabela de dupla entrada (acréscimo)
+</code></pre>
+<h3 class="t-h3 sub" id="a04-4">Exercícios de fixação</h3>
+<p class="gab-link"><a href="#gab-a04">Ver respostas no Gabarito comentado →</a></p>
+<p><strong>4.1</strong> Monte à mão a tabela (fᵢ, frᵢ%, Fᵢ) dos status: <code>200, 200, 404, 500, 200, 301, 404, 200, 200, 500</code>. Depois confira com <code>value_counts</code>.</p>
+<p><strong>4.2</strong> Pela Regra de Sturges, quantas classes para n = 200?</p>
+<p><strong>4.3</strong> 50 carros com KM entre 0 e 100.000 e 4 classes: qual a amplitude de cada classe? Em que classe cai 50.000 km <strong>(a)</strong> pela convenção <code>[a, b)</code> e <strong>(b)</strong> no <code>pd.cut</code> padrão?</p>
+<p><strong>4.4</strong> No exemplo dos tempos, a classe do meio teve fᵢ = 0. Proponha uma explicação técnica para isso num sistema real.</p>
+<p><strong>4.5</strong> Desafio do investidor (IVVB11): rode o código do slide. Qual o percentual de aportes acima de R$ 1.000? Um aporte de exatamente R$ 1.000 cai em qual faixa? Por quê?</p>
+<h3 class="t-h3 sub" id="a04-5">Aprofunde</h3>
+<ul>
+<li>BUSSAB &amp; MORETTIN — <em>Estatística Básica</em>: tabelas de frequência e dados agrupados.</li>
+<li>MAGALHÃES &amp; LIMA — organização de dados em tabelas.</li>
+<li>STURGES (1926), <em>The Choice of a Class Interval</em> — artigo original da regra.</li>
+<li>Documentação Pandas: <code>cut</code>, <code>value_counts</code>, <code>crosstab</code>.</li>
+</ul>
+<h3 class="t-h3 sub" id="a04-6">Checklist de saída</h3>
+<ul class="checklist">
+<li class="chk"><label><input type="checkbox"><span>Diferencio fᵢ, frᵢ e Fᵢ e sei que Σfrᵢ = 1.</span></label></li>
+<li class="chk"><label><input type="checkbox"><span>Monto tabela com <code>value_counts</code>, <code>pd.cut</code> e <code>cumsum</code>.</span></label></li>
+<li class="chk"><label><input type="checkbox"><span>Aplico a Regra de Sturges.</span></label></li>
+<li class="chk"><label><input type="checkbox"><span>Sei que <code>pd.cut</code> fecha à direita por padrão e como mudar.</span></label></li>
+</ul></div></section>
+<section class="aula" id="a05"><div class="sec-head"><div class="sec-meta"><div class="kx-eyebrow"><span class="num">05</span><span class="t-overline">Aula 05</span></div><span class="badge badge--danca"><i>♪</i>DataViz</span></div><h2 class="t-h2">Representação gráfica</h2><p class="credit-line">Base: material de aula do Prof. Clayton Escouper das Chagas — Aula 05.</p></div><div class="content">
+<h3 class="t-h3 sub" id="a05-1">Objetivos da aula</h3>
+<ul>
+<li>Escolher o gráfico certo para cada tipo de variável.</li>
+<li>Diferenciar <strong>barras</strong> de <strong>histograma</strong>.</li>
+<li>Ler e <strong>calcular</strong> um <strong>boxplot</strong> (quartis, IQR, bigodes, outliers).</li>
+<li>Saber quando usar (e evitar) <strong>pizza</strong>; ler <strong>dispersão</strong> e <strong>linhas</strong>.</li>
+<li>Usar <strong>Seaborn</strong> sobre o <strong>Matplotlib</strong> e salvar figuras.</li>
+</ul>
+<h3 class="t-h3 sub" id="a05-2">Conceitos</h3>
+<h4 class="t-sub-m">1. Por que visualizar?</h4>
+<p>O <strong>Quarteto de Anscombe</strong> (1973): quatro conjuntos com praticamente a mesma média, variância, correlação e reta de regressão — mas formatos completamente diferentes quando plotados. A versão moderna é o <strong>Datasaurus Dozen</strong> (Matejka &amp; Fitzmaurice, 2017): um dinossauro com as mesmas estatísticas de um círculo.</p>
+<div class="alert alert--warning"><span class="ico">!</span><div><p class="ttl">Mito ou fato?</p><p>O slide cita que "o cérebro processa imagens 60.000 vezes mais rápido que texto". Essa frase circula muito em marketing, mas <strong>não há estudo científico conhecido que a sustente</strong>. O argumento válido é outro: nossa percepção compara <strong>posições e comprimentos</strong> muito bem (Cleveland &amp; McGill, 1984), e é isso que um bom gráfico explora. Bom exercício de pensamento crítico: <em>sempre pergunte a fonte do número</em>.</p></div></div>
+<h4 class="t-sub-m">2. Qual gráfico usar?</h4>
+<div class="tbl glass-s"><table>
+<thead>
+<tr>
+<th>Pergunta</th>
+<th>Gráfico</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Comparar categorias</td>
+<td><strong>Barras</strong> (separadas)</td>
+</tr>
+<tr>
+<td>Distribuição de uma variável contínua</td>
+<td><strong>Histograma</strong> (barras coladas)</td>
+</tr>
+<tr>
+<td>Achar outliers / comparar grupos</td>
+<td><strong>Boxplot</strong></td>
+</tr>
+<tr>
+<td>Evolução no tempo</td>
+<td><strong>Linhas</strong></td>
+</tr>
+<tr>
+<td>Relação entre duas numéricas</td>
+<td><strong>Dispersão (scatter)</strong></td>
+</tr>
+<tr>
+<td>Parte de um todo, ≤ 5 fatias bem diferentes</td>
+<td>Pizza (com cautela)</td>
+</tr>
+</tbody>
+</table></div>
+<h4 class="t-sub-m">3. Anatomia do boxplot (Tukey, 1977)</h4>
+<pre><code class="language-plaintext">        outlier
+           •
+   ───┬────────┬───  ← bigode superior (último dado ≤ Q3 + 1,5·IQR)
+      │        │
+      ├────────┤  Q3 (75%)
+      │   ──   │  Mediana (50%)
+      ├────────┤  Q1 (25%)
+      │        │
+   ───┴────────┴───  ← bigode inferior (primeiro dado ≥ Q1 − 1,5·IQR)
+</code></pre>
+<ul>
+<li><strong>IQR</strong> (amplitude interquartil) = Q3 − Q1 → onde vivem os 50% centrais.</li>
+<li><strong>Cercas:</strong> <code>Q1 − 1,5·IQR</code> e <code>Q3 + 1,5·IQR</code>. Fora delas → <strong>outlier</strong>.</li>
+</ul>
+<p><strong>Exemplo do slide calculado</strong> — latências <code>[10, 12, 12, 13, 15, 20, 22, 25, 40, 42, 80]</code>:</p>
+<div class="tbl glass-s"><table>
+<thead>
+<tr>
+<th>Q1</th>
+<th>Mediana</th>
+<th>Q3</th>
+<th>IQR</th>
+<th>Cerca inf.</th>
+<th>Cerca sup.</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>12,5</td>
+<td>20</td>
+<td>32,5</td>
+<td>20</td>
+<td>−17,5</td>
+<td><strong>62,5</strong></td>
+</tr>
+</tbody>
+</table></div>
+<p>→ <strong>80 ms &gt; 62,5 ms</strong>: é o outlier que aparece isolado no gráfico.</p>
+<div class="alert alert--info"><span class="ico">i</span><div><p class="ttl">Dica do professor</p><p>Existem vários métodos de calcular quartis; livros e o Pandas (<code>quantile</code>, interpolação linear) podem dar valores levemente diferentes. Nos exercícios, siga o método adotado pelo professor.</p></div></div>
+<figure>
+        <div class="frame glass-s">
+        <svg viewBox="0 0 640 170" role="img" aria-label="Boxplot das latências de 10 a 80 ms com outlier em 80">
+          <line class="sv-axis" x1="40" y1="130" x2="600" y2="130"/>
+          <g text-anchor="middle"><text class="sv-lbl" x="40" y="150">0</text><text class="sv-lbl" x="180" y="150">20</text><text class="sv-lbl" x="320" y="150">40</text><text class="sv-lbl" x="460" y="150">60</text><text class="sv-lbl" x="600" y="150">80</text></g>
+          <line class="sv-wh" x1="110" y1="70" x2="127.5" y2="70" stroke-width="2"/><line class="sv-wh" x1="110" y1="55" x2="110" y2="85" stroke-width="2"/>
+          <rect class="sv-box" x="127.5" y="45" width="140" height="50" rx="6" stroke-width="2"/>
+          <line class="sv-med" x1="180" y1="45" x2="180" y2="95" stroke-width="3"/>
+          <line class="sv-wh" x1="267.5" y1="70" x2="334" y2="70" stroke-width="2"/><line class="sv-wh" x1="334" y1="55" x2="334" y2="85" stroke-width="2"/>
+          <line class="sv-fence" x1="477.5" y1="30" x2="477.5" y2="110" stroke-dasharray="4 4"/>
+          <circle class="sv-out" cx="600" cy="70" r="7"/>
+          <text class="sv-txt" x="118" y="36">Q1 12,5</text><text class="sv-txt" x="170" y="112">Md 20</text><text class="sv-txt" x="240" y="36">Q3 32,5</text>
+          <text class="sv-fence-t" x="440" y="24">cerca 62,5</text><text class="sv-out-t" x="556" y="50">outlier 80</text>
+        </svg></div>
+        <figcaption>Latências [10 … 80] ms: IQR = 20, cerca superior Q3 + 1,5·IQR = 62,5. O ponto de 80 ms é o servidor com problema.</figcaption>
+      </figure><h4 class="t-sub-m">4. Pizza: o "vilão"</h4>
+<p>Comparamos <strong>comprimentos</strong> muito melhor que <strong>ângulos</strong>. Com 6+ categorias ou valores parecidos, use <strong>barras horizontais ordenadas</strong>.</p>
+<h3 class="t-h3 sub" id="a05-3">Hands-on</h3>
+<pre><code class="language-python">import matplotlib.pyplot as plt
+import seaborn as sns
+
+sns.set_theme(style=&quot;whitegrid&quot;)
+dados = [10, 12, 12, 13, 15, 20, 22, 25, 40, 42, 80]
+
+fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(11, 4))
+sns.histplot(dados, bins=5, kde=True, color=&quot;purple&quot;, ax=ax1)
+ax1.set(title=&quot;Distribuição de latência&quot;, xlabel=&quot;ms&quot;, ylabel=&quot;Frequência&quot;)
+
+sns.boxplot(x=dados, color=&quot;skyblue&quot;, ax=ax2)
+ax2.set(title=&quot;Outliers no sistema&quot;, xlabel=&quot;ms&quot;)
+
+plt.tight_layout()
+plt.savefig(&quot;latencia.png&quot;, dpi=150)
+plt.show()
+</code></pre>
+<h4 class="t-sub-m">Desafio do estoque (versão sem <em>warning</em>)</h4>
+<p>Nas versões recentes do Seaborn, <code>palette</code> sem <code>hue</code> gera aviso. Forma atual:</p>
+<pre><code class="language-python">carros  = [&quot;Etios&quot;, &quot;Kicks&quot;, &quot;T-Cross&quot;]
+estoque = [15, 8, 12]
+sns.barplot(x=carros, y=estoque, hue=carros, palette=&quot;viridis&quot;, legend=False)
+plt.title(&quot;Estoque de Veículos&quot;); plt.ylabel(&quot;Unidades&quot;)
+plt.savefig(&quot;estoque.png&quot;, dpi=150, bbox_inches=&quot;tight&quot;)
+</code></pre>
+<h4 class="t-sub-m">Dispersão (acréscimo)</h4>
+<pre><code class="language-python">sns.scatterplot(data=df, x=&quot;ram_gb&quot;, y=&quot;tempo_ms&quot;)
+sns.regplot(data=df, x=&quot;ram_gb&quot;, y=&quot;tempo_ms&quot;)  # com reta de tendência
+</code></pre>
+<h3 class="t-h3 sub" id="a05-4">Exercícios de fixação</h3>
+<p class="gab-link"><a href="#gab-a05">Ver respostas no Gabarito comentado →</a></p>
+<p><strong>5.1</strong> Escolha o gráfico: a) chamados por setor · b) distribuição do tempo de deploy · c) RAM × tempo de resposta · d) usuários ativos por dia no último mês.</p>
+<p><strong>5.2</strong> Calcule Q1, mediana, Q3, IQR e as cercas para <code>[4, 6, 7, 7, 8, 9, 10, 11, 30]</code> (use o método da mediana das metades, excluindo a mediana). Há outlier?</p>
+<p><strong>5.3</strong> Por que histograma tem barras coladas e o gráfico de barras não?</p>
+<p><strong>5.4</strong> Você tem 9 navegadores com participações entre 8% e 14%. Por que pizza é má ideia? O que usar?</p>
+<p><strong>5.5</strong> Explique com suas palavras o que o Quarteto de Anscombe prova.</p>
+<h3 class="t-h3 sub" id="a05-5">Aprofunde</h3>
+<ul>
+<li>ANSCOMBE (1973), <em>Graphs in Statistical Analysis</em>.</li>
+<li>TUKEY (1977), <em>Exploratory Data Analysis</em> — origem do boxplot.</li>
+<li>CLEVELAND &amp; McGILL (1984), <em>Graphical Perception</em> — por que barras vencem pizzas.</li>
+<li>Galeria e tutorial oficial do Seaborn.</li>
+</ul>
+<h3 class="t-h3 sub" id="a05-6">Checklist de saída</h3>
+<ul class="checklist">
+<li class="chk"><label><input type="checkbox"><span>Barras (qualitativa) × histograma (contínua).</span></label></li>
+<li class="chk"><label><input type="checkbox"><span>Calculo quartis, IQR e cercas de outlier.</span></label></li>
+<li class="chk"><label><input type="checkbox"><span>Sei quando evitar pizza.</span></label></li>
+<li class="chk"><label><input type="checkbox"><span>Crio e salvo gráficos com Seaborn/Matplotlib.</span></label></li>
+</ul></div></section>
+<section class="aula" id="a06"><div class="sec-head"><div class="sec-meta"><div class="kx-eyebrow"><span class="num">06</span><span class="t-overline">Aula 06</span></div><span class="badge badge--aula"><i>●</i>Descritiva</span></div><h2 class="t-h2">Medidas de posição</h2><p class="credit-line">Base: material de aula do Prof. Clayton Escouper das Chagas — Aula 06.</p></div><div class="content">
+<h3 class="t-h3 sub" id="a06-1">Objetivos da aula</h3>
+<ul>
+<li>Calcular <strong>média, mediana, moda</strong> e <strong>média ponderada</strong>.</li>
+<li>Saber qual usar em dados <strong>simétricos, assimétricos e categóricos</strong>.</li>
+<li>Entender <strong>robustez</strong> a outliers.</li>
+<li>Conhecer <strong>quartis e percentis</strong> como medidas de posição (acréscimo).</li>
+</ul>
+<h3 class="t-h3 sub" id="a06-2">Conceitos</h3>
+<h4 class="t-sub-m">1. Média aritmética</h4>
+<div class="formula glass-s"><b>x̄</b> = Σxᵢ / n</div>
+<p>Usa <strong>todos</strong> os valores → é sensível a outliers. Ótima para dados simétricos.</p>
+<h4 class="t-sub-m">2. Mediana (Md)</h4>
+<p>Valor do meio do <strong>rol</strong> (dados ordenados).</p>
+<ul>
+<li><strong>n ímpar:</strong> posição (n + 1)/2.</li>
+<li><strong>n par:</strong> média dos dois valores centrais, posições n/2 e n/2 + 1.</li>
+</ul>
+<p>Exemplo par: <code>3, 7, 1, 9, 4, 6</code> → ordenado <code>1, 3, 4, 6, 7, 9</code> → (4 + 6)/2 = <strong>5</strong>.</p>
+<h4 class="t-sub-m">3. Moda (Mo)</h4>
+<p>Valor mais frequente. Pode ser <strong>amodal</strong>, <strong>unimodal</strong>, <strong>bimodal</strong> ou <strong>multimodal</strong>. Única medida de centro que funciona para <strong>qualitativa nominal</strong>.</p>
+<h4 class="t-sub-m">4. Média ponderada</h4>
+<div class="formula glass-s"><b>x̄w</b> = Σ(xᵢ · wᵢ) / Σwᵢ</div>
+<p>Ex.: nota final, score de hardware, prioridade de tickets.</p>
+<h4 class="t-sub-m">5. Relação média × mediana × forma</h4>
+<div class="tbl glass-s"><table>
+<thead>
+<tr>
+<th>Forma</th>
+<th>Relação típica</th>
+<th>Melhor medida</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Simétrica</td>
+<td>média ≈ mediana ≈ moda</td>
+<td>média</td>
+</tr>
+<tr>
+<td>Assimétrica à <strong>direita</strong> (cauda longa para valores altos: salários, latências)</td>
+<td>média &gt; mediana</td>
+<td>mediana</td>
+</tr>
+<tr>
+<td>Assimétrica à <strong>esquerda</strong> (cauda para valores baixos)</td>
+<td>média &lt; mediana</td>
+<td>mediana</td>
+</tr>
+<tr>
+<td>Categórica</td>
+<td>—</td>
+<td>moda</td>
+</tr>
+</tbody>
+</table></div>
+<div class="alert alert--info"><span class="ico">i</span><div><p class="ttl">Dica do professor</p><p>Latência é quase sempre assimétrica à direita. Por isso SREs olham <strong>mediana (p50)</strong> e <strong>percentis altos (p95, p99)</strong> em vez de média.</p></div></div>
+<h4 class="t-sub-m">6. Separatrizes (acréscimo)</h4>
+<ul>
+<li><strong>Quartis:</strong> Q1 (25%), Q2 = mediana (50%), Q3 (75%).</li>
+<li><strong>Percentis:</strong> pₖ deixa k% dos dados abaixo. "p99 = 800 ms" → 99% das requisições respondem em até 800 ms.</li>
+</ul>
+<pre><code class="language-python">s.quantile([0.25, 0.5, 0.75, 0.95, 0.99])
+</code></pre>
+<h4 class="t-sub-m">7. Média aparada (acréscimo)</h4>
+<p>Remove uma porcentagem das pontas antes de calcular. Meio-termo entre média e mediana.</p>
+<pre><code class="language-python">from scipy import stats
+stats.trim_mean(dados, proportiontocut=0.1)  # corta 10% de cada lado
+</code></pre>
+<h3 class="t-h3 sub" id="a06-3">Hands-on</h3>
+<pre><code class="language-python">import pandas as pd
+
+tempos = pd.Series([0.1, 0.12, 0.11, 0.13, 0.1, 10.0])
+print(f&quot;Média:   {tempos.mean():.3f}s&quot;)    # 1.760 → distorcida
+print(f&quot;Mediana: {tempos.median():.3f}s&quot;)  # 0.115 → realidade
+
+nav = pd.Series([&quot;Chrome&quot;, &quot;Firefox&quot;, &quot;Chrome&quot;, &quot;Safari&quot;, &quot;Chrome&quot;, &quot;Edge&quot;])
+print(nav.mode()[0])   # Chrome — mode() devolve Series (pode haver empate)
+
+def media_ponderada(notas, pesos):
+    return sum(n * p for n, p in zip(notas, pesos)) / sum(pesos)
+
+print(media_ponderada([8, 6, 9], [4, 4, 2]))  # 7.4
+# versão NumPy: np.average([8, 6, 9], weights=[4, 4, 2])
+</code></pre>
+<h3 class="t-h3 sub" id="a06-4">Exercícios de fixação</h3>
+<p class="gab-link"><a href="#gab-a06">Ver respostas no Gabarito comentado →</a></p>
+<p><strong>6.1</strong> Startup: 10 devs a R$ 5.000, 2 gerentes a R$ 15.000, 1 dono a R$ 100.000. Calcule média, mediana e moda. Qual medida o sindicato usaria? E o dono, para atrair talentos?</p>
+<p><strong>6.2</strong> Benchmark com pesos CPU 4, GPU 4, RAM 2 e notas CPU 8, GPU 6, RAM 9. Qual o score?</p>
+<p><strong>6.3</strong> Calcule a mediana de <code>3, 7, 1, 9, 4, 6</code>.</p>
+<p><strong>6.4</strong> No exemplo dos tempos (média 1,76 s; mediana 0,115 s), a distribuição é assimétrica para qual lado? Justifique.</p>
+<p><strong>6.5</strong> Um painel mostra "tempo médio de resposta: 300 ms" e "p99: 4 s". O que isso diz sobre a experiência dos usuários?</p>
+<h3 class="t-h3 sub" id="a06-5">Aprofunde</h3>
+<ul>
+<li>BUSSAB &amp; MORETTIN — medidas-resumo.</li>
+<li>TRIOLA — medidas de centro.</li>
+<li>BRUCE, BRUCE &amp; GEDECK — estimativas de localização (média aparada, mediana, estimativas robustas).</li>
+<li>Documentação Pandas: <code>mean</code>, <code>median</code>, <code>mode</code>, <code>quantile</code>.</li>
+</ul>
+<h3 class="t-h3 sub" id="a06-6">Checklist de saída</h3>
+<ul class="checklist">
+<li class="chk"><label><input type="checkbox"><span>Calculo média, mediana (n par e ímpar), moda e média ponderada.</span></label></li>
+<li class="chk"><label><input type="checkbox"><span>Sei qual medida usar em cada forma de distribuição.</span></label></li>
+<li class="chk"><label><input type="checkbox"><span>Entendo percentis (p50, p95, p99).</span></label></li>
+<li class="chk"><label><input type="checkbox"><span>Uso <code>mean</code>, <code>median</code>, <code>mode</code>, <code>quantile</code> no Pandas.</span></label></li>
+</ul></div></section>
+<section class="aula" id="a07"><div class="sec-head"><div class="sec-meta"><div class="kx-eyebrow"><span class="num">07</span><span class="t-overline">Aula 07</span></div><span class="badge badge--aula"><i>●</i>Descritiva</span></div><h2 class="t-h2">Medidas de dispersão</h2><p class="credit-line">Base: material de aula do Prof. Clayton Escouper das Chagas — Aula 07.</p></div><div class="content">
+<h3 class="t-h3 sub" id="a07-1">Objetivos da aula</h3>
+<ul>
+<li>Calcular <strong>amplitude, variância, desvio padrão, coeficiente de variação</strong> e <strong>IQR</strong>.</li>
+<li>Entender a diferença entre fórmula <strong>populacional (÷ N)</strong> e <strong>amostral (÷ n − 1)</strong> — e qual o Pandas usa.</li>
+<li>Aplicar a <strong>regra empírica 68–95–99,7</strong> e o <strong>escore-z</strong> para detectar anomalias.</li>
+</ul>
+<h3 class="t-h3 sub" id="a07-2">Conceitos</h3>
+<h4 class="t-sub-m">1. Por que a média não basta</h4>
+<p>Dois servidores com média de 100 ms: A oscila entre 95 e 105 ms; B oscila entre 10 e 500 ms. <strong>Mesma média, experiências opostas.</strong> A dispersão mede essa diferença.</p>
+<h4 class="t-sub-m">2. Amplitude</h4>
+<p>R = x_max − x_min. Rápida, mas só olha os extremos.</p>
+<h4 class="t-sub-m">3. Variância e desvio padrão</h4>
+<p><strong>População</strong> (conheço todos os dados):</p>
+<div class="formula glass-s"><b>σ²</b> = Σ(xᵢ − μ)² / N &nbsp;·&nbsp; <b>σ</b> = √σ²</div>
+<p><strong>Amostra</strong> (estimando a população):</p>
+<div class="formula glass-s"><b>s²</b> = Σ(xᵢ − x̄)² / (n − 1) &nbsp;·&nbsp; <b>s</b> = √s²</div>
+<div class="alert alert--warning"><span class="ico">!</span><div><p class="ttl">Nota do professor — importante para o cálculo e para o código</p><p>o slide mostra a fórmula com <strong>n</strong> no denominador (populacional). Mas o <strong>Pandas</strong> (<code>.std()</code>, <code>.var()</code>) usa <strong>n − 1</strong> por padrão (<code>ddof=1</code>), enquanto o <strong>NumPy</strong> (<code>np.std</code>) usa <strong>n</strong> (<code>ddof=0</code>). Por isso o mesmo dado dá resultados diferentes nas duas bibliotecas!</p>
+<div class="tbl glass-s"><table>
+<thead>
+<tr>
+<th>Servidor</th>
+<th><code>pandas .std()</code> (n−1)</th>
+<th><code>.std(ddof=0)</code> (n)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Estável <code>[100,102,98,101,99]</code></td>
+<td>1,58 ms</td>
+<td>1,41 ms</td>
+</tr>
+<tr>
+<td>Instável <code>[10,200,50,150,90]</code></td>
+<td>76,16 ms</td>
+<td>68,12 ms</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>Por que n − 1?</strong> (correção de Bessel) A amostra tende a ficar mais "perto da própria média" do que da média real da população; dividir por n − 1 compensa essa subestimação.</p></div></div>
+<p><strong>Unidades:</strong> variância está em unidade² (ms²); o desvio padrão volta à unidade original (ms).</p>
+<h4 class="t-sub-m">4. Coeficiente de variação (CV)</h4>
+<div class="formula glass-s"><b>CV</b> = s / x̄ × 100%</div>
+<p>Compara dispersão entre grupos de <strong>escalas diferentes</strong> (Etios × Ferrari; ETF A × ETF B). Regra de bolso comum: CV &lt; 15% baixa dispersão; 15–30% média; &gt; 30% alta.</p>
+<h4 class="t-sub-m">5. IQR — a dispersão robusta (acréscimo)</h4>
+<p>IQR = Q3 − Q1. Não é afetado por outliers (par da mediana, como o desvio padrão é par da média).</p>
+<h4 class="t-sub-m">6. Distribuição normal e regra empírica</h4>
+<div class="tbl glass-s"><table>
+<thead>
+<tr>
+<th>Faixa</th>
+<th>% aproximada dos dados</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>μ ± 1σ</td>
+<td>68%</td>
+</tr>
+<tr>
+<td>μ ± 2σ</td>
+<td>95%</td>
+</tr>
+<tr>
+<td>μ ± 3σ</td>
+<td>99,7%</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>Escore-z</strong> (acréscimo): quantos desvios um valor está da média.</p>
+<div class="formula glass-s"><b>z</b> = (x − x̄) / s</div>
+<p>|z| &gt; 3 → forte candidato a anomalia (vale para dados aproximadamente normais).</p>
+<figure>
+        <div class="frame glass-s">
+        <svg viewBox="0 0 640 200" role="img" aria-label="Curva normal com faixas de 68, 95 e 99,7 por cento">
+          <path id="curve" class="sv-curve" stroke="url(#g)" stroke-width="3" d=""/>
+          <defs><linearGradient id="g" x1="0" x2="1"><stop offset="0" stop-color="#7B2EFF"/><stop offset=".5" stop-color="#FF2DAA"/><stop offset="1" stop-color="#7B2EFF"/></linearGradient></defs>
+          <line class="sv-axis" x1="40" y1="160" x2="600" y2="160"/>
+          <g id="ticks"></g>
+          <text class="sv-txt" x="296" y="100">68%</text>
+          <line class="sv-band" x1="226.7" y1="108" x2="413.3" y2="108"/>
+          <text class="sv-lbl" x="272" y="128">95% · ±2σ</text>
+          <line class="sv-band" x1="133.3" y1="134" x2="506.7" y2="134" stroke-dasharray="3 3"/>
+          <text class="sv-gold" x="44" y="30">|z| &gt; 3 → investigue</text>
+        </svg></div>
+        <figcaption>Regra empírica: 68% dos dados em μ ± 1σ, 95% em μ ± 2σ, 99,7% em μ ± 3σ.</figcaption>
+      </figure><h3 class="t-h3 sub" id="a07-3">Hands-on</h3>
+<pre><code class="language-python">import pandas as pd
+
+estavel  = pd.Series([100, 102, 98, 101, 99])
+instavel = pd.Series([10, 200, 50, 150, 90])
+
+for nome, s in [(&quot;Estável&quot;, estavel), (&quot;Instável&quot;, instavel)]:
+    print(f&quot;{nome:9} média={s.mean():.0f}  std={s.std():.2f}  &quot;
+          f&quot;CV={s.std()/s.mean():.1%}  IQR={s.quantile(.75)-s.quantile(.25):.1f}&quot;)
+</code></pre>
+<h4 class="t-sub-m">O desafio da CPU — resolvido e <strong>discutido</strong></h4>
+<pre><code class="language-python">temps = pd.Series([72, 74, 71, 95, 68, 110, 73, 70, 75, 72])
+media, desvio = temps.mean(), temps.std()
+cv = desvio / media * 100
+print(f&quot;Média {media:.2f} | Desvio {desvio:.2f} | CV {cv:.2f}%&quot;)
+# Média 78.00 | Desvio 13.53 | CV 17.35%
+
+if cv &gt; 20:
+    print(&quot;⚠️ ALERTA: sistema instável!&quot;)
+else:
+    print(&quot;✅ Sistema estável.&quot;)
+</code></pre>
+<div class="alert alert--warning"><span class="ico">!</span><div><p class="ttl">Nota do professor</p><p>o código <strong>não dispara o alerta</strong> (CV = 17,35%), mesmo com uma leitura de <strong>110 °C</strong>! Lição: CV mede a variabilidade <strong>geral</strong>; ele não é um detector de picos. Até o z-score de 110 °C fica em 2,36 (menor que 3), porque o próprio pico infla o desvio. Na prática, combine regras:<br />
+<code>python
+z = (temps - media) / desvio
+alertas = temps[(temps &gt; 90) | (z.abs() &gt; 2)]   # limite físico + estatístico</code></p></div></div>
+<h3 class="t-h3 sub" id="a07-4">Exercícios de fixação</h3>
+<p class="gab-link"><a href="#gab-a07">Ver respostas no Gabarito comentado →</a></p>
+<p><strong>7.1</strong> Calcule à mão a variância <strong>amostral</strong> e o desvio padrão do servidor estável <code>[100, 102, 98, 101, 99]</code>.</p>
+<p><strong>7.2</strong> ETF A: retorno médio 10%, σ = 2%. ETF B: 15%, σ = 12%. Calcule o CV de cada um. Qual é mais arriscado? Em qual você pode perder dinheiro considerando μ − 1σ? E μ − 2σ?</p>
+<p><strong>7.3</strong> Por que o desafio da CPU não alertou? Proponha uma regra melhor.</p>
+<p><strong>7.4</strong> Latência com μ = 200 ms e σ = 20 ms (aprox. normal). Entre quais valores estão ~95% das requisições? Uma requisição de 290 ms é anomalia? Calcule o z.</p>
+<p><strong>7.5</strong> Um colega calculou o desvio com NumPy e você com Pandas, e os números não bateram. Explique o motivo e como alinhar.</p>
+<h3 class="t-h3 sub" id="a07-5">Aprofunde</h3>
+<ul>
+<li>BUSSAB &amp; MORETTIN — medidas de dispersão.</li>
+<li>MONTGOMERY &amp; RUNGER — <em>Estatística Aplicada e Probabilidade para Engenheiros</em>: descrição de dados e variabilidade em processos.</li>
+<li>BRUCE, BRUCE &amp; GEDECK — estimativas de variabilidade (desvio, IQR, MAD).</li>
+<li>Documentação: <code>pandas.Series.std</code> (parâmetro <code>ddof</code>), <code>numpy.std</code>.</li>
+</ul>
+<h3 class="t-h3 sub" id="a07-6">Checklist de saída</h3>
+<ul class="checklist">
+<li class="chk"><label><input type="checkbox"><span>Calculo amplitude, variância, desvio, CV e IQR.</span></label></li>
+<li class="chk"><label><input type="checkbox"><span>Sei a diferença entre ÷N e ÷(n−1) e o padrão de Pandas/NumPy.</span></label></li>
+<li class="chk"><label><input type="checkbox"><span>Aplico 68–95–99,7 e escore-z.</span></label></li>
+<li class="chk"><label><input type="checkbox"><span>Entendi por que CV sozinho não detecta picos.</span></label></li>
+</ul></div></section>
+<section class="aula" id="a08"><div class="sec-head"><div class="sec-meta"><div class="kx-eyebrow"><span class="num">08</span><span class="t-overline">Aula 08</span></div><span class="badge badge--gamer"><i>◆</i>Probabilidade</span></div><h2 class="t-h2">Introdução à probabilidade</h2><p class="credit-line">Base: material de aula do Prof. Clayton Escouper das Chagas — Aula 08.</p></div><div class="content">
+<h3 class="t-h3 sub" id="a08-1">Objetivos da aula</h3>
+<ul>
+<li>Diferenciar experimento <strong>aleatório</strong> de <strong>determinístico</strong>.</li>
+<li>Definir <strong>espaço amostral (S)</strong> e <strong>evento (E)</strong>.</li>
+<li>Calcular probabilidade clássica, complementar, união e interseção.</li>
+<li>Contar possibilidades com o <strong>princípio multiplicativo</strong> (acréscimo: permutação e combinação).</li>
+<li>Entender a <strong>Lei dos Grandes Números</strong> e fazer uma <strong>simulação de Monte Carlo</strong>.</li>
+</ul>
+<h3 class="t-h3 sub" id="a08-2">Conceitos</h3>
+<h4 class="t-sub-m">1. Aleatório × determinístico</h4>
+<ul>
+<li><strong>Determinístico:</strong> mesma entrada → mesma saída (uma função pura, <code>2 + 2</code>).</li>
+<li><strong>Aleatório:</strong> resultado incerto antes de acontecer (dado, perda de pacote, falha de disco).</li>
+</ul>
+<h4 class="t-sub-m">2. Espaço amostral e evento</h4>
+<ul>
+<li><strong>S</strong> = todos os resultados possíveis. Dado: S = {1, 2, 3, 4, 5, 6}.</li>
+<li><strong>E</strong> ⊂ S = resultados que nos interessam. "Par": E = {2, 4, 6}.</li>
+</ul>
+<h4 class="t-sub-m">3. Definição clássica (resultados <strong>equiprováveis</strong>)</h4>
+<div class="formula glass-s"><b>P(E)</b> = nº de casos favoráveis / nº de casos possíveis = |E| / |S|</div>
+<div class="alert alert--warning"><span class="ico">!</span><div><p class="ttl">Atenção</p><p>Só vale se todos os resultados têm a mesma chance. "Chover ou não chover" <strong>não</strong> é 50%/50%.</p></div></div>
+<p><strong>Definição frequentista (acréscimo):</strong> P(E) ≈ nº de vezes que E ocorreu / nº de repetições — é a ideia por trás da Lei dos Grandes Números e do Monte Carlo.</p>
+<h4 class="t-sub-m">4. Axiomas / regras de ouro</h4>
+<ol>
+<li>0 ≤ P(A) ≤ 1</li>
+<li>P(S) = 1</li>
+<li><strong>Complementar:</strong> P(Aᶜ) = 1 − P(A)</li>
+</ol>
+<div class="alert alert--info"><span class="ico">i</span><div><p class="ttl">Truque do "pelo menos um"</p><p>é quase sempre mais fácil calcular pelo complementar.<br />
+P(pelo menos 1 de 3 servidores cair) = 1 − P(nenhum cair) = 1 − 0,999³ ≈ 0,30% (se cada um tem 99,9% de disponibilidade e as falhas são independentes).</p></div></div>
+<h4 class="t-sub-m">5. União, interseção e exclusão mútua</h4>
+<div class="formula glass-s"><b>P(A ∪ B)</b> = P(A) + P(B) − P(A ∩ B)</div>
+<ul>
+<li><strong>Mutuamente exclusivos:</strong> P(A ∩ B) = 0 (status 200 e 404 na mesma requisição).</li>
+<li>Não confundir com <strong>independentes</strong> (Aula 09): P(A ∩ B) = P(A)·P(B).</li>
+</ul>
+<h4 class="t-sub-m">6. Contagem (acréscimo — essencial para P clássica)</h4>
+<div class="tbl glass-s"><table>
+<thead>
+<tr>
+<th>Situação</th>
+<th>Fórmula</th>
+<th>Exemplo</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Princípio multiplicativo</td>
+<td>n₁ · n₂ · …</td>
+<td>token de 3 letras A–Z: 26³ = 17.576</td>
+</tr>
+<tr>
+<td>Permutação (ordem importa, todos)</td>
+<td>n!</td>
+<td>ordenar 5 jobs: 120</td>
+</tr>
+<tr>
+<td>Arranjo (ordem importa, escolho k)</td>
+<td>n!/(n−k)!</td>
+<td>pódio de 3 entre 10: 720</td>
+</tr>
+<tr>
+<td>Combinação (ordem <strong>não</strong> importa)</td>
+<td>n!/(k!(n−k)!)</td>
+<td>escolher 3 de 10 servidores: 120</td>
+</tr>
+</tbody>
+</table></div>
+<pre><code class="language-python">from math import comb, perm, factorial
+comb(10, 3), perm(10, 3), factorial(5)
+</code></pre>
+<h4 class="t-sub-m">7. Lei dos Grandes Números</h4>
+<p>Quanto mais repetições, mais a frequência observada se aproxima da probabilidade teórica. <strong>Não</strong> garante que "depois de muitos 5 vai sair um 6" (isso é a <strong>falácia do jogador</strong>): o dado não tem memória.</p>
+<h4 class="t-sub-m">8. Monte Carlo</h4>
+<p>Resolver um problema de probabilidade <strong>sorteando milhares/milhões de vezes</strong> e contando. Nome e método popularizados por Metropolis &amp; Ulam (1949), a partir de trabalhos em Los Alamos nos anos 1940.</p>
+<h3 class="t-h3 sub" id="a08-3">Hands-on</h3>
+<pre><code class="language-python">import numpy as np
+
+rng = np.random.default_rng(42)
+
+# LGN: frequência do 6 convergindo para 1/6
+for n in [100, 10_000, 1_000_000]:
+    freq = (rng.integers(1, 7, size=n) == 6).mean()
+    print(f&quot;n={n:&gt;9,}: {freq:.4%}&quot;)
+
+# Monte Carlo: P(soma de dois dados = 7)
+n = 1_000_000
+soma = rng.integers(1, 7, n) + rng.integers(1, 7, n)
+print(&quot;P(soma=7) ≈&quot;, (soma == 7).mean(), &quot;| teórico:&quot;, 6/36)
+</code></pre>
+<div class="alert alert--info"><span class="ico">i</span><div><p class="ttl">Dica do professor</p><p>A versão vetorizada com NumPy (sem <code>for</code> sobre cada lançamento) roda ordens de grandeza mais rápido que o <code>random.randint</code> em laço do slide.</p></div></div>
+<h4 class="t-sub-m">Tokens e força bruta</h4>
+<p>| Token | |S| | P(acertar em 1 tentativa) |<br />
+|---|---|---|<br />
+| 3 letras A–Z | 26³ = 17.576 | ≈ 0,0057% |<br />
+| 4 letras A–Z | 26⁴ = 456.976 | ≈ 0,00022% |<br />
+| 4 caracteres A–Z + 0–9 | 36⁴ = 1.679.616 | ≈ 0,00006% |</p>
+<h3 class="t-h3 sub" id="a08-4">Exercícios de fixação</h3>
+<p class="gab-link"><a href="#gab-a08">Ver respostas no Gabarito comentado →</a></p>
+<p><strong>8.1</strong> Dois dados: qual P(soma = 7)? E P(soma ≥ 10)?</p>
+<p><strong>8.2</strong> 40% dos usuários são Premium, 30% usam Linux e 12% são Premium <strong>e</strong> usam Linux. Qual P(Premium <strong>ou</strong> Linux)? E P(nem Premium nem Linux)?</p>
+<p><strong>8.3</strong> Quantos tokens de 4 caracteres existem usando A–Z e 0–9? Quantas vezes maior que só com letras?</p>
+<p><strong>8.4</strong> Cada servidor tem 99,9% de disponibilidade (independentes). Qual a P de pelo menos 1 de 3 cair?</p>
+<p><strong>8.5</strong> Escreva um Monte Carlo que estime P(sair pelo menos um 6 em 4 lançamentos) e compare com o valor exato 1 − (5/6)⁴.</p>
+<p><strong>8.6</strong> De 10 servidores, quantos grupos diferentes de 3 posso escolher para um teste? A ordem importa?</p>
+<h3 class="t-h3 sub" id="a08-5">Aprofunde</h3>
+<ul>
+<li>MAGALHÃES &amp; LIMA — <em>Noções de Probabilidade e Estatística</em>: probabilidade e contagem.</li>
+<li>MORETTIN &amp; BUSSAB — capítulos de probabilidade.</li>
+<li>DOWNEY — <em>Think Stats</em> (gratuito): distribuições e simulação em Python.</li>
+<li>METROPOLIS &amp; ULAM (1949), <em>The Monte Carlo Method</em>.</li>
+</ul>
+<h3 class="t-h3 sub" id="a08-6">Checklist de saída</h3>
+<ul class="checklist">
+<li class="chk"><label><input type="checkbox"><span>Defino S e E e calculo P clássica.</span></label></li>
+<li class="chk"><label><input type="checkbox"><span>Uso complementar, união e interseção.</span></label></li>
+<li class="chk"><label><input type="checkbox"><span>Conto com princípio multiplicativo e combinação.</span></label></li>
+<li class="chk"><label><input type="checkbox"><span>Explico a LGN (e a falácia do jogador).</span></label></li>
+<li class="chk"><label><input type="checkbox"><span>Escrevo um Monte Carlo vetorizado.</span></label></li>
+</ul></div></section>
+<section class="aula" id="a09"><div class="sec-head"><div class="sec-meta"><div class="kx-eyebrow"><span class="num">09</span><span class="t-overline">Aula 09</span></div><span class="badge badge--ia"><i>✦</i>Machine Learning</span></div><h2 class="t-h2">Probabilidade condicional e Teorema de Bayes</h2><p class="credit-line">Base: material de aula do Prof. Clayton Escouper das Chagas — Aula 09.</p></div><div class="content">
+<h3 class="t-h3 sub" id="a09-1">Objetivos da aula</h3>
+<ul>
+<li>Diferenciar eventos <strong>independentes</strong> e <strong>dependentes</strong> (com o teste matemático).</li>
+<li>Calcular <strong>P(B|A)</strong> por fórmula e por <strong>tabela de contingência</strong>.</li>
+<li>Usar a <strong>regra do produto</strong>, a <strong>Lei da Probabilidade Total</strong> e o <strong>Teorema de Bayes</strong>.</li>
+<li>Entender o <strong>paradoxo do falso positivo</strong> e a ideia de <strong>sensibilidade/especificidade</strong>.</li>
+<li>Construir um classificador <strong>Naive Bayes</strong> simples.</li>
+</ul>
+<h3 class="t-h3 sub" id="a09-2">Conceitos</h3>
+<h4 class="t-sub-m">1. Probabilidade condicional</h4>
+<div class="formula glass-s"><b>P(B | A)</b> = P(A ∩ B) / P(A), com P(A) &gt; 0</div>
+<p>Leitura: "probabilidade de B <strong>dado que</strong> A ocorreu". Na prática: <strong>restringimos o espaço amostral</strong> aos casos em que A aconteceu.</p>
+<h4 class="t-sub-m">2. Regra do produto (acréscimo)</h4>
+<div class="formula glass-s"><b>P(A ∩ B)</b> = P(A) · P(B | A)</div>
+<p>Baralho sem reposição, 2 ases seguidos: (4/52)·(3/51) ≈ 0,45%.<br />
+Com reposição (independentes): (4/52)² ≈ 0,59%.</p>
+<h4 class="t-sub-m">3. Independência — o teste</h4>
+<p>A e B são independentes se e somente se</p>
+<div class="formula glass-s"><b>P(A ∩ B)</b> = P(A) · P(B) &nbsp;⇔&nbsp; <b>P(B | A)</b> = P(B)</div>
+<div class="alert alert--warning"><span class="ico">!</span><div><p class="ttl">Independente ≠ mutuamente exclusivo.</p><p>Se A e B são exclusivos (e ambos possíveis), saber que A ocorreu garante que B <strong>não</strong> ocorreu — então eles são <strong>dependentes</strong>!</p></div></div>
+<h4 class="t-sub-m">4. Tabela de contingência (acréscimo — a forma mais fácil de pensar)</h4>
+<div class="tbl glass-s"><table>
+<thead>
+<tr>
+<th></th>
+<th>Com erro</th>
+<th>Sem erro</th>
+<th>Total</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Mobile</td>
+<td>50</td>
+<td>100</td>
+<td>150</td>
+</tr>
+<tr>
+<td>Desktop</td>
+<td>30</td>
+<td>20</td>
+<td>50</td>
+</tr>
+<tr>
+<td><strong>Total</strong></td>
+<td>80</td>
+<td>120</td>
+<td>200</td>
+</tr>
+</tbody>
+</table></div>
+<ul>
+<li>P(erro | mobile) = 50/150 ≈ 33,3%</li>
+<li>P(mobile | erro) = 50/80 = 62,5%</li>
+</ul>
+<div class="alert alert--info"><span class="ico">i</span><div><p class="ttl">Dica do professor</p><p>P(A|B) e P(B|A) <strong>não são a mesma coisa</strong>. Confundi-las é a "falácia da condicional invertida" — o erro que o Bayes corrige.</p></div></div>
+<h4 class="t-sub-m">5. Lei da Probabilidade Total</h4>
+<div class="formula glass-s"><b>P(B)</b> = P(B | A)·P(A) + P(B | Aᶜ)·P(Aᶜ)</div>
+<h4 class="t-sub-m">6. Teorema de Bayes</h4>
+<div class="formula glass-s"><b>P(A | B)</b> = P(B | A) · P(A) / P(B)</div>
+<div class="tbl glass-s"><table>
+<thead>
+<tr>
+<th>Termo</th>
+<th>Nome</th>
+<th>Significado</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>P(A)</td>
+<td><em>prior</em> (a priori)</td>
+<td>crença antes da evidência</td>
+</tr>
+<tr>
+<td>P(B|A)</td>
+<td><em>likelihood</em> (verossimilhança)</td>
+<td>chance da evidência se A for verdade</td>
+</tr>
+<tr>
+<td>P(B)</td>
+<td>evidência</td>
+<td>chance total da evidência (prob. total)</td>
+</tr>
+<tr>
+<td>P(A|B)</td>
+<td><em>posterior</em> (a posteriori)</td>
+<td>crença atualizada</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>Posterior de hoje = prior de amanhã.</strong> Cada nova evidência atualiza a crença (ex.: segundo exame).</p>
+<h4 class="t-sub-m">7. Vocabulário de testes (acréscimo)</h4>
+<ul>
+<li><strong>Sensibilidade</strong> = P(positivo | doente) — acerta os doentes.</li>
+<li><strong>Especificidade</strong> = P(negativo | saudável) — acerta os saudáveis.</li>
+<li><strong>Taxa de falso positivo</strong> = 1 − especificidade.</li>
+<li>"Teste 99% preciso" é ambíguo: precisa dizer <strong>qual</strong> das duas.</li>
+</ul>
+<h3 class="t-h3 sub" id="a09-3">O paradoxo do falso positivo</h3>
+<div class="alert alert--warning"><span class="ico">!</span><div><p class="ttl">Nota do professor (errata)</p><p>o slide descreve uma doença de <strong>1 em 10.000</strong> com teste 99% preciso, mas o código usa prevalência de <strong>0,1% (1 em 1.000)</strong> e <strong>5%</strong> de falso positivo. São dois cenários diferentes — os dois ensinam a mesma coisa:</p>
+<div class="tbl glass-s"><table>
+<thead>
+<tr>
+<th>Cenário</th>
+<th>Prevalência</th>
+<th>Sensib.</th>
+<th>Falso +</th>
+<th>P(doente | +)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Slide (texto)</td>
+<td>0,01%</td>
+<td>99%</td>
+<td>1%</td>
+<td><strong>≈ 0,98%</strong></td>
+</tr>
+<tr>
+<td>Slide (código)</td>
+<td>0,1%</td>
+<td>99%</td>
+<td>5%</td>
+<td><strong>≈ 1,94%</strong></td>
+</tr>
+</tbody>
+</table></div></div></div>
+<figure>
+        <div class="frame glass-s">
+        <svg viewBox="0 0 640 230" role="img" aria-label="Árvore de frequências: 100 mil pessoas, 100 doentes, 99 positivos verdadeiros, 4995 falsos positivos">
+          <rect class="sv-node" x="12" y="95" width="120" height="40" rx="20"/><text class="sv-body" x="72" y="120" text-anchor="middle">100.000 pessoas</text>
+          <line class="sv-axis" x1="132" y1="115" x2="200" y2="55" stroke-width="2"/><line class="sv-axis" x1="132" y1="115" x2="200" y2="175" stroke-width="2"/>
+          <rect class="sv-node sv-node-p" x="200" y="35" width="130" height="40" rx="20"/><text class="sv-body" x="265" y="60" text-anchor="middle">100 doentes</text>
+          <rect class="sv-node sv-node-c" x="200" y="155" width="130" height="40" rx="20"/><text class="sv-body" x="265" y="180" text-anchor="middle">99.900 saudáveis</text>
+          <line class="sv-axis" x1="330" y1="55" x2="400" y2="30" stroke-width="2"/><line class="sv-axis" x1="330" y1="175" x2="400" y2="160" stroke-width="2"/>
+          <rect class="sv-ok" x="400" y="10" width="220" height="40" rx="20"/><text class="sv-body" x="510" y="35" text-anchor="middle">99 positivos verdadeiros</text>
+          <rect class="sv-bad" x="400" y="140" width="220" height="40" rx="20"/><text class="sv-body" x="510" y="165" text-anchor="middle">4.995 falsos positivos</text>
+          <text class="sv-gold" x="400" y="100">P(doente | +) = 99 / 5.094 ≈ 1,9%</text>
+          <text class="sv-lbl" x="12" y="220">Prevalência 0,1% · sensibilidade 99% · falso positivo 5% (valores do código da aula)</text>
+        </svg></div>
+        <figcaption>Paradoxo do falso positivo contado em pessoas: com doença rara, os falsos positivos dominam.</figcaption>
+      </figure><p><strong>Por quê?</strong> Em 100.000 pessoas (cenário do código): 100 doentes → 99 positivos verdadeiros; 99.900 saudáveis → ~4.995 falsos positivos. Dos ~5.094 positivos, só 99 estão doentes.</p>
+<pre><code class="language-python">def bayes(prior, sens, falso_pos):
+    p_evid = sens * prior + falso_pos * (1 - prior)
+    return sens * prior / p_evid
+
+p1 = bayes(0.001, 0.99, 0.05)   # 1º teste positivo
+p2 = bayes(p1,    0.99, 0.05)   # 2º teste positivo (independente)
+print(f&quot;{p1:.2%} → {p2:.2%}&quot;)   # 1.94% → 28.18%
+</code></pre>
+<h3 class="t-h3 sub" id="a09-4">Naive Bayes do zero (desafio extra resolvido no Gabarito)</h3>
+<pre><code class="language-python">p_spam, p_leg = 0.4, 0.6
+p_oferta = {&quot;spam&quot;: 0.8, &quot;leg&quot;: 0.1}
+p_clique = {&quot;spam&quot;: 0.6, &quot;leg&quot;: 0.05}
+
+# &quot;Naive&quot;: supõe que as palavras são independentes dada a classe
+score_spam = p_spam * p_oferta[&quot;spam&quot;] * p_clique[&quot;spam&quot;]
+score_leg  = p_leg  * p_oferta[&quot;leg&quot;]  * p_clique[&quot;leg&quot;]
+print(f&quot;P(Spam | Oferta, Clique) = {score_spam / (score_spam + score_leg):.2%}&quot;)
+</code></pre>
+<p>Em produção: <code>sklearn.naive_bayes.MultinomialNB</code> + <code>CountVectorizer</code>.</p>
+<h3 class="t-h3 sub" id="a09-5">Exercícios de fixação</h3>
+<p class="gab-link"><a href="#gab-a09">Ver respostas no Gabarito comentado →</a></p>
+<p><strong>9.1</strong> Firewall: 5% dos acessos são ataques; detecta 95% dos ataques e dá 2% de falso alarme. Se disparou, qual P de ser ataque?</p>
+<p><strong>9.2</strong> Spam: P(Spam) = 0,4; P("Oferta"|Spam) = 0,8; P("Oferta"|Legítimo) = 0,1. Calcule P(Spam|"Oferta").</p>
+<p><strong>9.3</strong> No exercício anterior, adicione "Clique" com P = 0,6 (spam) e 0,05 (legítimo). Qual a nova probabilidade?</p>
+<p><strong>9.4</strong> Usando a tabela mobile/desktop, calcule P(erro), P(erro|desktop) e diga se "erro" e "mobile" são independentes.</p>
+<p><strong>9.5</strong> Com os números do código do slide, qual a P de estar doente após <strong>dois</strong> testes positivos independentes?</p>
+<p><strong>9.6</strong> Um teste tem sensibilidade 99% e especificidade 99%. Ele é bom para uma triagem em massa de uma doença com prevalência 1 em 10.000? Justifique numericamente.</p>
+<h3 class="t-h3 sub" id="a09-6">Aprofunde</h3>
+<ul>
+<li>BAYES (1763), <em>An Essay towards Solving a Problem in the Doctrine of Chances</em> — texto histórico.</li>
+<li>MAGALHÃES &amp; LIMA — probabilidade condicional e independência.</li>
+<li>DOWNEY — <em>Think Bayes</em> (gratuito): Bayes com Python.</li>
+<li>scikit-learn: <em>Naive Bayes</em> (guia do usuário).</li>
+</ul>
+<h3 class="t-h3 sub" id="a09-7">Checklist de saída</h3>
+<ul class="checklist">
+<li class="chk"><label><input type="checkbox"><span>Calculo P(B|A) por fórmula e por tabela.</span></label></li>
+<li class="chk"><label><input type="checkbox"><span>Testo independência com P(A∩B) = P(A)·P(B).</span></label></li>
+<li class="chk"><label><input type="checkbox"><span>Aplico probabilidade total + Bayes.</span></label></li>
+<li class="chk"><label><input type="checkbox"><span>Explico o paradoxo do falso positivo com números.</span></label></li>
+<li class="chk"><label><input type="checkbox"><span>Monto um Naive Bayes com duas palavras.</span></label></li>
+</ul></div></section>
+<section class="aula" id="revisao"><div class="sec-head"><div class="sec-meta"><div class="kx-eyebrow"><span class="num">RV</span><span class="t-overline">Revisão</span></div><span class="badge badge--evento"><i>★</i>Revisão</span></div><h2 class="t-h2">Revisão geral · Aulas 01 a 09</h2></div><div class="content"><h3 class="t-h3 sub" id="rev-1">Formulário</h3>
+<div class="tbl glass-s"><table>
+<thead>
+<tr>
+<th>Tema</th>
+<th>Fórmula</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Freq. relativa</td>
+<td>frᵢ = fᵢ / n</td>
+</tr>
+<tr>
+<td>Sturges</td>
+<td>k = 1 + 3,322·log₁₀(n)</td>
+</tr>
+<tr>
+<td>Salto sistemática</td>
+<td>k = N / n</td>
+</tr>
+<tr>
+<td>Média</td>
+<td>x̄ = Σxᵢ / n</td>
+</tr>
+<tr>
+<td>Média ponderada</td>
+<td>x̄w = Σ(xᵢ·wᵢ) / Σwᵢ</td>
+</tr>
+<tr>
+<td>Mediana</td>
+<td>posição (n+1)/2 no rol</td>
+</tr>
+<tr>
+<td>Amplitude</td>
+<td>R = máx − mín</td>
+</tr>
+<tr>
+<td>Variância amostral</td>
+<td>s² = Σ(xᵢ − x̄)² / (n − 1)</td>
+</tr>
+<tr>
+<td>Desvio padrão</td>
+<td>s = √s²</td>
+</tr>
+<tr>
+<td>CV</td>
+<td>s / x̄ × 100%</td>
+</tr>
+<tr>
+<td>IQR e cercas</td>
+<td>Q3 − Q1 ; Q1 − 1,5·IQR ; Q3 + 1,5·IQR</td>
+</tr>
+<tr>
+<td>Escore-z</td>
+<td>z = (x − x̄) / s</td>
+</tr>
+<tr>
+<td>P clássica</td>
+<td>P(E) = |E| / |S|</td>
+</tr>
+<tr>
+<td>Complementar</td>
+<td>P(Aᶜ) = 1 − P(A)</td>
+</tr>
+<tr>
+<td>União</td>
+<td>P(A∪B) = P(A) + P(B) − P(A∩B)</td>
+</tr>
+<tr>
+<td>Condicional</td>
+<td>P(B|A) = P(A∩B) / P(A)</td>
+</tr>
+<tr>
+<td>Independência</td>
+<td>P(A∩B) = P(A)·P(B)</td>
+</tr>
+<tr>
+<td>Prob. total</td>
+<td>P(B) = P(B|A)P(A) + P(B|Aᶜ)P(Aᶜ)</td>
+</tr>
+<tr>
+<td>Bayes</td>
+<td>P(A|B) = P(B|A)P(A) / P(B)</td>
+</tr>
+</tbody>
+</table></div>
+<h3 class="t-h3 sub" id="rev-2">Cola de Pandas</h3>
+<div class="tbl glass-s"><table>
+<thead>
+<tr>
+<th>Tarefa</th>
+<th>Código</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Ler</td>
+<td><code>pd.read_csv()</code>, <code>pd.read_excel()</code></td>
+</tr>
+<tr>
+<td>Inspecionar</td>
+<td><code>head()</code>, <code>info()</code>, <code>dtypes</code>, <code>describe()</code>, <code>shape</code></td>
+</tr>
+<tr>
+<td>Amostrar</td>
+<td><code>sample(n=, frac=, random_state=)</code></td>
+</tr>
+<tr>
+<td>Estratificar</td>
+<td><code>train_test_split(..., stratify=col)</code></td>
+</tr>
+<tr>
+<td>Frequência</td>
+<td><code>value_counts(normalize=True)</code></td>
+</tr>
+<tr>
+<td>Classes</td>
+<td><code>pd.cut(col, bins=, right=)</code></td>
+</tr>
+<tr>
+<td>Acumulada</td>
+<td><code>cumsum()</code></td>
+</tr>
+<tr>
+<td>Centro</td>
+<td><code>mean()</code>, <code>median()</code>, <code>mode()[0]</code></td>
+</tr>
+<tr>
+<td>Separatrizes</td>
+<td><code>quantile([.25,.5,.75])</code></td>
+</tr>
+<tr>
+<td>Dispersão</td>
+<td><code>var()</code>, <code>std()</code> (ddof=1)</td>
+</tr>
+<tr>
+<td>Gráficos</td>
+<td><code>sns.histplot</code>, <code>sns.boxplot</code>, <code>sns.barplot</code>, <code>plt.savefig</code></td>
+</tr>
+</tbody>
+</table></div>
+<h3 class="t-h3 sub" id="rev-3">Roteiro de estudo (3 dias)</h3>
+<ol>
+<li><strong>Dia 1 — Descritiva:</strong> refaça os exercícios das Aulas 04, 06 e 07 <strong>à mão</strong> e depois confira no Python.</li>
+<li><strong>Dia 2 — Probabilidade:</strong> refaça 8.1–8.4 e 9.1–9.5. Monte a árvore de probabilidade de cada problema de Bayes.</li>
+<li><strong>Dia 3 — Simulado:</strong> faça o simulado abaixo com cronômetro (40 min), corrija pelo gabarito e teste-se no <a href="https://akalixtogamer-lgtm.github.io/quizestudos/quizkalixto-probabilidade/">Quiz</a>.</li>
+</ol>
+<h3 class="t-h3 sub" id="rev-4">Simulado</h3>
+<p class="gab-link"><a href="#gab-sim">Ver respostas no Gabarito comentado →</a></p>
+<p><strong>S1.</strong> Classifique: a) tempo de carregamento da página · b) plano de assinatura (Free, Pro, Enterprise) · c) número de abas abertas · d) CEP do cliente.</p>
+<p><strong>S2.</strong> Dados <code>[3, 5, 5, 6, 8, 9, 30]</code>. Calcule média, mediana e moda. Qual representa melhor o centro? Por quê?</p>
+<p><strong>S3.</strong> Para <code>[2, 4, 4, 4, 5, 5, 7, 9]</code>, calcule a variância e o desvio padrão <strong>amostrais</strong>.</p>
+<p><strong>S4.</strong> Uma empresa tem 600 funcionários de TI e 400 de vendas. Numa amostra estratificada de 50, quantos de cada?</p>
+<p><strong>S5.</strong> Uma urna tem 3 bolas vermelhas e 7 azuis. Retiram-se 2 <strong>sem reposição</strong>. Qual P(ambas vermelhas)?</p>
+<p><strong>S6.</strong> 2% das peças de um lote são defeituosas. Um inspetor detecta 90% das defeituosas e rejeita por engano 5% das boas. Se uma peça foi rejeitada, qual P de ser realmente defeituosa?</p>
+<p><strong>S7.</strong> Explique, com um exemplo de TI, a diferença entre eventos <strong>independentes</strong> e <strong>mutuamente exclusivos</strong>.</p>
+<p><strong>S8.</strong> Código: escreva a função <code>resumo(serie)</code> que retorna um dicionário com média, mediana, desvio amostral, CV (%) e a lista de outliers pela regra do IQR.</p></div></section>
+<section class="aula" id="gabarito"><div class="sec-head"><div class="sec-meta"><div class="kx-eyebrow"><span class="num">GB</span><span class="t-overline">Respostas</span></div><span class="badge badge--aula"><i>✓</i>Respostas</span></div><h2 class="t-h2">Gabarito comentado</h2></div><div class="content"><div class="alert alert--warning"><span class="ico">!</span><div><p class="ttl">Tente antes de olhar</p><p>O aprendizado acontece na tentativa, não na leitura da resposta. Confira no Python sempre que possível.</p></div></div><div class="gab-list"><details class="gab glass" id="gab-lista"><summary><span class="t-sub-m">Lista de Exercícios 02 (Prof. Clayton)</span><span class="chev">+</span></summary><div class="gab-body"><p><strong>1.</strong> a) <code>ID_Transacao</code> → <strong>qualitativa nominal</strong> (é um identificador; não se soma nem se tira média de ID). b) <code>Avaliacao_Produto</code> → <strong>qualitativa ordinal</strong>. c) <code>Preco_Venda</code> → <strong>quantitativa contínua</strong>. d) <code>Metodo_Pagamento</code> → <strong>qualitativa nominal</strong>. e) <code>Quantidade_Itens</code> → <strong>quantitativa discreta</strong>.</p>
+<p><strong>2.</strong> Erro amostral é a diferença entre a estatística da amostra (ex.: x̄) e o parâmetro da população (μ). Mesmo com sorteio rigoroso, cada amostra contém elementos diferentes, então a média varia de amostra para amostra; é improvável cair <strong>exatamente</strong> no valor populacional. O erro diminui com amostras maiores, mas não some.</p>
+<p><strong>3.</strong> Não. Os carros que passam por revisão em concessionária tendem a ser mais novos e mais bem cuidados → <strong>viés de seleção</strong>. Carros antigos, de revisão em oficina independente ou sem manutenção ficam de fora.</p>
+<p><strong>4.</strong> A) <code>object</code> é o tipo genérico do Pandas para texto ou valores mistos. B) Como <code>float</code>, o valor permite contas (média, soma, variação %), ordenação numérica e gráficos. Como <code>object</code>, <code>"150.5"</code> é texto: <code>sum()</code> concatena ou dá erro, e a ordenação fica alfabética ("100" &lt; "20").</p>
+<p><strong>5.</strong></p>
+<pre><code class="language-python">import pandas as pd
+df = pd.DataFrame({
+    &quot;Modelo_Carro&quot;: [&quot;Etios&quot;, &quot;Kicks&quot;, &quot;T-Cross&quot;],
+    &quot;Ano&quot;: [2019, 2021, 2022],
+    &quot;Preco&quot;: [60000.0, 105000.0, 130000.0],
+    &quot;KM_Rodado&quot;: [45000, 22000, 9000],
+})
+print(df.dtypes)
+print(df.head(2))
+</code></pre>
+<p><strong>6.</strong> <code>CEP</code> é <strong>qualitativa nominal</strong> (o número é um código de localização); <code>Salario</code> é <strong>quantitativa contínua</strong>. A "média dos CEPs" gera um número sem significado — pode nem existir como endereço, e CEPs próximos numericamente não são necessariamente próximos geograficamente.</p></div></details><details class="gab glass" id="gab-a01"><summary><span class="t-sub-m">Aula 01</span><span class="chev">+</span></summary><div class="gab-body"><p><strong>1.1</strong> a) Descritiva · b) Indutiva · c) Descritiva.<br />
+<strong>1.2</strong> População: os 1.000 mouses. Amostra: os 5 testados. "% de defeituosos no lote" é <strong>parâmetro</strong> (o % nos 5 testados seria a estatística).<br />
+<strong>1.3</strong> Sem o 450: média = 1.145/9 ≈ <strong>127,2 ms</strong> — praticamente igual à mediana original (127,5 ms). Um único outlier deslocava a média em ~32 ms; a mediana já "dizia a verdade".<br />
+<strong>1.4</strong> Definição → Coleta → Limpeza → Exposição → Análise.<br />
+<strong>1.5</strong> Qualitativa (nominal, ou ordinal se você considerar a ordem das versões).</p></div></details><details class="gab glass" id="gab-a02"><summary><span class="t-sub-m">Aula 02</span><span class="chev">+</span></summary><div class="gab-body"><p><strong>2.1</strong> a) nominal · b) discreta · c) contínua · d) ordinal · e) nominal.<br />
+<strong>2.2</strong> a) parâmetro · b) estatística.<br />
+<strong>2.3</strong> Erro amostral é aleatório e <strong>diminui</strong> com n maior. Viés é sistemático (a forma de coletar favorece um grupo) e <strong>não diminui</strong> aumentando a amostra.<br />
+<strong>2.4</strong></p>
+<pre><code class="language-python">ordem = [&quot;Júnior&quot;, &quot;Pleno&quot;, &quot;Sênior&quot;]
+df[&quot;senioridade&quot;] = pd.Categorical(df[&quot;senioridade&quot;], categories=ordem, ordered=True)
+df[df[&quot;senioridade&quot;] &gt;= &quot;Pleno&quot;]
+</code></pre>
+<p><strong>2.5</strong> Em °C o zero é arbitrário (0 °C não é "ausência de temperatura"), então razões não fazem sentido. Em ms o zero é absoluto (0 ms = sem espera), então "200 ms é o dobro de 100 ms" é válido.</p></div></details><details class="gab glass" id="gab-a03"><summary><span class="t-sub-m">Aula 03</span><span class="chev">+</span></summary><div class="gab-body"><p><strong>3.1</strong> Estratificada: 50 × 0,8 = <strong>40 Linux</strong> e 50 × 0,2 = <strong>10 Windows</strong>. Sistemática com k = 20: 1.000/20 = <strong>50 servidores</strong>.<br />
+<strong>3.2</strong> a) conveniência · b) sistemática · c) estratificada · d) por conglomerados.<br />
+<strong>3.3</strong> k = 1.200/60 = <strong>20</strong>.</p>
+<pre><code class="language-python">rng = np.random.default_rng(42)
+inicio = rng.integers(0, 20)
+amostra = df.iloc[np.arange(inicio, len(df), 20)]
+</code></pre>
+<p><strong>3.4</strong> Ex.: logs em que um <em>health check</em> roda a cada 20 linhas; com k = 20, a amostra pode conter só health checks. Outro: vendas registradas por dia com k = 7 → sempre o mesmo dia da semana.<br />
+<strong>3.5</strong> Só alcança quem usa e-mail e se dispõe a responder → viés de seleção/cobertura e de <strong>não resposta</strong>.</p></div></details><details class="gab glass" id="gab-a04"><summary><span class="t-sub-m">Aula 04</span><span class="chev">+</span></summary><div class="gab-body"><p><strong>4.1</strong></p>
+<div class="tbl glass-s"><table>
+<thead>
+<tr>
+<th>Status</th>
+<th>fᵢ</th>
+<th>frᵢ%</th>
+<th>Fᵢ</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>200</td>
+<td>5</td>
+<td>50%</td>
+<td>5</td>
+</tr>
+<tr>
+<td>301</td>
+<td>1</td>
+<td>10%</td>
+<td>6</td>
+</tr>
+<tr>
+<td>404</td>
+<td>2</td>
+<td>20%</td>
+<td>8</td>
+</tr>
+<tr>
+<td>500</td>
+<td>2</td>
+<td>20%</td>
+<td>10</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>4.2</strong> k = 1 + 3,322 · log₁₀(200) = 1 + 3,322 · 2,301 ≈ 8,64 → <strong>9 classes</strong>.<br />
+<strong>4.3</strong> h = 100.000/4 = <strong>25.000 km</strong>. (a) <code>[a, b)</code> → <strong>3ª classe</strong> [50.000; 75.000). (b) <code>pd.cut</code> padrão <code>(a, b]</code> → <strong>2ª classe</strong> (25.000; 50.000]. Use <code>right=False</code> para seguir o slide.<br />
+<strong>4.4</strong> Dois comportamentos distintos: por exemplo, requisições atendidas pelo <strong>cache</strong> (~100–120 ms) e requisições que vão ao <strong>banco</strong> (~145–158 ms). Distribuição bimodal.<br />
+<strong>4.5</strong> <strong>50%</strong> acima de R$ 1.000. Um aporte de exatamente R$ 1.000 cai em "Até R$ 1.000", porque <code>pd.cut</code> fecha à direita: (0, 1000].</p></div></details><details class="gab glass" id="gab-a05"><summary><span class="t-sub-m">Aula 05</span><span class="chev">+</span></summary><div class="gab-body"><p><strong>5.1</strong> a) barras · b) histograma · c) dispersão · d) linhas.<br />
+<strong>5.2</strong> Rol já ordenado, n = 9 → mediana = <strong>8</strong> (5º valor). Metade inferior 4, 6, 7, 7 → Q1 = <strong>6,5</strong>. Metade superior 9, 10, 11, 30 → Q3 = <strong>10,5</strong>. IQR = <strong>4</strong>. Cercas: 6,5 − 6 = <strong>0,5</strong> e 10,5 + 6 = <strong>16,5</strong>. <strong>30 é outlier.</strong><br />
+<strong>5.3</strong> No histograma a variável é contínua: as classes são intervalos vizinhos, sem "buraco" entre elas. No de barras, cada barra é uma categoria separada.<br />
+<strong>5.4</strong> Fatias quase iguais e muitas categorias: impossível comparar ângulos. Use <strong>barras horizontais ordenadas</strong>.<br />
+<strong>5.5</strong> Estatísticas-resumo iguais podem esconder formas completamente diferentes (curva, reta com outlier, grupos). Sempre visualize.</p></div></details><details class="gab glass" id="gab-a06"><summary><span class="t-sub-m">Aula 06</span><span class="chev">+</span></summary><div class="gab-body"><p><strong>6.1</strong> Total = 50.000 + 30.000 + 100.000 = 180.000 → média = 180.000/13 ≈ <strong>R$ 13.846,15</strong>. Mediana (7º de 13) = <strong>R$ 5.000</strong>. Moda = <strong>R$ 5.000</strong>. Sindicato: <strong>mediana/moda</strong> (realidade da maioria). Dono: <strong>média</strong> (parece que "se ganha bem").<br />
+<strong>6.2</strong> (8·4 + 6·4 + 9·2)/10 = (32 + 24 + 18)/10 = <strong>7,4</strong>.<br />
+<strong>6.3</strong> Rol 1, 3, 4, 6, 7, 9 → (4 + 6)/2 = <strong>5</strong>.<br />
+<strong>6.4</strong> À <strong>direita</strong>: média &gt; mediana, puxada pelo valor alto (10 s).<br />
+<strong>6.5</strong> A maioria é rápida, mas 1% das requisições leva 4 s ou mais — em alto volume, são muitos usuários frustrados. A média esconde a cauda.</p></div></details><details class="gab glass" id="gab-a07"><summary><span class="t-sub-m">Aula 07</span><span class="chev">+</span></summary><div class="gab-body"><p><strong>7.1</strong> x̄ = 100. Desvios: 0, 2, −2, 1, −1 → quadrados 0, 4, 4, 1, 1 → soma 10. s² = 10/4 = <strong>2,5 ms²</strong>; s ≈ <strong>1,58 ms</strong>.<br />
+<strong>7.2</strong> CV_A = 2/10 = <strong>20%</strong>; CV_B = 12/15 = <strong>80%</strong> → B é bem mais arriscado. μ − 1σ: A = 8%, B = 3% (ambos positivos). μ − 2σ: A = 6%, B = <strong>−9%</strong> → B pode dar prejuízo num cenário razoavelmente comum (~2,5% das vezes, se normal).<br />
+<strong>7.3</strong> CV = 13,53/78 ≈ <strong>17,35% &lt; 20%</strong>. O pico de 110 °C infla o desvio, mas não o suficiente. CV mede variabilidade geral, não picos. Melhor: limite absoluto (ex.: &gt; 90 °C) <strong>ou</strong> z-score relativo a uma <strong>linha de base</strong> calculada em período normal.<br />
+<strong>7.4</strong> 95% entre 200 ± 2·20 → <strong>160 a 240 ms</strong>. z = (290 − 200)/20 = <strong>4,5</strong> → anomalia (|z| &gt; 3).<br />
+<strong>7.5</strong> Pandas usa <code>ddof=1</code> (÷ n − 1); NumPy usa <code>ddof=0</code> (÷ n). Alinhe com <code>s.std(ddof=0)</code> ou <code>np.std(x, ddof=1)</code>.</p></div></details><details class="gab glass" id="gab-a08"><summary><span class="t-sub-m">Aula 08</span><span class="chev">+</span></summary><div class="gab-body"><p><strong>8.1</strong> Soma 7: (1,6)(2,5)(3,4)(4,3)(5,2)(6,1) → 6/36 = <strong>1/6 ≈ 16,7%</strong>. Soma ≥ 10: 10 (3 casos), 11 (2), 12 (1) → 6/36 = <strong>1/6</strong>.<br />
+<strong>8.2</strong> P(P ∪ L) = 0,40 + 0,30 − 0,12 = <strong>58%</strong>. Nenhum dos dois: 1 − 0,58 = <strong>42%</strong>.<br />
+<strong>8.3</strong> 36⁴ = <strong>1.679.616</strong> — cerca de <strong>3,7×</strong> mais que 26⁴ = 456.976.<br />
+<strong>8.4</strong> 1 − 0,999³ ≈ <strong>0,30%</strong>.<br />
+<strong>8.5</strong></p>
+<pre><code class="language-python">rng = np.random.default_rng(0)
+lanc = rng.integers(1, 7, size=(1_000_000, 4))
+print((lanc == 6).any(axis=1).mean(), 1 - (5/6)**4)   # ≈ 0.5177
+</code></pre>
+<p><strong>8.6</strong> C(10, 3) = <strong>120</strong>. A ordem <strong>não</strong> importa (é um grupo).</p></div></details><details class="gab glass" id="gab-a09"><summary><span class="t-sub-m">Aula 09</span><span class="chev">+</span></summary><div class="gab-body"><p><strong>9.1</strong> P(alerta) = 0,95·0,05 + 0,02·0,95 = 0,0475 + 0,019 = 0,0665. P(ataque|alerta) = 0,0475/0,0665 ≈ <strong>71,4%</strong>.<br />
+<strong>9.2</strong> P(Oferta) = 0,8·0,4 + 0,1·0,6 = 0,38 → P(Spam|Oferta) = 0,32/0,38 ≈ <strong>84,2%</strong>.<br />
+<strong>9.3</strong> Spam: 0,4·0,8·0,6 = 0,192. Legítimo: 0,6·0,1·0,05 = 0,003. P = 0,192/0,195 ≈ <strong>98,5%</strong>. Mais evidência consistente → posterior mais extremo.<br />
+<strong>9.4</strong> P(erro) = 80/200 = <strong>40%</strong>. P(erro|desktop) = 30/50 = <strong>60%</strong>. P(erro|mobile) = 33,3% ≠ 40% → <strong>dependentes</strong>.<br />
+<strong>9.5</strong> Após o 1º: 1,94%. Usando como prior: 0,99·0,0194 / (0,99·0,0194 + 0,05·0,9806) ≈ <strong>28,2%</strong>.<br />
+<strong>9.6</strong> P(doente|+) ≈ 0,98%: de cada ~100 positivos, só 1 está doente. Serve como <strong>triagem</strong> (quase não deixa doente passar), mas exige <strong>teste confirmatório</strong> antes de qualquer diagnóstico.</p></div></details><details class="gab glass" id="gab-sim"><summary><span class="t-sub-m">Simulado</span><span class="chev">+</span></summary><div class="gab-body"><p><strong>S1.</strong> a) contínua · b) ordinal · c) discreta · d) nominal.<br />
+<strong>S2.</strong> Média = 66/7 ≈ <strong>9,43</strong>; mediana = <strong>6</strong>; moda = <strong>5</strong>. A mediana representa melhor: o 30 é outlier e puxa a média.<br />
+<strong>S3.</strong> x̄ = 5; Σ(xᵢ − x̄)² = 9+1+1+1+0+0+4+16 = 32; s² = 32/7 ≈ <strong>4,57</strong>; s ≈ <strong>2,14</strong>.<br />
+<strong>S4.</strong> TI: 50·0,6 = <strong>30</strong>; vendas: 50·0,4 = <strong>20</strong>.<br />
+<strong>S5.</strong> (3/10)·(2/9) = 6/90 = <strong>1/15 ≈ 6,7%</strong>.<br />
+<strong>S6.</strong> P(rejeitada) = 0,9·0,02 + 0,05·0,98 = 0,018 + 0,049 = 0,067 → P(defeituosa|rejeitada) = 0,018/0,067 ≈ <strong>26,9%</strong>.<br />
+<strong>S7.</strong> Exclusivos: status 200 e 404 na mesma requisição (não ocorrem juntos → P(A∩B) = 0, logo <strong>dependentes</strong>). Independentes: falha de disco no servidor de SP e no do RJ (um não altera a chance do outro).<br />
+<strong>S8.</strong></p>
+<pre><code class="language-python">def resumo(s: pd.Series) -&gt; dict:
+    q1, q3 = s.quantile([.25, .75])
+    iqr = q3 - q1
+    outliers = s[(s &lt; q1 - 1.5*iqr) | (s &gt; q3 + 1.5*iqr)].tolist()
+    return {
+        &quot;media&quot;: s.mean(), &quot;mediana&quot;: s.median(), &quot;desvio&quot;: s.std(),
+        &quot;cv_%&quot;: s.std() / s.mean() * 100, &quot;outliers&quot;: outliers,
+    }
+</code></pre></div></details></div></div></section>
+<section class="aula biblio" id="bib"><div class="sec-head"><div class="sec-meta"><div class="kx-eyebrow"><span class="num">BB</span><span class="t-overline">Referências</span></div></div><h2 class="t-h2">Bibliografia e créditos</h2></div><div class="content"><h3 class="t-h3 sub">Material-base do curso</h3>
+<ul>
+<li>CHAGAS, Clayton Escouper das. <strong>Probabilidade e Estatística Aplicada</strong> — slides das Aulas 01 a 09 e Lista de Exercícios 02. Material de aula, 2026.</li>
+</ul>
+<div class="alert alert--info"><span class="ico">i</span><div><p class="ttl">Dica do professor</p><p>Este caderno <strong>não substitui</strong> o material do Prof. Clayton: ele o segue aula a aula e acrescenta aprofundamentos, notas de revisão, exercícios e gabaritos. Toda a estrutura do curso e os exemplos originais são créditos do professor.</p></div></div>
+<h3 class="t-h3 sub">Livros-texto (em português)</h3>
+<ul>
+<li>BUSSAB, W. O.; MORETTIN, P. A. <strong>Estatística Básica</strong>. 9. ed. São Paulo: Saraiva, 2017.</li>
+<li>MAGALHÃES, M. N.; LIMA, A. C. P. <strong>Noções de Probabilidade e Estatística</strong>. 7. ed. São Paulo: Edusp, 2015.</li>
+<li>TRIOLA, M. F. <strong>Introdução à Estatística</strong>. 12. ed. Rio de Janeiro: LTC, 2017.</li>
+<li>MONTGOMERY, D. C.; RUNGER, G. C. <strong>Estatística Aplicada e Probabilidade para Engenheiros</strong>. 6. ed. Rio de Janeiro: LTC, 2016.</li>
+<li>BRUCE, P.; BRUCE, A.; GEDECK, P. <strong>Estatística Prática para Cientistas de Dados</strong>. 2. ed. Rio de Janeiro: Alta Books, 2021.</li>
+<li>McKINNEY, W. <strong>Python para Análise de Dados</strong>. 3. ed. São Paulo: Novatec, 2023.</li>
+</ul>
+<h3 class="t-h3 sub">Gratuitos / abertos</h3>
+<ul>
+<li>DIEZ, D.; ÇETINKAYA-RUNDEL, M.; BARR, C. <strong>OpenIntro Statistics</strong>. 4. ed. OpenIntro, 2019. — openintro.org</li>
+<li>DOWNEY, A. B. <strong>Think Stats</strong>. 2. ed. Green Tea Press / O'Reilly, 2014. — greenteapress.com</li>
+<li>DOWNEY, A. B. <strong>Think Bayes</strong>. 2. ed. Green Tea Press / O'Reilly, 2021. — greenteapress.com</li>
+</ul>
+<h3 class="t-h3 sub">Artigos clássicos citados</h3>
+<ul>
+<li>BAYES, T. An Essay towards Solving a Problem in the Doctrine of Chances. <strong>Philosophical Transactions of the Royal Society</strong>, v. 53, p. 370–418, 1763.</li>
+<li>STURGES, H. A. The Choice of a Class Interval. <strong>Journal of the American Statistical Association</strong>, v. 21, n. 153, p. 65–66, 1926.</li>
+<li>METROPOLIS, N.; ULAM, S. The Monte Carlo Method. <strong>Journal of the American Statistical Association</strong>, v. 44, n. 247, p. 335–341, 1949.</li>
+<li>ANSCOMBE, F. J. Graphs in Statistical Analysis. <strong>The American Statistician</strong>, v. 27, n. 1, p. 17–21, 1973.</li>
+<li>TUKEY, J. W. <strong>Exploratory Data Analysis</strong>. Reading: Addison-Wesley, 1977.</li>
+<li>CLEVELAND, W. S.; McGILL, R. Graphical Perception. <strong>Journal of the American Statistical Association</strong>, v. 79, n. 387, p. 531–554, 1984.</li>
+<li>MATEJKA, J.; FITZMAURICE, G. Same Stats, Different Graphs. <strong>Proceedings of CHI 2017</strong>, ACM, 2017.</li>
+</ul>
+<h3 class="t-h3 sub">Documentação técnica</h3>
+<ul>
+<li>pandas — pandas.pydata.org/docs</li>
+<li>NumPy — numpy.org/doc</li>
+<li>Matplotlib — matplotlib.org</li>
+<li>seaborn — seaborn.pydata.org</li>
+<li>scikit-learn — scikit-learn.org (<code>train_test_split</code>, Naive Bayes)</li>
+<li>SciPy — docs.scipy.org (<code>scipy.stats</code>)</li>
+</ul></div></section>
+
+    <footer class="sig glass">
+      <div class="who"><img class="kx-logo" src="data:image/webp;base64,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" width="56" height="56" alt="Logo Kalixto"><div><b>Kalixto — Professor • Programador • Gamer</b><small>Kalixto by Wallace Toledo · @dev.kalixto</small></div></div>
+      <p>Apostila baseada no material de aula do Prof. Clayton Escouper das Chagas (Probabilidade e Estatística Aplicada), expandida com aprofundamentos, exercícios e gabaritos.</p>
+    </footer>
+  </main>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+<script>
+
+// Curva normal e marcações μ±kσ (Aula 07)
+(function(){
+  const cx=320, s=93.33, base=160, h=120, pts=[];
+  for(let x=40;x<=600;x+=4){const z=(x-cx)/s; pts.push([x, base - h*Math.exp(-z*z/2)]);}
+  document.getElementById("curve").setAttribute("d","M"+pts.map(p=>p[0]+","+p[1].toFixed(1)).join(" L")+" L600,160 L40,160 Z");
+  const lab=["μ−3σ","μ−2σ","μ−σ","μ","μ+σ","μ+2σ","μ+3σ"];
+  document.getElementById("ticks").innerHTML = lab.map((t,k)=>{const x=cx+(k-3)*s; return `<line class="sv-axis" x1="${x}" y1="160" x2="${x}" y2="165"/><text class="sv-lbl" x="${x}" y="182" text-anchor="middle">${t}</text>`}).join("");
+})();
+
+if (window.hljs) document.querySelectorAll('pre code.language-python').forEach(el => hljs.highlightElement(el));
+
+// Barra de progresso e item ativo do sumário
+const links = [...document.querySelectorAll('.toc a')];
+const secs = links.map(a => document.querySelector(a.getAttribute('href'))).filter(Boolean);
+function onScroll(){
+  const h = document.documentElement, max = h.scrollHeight - h.clientHeight;
+  document.getElementById('progress').style.width = (max > 0 ? h.scrollTop / max * 100 : 0) + '%';
+  let cur = secs[0];
+  for (const s of secs) if (s.getBoundingClientRect().top < 140) cur = s;
+  links.forEach(a => a.classList.toggle('on', cur && a.getAttribute('href') === '#' + cur.id));
+}
+document.addEventListener('scroll', onScroll, {passive:true}); onScroll();
+
+// Abre o gabarito ao seguir um link "Ver respostas"
+document.addEventListener('click', e => {
+  const a = e.target.closest('a[href^="#gab-"]'); if (!a) return;
+  const d = document.querySelector(a.getAttribute('href')); if (d) d.open = true;
+});
+
+// Checklists: lembrar marcações neste navegador (opcional)
+document.querySelectorAll('.checklist input').forEach((c, i) => {
+  const k = 'kx-chk-' + i;
+  try { c.checked = localStorage.getItem(k) === '1'; } catch (_) {}
+  c.addEventListener('change', () => { try { localStorage.setItem(k, c.checked ? '1' : '0'); } catch (_) {} });
+});
+</script>

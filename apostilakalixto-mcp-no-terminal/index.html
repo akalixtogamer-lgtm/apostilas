@@ -1,0 +1,685 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1"><style>:root{color-scheme:light}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#faf9f5;color:#141413}img{max-width:100%}</style></head><body>
+<title>MCP no Terminal</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700&family=Source+Sans+3:ital,wght@0,400;0,600;1,400&family=JetBrains+Mono:wght@400;700&display=swap">
+
+<style>
+  :root {
+    --ground:      #F5F7F5;
+    --surface:     #FFFFFF;
+    --surface-alt: #ECF0ED;
+    --ink:         #171C1A;
+    --ink-soft:    #4A5551;
+    --ink-faint:   #7C8783;
+    --rule:        #D8DEDA;
+    --rule-soft:   #E6EAE7;
+    --accent:      #2F7268;
+    --accent-deep: #235850;
+    --brass:       #8A6E2E;
+    --ok:          #2F7268;
+    --warn:        #8A6524;
+    --fail:        #9E3D3D;
+    --code-bg:     #10201D;
+    --code-ink:    #DCE7E3;
+    --code-dim:    #7E938D;
+    --code-accent: #7FC9B8;
+    --code-brass:  #D3B26B;
+    --shadow:      0 1px 2px rgba(23,28,26,.05), 0 6px 20px -12px rgba(23,28,26,.22);
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --ground:      #101514;
+      --surface:     #181E1C;
+      --surface-alt: #1F2624;
+      --ink:         #E7EDEA;
+      --ink-soft:    #A7B3AF;
+      --ink-faint:   #77837F;
+      --rule:        #2B3431;
+      --rule-soft:   #232B29;
+      --accent:      #5FB3A2;
+      --accent-deep: #7FC9B8;
+      --brass:       #C9A961;
+      --ok:          #5FB3A2;
+      --warn:        #C9A961;
+      --fail:        #D98A8A;
+      --code-bg:     #0B1413;
+      --code-ink:    #DCE7E3;
+      --code-dim:    #6F837E;
+      --code-accent: #7FC9B8;
+      --code-brass:  #D3B26B;
+      --shadow:      0 1px 2px rgba(0,0,0,.3), 0 6px 20px -12px rgba(0,0,0,.7);
+    }
+  }
+
+  :root[data-theme="dark"] {
+    --ground:      #101514;
+    --surface:     #181E1C;
+    --surface-alt: #1F2624;
+    --ink:         #E7EDEA;
+    --ink-soft:    #A7B3AF;
+    --ink-faint:   #77837F;
+    --rule:        #2B3431;
+    --rule-soft:   #232B29;
+    --accent:      #5FB3A2;
+    --accent-deep: #7FC9B8;
+    --brass:       #C9A961;
+    --ok:          #5FB3A2;
+    --warn:        #C9A961;
+    --fail:        #D98A8A;
+    --code-bg:     #0B1413;
+    --code-ink:    #DCE7E3;
+    --code-dim:    #6F837E;
+    --code-accent: #7FC9B8;
+    --code-brass:  #D3B26B;
+    --shadow:      0 1px 2px rgba(0,0,0,.3), 0 6px 20px -12px rgba(0,0,0,.7);
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    background: var(--ground);
+    color: var(--ink);
+    font-family: "Source Sans 3", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    font-size: 17px;
+    line-height: 1.62;
+    margin: 0;
+    padding: 0;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .page {
+    max-width: 50rem;
+    margin: 0 auto;
+    padding: 3.5rem 1.5rem 6rem;
+    display: flex;
+    flex-direction: column;
+    gap: 3.25rem;
+  }
+
+  /* ---------- header ---------- */
+
+  header { display: flex; flex-direction: column; gap: .85rem; }
+
+  .eyebrow {
+    font-family: "JetBrains Mono", ui-monospace, monospace;
+    font-size: .7rem;
+    letter-spacing: .16em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin: 0;
+  }
+
+  h1 {
+    font-family: "Bricolage Grotesque", "Source Sans 3", sans-serif;
+    font-weight: 700;
+    font-size: clamp(2.2rem, 6vw, 3.1rem);
+    line-height: 1.04;
+    letter-spacing: -.025em;
+    text-wrap: balance;
+    margin: 0;
+  }
+
+  .standfirst {
+    font-size: 1.15rem;
+    color: var(--ink-soft);
+    max-width: 40ch;
+    margin: 0;
+  }
+
+  .meta {
+    font-family: "JetBrains Mono", ui-monospace, monospace;
+    font-size: .74rem;
+    color: var(--ink-faint);
+    border-top: 1px solid var(--rule);
+    padding-top: .85rem;
+    margin: .5rem 0 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: .4rem 1.5rem;
+  }
+
+  /* ---------- sections ---------- */
+
+  section { display: flex; flex-direction: column; gap: 1.1rem; }
+
+  h2 {
+    font-family: "Bricolage Grotesque", "Source Sans 3", sans-serif;
+    font-weight: 700;
+    font-size: 1.5rem;
+    letter-spacing: -.015em;
+    line-height: 1.2;
+    text-wrap: balance;
+    margin: 0;
+    padding-bottom: .6rem;
+    border-bottom: 2px solid var(--accent);
+  }
+
+  h3 {
+    font-family: "Bricolage Grotesque", "Source Sans 3", sans-serif;
+    font-weight: 500;
+    font-size: 1.06rem;
+    letter-spacing: -.005em;
+    margin: 0;
+  }
+
+  p { margin: 0; max-width: 66ch; }
+
+  a { color: var(--accent-deep); text-decoration-thickness: 1px; text-underline-offset: 2px; }
+  a:focus-visible, button:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+    border-radius: 3px;
+  }
+
+  code {
+    font-family: "JetBrains Mono", ui-monospace, monospace;
+    font-size: .86em;
+    background: var(--surface-alt);
+    padding: .1em .38em;
+    border-radius: 3px;
+    color: var(--ink);
+  }
+
+  /* ---------- callout ---------- */
+
+  .callout {
+    background: var(--surface);
+    border: 1px solid var(--rule);
+    border-left: 4px solid var(--brass);
+    border-radius: 4px;
+    padding: 1.15rem 1.35rem;
+    display: flex;
+    flex-direction: column;
+    gap: .55rem;
+    box-shadow: var(--shadow);
+  }
+
+  .callout .tag {
+    font-family: "JetBrains Mono", ui-monospace, monospace;
+    font-size: .68rem;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+    color: var(--brass);
+  }
+
+  /* ---------- command block ---------- */
+
+  .cmd { display: flex; flex-direction: column; gap: .5rem; }
+
+  .cmd > .label {
+    font-size: .95rem;
+    color: var(--ink-soft);
+    max-width: 66ch;
+  }
+
+  .shell {
+    position: relative;
+    background: var(--code-bg);
+    border-radius: 5px;
+    overflow: hidden;
+  }
+
+  .shell pre {
+    margin: 0;
+    padding: 1rem 3.6rem 1rem 1.1rem;
+    overflow-x: auto;
+    font-family: "JetBrains Mono", ui-monospace, monospace;
+    font-size: .855rem;
+    line-height: 1.72;
+    color: var(--code-ink);
+    tab-size: 2;
+  }
+
+  .shell .p  { color: var(--code-accent); user-select: none; }
+  .shell .c  { color: var(--code-dim); font-style: italic; }
+  .shell .f  { color: var(--code-brass); }
+  .shell .s  { color: var(--code-ink); }
+
+  .copy {
+    position: absolute;
+    top: .55rem;
+    right: .55rem;
+    font-family: "JetBrains Mono", ui-monospace, monospace;
+    font-size: .66rem;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    color: var(--code-dim);
+    background: transparent;
+    border: 1px solid rgba(127,201,184,.28);
+    border-radius: 3px;
+    padding: .28rem .5rem;
+    cursor: pointer;
+    transition: color .15s, border-color .15s;
+  }
+  .copy:hover { color: var(--code-accent); border-color: rgba(127,201,184,.6); }
+  .copy[data-done="1"] { color: var(--code-accent); border-color: var(--code-accent); }
+
+  /* ---------- tables ---------- */
+
+  .tablewrap {
+    overflow-x: auto;
+    border: 1px solid var(--rule);
+    border-radius: 4px;
+    background: var(--surface);
+  }
+
+  table {
+    border-collapse: collapse;
+    width: 100%;
+    font-size: .93rem;
+    min-width: 32rem;
+  }
+
+  th, td {
+    text-align: left;
+    padding: .68rem .9rem;
+    border-bottom: 1px solid var(--rule-soft);
+    vertical-align: top;
+  }
+
+  thead th {
+    font-family: "JetBrains Mono", ui-monospace, monospace;
+    font-size: .68rem;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+    background: var(--surface-alt);
+    border-bottom: 1px solid var(--rule);
+    white-space: nowrap;
+  }
+
+  tbody tr:last-child td { border-bottom: none; }
+  td code { background: transparent; padding: 0; color: var(--accent-deep); }
+
+  /* ---------- status pills ---------- */
+
+  .pill {
+    display: inline-flex;
+    align-items: center;
+    gap: .35rem;
+    font-family: "JetBrains Mono", ui-monospace, monospace;
+    font-size: .72rem;
+    padding: .12rem .45rem;
+    border-radius: 3px;
+    border: 1px solid currentColor;
+    white-space: nowrap;
+  }
+  .pill.ok   { color: var(--ok); }
+  .pill.warn { color: var(--warn); }
+  .pill.fail { color: var(--fail); }
+
+  /* ---------- footer ---------- */
+
+  footer {
+    border-top: 1px solid var(--rule);
+    padding-top: 1.25rem;
+    font-size: .88rem;
+    color: var(--ink-faint);
+    display: flex;
+    flex-direction: column;
+    gap: .4rem;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    * { transition: none !important; animation: none !important; }
+  }
+
+  @media (max-width: 34rem) {
+    body { font-size: 16px; }
+    .page { padding: 2.25rem 1.1rem 4rem; gap: 2.5rem; }
+    .shell pre { font-size: .79rem; padding-right: 1.1rem; padding-top: 2.6rem; }
+    .copy { top: .45rem; left: .55rem; right: auto; }
+  }
+</style>
+
+<div class="page">
+
+  <header>
+    <p class="eyebrow">Claude Code · referência</p>
+    <h1>MCP no Terminal</h1>
+    <p class="standfirst">Instalar o Claude Code e reconectar seus servidores MCP depois de formatar a máquina.</p>
+    <p class="meta">
+      <span>Windows · devkalixto</span>
+      <span>Claude Code 2.1.238</span>
+      <span>Agosto 2026</span>
+    </p>
+  </header>
+
+  <section>
+    <h2>Instalar o Claude Code</h2>
+    <p>Roda nativo no Windows 10 1809+. Não precisa de Administrador. Descubra em qual shell você está pelo prompt: <code>PS C:\</code> é PowerShell, <code>C:\</code> sem o <code>PS</code> é CMD.</p>
+
+    <div class="cmd">
+      <p class="label">PowerShell:</p>
+      <div class="shell">
+        <button class="copy" type="button" data-copy="irm https://claude.ai/install.ps1 | iex">Copiar</button>
+<pre><span class="p">PS&gt;</span> <span class="s">irm https://claude.ai/install.ps1 | iex</span></pre>
+      </div>
+    </div>
+
+    <div class="cmd">
+      <p class="label">CMD:</p>
+      <div class="shell">
+        <button class="copy" type="button" data-copy="curl -fsSL https://claude.ai/install.cmd -o install.cmd &amp;&amp; install.cmd &amp;&amp; del install.cmd">Copiar</button>
+<pre><span class="p">&gt;</span> <span class="s">curl -fsSL https://claude.ai/install.cmd -o install.cmd &amp;&amp; install.cmd &amp;&amp; del install.cmd</span></pre>
+      </div>
+    </div>
+
+    <div class="cmd">
+      <p class="label">Conferir. O <code>claude doctor</code> dá o diagnóstico completo sem abrir sessão; <code>claude</code> sozinho inicia e abre o navegador para login.</p>
+      <div class="shell">
+        <button class="copy" type="button" data-copy="claude --version">Copiar</button>
+<pre><span class="p">$</span> <span class="s">claude --version</span>   <span class="c"># deve imprimir algo como 2.1.238 (Claude Code)</span>
+<span class="p">$</span> <span class="s">claude doctor</span>      <span class="c"># diagnóstico de instalação e settings</span>
+<span class="p">$</span> <span class="s">claude</span>             <span class="c"># inicia a sessão e faz o login</span></pre>
+      </div>
+    </div>
+
+    <div class="callout">
+      <span class="tag">Instale o Git for Windows junto</span>
+      <p>É opcional, mas define qual ferramenta de shell você ganha. <strong>Sem</strong> ele, o Claude Code roda comandos via PowerShell. <strong>Com</strong> ele, usa o Git Bash e libera a ferramenta Bash completa. Se o Git Bash não for encontrado, aponte o caminho no <code>settings.json</code>:</p>
+      <div class="shell" style="margin-top:.3rem">
+        <button class="copy" type="button" data-copy='{ "env": { "CLAUDE_CODE_GIT_BASH_PATH": "C:\\Program Files\\Git\\bin\\bash.exe" } }'>Copiar</button>
+<pre><span class="s">{ "env": { "CLAUDE_CODE_GIT_BASH_PATH": "C:\\\\Program Files\\\\Git\\\\bin\\\\bash.exe" } }</span></pre>
+      </div>
+    </div>
+
+    <div class="tablewrap">
+      <table>
+        <thead>
+          <tr><th>Opção</th><th>Sandbox</th><th>Quando usar</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><strong>Windows nativo</strong></td><td>Não suportado</td><td>Projetos e ferramentas Windows. É o caminho simples.</td></tr>
+          <tr><td><strong>WSL 2</strong></td><td>Suportado</td><td>Toolchain Linux ou execução de comandos em sandbox. Instale e rode o <code>claude</code> <em>dentro</em> do WSL, não no PowerShell.</td></tr>
+          <tr><td><strong>WSL 1</strong></td><td>Não suportado</td><td>Só se o WSL 2 não estiver disponível.</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p style="color:var(--ink-faint);font-size:.92rem">Requer plano Pro, Max, Team, Enterprise ou Console. O plano gratuito do claude.ai não inclui Claude Code. A instalação nativa se atualiza sozinha em segundo plano.</p>
+  </section>
+
+  <section>
+    <h2>Comece por aqui</h2>
+    <div class="callout">
+      <span class="tag">Você provavelmente não precisa reconfigurar nada</span>
+      <p>Se você fez login no Claude Code com sua conta claude.ai, os conectores que já estão lá — Notion, Gmail, Drive, Figma, Adobe, Calendar — aparecem no terminal <strong>automaticamente</strong>. Não existe comando para adicionar: eles já estão. Rode <code>/mcp</code> dentro do Claude Code e confira antes de sair digitando.</p>
+    </div>
+
+    <div class="cmd">
+      <p class="label">Dentro de uma sessão do Claude Code — painel de status, autenticação e ferramentas de cada servidor.</p>
+      <div class="shell">
+        <button class="copy" type="button" data-copy="/mcp">Copiar</button>
+<pre><span class="s">/mcp</span></pre>
+      </div>
+    </div>
+
+    <div class="cmd">
+      <p class="label">Fora da sessão, no shell. A lista mostra o estado de saúde ao lado de cada servidor.</p>
+      <div class="shell">
+        <button class="copy" type="button" data-copy="claude mcp list">Copiar</button>
+<pre><span class="p">$</span> <span class="s">claude mcp list</span></pre>
+      </div>
+    </div>
+
+    <div class="tablewrap">
+      <table>
+        <thead>
+          <tr><th>Estado</th><th>Significa</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><span class="pill ok">✔ Connected</span></td><td>Funcionando. Nada a fazer.</td></tr>
+          <tr><td><span class="pill warn">! Needs authentication</span></td><td>Configurado, mas falta login. Abra <code>/mcp</code> e autentique.</td></tr>
+          <tr><td><span class="pill fail">✘ Failed to connect</span></td><td>A linha traz o código HTTP e o texto do erro. Um <code>401</code> quase sempre é token errado ou vencido.</td></tr>
+          <tr><td><span class="pill warn">⏸ Pending approval</span></td><td>Servidor de <code>.mcp.json</code> esperando sua aprovação. Rode <code>claude</code> na pasta e aceite.</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section>
+    <h2>Adicionar um servidor</h2>
+    <p>Toda a decisão está em uma pergunta: o servidor roda <strong>na nuvem</strong> ou <strong>na sua máquina</strong>? Se as instruções te derem uma URL, é remoto. Se derem um comando de execução, é local.</p>
+
+    <h3>Remoto — HTTP</h3>
+    <div class="cmd">
+      <p class="label">O caso mais comum hoje. Endpoints que terminam em <code>/mcp</code>.</p>
+      <div class="shell">
+        <button class="copy" type="button" data-copy="claude mcp add --transport http notion https://mcp.notion.com/mcp">Copiar</button>
+<pre><span class="c"># sintaxe</span>
+<span class="p">$</span> <span class="s">claude mcp add </span><span class="f">--transport</span><span class="s"> http &lt;nome&gt; &lt;url&gt;</span>
+
+<span class="c"># exemplo real</span>
+<span class="p">$</span> <span class="s">claude mcp add </span><span class="f">--transport</span><span class="s"> http notion https://mcp.notion.com/mcp</span></pre>
+      </div>
+    </div>
+
+    <div class="cmd">
+      <p class="label">Com token no cabeçalho, quando o serviço não usa OAuth.</p>
+      <div class="shell">
+        <button class="copy" type="button" data-copy="claude mcp add --transport http minha-api https://api.exemplo.com/mcp \
+  --header &quot;Authorization: Bearer SEU_TOKEN&quot;">Copiar</button>
+<pre><span class="p">$</span> <span class="s">claude mcp add </span><span class="f">--transport</span><span class="s"> http minha-api https://api.exemplo.com/mcp \</span>
+    <span class="f">--header</span><span class="s"> "Authorization: Bearer SEU_TOKEN"</span></pre>
+      </div>
+    </div>
+
+    <h3>Remoto — SSE</h3>
+    <div class="cmd">
+      <p class="label">Alguns serviços ainda só expõem SSE. Mesma estrutura, outro transporte.</p>
+      <div class="shell">
+        <button class="copy" type="button" data-copy="claude mcp add --transport sse asana https://mcp.asana.com/sse">Copiar</button>
+<pre><span class="p">$</span> <span class="s">claude mcp add </span><span class="f">--transport</span><span class="s"> sse asana https://mcp.asana.com/sse</span></pre>
+      </div>
+    </div>
+
+    <h3>Local — stdio</h3>
+    <div class="cmd">
+      <p class="label">Roda um processo na sua máquina. Tudo depois do <code>--</code> é o comando do servidor, passado intacto.</p>
+      <div class="shell">
+        <button class="copy" type="button" data-copy="claude mcp add --transport stdio airtable --env AIRTABLE_API_KEY=SUA_CHAVE -- npx -y airtable-mcp-server">Copiar</button>
+<pre><span class="c"># sintaxe</span>
+<span class="p">$</span> <span class="s">claude mcp add [opções] &lt;nome&gt; </span><span class="f">--</span><span class="s"> &lt;comando&gt; [args...]</span>
+
+<span class="c"># exemplo real</span>
+<span class="p">$</span> <span class="s">claude mcp add </span><span class="f">--transport</span><span class="s"> stdio airtable \</span>
+    <span class="f">--env</span><span class="s"> AIRTABLE_API_KEY=SUA_CHAVE \</span>
+    <span class="f">--</span><span class="s"> npx -y airtable-mcp-server</span></pre>
+      </div>
+    </div>
+
+    <div class="callout">
+      <span class="tag">Por que o traço duplo importa</span>
+      <p>O <code>--</code> separa as opções do Claude das opções do servidor. Sem ele, uma flag como <code>--port 8080</code> no fim da linha seria interpretada como flag do próprio <code>claude mcp add</code>, e o comando quebra.</p>
+    </div>
+
+    <h3>A partir de um JSON</h3>
+    <div class="cmd">
+      <p class="label">Quando a documentação do serviço só te dá um bloco <code>mcpServers</code> escrito para outro cliente. Passe o objeto de <em>dentro</em> do bloco, não o bloco inteiro.</p>
+      <div class="shell">
+        <button class="copy" type="button" data-copy="claude mcp add-json exemplo '{&quot;command&quot;:&quot;npx&quot;,&quot;args&quot;:[&quot;-y&quot;,&quot;@exemplo/mcp-server&quot;]}'">Copiar</button>
+<pre><span class="p">$</span> <span class="s">claude mcp add-json exemplo \</span>
+    <span class="s">'{"command":"npx","args":["-y","@exemplo/mcp-server"]}'</span></pre>
+      </div>
+    </div>
+
+    <div class="callout">
+      <span class="tag">O erro que pega todo mundo</span>
+      <p>Uma entrada com <code>url</code> mas sem <code>type</code> falha. O Claude Code lê qualquer entrada sem <code>type</code> como servidor stdio, então acrescente <code>"type": "http"</code> (ou <code>"sse"</code>, ou <code>"ws"</code>) antes de colar. Nomes de servidor aceitam só letras, números, hífen e underscore.</p>
+    </div>
+  </section>
+
+  <section>
+    <h2>Onde a configuração é gravada</h2>
+    <p>Todo <code>claude mcp add</code> grava em escopo <strong>local</strong> por padrão — ou seja, só naquele projeto. Se você quer o servidor em qualquer pasta, precisa dizer.</p>
+
+    <div class="tablewrap">
+      <table>
+        <thead>
+          <tr><th>Escopo</th><th>Flag</th><th>Onde vive</th><th>Quando usar</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>local</strong><br><span style="color:var(--ink-faint);font-size:.85em">padrão</span></td>
+            <td><code>--scope local</code></td>
+            <td><code>~/.claude.json</code>, na entrada do projeto atual</td>
+            <td>Um servidor que só faz sentido neste projeto</td>
+          </tr>
+          <tr>
+            <td><strong>project</strong></td>
+            <td><code>--scope project</code></td>
+            <td><code>.mcp.json</code> na raiz do projeto</td>
+            <td>Compartilhar com o time — este arquivo vai pro Git</td>
+          </tr>
+          <tr>
+            <td><strong>user</strong></td>
+            <td><code>--scope user</code></td>
+            <td>Sua config global</td>
+            <td>Vale em todos os projetos. <strong>É o que você quer na maioria dos casos.</strong></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="cmd">
+      <p class="label">Disponível em qualquer pasta da máquina:</p>
+      <div class="shell">
+        <button class="copy" type="button" data-copy="claude mcp add --transport http --scope user hubspot https://mcp.hubspot.com/anthropic">Copiar</button>
+<pre><span class="p">$</span> <span class="s">claude mcp add </span><span class="f">--transport</span><span class="s"> http </span><span class="f">--scope</span><span class="s"> user \</span>
+    <span class="s">hubspot https://mcp.hubspot.com/anthropic</span></pre>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2>GitHub</h2>
+    <p>Não existe conector oficial do GitHub no diretório da Claude, então no terminal ele entra na mão, com um token pessoal.</p>
+
+    <div class="cmd">
+      <p class="label">Gere um PAT em <a href="https://github.com/settings/tokens">github.com/settings/tokens</a> e troque no lugar do placeholder.</p>
+      <div class="shell">
+        <button class="copy" type="button" data-copy="claude mcp add --transport http --scope user github https://api.githubcopilot.com/mcp/ \
+  --header &quot;Authorization: Bearer SEU_GITHUB_PAT&quot;">Copiar</button>
+<pre><span class="p">$</span> <span class="s">claude mcp add </span><span class="f">--transport</span><span class="s"> http </span><span class="f">--scope</span><span class="s"> user github \</span>
+    <span class="s">https://api.githubcopilot.com/mcp/ \</span>
+    <span class="f">--header</span><span class="s"> "Authorization: Bearer SEU_GITHUB_PAT"</span></pre>
+      </div>
+    </div>
+
+    <div class="callout">
+      <span class="tag">O comando aceita qualquer coisa</span>
+      <p>O <code>claude mcp add</code> grava a configuração <strong>sem validar a credencial</strong>. Um token errado é aceito na hora e só falha depois, na conexão. Confirme com <code>/mcp</code> ou <code>claude mcp get github</code> — se aparecer <span class="pill fail">✘</span> com <code>401</code>, o problema é o token.</p>
+    </div>
+
+    <div class="callout">
+      <span class="tag">Cuidado ao colar tokens</span>
+      <p>Colar um token com quebra de linha no fim deixa espaço invisível na config. O Claude Code avisa com <code>Leading or trailing whitespace in: headers.Authorization</code> — mas <strong>não</strong> corrige sozinho. Edite a config para tirar.</p>
+    </div>
+  </section>
+
+  <section>
+    <h2>Gerenciar o que já existe</h2>
+
+    <div class="cmd">
+      <p class="label">Detalhes de um servidor — transporte, escopo, estado e a linha <code>Issue:</code> quando algo falha.</p>
+      <div class="shell">
+        <button class="copy" type="button" data-copy="claude mcp get notion">Copiar</button>
+<pre><span class="p">$</span> <span class="s">claude mcp get notion</span></pre>
+      </div>
+    </div>
+
+    <div class="cmd">
+      <p class="label">Remover. Útil também para refazer um servidor: adicionar o mesmo nome no mesmo escopo dá erro de <code>already exists</code>.</p>
+      <div class="shell">
+        <button class="copy" type="button" data-copy="claude mcp remove notion">Copiar</button>
+<pre><span class="p">$</span> <span class="s">claude mcp remove notion</span></pre>
+      </div>
+    </div>
+
+    <div class="cmd">
+      <p class="label">Importar o que já estava configurado no Claude Desktop.</p>
+      <div class="shell">
+        <button class="copy" type="button" data-copy="claude mcp add-from-claude-desktop --scope user">Copiar</button>
+<pre><span class="p">$</span> <span class="s">claude mcp add-from-claude-desktop </span><span class="f">--scope</span><span class="s"> user</span></pre>
+      </div>
+    </div>
+
+    <div class="callout">
+      <span class="tag">Não funciona no Windows nativo</span>
+      <p>O <code>add-from-claude-desktop</code> só roda em macOS e WSL. No PowerShell ou CMD do Windows ele não acha o arquivo de configuração do Desktop — nesse caso, abra o <code>claude_desktop_config.json</code> e refaça as entradas com <code>claude mcp add-json</code>.</p>
+    </div>
+  </section>
+
+  <section>
+    <h2>Variáveis de ambiente úteis</h2>
+    <div class="tablewrap">
+      <table>
+        <thead>
+          <tr><th>Variável</th><th>Para quê</th><th>Exemplo</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><code>MCP_TIMEOUT</code></td><td>Tempo de inicialização do servidor, em ms</td><td><code>MCP_TIMEOUT=10000 claude</code></td></tr>
+          <tr><td><code>MAX_MCP_OUTPUT_TOKENS</code></td><td>Teto de saída de uma ferramenta. O padrão é 25.000</td><td><code>MAX_MCP_OUTPUT_TOKENS=50000</code></td></tr>
+          <tr><td><code>MCP_TOOL_TIMEOUT</code></td><td>Tempo de execução de ferramenta. Dá para sobrescrever por servidor com <code>"timeout"</code> no <code>.mcp.json</code></td><td>—</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section>
+    <h2>Nomes reservados</h2>
+    <p>Estes nomes pertencem a servidores internos e o <code>claude mcp add</code> os rejeita. Se um deles aparecer na sua config antiga, renomeie antes de importar.</p>
+    <p><code>workspace</code> · <code>claude-in-chrome</code> · <code>computer-use</code> · <code>Claude Preview</code> · <code>Claude Browser</code></p>
+  </section>
+
+  <footer>
+    <p>Fontes: <a href="https://code.claude.com/docs/en/mcp">Connect Claude Code to tools via MCP</a> e <a href="https://code.claude.com/docs/en/setup">Advanced setup</a> — documentação oficial do Claude Code.</p>
+    <p>Verifique se confia em cada servidor antes de conectar. Servidores que buscam conteúdo externo abrem espaço para prompt injection.</p>
+  </footer>
+
+</div>
+
+<script>
+  document.querySelectorAll('.copy').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      var text = btn.getAttribute('data-copy') || '';
+      var done = function () {
+        btn.textContent = 'Copiado';
+        btn.setAttribute('data-done', '1');
+        setTimeout(function () {
+          btn.textContent = 'Copiar';
+          btn.removeAttribute('data-done');
+        }, 1600);
+      };
+      try {
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          navigator.clipboard.writeText(text).then(done, function () {
+            btn.textContent = 'Falhou';
+            setTimeout(function () { btn.textContent = 'Copiar'; }, 1600);
+          });
+          return;
+        }
+      } catch (e) { /* segue para o fallback */ }
+      try {
+        var ta = document.createElement('textarea');
+        ta.value = text;
+        ta.setAttribute('readonly', '');
+        ta.style.position = 'fixed';
+        ta.style.opacity = '0';
+        document.body.appendChild(ta);
+        ta.select();
+        document.execCommand('copy');
+        document.body.removeChild(ta);
+        done();
+      } catch (e2) {
+        btn.textContent = 'Falhou';
+        setTimeout(function () { btn.textContent = 'Copiar'; }, 1600);
+      }
+    });
+  });
+</script>
+
+</body></html>
