@@ -1,0 +1,1321 @@
+<!DOCTYPE html>
+<!--
+================================================================================
+  APOSTILA · DESIGN PATTERNS DO ZERO AO PROFISSIONAL
+  Volume 1 — Fundamentos + Padrões Criacionais
+  Assinatura: KALIXTO  ·  afro-futurismo cyberpunk neon
+  Arquivo único · HTML5 + CSS3 (tokens em camadas) + JS vanilla · PT-BR
+  Referência de terminologia/agrupamento: refactoring.guru/pt-br/design-patterns
+  Conteúdo 100% autoral. Java como linguagem principal.
+================================================================================
+-->
+<html lang="pt-BR">
+<head><script>(function(){try{var t=localStorage.getItem('kx-theme');if(t==='light'||t==='dark')document.documentElement.setAttribute('data-theme',t);}catch(e){}})();</script><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Unbounded:wght@600;700&family=Sora:wght@600&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap"><style>/* =====================================================================
+   KALIXTO DESIGN SYSTEM — tokens espelhados do arquivo Figma
+   "Kalixto — Design System" (coleções Primitives, Theme, Spacing & Radius;
+   estilos de texto, efeitos Glass/Glow/Elevation e gradientes).
+   Tema padrão: Dark. Light via prefers-color-scheme ou data-theme.
+   ===================================================================== */
+:root{
+  /* Primitives */
+  --black-950:#050505; --gray-900:#1B1B1B; --gray-800:#2D2D2D; --gray-500:#6E6E80; --gray-300:#B3B3C2; --gray-100:#F5F7FA; --white:#FFFFFF;
+  --ink-900:#120B24; --ink-600:#4A4560;
+  --purple-700:#5A12D6; --purple-500:#7B2EFF; --purple-300:#B899FF; --purple-100:#EADFFF;
+  --pink-700:#D6127F; --pink-500:#FF2DAA; --pink-100:#FFD5F1;
+  --cyan-700:#0089A8; --cyan-500:#00D9FF; --cyan-100:#D8F7FF;
+  --gold-700:#B7791F; --gold-500:#FFC53D;
+  --green-700:#0E9F6E; --green-500:#22E3A0;
+  --amber-700:#B86E00; --amber-500:#FFB020;
+  --red-700:#D92D4A; --red-500:#FF4D6A;
+  /* Auditoria 30/09/2026 — tons 800 para o modo Light e cinzas do text/muted */
+  --gray-400:#9494A3; --gray-600:#636374;
+  --pink-800:#C11072; --cyan-800:#006E87; --gold-800:#895B17; --green-800:#0A724F; --amber-800:#925700; --red-800:#C0233D;
+
+  /* Theme · Dark (padrão) */
+  --bg-base:var(--black-950); --bg-surface:var(--gray-900); --bg-elevated:var(--gray-800);
+  --text-primary:var(--white); --text-secondary:var(--gray-300); --text-muted:var(--gray-400);
+  --brand-primary:var(--purple-500); --brand-secondary:var(--pink-500); --brand-tertiary:var(--cyan-500);
+  --accent-gold:var(--gold-500); --support-lilac:var(--purple-300);
+  --fb-success:var(--green-500); --fb-warning:var(--amber-500); --fb-error:var(--red-500); --fb-info:var(--cyan-500);
+  --glass-fill:rgba(255,255,255,.06); --glass-stroke:rgba(255,255,255,.14); --glass-tint:rgba(123,46,255,.10);
+  --glass-shadow:0 24px 64px rgba(0,0,0,.45), inset 0 1px 0 rgba(255,255,255,.12);
+  --glass-shadow-s:0 12px 32px rgba(0,0,0,.35), inset 0 1px 0 rgba(255,255,255,.10);
+  --on-accent:var(--black-950); --on-brand:var(--white);
+  --code-bg:rgba(0,0,0,.35);
+  --aura-1:rgba(123,46,255,.34); --aura-2:rgba(255,45,170,.16); --aura-3:rgba(0,217,255,.10);
+
+  /* Gradientes (Paint styles) */
+  --g-neon:linear-gradient(90deg,#7B2EFF 0%,#FF2DAA 100%);
+  --g-tech:linear-gradient(90deg,#00D9FF 0%,#7B2EFF 100%);
+  --g-ia:linear-gradient(90deg,#00D9FF 0%,#B899FF 50%,#FF2DAA 100%);
+  --g-gamer:linear-gradient(90deg,#FF2DAA 0%,#7B2EFF 50%,#00D9FF 100%);
+  --g-ancestral:linear-gradient(90deg,#FFC53D 0%,#FF2DAA 50%,#7B2EFF 100%);
+
+  /* Glow (Effect styles) */
+  --glow-purple:0 0 40px rgba(123,46,255,.55); --glow-pink:0 0 40px rgba(255,45,170,.50); --glow-cyan:0 0 40px rgba(0,217,255,.50);
+
+  /* Spacing & Radius */
+  --s1:4px; --s2:8px; --s3:12px; --s4:16px; --s6:24px; --s8:32px; --s12:48px; --s16:64px; --s24:96px;
+  --r-sm:8px; --r-md:16px; --r-alert:20px; --r-lg:24px; --r-card:28px; --r-xl:32px; --r-pill:999px;
+  --blur-sm:12px; --blur-md:24px;
+
+  /* Tipografia (Text styles) */
+  --f-display:"Unbounded","Sora",system-ui,sans-serif;
+  --f-heading:"Sora","Inter",system-ui,sans-serif;
+  --f-body:"Inter",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --f-code:"JetBrains Mono",ui-monospace,Consolas,monospace;
+  color-scheme:dark;
+}
+/* Theme · Light */
+@media (prefers-color-scheme: light){
+  :root:not([data-theme="dark"]){
+    --bg-base:var(--gray-100); --bg-surface:var(--white); --bg-elevated:var(--purple-100);
+    --text-primary:var(--ink-900); --text-secondary:var(--ink-600); --text-muted:var(--gray-600);
+    --brand-secondary:var(--pink-800); --brand-tertiary:var(--cyan-800);
+    --accent-gold:var(--gold-800); --support-lilac:var(--purple-700);
+    --fb-success:var(--green-800); --fb-warning:var(--amber-800); --fb-error:var(--red-800); --fb-info:var(--cyan-800);
+    --glass-fill:rgba(255,255,255,.55); --glass-stroke:rgba(255,255,255,.85); --glass-tint:rgba(184,153,255,.18);
+    --glass-shadow:0 24px 64px rgba(90,18,214,.10), inset 0 1px 0 rgba(255,255,255,.7);
+    --glass-shadow-s:0 12px 32px rgba(90,18,214,.08), inset 0 1px 0 rgba(255,255,255,.7);
+    --on-accent:var(--white);
+    --code-bg:rgba(255,255,255,.7);
+    --aura-1:rgba(234,223,255,.9); --aura-2:rgba(255,213,241,.8); --aura-3:rgba(216,247,255,.8);
+    color-scheme:light;
+  }
+}
+:root[data-theme="light"]{
+  --bg-base:var(--gray-100); --bg-surface:var(--white); --bg-elevated:var(--purple-100);
+  --text-primary:var(--ink-900); --text-secondary:var(--ink-600); --text-muted:var(--gray-600);
+  --brand-secondary:var(--pink-800); --brand-tertiary:var(--cyan-800);
+  --accent-gold:var(--gold-800); --support-lilac:var(--purple-700);
+  --fb-success:var(--green-800); --fb-warning:var(--amber-800); --fb-error:var(--red-800); --fb-info:var(--cyan-800);
+  --glass-fill:rgba(255,255,255,.55); --glass-stroke:rgba(255,255,255,.85); --glass-tint:rgba(184,153,255,.18);
+  --glass-shadow:0 24px 64px rgba(90,18,214,.10), inset 0 1px 0 rgba(255,255,255,.7);
+  --glass-shadow-s:0 12px 32px rgba(90,18,214,.08), inset 0 1px 0 rgba(255,255,255,.7);
+  --on-accent:var(--white);
+  --code-bg:rgba(255,255,255,.7);
+  --aura-1:rgba(234,223,255,.9); --aura-2:rgba(255,213,241,.8); --aura-3:rgba(216,247,255,.8);
+  color-scheme:light;
+}
+
+/* ---------- Base ---------- */
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important}}
+body{background:var(--bg-base);color:var(--text-primary);font:400 16px/24px var(--f-body);
+  background-image:
+    radial-gradient(900px 620px at 92% -8%,var(--aura-1),transparent 62%),
+    radial-gradient(760px 520px at -12% 38%,var(--aura-2),transparent 60%),
+    radial-gradient(700px 500px at 80% 110%,var(--aura-3),transparent 60%);
+  background-attachment:fixed}
+a{color:var(--brand-tertiary)}
+:focus-visible{outline:2px solid var(--brand-tertiary);outline-offset:3px}
+strong{font-weight:600;color:var(--text-primary)}
+
+/* ---------- Tipografia (Text styles do Figma, escalados para web) ---------- */
+.t-display{font:700 clamp(40px,7vw,72px)/1.1 var(--f-display);letter-spacing:-.02em;margin:0;text-wrap:balance}
+.t-h1{font:600 clamp(30px,4.6vw,48px)/1.16 var(--f-display);letter-spacing:-.01em;margin:0;text-wrap:balance}
+.t-h2{font:600 clamp(26px,3.6vw,36px)/1.22 var(--f-display);letter-spacing:-.01em;margin:0;text-wrap:balance}
+.t-h3{font:600 clamp(22px,2.8vw,28px)/1.28 var(--f-heading);margin:0;text-wrap:balance}
+.t-sub-l{font:600 22px/30px var(--f-heading);margin:0}
+.t-sub-m{font:600 18px/26px var(--f-heading);margin:0}
+.t-overline{font:600 13px/16px var(--f-heading);letter-spacing:.14em;text-transform:uppercase}
+.t-body-l{font:400 18px/28px var(--f-body)}
+.t-body-s{font:400 14px/20px var(--f-body)}
+.t-caption{font:500 12px/16px var(--f-body);letter-spacing:.02em}
+.t-code{font:400 13px/20px var(--f-code)}
+.grad-text{background:var(--g-neon);-webkit-background-clip:text;background-clip:text;color:transparent}
+
+/* ---------- Cabeçalho de seção (padrão das páginas do DS) ---------- */
+.kx-eyebrow{display:flex;align-items:center;gap:var(--s2);color:var(--text-muted)}
+.kx-eyebrow .num{font:600 11px/1 var(--f-heading);color:#fff;background:var(--g-neon);border-radius:var(--r-pill);padding:4px 8px;letter-spacing:.04em}
+.kx-rule{width:72px;height:2px;border-radius:2px;background:var(--g-ia);border:0;margin:0}
+
+/* ---------- Glass (Effect Glass/Dark · M | S) ---------- */
+.glass{background:var(--glass-fill);border:1px solid var(--glass-stroke);box-shadow:var(--glass-shadow);
+  -webkit-backdrop-filter:blur(var(--blur-md));backdrop-filter:blur(var(--blur-md))}
+.glass-s{background:var(--glass-fill);border:1px solid var(--glass-stroke);box-shadow:var(--glass-shadow-s);
+  -webkit-backdrop-filter:blur(var(--blur-sm));backdrop-filter:blur(var(--blur-sm))}
+
+/* ---------- Button (Primary · Secondary · Glass · Ghost) ---------- */
+.btn{display:inline-flex;align-items:center;gap:var(--s3);font:600 17px/21px var(--f-heading);text-decoration:none;cursor:pointer;
+  border-radius:var(--r-pill);padding:16px 30px;border:0;color:#fff;transition:box-shadow .2s,transform .2s,filter .2s}
+.btn .arrow{transition:transform .2s}
+.btn:hover .arrow{transform:translateX(3px)}
+.btn--primary{background:var(--g-neon)}
+.btn--primary:hover{box-shadow:var(--glow-pink)}
+.btn--secondary{background:var(--brand-primary)}
+.btn--secondary:hover{box-shadow:var(--glow-purple)}
+.btn--glass{background:var(--glass-fill);border:1px solid var(--glass-stroke);color:var(--text-primary);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px)}
+.btn--glass .arrow{color:var(--brand-tertiary)}
+.btn--ghost{background:transparent;border:1.5px solid var(--brand-tertiary);color:var(--brand-tertiary)}
+.btn--ghost:hover{box-shadow:var(--glow-cyan)}
+.btn--sm{font-size:15px;padding:12px 22px}
+
+/* ---------- Badge (Tech · Dança · IA · Gamer · Evento · Aula) ---------- */
+.badge{--c:var(--brand-tertiary);display:inline-flex;align-items:center;gap:var(--s2);padding:8px 16px 8px 14px;border-radius:var(--r-pill);
+  background:color-mix(in srgb,var(--c) 16%,transparent);border:1px solid color-mix(in srgb,var(--c) 45%,transparent);color:var(--c);
+  font:600 13px/16px var(--f-heading);letter-spacing:.06em;text-transform:uppercase;white-space:nowrap}
+.badge i{font:500 13px/16px var(--f-code);font-style:normal}
+.badge--tech{--c:var(--brand-tertiary)} .badge--danca{--c:var(--brand-secondary)} .badge--ia{--c:var(--support-lilac)}
+.badge--gamer{--c:var(--brand-primary)} .badge--evento{--c:var(--accent-gold)} .badge--aula{--c:var(--fb-success)}
+
+/* ---------- Alert (Success · Warning · Error · Info) ---------- */
+.alert{--c:var(--fb-info);display:flex;gap:var(--s4);align-items:flex-start;padding:20px 24px;border-radius:var(--r-alert);
+  background:var(--glass-fill);border:1px solid color-mix(in srgb,var(--c) 40%,transparent);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px)}
+.alert .ico{flex:none;width:28px;height:28px;border-radius:50%;background:var(--c);color:var(--on-accent);display:grid;place-items:center;font:500 15px/1 var(--f-code)}
+.alert .ttl{font:600 17px/24px var(--f-heading);margin:0 0 2px;color:var(--text-primary)}
+.alert p{margin:0;font:400 15px/22px var(--f-body);color:var(--text-secondary)}
+.alert--success{--c:var(--fb-success)} .alert--warning{--c:var(--fb-warning)} .alert--error{--c:var(--fb-error)} .alert--info{--c:var(--fb-info)}
+
+/* ---------- Destaque / Callout ---------- */
+.callout{display:flex;gap:var(--s6);border-radius:var(--r-lg);overflow:hidden}
+.callout::before{content:"";flex:none;width:4px;background:var(--g-neon)}
+.callout .in{padding:24px 32px 24px 0}
+.callout .t-overline{color:var(--brand-secondary);font-size:12px}
+.callout .q{font:600 clamp(17px,2vw,21px)/1.45 var(--f-heading);margin:8px 0 0;color:var(--text-primary)}
+
+/* ---------- Stat ---------- */
+.stat{padding:var(--s8);border-radius:var(--r-card);display:grid;gap:10px;min-width:0}
+.stat .t-overline{color:var(--text-muted);font-size:12px}
+.stat .num{font:700 clamp(40px,6vw,56px)/1 var(--f-display);background:var(--g-neon);-webkit-background-clip:text;background-clip:text;color:transparent}
+.stat .delta{font:500 13px/16px var(--f-code);color:var(--fb-success)}
+
+/* ---------- Chamada / CTA ---------- */
+.cta{border-radius:var(--r-xl);padding:36px 44px;display:flex;align-items:center;justify-content:space-between;gap:var(--s8);flex-wrap:wrap;
+  background:linear-gradient(100deg,rgba(123,46,255,.28),rgba(255,45,170,.16) 55%,rgba(255,197,61,.10)),var(--bg-surface);
+  border:1px solid var(--glass-stroke);box-shadow:var(--glass-shadow)}
+.cta h2{font:600 clamp(22px,3vw,28px)/1.25 var(--f-display);margin:0 0 6px;text-wrap:balance}
+.cta p{margin:0;color:var(--text-secondary)}
+
+/* ---------- Código ---------- */
+pre{font:400 13px/20px var(--f-code);background:var(--code-bg);border:1px solid var(--glass-stroke);border-radius:var(--r-md);padding:var(--s4) 20px;overflow-x:auto;margin:0;color:var(--text-primary)}
+code{font-family:var(--f-code);font-size:.9em;color:var(--brand-tertiary);background:color-mix(in srgb,var(--brand-tertiary) 12%,transparent);padding:1px 6px;border-radius:6px}
+pre code{background:none;color:inherit;padding:0;font-size:inherit}
+.tk-k{color:var(--brand-secondary)} .tk-s{color:var(--fb-success)} .tk-c{color:var(--text-muted)} .tk-n{color:var(--accent-gold)}
+
+/* ---------- Logo oficial ---------- */
+.kx-logo{border-radius:50%;flex:none;display:block;box-shadow:var(--glow-purple)}
+</style><style>
+:root:not(#kx){--kx-magenta:var(--brand-secondary);--kx-magenta-2:var(--brand-secondary);--kx-purple:var(--brand-primary);--kx-purple-2:var(--brand-primary);--kx-blue:var(--brand-tertiary);--kx-cyan:var(--brand-tertiary);--kx-amber:var(--fb-warning);--kx-green:var(--fb-success);--kx-red:var(--fb-error);--dpk-900:var(--bg-base);--dpk-850:var(--bg-base);--dpk-800:var(--bg-surface);--dpk-700:var(--bg-surface);--dpk-600:var(--bg-elevated);--line:var(--glass-stroke);--line-soft:var(--glass-stroke);--paper:var(--bg-surface);--paper-2:var(--bg-elevated);--txt:var(--text-primary);--txt-soft:var(--text-secondary);--txt-dim:var(--text-muted)}
+
+/* === Kalixto skin: fontes e superfícies do DS === */
+body{font-family:var(--f-body)!important;background:var(--bg-base)!important;color:var(--text-primary);
+  background-image:radial-gradient(900px 620px at 92% -8%,var(--aura-1),transparent 62%),radial-gradient(760px 520px at -12% 38%,var(--aura-2),transparent 60%)!important;background-attachment:fixed!important}
+h1{font-family:var(--f-display)!important;font-weight:700!important;letter-spacing:-.02em}
+h2{font-family:var(--f-display)!important;font-weight:600!important;letter-spacing:-.01em}
+h3,h4,h5,th,.eyebrow,.kicker,.tag{font-family:var(--f-heading)!important}
+code,pre,kbd,samp,.mono,[class*="term"],[class*="code"]{font-family:var(--f-code)!important}
+em{color:var(--brand-secondary)}
+.kx-bar{max-width:1100px;margin:0 auto;padding:20px 16px 0;display:flex;align-items:center;gap:12px;flex-wrap:wrap;position:relative;z-index:5}
+.kx-bar b{font:600 14px/18px var(--f-heading);color:var(--text-primary)}
+.kx-bar small{display:block;font:500 12px/16px var(--f-body);color:var(--text-muted)}
+.kx-bar a{margin-left:auto;font:600 14px/20px var(--f-heading);color:var(--brand-tertiary);text-decoration:none}
+.kx-sig{max-width:1100px;margin:48px auto 96px;padding:0 16px}
+.kx-sig div{display:flex;align-items:center;gap:12px;padding:20px 24px;border-radius:28px;background:var(--glass-fill);border:1px solid var(--glass-stroke)}
+.kx-sig b{font:600 15px/20px var(--f-heading);color:var(--text-primary);display:block}
+.kx-sig small{font:500 12px/16px var(--f-body);color:var(--text-muted)}
+
+.calmtog{bottom:calc(80px + env(safe-area-inset-bottom,0px))!important}
+.shell>*,main,.wrap{min-width:0}
+@media (max-width:860px){.shell{grid-template-columns:minmax(0,1fr)!important}}
+pre{max-width:100%;overflow-x:auto}
+
+.code,.uml,pre{--bg-base:#050505;--bg-surface:#1B1B1B;--bg-elevated:#2D2D2D;--text-primary:#FFFFFF;--text-secondary:#B3B3C2;--text-muted:#9494A3;--brand-primary:#7B2EFF;--brand-secondary:#FF2DAA;--brand-tertiary:#00D9FF;--accent-gold:#FFC53D;--support-lilac:#B899FF;--fb-success:#22E3A0;--fb-warning:#FFB020;--fb-error:#FF4D6A;--fb-info:#00D9FF;--glass-fill:rgba(255,255,255,.06);--glass-stroke:rgba(255,255,255,.14);--code-bg:transparent;color-scheme:dark;color:var(--text-primary);--kx-magenta:var(--brand-secondary);--kx-magenta-2:var(--brand-secondary);--kx-purple:var(--brand-primary);--kx-purple-2:var(--brand-primary);--kx-blue:var(--brand-tertiary);--kx-cyan:var(--brand-tertiary);--kx-amber:var(--fb-warning);--kx-green:var(--fb-success);--kx-red:var(--fb-error);--dpk-900:var(--bg-base);--dpk-850:var(--bg-base);--dpk-800:var(--bg-surface);--dpk-700:var(--bg-surface);--dpk-600:var(--bg-elevated);--line:var(--glass-stroke);--line-soft:var(--glass-stroke);--paper:var(--bg-surface);--paper-2:var(--bg-elevated);--txt:var(--text-primary);--txt-soft:var(--text-secondary);--txt-dim:var(--text-muted)}</style>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<meta name="description" content="Apostila Kalixto de Design Patterns: do zero ao profissional. Fundamentos, SOLID e padrões criacionais com Java comentado, analogias, UML textual, exercícios e quizzes."/>
+<meta name="author" content="Kalixto"/>
+<title>Design Patterns do Zero · Vol. 1 · Apostila Kalixto</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+
+<style>
+/* ════════════════════════════════════════════════════════════════════════════
+   CAMADA 1 — TOKENS PRIMITIVOS (valores brutos da marca Kalixto)
+   ════════════════════════════════════════════════════════════════════════════ */
+:root{
+  --kx-magenta:#FF2D8A; --kx-magenta-2:#FF6EB4;
+  --kx-purple:#A855F7;  --kx-purple-2:#7B2FBE;
+  --kx-blue:#2E8BFF;    --kx-cyan:#22D3EE;
+  --kx-amber:#FFB020;   --kx-green:#34D399; --kx-red:#FF5470;
+  --dpk-900:#070010; --dpk-850:#0A0014; --dpk-800:#0E0118; --dpk-700:#160226;
+  --dpk-600:#1E0833; --line:#33204d; --line-soft:#26163b;
+  --paper:#0C0118; --paper-2:#120322;
+  --txt:#ECE6F5; --txt-soft:#C3B6D6; --txt-dim:#8E80A6;
+  --radius:16px; --radius-sm:10px;
+  --maxw:880px;
+  --glow-m:0 0 0 1px #FF2D8A55, 0 0 22px #FF2D8A40;
+  --glow-p:0 0 0 1px #A855F755, 0 0 22px #A855F740;
+  --glow-b:0 0 0 1px #2E8BFF55, 0 0 22px #2E8BFF40;
+}
+/* ════════════════════════════════════════════════════════════════════════════
+   CAMADA 2 — TOKENS SEMÂNTICOS  +  RESET
+   ════════════════════════════════════════════════════════════════════════════ */
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  font-family:'Inter',system-ui,sans-serif;background:var(--dpk-900);color:var(--txt);
+  line-height:1.72; font-size:17px;background-image:
+    radial-gradient(900px 500px at 12% -8%, #FF2D8A18, transparent 60%),
+    radial-gradient(900px 600px at 100% 0%, #2E8BFF14, transparent 55%),
+    radial-gradient(700px 700px at 50% 120%, #A855F712, transparent 60%);
+  background-attachment:fixed;
+}
+body.calm{background-image:none;background:color-mix(in srgb,var(--brand-primary) 12%,var(--bg-surface))}
+body.calm .glowy{box-shadow:none!important}
+a{color:var(--kx-cyan);text-decoration:none}
+a:hover{text-decoration:underline}
+
+/* PROGRESS BAR */
+#bar{position:fixed;top:0;left:0;height:3px;width:0;z-index:60;background:linear-gradient(90deg,var(--kx-magenta),var(--kx-purple),var(--kx-blue));
+  box-shadow:0 0 12px #A855F7aa}
+
+/* ════════════════════════════════════════════════════════════════════════════
+   SHELL — sidebar + conteúdo
+   ════════════════════════════════════════════════════════════════════════════ */
+.shell{display:grid;grid-template-columns:300px 1fr;min-height:100vh}
+.rail{position:sticky;top:0;height:100vh;overflow-y:auto;background:linear-gradient(180deg,var(--dpk-850),var(--dpk-900));border-right:1px solid var(--line);padding:22px 14px 60px}
+.rail::-webkit-scrollbar{width:8px}
+.rail::-webkit-scrollbar-thumb{background:color-mix(in srgb,var(--brand-primary) 12%,var(--bg-surface));border-radius:8px}
+.brand{display:flex;align-items:center;gap:12px;padding:6px 8px 16px;margin-bottom:8px;border-bottom:1px solid var(--line-soft)}
+.kx-mark{width:46px;height:46px;flex:0 0 auto;filter:drop-shadow(0 0 10px #A855F766)}
+.brand b{font-family:'Space Grotesk';font-size:18px;letter-spacing:.5px;color:var(--text-primary);display:block;line-height:1.1}
+.brand small{font-family:'JetBrains Mono';font-size:9.5px;letter-spacing:2.5px;color:var(--kx-magenta);text-transform:uppercase}
+.rail nav{font-size:13.5px}
+.rail .grp{font-family:'JetBrains Mono';font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--txt-dim);margin:18px 10px 6px;display:flex;align-items:center;gap:8px}
+.rail .grp::before{content:"";width:14px;height:1px;background:var(--kx-purple)}
+.rail a{display:block;color:var(--txt-soft);padding:6px 10px;border-radius:8px;border-left:2px solid transparent}
+.rail a:hover{background:color-mix(in srgb,var(--text-primary) 3.5%,transparent);text-decoration:none;color:var(--text-primary)}
+.rail a.on{color:var(--text-primary);background:#A855F71a;border-left-color:var(--kx-magenta)}
+.rail a.soon{opacity:.45;pointer-events:none}
+.rail a.soon::after{content:"em breve";float:right;font-family:'JetBrains Mono';font-size:8.5px;letter-spacing:1px;color:var(--kx-amber);border:1px solid #FFB02055;border-radius:6px;padding:0 5px;margin-top:2px}
+
+.wrap{max-width:var(--maxw);margin:0 auto;padding:54px 28px 140px}
+
+/* TOPBAR mobile */
+.topbar{display:none}
+
+/* ════════════════════════════════════════════════════════════════════════════
+   TIPOGRAFIA DE CONTEÚDO
+   ════════════════════════════════════════════════════════════════════════════ */
+.eyebrow{font-family:'JetBrains Mono';font-size:11px;letter-spacing:3px;text-transform:uppercase;color:var(--kx-magenta);margin-bottom:10px}
+h1.ch{font-family:'Space Grotesk';font-size:clamp(28px,5vw,42px);line-height:1.08;font-weight:700;color:var(--text-primary);letter-spacing:-.5px;margin-bottom:14px}
+h2{font-family:'Space Grotesk';font-size:clamp(21px,3.4vw,28px);color:var(--text-primary);font-weight:600;
+  margin:42px 0 12px;letter-spacing:-.3px;scroll-margin-top:24px}
+h3{font-family:'Space Grotesk';font-size:19px;color:var(--kx-purple);font-weight:600;margin:28px 0 8px}
+p{margin:0 0 14px;color:var(--txt-soft)}
+p strong,li strong{color:var(--txt);font-weight:600}
+em{color:var(--kx-cyan);font-style:normal}
+.lead{font-size:19px;color:var(--txt);margin-bottom:24px}
+ul,ol{margin:0 0 16px 24px;color:var(--txt-soft)}
+li{margin-bottom:7px}
+code{font-family:'JetBrains Mono';font-size:.86em;background:#A855F71a;color:var(--text-primary);
+  padding:1px 6px;border-radius:6px;border:1px solid #A855F733}
+hr.sep{border:0;height:1px;background:linear-gradient(90deg,transparent,var(--line),transparent);margin:46px 0}
+
+/* section divisória de PARTE */
+.part{margin:30px 0 10px;padding:30px 26px;border-radius:var(--radius);position:relative;overflow:hidden;background:linear-gradient(135deg,color-mix(in srgb,var(--brand-primary) 12%,var(--bg-surface)),color-mix(in srgb,var(--brand-primary) 12%,var(--bg-surface)));border:1px solid var(--line)}
+.part::before{content:"";position:absolute;inset:0;background:
+  radial-gradient(400px 200px at 90% 10%, #2E8BFF22, transparent 60%);pointer-events:none}
+.part .pnum{font-family:'JetBrains Mono';font-size:12px;letter-spacing:3px;color:var(--kx-blue)}
+.part h2{margin:6px 0 6px;border:0}
+.part p{margin:0;color:var(--txt-soft)}
+
+/* ════════════════════════════════════════════════════════════════════════════
+   BOXES (curio / warn / key / tip / ana)
+   ════════════════════════════════════════════════════════════════════════════ */
+.box{border-radius:var(--radius);padding:18px 20px;margin:22px 0;border:1px solid var(--line);background:var(--paper);position:relative}
+.box .bt{font-family:'Space Grotesk';font-weight:600;font-size:14px;display:flex;align-items:center;gap:9px;margin-bottom:7px}
+.box .bt .ic{width:24px;height:24px;border-radius:7px;display:grid;place-items:center;font-size:13px;flex:0 0 auto}
+.box p:last-child{margin-bottom:0}
+.box.key{border-color:#FF2D8A55;background:linear-gradient(180deg,color-mix(in srgb,var(--brand-secondary) 12%,var(--bg-surface)),color-mix(in srgb,var(--brand-primary) 12%,var(--bg-surface)))}
+.box.key .bt{color:var(--kx-magenta)} .box.key .ic{background:#FF2D8A22;color:var(--kx-magenta)}
+.box.warn{border-color:#FF547055;background:linear-gradient(180deg,color-mix(in srgb,var(--brand-secondary) 12%,var(--bg-surface)),color-mix(in srgb,var(--brand-primary) 12%,var(--bg-surface)))}
+.box.warn .bt{color:var(--kx-red)} .box.warn .ic{background:#FF547022;color:var(--kx-red)}
+.box.tip{border-color:#34D39955;background:linear-gradient(180deg,color-mix(in srgb,var(--fb-success) 12%,var(--bg-surface)),color-mix(in srgb,var(--brand-primary) 12%,var(--bg-surface)))}
+.box.tip .bt{color:var(--kx-green)} .box.tip .ic{background:#34D39922;color:var(--kx-green)}
+.box.curio{border-color:#2E8BFF55;background:linear-gradient(180deg,color-mix(in srgb,var(--brand-tertiary) 12%,var(--bg-surface)),color-mix(in srgb,var(--brand-primary) 12%,var(--bg-surface)))}
+.box.curio .bt{color:var(--kx-blue)} .box.curio .ic{background:#2E8BFF22;color:var(--kx-blue)}
+.box.ana{border-color:#A855F755;background:linear-gradient(180deg,color-mix(in srgb,var(--brand-primary) 12%,var(--bg-surface)),color-mix(in srgb,var(--brand-primary) 12%,var(--bg-surface)))}
+.box.ana .bt{color:var(--kx-purple)} .box.ana .ic{background:#A855F722;color:var(--kx-purple)}
+
+/* ════════════════════════════════════════════════════════════════════════════
+   CÓDIGO
+   ════════════════════════════════════════════════════════════════════════════ */
+.code{margin:20px 0;border-radius:var(--radius);overflow:hidden;border:1px solid var(--line);background:#08010f}
+.code .hd{display:flex;align-items:center;gap:8px;padding:9px 14px;background:#120322;border-bottom:1px solid var(--line)}
+.code .hd .dot{width:10px;height:10px;border-radius:50%}
+.code .hd .d1{background:#FF5470}.code .hd .d2{background:#FFB020}.code .hd .d3{background:#34D399}
+.code .hd .lng{margin-left:auto;font-family:'JetBrains Mono';font-size:10.5px;letter-spacing:1.5px;
+  text-transform:uppercase;color:var(--txt-dim)}
+.code pre{margin:0;padding:16px 18px;overflow-x:auto}
+.code code{background:none;border:0;padding:0;color:#D9CFEA;font-size:13.5px;line-height:1.7;display:block;white-space:pre}
+.code .cm{color:#6f6388;font-style:italic}   /* comentário */
+.code .kw{color:#FF6EB4}                       /* keyword */
+.code .ty{color:#22D3EE}                        /* tipo/classe */
+.code .st{color:#A7E8B0}                        /* string */
+.code .nm{color:#FFB020}                        /* número */
+.code .fn{color:#C9A6FF}                        /* método */
+.code .an{color:#FF9E5e}                        /* anotação */
+
+/* UML / diagrama ASCII */
+.uml{margin:20px 0;border-radius:var(--radius);border:1px dashed #A855F766;background:#0a0118;
+  padding:16px 18px;overflow-x:auto}
+.uml pre{font-family:'JetBrains Mono';font-size:12.5px;line-height:1.55;color:#BFA9E0;white-space:pre}
+.uml .cap{font-family:'JetBrains Mono';font-size:10px;letter-spacing:2px;text-transform:uppercase;
+  color:var(--kx-purple);margin-bottom:10px}
+
+/* TABELA */
+.tbl{margin:22px 0;border-radius:var(--radius);overflow:hidden;border:1px solid var(--line)}
+table{width:100%;border-collapse:collapse;font-size:14.5px}
+th{background:color-mix(in srgb,var(--brand-primary) 12%,var(--bg-surface));color:var(--text-primary);font-family:'Space Grotesk';font-weight:600;text-align:left;padding:11px 14px;border-bottom:1px solid var(--line);font-size:13px}
+td{padding:10px 14px;border-bottom:1px solid var(--line-soft);color:var(--txt-soft);vertical-align:top}
+tr:last-child td{border-bottom:0}
+tr:nth-child(even) td{background:color-mix(in srgb,var(--text-primary) 2.0%,transparent)}
+
+/* EXERCÍCIO */
+.ex{margin:24px 0;border-radius:var(--radius);border:1px solid #FF2D8A44;overflow:hidden;background:linear-gradient(180deg,color-mix(in srgb,var(--brand-primary) 12%,var(--bg-surface)),color-mix(in srgb,var(--brand-primary) 12%,var(--bg-surface)))}
+.ex .xh{padding:12px 18px;background:#FF2D8A14;border-bottom:1px solid #FF2D8A33;
+  font-family:'Space Grotesk';font-weight:600;color:var(--kx-magenta-2);display:flex;align-items:center;gap:10px}
+.ex .xh .tag{font-family:'JetBrains Mono';font-size:10px;letter-spacing:1px;background:#FF2D8A22;color:var(--kx-magenta);
+  padding:2px 8px;border-radius:6px;text-transform:uppercase}
+.ex .xb{padding:16px 18px}
+.ex .deliver{margin-top:12px;padding:10px 14px;border-radius:10px;background:#2E8BFF12;border:1px solid #2E8BFF33;
+  font-size:13.5px;color:var(--txt-soft)}
+.ex .deliver b{color:var(--kx-blue)}
+
+/* QUIZ */
+.quiz{margin:26px 0;border-radius:var(--radius);border:1px solid var(--line);background:var(--paper);overflow:hidden}
+.quiz .qh{padding:13px 18px;background:color-mix(in srgb,var(--brand-primary) 12%,var(--bg-surface));border-bottom:1px solid var(--line);
+  font-family:'Space Grotesk';font-weight:600;color:var(--text-primary);display:flex;align-items:center;gap:9px}
+.quiz .qh .ic{color:var(--kx-purple)}
+.q{padding:16px 18px;border-bottom:1px solid var(--line-soft)}
+.q:last-child{border-bottom:0}
+.q .qt{font-weight:600;color:var(--txt);margin-bottom:10px}
+.opt{display:block;width:100%;text-align:left;background:color-mix(in srgb,var(--brand-primary) 12%,var(--bg-surface));border:1px solid var(--line);color:var(--txt-soft);
+  padding:10px 13px;border-radius:10px;margin-bottom:8px;cursor:pointer;font:inherit;font-size:14.5px;transition:.15s}
+.opt:hover{border-color:var(--kx-purple);background:color-mix(in srgb,var(--brand-primary) 12%,var(--bg-surface))}
+.opt.ok{border-color:var(--kx-green);background:color-mix(in srgb,var(--fb-success) 12%,var(--bg-surface));color:var(--text-primary)}
+.opt.no{border-color:var(--kx-red);background:color-mix(in srgb,var(--brand-secondary) 12%,var(--bg-surface));color:var(--text-primary)}
+.opt.lock{pointer-events:none}
+.fb{display:none;margin-top:6px;padding:9px 12px;border-radius:9px;font-size:13.5px;line-height:1.6}
+.fb.show{display:block}
+.fb.good{background:color-mix(in srgb,var(--fb-success) 12%,var(--bg-surface));border:1px solid #34D39944;color:var(--text-primary)}
+.fb.bad{background:color-mix(in srgb,var(--brand-secondary) 12%,var(--bg-surface));border:1px solid #FF547044;color:var(--text-primary)}
+
+/* RESUMO + LOOP KALIXTO */
+.resumo{margin:30px 0;border-radius:var(--radius);border:1px solid #A855F755;overflow:hidden;background:linear-gradient(180deg,color-mix(in srgb,var(--brand-primary) 12%,var(--bg-surface)),color-mix(in srgb,var(--brand-primary) 12%,var(--bg-surface)))}
+.resumo .rh{padding:12px 18px;background:#A855F716;font-family:'Space Grotesk';font-weight:600;color:var(--kx-purple);border-bottom:1px solid #A855F733;display:flex;align-items:center;gap:9px}
+.resumo .rb{padding:8px 18px 16px}
+.resumo ul{margin:10px 0 0 20px}
+.loop{margin:30px 0;border-radius:var(--radius);border:1px solid var(--line);background:color-mix(in srgb,var(--brand-primary) 12%,var(--bg-surface));padding:18px 20px}
+.loop .lt{font-family:'JetBrains Mono';font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--kx-cyan);margin-bottom:12px}
+.loop .steps{display:flex;flex-wrap:wrap;gap:8px;align-items:center;font-family:'Space Grotesk';font-size:13px}
+.loop .st{padding:6px 12px;border-radius:20px;border:1px solid var(--line);color:var(--txt)}
+.loop .st.a{border-color:#FF2D8A77;color:var(--kx-magenta-2)}
+.loop .st.b{border-color:#A855F777;color:var(--kx-purple)}
+.loop .st.c{border-color:#2E8BFF77;color:var(--kx-blue)}
+.loop .st.d{border-color:#22D3EE77;color:var(--kx-cyan)}
+.loop .ar{color:var(--txt-dim)}
+
+/* CAPA */
+.cover{min-height:100vh;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;
+  padding:60px 24px;position:relative}
+.cover .ring{width:160px;height:160px;display:grid;place-items:center;border-radius:50%;margin-bottom:26px;position:relative}
+.cover .ring::before{content:"";position:absolute;inset:-10px;border-radius:50%;background:conic-gradient(from 0deg,var(--kx-magenta),var(--kx-purple),var(--kx-blue),var(--kx-cyan),var(--kx-magenta));
+  -webkit-mask:radial-gradient(circle, transparent 64%, #000 66%);mask:radial-gradient(circle, transparent 64%, #000 66%);
+  animation:spin 14s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+.cover .ring .kx-mark{width:96px;height:96px}
+.cover h1{font-family:'Space Grotesk';font-size:clamp(34px,7vw,64px);font-weight:700;letter-spacing:-1px;line-height:1.02;background:linear-gradient(120deg,var(--text-primary) 20%,#FF6EB4 55%,#A855F7 80%);-webkit-background-clip:text;background-clip:text;
+  -webkit-text-fill-color:transparent;margin-bottom:14px}
+.cover .sub{font-size:clamp(16px,2.4vw,21px);color:var(--txt-soft);max-width:620px;margin-bottom:30px}
+.cover .meta{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;font-family:'JetBrains Mono';font-size:12px}
+.cover .meta span{border:1px solid var(--line);border-radius:20px;padding:6px 14px;color:var(--txt-soft)}
+.cover .meta b{color:var(--kx-magenta)}
+.cover .scroll{position:absolute;bottom:28px;font-family:'JetBrains Mono';font-size:11px;letter-spacing:2px;color:var(--txt-dim);text-transform:uppercase;animation:bob 2s ease-in-out infinite}
+@keyframes bob{50%{transform:translateY(6px)}}
+
+/* CALM TOGGLE */
+.calmtog{position:fixed;right:18px;bottom:18px;z-index:55;background:color-mix(in srgb,var(--brand-primary) 12%,var(--bg-surface));border:1px solid var(--line);color:var(--txt-soft);border-radius:30px;padding:9px 15px;font:inherit;font-size:12.5px;cursor:pointer;
+  box-shadow:var(--glow-p);font-family:'JetBrains Mono';letter-spacing:1px}
+.calmtog:hover{color:var(--text-primary);border-color:var(--kx-purple)}
+
+/* reveal */
+.rev{opacity:0;transform:translateY(14px);transition:opacity .6s,transform .6s}
+.rev.in{opacity:1;transform:none}
+
+/* ════════════════════════════════════════════════════════════════════════════
+   RESPONSIVO
+   ════════════════════════════════════════════════════════════════════════════ */
+@media (max-width:860px){
+  .shell{grid-template-columns:1fr}
+  .rail{position:fixed;left:0;top:0;z-index:50;width:280px;transform:translateX(-100%);transition:.25s;box-shadow:0 0 40px #000}
+  .rail.open{transform:none}
+  .topbar{display:flex;position:sticky;top:0;z-index:40;align-items:center;gap:12px;padding:12px 16px;background:color-mix(in srgb,var(--brand-primary) 12%,var(--bg-surface));backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+  .topbar .kx-mark{width:34px;height:34px}
+  .topbar b{font-family:'Space Grotesk';color:var(--text-primary);font-size:15px}
+  .topbar .burger{margin-left:auto;background:color-mix(in srgb,var(--brand-primary) 12%,var(--bg-surface));border:1px solid var(--line);color:var(--text-primary);border-radius:10px;
+    width:42px;height:42px;font-size:20px;cursor:pointer}
+  .scrim{display:none;position:fixed;inset:0;background:var(--bg-surface);z-index:45}
+  .scrim.on{display:block}
+  .wrap{padding:30px 18px 120px}
+  body{font-size:16px}
+}
+@media (prefers-reduced-motion:reduce){
+  *{animation:none!important;transition:none!important;scroll-behavior:auto!important}
+  .rev{opacity:1;transform:none}
+}
+</style>
+</head>
+<body><div class="kx-bar"><img class="kx-logo" src="data:image/webp;base64,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" width="40" height="40" alt="Logo Kalixto"><div><b>Dev-Kalixto</b><small>Kalixto by Wallace Toledo</small></div><a href="../">← Todos os materiais</a></div>
+<div id="bar"></div>
+
+<section class="cover" id="topo">
+  <div class="ring glowy"><svg class="kx-mark" viewBox="0 0 100 100" role="img" aria-label="Logo Kalixto" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="kxg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#FF2D8A"/><stop offset=".55" stop-color="#A855F7"/><stop offset="1" stop-color="#2E8BFF"/>
+    </linearGradient>
+  </defs>
+  <path d="M50 6 L86 26 L86 74 L50 94 L14 74 L14 26 Z" fill="none" stroke="url(#kxg)" stroke-width="3"/>
+  <path d="M50 16 L77 31 L77 69 L50 84 L23 69 L23 31 Z" fill="none" stroke="#FF2D8A" stroke-width="1" opacity=".35"/>
+  <path d="M38 30 L38 70 M38 50 L60 30 M38 50 L60 70" fill="none" stroke="url(#kxg)" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+  <circle cx="38" cy="30" r="3.4" fill="#22D3EE"/><circle cx="60" cy="30" r="3.4" fill="#FF2D8A"/><circle cx="60" cy="70" r="3.4" fill="#A855F7"/>
+</svg></div>
+  <div class="eyebrow">Apostila Kalixto · Volume 1</div>
+  <h1>Design Patterns<br>do Zero ao Profissional</h1>
+  <p class="sub">Padrões de Projeto explicados como se fosse a sua primeira aula — com analogias do dia a dia, Java comentado linha a linha, UML em texto, exercícios e desafios. Da base de POO ao raciocínio de arquiteto.</p>
+  <div class="meta">
+    <span><b>Autor:</b> Kalixto</span>
+    <span><b>Volume:</b> 1 — Fundamentos + Criacionais</span>
+    <span><b>Versão:</b> 1.0</span>
+    <span><b>Data:</b> Junho de 2026</span>
+  </div>
+  <div class="scroll">role para começar ↓</div>
+</section>
+<div class="topbar"><svg class="kx-mark" viewBox="0 0 100 100" role="img" aria-label="Logo Kalixto" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="kxg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#FF2D8A"/><stop offset=".55" stop-color="#A855F7"/><stop offset="1" stop-color="#2E8BFF"/>
+    </linearGradient>
+  </defs>
+  <path d="M50 6 L86 26 L86 74 L50 94 L14 74 L14 26 Z" fill="none" stroke="url(#kxg)" stroke-width="3"/>
+  <path d="M50 16 L77 31 L77 69 L50 84 L23 69 L23 31 Z" fill="none" stroke="#FF2D8A" stroke-width="1" opacity=".35"/>
+  <path d="M38 30 L38 70 M38 50 L60 30 M38 50 L60 70" fill="none" stroke="url(#kxg)" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+  <circle cx="38" cy="30" r="3.4" fill="#22D3EE"/><circle cx="60" cy="30" r="3.4" fill="#FF2D8A"/><circle cx="60" cy="70" r="3.4" fill="#A855F7"/>
+</svg><b>Design Patterns &middot; Vol.1</b><button class="burger" aria-label="menu">&#9776;</button></div><div class="shell"><aside class="rail"><div class="brand"><svg class="kx-mark" viewBox="0 0 100 100" role="img" aria-label="Logo Kalixto" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="kxg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#FF2D8A"/><stop offset=".55" stop-color="#A855F7"/><stop offset="1" stop-color="#2E8BFF"/>
+    </linearGradient>
+  </defs>
+  <path d="M50 6 L86 26 L86 74 L50 94 L14 74 L14 26 Z" fill="none" stroke="url(#kxg)" stroke-width="3"/>
+  <path d="M50 16 L77 31 L77 69 L50 84 L23 69 L23 31 Z" fill="none" stroke="#FF2D8A" stroke-width="1" opacity=".35"/>
+  <path d="M38 30 L38 70 M38 50 L60 30 M38 50 L60 70" fill="none" stroke="url(#kxg)" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+  <circle cx="38" cy="30" r="3.4" fill="#22D3EE"/><circle cx="60" cy="30" r="3.4" fill="#FF2D8A"/><circle cx="60" cy="70" r="3.4" fill="#A855F7"/>
+</svg><div><b>Design Patterns</b><small>Kalixto &middot; Vol. 1</small></div></div><nav><a href="#topo">Capa</a><a href="#prefacio">Pref&aacute;cio</a><a href="#sumario">Sum&aacute;rio</a><div class="grp">Parte 1 &middot; Fundamentos</div><a href="#c1">1. O que s&atilde;o patterns</a><a href="#c2">2. O problema antes</a><a href="#c3">3. Conceitos de POO</a><a href="#c4">4. SOLID</a><div class="grp">Parte 2 &middot; Introdu&ccedil;&atilde;o</div><a href="#c5">5. O que &eacute; um pattern</a><a href="#c6">6. Classifica&ccedil;&atilde;o</a><div class="grp">Parte 3 &middot; Criacionais</div><a href="#singleton">Singleton</a><a href="#factory">Factory Method</a><a href="#abstractfactory">Abstract Factory</a><a href="#builder">Builder</a><a href="#prototype">Prototype</a><a href="#fecho">Fecho do volume</a><div class="grp">Pr&oacute;ximos volumes</div><a href="#" class="soon">Estruturais</a><a href="#" class="soon">Comportamentais</a><a href="#" class="soon">Projetos pr&aacute;ticos</a><a href="#" class="soon">Entrevistas + Quiz</a></nav></aside><main><div class="wrap">
+<section id="prefacio">
+  <div class="eyebrow">Antes de começar</div>
+  <h1 class="ch">Prefácio</h1>
+  <p class="lead">Esta apostila foi escrita para uma pessoa específica: você, que talvez nunca tenha ouvido o termo "Design Pattern" e quer sair daqui sabendo reconhecer, implementar e — o mais importante — <em>decidir quando usar</em> cada padrão.</p>
+
+  <h2>O que você vai aprender</h2>
+  <p>Ao final da jornada completa (todos os volumes), você será capaz de:</p>
+  <ul>
+    <li>Entender de verdade o que é um padrão de projeto e por que ele existe.</li>
+    <li>Reconhecer padrões já prontos em frameworks como Spring, React e Django.</li>
+    <li>Implementar os 23 padrões clássicos do <strong>Gang of Four</strong> em Java (com versões em C#, Python e JavaScript quando fizer sentido).</li>
+    <li>Saber <strong>quando NÃO usar</strong> um padrão — porque padrão demais vira problema.</li>
+    <li>Refatorar código ruim aplicando padrões passo a passo.</li>
+    <li>Responder provas acadêmicas e entrevistas técnicas (júnior, pleno e sênior).</li>
+    <li>Dar o próximo passo rumo à Arquitetura de Software.</li>
+  </ul>
+
+  <h2>Como estudar esta apostila</h2>
+  <p>Cada padrão segue sempre a mesma receita didática, na mesma ordem. Isso é proposital: quando a estrutura é previsível, seu cérebro gasta energia aprendendo o conteúdo, não decifrando a página.</p>
+  <div class="tbl glowy"><table><thead><tr><th>Etapa</th><th>O que você faz</th></tr></thead><tbody><tr><td>1. Conceito</td><td>Entende a ideia central em uma frase.</td></tr><tr><td>2. Analogia</td><td>Conecta com algo do mundo real.</td></tr><tr><td>3. Problema</td><td>Vê a dor que o padrão resolve.</td></tr><tr><td>4. Solução + UML</td><td>Entende a estrutura.</td></tr><tr><td>5. Código Java</td><td>Lê implementação comentada linha a linha.</td></tr><tr><td>6. Erros comuns</td><td>Aprende com o erro dos outros.</td></tr><tr><td>7. Quando usar / evitar</td><td>Desenvolve julgamento, não decoreba.</td></tr><tr><td>8. Exercícios + Quiz</td><td>Pratica de forma ativa.</td></tr></tbody></table></div>
+
+  <div class="box tip glowy"><div class="bt"><span class="ic">✓</span>Aprendizagem ativa &gt; leitura passiva</div><p>Não pule os exercícios e quizzes. A ciência da aprendizagem é clara: você fixa muito mais resolvendo do que relendo. Cada capítulo fecha com um <b>resumo</b> e o <b>Loop Kalixto</b> — use-os como revisão espaçada, voltando neles dias depois.</p></div>
+
+  <h2>Como usar os exercícios e projetos</h2>
+  <p>Os exercícios têm um campo <strong>Entrega</strong>: ele descreve o artefato concreto que você deve produzir (uma classe, um diagrama, um trecho de código). Trate cada entrega como se fosse para um cliente. Os <strong>projetos práticos</strong> (volumes finais) juntam vários padrões num sistema só — é onde a teoria vira músculo.</p>
+
+  <div class="box curio glowy"><div class="bt"><span class="ic">?</span>Pré-requisito honesto</div><p>Você precisa saber o básico de <b>lógica de programação</b> e ter visto Java ao menos uma vez (variáveis, classes, métodos). Se POO ainda assusta, relaxe: o Capítulo 3 reconstrói tudo do zero antes de tocarmos em qualquer padrão.</p></div>
+</section>
+
+<section id="sumario">
+  <div class="eyebrow">Mapa da obra</div>
+  <h1 class="ch">Sumário completo</h1>
+  <p class="lead">Este é o índice da apostila inteira. O <strong>Volume 1</strong> (este arquivo) cobre os Fundamentos e os Padrões Criacionais. Os demais blocos chegam nos próximos volumes.</p>
+
+  <h3>Volume 1 — neste arquivo</h3>
+  <ul>
+    <li><strong>Parte 1 — Fundamentos:</strong> <a href="#c1">1. O que são Design Patterns</a> · <a href="#c2">2. O problema antes dos padrões</a> · <a href="#c3">3. Conceitos de POO</a> · <a href="#c4">4. SOLID</a></li>
+    <li><strong>Parte 2 — Introdução:</strong> <a href="#c5">5. O que é um pattern</a> · <a href="#c6">6. Classificação</a></li>
+    <li><strong>Parte 3 — Criacionais:</strong> <a href="#singleton">Singleton</a> · <a href="#factory">Factory Method</a> · <a href="#abstractfactory">Abstract Factory</a> · <a href="#builder">Builder</a> · <a href="#prototype">Prototype</a></li>
+  </ul>
+
+  <h3>Próximos volumes</h3>
+  <div class="tbl glowy"><table><thead><tr><th>Volume</th><th>Conteúdo</th></tr></thead><tbody><tr><td>2</td><td>Parte 4 — Padrões Estruturais (Adapter, Bridge, Composite, Decorator, Facade, Flyweight, Proxy)</td></tr><tr><td>3</td><td>Parte 5 — Padrões Comportamentais (Chain of Responsibility, Command, Interpreter, Iterator, Mediator, Memento, Observer, State, Strategy, Template Method, Visitor)</td></tr><tr><td>4</td><td>Partes 6–10 — Comparações, padrões em sistemas reais, em frameworks, refatoração e criação dos seus próprios padrões</td></tr><tr><td>5</td><td>Partes 11–12 — Projeto guiado (Gestão Acadêmica) e projeto-desafio (Delivery)</td></tr><tr><td>6</td><td>Partes 13–20 — Mapa mental, 50 erros comuns, 100 perguntas de entrevista, 100 questões de quiz, 60 exercícios de fixação, 10 estudos de caso, resumo executivo e guia de consulta rápida</td></tr><tr><td>Apêndices</td><td>Glossário completo e bibliografia</td></tr></tbody></table></div>
+</section>
+<div class="part rev"><div class="pnum">Parte 1</div><h2>Fundamentos</h2><p>Antes de correr para os padrões, a gente constrói o chão: de onde eles vieram, que dor resolvem, a POO que sustenta tudo e os princípios SOLID que são a "gramática" do bom projeto.</p></div>
+<section id="c1">
+  <div class="eyebrow">Parte 1 · Capítulo 1</div>
+  <h1 class="ch">O que são Design Patterns</h1>
+  <p class="lead">Um <strong>design pattern</strong> (padrão de projeto) é uma solução testada e reaproveitável para um problema que aparece de novo e de novo no projeto de software. Não é um código pronto para copiar — é uma <em>receita</em> de como organizar suas classes e objetos.</p>
+
+  <div class="box ana glowy"><div class="bt"><span class="ic">≈</span>Padrão é planta de casa, não casa pronta</div><p>Um arquiteto não desenha cada casa do zero. Ele tem <b>plantas</b> reaproveitáveis: "casa térrea com quintal", "sobrado geminado". A planta resolve o problema estrutural; cada construtor adapta acabamento, cor e tamanho. Um design pattern é a planta — você adapta ao seu código.</p></div>
+
+  <h2>De onde os padrões vieram</h2>
+  <p>A ideia de "padrão" nasceu fora da computação. Em 1977, o arquiteto <strong>Christopher Alexander</strong> publicou <em>A Pattern Language</em>, catalogando soluções recorrentes de arquitetura de cidades e prédios. A sacada dele: bons problemas se repetem, então boas soluções podem ser nomeadas, documentadas e reutilizadas.</p>
+  <p>Nos anos 1990, quatro engenheiros levaram essa ideia para a Orientação a Objetos e mudaram a história do software.</p>
+
+  <h2>O Gang of Four (GoF)</h2>
+  <p>Em 1994, quatro autores publicaram o livro que virou a bíblia do tema: <em>Design Patterns: Elements of Reusable Object-Oriented Software</em>. Eles ficaram conhecidos como <strong>Gang of Four</strong> — a "Gangue dos Quatro":</p>
+  <div class="tbl glowy"><table><thead><tr><th>Autor</th><th>Contribuição</th></tr></thead><tbody><tr><td>Erich Gamma</td><td>Mais tarde co-criou o JUnit e o editor que virou o VS Code.</td></tr><tr><td>Richard Helm</td><td>Pesquisador de modelagem orientada a objetos.</td></tr><tr><td>Ralph Johnson</td><td>Professor, referência em frameworks e refatoração.</td></tr><tr><td>John Vlissides</td><td>Pesquisador da IBM, faleceu em 2005.</td></tr></tbody></table></div>
+  <p>O livro catalogou <strong>23 padrões</strong>, divididos em três famílias (criacionais, estruturais e comportamentais). Esses 23 são o nosso roteiro.</p>
+
+  <div class="box curio glowy"><div class="bt"><span class="ic">?</span>22 ou 23?</div><p>Alguns catálogos modernos (como o refactoring.guru) listam 22 padrões "do dia a dia" e deixam o <b>Interpreter</b> de fora por ser raro. O livro original do GoF tem 23 — e nós vamos cobrir todos eles, incluindo o Interpreter, para você não ficar com buraco na formação.</p></div>
+
+  <h2>Por que isso importa para você</h2>
+  <ul>
+    <li><strong>Vocabulário comum:</strong> dizer "isso aqui é um Observer" comunica em 2 segundos o que levaria 5 minutos para explicar.</li>
+    <li><strong>Soluções maduras:</strong> você reaproveita décadas de tentativa e erro de gente muito experiente.</li>
+    <li><strong>Código que aguenta mudança:</strong> padrões otimizam justamente para o que mais dói no software — a mudança de requisitos.</li>
+    <li><strong>Carreira:</strong> é assunto garantido em entrevista e pré-requisito para arquitetura.</li>
+  </ul>
+
+  <div class="resumo glowy"><div class="rh"><span>◈</span>Resumo do capítulo</div><div class="rb"><ul><li>Design pattern = solução recorrente e reaproveitável, não código pronto.</li><li>A ideia veio da arquitetura (Christopher Alexander) e chegou ao software pelo Gang of Four em 1994.</li><li>O GoF catalogou 23 padrões em 3 famílias.</li><li>O valor real é vocabulário comum + soluções maduras + código preparado para mudança.</li></ul></div></div>
+
+  <div class="ex glowy"><div class="xh"><span class="tag">básico</span>Exercício 1.1 — Caça aos padrões</div><div class="xb"><p>Sem saber ainda os nomes, pense em 3 aplicativos que você usa (ex.: iFood, Spotify, WhatsApp). Para cada um, escreva uma situação em que o app precisa de "muitas variações da mesma coisa" (vários tipos de pagamento, vários tipos de notificação...). Guarde essa lista — vamos voltar nela.</p><div class="deliver"><b>Entrega:</b> uma lista com 3 apps e 1 situação de "variação" por app.</div></div></div>
+
+  <div class="loop"><div class="lt">Loop Kalixto de Aprendizagem</div><div class="steps"><span class="st a">Entender</span><span class="ar">→</span><span class="st b">Reconhecer</span><span class="ar">→</span><span class="st c">Implementar</span><span class="ar">→</span><span class="st d">Refatorar</span><span class="ar">↺</span><span class="st a">Repetir</span></div></div>
+</section>
+
+<section id="c2">
+  <div class="eyebrow">Parte 1 · Capítulo 2</div>
+  <h1 class="ch">O problema antes dos padrões</h1>
+  <p class="lead">Para valorizar a cura, primeiro a doença. Antes de pensar em estrutura, programava-se "no impulso" — e o resultado tem nome: <em>código espaguete</em>.</p>
+
+  <h2>Os quatro vilões</h2>
+  <div class="tbl glowy"><table><thead><tr><th>Vilão</th><th>O que é</th><th>Sintoma</th></tr></thead><tbody><tr><td>Código espaguete</td><td>Fluxo embaralhado, tudo conectado com tudo.</td><td>Você muda uma linha e quebra três telas distantes.</td></tr><tr><td>Acoplamento excessivo</td><td>Uma classe depende dos detalhes internos de muitas outras.</td><td>Não dá para reusar nada isoladamente.</td></tr><tr><td>Duplicação</td><td>O mesmo trecho copiado e colado em N lugares.</td><td>Corrigir um bug exige caçar 7 cópias.</td></tr><tr><td>Baixa manutenção</td><td>Medo de mexer no código.</td><td>"Funciona, não encosta."</td></tr></tbody></table></div>
+
+  <h2>Vendo a dor no código</h2>
+  <p>Imagine um sistema de pagamentos escrito sem nenhum cuidado de projeto. Tudo num método só, decidindo o tipo de pagamento com <code>if/else</code> e repetindo regras:</p>
+  <div class="code"><div class="hd"><span class="dot d1"></span><span class="dot d2"></span><span class="dot d3"></span><span class="lng">java · antes (ruim)</span></div><pre><code><span class="kw">public</span> <span class="kw">class</span> Checkout {
+    <span class="kw">public</span> <span class="kw">void</span> <span class="fn">pagar</span>(<span class="ty">String</span> tipo, <span class="ty">double</span> valor) {
+        <span class="kw">if</span> (tipo.<span class="fn">equals</span>(<span class="st">"pix"</span>)) {
+            <span class="cm">// valida, gera QR, registra, envia e-mail...</span>
+            <span class="ty">System</span>.out.<span class="fn">println</span>(<span class="st">"Pagando "</span> + valor + <span class="st">" via Pix"</span>);
+        } <span class="kw">else</span> <span class="kw">if</span> (tipo.<span class="fn">equals</span>(<span class="st">"credito"</span>)) {
+            <span class="cm">// valida cartao, antifraude, parcela, registra, envia e-mail...</span>
+            <span class="ty">System</span>.out.<span class="fn">println</span>(<span class="st">"Pagando "</span> + valor + <span class="st">" no credito"</span>);
+        } <span class="kw">else</span> <span class="kw">if</span> (tipo.<span class="fn">equals</span>(<span class="st">"boleto"</span>)) {
+            <span class="cm">// gera linha digitavel, registra, envia e-mail...</span>
+            <span class="ty">System</span>.out.<span class="fn">println</span>(<span class="st">"Pagando "</span> + valor + <span class="st">" via boleto"</span>);
+        }
+        <span class="cm">// E quando entrar Apple Pay? Mais um else-if aqui dentro.</span>
+        <span class="cm">// E o envio de e-mail repetido em cada ramo? Duplicacao.</span>
+    }
+}</code></pre></div>
+
+  <div class="box warn glowy"><div class="bt"><span class="ic">!</span>Por que isso é uma bomba-relógio</div><p>Toda vez que surge um novo meio de pagamento, você <b>edita</b> a classe <code>Checkout</code>. Isso viola o princípio do "aberto para extensão, fechado para modificação" (vamos ver no Cap. 4). Quanto mais cresce, mais frágil fica. Padrões como <b>Strategy</b> e <b>Factory</b> existem exatamente para matar esse <code>if/else</code> gigante.</p></div>
+
+  <h2>O custo invisível</h2>
+  <p>Código ruim não cobra a conta no dia que é escrito — cobra meses depois, quando o time gasta o dobro do tempo para entregar metade. Isso tem nome em engenharia: <strong>dívida técnica</strong>. Padrões são uma forma de manter essa dívida sob controle.</p>
+
+  <div class="resumo glowy"><div class="rh"><span>◈</span>Resumo do capítulo</div><div class="rb"><ul><li>Antes dos padrões, dominavam espaguete, acoplamento, duplicação e baixa manutenção.</li><li>O sintoma clássico: mexer num ponto quebra outro distante.</li><li>O if/else gigante que decide "tipo" é o cheiro de código mais comum — e o mais fácil de melhorar.</li><li>Código ruim gera dívida técnica: a conta chega depois, com juros.</li></ul></div></div>
+
+  <div class="ex glowy"><div class="xh"><span class="tag">básico</span>Exercício 2.1 — Diagnóstico</div><div class="xb"><p>Releia o método <code>pagar</code> acima. Liste pelo menos <b>três</b> problemas concretos que ele tem e, para cada um, escreva em uma frase como você <i>imagina</i> que poderia melhorar (sem usar nome de padrão ainda).</p><div class="deliver"><b>Entrega:</b> uma lista de 3 problemas + 3 ideias de melhoria.</div></div></div>
+
+  <div class="loop"><div class="lt">Loop Kalixto de Aprendizagem</div><div class="steps"><span class="st a">Entender</span><span class="ar">→</span><span class="st b">Reconhecer</span><span class="ar">→</span><span class="st c">Implementar</span><span class="ar">→</span><span class="st d">Refatorar</span><span class="ar">↺</span><span class="st a">Repetir</span></div></div>
+</section>
+
+<section id="c3">
+  <div class="eyebrow">Parte 1 · Capítulo 3</div>
+  <h1 class="ch">Conceitos obrigatórios de POO</h1>
+  <p class="lead">Padrões são feitos de Orientação a Objetos. Se algum termo abaixo estiver nebuloso, este capítulo é o seu chão firme. Vamos rápido, mas sem pular ninguém.</p>
+
+  <h2>Classe e objeto</h2>
+  <p>A <strong>classe</strong> é o molde; o <strong>objeto</strong> é o que sai do molde. A classe <code>Carro</code> define que todo carro tem cor e velocidade; cada carro que você cria é um objeto independente.</p>
+  <div class="code"><div class="hd"><span class="dot d1"></span><span class="dot d2"></span><span class="dot d3"></span><span class="lng">java</span></div><pre><code><span class="kw">public</span> <span class="kw">class</span> Carro {          <span class="cm">// a classe: o molde</span>
+    <span class="ty">String</span> cor;
+    <span class="ty">int</span> velocidade;
+}
+
+Carro fusca = <span class="kw">new</span> <span class="fn">Carro</span>();    <span class="cm">// objeto 1 (instancia)</span>
+Carro civic = <span class="kw">new</span> <span class="fn">Carro</span>();    <span class="cm">// objeto 2, independente</span>
+fusca.cor = <span class="st">"azul"</span>;</code></pre></div>
+
+  <h2>Encapsulamento</h2>
+  <p>Esconder os detalhes internos e expor só o necessário. Atributos ficam <code>private</code>; o acesso passa por métodos. Assim você protege o objeto de estados inválidos.</p>
+  <div class="code"><div class="hd"><span class="dot d1"></span><span class="dot d2"></span><span class="dot d3"></span><span class="lng">java</span></div><pre><code><span class="kw">public</span> <span class="kw">class</span> ContaBancaria {
+    <span class="kw">private</span> <span class="ty">double</span> saldo;                 <span class="cm">// ninguem mexe direto</span>
+
+    <span class="kw">public</span> <span class="kw">void</span> <span class="fn">depositar</span>(<span class="ty">double</span> v) {
+        <span class="kw">if</span> (v &gt; <span class="nm">0</span>) saldo += v;            <span class="cm">// regra protegida aqui dentro</span>
+    }
+    <span class="kw">public</span> <span class="ty">double</span> <span class="fn">getSaldo</span>() { <span class="kw">return</span> saldo; }
+}</code></pre></div>
+
+  <h2>Herança</h2>
+  <p>Uma classe filha reaproveita o que a classe mãe já tem, usando <code>extends</code>. Bom para "é um tipo de": um <code>Gato</code> <em>é um</em> <code>Animal</code>.</p>
+  <div class="code"><div class="hd"><span class="dot d1"></span><span class="dot d2"></span><span class="dot d3"></span><span class="lng">java</span></div><pre><code><span class="kw">public</span> <span class="kw">class</span> Animal {
+    <span class="kw">public</span> <span class="kw">void</span> <span class="fn">respirar</span>() { <span class="ty">System</span>.out.<span class="fn">println</span>(<span class="st">"respirando..."</span>); }
+}
+<span class="kw">public</span> <span class="kw">class</span> Gato <span class="kw">extends</span> Animal {        <span class="cm">// Gato herda respirar()</span>
+    <span class="kw">public</span> <span class="kw">void</span> <span class="fn">miar</span>() { <span class="ty">System</span>.out.<span class="fn">println</span>(<span class="st">"miau"</span>); }
+}</code></pre></div>
+
+  <h2>Polimorfismo</h2>
+  <p>"Muitas formas." O mesmo método se comporta diferente dependendo do objeto real. É o coração de quase todo padrão.</p>
+  <div class="code"><div class="hd"><span class="dot d1"></span><span class="dot d2"></span><span class="dot d3"></span><span class="lng">java</span></div><pre><code>Animal a = <span class="kw">new</span> <span class="fn">Gato</span>();   <span class="cm">// referencia Animal, objeto Gato</span>
+a.<span class="fn">emitirSom</span>();           <span class="cm">// chama a versao de Gato em tempo de execucao</span></code></pre></div>
+
+  <h2>Abstração</h2>
+  <p>Focar no <em>o quê</em> e esconder o <em>como</em>. Você usa <code>List</code> sem saber se por dentro é array ou lista ligada. A abstração é a "interface mental" da coisa.</p>
+
+  <h2>Interface</h2>
+  <p>Um <strong>contrato</strong>: define <em>o que</em> uma classe deve fazer, sem dizer como. Quem implementa é obrigado a cumprir.</p>
+  <div class="code"><div class="hd"><span class="dot d1"></span><span class="dot d2"></span><span class="dot d3"></span><span class="lng">java</span></div><pre><code><span class="kw">public</span> <span class="kw">interface</span> Pagavel {
+    <span class="kw">void</span> <span class="fn">pagar</span>(<span class="ty">double</span> valor);   <span class="cm">// contrato, sem corpo</span>
+}
+<span class="kw">public</span> <span class="kw">class</span> Pix <span class="kw">implements</span> Pagavel {
+    <span class="kw">public</span> <span class="kw">void</span> <span class="fn">pagar</span>(<span class="ty">double</span> valor) { <span class="cm">/* implementacao do Pix */</span> }
+}</code></pre></div>
+
+  <h2>Classe abstrata</h2>
+  <p>Um meio-termo: pode ter método pronto <em>e</em> método sem corpo (<code>abstract</code>). Não pode ser instanciada; serve de base para filhas.</p>
+  <div class="code"><div class="hd"><span class="dot d1"></span><span class="dot d2"></span><span class="dot d3"></span><span class="lng">java</span></div><pre><code><span class="kw">public</span> <span class="kw">abstract</span> <span class="kw">class</span> Forma {
+    <span class="kw">public</span> <span class="kw">abstract</span> <span class="ty">double</span> <span class="fn">area</span>();          <span class="cm">// filha decide</span>
+    <span class="kw">public</span> <span class="kw">void</span> <span class="fn">descrever</span>() {               <span class="cm">// pronto, herdado</span>
+        <span class="ty">System</span>.out.<span class="fn">println</span>(<span class="st">"Area = "</span> + <span class="fn">area</span>());
+    }
+}</code></pre></div>
+
+  <div class="box key glowy"><div class="bt"><span class="ic">★</span>Interface x Classe abstrata</div><p><b>Interface</b> = só contrato (em Java moderno aceita método default, mas pense nela como "o quê"). <b>Classe abstrata</b> = contrato + comportamento parcial compartilhado. Regra prática: precisa só de capacidade → interface; precisa compartilhar código entre filhas → classe abstrata.</p></div>
+
+  <h2>As quatro relações entre classes</h2>
+  <p>Padrões e UML falam o tempo todo destas relações. Decore a diferença pela "força do laço":</p>
+  <div class="tbl glowy"><table><thead><tr><th>Relação</th><th>Significado</th><th>Exemplo</th><th>Força do laço</th></tr></thead><tbody><tr><td>Dependência</td><td>Uma usa a outra de passagem (parâmetro/variável local).</td><td>Um método recebe um <code>Logger</code>.</td><td>Fraca</td></tr><tr><td>Associação</td><td>Uma conhece a outra de forma duradoura (atributo).</td><td><code>Professor</code> tem uma <code>Turma</code>.</td><td>Média</td></tr><tr><td>Agregação</td><td>"Tem um", mas as partes vivem sem o todo.</td><td><code>Time</code> tem <code>Jogadores</code> (que existem fora do time).</td><td>Média/forte</td></tr><tr><td>Composição</td><td>"Tem um", e as partes morrem com o todo.</td><td><code>Casa</code> tem <code>Cômodos</code> (sem casa, sem cômodo).</td><td>Forte</td></tr></tbody></table></div>
+  <div class="uml"><div class="cap">relações em texto</div><pre>Dependencia:  A ----&gt;  B     (A usa B momentaneamente)
+Associacao:   A ----  B      (A tem referencia para B)
+Agregacao:    A &lt;&gt;--- B      (A "tem" B; B sobrevive sozinho)  [losango vazado]
+Composicao:   A &lt;#&gt;-- B      (A "tem" B; B morre com A)         [losango cheio]</pre></div>
+
+  <h2>Composição &gt; herança</h2>
+  <p>Um dos mantras do GoF: <strong>"prefira composição a herança"</strong>. Em vez de herdar tudo de uma mãe (laço rígido), monte o objeto combinando peças menores (laço flexível). Quase todo padrão estrutural e comportamental aplica isso.</p>
+
+  <div class="resumo glowy"><div class="rh"><span>◈</span>Resumo do capítulo</div><div class="rb"><ul><li>Classe é molde, objeto é instância.</li><li>Os 4 pilares: encapsulamento (esconder), herança (reaproveitar), polimorfismo (muitas formas), abstração (o quê, não o como).</li><li>Interface = contrato puro; classe abstrata = contrato + código compartilhado.</li><li>Dependência &lt; associação &lt; agregação &lt; composição (do laço mais fraco ao mais forte).</li><li>Mantra do GoF: prefira composição a herança.</li></ul></div></div>
+
+  <div class="ex glowy"><div class="xh"><span class="tag">básico</span>Exercício 3.1 — Modele as relações</div><div class="xb"><p>Para o par a seguir, classifique a relação (dependência, associação, agregação ou composição) e justifique em uma frase: (a) <code>Pedido</code> e <code>ItemDoPedido</code>; (b) <code>Playlist</code> e <code>Musica</code>; (c) <code>RelatorioPDF</code> e <code>GeradorDePdf</code> usado só dentro de um método.</p><div class="deliver"><b>Entrega:</b> as 3 classificações com justificativa.</div></div></div>
+
+  <div class="quiz glowy"><div class="qh"><span class="ic">◇</span>Quiz — POO essencial</div><div class="q"><div class="qt">Qual pilar permite que <code>a.emitirSom()</code> rode versões diferentes conforme o objeto real?</div><button class="opt" data-ok="0"><b>a)</b> Encapsulamento</button><button class="opt" data-ok="1"><b>b)</b> Polimorfismo</button><button class="opt" data-ok="0"><b>c)</b> Abstração</button><div class="fb good"><b>Isso!</b> Polimorfismo é o mesmo método assumindo formas diferentes em tempo de execução.</div><div class="fb bad">Quase. Encapsulamento é esconder estado; o que muda o comportamento conforme o objeto é o <b>polimorfismo</b>.</div></div><div class="q"><div class="qt">Casa "tem" cômodos, e sem a casa os cômodos deixam de existir. Que relação é essa?</div><button class="opt" data-ok="0"><b>a)</b> Agregação</button><button class="opt" data-ok="1"><b>b)</b> Composição</button><button class="opt" data-ok="0"><b>c)</b> Dependência</button><div class="fb good"><b>Exato.</b> Parte que morre com o todo = composição (losango cheio).</div><div class="fb bad">Na agregação as partes sobrevivem sozinhas. Aqui elas morrem com o todo → <b>composição</b>.</div></div><div class="q"><div class="qt">Você precisa apenas garantir que várias classes saibam "pagar(valor)", sem compartilhar código. Use:</div><button class="opt" data-ok="1"><b>a)</b> Interface</button><button class="opt" data-ok="0"><b>b)</b> Classe abstrata com tudo implementado</button><button class="opt" data-ok="0"><b>c)</b> Herança múltipla de classes</button><div class="fb good"><b>Boa.</b> Só contrato, sem código compartilhado → interface.</div><div class="fb bad">Se não há código a compartilhar, classe abstrata é exagero. O contrato puro é uma <b>interface</b>.</div></div></div>
+
+  <div class="loop"><div class="lt">Loop Kalixto de Aprendizagem</div><div class="steps"><span class="st a">Entender</span><span class="ar">→</span><span class="st b">Reconhecer</span><span class="ar">→</span><span class="st c">Implementar</span><span class="ar">→</span><span class="st d">Refatorar</span><span class="ar">↺</span><span class="st a">Repetir</span></div></div>
+</section>
+
+<section id="c4">
+  <div class="eyebrow">Parte 1 · Capítulo 4</div>
+  <h1 class="ch">SOLID — a gramática do bom projeto</h1>
+  <p class="lead">SOLID são cinco princípios que mantêm o código flexível e fácil de manter. Eles não são padrões, mas são o <em>porquê</em> por trás de quase todos. Se você entender SOLID, os padrões deixam de ser mágica.</p>
+
+  <div class="tbl glowy"><table><thead><tr><th>Letra</th><th>Princípio</th><th>Em uma frase</th></tr></thead><tbody><tr><td>S</td><td>Single Responsibility</td><td>Uma classe, um motivo para mudar.</td></tr><tr><td>O</td><td>Open/Closed</td><td>Aberto para extensão, fechado para modificação.</td></tr><tr><td>L</td><td>Liskov Substitution</td><td>Filho deve poder substituir o pai sem surpresas.</td></tr><tr><td>I</td><td>Interface Segregation</td><td>Muitas interfaces pequenas &gt; uma gigante.</td></tr><tr><td>D</td><td>Dependency Inversion</td><td>Dependa de abstrações, não de implementações.</td></tr></tbody></table></div>
+
+  <h2>S — Single Responsibility (Responsabilidade Única)</h2>
+  <p>Uma classe deve ter <strong>um único motivo para mudar</strong>. Se ela cuida de regra de negócio <em>e</em> de e-mail <em>e</em> de banco, qualquer um dos três a obriga a mudar.</p>
+  <div class="code"><div class="hd"><span class="dot d1"></span><span class="dot d2"></span><span class="dot d3"></span><span class="lng">java · errado</span></div><pre><code><span class="kw">public</span> <span class="kw">class</span> Relatorio {
+    <span class="kw">public</span> <span class="ty">String</span> <span class="fn">gerar</span>() { <span class="cm">/* monta o relatorio */</span> <span class="kw">return</span> <span class="st">"..."</span>; }
+    <span class="kw">public</span> <span class="kw">void</span> <span class="fn">salvarEmDisco</span>(<span class="ty">String</span> s) { <span class="cm">/* I/O de arquivo */</span> }
+    <span class="kw">public</span> <span class="kw">void</span> <span class="fn">enviarPorEmail</span>(<span class="ty">String</span> s) { <span class="cm">/* SMTP */</span> }
+}
+<span class="cm">// Tres responsabilidades: conteudo, persistencia e envio.</span></code></pre></div>
+  <div class="code"><div class="hd"><span class="dot d1"></span><span class="dot d2"></span><span class="dot d3"></span><span class="lng">java · correto</span></div><pre><code><span class="kw">public</span> <span class="kw">class</span> Relatorio {            <span class="cm">// so o conteudo</span>
+    <span class="kw">public</span> <span class="ty">String</span> <span class="fn">gerar</span>() { <span class="kw">return</span> <span class="st">"..."</span>; }
+}
+<span class="kw">public</span> <span class="kw">class</span> ArquivoSalvador {     <span class="cm">// so persistencia</span>
+    <span class="kw">public</span> <span class="kw">void</span> <span class="fn">salvar</span>(<span class="ty">String</span> s) { <span class="cm">/* ... */</span> }
+}
+<span class="kw">public</span> <span class="kw">class</span> EmailSender {         <span class="cm">// so envio</span>
+    <span class="kw">public</span> <span class="kw">void</span> <span class="fn">enviar</span>(<span class="ty">String</span> s) { <span class="cm">/* ... */</span> }
+}</code></pre></div>
+
+  <h2>O — Open/Closed (Aberto/Fechado)</h2>
+  <p>Você deve poder <strong>adicionar comportamento sem editar o código existente</strong>. Lembra do <code>if/else</code> de pagamentos? Cada novo meio te obriga a abrir a classe. Isso é fechado para extensão e aberto para modificação — o oposto do ideal.</p>
+  <div class="code"><div class="hd"><span class="dot d1"></span><span class="dot d2"></span><span class="dot d3"></span><span class="lng">java · correto (via abstração)</span></div><pre><code><span class="kw">public</span> <span class="kw">interface</span> MeioPagamento { <span class="kw">void</span> <span class="fn">pagar</span>(<span class="ty">double</span> v); }
+
+<span class="kw">public</span> <span class="kw">class</span> Pix    <span class="kw">implements</span> MeioPagamento { <span class="kw">public</span> <span class="kw">void</span> <span class="fn">pagar</span>(<span class="ty">double</span> v){} }
+<span class="kw">public</span> <span class="kw">class</span> Cartao <span class="kw">implements</span> MeioPagamento { <span class="kw">public</span> <span class="kw">void</span> <span class="fn">pagar</span>(<span class="ty">double</span> v){} }
+<span class="cm">// Novo meio? Crie uma classe nova. O Checkout NAO muda.</span></code></pre></div>
+  <div class="box key glowy"><div class="bt"><span class="ic">★</span>O é a alma dos padrões criacionais</div><p>Quase todo padrão que veremos na Parte 3 existe para honrar o Open/Closed: permitir novas variações de objeto sem reescrever o que já funciona.</p></div>
+
+  <h2>L — Liskov Substitution (Substituição de Liskov)</h2>
+  <p>Se <code>B</code> é filho de <code>A</code>, então usar um <code>B</code> onde se espera um <code>A</code> não pode quebrar nada. O exemplo clássico do mau uso: <code>Quadrado extends Retangulo</code>. Faz sentido na geometria, mas no código o quadrado quebra a expectativa de "mudar largura e altura de forma independente".</p>
+  <div class="code"><div class="hd"><span class="dot d1"></span><span class="dot d2"></span><span class="dot d3"></span><span class="lng">java · viola Liskov</span></div><pre><code><span class="kw">class</span> Retangulo {
+    <span class="kw">protected</span> <span class="ty">int</span> l, a;
+    <span class="kw">public</span> <span class="kw">void</span> <span class="fn">setLargura</span>(<span class="ty">int</span> l){ <span class="kw">this</span>.l = l; }
+    <span class="kw">public</span> <span class="kw">void</span> <span class="fn">setAltura</span>(<span class="ty">int</span> a){ <span class="kw">this</span>.a = a; }
+    <span class="kw">public</span> <span class="ty">int</span> <span class="fn">area</span>(){ <span class="kw">return</span> l * a; }
+}
+<span class="kw">class</span> Quadrado <span class="kw">extends</span> Retangulo {
+    <span class="kw">public</span> <span class="kw">void</span> <span class="fn">setLargura</span>(<span class="ty">int</span> l){ <span class="kw">this</span>.l = l; <span class="kw">this</span>.a = l; } <span class="cm">// forca a==l</span>
+    <span class="kw">public</span> <span class="kw">void</span> <span class="fn">setAltura</span>(<span class="ty">int</span> a){ <span class="kw">this</span>.l = a; <span class="kw">this</span>.a = a; }  <span class="cm">// surpresa!</span>
+}
+<span class="cm">// Um codigo que espera Retangulo e faz set(2x5) esperando area 10</span>
+<span class="cm">// recebe 25 com Quadrado. O filho NAO pode substituir o pai.</span></code></pre></div>
+
+  <h2>I — Interface Segregation (Segregação de Interface)</h2>
+  <p>Ninguém deve ser obrigado a implementar métodos que não usa. Prefira <strong>várias interfaces pequenas</strong> a uma "interface gorda".</p>
+  <div class="code"><div class="hd"><span class="dot d1"></span><span class="dot d2"></span><span class="dot d3"></span><span class="lng">java · errado</span></div><pre><code><span class="kw">public</span> <span class="kw">interface</span> Funcionario {
+    <span class="kw">void</span> <span class="fn">trabalhar</span>();
+    <span class="kw">void</span> <span class="fn">receberSalario</span>();
+    <span class="kw">void</span> <span class="fn">tirarFerias</span>();   <span class="cm">// e um Robo? robo nao tira ferias.</span>
+}</code></pre></div>
+  <div class="code"><div class="hd"><span class="dot d1"></span><span class="dot d2"></span><span class="dot d3"></span><span class="lng">java · correto</span></div><pre><code><span class="kw">public</span> <span class="kw">interface</span> Trabalhador { <span class="kw">void</span> <span class="fn">trabalhar</span>(); }
+<span class="kw">public</span> <span class="kw">interface</span> Assalariado { <span class="kw">void</span> <span class="fn">receberSalario</span>(); }
+<span class="cm">// cada classe implementa so o que faz sentido para ela</span></code></pre></div>
+
+  <h2>D — Dependency Inversion (Inversão de Dependência)</h2>
+  <p>Módulos importantes não devem depender de detalhes; ambos dependem de <strong>abstrações</strong>. Em vez de o <code>Pedido</code> criar diretamente um <code>MySQLRepo</code>, ele recebe um <code>Repositorio</code> (interface).</p>
+  <div class="code"><div class="hd"><span class="dot d1"></span><span class="dot d2"></span><span class="dot d3"></span><span class="lng">java · correto</span></div><pre><code><span class="kw">public</span> <span class="kw">interface</span> Repositorio { <span class="kw">void</span> <span class="fn">salvar</span>(<span class="ty">Object</span> o); }
+
+<span class="kw">public</span> <span class="kw">class</span> ServicoPedido {
+    <span class="kw">private</span> <span class="kw">final</span> Repositorio repo;
+    <span class="kw">public</span> <span class="fn">ServicoPedido</span>(Repositorio repo) { <span class="kw">this</span>.repo = repo; } <span class="cm">// injetado</span>
+    <span class="kw">public</span> <span class="kw">void</span> <span class="fn">finalizar</span>(<span class="ty">Object</span> pedido) { repo.<span class="fn">salvar</span>(pedido); }
+}
+<span class="cm">// Trocar MySQL por Mongo nao muda o ServicoPedido. So a implementacao do repo.</span></code></pre></div>
+  <div class="box tip glowy"><div class="bt"><span class="ic">✓</span>DI vs IoC vs Spring</div><p>Esse "receber de fora em vez de criar dentro" é a <b>Injeção de Dependência</b>. Frameworks como Spring fazem isso automaticamente (Inversão de Controle). Você vai reencontrar esse princípio em vários padrões e no Volume 4.</p></div>
+
+  <div class="resumo glowy"><div class="rh"><span>◈</span>Resumo do capítulo</div><div class="rb"><ul><li>SOLID = 5 princípios que mantêm o código flexível: S.O.L.I.D.</li><li>S: um motivo para mudar. O: estenda sem editar. L: filho substitui pai sem surpresa.</li><li>I: interfaces pequenas e focadas. D: dependa de abstrações.</li><li>SOLID é o "porquê" dos padrões — entenda isto e os 23 padrões fazem sentido sozinhos.</li></ul></div></div>
+
+  <div class="ex glowy"><div class="xh"><span class="tag">intermediário</span>Exercício 4.1 — Refatore para SOLID</div><div class="xb"><p>A classe <code>Usuario</code> abaixo valida senha, salva no banco e envia e-mail de boas-vindas, tudo junto. Identifique <b>qual letra do SOLID</b> ela mais viola e reescreva separando responsabilidades em pelo menos duas classes/interfaces.</p><div class="code"><div class="hd"><span class="dot d1"></span><span class="dot d2"></span><span class="dot d3"></span><span class="lng">java · ponto de partida</span></div><pre><code><span class="kw">public</span> <span class="kw">class</span> Usuario {
+    <span class="kw">public</span> <span class="ty">boolean</span> <span class="fn">senhaValida</span>(<span class="ty">String</span> s) { <span class="kw">return</span> s.<span class="fn">length</span>() &gt;= <span class="nm">8</span>; }
+    <span class="kw">public</span> <span class="kw">void</span> <span class="fn">salvarNoBanco</span>() { <span class="cm">/* SQL aqui */</span> }
+    <span class="kw">public</span> <span class="kw">void</span> <span class="fn">enviarBoasVindas</span>() { <span class="cm">/* SMTP aqui */</span> }
+}</code></pre></div><div class="deliver"><b>Entrega:</b> o nome do princípio violado + o código refatorado.</div></div></div>
+
+  <div class="quiz glowy"><div class="qh"><span class="ic">◇</span>Quiz — SOLID</div><div class="q"><div class="qt">"Adicionar um novo tipo sem editar o código que já existe" é a ideia de qual letra?</div><button class="opt" data-ok="0"><b>a)</b> S</button><button class="opt" data-ok="1"><b>b)</b> O</button><button class="opt" data-ok="0"><b>c)</b> D</button><div class="fb good"><b>Certo.</b> Open/Closed: aberto para extensão, fechado para modificação.</div><div class="fb bad">Reveja: estender sem modificar é o <b>O</b> de Open/Closed.</div></div><div class="q"><div class="qt">Uma interface <code>Funcionario</code> que obriga um robô a implementar <code>tirarFerias()</code> viola:</div><button class="opt" data-ok="1"><b>a)</b> Interface Segregation (I)</button><button class="opt" data-ok="0"><b>b)</b> Liskov (L)</button><button class="opt" data-ok="0"><b>c)</b> Single Responsibility (S)</button><div class="fb good"><b>Isso.</b> Interface gorda forçando método inútil → quebra o I.</div><div class="fb bad">O problema é obrigar a implementar o que não se usa: isso é o <b>I</b>, Interface Segregation.</div></div><div class="q"><div class="qt">Receber um <code>Repositorio</code> (interface) pelo construtor em vez de dar <code>new MySQLRepo()</code> dentro da classe é aplicar:</div><button class="opt" data-ok="1"><b>a)</b> Dependency Inversion (D)</button><button class="opt" data-ok="0"><b>b)</b> Single Responsibility (S)</button><button class="opt" data-ok="0"><b>c)</b> Open/Closed só</button><div class="fb good"><b>Perfeito.</b> Depender da abstração e injetá-la é o D (com Injeção de Dependência).</div><div class="fb bad">O foco aqui é depender de abstração, não de detalhe concreto → <b>D</b>, Dependency Inversion.</div></div></div>
+
+  <div class="loop"><div class="lt">Loop Kalixto de Aprendizagem</div><div class="steps"><span class="st a">Entender</span><span class="ar">→</span><span class="st b">Reconhecer</span><span class="ar">→</span><span class="st c">Implementar</span><span class="ar">→</span><span class="st d">Refatorar</span><span class="ar">↺</span><span class="st a">Repetir</span></div></div>
+</section>
+<div class="part rev"><div class="pnum">Parte 2</div><h2>Introdução aos Design Patterns</h2><p>Agora que o chão está firme, formalizamos o que é um padrão, do que ele é feito e como os 23 se organizam em três famílias.</p></div>
+<section id="c5">
+  <div class="eyebrow">Parte 2 · Capítulo 5</div>
+  <h1 class="ch">O que é um pattern (de verdade)</h1>
+  <p class="lead">Um padrão não é uma biblioteca nem um trecho de código que você importa. É a <strong>descrição de uma solução</strong> para um problema recorrente, que você adapta ao seu contexto.</p>
+
+  <div class="box key glowy"><div class="bt"><span class="ic">★</span>A equação para nunca esquecer</div><p><b>Pattern ≠ código pronto.</b> &nbsp; <b>Pattern = solução recorrente + estrutura + nome.</b> Dois desenvolvedores podem implementar o mesmo padrão com códigos diferentes — e ainda assim ser o mesmo padrão.</p></div>
+
+  <h2>Do que um padrão é feito</h2>
+  <p>No livro do GoF, todo padrão é descrito por quatro elementos. Você vai reconhecê-los em cada capítulo desta apostila:</p>
+  <div class="tbl glowy"><table><thead><tr><th>Elemento</th><th>O que responde</th></tr></thead><tbody><tr><td>Nome</td><td>Como chamamos? (entra no vocabulário do time)</td></tr><tr><td>Problema</td><td>Quando aplicar? Que situação ele resolve?</td></tr><tr><td>Solução</td><td>Quais classes/objetos e como se relacionam (a estrutura).</td></tr><tr><td>Consequências</td><td>O que ganho e o que pago ao usar (trade-offs).</td></tr></tbody></table></div>
+
+  <h2>Benefícios — e o aviso</h2>
+  <p>Padrões trazem reuso de soluções maduras, vocabulário comum e código preparado para mudança. Mas há um porém honesto:</p>
+  <div class="box warn glowy"><div class="bt"><span class="ic">!</span>Padrão não é troféu</div><p>O maior erro de iniciante é <b>forçar</b> padrões para parecer sofisticado. Padrão aplicado sem necessidade vira complexidade gratuita. A pergunta certa nunca é "qual padrão eu uso aqui?", e sim "qual problema eu tenho?". O padrão é resposta, não ponto de partida.</p></div>
+
+  <div class="resumo glowy"><div class="rh"><span>◈</span>Resumo do capítulo</div><div class="rb"><ul><li>Pattern é solução descrita e adaptável, não código importável.</li><li>Todo padrão tem nome, problema, solução (estrutura) e consequências.</li><li>Benefícios: reuso, vocabulário comum, flexibilidade.</li><li>Aviso: padrão sem problema real = complexidade desnecessária.</li></ul></div></div>
+
+  <div class="loop"><div class="lt">Loop Kalixto de Aprendizagem</div><div class="steps"><span class="st a">Entender</span><span class="ar">→</span><span class="st b">Reconhecer</span><span class="ar">→</span><span class="st c">Implementar</span><span class="ar">→</span><span class="st d">Refatorar</span><span class="ar">↺</span><span class="st a">Repetir</span></div></div>
+</section>
+
+<section id="c6">
+  <div class="eyebrow">Parte 2 · Capítulo 6</div>
+  <h1 class="ch">Classificação dos padrões</h1>
+  <p class="lead">Os 23 padrões do GoF se dividem em três famílias, conforme o tipo de problema que atacam: como <em>criar</em>, como <em>compor</em> e como <em>fazer objetos colaborarem</em>.</p>
+
+  <div class="tbl glowy"><table><thead><tr><th>Família</th><th>Pergunta que responde</th><th>Padrões</th></tr></thead><tbody><tr><td><b style="color:#FF2D8A">Criacionais</b></td><td>Como criar objetos de forma flexível?</td><td>Singleton, Factory Method, Abstract Factory, Builder, Prototype</td></tr><tr><td><b style="color:#A855F7">Estruturais</b></td><td>Como montar objetos em estruturas maiores?</td><td>Adapter, Bridge, Composite, Decorator, Facade, Flyweight, Proxy</td></tr><tr><td><b style="color:#2E8BFF">Comportamentais</b></td><td>Como objetos colaboram e dividem responsabilidades?</td><td>Chain of Responsibility, Command, Interpreter, Iterator, Mediator, Memento, Observer, State, Strategy, Template Method, Visitor</td></tr></tbody></table></div>
+
+  <div class="uml"><div class="cap">mapa mental textual</div><pre>                 DESIGN PATTERNS (GoF · 23)
+                          |
+        +-----------------+------------------+
+        |                 |                  |
+   CRIACIONAIS       ESTRUTURAIS       COMPORTAMENTAIS
+   (criar objetos)   (montar/compor)   (colaborar)
+        |                 |                  |
+   Singleton          Adapter           Observer
+   Factory Method     Decorator         Strategy
+   Abstract Factory   Facade            State
+   Builder            Proxy             Command
+   Prototype          Composite         Iterator ...</pre></div>
+
+  <div class="box curio glowy"><div class="bt"><span class="ic">?</span>Por que começar pelos criacionais?</div><p>Porque criar objetos é o primeiro problema de todo sistema — e porque os criacionais ensinam o reflexo mais valioso: <b>programar para uma interface, não para uma implementação</b>. Esse reflexo carrega você pelo resto dos padrões.</p></div>
+
+  <div class="resumo glowy"><div class="rh"><span>◈</span>Resumo do capítulo</div><div class="rb"><ul><li>Três famílias: criacionais (criar), estruturais (compor), comportamentais (colaborar).</li><li>5 criacionais, 7 estruturais, 11 comportamentais = 23.</li><li>Comece pelos criacionais: eles ensinam "programe para a interface, não para a implementação".</li></ul></div></div>
+
+  <div class="loop"><div class="lt">Loop Kalixto de Aprendizagem</div><div class="steps"><span class="st a">Entender</span><span class="ar">→</span><span class="st b">Reconhecer</span><span class="ar">→</span><span class="st c">Implementar</span><span class="ar">→</span><span class="st d">Refatorar</span><span class="ar">↺</span><span class="st a">Repetir</span></div></div>
+</section>
+<div class="part rev"><div class="pnum">Parte 3</div><h2>Padrões Criacionais</h2><p>Cinco padrões que tratam de uma coisa só: criar objetos sem amarrar seu código a classes concretas. Cada um segue a mesma receita didática — conceito, analogia, problema, solução, código comentado, erros, quando usar/evitar, exercício e desafio.</p></div>
+<section id="singleton">
+  <div class="eyebrow">Parte 3 · Criacional</div>
+  <h1 class="ch">Singleton</h1>
+  <p class="lead"><strong>Conceito:</strong> garante que uma classe tenha <em>uma única instância</em> em todo o sistema e oferece um ponto global de acesso a ela.</p>
+
+  <div class="box ana glowy"><div class="bt"><span class="ic">≈</span>O presidente do país</div><p>Por mais que existam milhões de cidadãos, há <b>um</b> presidente por vez. Não importa quem pergunte "quem é o presidente?", a resposta aponta sempre para a mesma pessoa. O Singleton é isso: por mais que o código peça a instância, recebe sempre a mesma.</p></div>
+
+  <h2>Problema</h2>
+  <p>Alguns recursos devem existir uma vez só: a configuração da aplicação, um pool de conexões, um logger central. Se cada parte do código criar o seu próprio, você gasta memória à toa e — pior — pode ter estados inconsistentes (dois loggers escrevendo em arquivos diferentes).</p>
+
+  <h2>Solução</h2>
+  <p>A própria classe controla sua criação: o construtor vira <code>private</code> (ninguém de fora dá <code>new</code>) e um método estático devolve sempre a mesma instância guardada internamente.</p>
+  <div class="uml"><div class="cap">estrutura</div><pre>+------------------------------+
+|          Singleton           |
++------------------------------+
+| - instancia : Singleton      |  &lt;-- guarda a si mesma (static)
+| - Singleton()                |  &lt;-- construtor PRIVADO
++------------------------------+
+| + getInstancia() : Singleton |  &lt;-- ponto de acesso global
++------------------------------+</pre></div>
+
+  <h2>Código Java comentado</h2>
+  <div class="code"><div class="hd"><span class="dot d1"></span><span class="dot d2"></span><span class="dot d3"></span><span class="lng">java · thread-safe (holder)</span></div><pre><code><span class="kw">public</span> <span class="kw">class</span> Configuracao {
+
+    <span class="cm">// 1) Construtor privado: impede "new Configuracao()" de fora.</span>
+    <span class="kw">private</span> <span class="fn">Configuracao</span>() {
+        <span class="cm">// carrega config de arquivo, etc.</span>
+    }
+
+    <span class="cm">// 2) Holder estatico: a JVM so carrega esta classe interna</span>
+    <span class="cm">//    na primeira vez que getInstancia() e chamado, e faz isso</span>
+    <span class="cm">//    de forma thread-safe automaticamente.</span>
+    <span class="kw">private</span> <span class="kw">static</span> <span class="kw">class</span> Holder {
+        <span class="kw">private</span> <span class="kw">static</span> <span class="kw">final</span> Configuracao INSTANCIA = <span class="kw">new</span> <span class="fn">Configuracao</span>();
+    }
+
+    <span class="cm">// 3) Ponto de acesso global. Sempre devolve a MESMA instancia.</span>
+    <span class="kw">public</span> <span class="kw">static</span> Configuracao <span class="fn">getInstancia</span>() {
+        <span class="kw">return</span> Holder.INSTANCIA;
+    }
+
+    <span class="kw">public</span> <span class="ty">String</span> <span class="kw">get</span>(<span class="ty">String</span> chave) { <span class="kw">return</span> <span class="st">"valor"</span>; }
+}
+
+<span class="cm">// Uso:</span>
+Configuracao c1 = Configuracao.<span class="fn">getInstancia</span>();
+Configuracao c2 = Configuracao.<span class="fn">getInstancia</span>();
+<span class="cm">// c1 == c2  -&gt; true (mesmo objeto)</span></code></pre></div>
+
+  <div class="box tip glowy"><div class="bt"><span class="ic">✓</span>Por que o "Holder"?</div><p>A versão ingênua (<code>if (instancia == null) instancia = new ...</code>) quebra com várias threads: duas podem entrar no <code>if</code> ao mesmo tempo e criar dois objetos. O padrão <i>Initialization-on-demand Holder</i> resolve isso de graça, usando a garantia da JVM de que classes carregam uma vez só, com segurança de thread.</p></div>
+
+  <h2>Em outras linguagens</h2>
+  <div class="code"><div class="hd"><span class="dot d1"></span><span class="dot d2"></span><span class="dot d3"></span><span class="lng">csharp</span></div><pre><code><span class="kw">public</span> <span class="kw">sealed</span> <span class="kw">class</span> Configuracao {
+    <span class="kw">private</span> <span class="kw">static</span> readonly Configuracao _inst = <span class="kw">new</span> <span class="fn">Configuracao</span>();
+    <span class="kw">private</span> <span class="fn">Configuracao</span>() { }
+    <span class="kw">public</span> <span class="kw">static</span> Configuracao Instancia =&gt; _inst;
+}</code></pre></div>
+  <div class="code"><div class="hd"><span class="dot d1"></span><span class="dot d2"></span><span class="dot d3"></span><span class="lng">python</span></div><pre><code><span class="kw">class</span> Configuracao:
+    _inst = <span class="kw">None</span>
+    <span class="kw">def</span> <span class="fn">__new__</span>(cls):
+        <span class="kw">if</span> cls._inst is <span class="kw">None</span>:
+            cls._inst = <span class="kw">super</span>().<span class="fn">__new__</span>(cls)
+        <span class="kw">return</span> cls._inst   <span class="cm"># sempre o mesmo objeto</span></code></pre></div>
+  <div class="code"><div class="hd"><span class="dot d1"></span><span class="dot d2"></span><span class="dot d3"></span><span class="lng">javascript</span></div><pre><code><span class="cm">// Em JS, um modulo ja e um singleton natural:</span>
+<span class="kw">let</span> instancia;
+export <span class="kw">function</span> <span class="fn">getConfig</span>() {
+  <span class="kw">if</span> (!instancia) instancia = { tema: <span class="st">"neon"</span> };
+  <span class="kw">return</span> instancia;
+}</code></pre></div>
+
+  <h2>Erros comuns</h2>
+  <ul>
+    <li><strong>Virar variável global disfarçada:</strong> usar Singleton para acessar estado de qualquer lugar acopla tudo a ele. É o "padrão" mais abusado.</li>
+    <li><strong>Esquecer threads:</strong> a versão lazy ingênua não é thread-safe.</li>
+    <li><strong>Dificultar testes:</strong> estado global compartilhado entre testes causa falhas fantasmas.</li>
+  </ul>
+
+  <div class="tbl glowy"><table><thead><tr><th>Quando usar</th><th>Quando evitar</th></tr></thead><tbody><tr><td>Há de fato um único recurso lógico (config, logger, pool).</td><td>Você só quer "acessar de qualquer lugar" — isso é estado global, não Singleton.</td></tr><tr><td>O acesso global simplifica e não esconde dependências.</td><td>A classe guarda estado mutável que atrapalha testes.</td></tr><tr><td>Criar o objeto é caro e você quer reaproveitar.</td><td>Você poderia simplesmente injetar a dependência (geralmente melhor).</td></tr></tbody></table></div>
+
+  <div class="ex glowy"><div class="xh"><span class="tag">intermediário</span>Exercício — Logger Singleton</div><div class="xb"><p>Implemente em Java um <code>Logger</code> Singleton thread-safe (use o padrão Holder) com um método <code>log(String msg)</code> que imprime <code>[LOG] msg</code>. Prove no <code>main</code> que duas chamadas a <code>getInstancia()</code> retornam o mesmo objeto (<code>==</code>).</p><div class="deliver"><b>Entrega:</b> a classe Logger + um main que imprime o resultado da comparação.</div></div></div>
+  <div class="ex glowy"><div class="xh"><span class="tag">avançado</span>Desafio — Singleton x Injeção</div><div class="xb"><p>Reescreva o exercício anterior <b>sem</b> Singleton: crie o <code>Logger</code> uma vez no <code>main</code> e injete-o via construtor nas classes que precisam. Em seguida, escreva 3 linhas comparando as duas abordagens em testabilidade.</p><div class="deliver"><b>Entrega:</b> a versão com injeção + comentário comparativo.</div></div></div>
+
+  <div class="quiz glowy"><div class="qh"><span class="ic">◇</span>Quiz — Singleton</div><div class="q"><div class="qt">O que torna o construtor de um Singleton especial?</div><button class="opt" data-ok="0"><b>a)</b> Ele é <code>public</code> e estático</button><button class="opt" data-ok="1"><b>b)</b> Ele é <code>private</code></button><button class="opt" data-ok="0"><b>c)</b> Ele não existe</button><div class="fb good"><b>Certo.</b> Construtor privado impede que outros criem instâncias com <code>new</code>.</div><div class="fb bad">O segredo é o construtor <b>privado</b>: só a própria classe pode se instanciar.</div></div><div class="q"><div class="qt">Qual é a crítica mais comum ao Singleton?</div><button class="opt" data-ok="0"><b>a)</b> É lento</button><button class="opt" data-ok="1"><b>b)</b> Vira estado global e dificulta testes</button><button class="opt" data-ok="0"><b>c)</b> Ocupa muita memória</button><div class="fb good"><b>Exato.</b> Abusado, ele acopla o sistema todo e prejudica testes.</div><div class="fb bad">A dor real não é desempenho: é virar <b>estado global</b>, acoplando tudo e travando testes.</div></div></div>
+
+  <div class="loop"><div class="lt">Loop Kalixto de Aprendizagem</div><div class="steps"><span class="st a">Entender</span><span class="ar">→</span><span class="st b">Reconhecer</span><span class="ar">→</span><span class="st c">Implementar</span><span class="ar">→</span><span class="st d">Refatorar</span><span class="ar">↺</span><span class="st a">Repetir</span></div></div>
+</section>
+
+<section id="factory">
+  <div class="eyebrow">Parte 3 · Criacional</div>
+  <h1 class="ch">Factory Method</h1>
+  <p class="lead"><strong>Conceito:</strong> define um método para criar objetos, mas deixa as <em>subclasses</em> decidirem qual classe concreta instanciar. Você cria "produtos" sem dar <code>new</code> da classe concreta no meio do código.</p>
+
+  <div class="box ana glowy"><div class="bt"><span class="ic">≈</span>A fábrica de documentos</div><p>Você pede ao seu editor "novo documento". Dependendo do programa, sai um <code>.docx</code>, um <code>.pdf</code> ou um <code>.txt</code>. Você não diz <i>como</i> criar — você pede, e a fábrica certa entrega o produto certo. O <code>new</code> fica escondido dentro da fábrica.</p></div>
+
+  <h2>Problema</h2>
+  <p>Aquele <code>if/else</code> do Capítulo 2 espalhava <code>new Pix()</code>, <code>new Cartao()</code> pelo código. Toda vez que surge um tipo novo, você caça e edita todos esses pontos. Isso viola o Open/Closed.</p>
+
+  <h2>Solução</h2>
+  <p>Centralize a criação em um <strong>método fábrica</strong>. O código cliente conversa com a <em>interface</em> do produto; a decisão de qual concreto criar mora num único lugar.</p>
+  <div class="uml"><div class="cap">estrutura</div><pre>   <<interface>>            Criador (abstrato)
+    Transporte      <----   + criar() : Transporte   (factory method)
+        ^                          ^
+   +----+----+              +------+------+
+ Carro     Navio        CriadorCarro   CriadorNavio
+ (produtos concretos)   (sobrescrevem criar())</pre></div>
+
+  <h2>Código Java comentado</h2>
+  <div class="code"><div class="hd"><span class="dot d1"></span><span class="dot d2"></span><span class="dot d3"></span><span class="lng">java</span></div><pre><code><span class="cm">// 1) Produto: a interface que o cliente conhece.</span>
+<span class="kw">public</span> <span class="kw">interface</span> Transporte {
+    <span class="kw">void</span> <span class="fn">entregar</span>();
+}
+
+<span class="cm">// 2) Produtos concretos.</span>
+<span class="kw">public</span> <span class="kw">class</span> Carro <span class="kw">implements</span> Transporte {
+    <span class="kw">public</span> <span class="kw">void</span> <span class="fn">entregar</span>() { <span class="ty">System</span>.out.<span class="fn">println</span>(<span class="st">"Entrega por terra"</span>); }
+}
+<span class="kw">public</span> <span class="kw">class</span> Navio <span class="kw">implements</span> Transporte {
+    <span class="kw">public</span> <span class="kw">void</span> <span class="fn">entregar</span>() { <span class="ty">System</span>.out.<span class="fn">println</span>(<span class="st">"Entrega por mar"</span>); }
+}
+
+<span class="cm">// 3) Criador: declara o factory method (aqui, abstrato).</span>
+<span class="kw">public</span> <span class="kw">abstract</span> <span class="kw">class</span> Logistica {
+    <span class="kw">public</span> <span class="kw">abstract</span> Transporte <span class="fn">criarTransporte</span>();   <span class="cm">// FACTORY METHOD</span>
+
+    <span class="cm">// Reaproveita o produto sem saber qual concreto e:</span>
+    <span class="kw">public</span> <span class="kw">void</span> <span class="fn">planejar</span>() {
+        Transporte t = <span class="fn">criarTransporte</span>();  <span class="cm">// delega a decisao</span>
+        t.<span class="fn">entregar</span>();
+    }
+}
+
+<span class="cm">// 4) Criadores concretos decidem o produto.</span>
+<span class="kw">public</span> <span class="kw">class</span> LogisticaRodoviaria <span class="kw">extends</span> Logistica {
+    <span class="kw">public</span> Transporte <span class="fn">criarTransporte</span>() { <span class="kw">return</span> <span class="kw">new</span> <span class="fn">Carro</span>(); }
+}
+<span class="kw">public</span> <span class="kw">class</span> LogisticaMaritima <span class="kw">extends</span> Logistica {
+    <span class="kw">public</span> Transporte <span class="fn">criarTransporte</span>() { <span class="kw">return</span> <span class="kw">new</span> <span class="fn">Navio</span>(); }
+}
+
+<span class="cm">// Uso: o cliente escolhe a fabrica, nao o produto.</span>
+Logistica log = <span class="kw">new</span> <span class="fn">LogisticaMaritima</span>();
+log.<span class="fn">planejar</span>();   <span class="cm">// "Entrega por mar"</span></code></pre></div>
+
+  <div class="box key glowy"><div class="bt"><span class="ic">★</span>A virada de chave</div><p>Repare: o método <code>planejar()</code> usa <code>Transporte</code> sem nunca escrever <code>new Carro()</code> ou <code>new Navio()</code>. Para adicionar entrega aérea, você cria <code>Aviao</code> + <code>LogisticaAerea</code> e <b>não toca</b> em nada que já existe. Isso é o Open/Closed em ação.</p></div>
+
+  <h2>Versão simples (factory estática)</h2>
+  <p>Na prática, muito código usa uma variação enxuta: um único método estático que devolve o produto conforme um parâmetro. Tecnicamente é uma "Simple Factory", mas resolve 80% dos casos.</p>
+  <div class="code"><div class="hd"><span class="dot d1"></span><span class="dot d2"></span><span class="dot d3"></span><span class="lng">java · simple factory</span></div><pre><code><span class="kw">public</span> <span class="kw">class</span> TransporteFactory {
+    <span class="kw">public</span> <span class="kw">static</span> Transporte <span class="fn">criar</span>(<span class="ty">String</span> tipo) {
+        <span class="kw">return</span> <span class="kw">switch</span> (tipo) {
+            <span class="kw">case</span> <span class="st">"carro"</span> -&gt; <span class="kw">new</span> <span class="fn">Carro</span>();
+            <span class="kw">case</span> <span class="st">"navio"</span> -&gt; <span class="kw">new</span> <span class="fn">Navio</span>();
+            default -&gt; <span class="kw">throw</span> <span class="kw">new</span> <span class="fn">IllegalArgumentException</span>(<span class="st">"tipo invalido"</span>);
+        };
+    }
+}
+Transporte t = TransporteFactory.<span class="fn">criar</span>(<span class="st">"carro"</span>);</code></pre></div>
+
+  <h2>Erros comuns</h2>
+  <ul>
+    <li>Confundir com Abstract Factory (este cria <em>um</em> produto; o Abstract cria <em>famílias</em>).</li>
+    <li>Deixar o <code>switch</code> da Simple Factory crescer sem fim — às vezes Strategy ou um mapa resolve melhor.</li>
+    <li>Criar fábrica para algo trivial: se só existe um tipo, não precisa de fábrica.</li>
+  </ul>
+  <div class="tbl glowy"><table><thead><tr><th>Quando usar</th><th>Quando evitar</th></tr></thead><tbody><tr><td>Você não sabe de antemão quais tipos concretos precisará criar.</td><td>Só existe um tipo de produto e não vai mudar.</td></tr><tr><td>Quer isolar a criação para honrar o Open/Closed.</td><td>O custo da indireção supera o ganho (over-engineering).</td></tr><tr><td>Frameworks que deixam você "plugar" suas próprias classes.</td><td>Um simples construtor já resolveria com clareza.</td></tr></tbody></table></div>
+
+  <div class="ex glowy"><div class="xh"><span class="tag">intermediário</span>Exercício — Fábrica de notificações</div><div class="xb"><p>Crie a interface <code>Notificacao</code> com <code>enviar(String msg)</code> e os concretos <code>Email</code>, <code>SMS</code> e <code>Push</code>. Implemente uma fábrica que, dado o canal, devolve a notificação certa. Mostre o uso enviando a mesma mensagem pelos três canais.</p><div class="deliver"><b>Entrega:</b> interface + 3 concretos + fábrica + main de demonstração.</div></div></div>
+  <div class="ex glowy"><div class="xh"><span class="tag">avançado</span>Desafio — Sem switch</div><div class="xb"><p>Refaça a fábrica de notificações <b>sem</b> <code>switch/if</code>: registre os criadores num <code>Map&lt;String, Supplier&lt;Notificacao&gt;&gt;</code>. Explique em 2 linhas por que isso facilita adicionar um canal novo.</p><div class="deliver"><b>Entrega:</b> a fábrica baseada em Map + comentário.</div></div></div>
+
+  <div class="resumo glowy"><div class="rh"><span>◈</span>Resumo do capítulo</div><div class="rb"><ul><li>Factory Method delega a criação de UM produto para subclasses/fábricas.</li><li>O cliente fala com a interface do produto; o new fica escondido.</li><li>Honra o Open/Closed: novo tipo = nova classe, sem editar o existente.</li><li>A "Simple Factory" (método estático com switch) é a variação prática mais comum.</li></ul></div></div>
+
+  <div class="loop"><div class="lt">Loop Kalixto de Aprendizagem</div><div class="steps"><span class="st a">Entender</span><span class="ar">→</span><span class="st b">Reconhecer</span><span class="ar">→</span><span class="st c">Implementar</span><span class="ar">→</span><span class="st d">Refatorar</span><span class="ar">↺</span><span class="st a">Repetir</span></div></div>
+</section>
+
+<section id="abstractfactory">
+  <div class="eyebrow">Parte 3 · Criacional</div>
+  <h1 class="ch">Abstract Factory</h1>
+  <p class="lead"><strong>Conceito:</strong> cria <em>famílias</em> de objetos relacionados sem especificar suas classes concretas. É um "Factory Method elevado": em vez de um produto, uma fábrica produz um conjunto coerente de produtos.</p>
+
+  <div class="box ana glowy"><div class="bt"><span class="ic">≈</span>Montadora de móveis por estilo</div><p>Você escolhe um estilo: "Vitoriano" ou "Moderno". Ao escolher, ganha um <b>conjunto combinando</b> — cadeira, sofá e mesa, todos no mesmo estilo. Você nunca mistura cadeira vitoriana com mesa moderna. A fábrica garante a coerência da família.</p></div>
+
+  <h2>Problema</h2>
+  <p>Seu app precisa de temas (claro/escuro). Cada tema tem botão, caixa de texto e menu próprios. Se você criar cada componente com <code>if (tema == escuro)</code> espalhado, vai acabar com um botão escuro dentro de um menu claro. Você precisa garantir <strong>famílias consistentes</strong>.</p>
+
+  <h2>Solução</h2>
+  <div class="uml"><div class="cap">estrutura</div><pre>      <<interface>> FabricaUI
+      + criarBotao() : Botao
+      + criarCheckbox() : Checkbox
+            ^                ^
+   FabricaClaro          FabricaEscuro
+   (Botao/CheckboxClaro) (Botao/CheckboxEscuro)
+   --- cada fabrica produz a FAMILIA inteira no mesmo estilo ---</pre></div>
+
+  <div class="code"><div class="hd"><span class="dot d1"></span><span class="dot d2"></span><span class="dot d3"></span><span class="lng">java</span></div><pre><code><span class="cm">// Produtos abstratos (a familia)</span>
+<span class="kw">public</span> <span class="kw">interface</span> Botao   { <span class="kw">void</span> <span class="fn">render</span>(); }
+<span class="kw">public</span> <span class="kw">interface</span> Checkbox{ <span class="kw">void</span> <span class="fn">render</span>(); }
+
+<span class="cm">// Familia CLARA</span>
+<span class="kw">public</span> <span class="kw">class</span> BotaoClaro    <span class="kw">implements</span> Botao    { <span class="kw">public</span> <span class="kw">void</span> <span class="fn">render</span>(){ <span class="ty">System</span>.out.<span class="fn">println</span>(<span class="st">"botao claro"</span>); } }
+<span class="kw">public</span> <span class="kw">class</span> CheckboxClaro <span class="kw">implements</span> Checkbox { <span class="kw">public</span> <span class="kw">void</span> <span class="fn">render</span>(){ <span class="ty">System</span>.out.<span class="fn">println</span>(<span class="st">"check claro"</span>); } }
+<span class="cm">// Familia ESCURA</span>
+<span class="kw">public</span> <span class="kw">class</span> BotaoEscuro    <span class="kw">implements</span> Botao    { <span class="kw">public</span> <span class="kw">void</span> <span class="fn">render</span>(){ <span class="ty">System</span>.out.<span class="fn">println</span>(<span class="st">"botao escuro"</span>); } }
+<span class="kw">public</span> <span class="kw">class</span> CheckboxEscuro <span class="kw">implements</span> Checkbox { <span class="kw">public</span> <span class="kw">void</span> <span class="fn">render</span>(){ <span class="ty">System</span>.out.<span class="fn">println</span>(<span class="st">"check escuro"</span>); } }
+
+<span class="cm">// A FABRICA ABSTRATA: declara como criar a familia toda.</span>
+<span class="kw">public</span> <span class="kw">interface</span> FabricaUI {
+    Botao <span class="fn">criarBotao</span>();
+    Checkbox <span class="fn">criarCheckbox</span>();
+}
+<span class="cm">// Fabricas concretas: cada uma so produz produtos do seu estilo.</span>
+<span class="kw">public</span> <span class="kw">class</span> FabricaClara <span class="kw">implements</span> FabricaUI {
+    <span class="kw">public</span> Botao <span class="fn">criarBotao</span>()       { <span class="kw">return</span> <span class="kw">new</span> <span class="fn">BotaoClaro</span>(); }
+    <span class="kw">public</span> Checkbox <span class="fn">criarCheckbox</span>() { <span class="kw">return</span> <span class="kw">new</span> <span class="fn">CheckboxClaro</span>(); }
+}
+<span class="kw">public</span> <span class="kw">class</span> FabricaEscura <span class="kw">implements</span> FabricaUI {
+    <span class="kw">public</span> Botao <span class="fn">criarBotao</span>()       { <span class="kw">return</span> <span class="kw">new</span> <span class="fn">BotaoEscuro</span>(); }
+    <span class="kw">public</span> Checkbox <span class="fn">criarCheckbox</span>() { <span class="kw">return</span> <span class="kw">new</span> <span class="fn">CheckboxEscuro</span>(); }
+}
+
+<span class="cm">// Cliente: recebe UMA fabrica e monta a tela inteira coerente.</span>
+<span class="kw">public</span> <span class="kw">class</span> Tela {
+    <span class="kw">private</span> <span class="kw">final</span> Botao botao;
+    <span class="kw">private</span> <span class="kw">final</span> Checkbox checkbox;
+    <span class="kw">public</span> <span class="fn">Tela</span>(FabricaUI f) {        <span class="cm">// injeta a familia escolhida</span>
+        <span class="kw">this</span>.botao = f.<span class="fn">criarBotao</span>();
+        <span class="kw">this</span>.checkbox = f.<span class="fn">criarCheckbox</span>();
+    }
+    <span class="kw">public</span> <span class="kw">void</span> <span class="fn">desenhar</span>() { botao.<span class="fn">render</span>(); checkbox.<span class="fn">render</span>(); }
+}
+
+<span class="cm">// Uso:</span>
+FabricaUI fabrica = <span class="kw">new</span> <span class="fn">FabricaEscura</span>();  <span class="cm">// troca aqui muda a tela toda</span>
+<span class="kw">new</span> <span class="fn">Tela</span>(fabrica).<span class="fn">desenhar</span>();             <span class="cm">// tudo escuro, sem mistura</span></code></pre></div>
+
+  <div class="box key glowy"><div class="bt"><span class="ic">★</span>Factory Method x Abstract Factory</div><p><b>Factory Method</b> cria <i>um</i> produto e usa herança (subclasse decide). <b>Abstract Factory</b> cria uma <i>família</i> de produtos e usa composição (você passa a fábrica). Regra: um produto → Factory Method; um conjunto coerente → Abstract Factory.</p></div>
+
+  <h2>Erros comuns</h2>
+  <ul>
+    <li>Usar quando só há um produto na "família" (aí é Factory Method, ou nem isso).</li>
+    <li>Adicionar um produto novo à família: exige mexer em <em>todas</em> as fábricas. É o preço do padrão.</li>
+  </ul>
+  <div class="tbl glowy"><table><thead><tr><th>Quando usar</th><th>Quando evitar</th></tr></thead><tbody><tr><td>Há famílias de produtos que devem combinar entre si.</td><td>Só existe um produto, sem "família".</td></tr><tr><td>Você quer trocar a família inteira num ponto único.</td><td>As famílias raramente mudam — indireção sem retorno.</td></tr><tr><td>Temas, drivers de banco por fornecedor, UIs por SO.</td><td>Adicionar produtos novos é frequente (custo alto de manutenção).</td></tr></tbody></table></div>
+
+  <div class="ex glowy"><div class="xh"><span class="tag">avançado</span>Desafio — Fábrica de banco de dados</div><div class="xb"><p>Modele uma família por fornecedor: <code>Conexao</code> e <code>Comando</code>, com implementações <code>MySQL*</code> e <code>Postgres*</code>. Crie <code>FabricaMySQL</code> e <code>FabricaPostgres</code> implementando <code>FabricaBanco</code>. Mostre um cliente que recebe a fábrica e roda um comando — trocando só a fábrica para mudar de banco.</p><div class="deliver"><b>Entrega:</b> produtos + 2 fábricas + cliente que troca de fornecedor numa linha.</div></div></div>
+
+  <div class="quiz glowy"><div class="qh"><span class="ic">◇</span>Quiz — Abstract Factory</div><div class="q"><div class="qt">A diferença central entre Factory Method e Abstract Factory é:</div><button class="opt" data-ok="1"><b>a)</b> Um cria um produto; o outro cria uma família de produtos</button><button class="opt" data-ok="0"><b>b)</b> Um é mais rápido que o outro</button><button class="opt" data-ok="0"><b>c)</b> Abstract Factory não usa interfaces</button><div class="fb good"><b>Isso.</b> Factory Method = um produto (herança); Abstract Factory = família (composição).</div><div class="fb bad">A questão é escopo: um produto vs. uma <b>família coerente</b> de produtos.</div></div></div>
+
+  <div class="resumo glowy"><div class="rh"><span>◈</span>Resumo do capítulo</div><div class="rb"><ul><li>Abstract Factory cria famílias de objetos que precisam combinar.</li><li>Garante coerência: nunca mistura produtos de famílias diferentes.</li><li>Usa composição (passa-se a fábrica); Factory Method usa herança.</li><li>Custo: adicionar um produto novo obriga mexer em todas as fábricas.</li></ul></div></div>
+
+  <div class="loop"><div class="lt">Loop Kalixto de Aprendizagem</div><div class="steps"><span class="st a">Entender</span><span class="ar">→</span><span class="st b">Reconhecer</span><span class="ar">→</span><span class="st c">Implementar</span><span class="ar">→</span><span class="st d">Refatorar</span><span class="ar">↺</span><span class="st a">Repetir</span></div></div>
+</section>
+
+<section id="builder">
+  <div class="eyebrow">Parte 3 · Criacional</div>
+  <h1 class="ch">Builder</h1>
+  <p class="lead"><strong>Conceito:</strong> constrói um objeto complexo passo a passo, separando a montagem da representação final. Ideal quando há muitos parâmetros, vários opcionais.</p>
+
+  <div class="box ana glowy"><div class="bt"><span class="ic">≈</span>Montando um lanche</div><p>No balcão você fala: "pão, hambúrguer, sem cebola, com queijo extra, sem molho". Você monta o lanche <b>passo a passo</b>, escolhendo só o que quer. No fim, recebe o lanche pronto. O Builder é esse balcão para objetos.</p></div>
+
+  <h2>Problema — o construtor telescópico</h2>
+  <p>Quando um objeto tem muitos campos opcionais, o construtor vira um monstro impossível de ler:</p>
+  <div class="code"><div class="hd"><span class="dot d1"></span><span class="dot d2"></span><span class="dot d3"></span><span class="lng">java · dor</span></div><pre><code><span class="cm">// O que cada valor significa? Boa sorte.</span>
+Pizza p = <span class="kw">new</span> <span class="fn">Pizza</span>(<span class="st">"grande"</span>, <span class="kw">true</span>, <span class="kw">false</span>, <span class="kw">true</span>, <span class="kw">true</span>, <span class="kw">false</span>, <span class="nm">2</span>);</code></pre></div>
+
+  <h2>Solução</h2>
+  <div class="uml"><div class="cap">estrutura</div><pre>  Cliente ---> PizzaBuilder.tamanho(...).comQueijo()....build()
+                     |                                     |
+                     +---- monta passo a passo ------------+--> Pizza pronta</pre></div>
+
+  <div class="code"><div class="hd"><span class="dot d1"></span><span class="dot d2"></span><span class="dot d3"></span><span class="lng">java · builder fluente</span></div><pre><code><span class="kw">public</span> <span class="kw">class</span> Pizza {
+    <span class="kw">private</span> <span class="kw">final</span> <span class="ty">String</span> tamanho;      <span class="cm">// obrigatorio</span>
+    <span class="kw">private</span> <span class="kw">final</span> <span class="ty">boolean</span> queijo;      <span class="cm">// opcionais...</span>
+    <span class="kw">private</span> <span class="kw">final</span> <span class="ty">boolean</span> calabresa;
+    <span class="kw">private</span> <span class="kw">final</span> <span class="ty">boolean</span> borda;
+
+    <span class="cm">// Construtor PRIVADO: so o builder cria.</span>
+    <span class="kw">private</span> <span class="fn">Pizza</span>(Builder b) {
+        <span class="kw">this</span>.tamanho   = b.tamanho;
+        <span class="kw">this</span>.queijo    = b.queijo;
+        <span class="kw">this</span>.calabresa = b.calabresa;
+        <span class="kw">this</span>.borda     = b.borda;
+    }
+
+    <span class="cm">// O Builder vive dentro da Pizza (classe estatica aninhada).</span>
+    <span class="kw">public</span> <span class="kw">static</span> <span class="kw">class</span> Builder {
+        <span class="kw">private</span> <span class="kw">final</span> <span class="ty">String</span> tamanho;          <span class="cm">// obrigatorio no construtor do builder</span>
+        <span class="kw">private</span> <span class="ty">boolean</span> queijo, calabresa, borda;
+
+        <span class="kw">public</span> <span class="fn">Builder</span>(<span class="ty">String</span> tamanho) { <span class="kw">this</span>.tamanho = tamanho; }
+
+        <span class="cm">// Cada metodo devolve "this" -&gt; permite encadear (fluent).</span>
+        <span class="kw">public</span> Builder <span class="fn">comQueijo</span>()    { <span class="kw">this</span>.queijo = <span class="kw">true</span>; <span class="kw">return</span> <span class="kw">this</span>; }
+        <span class="kw">public</span> Builder <span class="fn">comCalabresa</span>() { <span class="kw">this</span>.calabresa = <span class="kw">true</span>; <span class="kw">return</span> <span class="kw">this</span>; }
+        <span class="kw">public</span> Builder <span class="fn">comBorda</span>()     { <span class="kw">this</span>.borda = <span class="kw">true</span>; <span class="kw">return</span> <span class="kw">this</span>; }
+
+        <span class="kw">public</span> Pizza <span class="fn">build</span>() { <span class="kw">return</span> <span class="kw">new</span> <span class="fn">Pizza</span>(<span class="kw">this</span>); }  <span class="cm">// entrega o objeto</span>
+    }
+}
+
+<span class="cm">// Uso: legivel, so o que importa, em qualquer ordem.</span>
+Pizza p = <span class="kw">new</span> Pizza.<span class="fn">Builder</span>(<span class="st">"grande"</span>)
+        .<span class="fn">comQueijo</span>()
+        .<span class="fn">comBorda</span>()
+        .<span class="fn">build</span>();</code></pre></div>
+
+  <div class="box key glowy"><div class="bt"><span class="ic">★</span>Por que cada método retorna <code>this</code>?</div><p>Retornar a própria instância do builder permite o <b>encadeamento fluente</b> (<code>.comQueijo().comBorda()</code>). É o que transforma uma criação confusa numa frase quase em português.</p></div>
+
+  <h2>Erros comuns</h2>
+  <ul>
+    <li>Usar Builder para objetos simples com 2-3 campos — aí o construtor normal é mais claro.</li>
+    <li>Esquecer de validar no <code>build()</code> (ex.: tamanho obrigatório nulo).</li>
+    <li>Confundir com Factory: Factory escolhe <em>qual</em> objeto; Builder define <em>como montar</em> um objeto complexo.</li>
+  </ul>
+  <div class="tbl glowy"><table><thead><tr><th>Quando usar</th><th>Quando evitar</th></tr></thead><tbody><tr><td>Muitos parâmetros, vários opcionais.</td><td>Objeto simples com poucos campos.</td></tr><tr><td>Quer criação legível e imutável.</td><td>A criação já é clara com um construtor.</td></tr><tr><td>Variações de montagem do mesmo produto.</td><td>Você precisa escolher entre tipos diferentes (use Factory).</td></tr></tbody></table></div>
+
+  <div class="ex glowy"><div class="xh"><span class="tag">intermediário</span>Exercício — Builder de Usuário</div><div class="xb"><p>Crie uma classe <code>Usuario</code> com <code>nome</code> (obrigatório) e <code>email</code>, <code>telefone</code>, <code>idade</code> (opcionais), usando um Builder fluente. Valide no <code>build()</code> que o nome não é vazio. Crie dois usuários: um só com nome, outro completo.</p><div class="deliver"><b>Entrega:</b> a classe Usuario + Builder com validação + 2 exemplos de uso.</div></div></div>
+  <div class="ex glowy"><div class="xh"><span class="tag">avançado</span>Desafio — Director</div><div class="xb"><p>Adicione um <code>Director</code> com métodos <code>usuarioMinimo(nome)</code> e <code>usuarioCompleto(...)</code> que encapsulam receitas de montagem comuns usando o seu Builder. Explique em 2 linhas o papel do Director.</p><div class="deliver"><b>Entrega:</b> a classe Director + comentário sobre seu papel.</div></div></div>
+
+  <div class="resumo glowy"><div class="rh"><span>◈</span>Resumo do capítulo</div><div class="rb"><ul><li>Builder monta objetos complexos passo a passo, separando montagem de resultado.</li><li>Mata o "construtor telescópico" e permite imutabilidade.</li><li>Métodos retornam this para encadeamento fluente.</li><li>Builder = como montar; Factory = qual criar.</li></ul></div></div>
+
+  <div class="loop"><div class="lt">Loop Kalixto de Aprendizagem</div><div class="steps"><span class="st a">Entender</span><span class="ar">→</span><span class="st b">Reconhecer</span><span class="ar">→</span><span class="st c">Implementar</span><span class="ar">→</span><span class="st d">Refatorar</span><span class="ar">↺</span><span class="st a">Repetir</span></div></div>
+</section>
+
+<section id="prototype">
+  <div class="eyebrow">Parte 3 · Criacional</div>
+  <h1 class="ch">Prototype</h1>
+  <p class="lead"><strong>Conceito:</strong> cria novos objetos <em>clonando</em> um objeto existente (o protótipo), em vez de instanciar do zero. Útil quando criar é caro ou quando você quer copiar um estado já configurado.</p>
+
+  <div class="box ana glowy"><div class="bt"><span class="ic">≈</span>Ctrl+C, Ctrl+V de um documento modelo</div><p>Você tem um documento-modelo todo formatado. Para um novo, você <b>duplica</b> o modelo e altera o conteúdo — em vez de formatar tudo de novo. O Prototype é esse "duplicar e ajustar".</p></div>
+
+  <h2>Problema</h2>
+  <p>Montar um objeto pode ser caro (consulta a banco, cálculo pesado, muitos passos). Se você precisa de vários parecidos, refazer tudo a cada vez é desperdício. Além disso, às vezes você só tem o objeto em mãos e nem conhece a classe concreta para dar <code>new</code>.</p>
+
+  <h2>Solução</h2>
+  <div class="uml"><div class="cap">estrutura</div><pre>  <<interface>> Prototipo
+  + clonar() : Prototipo
+        ^
+   FormaConcreta  ---- clonar() devolve uma COPIA de si mesma</pre></div>
+
+  <div class="code"><div class="hd"><span class="dot d1"></span><span class="dot d2"></span><span class="dot d3"></span><span class="lng">java</span></div><pre><code><span class="cm">// 1) Contrato de clonagem.</span>
+<span class="kw">public</span> <span class="kw">interface</span> Prototipo {
+    Prototipo <span class="fn">clonar</span>();
+}
+
+<span class="cm">// 2) Objeto clonavel: o clone copia o estado atual.</span>
+<span class="kw">public</span> <span class="kw">class</span> Personagem <span class="kw">implements</span> Prototipo {
+    <span class="kw">private</span> <span class="ty">String</span> nome;
+    <span class="kw">private</span> <span class="ty">int</span> nivel;
+    <span class="kw">private</span> <span class="ty">int</span>[] atributos;   <span class="cm">// cuidado: referencia!</span>
+
+    <span class="kw">public</span> <span class="fn">Personagem</span>(<span class="ty">String</span> nome, <span class="ty">int</span> nivel, <span class="ty">int</span>[] atributos) {
+        <span class="kw">this</span>.nome = nome; <span class="kw">this</span>.nivel = nivel; <span class="kw">this</span>.atributos = atributos;
+    }
+
+    <span class="kw">public</span> Prototipo <span class="fn">clonar</span>() {
+        <span class="cm">// Copia PROFUNDA do array para o clone nao compartilhar o mesmo.</span>
+        <span class="ty">int</span>[] copia = atributos.<span class="fn">clone</span>();
+        <span class="kw">return</span> <span class="kw">new</span> <span class="fn">Personagem</span>(<span class="kw">this</span>.nome, <span class="kw">this</span>.nivel, copia);
+    }
+
+    <span class="kw">public</span> <span class="kw">void</span> <span class="fn">setNome</span>(<span class="ty">String</span> n) { <span class="kw">this</span>.nome = n; }
+}
+
+<span class="cm">// Uso: configura uma vez, clona varias.</span>
+Personagem base = <span class="kw">new</span> <span class="fn">Personagem</span>(<span class="st">"Guerreiro"</span>, <span class="nm">10</span>, <span class="kw">new</span> <span class="ty">int</span>[]{<span class="nm">8</span>,<span class="nm">5</span>,<span class="nm">3</span>});
+Personagem novo = (Personagem) base.<span class="fn">clonar</span>();
+novo.<span class="fn">setNome</span>(<span class="st">"Guerreiro 2"</span>);  <span class="cm">// nao afeta o "base"</span></code></pre></div>
+
+  <div class="box warn glowy"><div class="bt"><span class="ic">!</span>Cópia rasa x cópia profunda</div><p>O erro nº 1 do Prototype: copiar só as referências (<b>cópia rasa</b>). Aí o clone e o original compartilham a mesma lista/array — mexer em um bagunça o outro. Sempre pergunte: meus campos são objetos mutáveis? Se sim, faça <b>cópia profunda</b> (clone os objetos internos também).</p></div>
+
+  <h2>Erros comuns</h2>
+  <ul>
+    <li>Cópia rasa onde precisava de profunda (bug silencioso e cruel).</li>
+    <li>Depender do <code>Cloneable</code> de Java, que é problemático — prefira um método <code>clonar()</code> próprio, como acima.</li>
+    <li>Usar Prototype quando um construtor simples já resolveria.</li>
+  </ul>
+  <div class="tbl glowy"><table><thead><tr><th>Quando usar</th><th>Quando evitar</th></tr></thead><tbody><tr><td>Criar do zero é caro e você quer copiar estado pronto.</td><td>Criar é barato e direto.</td></tr><tr><td>Você só tem a instância, não a classe concreta.</td><td>Objetos com grafos de referência muito complexos (clone vira pesadelo).</td></tr><tr><td>Precisa de muitas variações de um objeto base.</td><td>Imutáveis — não precisa clonar o que não muda.</td></tr></tbody></table></div>
+
+  <div class="ex glowy"><div class="xh"><span class="tag">avançado</span>Desafio — Editor com clone</div><div class="xb"><p>Modele uma <code>Figura</code> (com <code>x</code>, <code>y</code>, <code>cor</code> e uma <code>List&lt;Integer&gt; pontos</code>) que implemente <code>clonar()</code> com <b>cópia profunda</b> da lista. Crie uma figura, clone-a, altere os pontos do clone e prove (imprimindo) que o original ficou intacto.</p><div class="deliver"><b>Entrega:</b> a classe Figura + demonstração de que o original não muda.</div></div></div>
+
+  <div class="resumo glowy"><div class="rh"><span>◈</span>Resumo do capítulo</div><div class="rb"><ul><li>Prototype cria objetos clonando um protótipo já configurado.</li><li>Bom quando criar do zero é caro ou você só tem a instância.</li><li>O risco central é cópia rasa: faça cópia profunda de campos mutáveis.</li><li>Em Java, prefira um método clonar() próprio a Cloneable.</li></ul></div></div>
+
+  <div class="loop"><div class="lt">Loop Kalixto de Aprendizagem</div><div class="steps"><span class="st a">Entender</span><span class="ar">→</span><span class="st b">Reconhecer</span><span class="ar">→</span><span class="st c">Implementar</span><span class="ar">→</span><span class="st d">Refatorar</span><span class="ar">↺</span><span class="st a">Repetir</span></div></div>
+</section>
+
+<section id="fecho">
+  <div class="eyebrow">Fim do Volume 1</div>
+  <h1 class="ch">Você fechou os Fundamentos + Criacionais</h1>
+  <p class="lead">Recapitulando o que está na sua mão agora: a história e o porquê dos padrões, a POO que os sustenta, os princípios SOLID e os cinco padrões criacionais — Singleton, Factory Method, Abstract Factory, Builder e Prototype.</p>
+
+  <div class="box key glowy"><div class="bt"><span class="ic">★</span>O reflexo que você leva daqui</div><p><b>Programe para uma interface, não para uma implementação.</b> Todos os criacionais ensinam isso. Se você sair deste volume com esse reflexo, os padrões estruturais e comportamentais vão parecer naturais.</p></div>
+
+  <div class="tbl glowy"><table><thead><tr><th>Padrão</th><th>Cria...</th><th>Pista para reconhecer</th></tr></thead><tbody><tr><td>Singleton</td><td>uma única instância</td><td>construtor privado + getInstancia()</td></tr><tr><td>Factory Method</td><td>um produto</td><td>método que devolve a interface, new escondido</td></tr><tr><td>Abstract Factory</td><td>uma família</td><td>fábrica que cria vários produtos combinando</td></tr><tr><td>Builder</td><td>objeto complexo passo a passo</td><td>encadeamento .comX().build()</td></tr><tr><td>Prototype</td><td>cópia de um objeto</td><td>método clonar()</td></tr></tbody></table></div>
+
+  <div class="box tip glowy"><div class="bt"><span class="ic">✓</span>Próximo volume</div><p>No <b>Volume 2</b> entramos nos <b>Padrões Estruturais</b> (Adapter, Decorator, Facade, Proxy e cia.): como compor objetos em estruturas maiores sem virar espaguete. Mesma receita didática, mesmo Loop Kalixto.</p></div>
+
+  <div class="loop"><div class="lt">Loop Kalixto de Aprendizagem</div><div class="steps"><span class="st a">Entender</span><span class="ar">→</span><span class="st b">Reconhecer</span><span class="ar">→</span><span class="st c">Implementar</span><span class="ar">→</span><span class="st d">Refatorar</span><span class="ar">↺</span><span class="st a">Repetir</span></div></div>
+</section>
+</div></main></div><div class="scrim"></div><button class="calmtog">modo calmo</button>
+
+<script>
+/* progress bar */
+var bar=document.getElementById('bar');
+addEventListener('scroll',function(){
+  var h=document.documentElement;var sc=h.scrollTop/(h.scrollHeight-h.clientHeight);
+  bar.style.width=(sc*100)+'%';
+},{passive:true});
+
+/* nav highlight via IntersectionObserver */
+var links={};document.querySelectorAll('.rail a[href^="#"]').forEach(function(a){links[a.getAttribute('href').slice(1)]=a;});
+var io=new IntersectionObserver(function(es){
+  es.forEach(function(e){if(e.isIntersecting){
+    var id=e.target.id;Object.values(links).forEach(function(l){l.classList.remove('on');});
+    if(links[id])links[id].classList.add('on');
+  }});
+},{rootMargin:'-15% 0px -75% 0px'});
+document.querySelectorAll('section[id]').forEach(function(s){io.observe(s);});
+
+/* mobile drawer */
+function tog(){document.querySelector('.rail').classList.toggle('open');document.querySelector('.scrim').classList.toggle('on');}
+var b=document.querySelector('.burger');if(b)b.onclick=tog;
+var sc=document.querySelector('.scrim');if(sc)sc.onclick=tog;
+document.querySelectorAll('.rail a').forEach(function(a){a.addEventListener('click',function(){
+  if(window.innerWidth<=860){document.querySelector('.rail').classList.remove('open');document.querySelector('.scrim').classList.remove('on');}
+});});
+
+/* calm mode */
+var ct=document.querySelector('.calmtog');
+ct.onclick=function(){document.body.classList.toggle('calm');
+  ct.textContent=document.body.classList.contains('calm')?'modo neon':'modo calmo';};
+
+/* quiz */
+document.querySelectorAll('.q').forEach(function(q){
+  var good=q.querySelector('.fb.good'), bad=q.querySelector('.fb.bad');
+  q.querySelectorAll('.opt').forEach(function(o){
+    o.onclick=function(){
+      q.querySelectorAll('.opt').forEach(function(x){x.classList.add('lock');});
+      if(o.dataset.ok==='1'){o.classList.add('ok');good.classList.add('show');}
+      else{o.classList.add('no');q.querySelector('.opt[data-ok="1"]').classList.add('ok');bad.classList.add('show');}
+    };
+  });
+});
+
+/* reveal */
+var ro=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');ro.unobserve(e.target);}});},{rootMargin:'0px 0px -8% 0px'});
+document.querySelectorAll('.rev').forEach(function(el){ro.observe(el);});
+</script>
+<footer class="kx-sig"><div><img class="kx-logo" src="data:image/webp;base64,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" width="40" height="40" alt=""><span><b>Kalixto — Professor • Programador • Gamer</b><small>Kalixto by Wallace Toledo · @dev.kalixto</small></span></div></footer>
+<style>
+.kx-theme{position:fixed;right:16px;bottom:calc(16px + env(safe-area-inset-bottom,0px));z-index:50;display:inline-flex;align-items:center;gap:8px;
+  font:600 14px/20px var(--f-heading,'Sora',system-ui,sans-serif);color:var(--text-primary,#fff);cursor:pointer;
+  background:var(--glass-fill,rgba(255,255,255,.06));border:1px solid var(--glass-stroke,rgba(255,255,255,.14));border-radius:999px;padding:10px 16px;
+  -webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);box-shadow:var(--glass-shadow-s,0 12px 32px rgba(0,0,0,.35))}
+.kx-theme:hover{box-shadow:0 0 32px rgba(123,46,255,.45)}
+.kx-theme:focus-visible{outline:2px solid var(--brand-tertiary,#00D9FF);outline-offset:3px}
+.kx-theme .ic{width:18px;height:18px;border-radius:50%;background:linear-gradient(90deg,#7B2EFF,#FF2DAA);flex:none}
+@media print{.kx-theme{display:none}}
+</style>
+<button class="kx-theme" id="kx-theme" type="button" aria-label="Alternar modo claro e escuro"><span class="ic" aria-hidden="true"></span><span id="kx-theme-t">Modo claro</span></button>
+<script>
+(function(){
+  var root=document.documentElement, b=document.getElementById('kx-theme'), t=document.getElementById('kx-theme-t');
+  function cur(){var a=root.getAttribute('data-theme');if(a)return a;return window.matchMedia('(prefers-color-scheme: light)').matches?'light':'dark';}
+  function paint(){t.textContent=cur()==='dark'?'Modo claro':'Modo escuro';}
+  b.addEventListener('click',function(){var n=cur()==='dark'?'light':'dark';root.setAttribute('data-theme',n);try{localStorage.setItem('kx-theme',n);}catch(e){}paint();
+    if(document.querySelector('.mermaid'))location.reload();});
+  window.matchMedia('(prefers-color-scheme: light)').addEventListener('change',paint);
+  paint();
+})();
+</script></body></html>
