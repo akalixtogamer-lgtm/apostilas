@@ -1,0 +1,1316 @@
+<!DOCTYPE html>
+<!--
+═══════════════════════════════════════════════════════════════════════════════
+  APOSTILA · DESIGN DE INTERFACE NO FIGMA
+  Assinatura: DEV-KALIXTO  ·  Identidade: afro-futurismo cyberpunk neon
+  Conceito: a página obedece tudo que ensina (grid 8pt, WCAG, hitbox 48px,
+            menu sanduíche e carrossel como demonstrações vivas).
+  Arquitetura: arquivo único · HTML5 + CSS3 (tokens em camadas) + JS vanilla
+  Comentários didáticos em PT-BR para reuso educacional.
+═══════════════════════════════════════════════════════════════════════════════
+-->
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="description" content="Curso completo de Design de Interface no Figma: grid de 8pt, acessibilidade, mobile-first e prototipagem. Assinatura dev-kalixto." />
+<meta name="author" content="Kalixto" />
+<title>Design de Interface no Figma · Apostila dev-kalixto</title>
+
+<!-- Tipografia: display angular techy (Space Grotesk), corpo legível (Inter), dados/código mono (JetBrains Mono) -->
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet" />
+
+<style>
+/* ═══════════════════════════════════════════════════════════════════════════
+   CAMADA 1 — TOKENS PRIMITIVOS
+   Cores cruas da marca Kalixto. Aqui nada tem "significado", só valor bruto.
+   ═══════════════════════════════════════════════════════════════════════════ */
+:root {
+  /* Logo oficial da marca Kalixto (WebP embutido em base64 — arquivo único) */
+  --kx-logo: url('data:image/webp;base64,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');
+
+  /* Fundos near-black com tom arroxeado (base do afro-futurismo cyberpunk) */
+  --kx-void:        #0A0613;   /* fundo absoluto */
+  --kx-surface:     #120A22;   /* superfície elevada (cards) */
+  --kx-surface-2:   #1A0F30;   /* superfície ainda mais elevada / hover */
+  --kx-line:        #2A1B45;   /* linhas / bordas sutis */
+
+  /* Néons da marca */
+  --kx-magenta:     #FF2E97;   /* acento primário */
+  --kx-purple:      #B14EFF;   /* acento secundário */
+  --kx-blue:        #21E6FF;   /* acento terciário / informação */
+  --kx-gold:        #FFC24B;   /* toque quente afro-futurista (destaques) */
+
+  /* Texto (testados para contraste WCAG sobre --kx-void) */
+  --kx-text:        #F2ECFF;   /* texto principal — alto contraste */
+  --kx-text-soft:   #C5B8E0;   /* texto secundário */
+  --kx-text-mute:   #8A7CAD;   /* legendas / metadados */
+
+  /* Estados semânticos de feedback */
+  --kx-ok:          #34E5B0;   /* aprovado / sucesso */
+  --kx-warn:        #FFB13C;   /* atenção */
+  --kx-bad:         #FF5A6E;   /* reprovado / erro */
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   CAMADA 2 — TOKENS SEMÂNTICOS
+   Damos PAPEL aos primitivos. O resto do CSS consome estes, nunca o bruto.
+   ═══════════════════════════════════════════════════════════════════════════ */
+:root {
+  --bg:             var(--kx-void);
+  --bg-card:        var(--kx-surface);
+  --bg-card-hi:     var(--kx-surface-2);
+  --border:         var(--kx-line);
+  --accent:         var(--kx-magenta);
+  --accent-2:       var(--kx-purple);
+  --accent-3:       var(--kx-blue);
+  --highlight:      var(--kx-gold);
+  --fg:             var(--kx-text);
+  --fg-soft:        var(--kx-text-soft);
+  --fg-mute:        var(--kx-text-mute);
+
+  /* Fontes por papel */
+  --font-display:   'Space Grotesk', system-ui, sans-serif;
+  --font-body:      'Inter', system-ui, sans-serif;
+  --font-mono:      'JetBrains Mono', ui-monospace, monospace;
+
+  /* ESCALA DE ESPAÇAMENTO 8PT — o coração da apostila.
+     Toda margem, padding e gap do projeto nasce daqui. */
+  --s-1:  4px;    /* exceção fina (grid de 4pt) */
+  --s-2:  8px;    /* 1 unidade */
+  --s-3:  16px;   /* 2 unidades */
+  --s-4:  24px;   /* 3 unidades */
+  --s-5:  32px;   /* 4 unidades */
+  --s-6:  48px;   /* 6 unidades — também é o tamanho mínimo de hitbox! */
+  --s-7:  64px;   /* 8 unidades */
+  --s-8:  96px;   /* 12 unidades */
+
+  /* Raios, sombras e brilhos neon */
+  --radius:     14px;
+  --radius-sm:  8px;
+  --glow-magenta: 0 0 24px -4px var(--kx-magenta);
+  --glow-blue:    0 0 24px -4px var(--kx-blue);
+  --shadow:     0 16px 40px -12px rgba(0,0,0,.7);
+
+  /* Largura de leitura confortável (~70 caracteres) */
+  --measure: 68ch;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   RESET ENXUTO + BASE
+   ═══════════════════════════════════════════════════════════════════════════ */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; scroll-padding-top: var(--s-7); }
+
+body {
+  font-family: var(--font-body);
+  background: var(--bg);
+  color: var(--fg);
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+
+  /* ASSINATURA VISUAL: grade de 8px desenhada no fundo.
+     A apostila literalmente "mostra" o grid de 8pt o tempo todo. */
+  background-image:
+    linear-gradient(rgba(177,78,255,.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(177,78,255,.04) 1px, transparent 1px);
+  background-size: 8px 8px;
+}
+
+img { max-width: 100%; display: block; }
+a { color: inherit; }
+
+/* Foco visível e acessível em qualquer elemento interativo (regra de qualidade) */
+:focus-visible {
+  outline: 2px solid var(--accent-3);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+/* Respeita usuários que pedem menos movimento (acessibilidade do Módulo 1) */
+@media (prefers-reduced-motion: reduce) {
+  * { animation-duration: .001ms !important; transition-duration: .001ms !important; }
+  html { scroll-behavior: auto; }
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   LAYOUT GERAL — sidebar fixa + coluna de leitura
+   ═══════════════════════════════════════════════════════════════════════════ */
+.layout {
+  display: grid;
+  grid-template-columns: 280px 1fr;
+  align-items: start;
+  max-width: 1320px;
+  margin: 0 auto;
+}
+
+/* --- BARRA LATERAL (navegação sticky) --- */
+.sidebar {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  padding: var(--s-5) var(--s-4);
+  border-right: 1px solid var(--border);
+  background: linear-gradient(180deg, rgba(18,10,34,.6), rgba(10,6,19,.6));
+  backdrop-filter: blur(8px);
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-4);
+  overflow-y: auto;
+}
+
+.brand { display: flex; align-items: center; gap: var(--s-3); }
+
+/* Marca Kalixto: monograma neon */
+.brand__mark {
+  width: 48px; height: 48px;           /* hitbox de 48px — a regra na prática */
+  flex: 0 0 48px;
+  border-radius: 50%;                   /* logo circular: recorta os cantos pretos */
+  background: var(--kx-logo) center / cover no-repeat, var(--kx-void);
+  box-shadow: var(--glow-magenta);
+}
+.brand__name {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 18px;
+  letter-spacing: .5px;
+  line-height: 1.1;
+}
+.brand__name span { color: var(--accent); }
+.brand__role {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--fg-mute);
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+.nav { display: flex; flex-direction: column; gap: var(--s-1); }
+.nav__title {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--fg-mute);
+  padding: var(--s-2) var(--s-3) var(--s-1);
+}
+.nav__link {
+  display: flex;
+  align-items: center;
+  gap: var(--s-3);
+  min-height: 44px;                    /* alvo de toque confortável */
+  padding: var(--s-2) var(--s-3);
+  border-radius: var(--radius-sm);
+  text-decoration: none;
+  color: var(--fg-soft);
+  font-size: 14px;
+  font-weight: 500;
+  transition: background .2s, color .2s, transform .2s;
+  border-left: 2px solid transparent;
+}
+.nav__link:hover { background: var(--bg-card-hi); color: var(--fg); transform: translateX(2px); }
+.nav__link.is-active {
+  background: var(--bg-card);
+  color: var(--fg);
+  border-left-color: var(--accent);
+}
+.nav__num {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--accent);
+  min-width: 22px;
+}
+
+/* Barra de progresso de leitura na sidebar */
+.progress { margin-top: auto; }
+.progress__label {
+  display: flex; justify-content: space-between;
+  font-family: var(--font-mono); font-size: 11px;
+  color: var(--fg-mute); margin-bottom: var(--s-2);
+}
+.progress__track {
+  height: 6px; border-radius: 99px;
+  background: var(--border); overflow: hidden;
+}
+.progress__bar {
+  height: 100%; width: 0%;
+  background: linear-gradient(90deg, var(--accent), var(--accent-3));
+  transition: width .3s ease;
+}
+
+/* --- CONTEÚDO PRINCIPAL --- */
+.main { padding: 0 var(--s-6) var(--s-8); min-width: 0; }
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   HERO — abertura com a tese: o grid de 8pt como espinha dorsal
+   ═══════════════════════════════════════════════════════════════════════════ */
+.hero {
+  position: relative;
+  padding: var(--s-8) 0 var(--s-7);
+  border-bottom: 1px solid var(--border);
+}
+.hero__eyebrow {
+  display: inline-flex; align-items: center; gap: var(--s-2);
+  font-family: var(--font-mono);
+  font-size: 12px; letter-spacing: 2px; text-transform: uppercase;
+  color: var(--accent-3);
+  margin-bottom: var(--s-4);
+}
+.hero__eyebrow::before {
+  content: ""; width: 28px; height: 1px; background: var(--accent-3);
+}
+.hero__title {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(40px, 7vw, 76px);
+  line-height: 1.02;
+  letter-spacing: -1.5px;
+  margin-bottom: var(--s-4);
+}
+.hero__title .grad {
+  background: linear-gradient(110deg, var(--accent), var(--accent-2) 45%, var(--accent-3));
+  -webkit-background-clip: text; background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+.hero__lead {
+  max-width: var(--measure);
+  color: var(--fg-soft);
+  font-size: 18px;
+  margin-bottom: var(--s-5);
+}
+.hero__lead strong { color: var(--fg); font-weight: 600; }
+.hero__meta {
+  display: flex; flex-wrap: wrap; gap: var(--s-2);
+}
+.tag {
+  font-family: var(--font-mono); font-size: 12px;
+  padding: var(--s-1) var(--s-3);
+  border: 1px solid var(--border); border-radius: 99px;
+  color: var(--fg-soft);
+}
+.tag--accent { border-color: var(--accent); color: var(--accent); }
+
+/* "Régua" decorativa do hero que materializa a escala 8pt */
+.ruler {
+  margin-top: var(--s-6);
+  display: flex; align-items: flex-end; gap: var(--s-2);
+  height: 80px;
+}
+.ruler__tick {
+  flex: 1;
+  background: linear-gradient(180deg, var(--accent-2), transparent);
+  border-radius: 3px 3px 0 0;
+  opacity: .55;
+}
+.ruler__num {
+  font-family: var(--font-mono); font-size: 11px; color: var(--fg-mute);
+  text-align: center; margin-top: var(--s-2);
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   MÓDULOS / SEÇÕES
+   ═══════════════════════════════════════════════════════════════════════════ */
+.module { padding: var(--s-8) 0; border-bottom: 1px solid var(--border); }
+.module:last-of-type { border-bottom: 0; }
+
+.module__head { margin-bottom: var(--s-6); }
+.module__kicker {
+  font-family: var(--font-mono);
+  font-size: 13px; letter-spacing: 3px; text-transform: uppercase;
+  color: var(--accent);
+  display: flex; align-items: center; gap: var(--s-3);
+  margin-bottom: var(--s-3);
+}
+.module__kicker::before {
+  content: attr(data-num);
+  font-size: 13px;
+  color: var(--kx-void);
+  background: var(--accent);
+  width: 28px; height: 28px;
+  display: grid; place-items: center;
+  border-radius: 8px; font-weight: 700;
+}
+.module__title {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(28px, 4vw, 40px);
+  letter-spacing: -.5px;
+  line-height: 1.1;
+}
+
+/* Bloco de texto com largura de leitura controlada */
+.prose { max-width: var(--measure); }
+.prose h3 {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 22px;
+  margin: var(--s-6) 0 var(--s-3);
+  color: var(--fg);
+  scroll-margin-top: var(--s-7);
+}
+.prose p { color: var(--fg-soft); margin-bottom: var(--s-3); }
+.prose strong { color: var(--fg); font-weight: 600; }
+.prose em { color: var(--highlight); font-style: normal; }
+.prose ul, .prose ol { margin: 0 0 var(--s-3) var(--s-4); color: var(--fg-soft); }
+.prose li { margin-bottom: var(--s-2); }
+.prose li::marker { color: var(--accent); }
+
+/* Código inline e blocos */
+code {
+  font-family: var(--font-mono);
+  font-size: .88em;
+  background: var(--bg-card);
+  color: var(--accent-3);
+  padding: 2px 6px; border-radius: 5px;
+  border: 1px solid var(--border);
+}
+
+/* Cartões de destaque (boas práticas, dicas) */
+.card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: var(--s-5);
+  margin: var(--s-5) 0;
+}
+.card__title {
+  font-family: var(--font-display);
+  font-weight: 600; font-size: 18px;
+  display: flex; align-items: center; gap: var(--s-3);
+  margin-bottom: var(--s-4);
+}
+.card__icon {
+  width: 36px; height: 36px; flex: 0 0 36px;
+  display: grid; place-items: center; border-radius: 9px;
+  background: var(--bg-card-hi); border: 1px solid var(--border);
+  font-size: 18px;
+}
+
+/* Callout — caixa de aviso/dica colorida por intenção */
+.callout {
+  border-left: 3px solid var(--accent-3);
+  background: linear-gradient(90deg, rgba(33,230,255,.06), transparent);
+  padding: var(--s-4);
+  border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+  margin: var(--s-4) 0;
+}
+.callout--gold { border-left-color: var(--highlight); background: linear-gradient(90deg, rgba(255,194,75,.06), transparent); }
+.callout--magenta { border-left-color: var(--accent); background: linear-gradient(90deg, rgba(255,46,151,.06), transparent); }
+.callout__tag {
+  font-family: var(--font-mono); font-size: 11px; letter-spacing: 2px;
+  text-transform: uppercase; color: var(--accent-3); display: block; margin-bottom: var(--s-1);
+}
+.callout--gold .callout__tag { color: var(--highlight); }
+.callout--magenta .callout__tag { color: var(--accent); }
+.callout p { margin: 0; color: var(--fg-soft); }
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   COMPONENTES INTERATIVOS (as "demos vivas")
+   ═══════════════════════════════════════════════════════════════════════════ */
+.demo {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+  margin: var(--s-5) 0;
+}
+.demo__bar {
+  display: flex; align-items: center; justify-content: space-between;
+  gap: var(--s-3);
+  padding: var(--s-3) var(--s-4);
+  background: var(--bg-card-hi);
+  border-bottom: 1px solid var(--border);
+}
+.demo__label {
+  font-family: var(--font-mono); font-size: 12px; letter-spacing: 1px;
+  text-transform: uppercase; color: var(--fg-mute);
+}
+.demo__stage { padding: var(--s-5); }
+
+/* Botão padrão (componente reutilizável da apostila) */
+.btn {
+  font-family: var(--font-body); font-weight: 600; font-size: 14px;
+  min-height: 44px; padding: 0 var(--s-4);
+  display: inline-flex; align-items: center; gap: var(--s-2);
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border);
+  background: var(--bg-card-hi);
+  color: var(--fg);
+  cursor: pointer;
+  transition: transform .15s, box-shadow .2s, background .2s;
+}
+.btn:hover { transform: translateY(-1px); background: var(--border); }
+.btn--accent {
+  background: linear-gradient(135deg, var(--accent), var(--accent-2));
+  color: var(--kx-void); border: 0; box-shadow: var(--glow-magenta);
+}
+.btn--accent:hover { box-shadow: 0 0 32px -2px var(--accent); }
+
+/* --- DEMO 1: medidor de contraste WCAG --- */
+.contrast {
+  display: grid; grid-template-columns: 1fr 1fr; gap: var(--s-4);
+}
+.contrast__sample {
+  border-radius: var(--radius-sm); padding: var(--s-5);
+  display: flex; flex-direction: column; gap: var(--s-2);
+  min-height: 140px; justify-content: center;
+  border: 1px solid var(--border);
+}
+.contrast__big { font-family: var(--font-display); font-weight: 700; font-size: 28px; }
+.contrast__small { font-size: 14px; }
+.contrast__readout { display: flex; flex-direction: column; gap: var(--s-3); justify-content: center; }
+.contrast__ratio {
+  font-family: var(--font-mono); font-weight: 700; font-size: 40px; line-height: 1;
+}
+.badge {
+  font-family: var(--font-mono); font-size: 12px; font-weight: 700;
+  padding: 4px 10px; border-radius: 99px; display: inline-flex; align-items: center; gap: 6px;
+  width: fit-content;
+}
+.badge--ok  { background: rgba(52,229,176,.15); color: var(--kx-ok); }
+.badge--bad { background: rgba(255,90,110,.15); color: var(--kx-bad); }
+.field { display: flex; align-items: center; gap: var(--s-3); flex-wrap: wrap; }
+.field label { font-size: 13px; color: var(--fg-soft); font-family: var(--font-mono); }
+input[type="color"] {
+  width: 44px; height: 44px; border: 1px solid var(--border);
+  border-radius: 8px; background: none; cursor: pointer; padding: 2px;
+}
+
+/* --- DEMO 2: grid de 8pt ao vivo --- */
+.grid8 { position: relative; }
+.grid8__canvas {
+  position: relative; border-radius: var(--radius-sm);
+  background: var(--bg); overflow: hidden; padding: var(--s-5);
+  border: 1px solid var(--border);
+}
+.grid8__canvas.show-grid {
+  background-image:
+    linear-gradient(rgba(33,230,255,.25) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(33,230,255,.25) 1px, transparent 1px);
+  background-size: 8px 8px;
+}
+.grid8__row { display: flex; flex-wrap: wrap; }
+.grid8__block {
+  height: 56px; border-radius: 6px;
+  background: linear-gradient(135deg, var(--accent), var(--accent-2));
+  flex: 1 1 80px; min-width: 80px;
+}
+.grid8__controls { display: flex; align-items: center; gap: var(--s-4); flex-wrap: wrap; margin-top: var(--s-4); }
+.slider-wrap { display: flex; align-items: center; gap: var(--s-3); }
+input[type="range"] { accent-color: var(--accent); cursor: pointer; }
+.gap-readout { font-family: var(--font-mono); color: var(--accent-3); font-weight: 700; min-width: 64px; }
+
+/* --- DEMO 3: hitbox 48px --- */
+.hitbox-demo { display: flex; gap: var(--s-6); flex-wrap: wrap; align-items: center; }
+.hitbox {
+  position: relative; display: grid; place-items: center;
+}
+.hitbox__zone {
+  width: 48px; height: 48px;
+  border: 1px dashed var(--accent-3); border-radius: 10px;
+  display: grid; place-items: center;
+  transition: background .2s;
+}
+.hitbox__zone:hover { background: rgba(33,230,255,.1); }
+.hitbox__icon {
+  width: 24px; height: 24px; border-radius: 6px;
+  background: var(--accent); display: grid; place-items: center;
+  color: var(--kx-void); font-weight: 700; font-size: 14px;
+}
+.hitbox__too-small .hitbox__zone { width: 24px; height: 24px; border-color: var(--kx-bad); }
+.hitbox-caption { font-family: var(--font-mono); font-size: 12px; color: var(--fg-mute); text-align: center; margin-top: var(--s-2); }
+
+/* --- DEMO 4: menu sanduíche funcional --- */
+.phone {
+  width: 280px; margin: 0 auto;
+  border: 2px solid var(--border); border-radius: 28px;
+  background: var(--bg); overflow: hidden; position: relative;
+  box-shadow: var(--shadow);
+}
+.phone__bar {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: var(--s-3) var(--s-4); border-bottom: 1px solid var(--border);
+}
+.phone__logo { font-family: var(--font-display); font-weight: 700; color: var(--accent); }
+.hamburger {
+  width: 48px; height: 48px;                /* hitbox generosa! */
+  display: grid; place-items: center; cursor: pointer;
+  background: none; border: 0; border-radius: 10px;
+}
+.hamburger span, .hamburger span::before, .hamburger span::after {
+  content: ""; display: block; width: 22px; height: 2px;
+  background: var(--fg); border-radius: 2px; position: relative;
+  transition: transform .3s, opacity .3s;
+}
+.hamburger span::before { position: absolute; top: -7px; }
+.hamburger span::after  { position: absolute; top: 7px; }
+.phone.is-open .hamburger span { background: transparent; }
+.phone.is-open .hamburger span::before { transform: translateY(7px) rotate(45deg); }
+.phone.is-open .hamburger span::after  { transform: translateY(-7px) rotate(-45deg); }
+.phone__body { height: 260px; padding: var(--s-4); position: relative; }
+.phone__placeholder { height: 100%; border-radius: 10px; border: 1px dashed var(--border); display: grid; place-items: center; color: var(--fg-mute); font-size: 13px; }
+.drawer {
+  position: absolute; inset: 0;
+  background: rgba(10,6,19,.85); backdrop-filter: blur(4px);
+  opacity: 0; pointer-events: none; transition: opacity .3s;
+}
+.phone.is-open .drawer { opacity: 1; pointer-events: auto; }
+.drawer__panel {
+  position: absolute; top: 0; left: 0; bottom: 0; width: 78%;
+  background: var(--bg-card); border-right: 1px solid var(--accent);
+  padding: var(--s-5) var(--s-4);
+  transform: translateX(-100%); transition: transform .3s ease;
+  display: flex; flex-direction: column; gap: var(--s-2);
+}
+.phone.is-open .drawer__panel { transform: translateX(0); }
+.drawer__link {
+  min-height: 44px; display: flex; align-items: center;
+  padding: 0 var(--s-3); border-radius: 8px; color: var(--fg-soft);
+  text-decoration: none; font-weight: 500;
+}
+.drawer__link:hover { background: var(--bg-card-hi); color: var(--fg); }
+
+/* --- DEMO 5: carrossel com "peek" do próximo card --- */
+.carousel {
+  display: flex; gap: var(--s-3);
+  overflow-x: auto; scroll-snap-type: x mandatory;
+  padding-bottom: var(--s-3);
+  /* a mágica do affordance: padding-right deixa o próximo card "espiando" */
+  scrollbar-width: thin; scrollbar-color: var(--accent) var(--bg-card);
+}
+.carousel::-webkit-scrollbar { height: 8px; }
+.carousel::-webkit-scrollbar-thumb { background: var(--accent); border-radius: 99px; }
+.carousel::-webkit-scrollbar-track { background: var(--bg-card); border-radius: 99px; }
+.carousel__card {
+  flex: 0 0 78%;                  /* < 100% → o próximo card aparece cortado */
+  scroll-snap-align: start;
+  height: 160px; border-radius: var(--radius);
+  display: flex; align-items: flex-end; padding: var(--s-4);
+  font-family: var(--font-display); font-weight: 700; font-size: 20px;
+  color: var(--kx-void);
+}
+.carousel__card:nth-child(1) { background: linear-gradient(135deg, var(--accent), var(--accent-2)); }
+.carousel__card:nth-child(2) { background: linear-gradient(135deg, var(--accent-2), var(--accent-3)); }
+.carousel__card:nth-child(3) { background: linear-gradient(135deg, var(--accent-3), var(--highlight)); }
+.carousel__card:nth-child(4) { background: linear-gradient(135deg, var(--highlight), var(--accent)); }
+.carousel-hint { font-family: var(--font-mono); font-size: 12px; color: var(--fg-mute); margin-top: var(--s-2); }
+
+/* Atalho de teclado estilizado (Módulo 4) */
+kbd {
+  font-family: var(--font-mono); font-size: 12px;
+  background: var(--bg-card-hi); border: 1px solid var(--border);
+  border-bottom-width: 2px; border-radius: 6px;
+  padding: 2px 8px; color: var(--fg); white-space: nowrap;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   MÓDULO 5 — checklist de exercícios com progresso (localStorage)
+   ═══════════════════════════════════════════════════════════════════════════ */
+.exercise {
+  background: var(--bg-card); border: 1px solid var(--border);
+  border-radius: var(--radius); padding: var(--s-5); margin: var(--s-4) 0;
+}
+.exercise__head { display: flex; align-items: center; gap: var(--s-3); margin-bottom: var(--s-3); }
+.exercise__no {
+  font-family: var(--font-mono); font-weight: 700; color: var(--kx-void);
+  background: var(--accent-2); width: 32px; height: 32px; flex: 0 0 32px;
+  display: grid; place-items: center; border-radius: 8px;
+}
+.exercise__title { font-family: var(--font-display); font-weight: 600; font-size: 18px; }
+.check {
+  display: flex; align-items: flex-start; gap: var(--s-3);
+  min-height: 44px; padding: var(--s-2); border-radius: 8px;
+  cursor: pointer; transition: background .15s;
+}
+.check:hover { background: var(--bg-card-hi); }
+.check input { display: none; }
+.check__box {
+  width: 22px; height: 22px; flex: 0 0 22px; margin-top: 2px;
+  border: 2px solid var(--border); border-radius: 6px;
+  display: grid; place-items: center;
+  transition: background .2s, border-color .2s;
+}
+.check input:checked + .check__box {
+  background: var(--accent); border-color: var(--accent);
+}
+.check__box svg { opacity: 0; transition: opacity .2s; }
+.check input:checked + .check__box svg { opacity: 1; }
+.check__text { color: var(--fg-soft); font-size: 15px; }
+.check input:checked ~ .check__text { color: var(--fg-mute); text-decoration: line-through; }
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   LIVROS RECOMENDADOS
+   ═══════════════════════════════════════════════════════════════════════════ */
+.books { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: var(--s-4); }
+.book {
+  background: var(--bg-card); border: 1px solid var(--border);
+  border-radius: var(--radius); padding: var(--s-5);
+  position: relative; overflow: hidden;
+  transition: transform .2s, border-color .2s;
+}
+.book:hover { transform: translateY(-4px); border-color: var(--accent); }
+.book__spine { position: absolute; left: 0; top: 0; bottom: 0; width: 4px; background: linear-gradient(180deg, var(--accent), var(--accent-3)); }
+.book__no { font-family: var(--font-mono); color: var(--accent); font-size: 13px; }
+.book__title { font-family: var(--font-display); font-weight: 600; font-size: 18px; margin: var(--s-2) 0 var(--s-1); }
+.book__author { font-family: var(--font-mono); font-size: 12px; color: var(--fg-mute); margin-bottom: var(--s-3); }
+.book__desc { font-size: 14px; color: var(--fg-soft); }
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   RODAPÉ — assinatura dev-kalixto
+   ═══════════════════════════════════════════════════════════════════════════ */
+.signoff {
+  margin-top: var(--s-8);
+  padding: var(--s-7) var(--s-5);
+  border: 1px solid var(--border); border-radius: var(--radius);
+  background:
+    radial-gradient(120% 140% at 0% 0%, rgba(255,46,151,.12), transparent 50%),
+    radial-gradient(120% 140% at 100% 100%, rgba(33,230,255,.12), transparent 50%),
+    var(--bg-card);
+  text-align: center;
+}
+.signoff__mark {
+  width: 88px; height: 88px; margin: 0 auto var(--s-4);
+  border-radius: 50%;
+  background: var(--kx-logo) center / cover no-repeat, var(--kx-void);
+  box-shadow: var(--glow-magenta);
+}
+.signoff__name { font-family: var(--font-display); font-weight: 700; font-size: 24px; }
+.signoff__name span { color: var(--accent); }
+.signoff__tag { font-family: var(--font-mono); font-size: 12px; letter-spacing: 2px; text-transform: uppercase; color: var(--fg-mute); margin-top: var(--s-2); }
+.signoff__line { color: var(--fg-soft); max-width: 46ch; margin: var(--s-4) auto 0; }
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   TOPO MOBILE + RESPONSIVIDADE (mobile-first na prática)
+   ═══════════════════════════════════════════════════════════════════════════ */
+.topbar { display: none; }
+
+@media (max-width: 920px) {
+  .layout { grid-template-columns: 1fr; }
+
+  /* A própria apostila vira mobile: a sidebar some e nasce um MENU SANDUÍCHE
+     real no topo — o Módulo 3 demonstrado na navegação da página. */
+  .topbar {
+    display: flex; align-items: center; justify-content: space-between;
+    position: sticky; top: 0; z-index: 40;
+    padding: var(--s-3) var(--s-4);
+    background: rgba(10,6,19,.92); backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--border);
+  }
+  .sidebar {
+    position: fixed; inset: 0 30% 0 0; height: 100dvh; z-index: 50;
+    transform: translateX(-100%); transition: transform .3s ease;
+  }
+  body.menu-open .sidebar { transform: translateX(0); }
+  .scrim {
+    position: fixed; inset: 0; z-index: 45; background: rgba(0,0,0,.6);
+    opacity: 0; pointer-events: none; transition: opacity .3s;
+  }
+  body.menu-open .scrim { opacity: 1; pointer-events: auto; }
+  .main { padding: 0 var(--s-4) var(--s-7); }
+  .hero { padding-top: var(--s-6); }
+  .contrast { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 560px) {
+  .hitbox-demo { gap: var(--s-5); }
+  .ruler { display: none; }
+  .module { padding: var(--s-7) 0; }
+}
+</style>
+</head>
+<body>
+
+<!-- TOPO MOBILE: aparece só em telas pequenas, com menu sanduíche real -->
+<header class="topbar">
+  <div class="brand" style="gap:var(--s-2)">
+    <div class="brand__mark" role="img" aria-label="Logo Kalixto"></div>
+    <div>
+      <div class="brand__name">dev-<span>kalixto</span></div>
+    </div>
+  </div>
+  <!-- Botão sanduíche com hitbox de 48px (a regra do Módulo 3 aplicada) -->
+  <button class="hamburger" id="menuToggle" aria-label="Abrir índice da apostila" aria-expanded="false">
+    <span></span>
+  </button>
+</header>
+<div class="scrim" id="scrim" aria-hidden="true"></div>
+
+<div class="layout">
+
+  <!-- ╔══════════════════════ BARRA LATERAL / ÍNDICE ══════════════════════╗ -->
+  <aside class="sidebar" id="sidebar">
+    <div class="brand">
+      <div class="brand__mark" role="img" aria-label="Logo Kalixto"></div>
+      <div>
+        <div class="brand__name">dev-<span>kalixto</span></div>
+        <div class="brand__role">UI · Figma · Front-end</div>
+      </div>
+    </div>
+
+    <nav class="nav" aria-label="Índice da apostila">
+      <span class="nav__title">Apostila</span>
+      <a class="nav__link" href="#hero"><span class="nav__num">00</span> Abertura</a>
+      <a class="nav__link" href="#m1"><span class="nav__num">01</span> Fundamentos &amp; A11y</a>
+      <a class="nav__link" href="#m2"><span class="nav__num">02</span> Grid de 8pt</a>
+      <a class="nav__link" href="#m3"><span class="nav__num">03</span> Componentes</a>
+      <a class="nav__link" href="#m4"><span class="nav__num">04</span> Figma na prática</a>
+      <a class="nav__link" href="#m5"><span class="nav__num">05</span> Exercícios</a>
+      <a class="nav__link" href="#livros"><span class="nav__num">06</span> Leituras</a>
+    </nav>
+
+    <div class="progress">
+      <div class="progress__label">
+        <span>Progresso de leitura</span>
+        <span id="progressPct">0%</span>
+      </div>
+      <div class="progress__track"><div class="progress__bar" id="progressBar"></div></div>
+    </div>
+  </aside>
+
+  <!-- ╔══════════════════════════ CONTEÚDO ════════════════════════════════╗ -->
+  <main class="main">
+
+    <!-- ───────────────── HERO ───────────────── -->
+    <section class="hero" id="hero">
+      <span class="hero__eyebrow">dev-kalixto // apostila de interface</span>
+      <h1 class="hero__title">Design de<br><span class="grad">Interface</span> no Figma</h1>
+      <p class="hero__lead">
+        Do fundamento ao protótipo de alta fidelidade. Aqui você domina o
+        <strong>grid de 8pt</strong>, alinhamento, menu sanduíche e carrossel —
+        e aprende a orquestrar tudo no <strong>Figma</strong>, criando telas que já
+        nascem prontas para virar código (Flexbox e Box Model).
+      </p>
+      <div class="hero__meta">
+        <span class="tag tag--accent">Mobile-First</span>
+        <span class="tag">Acessibilidade WCAG</span>
+        <span class="tag">Responsividade</span>
+        <span class="tag">Figma → Código</span>
+      </div>
+
+      <!-- Régua viva: cada barra é um passo da escala de 8pt -->
+      <div class="ruler" aria-hidden="true">
+        <div class="ruler__tick" style="height:14%"></div>
+        <div class="ruler__tick" style="height:24%"></div>
+        <div class="ruler__tick" style="height:36%"></div>
+        <div class="ruler__tick" style="height:48%"></div>
+        <div class="ruler__tick" style="height:62%"></div>
+        <div class="ruler__tick" style="height:78%"></div>
+        <div class="ruler__tick" style="height:100%"></div>
+      </div>
+      <div class="ruler__num">8 · 16 · 24 · 32 · 40 · 48 · 64 px</div>
+    </section>
+
+    <!-- ───────────────── MÓDULO 1 ───────────────── -->
+    <section class="module" id="m1">
+      <div class="module__head">
+        <div class="module__kicker" data-num="1">Módulo 01</div>
+        <h2 class="module__title">Fundamentos de UI e Acessibilidade</h2>
+      </div>
+
+      <div class="prose">
+        <p>Antes de abrir o Figma, é preciso entender as regras do jogo. A interface é a ponte entre o sistema e o ser humano — e essa ponte precisa funcionar para <em>todo mundo</em>.</p>
+
+        <h3>1.1 · A mentalidade Mobile-First</h3>
+        <p>Desenhar <strong>Mobile-First</strong> significa começar pela menor tela (o celular) e, progressivamente, adaptar para telas maiores. Por quê? Porque o espaço limitado <strong>te obriga a priorizar o conteúdo</strong>: o que é realmente importante quando não cabe tudo?</p>
+        <p>No mobile, o dedo é o cursor. O alvo de toque mínimo é de <strong>48×48px</strong> (Material Design / Android) ou <strong>44×44px</strong> (iOS). Nunca crie áreas clicáveis menores que isso.</p>
+      </div>
+
+      <!-- DEMO: hitbox 48px -->
+      <div class="demo">
+        <div class="demo__bar"><span class="demo__label">Demo · Alvo de toque</span><span class="demo__label">passe o mouse</span></div>
+        <div class="demo__stage">
+          <div class="hitbox-demo">
+            <div>
+              <div class="hitbox">
+                <div class="hitbox__zone"><div class="hitbox__icon">≡</div></div>
+              </div>
+              <div class="hitbox-caption" style="color:var(--accent-3)">48×48 · ✓ confortável</div>
+            </div>
+            <div>
+              <div class="hitbox hitbox__too-small">
+                <div class="hitbox__zone"><div class="hitbox__icon" style="width:16px;height:16px;font-size:10px">≡</div></div>
+              </div>
+              <div class="hitbox-caption" style="color:var(--kx-bad)">24×24 · ✗ frustrante</div>
+            </div>
+            <p class="prose" style="flex:1;min-width:200px;margin:0">O ícone pode ser pequeno (24px), mas a <strong>área clicável invisível</strong> ao redor dele precisa respeitar os 48px. É isso que separa um toque preciso de um toque irritante.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="prose">
+        <h3>1.2 · Acessibilidade visual e contraste (WCAG)</h3>
+        <p>Uma interface de qualidade é utilizável por todos. A diretriz <strong>WCAG</strong> exige contraste mínimo de <strong>4.5:1</strong> para texto normal e <strong>3:1</strong> para texto grande. Use a <strong>hierarquia visual</strong> (peso e tamanho de fonte) para guiar os olhos: o H1 deve ser, sem dúvida, o elemento mais importante.</p>
+      </div>
+
+      <!-- DEMO: medidor de contraste WCAG (interativo) -->
+      <div class="demo">
+        <div class="demo__bar"><span class="demo__label">Demo · Medidor de contraste</span><span class="demo__label">mude as cores</span></div>
+        <div class="demo__stage">
+          <div class="contrast">
+            <div class="contrast__sample" id="cSample">
+              <span class="contrast__big" id="cBig">Título H1</span>
+              <span class="contrast__small" id="cSmall">Texto de parágrafo de exemplo.</span>
+            </div>
+            <div class="contrast__readout">
+              <div class="field">
+                <label for="cText">texto</label>
+                <input type="color" id="cText" value="#F2ECFF" />
+                <label for="cBg">fundo</label>
+                <input type="color" id="cBg" value="#120A22" />
+              </div>
+              <div class="contrast__ratio" id="cRatio">—</div>
+              <div id="cBadges"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="callout">
+        <span class="callout__tag">Dica prática</span>
+        <p>No Figma, instale plugins como <strong>Stark</strong> ou <strong>Contrast</strong> para testar suas cores instantaneamente, sem sair da prancheta.</p>
+      </div>
+    </section>
+
+    <!-- ───────────────── MÓDULO 2 ───────────────── -->
+    <section class="module" id="m2">
+      <div class="module__head">
+        <div class="module__kicker" data-num="2">Módulo 02</div>
+        <h2 class="module__title">Estrutura, Grid de 8pt e Espaçamento</h2>
+      </div>
+
+      <div class="prose">
+        <p>O segredo de um design profissional (e fácil de codar com frameworks CSS) não está nas cores — está na <strong>matemática do espaço</strong>.</p>
+
+        <h3>2.1 · O sistema de Grid de 8pt</h3>
+        <p>No <strong>8pt Grid System</strong>, todos os espaçamentos, margens, paddings e dimensões são múltiplos de 8: <code>8, 16, 24, 32, 40, 48, 56, 64…</code></p>
+        <p>Por que o 8? A maioria das resoluções modernas é divisível por 8. Ao exportar assets em 1.5×, 2× ou 3× (telas Retina), múltiplos de 8 escalam em <strong>pixels inteiros</strong>, evitando o <em>sub-pixel rendering</em> (bordas embaçadas).</p>
+        <ul>
+          <li><strong>Exceção — Grid de 4pt:</strong> para ajustes finos, como a distância entre um ícone e o texto de um botão, use múltiplos de 4 (<code>4, 12, 20</code>).</li>
+        </ul>
+      </div>
+
+      <!-- DEMO: grid 8pt interativo -->
+      <div class="demo">
+        <div class="demo__bar"><span class="demo__label">Demo · Grid de 8pt ao vivo</span></div>
+        <div class="demo__stage">
+          <div class="grid8">
+            <div class="grid8__canvas show-grid" id="grid8Canvas">
+              <div class="grid8__row" id="grid8Row" style="gap:16px">
+                <div class="grid8__block"></div>
+                <div class="grid8__block"></div>
+                <div class="grid8__block"></div>
+              </div>
+            </div>
+            <div class="grid8__controls">
+              <div class="slider-wrap">
+                <span class="demo__label">gap</span>
+                <input type="range" id="gapRange" min="0" max="8" step="1" value="2" />
+                <span class="gap-readout" id="gapReadout">16px</span>
+              </div>
+              <button class="btn" id="gridToggle">Ocultar grade</button>
+            </div>
+            <p class="prose" style="margin-top:var(--s-3);font-size:14px;color:var(--fg-mute)">Repare: o <code>gap</code> só anda de 8 em 8. Os blocos sempre encostam nas linhas da grade — é assim que o ritmo se mantém perfeito.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="prose">
+        <h3>2.2 · Alinhamento e ritmo vertical</h3>
+        <p>Alinhar elementos é lidar com dois conceitos que você já conhece da estilização web:</p>
+        <ul>
+          <li><strong>Padding</strong> (espaçamento interno): entre o conteúdo e a borda do recipiente. Ex.: <code>padding: 16px 24px</code>.</li>
+          <li><strong>Margin</strong> (espaçamento externo): entre um recipiente e outro. Ex.: gap de <code>32px</code> entre o cabeçalho e o primeiro parágrafo.</li>
+          <li><strong>Ritmo</strong>: se um título usa 24px de margem inferior, <em>todos</em> os títulos iguais devem respeitar isso. Consistência cria conforto visual.</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ───────────────── MÓDULO 3 ───────────────── -->
+    <section class="module" id="m3">
+      <div class="module__head">
+        <div class="module__kicker" data-num="3">Módulo 03</div>
+        <h2 class="module__title">Componentes Essenciais e Complexos</h2>
+      </div>
+
+      <div class="prose">
+        <h3>3.1 · O Menu Sanduíche (Hamburger)</h3>
+        <p>As três linhas (≡) viraram o padrão universal para ocultar navegação em telas pequenas. Boas práticas:</p>
+        <ol>
+          <li><strong>Evite no desktop:</strong> com espaço sobrando, mostre as opções. Esconder navegação aumenta o custo cognitivo.</li>
+          <li><strong>Animação importa:</strong> a transição (overlay ou slide lateral) deve ser suave — algo entre 200ms e 300ms.</li>
+          <li><strong>Hitbox generosa:</strong> o ícone pode ter 24px, mas a área clicável deve ter no mínimo 48×48px.</li>
+          <li><strong>Acessibilidade:</strong> com o menu aberto, prenda o foco dentro dele (<em>trap focus</em>) e permita fechar tocando fora ou num (X) claro.</li>
+        </ol>
+      </div>
+
+      <!-- DEMO: menu sanduíche funcional -->
+      <div class="demo">
+        <div class="demo__bar"><span class="demo__label">Demo · Menu sanduíche</span><span class="demo__label">clique no ≡</span></div>
+        <div class="demo__stage">
+          <div class="phone" id="phoneMenu">
+            <div class="phone__bar">
+              <span class="phone__logo">Kalixto</span>
+              <button class="hamburger" id="phoneToggle" aria-label="Abrir menu" aria-expanded="false"><span></span></button>
+            </div>
+            <div class="phone__body">
+              <div class="phone__placeholder">Conteúdo da tela principal</div>
+              <!-- Overlay com painel deslizante; fecha clicando fora -->
+              <div class="drawer" id="phoneDrawer">
+                <div class="drawer__panel" role="menu" aria-label="Navegação">
+                  <a class="drawer__link" href="#" role="menuitem">Início</a>
+                  <a class="drawer__link" href="#" role="menuitem">Cursos</a>
+                  <a class="drawer__link" href="#" role="menuitem">Sobre</a>
+                  <a class="drawer__link" href="#" role="menuitem">Contato</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="callout callout--magenta">
+        <span class="callout__tag">Repare</span>
+        <p>Em telas pequenas, a <strong>própria navegação desta apostila</strong> também vira um menu sanduíche (lá no topo). É o Módulo 3 funcionando na prática — diminua a janela para ver.</p>
+      </div>
+
+      <div class="prose">
+        <h3>3.2 · Carrosséis (Sliders)</h3>
+        <p>Carrosséis economizam espaço vertical (ótimo no mobile), permitindo scroll horizontal de cards, imagens ou produtos. Boas práticas:</p>
+        <ol>
+          <li><strong>Dica visual (affordance):</strong> nunca esconda totalmente o próximo item. Mostre sempre uma "fatia" (10% a 20%) do próximo card cortado na borda — isso convida ao gesto de <em>swipe</em>.</li>
+          <li><strong>Controles:</strong> no desktop, setas visíveis; no mobile, o gesto basta, mas indicadores (bolinhas) ajudam a entender a quantidade.</li>
+          <li><strong>Evite auto-play em textos:</strong> se há algo para ler, não gire sozinho — isso frustra.</li>
+        </ol>
+      </div>
+
+      <!-- DEMO: carrossel com peek -->
+      <div class="demo">
+        <div class="demo__bar"><span class="demo__label">Demo · Carrossel mobile</span><span class="demo__label">arraste →</span></div>
+        <div class="demo__stage">
+          <div class="carousel">
+            <div class="carousel__card">Card 01</div>
+            <div class="carousel__card">Card 02</div>
+            <div class="carousel__card">Card 03</div>
+            <div class="carousel__card">Card 04</div>
+          </div>
+          <p class="carousel-hint">↑ O card seguinte aparece "espiando" na direita: o affordance que indica "tem mais, desliza".</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ───────────────── MÓDULO 4 ───────────────── -->
+    <section class="module" id="m4">
+      <div class="module__head">
+        <div class="module__kicker" data-num="4">Módulo 04</div>
+        <h2 class="module__title">Dominando o Figma para UI</h2>
+      </div>
+
+      <div class="prose">
+        <p>O Figma não é só uma prancheta — ele funciona com lógicas muito próximas do front-end. Dominando as ferramentas abaixo, seu layout já sai <strong>80% pronto para o código</strong>.</p>
+
+        <h3>4.1 · Configurando o ambiente</h3>
+        <ol>
+          <li>Pressione <kbd>F</kbd> para selecionar a ferramenta <strong>Frame</strong>.</li>
+          <li>Na lateral direita, escolha <strong>iPhone 14/15 Pro</strong> (393×852) para começar Mobile-First.</li>
+          <li>Para desktop, depois crie um frame <strong>Desktop</strong> (1440×1024).</li>
+        </ol>
+
+        <h3>4.2 · Auto Layout (o coração do Figma)</h3>
+        <p>O Auto Layout é a representação visual do <strong>Flexbox</strong>. Ele controla como os itens se alinham, distribuem espaço e reagem a mudanças de tamanho.</p>
+      </div>
+
+      <div class="card">
+        <div class="card__title"><span class="card__icon">⌨️</span> Aplicando o 8pt no Auto Layout</div>
+        <div class="prose">
+          <ul>
+            <li>Selecione os elementos e pressione <kbd>Shift</kbd> + <kbd>A</kbd>.</li>
+            <li>No painel direito, defina o <strong>Gap</strong> para valores como <code>8</code>, <code>16</code>, <code>24</code>.</li>
+            <li>Defina o <strong>Padding</strong> (horizontal e vertical) na mesma escala: <code>16</code> nas laterais, <code>24</code> em cima/baixo.</li>
+            <li><strong>Vantagem:</strong> ao inserir um item no meio, tudo é empurrado automaticamente, preservando o grid.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="prose">
+        <h3>4.3 · Criando Componentes (Design Systems)</h3>
+        <p>Componentes são elementos reutilizáveis. Um botão principal deve ser componente: muda a cor dele, muda no projeto todo.</p>
+        <ul>
+          <li><strong>Atalho:</strong> <kbd>Ctrl</kbd> + <kbd>Alt</kbd> + <kbd>K</kbd> (Win) ou <kbd>Cmd</kbd> + <kbd>Opt</kbd> + <kbd>K</kbd> (Mac).</li>
+          <li><strong>Variantes:</strong> crie variações do mesmo componente — Botão Default, Hover, Disabled.</li>
+        </ul>
+
+        <h3>4.4 · Prototipando no Figma</h3>
+        <p>É na aba <strong>Prototype</strong> (canto superior direito) que a interface ganha vida.</p>
+      </div>
+
+      <div class="card">
+        <div class="card__title"><span class="card__icon">≡</span> Prototipar o Menu Sanduíche</div>
+        <div class="prose">
+          <ol>
+            <li>Crie o Frame da tela principal com o ícone (≡).</li>
+            <li>Crie um segundo Frame: o menu aberto (ex.: barra lateral em 80% da tela).</li>
+            <li>Na aba Prototype, arraste o "nó" do ícone (≡) até o Frame do menu.</li>
+            <li>Configure a interação:
+              <ul>
+                <li><strong>Trigger:</strong> On Click</li>
+                <li><strong>Action:</strong> Open Overlay (aparece por cima sem sair da tela)</li>
+                <li><strong>Overlay Position:</strong> Top Left / Right</li>
+                <li><strong>Animation:</strong> Move In (esquerda ou direita)</li>
+                <li>Marque <strong>"Close when clicking outside"</strong> — acessibilidade!</li>
+              </ul>
+            </li>
+          </ol>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card__title"><span class="card__icon">↔</span> Prototipar um Carrossel (Horizontal Scroll)</div>
+        <div class="prose">
+          <ol>
+            <li>Agrupe (ou coloque em Auto Layout) todos os cards do carrossel.</li>
+            <li>Coloque esse grupo dentro de um Frame com a largura da tela do celular.</li>
+            <li>Marque <strong>"Clip Content"</strong> no frame para esconder o que passa da borda.</li>
+            <li>Na aba Prototype, selecione o Frame, vá em <strong>Overflow Scrolling</strong> e mude para <strong>Horizontal</strong>. No preview (<kbd>Shift</kbd> + <kbd>Space</kbd>), já dá pra deslizar!</li>
+          </ol>
+        </div>
+      </div>
+    </section>
+
+    <!-- ───────────────── MÓDULO 5 ───────────────── -->
+    <section class="module" id="m5">
+      <div class="module__head">
+        <div class="module__kicker" data-num="5">Módulo 05</div>
+        <h2 class="module__title">Exercícios de Fixação</h2>
+      </div>
+      <div class="prose">
+        <p>A teoria só se consolida na prática. Abra seu Figma e marque cada passo conforme avança — <strong>seu progresso fica salvo</strong> neste navegador.</p>
+      </div>
+
+      <!-- Exercício 1 -->
+      <div class="exercise">
+        <div class="exercise__head"><span class="exercise__no">1</span><span class="exercise__title">Sistema de espaçamento (Auto Layout)</span></div>
+        <label class="check"><input type="checkbox" data-ex="ex1-1" /><span class="check__box"><svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M5 12l5 5L20 6" stroke="#0A0613" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="check__text">Criar três retângulos e um texto (título).</span></label>
+        <label class="check"><input type="checkbox" data-ex="ex1-2" /><span class="check__box"><svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M5 12l5 5L20 6" stroke="#0A0613" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="check__text">Transformar tudo em Auto Layout (<code>Shift + A</code>).</span></label>
+        <label class="check"><input type="checkbox" data-ex="ex1-3" /><span class="check__box"><svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M5 12l5 5L20 6" stroke="#0A0613" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="check__text">Configurar o Gap entre elementos para <strong>16px</strong>.</span></label>
+        <label class="check"><input type="checkbox" data-ex="ex1-4" /><span class="check__box"><svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M5 12l5 5L20 6" stroke="#0A0613" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="check__text">Configurar o Padding interno do card para <strong>24px</strong>.</span></label>
+        <label class="check"><input type="checkbox" data-ex="ex1-5" /><span class="check__box"><svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M5 12l5 5L20 6" stroke="#0A0613" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="check__text">Reordenar os retângulos arrastando e observar o layout se manter alinhado.</span></label>
+      </div>
+
+      <!-- Exercício 2 -->
+      <div class="exercise">
+        <div class="exercise__head"><span class="exercise__no">2</span><span class="exercise__title">Componentizar e prototipar o menu sanduíche</span></div>
+        <label class="check"><input type="checkbox" data-ex="ex2-1" /><span class="check__box"><svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M5 12l5 5L20 6" stroke="#0A0613" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="check__text">Desenhar uma Navbar (logo + ícone) e transformá-la em Componente.</span></label>
+        <label class="check"><input type="checkbox" data-ex="ex2-2" /><span class="check__box"><svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M5 12l5 5L20 6" stroke="#0A0613" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="check__text">Criar uma tela escura translúcida (Overlay) com os links.</span></label>
+        <label class="check"><input type="checkbox" data-ex="ex2-3" /><span class="check__box"><svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M5 12l5 5L20 6" stroke="#0A0613" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="check__text">Prototipar o clique abrindo o Overlay deslizando da esquerda em <strong>300ms</strong>.</span></label>
+      </div>
+
+      <!-- Exercício 3 -->
+      <div class="exercise">
+        <div class="exercise__head"><span class="exercise__no">3</span><span class="exercise__title">O carrossel mobile</span></div>
+        <label class="check"><input type="checkbox" data-ex="ex3-1" /><span class="check__box"><svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M5 12l5 5L20 6" stroke="#0A0613" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="check__text">Criar 4 cards medindo <strong>280px</strong> de largura cada.</span></label>
+        <label class="check"><input type="checkbox" data-ex="ex3-2" /><span class="check__box"><svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M5 12l5 5L20 6" stroke="#0A0613" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="check__text">Posicioná-los lado a lado com Auto Layout e <strong>16px</strong> de gap.</span></label>
+        <label class="check"><input type="checkbox" data-ex="ex3-3" /><span class="check__box"><svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M5 12l5 5L20 6" stroke="#0A0613" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="check__text">Colocar o grupo dentro da tela mobile (Frame de 393px).</span></label>
+        <label class="check"><input type="checkbox" data-ex="ex3-4" /><span class="check__box"><svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M5 12l5 5L20 6" stroke="#0A0613" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="check__text">Aplicar Overflow Scrolling Horizontal com o 2º card cortado na borda.</span></label>
+      </div>
+    </section>
+
+    <!-- ───────────────── LIVROS ───────────────── -->
+    <section class="module" id="livros">
+      <div class="module__head">
+        <div class="module__kicker" data-num="6">Bônus</div>
+        <h2 class="module__title">Leituras para Especialização</h2>
+      </div>
+      <div class="prose" style="margin-bottom:var(--s-5)">
+        <p>Para consolidar a transição ao nível Pleno/Sênior, estas obras formam a base teórica que separa executores de estrategistas.</p>
+      </div>
+
+      <div class="books">
+        <article class="book">
+          <span class="book__spine"></span>
+          <div class="book__no">01</div>
+          <h3 class="book__title">Refactoring UI</h3>
+          <div class="book__author">Adam Wathan &amp; Steve Schoger</div>
+          <p class="book__desc">O livro definitivo para devs e iniciantes. Táticas práticas sobre espaçamento, grid e tipografia, sem "teoria acadêmica". Muda sua visão de interface.</p>
+        </article>
+        <article class="book">
+          <span class="book__spine"></span>
+          <div class="book__no">02</div>
+          <h3 class="book__title">Don't Make Me Think, Revisited</h3>
+          <div class="book__author">Steve Krug</div>
+          <p class="book__desc">A bíblia da usabilidade. Como projetar interfaces intuitivas (menus, navegação) reduzindo a carga cognitiva do usuário.</p>
+        </article>
+        <article class="book">
+          <span class="book__spine"></span>
+          <div class="book__no">03</div>
+          <h3 class="book__title">Laws of UX</h3>
+          <div class="book__author">Jon Yablonski</div>
+          <p class="book__desc">Princípios psicológicos que ditam como agrupamos informação, o tamanho dos botões (Lei de Fitts) e como organizar carrosséis.</p>
+        </article>
+        <article class="book">
+          <span class="book__spine"></span>
+          <div class="book__no">04</div>
+          <h3 class="book__title">The Design of Everyday Things</h3>
+          <div class="book__author">Don Norman</div>
+          <p class="book__desc">Clássico sobre por que algumas coisas são fáceis de usar e outras não. Fundamental para entender <em>affordance</em>.</p>
+        </article>
+      </div>
+
+      <!-- ASSINATURA dev-kalixto -->
+      <div class="signoff">
+        <div class="signoff__mark" role="img" aria-label="Logo Kalixto"></div>
+        <div class="signoff__name">dev-<span>kalixto</span></div>
+        <div class="signoff__tag">UI Design · Figma · Front-end · Rio de Janeiro</div>
+        <p class="signoff__line">O grid é o seu melhor amigo e a consistência é a chave do design profissional. Bons estudos.</p>
+      </div>
+    </section>
+
+  </main>
+</div>
+
+<script>
+/* ═══════════════════════════════════════════════════════════════════════════
+   JAVASCRIPT — toda a interatividade da apostila, comentada em PT-BR.
+   Sem dependências externas. Tudo vanilla.
+   ═══════════════════════════════════════════════════════════════════════════ */
+(function () {
+  "use strict";
+
+  /* ---------- 1. MENU SANDUÍCHE DA PRÓPRIA APOSTILA (mobile) ---------- */
+  const body = document.body;
+  const menuToggle = document.getElementById("menuToggle");
+  const scrim = document.getElementById("scrim");
+
+  function toggleMenu(open) {
+    body.classList.toggle("menu-open", open);
+    menuToggle.setAttribute("aria-expanded", String(open));
+  }
+  menuToggle.addEventListener("click", () => toggleMenu(!body.classList.contains("menu-open")));
+  scrim.addEventListener("click", () => toggleMenu(false));         // fecha clicando fora
+  // Fecha ao clicar num link do índice (boa UX no mobile)
+  document.querySelectorAll(".nav__link").forEach(a =>
+    a.addEventListener("click", () => toggleMenu(false))
+  );
+  // Acessibilidade: ESC fecha o menu
+  document.addEventListener("keydown", e => { if (e.key === "Escape") toggleMenu(false); });
+
+  /* ---------- 2. MEDIDOR DE CONTRASTE WCAG ---------- */
+  const cText = document.getElementById("cText");
+  const cBg = document.getElementById("cBg");
+  const cSample = document.getElementById("cSample");
+  const cBig = document.getElementById("cBig");
+  const cSmall = document.getElementById("cSmall");
+  const cRatio = document.getElementById("cRatio");
+  const cBadges = document.getElementById("cBadges");
+
+  // Converte cor #RRGGBB em luminância relativa (fórmula oficial WCAG)
+  function luminance(hex) {
+    const c = hex.replace("#", "");
+    const rgb = [0, 2, 4].map(i => parseInt(c.substr(i, 2), 16) / 255);
+    const lin = rgb.map(v => v <= 0.03928 ? v / 12.92 : Math.pow((v + 0.055) / 1.055, 2.4));
+    return 0.2126 * lin[0] + 0.7152 * lin[1] + 0.0722 * lin[2];
+  }
+  // Razão de contraste entre duas cores
+  function contrastRatio(fg, bg) {
+    const L1 = luminance(fg), L2 = luminance(bg);
+    const hi = Math.max(L1, L2), lo = Math.min(L1, L2);
+    return (hi + 0.05) / (lo + 0.05);
+  }
+  function badge(ok, label) {
+    return `<span class="badge badge--${ok ? "ok" : "bad"}">${ok ? "✓" : "✗"} ${label}</span>`;
+  }
+  function updateContrast() {
+    const ratio = contrastRatio(cText.value, cBg.value);
+    cSample.style.background = cBg.value;
+    cBig.style.color = cText.value;
+    cSmall.style.color = cText.value;
+    cRatio.textContent = ratio.toFixed(2) + ":1";
+    cRatio.style.color = ratio >= 4.5 ? "var(--kx-ok)" : (ratio >= 3 ? "var(--kx-warn)" : "var(--kx-bad)");
+    // AA texto normal precisa 4.5:1; texto grande precisa 3:1
+    cBadges.innerHTML =
+      badge(ratio >= 4.5, "Texto normal (4.5:1)") + " " +
+      badge(ratio >= 3,   "Texto grande (3:1)");
+  }
+  [cText, cBg].forEach(el => el.addEventListener("input", updateContrast));
+  updateContrast();
+
+  /* ---------- 3. GRID DE 8PT INTERATIVO ---------- */
+  const gapRange = document.getElementById("gapRange");
+  const gapReadout = document.getElementById("gapReadout");
+  const grid8Row = document.getElementById("grid8Row");
+  const gridToggle = document.getElementById("gridToggle");
+  const grid8Canvas = document.getElementById("grid8Canvas");
+
+  function updateGap() {
+    const px = Number(gapRange.value) * 8;     // cada passo = 8px (a escala!)
+    grid8Row.style.gap = px + "px";
+    gapReadout.textContent = px + "px";
+  }
+  gapRange.addEventListener("input", updateGap);
+  updateGap();
+
+  gridToggle.addEventListener("click", () => {
+    const on = grid8Canvas.classList.toggle("show-grid");
+    gridToggle.textContent = on ? "Ocultar grade" : "Mostrar grade";
+  });
+
+  /* ---------- 4. MENU SANDUÍCHE DA DEMO (componente do Módulo 3) ---------- */
+  const phone = document.getElementById("phoneMenu");
+  const phoneToggle = document.getElementById("phoneToggle");
+  const phoneDrawer = document.getElementById("phoneDrawer");
+
+  function togglePhone(open) {
+    phone.classList.toggle("is-open", open);
+    phoneToggle.setAttribute("aria-expanded", String(open));
+  }
+  phoneToggle.addEventListener("click", () => togglePhone(!phone.classList.contains("is-open")));
+  // "Close when clicking outside": clicar no overlay (fora do painel) fecha
+  phoneDrawer.addEventListener("click", e => { if (e.target === phoneDrawer) togglePhone(false); });
+
+  /* ---------- 5. CHECKLIST COM PROGRESSO PERSISTENTE ---------- */
+  const KEY = "kalixto-apostila-ui";
+  const boxes = document.querySelectorAll(".check input[type=checkbox]");
+
+  // Carrega progresso salvo (degrada com segurança se localStorage indisponível)
+  let saved = {};
+  try { saved = JSON.parse(localStorage.getItem(KEY) || "{}"); } catch (_) { saved = {}; }
+
+  boxes.forEach(box => {
+    const id = box.dataset.ex;
+    if (saved[id]) box.checked = true;
+    box.addEventListener("change", () => {
+      saved[id] = box.checked;
+      try { localStorage.setItem(KEY, JSON.stringify(saved)); } catch (_) {}
+    });
+  });
+
+  /* ---------- 6. PROGRESSO DE LEITURA + ÍNDICE ATIVO ---------- */
+  const progressBar = document.getElementById("progressBar");
+  const progressPct = document.getElementById("progressPct");
+  const links = document.querySelectorAll(".nav__link");
+  const sections = [...links].map(a => document.querySelector(a.getAttribute("href"))).filter(Boolean);
+
+  function onScroll() {
+    // Barra de progresso = quanto da página já foi rolado
+    const h = document.documentElement;
+    const scrolled = h.scrollTop / (h.scrollHeight - h.clientHeight || 1);
+    const pct = Math.min(100, Math.round(scrolled * 100));
+    progressBar.style.width = pct + "%";
+    progressPct.textContent = pct + "%";
+
+    // Destaca no índice a seção visível no momento
+    let activeId = sections[0] ? sections[0].id : null;
+    const mid = window.scrollY + window.innerHeight * 0.35;
+    sections.forEach(sec => { if (sec.offsetTop <= mid) activeId = sec.id; });
+    links.forEach(a => a.classList.toggle("is-active", a.getAttribute("href") === "#" + activeId));
+  }
+  window.addEventListener("scroll", onScroll, { passive: true });
+  window.addEventListener("resize", onScroll);
+  onScroll();
+})();
+</script>
+</body>
+</html>
