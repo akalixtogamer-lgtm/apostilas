@@ -23,17 +23,20 @@
   --green-700:#0E9F6E; --green-500:#22E3A0;
   --amber-700:#B86E00; --amber-500:#FFB020;
   --red-700:#D92D4A; --red-500:#FF4D6A;
+  /* Auditoria 30/09/2026 — tons 800 para o modo Light e cinzas do text/muted */
+  --gray-400:#9494A3; --gray-600:#636374;
+  --pink-800:#C11072; --cyan-800:#006E87; --gold-800:#895B17; --green-800:#0A724F; --amber-800:#925700; --red-800:#C0233D;
 
   /* Theme · Dark (padrão) */
   --bg-base:var(--black-950); --bg-surface:var(--gray-900); --bg-elevated:var(--gray-800);
-  --text-primary:var(--white); --text-secondary:var(--gray-300); --text-muted:var(--gray-500);
+  --text-primary:var(--white); --text-secondary:var(--gray-300); --text-muted:var(--gray-400);
   --brand-primary:var(--purple-500); --brand-secondary:var(--pink-500); --brand-tertiary:var(--cyan-500);
   --accent-gold:var(--gold-500); --support-lilac:var(--purple-300);
   --fb-success:var(--green-500); --fb-warning:var(--amber-500); --fb-error:var(--red-500); --fb-info:var(--cyan-500);
   --glass-fill:rgba(255,255,255,.06); --glass-stroke:rgba(255,255,255,.14); --glass-tint:rgba(123,46,255,.10);
   --glass-shadow:0 24px 64px rgba(0,0,0,.45), inset 0 1px 0 rgba(255,255,255,.12);
   --glass-shadow-s:0 12px 32px rgba(0,0,0,.35), inset 0 1px 0 rgba(255,255,255,.10);
-  --on-accent:var(--black-950);
+  --on-accent:var(--black-950); --on-brand:var(--white);
   --code-bg:rgba(0,0,0,.35);
   --aura-1:rgba(123,46,255,.34); --aura-2:rgba(255,45,170,.16); --aura-3:rgba(0,217,255,.10);
 
@@ -63,10 +66,10 @@
 @media (prefers-color-scheme: light){
   :root:not([data-theme="dark"]){
     --bg-base:var(--gray-100); --bg-surface:var(--white); --bg-elevated:var(--purple-100);
-    --text-primary:var(--ink-900); --text-secondary:var(--ink-600); --text-muted:var(--gray-500);
-    --brand-secondary:var(--pink-700); --brand-tertiary:var(--cyan-700);
-    --accent-gold:var(--gold-700); --support-lilac:var(--purple-700);
-    --fb-success:var(--green-700); --fb-warning:var(--amber-700); --fb-error:var(--red-700); --fb-info:var(--cyan-700);
+    --text-primary:var(--ink-900); --text-secondary:var(--ink-600); --text-muted:var(--gray-600);
+    --brand-secondary:var(--pink-800); --brand-tertiary:var(--cyan-800);
+    --accent-gold:var(--gold-800); --support-lilac:var(--purple-700);
+    --fb-success:var(--green-800); --fb-warning:var(--amber-800); --fb-error:var(--red-800); --fb-info:var(--cyan-800);
     --glass-fill:rgba(255,255,255,.55); --glass-stroke:rgba(255,255,255,.85); --glass-tint:rgba(184,153,255,.18);
     --glass-shadow:0 24px 64px rgba(90,18,214,.10), inset 0 1px 0 rgba(255,255,255,.7);
     --glass-shadow-s:0 12px 32px rgba(90,18,214,.08), inset 0 1px 0 rgba(255,255,255,.7);
@@ -78,10 +81,10 @@
 }
 :root[data-theme="light"]{
   --bg-base:var(--gray-100); --bg-surface:var(--white); --bg-elevated:var(--purple-100);
-  --text-primary:var(--ink-900); --text-secondary:var(--ink-600); --text-muted:var(--gray-500);
-  --brand-secondary:var(--pink-700); --brand-tertiary:var(--cyan-700);
-  --accent-gold:var(--gold-700); --support-lilac:var(--purple-700);
-  --fb-success:var(--green-700); --fb-warning:var(--amber-700); --fb-error:var(--red-700); --fb-info:var(--cyan-700);
+  --text-primary:var(--ink-900); --text-secondary:var(--ink-600); --text-muted:var(--gray-600);
+  --brand-secondary:var(--pink-800); --brand-tertiary:var(--cyan-800);
+  --accent-gold:var(--gold-800); --support-lilac:var(--purple-700);
+  --fb-success:var(--green-800); --fb-warning:var(--amber-800); --fb-error:var(--red-800); --fb-info:var(--cyan-800);
   --glass-fill:rgba(255,255,255,.55); --glass-stroke:rgba(255,255,255,.85); --glass-tint:rgba(184,153,255,.18);
   --glass-shadow:0 24px 64px rgba(90,18,214,.10), inset 0 1px 0 rgba(255,255,255,.7);
   --glass-shadow-s:0 12px 32px rgba(90,18,214,.08), inset 0 1px 0 rgba(255,255,255,.7);
