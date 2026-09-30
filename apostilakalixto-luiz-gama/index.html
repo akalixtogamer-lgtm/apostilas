@@ -1,0 +1,1215 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head><script>(function(){try{var t=localStorage.getItem('kx-theme');if(t==='light'||t==='dark')document.documentElement.setAttribute('data-theme',t);}catch(e){}})();</script><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Unbounded:wght@600;700&family=Sora:wght@600&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap"><style>/* =====================================================================
+   KALIXTO DESIGN SYSTEM — tokens espelhados do arquivo Figma
+   "Kalixto — Design System" (coleções Primitives, Theme, Spacing & Radius;
+   estilos de texto, efeitos Glass/Glow/Elevation e gradientes).
+   Tema padrão: Dark. Light via prefers-color-scheme ou data-theme.
+   ===================================================================== */
+:root{
+  /* Primitives */
+  --black-950:#050505; --gray-900:#1B1B1B; --gray-800:#2D2D2D; --gray-500:#6E6E80; --gray-300:#B3B3C2; --gray-100:#F5F7FA; --white:#FFFFFF;
+  --ink-900:#120B24; --ink-600:#4A4560;
+  --purple-700:#5A12D6; --purple-500:#7B2EFF; --purple-300:#B899FF; --purple-100:#EADFFF;
+  --pink-700:#D6127F; --pink-500:#FF2DAA; --pink-100:#FFD5F1;
+  --cyan-700:#0089A8; --cyan-500:#00D9FF; --cyan-100:#D8F7FF;
+  --gold-700:#B7791F; --gold-500:#FFC53D;
+  --green-700:#0E9F6E; --green-500:#22E3A0;
+  --amber-700:#B86E00; --amber-500:#FFB020;
+  --red-700:#D92D4A; --red-500:#FF4D6A;
+  /* Auditoria 30/09/2026 — tons 800 para o modo Light e cinzas do text/muted */
+  --gray-400:#9494A3; --gray-600:#636374;
+  --pink-800:#C11072; --cyan-800:#006E87; --gold-800:#895B17; --green-800:#0A724F; --amber-800:#925700; --red-800:#C0233D;
+
+  /* Theme · Dark (padrão) */
+  --bg-base:var(--black-950); --bg-surface:var(--gray-900); --bg-elevated:var(--gray-800);
+  --text-primary:var(--white); --text-secondary:var(--gray-300); --text-muted:var(--gray-400);
+  --brand-primary:var(--purple-500); --brand-secondary:var(--pink-500); --brand-tertiary:var(--cyan-500);
+  --accent-gold:var(--gold-500); --support-lilac:var(--purple-300);
+  --fb-success:var(--green-500); --fb-warning:var(--amber-500); --fb-error:var(--red-500); --fb-info:var(--cyan-500);
+  --glass-fill:rgba(255,255,255,.06); --glass-stroke:rgba(255,255,255,.14); --glass-tint:rgba(123,46,255,.10);
+  --glass-shadow:0 24px 64px rgba(0,0,0,.45), inset 0 1px 0 rgba(255,255,255,.12);
+  --glass-shadow-s:0 12px 32px rgba(0,0,0,.35), inset 0 1px 0 rgba(255,255,255,.10);
+  --on-accent:var(--black-950); --on-brand:var(--white);
+  --code-bg:rgba(0,0,0,.35);
+  --aura-1:rgba(123,46,255,.34); --aura-2:rgba(255,45,170,.16); --aura-3:rgba(0,217,255,.10);
+
+  /* Gradientes (Paint styles) */
+  --g-neon:linear-gradient(90deg,#7B2EFF 0%,#FF2DAA 100%);
+  --g-tech:linear-gradient(90deg,#00D9FF 0%,#7B2EFF 100%);
+  --g-ia:linear-gradient(90deg,#00D9FF 0%,#B899FF 50%,#FF2DAA 100%);
+  --g-gamer:linear-gradient(90deg,#FF2DAA 0%,#7B2EFF 50%,#00D9FF 100%);
+  --g-ancestral:linear-gradient(90deg,#FFC53D 0%,#FF2DAA 50%,#7B2EFF 100%);
+
+  /* Glow (Effect styles) */
+  --glow-purple:0 0 40px rgba(123,46,255,.55); --glow-pink:0 0 40px rgba(255,45,170,.50); --glow-cyan:0 0 40px rgba(0,217,255,.50);
+
+  /* Spacing & Radius */
+  --s1:4px; --s2:8px; --s3:12px; --s4:16px; --s6:24px; --s8:32px; --s12:48px; --s16:64px; --s24:96px;
+  --r-sm:8px; --r-md:16px; --r-alert:20px; --r-lg:24px; --r-card:28px; --r-xl:32px; --r-pill:999px;
+  --blur-sm:12px; --blur-md:24px;
+
+  /* Tipografia (Text styles) */
+  --f-display:"Unbounded","Sora",system-ui,sans-serif;
+  --f-heading:"Sora","Inter",system-ui,sans-serif;
+  --f-body:"Inter",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --f-code:"JetBrains Mono",ui-monospace,Consolas,monospace;
+  color-scheme:dark;
+}
+/* Theme · Light */
+@media (prefers-color-scheme: light){
+  :root:not([data-theme="dark"]){
+    --bg-base:var(--gray-100); --bg-surface:var(--white); --bg-elevated:var(--purple-100);
+    --text-primary:var(--ink-900); --text-secondary:var(--ink-600); --text-muted:var(--gray-600);
+    --brand-secondary:var(--pink-800); --brand-tertiary:var(--cyan-800);
+    --accent-gold:var(--gold-800); --support-lilac:var(--purple-700);
+    --fb-success:var(--green-800); --fb-warning:var(--amber-800); --fb-error:var(--red-800); --fb-info:var(--cyan-800);
+    --glass-fill:rgba(255,255,255,.55); --glass-stroke:rgba(255,255,255,.85); --glass-tint:rgba(184,153,255,.18);
+    --glass-shadow:0 24px 64px rgba(90,18,214,.10), inset 0 1px 0 rgba(255,255,255,.7);
+    --glass-shadow-s:0 12px 32px rgba(90,18,214,.08), inset 0 1px 0 rgba(255,255,255,.7);
+    --on-accent:var(--white);
+    --code-bg:rgba(255,255,255,.7);
+    --aura-1:rgba(234,223,255,.9); --aura-2:rgba(255,213,241,.8); --aura-3:rgba(216,247,255,.8);
+    color-scheme:light;
+  }
+}
+:root[data-theme="light"]{
+  --bg-base:var(--gray-100); --bg-surface:var(--white); --bg-elevated:var(--purple-100);
+  --text-primary:var(--ink-900); --text-secondary:var(--ink-600); --text-muted:var(--gray-600);
+  --brand-secondary:var(--pink-800); --brand-tertiary:var(--cyan-800);
+  --accent-gold:var(--gold-800); --support-lilac:var(--purple-700);
+  --fb-success:var(--green-800); --fb-warning:var(--amber-800); --fb-error:var(--red-800); --fb-info:var(--cyan-800);
+  --glass-fill:rgba(255,255,255,.55); --glass-stroke:rgba(255,255,255,.85); --glass-tint:rgba(184,153,255,.18);
+  --glass-shadow:0 24px 64px rgba(90,18,214,.10), inset 0 1px 0 rgba(255,255,255,.7);
+  --glass-shadow-s:0 12px 32px rgba(90,18,214,.08), inset 0 1px 0 rgba(255,255,255,.7);
+  --on-accent:var(--white);
+  --code-bg:rgba(255,255,255,.7);
+  --aura-1:rgba(234,223,255,.9); --aura-2:rgba(255,213,241,.8); --aura-3:rgba(216,247,255,.8);
+  color-scheme:light;
+}
+
+/* ---------- Base ---------- */
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important}}
+body{background:var(--bg-base);color:var(--text-primary);font:400 16px/24px var(--f-body);
+  background-image:
+    radial-gradient(900px 620px at 92% -8%,var(--aura-1),transparent 62%),
+    radial-gradient(760px 520px at -12% 38%,var(--aura-2),transparent 60%),
+    radial-gradient(700px 500px at 80% 110%,var(--aura-3),transparent 60%);
+  background-attachment:fixed}
+a{color:var(--brand-tertiary)}
+:focus-visible{outline:2px solid var(--brand-tertiary);outline-offset:3px}
+strong{font-weight:600;color:var(--text-primary)}
+
+/* ---------- Tipografia (Text styles do Figma, escalados para web) ---------- */
+.t-display{font:700 clamp(40px,7vw,72px)/1.1 var(--f-display);letter-spacing:-.02em;margin:0;text-wrap:balance}
+.t-h1{font:600 clamp(30px,4.6vw,48px)/1.16 var(--f-display);letter-spacing:-.01em;margin:0;text-wrap:balance}
+.t-h2{font:600 clamp(26px,3.6vw,36px)/1.22 var(--f-display);letter-spacing:-.01em;margin:0;text-wrap:balance}
+.t-h3{font:600 clamp(22px,2.8vw,28px)/1.28 var(--f-heading);margin:0;text-wrap:balance}
+.t-sub-l{font:600 22px/30px var(--f-heading);margin:0}
+.t-sub-m{font:600 18px/26px var(--f-heading);margin:0}
+.t-overline{font:600 13px/16px var(--f-heading);letter-spacing:.14em;text-transform:uppercase}
+.t-body-l{font:400 18px/28px var(--f-body)}
+.t-body-s{font:400 14px/20px var(--f-body)}
+.t-caption{font:500 12px/16px var(--f-body);letter-spacing:.02em}
+.t-code{font:400 13px/20px var(--f-code)}
+.grad-text{background:var(--g-neon);-webkit-background-clip:text;background-clip:text;color:transparent}
+
+/* ---------- Cabeçalho de seção (padrão das páginas do DS) ---------- */
+.kx-eyebrow{display:flex;align-items:center;gap:var(--s2);color:var(--text-muted)}
+.kx-eyebrow .num{font:600 11px/1 var(--f-heading);color:#fff;background:var(--g-neon);border-radius:var(--r-pill);padding:4px 8px;letter-spacing:.04em}
+.kx-rule{width:72px;height:2px;border-radius:2px;background:var(--g-ia);border:0;margin:0}
+
+/* ---------- Glass (Effect Glass/Dark · M | S) ---------- */
+.glass{background:var(--glass-fill);border:1px solid var(--glass-stroke);box-shadow:var(--glass-shadow);
+  -webkit-backdrop-filter:blur(var(--blur-md));backdrop-filter:blur(var(--blur-md))}
+.glass-s{background:var(--glass-fill);border:1px solid var(--glass-stroke);box-shadow:var(--glass-shadow-s);
+  -webkit-backdrop-filter:blur(var(--blur-sm));backdrop-filter:blur(var(--blur-sm))}
+
+/* ---------- Button (Primary · Secondary · Glass · Ghost) ---------- */
+.btn{display:inline-flex;align-items:center;gap:var(--s3);font:600 17px/21px var(--f-heading);text-decoration:none;cursor:pointer;
+  border-radius:var(--r-pill);padding:16px 30px;border:0;color:#fff;transition:box-shadow .2s,transform .2s,filter .2s}
+.btn .arrow{transition:transform .2s}
+.btn:hover .arrow{transform:translateX(3px)}
+.btn--primary{background:var(--g-neon)}
+.btn--primary:hover{box-shadow:var(--glow-pink)}
+.btn--secondary{background:var(--brand-primary)}
+.btn--secondary:hover{box-shadow:var(--glow-purple)}
+.btn--glass{background:var(--glass-fill);border:1px solid var(--glass-stroke);color:var(--text-primary);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px)}
+.btn--glass .arrow{color:var(--brand-tertiary)}
+.btn--ghost{background:transparent;border:1.5px solid var(--brand-tertiary);color:var(--brand-tertiary)}
+.btn--ghost:hover{box-shadow:var(--glow-cyan)}
+.btn--sm{font-size:15px;padding:12px 22px}
+
+/* ---------- Badge (Tech · Dança · IA · Gamer · Evento · Aula) ---------- */
+.badge{--c:var(--brand-tertiary);display:inline-flex;align-items:center;gap:var(--s2);padding:8px 16px 8px 14px;border-radius:var(--r-pill);
+  background:color-mix(in srgb,var(--c) 16%,transparent);border:1px solid color-mix(in srgb,var(--c) 45%,transparent);color:var(--c);
+  font:600 13px/16px var(--f-heading);letter-spacing:.06em;text-transform:uppercase;white-space:nowrap}
+.badge i{font:500 13px/16px var(--f-code);font-style:normal}
+.badge--tech{--c:var(--brand-tertiary)} .badge--danca{--c:var(--brand-secondary)} .badge--ia{--c:var(--support-lilac)}
+.badge--gamer{--c:var(--brand-primary)} .badge--evento{--c:var(--accent-gold)} .badge--aula{--c:var(--fb-success)}
+
+/* ---------- Alert (Success · Warning · Error · Info) ---------- */
+.alert{--c:var(--fb-info);display:flex;gap:var(--s4);align-items:flex-start;padding:20px 24px;border-radius:var(--r-alert);
+  background:var(--glass-fill);border:1px solid color-mix(in srgb,var(--c) 40%,transparent);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px)}
+.alert .ico{flex:none;width:28px;height:28px;border-radius:50%;background:var(--c);color:var(--on-accent);display:grid;place-items:center;font:500 15px/1 var(--f-code)}
+.alert .ttl{font:600 17px/24px var(--f-heading);margin:0 0 2px;color:var(--text-primary)}
+.alert p{margin:0;font:400 15px/22px var(--f-body);color:var(--text-secondary)}
+.alert--success{--c:var(--fb-success)} .alert--warning{--c:var(--fb-warning)} .alert--error{--c:var(--fb-error)} .alert--info{--c:var(--fb-info)}
+
+/* ---------- Destaque / Callout ---------- */
+.callout{display:flex;gap:var(--s6);border-radius:var(--r-lg);overflow:hidden}
+.callout::before{content:"";flex:none;width:4px;background:var(--g-neon)}
+.callout .in{padding:24px 32px 24px 0}
+.callout .t-overline{color:var(--brand-secondary);font-size:12px}
+.callout .q{font:600 clamp(17px,2vw,21px)/1.45 var(--f-heading);margin:8px 0 0;color:var(--text-primary)}
+
+/* ---------- Stat ---------- */
+.stat{padding:var(--s8);border-radius:var(--r-card);display:grid;gap:10px;min-width:0}
+.stat .t-overline{color:var(--text-muted);font-size:12px}
+.stat .num{font:700 clamp(40px,6vw,56px)/1 var(--f-display);background:var(--g-neon);-webkit-background-clip:text;background-clip:text;color:transparent}
+.stat .delta{font:500 13px/16px var(--f-code);color:var(--fb-success)}
+
+/* ---------- Chamada / CTA ---------- */
+.cta{border-radius:var(--r-xl);padding:36px 44px;display:flex;align-items:center;justify-content:space-between;gap:var(--s8);flex-wrap:wrap;
+  background:linear-gradient(100deg,rgba(123,46,255,.28),rgba(255,45,170,.16) 55%,rgba(255,197,61,.10)),var(--bg-surface);
+  border:1px solid var(--glass-stroke);box-shadow:var(--glass-shadow)}
+.cta h2{font:600 clamp(22px,3vw,28px)/1.25 var(--f-display);margin:0 0 6px;text-wrap:balance}
+.cta p{margin:0;color:var(--text-secondary)}
+
+/* ---------- Código ---------- */
+pre{font:400 13px/20px var(--f-code);background:var(--code-bg);border:1px solid var(--glass-stroke);border-radius:var(--r-md);padding:var(--s4) 20px;overflow-x:auto;margin:0;color:var(--text-primary)}
+code{font-family:var(--f-code);font-size:.9em;color:var(--brand-tertiary);background:color-mix(in srgb,var(--brand-tertiary) 12%,transparent);padding:1px 6px;border-radius:6px}
+pre code{background:none;color:inherit;padding:0;font-size:inherit}
+.tk-k{color:var(--brand-secondary)} .tk-s{color:var(--fb-success)} .tk-c{color:var(--text-muted)} .tk-n{color:var(--accent-gold)}
+
+/* ---------- Logo oficial ---------- */
+.kx-logo{border-radius:50%;flex:none;display:block;box-shadow:var(--glow-purple)}
+</style><style>
+:root:not(#kx){--noite:var(--bg-base);--noite-2:var(--bg-surface);--painel:var(--bg-surface);--painel-borda:var(--glass-stroke);--creme:var(--text-primary);--creme-suave:var(--text-secondary);--ouro:var(--accent-gold);--ouro-claro:var(--accent-gold);--terracota:var(--brand-secondary);--indigo:var(--brand-primary);--verdejante:var(--fb-success);--grad-fogo:var(--g-ancestral);--grad-noite:linear-gradient(180deg,transparent 0%,color-mix(in srgb,var(--bg-base) 72%,transparent) 45%,color-mix(in srgb,var(--bg-base) 95%,transparent) 100%);--fonte-display:var(--f-display);--fonte-corpo:var(--f-body);--fonte-mono:var(--f-code)}
+
+/* === Kalixto skin: fontes e superfícies do DS === */
+body{font-family:var(--f-body)!important;background:var(--bg-base)!important;color:var(--text-primary);
+  background-image:radial-gradient(900px 620px at 92% -8%,var(--aura-1),transparent 62%),radial-gradient(760px 520px at -12% 38%,var(--aura-2),transparent 60%)!important;background-attachment:fixed!important}
+h1{font-family:var(--f-display)!important;font-weight:700!important;letter-spacing:-.02em}
+h2{font-family:var(--f-display)!important;font-weight:600!important;letter-spacing:-.01em}
+h3,h4,h5,th,.eyebrow,.kicker,.tag{font-family:var(--f-heading)!important}
+code,pre,kbd,samp,.mono,[class*="term"],[class*="code"]{font-family:var(--f-code)!important}
+em{color:var(--brand-secondary)}
+.kx-bar{max-width:1100px;margin:0 auto;padding:20px 16px 0;display:flex;align-items:center;gap:12px;flex-wrap:wrap;position:relative;z-index:5}
+.kx-bar b{font:600 14px/18px var(--f-heading);color:var(--text-primary)}
+.kx-bar small{display:block;font:500 12px/16px var(--f-body);color:var(--text-muted)}
+.kx-bar a{margin-left:auto;font:600 14px/20px var(--f-heading);color:var(--brand-tertiary);text-decoration:none}
+.kx-sig{max-width:1100px;margin:48px auto 96px;padding:0 16px}
+.kx-sig div{display:flex;align-items:center;gap:12px;padding:20px 24px;border-radius:28px;background:var(--glass-fill);border:1px solid var(--glass-stroke)}
+.kx-sig b{font:600 15px/20px var(--f-heading);color:var(--text-primary);display:block}
+.kx-sig small{font:500 12px/16px var(--f-body);color:var(--text-muted)}
+
+nav.topo{background:color-mix(in srgb,var(--bg-base) 88%,transparent)!important}
+nav.topo .marca{display:inline-flex;align-items:center;gap:10px}
+nav.topo .marca img{width:28px;height:28px;border-radius:50%}
+.hero .selo{background:color-mix(in srgb,var(--bg-base) 55%,transparent)!important}
+.hero h1{filter:drop-shadow(0 3px 14px color-mix(in srgb,var(--bg-base) 55%,transparent))!important}
+.hero .sub{text-shadow:none!important}
+table.tabela tr:nth-child(even) td{background:color-mix(in srgb,var(--text-primary) 4%,transparent)!important}
+#subir{background:color-mix(in srgb,var(--bg-base) 85%,transparent)!important;bottom:calc(76px + env(safe-area-inset-bottom,0px))!important}
+</style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Luiz Gama — A Palavra e a Lei | Apostila Kalixto</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<style>
+:root{
+  /* ── Paleta ancestral ─────────────────────────── */
+  --noite:#160F08;          /* fundo café-terra profundo */
+  --noite-2:#1F1409;        /* fundo alternado */
+  --painel:#28190C;         /* cartões */
+  --painel-borda:#3E2A14;
+  --creme:#F3E3C3;          /* texto principal — alto contraste */
+  --creme-suave:#CBB48C;    /* texto secundário */
+  --ouro:#D9A441;           /* dourado axé */
+  --ouro-claro:#EDC372;
+  --terracota:#C2542F;      /* barro de Salvador */
+  --indigo:#4A6B9A;         /* azul dos malês */
+  --verdejante:#7A8C4F;     /* folha, usado com parcimônia */
+  --grad-fogo:linear-gradient(120deg,var(--ouro-claro) 0%,var(--ouro) 38%,var(--terracota) 100%);
+  --grad-noite:linear-gradient(180deg,rgba(22,15,8,0) 0%,rgba(22,15,8,.72) 45%,rgba(22,15,8,.95) 100%);
+  --faixa:repeating-linear-gradient(90deg,
+      var(--terracota) 0 26px, var(--ouro) 26px 40px,
+      var(--creme) 40px 46px, var(--indigo) 46px 72px,
+      var(--ouro) 72px 84px, var(--noite-2) 84px 92px);
+  --fonte-display:'Fraunces',Georgia,serif;
+  --fonte-corpo:'Archivo',system-ui,sans-serif;
+  --fonte-mono:'IBM Plex Mono',monospace;
+  --max:880px;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *,*::before,*::after{animation:none!important;transition:none!important}
+}
+body{
+  background:var(--noite);
+  color:var(--creme);
+  font-family:var(--fonte-corpo);
+  font-size:1.05rem;
+  line-height:1.75;
+  -webkit-font-smoothing:antialiased;
+}
+::selection{background:var(--terracota);color:var(--creme)}
+
+/* ── Barra de progresso ── */
+#progresso{position:fixed;top:0;left:0;height:4px;width:0;background:var(--grad-fogo);z-index:999}
+
+/* ── Navegação ── */
+nav.topo{
+  position:fixed;top:0;left:0;right:0;z-index:900;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:.7rem 1.2rem;
+  background:rgba(22,15,8,.88);backdrop-filter:blur(10px);
+  border-bottom:1px solid var(--painel-borda);
+}
+nav.topo .marca{font-family:var(--fonte-mono);font-size:.78rem;letter-spacing:.18em;color:var(--ouro);text-transform:uppercase}
+nav.topo a{color:var(--creme-suave);text-decoration:none;font-size:.82rem;font-weight:600;margin-left:1.1rem;transition:color .2s}
+nav.topo a:hover,nav.topo a:focus-visible{color:var(--ouro-claro)}
+nav.topo a:focus-visible{outline:2px solid var(--ouro);outline-offset:3px}
+@media(max-width:640px){nav.topo .links{display:none}}
+
+/* ── Faixa ancestral (assinatura visual) ── */
+.faixa{height:12px;background:var(--faixa);border:none}
+.faixa.fina{height:7px;opacity:.9}
+
+/* ── HERO ── */
+header.hero{
+  position:relative;min-height:100svh;
+  display:flex;flex-direction:column;justify-content:flex-end;
+  padding:7rem 1.5rem 4.5rem;
+  background:
+    radial-gradient(ellipse 70% 55% at 78% 18%, rgba(217,164,65,.28), transparent 60%),
+    radial-gradient(ellipse 55% 45% at 12% 70%, rgba(194,84,47,.22), transparent 65%),
+    radial-gradient(ellipse 40% 40% at 55% 95%, rgba(74,107,154,.18), transparent 70%),
+    var(--noite);
+  overflow:hidden;
+}
+header.hero::after{ /* véu escuro garante legibilidade sobre o degradê */
+  content:"";position:absolute;inset:0;background:var(--grad-noite);pointer-events:none;
+}
+.hero-conteudo{position:relative;z-index:2;max-width:var(--max);margin:0 auto;width:100%}
+.hero .selo{
+  display:inline-flex;align-items:center;gap:.6rem;
+  font-family:var(--fonte-mono);font-size:.75rem;letter-spacing:.22em;text-transform:uppercase;
+  color:var(--ouro-claro);border:1px solid rgba(217,164,65,.45);
+  padding:.45rem .9rem;border-radius:2px;margin-bottom:1.6rem;
+  background:rgba(22,15,8,.55);
+}
+.hero h1{
+  font-family:var(--fonte-display);font-weight:900;
+  font-size:clamp(3rem,10vw,6.8rem);line-height:.95;letter-spacing:-.015em;
+  background:var(--grad-fogo);
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+  filter:drop-shadow(0 3px 14px rgba(0,0,0,.55));
+  margin-bottom:1.2rem;
+}
+.hero .sub{
+  font-size:clamp(1.05rem,2.3vw,1.35rem);color:var(--creme);max-width:620px;
+  font-weight:500;text-shadow:0 2px 8px rgba(0,0,0,.6);
+}
+.hero .assina{margin-top:2.2rem;font-family:var(--fonte-mono);font-size:.8rem;color:var(--creme-suave);letter-spacing:.12em}
+.sankofa{position:absolute;right:-4rem;top:6rem;width:min(46vw,430px);opacity:.16;z-index:1}
+@media(max-width:720px){.sankofa{top:2rem;right:-6rem;opacity:.12}}
+
+/* ── Estrutura de seções ── */
+main{display:block}
+section.parte-capa{
+  position:relative;padding:5.5rem 1.5rem 4rem;
+  background:linear-gradient(160deg,var(--noite-2) 0%,var(--noite) 70%);
+  border-top:1px solid var(--painel-borda);
+}
+section.parte-capa .rotulo{
+  font-family:var(--fonte-mono);font-size:.75rem;letter-spacing:.26em;color:var(--terracota);
+  text-transform:uppercase;display:block;margin-bottom:.8rem;
+}
+section.parte-capa h2{
+  font-family:var(--fonte-display);font-weight:900;font-size:clamp(2rem,5.4vw,3.4rem);
+  line-height:1.05;color:var(--ouro-claro);max-width:var(--max);
+}
+section.parte-capa .miolo{max-width:var(--max);margin:0 auto}
+section.parte-capa p.abre{max-width:640px;color:var(--creme-suave);margin-top:1.1rem;font-size:1.02rem}
+
+article.cap{
+  padding:4rem 1.5rem;position:relative;
+}
+article.cap:nth-of-type(even){background:var(--noite-2)}
+article.cap .miolo{max-width:var(--max);margin:0 auto;position:relative;padding-left:1.4rem;border-left:4px solid transparent;border-image:var(--faixa) 1}
+@media(max-width:640px){article.cap .miolo{padding-left:1rem}}
+.cap .num{
+  font-family:var(--fonte-mono);font-size:.74rem;letter-spacing:.24em;color:var(--terracota);
+  text-transform:uppercase;display:block;margin-bottom:.55rem;
+}
+.cap h3{
+  font-family:var(--fonte-display);font-weight:900;font-size:clamp(1.55rem,3.6vw,2.35rem);
+  line-height:1.12;color:var(--creme);margin-bottom:1.3rem;
+}
+.cap h4{
+  font-family:var(--fonte-display);font-weight:600;font-size:1.22rem;color:var(--ouro-claro);
+  margin:1.9rem 0 .7rem;
+}
+.cap p{margin-bottom:1.05rem;color:var(--creme)}
+.cap p.leve{color:var(--creme-suave)}
+.cap strong{color:var(--ouro-claro);font-weight:700}
+.cap em{color:var(--creme)}
+.cap ul,.cap ol{margin:0 0 1.2rem 1.3rem}
+.cap li{margin-bottom:.5rem}
+.cap li::marker{color:var(--ouro)}
+
+/* ── Componentes ── */
+.destaque{
+  margin:1.8rem 0;padding:1.4rem 1.5rem;
+  background:linear-gradient(135deg,rgba(217,164,65,.12),rgba(194,84,47,.10));
+  border:1px solid rgba(217,164,65,.3);border-radius:6px;
+}
+.destaque .titulo{font-family:var(--fonte-mono);font-size:.72rem;letter-spacing:.2em;text-transform:uppercase;color:var(--ouro);display:block;margin-bottom:.5rem}
+.destaque p{margin-bottom:.4rem}
+.destaque p:last-child{margin-bottom:0}
+
+.destaque.indigo{background:linear-gradient(135deg,rgba(74,107,154,.16),rgba(74,107,154,.06));border-color:rgba(74,107,154,.45)}
+.destaque.indigo .titulo{color:var(--indigo)}
+
+blockquote.voz{
+  margin:2rem 0;padding:1.6rem 1.7rem;position:relative;
+  background:var(--painel);border-radius:6px;border:1px solid var(--painel-borda);
+  border-left:6px solid transparent;border-image:var(--faixa) 1;
+  font-family:var(--fonte-display);font-size:1.18rem;line-height:1.55;color:var(--creme);
+}
+blockquote.voz footer{
+  font-family:var(--fonte-mono);font-size:.75rem;letter-spacing:.14em;color:var(--ouro);
+  margin-top:.9rem;text-transform:uppercase;
+}
+
+.ficha{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1rem;margin:1.6rem 0;
+}
+.ficha .item{
+  background:var(--painel);border:1px solid var(--painel-borda);border-radius:6px;padding:1rem 1.1rem;
+}
+.ficha .k{font-family:var(--fonte-mono);font-size:.68rem;letter-spacing:.2em;text-transform:uppercase;color:var(--terracota);display:block;margin-bottom:.35rem}
+.ficha .v{font-weight:600;color:var(--creme);font-size:.98rem;line-height:1.4}
+
+table.tabela{width:100%;border-collapse:collapse;margin:1.6rem 0;font-size:.95rem}
+table.tabela th{
+  font-family:var(--fonte-mono);font-size:.7rem;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--ouro);text-align:left;padding:.65rem .8rem;border-bottom:2px solid var(--terracota);
+}
+table.tabela td{padding:.7rem .8rem;border-bottom:1px solid var(--painel-borda);vertical-align:top;color:var(--creme)}
+table.tabela tr:nth-child(even) td{background:rgba(40,25,12,.5)}
+
+/* ── Sumário ── */
+.sumario{max-width:var(--max);margin:0 auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:.7rem;padding-top:2rem}
+.sumario a{
+  display:flex;gap:.7rem;align-items:baseline;
+  background:var(--painel);border:1px solid var(--painel-borda);border-radius:6px;
+  padding:.8rem 1rem;color:var(--creme);text-decoration:none;font-size:.9rem;font-weight:500;
+  transition:border-color .2s,transform .2s;
+}
+.sumario a:hover,.sumario a:focus-visible{border-color:var(--ouro);transform:translateX(4px)}
+.sumario a:focus-visible{outline:2px solid var(--ouro);outline-offset:2px}
+.sumario a .n{font-family:var(--fonte-mono);font-size:.7rem;color:var(--terracota);min-width:2ch}
+
+/* ── Linha do tempo ── */
+.tempo{max-width:var(--max);margin:2rem auto 0;position:relative;padding-left:2rem}
+.tempo::before{content:"";position:absolute;left:9px;top:6px;bottom:6px;width:5px;background:var(--faixa);background-size:100% 300px;border-radius:3px}
+.tempo .evento{position:relative;margin-bottom:1.7rem;padding-left:1.2rem}
+.tempo .evento::before{
+  content:"";position:absolute;left:-1.62rem;top:.42rem;width:13px;height:13px;border-radius:50%;
+  background:var(--ouro);border:3px solid var(--noite);box-shadow:0 0 0 2px var(--terracota);
+}
+.tempo .ano{font-family:var(--fonte-mono);font-weight:600;color:var(--ouro-claro);font-size:.95rem;letter-spacing:.08em}
+.tempo .fato{color:var(--creme);margin-top:.15rem}
+.tempo .fato small{color:var(--creme-suave)}
+
+/* ── Glossário ── */
+.glossario{display:grid;gap:.8rem;margin-top:1.6rem}
+.glossario .termo{background:var(--painel);border:1px solid var(--painel-borda);border-radius:6px;padding:1rem 1.2rem}
+.glossario dt{font-family:var(--fonte-display);font-weight:600;color:var(--ouro-claro);font-size:1.08rem;margin-bottom:.3rem}
+.glossario dd{color:var(--creme-suave);font-size:.95rem}
+
+/* ── Quiz ── */
+.quiz{max-width:var(--max);margin:2rem auto 0}
+.quiz .pergunta{background:var(--painel);border:1px solid var(--painel-borda);border-radius:8px;padding:1.4rem 1.5rem;margin-bottom:1.2rem}
+.quiz .enunciado{font-weight:700;margin-bottom:.9rem;color:var(--creme)}
+.quiz button.opcao{
+  display:block;width:100%;text-align:left;margin-bottom:.55rem;
+  background:var(--noite-2);border:1px solid var(--painel-borda);border-radius:6px;
+  color:var(--creme);font-family:var(--fonte-corpo);font-size:.95rem;padding:.7rem .95rem;
+  cursor:pointer;transition:border-color .2s,background .2s;
+}
+.quiz button.opcao:hover{border-color:var(--ouro)}
+.quiz button.opcao:focus-visible{outline:2px solid var(--ouro);outline-offset:2px}
+.quiz button.opcao.certa{background:rgba(122,140,79,.25);border-color:var(--verdejante)}
+.quiz button.opcao.errada{background:rgba(194,84,47,.22);border-color:var(--terracota)}
+.quiz .feedback{font-size:.88rem;color:var(--creme-suave);margin-top:.5rem;display:none}
+.quiz .feedback.mostrar{display:block}
+
+/* ── Rodapé ── */
+footer.fim{
+  padding:4rem 1.5rem 3rem;text-align:center;background:var(--noite-2);
+  border-top:1px solid var(--painel-borda);
+}
+footer.fim .frase{
+  font-family:var(--fonte-display);font-size:clamp(1.3rem,3.4vw,2rem);font-weight:600;
+  max-width:700px;margin:0 auto 1.4rem;
+  background:var(--grad-fogo);-webkit-background-clip:text;background-clip:text;color:transparent;
+}
+footer.fim .credito{font-family:var(--fonte-mono);font-size:.75rem;letter-spacing:.18em;color:var(--creme-suave);text-transform:uppercase}
+
+/* ── Reveal ── */
+.rev{opacity:0;transform:translateY(26px);transition:opacity .7s ease,transform .7s ease}
+.rev.vivo{opacity:1;transform:none}
+
+/* ── Botão topo ── */
+#subir{
+  position:fixed;right:1.1rem;bottom:1.1rem;z-index:800;
+  width:46px;height:46px;border-radius:50%;border:1px solid var(--ouro);
+  background:rgba(22,15,8,.85);color:var(--ouro-claro);font-size:1.2rem;cursor:pointer;
+  opacity:0;pointer-events:none;transition:opacity .3s;
+}
+#subir.ver{opacity:1;pointer-events:auto}
+#subir:focus-visible{outline:2px solid var(--ouro);outline-offset:2px}
+</style>
+</head>
+<body>
+<div id="progresso" aria-hidden="true"></div>
+
+<nav class="topo" aria-label="Navegação principal">
+  <span class="marca"><img src="data:image/webp;base64,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" alt="">Kalixto · Luiz Gama</span>
+  <span class="links">
+    <a href="#sumario">Sumário</a>
+    <a href="#parte1">Origens</a>
+    <a href="#parte4">O Direito</a>
+    <a href="#tempo-sec">Linha do tempo</a>
+    <a href="#quiz-sec">Quiz</a>
+  </span>
+</nav>
+
+<header class="hero">
+  <svg class="sankofa" viewBox="0 0 200 200" aria-hidden="true">
+    <!-- Sankofa estilizado: "voltar e buscar o que ficou para trás" -->
+    <path d="M100 178c-38 0-64-24-64-58 0-30 22-52 50-52 24 0 40 15 40 36 0 18-12 30-28 30-13 0-22-8-22-19 0-9 6-15 14-15" fill="none" stroke="#D9A441" stroke-width="9" stroke-linecap="round"/>
+    <circle cx="122" cy="46" r="13" fill="#C2542F"/>
+    <path d="M122 46 148 22M122 46l30 6" stroke="#C2542F" stroke-width="8" stroke-linecap="round"/>
+  </svg>
+  <div class="hero-conteudo">
+    <span class="selo">◆ Apostila Histórica · Estudos Afro-Brasileiros</span>
+    <h1>Luiz<br>Gama</h1>
+    <p class="sub">A história completa do homem que enfrentou a escravidão com a palavra e a lei — do sequestro ilegal aos tribunais que abalaram o Império.</p>
+    <p class="assina">SALVADOR · 1830 — SÃO PAULO · 1882</p>
+  </div>
+</header>
+<div class="faixa" aria-hidden="true"></div>
+<main>
+
+<!-- ══════════ SUMÁRIO ══════════ -->
+<section class="parte-capa" id="sumario">
+  <div class="miolo">
+    <span class="rotulo">Sumário</span>
+    <h2>O caminho desta apostila</h2>
+    <p class="abre">Seis partes, do nascimento livre em Salvador ao funeral que parou São Paulo — e ao legado que segue vivo.</p>
+    <div class="sumario rev">
+      <a href="#parte1"><span class="n">I</span> Origens — o Brasil, a mãe, o pai</a>
+      <a href="#parte2"><span class="n">II</span> Cativeiro — a escravização ilegal</a>
+      <a href="#parte3"><span class="n">III</span> Liberdade e formação</a>
+      <a href="#parte4"><span class="n">IV</span> A palavra — poeta e jornalista</a>
+      <a href="#parte5"><span class="n">V</span> O Direito — o advogado dos escravizados</a>
+      <a href="#parte6"><span class="n">VI</span> Morte, funeral e legado</a>
+      <a href="#tempo-sec"><span class="n">◆</span> Linha do tempo completa</a>
+      <a href="#glossario-sec"><span class="n">◆</span> Glossário histórico</a>
+      <a href="#quiz-sec"><span class="n">◆</span> Quiz de fixação</a>
+      <a href="#biblio-sec"><span class="n">◆</span> Bibliografia comentada</a>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ PARTE I ══════════ -->
+<section class="parte-capa" id="parte1">
+  <div class="miolo rev">
+    <span class="rotulo">Parte I</span>
+    <h2>Origens — o Brasil, a mãe, o pai</h2>
+    <p class="abre">Nenhuma vida se explica fora do seu tempo. Antes de conhecer Luiz Gama, é preciso conhecer o país escravista em que ele nasceu — e as duas figuras que definiram seu destino: Luiza Mahin e um pai sem nome.</p>
+  </div>
+</section>
+
+<article class="cap" id="cap1">
+  <div class="miolo rev">
+    <span class="num">Capítulo 01 · Contexto</span>
+    <h3>O Brasil do século XIX: um império erguido sobre a escravidão</h3>
+    <p>Quando Luiz Gama nasceu, em 1830, o Brasil era um império jovem — independente havia apenas oito anos — e, ao mesmo tempo, a maior sociedade escravista das Américas. Estima-se que, ao longo de mais de três séculos, cerca de <strong>4,8 milhões de africanos</strong> tenham sido desembarcados à força em portos brasileiros, quase metade de todo o tráfico transatlântico. Nenhum outro país recebeu tanta gente escravizada; nenhum outro demorou tanto para abolir a instituição.</p>
+    <p>A economia inteira dependia do trabalho cativo: o açúcar do Nordeste, o café que começava a subir o Vale do Paraíba, o comércio urbano, o serviço doméstico das casas senhoriais. A escravidão não era uma margem do sistema — era o próprio sistema. E ela estava em toda parte: nas fazendas, mas também nas ruas de Salvador e do Rio, onde escravizados "de ganho" vendiam, carregavam, cozinhavam e entregavam ao senhor o produto do próprio suor.</p>
+    <h4>Uma sociedade sem cidadania negra</h4>
+    <p>A Constituição de 1824, outorgada por Dom Pedro I, falava em liberdades — mas silenciava sobre a escravidão, que seguia regulada por leis ordinárias, costumes e violência. A população negra, mesmo quando livre, vivia sob suspeita permanente: qualquer pessoa negra podia ser detida sob a acusação de ser "escrava fugida" e obrigada a provar a própria liberdade. Esse detalhe jurídico perverso — <em>o ônus da prova recaía sobre o negro, não sobre quem o acusava</em> — será decisivo na história de Luiz Gama.</p>
+    <h4>Resistência em todas as frentes</h4>
+    <ul>
+      <li><strong>Quilombos</strong> — comunidades de fugitivos espalhadas por todo o território, herdeiras da tradição de Palmares;</li>
+      <li><strong>Revoltas urbanas e escravas</strong> — a Bahia da década de 1830 foi o epicentro: dezenas de levantes culminaram na Revolta dos Malês (1835), a maior insurreição urbana de escravizados da história do Brasil;</li>
+      <li><strong>Resistência cotidiana</strong> — fugas, negociações, compra de alforrias, irmandades negras, candomblés, capoeira: mil formas de manter a humanidade num sistema desenhado para negá-la.</li>
+    </ul>
+    <div class="destaque">
+      <span class="titulo">Para entender</span>
+      <p>O Brasil aboliu o tráfico atlântico oficialmente em <strong>1831</strong> (Lei Feijó) — mas continuou importando africanos ilegalmente por mais duas décadas. Essa contradição entre a lei escrita e a prática escravista será, anos depois, a arma jurídica mais poderosa nas mãos de Luiz Gama.</p>
+    </div>
+  </div>
+</article>
+
+<article class="cap" id="cap2">
+  <div class="miolo rev">
+    <span class="num">Capítulo 02 · Nascimento</span>
+    <h3>A origem de Luiz Gama: nascido livre na Bahia</h3>
+    <div class="ficha">
+      <div class="item"><span class="k">Nome completo</span><span class="v">Luiz Gonzaga Pinto da Gama</span></div>
+      <div class="item"><span class="k">Nascimento</span><span class="v">21 de junho de 1830</span></div>
+      <div class="item"><span class="k">Local</span><span class="v">Salvador, Bahia</span></div>
+      <div class="item"><span class="k">Condição jurídica</span><span class="v">Livre — filho de mulher africana liberta</span></div>
+    </div>
+    <p>Luiz Gama nasceu <strong>livre</strong>. Este é o ponto de partida indispensável de toda a sua história. Pelo princípio jurídico do <em>partus sequitur ventrem</em> — "o parto segue o ventre" —, herdado do direito romano e vigente no Brasil imperial, a condição da criança seguia a condição da mãe. Como Luiza Mahin era uma mulher livre, seu filho nasceu livre. Tudo o que aconteceu depois foi, portanto, <strong>crime</strong>.</p>
+    <p>Ele mesmo contou sua origem numa carta autobiográfica enviada em 1880 ao escritor Lúcio de Mendonça — o documento mais importante que temos sobre sua vida íntima. Nela, Gama descreve a mãe como "negra, africana, livre" e o pai como um fidalgo branco de "uma das principais famílias da Bahia", cujo nome se recusou a revelar até a morte.</p>
+    <p class="leve">Criado nos primeiros anos entre a casa materna e as ruas de Salvador, o menino Luiz cresceu na cidade mais africana das Américas — e essa infância baiana deixaria marcas profundas em sua identidade, sua poesia e seu orgulho de origem.</p>
+  </div>
+</article>
+
+<article class="cap" id="cap3">
+  <div class="miolo rev">
+    <span class="num">Capítulo 03 · A mãe</span>
+    <h3>Quem foi Luiza Mahin?</h3>
+    <p>Luiza Mahin é uma das figuras mais fascinantes — e mais debatidas — da história afro-brasileira. Quase tudo o que sabemos sobre ela vem do testemunho do próprio filho, que a descreveu com precisão e reverência na carta de 1880.</p>
+    <div class="ficha">
+      <div class="item"><span class="k">Origem</span><span class="v">Africana da Costa da Mina (África Ocidental)</span></div>
+      <div class="item"><span class="k">Identidade</span><span class="v">Associada à nação nagô; o nome "Mahin" remete ao povo Mahi, do atual Benim</span></div>
+      <div class="item"><span class="k">Ofício</span><span class="v">Quitandeira — vendedora de rua em Salvador</span></div>
+      <div class="item"><span class="k">Condição</span><span class="v">Liberta, "baixinha, magra e bonita", segundo o filho</span></div>
+    </div>
+    <p>Como quitandeira, Luiza integrava a rede de mulheres africanas que dominava o pequeno comércio de rua de Salvador — mulheres que vendiam acarajé, frutas e miudezas, e que funcionavam também como <strong>rede de comunicação e resistência</strong>: circulavam por toda a cidade, ouviam tudo, levavam recados. Não por acaso, as autoridades suspeitavam que os tabuleiros das quitandeiras serviram para transportar mensagens dos revoltosos malês.</p>
+    <h4>Participação nas revoltas</h4>
+    <p>Segundo Luiz Gama, sua mãe era "altiva, generosa, sofrida e vingativa" e envolveu-se nos levantes que sacudiram a Bahia — a tradição a associa à <strong>Revolta dos Malês (1835)</strong>, o levante de africanos muçulmanos, e à <strong>Sabinada (1837–1838)</strong>, a rebelião autonomista baiana. Após a repressão da Sabinada, Luiza deixou Salvador rumo ao Rio de Janeiro — e desapareceu da vida do filho para sempre.</p>
+    <p>Já adulto, Gama a procurou obsessivamente. Em 1861, recebeu notícias vagas de que ela teria sido vista no Rio; mandou investigar, sem sucesso. Nunca mais a encontrou.</p>
+    <div class="destaque indigo">
+      <span class="titulo">Debate historiográfico</span>
+      <p>Não existe, até hoje, <strong>nenhum documento de época</strong> — batismo, alforria, registro policial — que comprove de forma independente a existência de Luiza Mahin. Toda a informação deriva do relato do filho. Parte dos historiadores trata o retrato como memória fiel; outra parte considera que Gama pode ter condensado na figura materna a memória coletiva das africanas rebeldes da Bahia. Nos dois casos, Luiza Mahin tornou-se símbolo: hoje é celebrada como ícone da mulher negra brasileira, e seu nome batiza escolas, ruas e coletivos por todo o país.</p>
+    </div>
+  </div>
+</article>
+
+<article class="cap" id="cap4">
+  <div class="miolo rev">
+    <span class="num">Capítulo 04 · O pai</span>
+    <h3>O pai que o vendeu como escravo</h3>
+    <p>Do pai, Luiz Gama nos deixou apenas o retrato moral — e a recusa. Sabemos, por suas próprias palavras, que era um <strong>fidalgo branco de origem portuguesa</strong>, membro de uma família rica e influente da Bahia. Sabemos que reconheceu o menino, que o levou para viver consigo depois da partida de Luiza. E sabemos que era dado ao jogo e à vida desregrada.</p>
+    <p>Em <strong>10 de novembro de 1840</strong>, arruinado pelas dívidas, esse homem cometeu o ato que definiria tudo: <strong>vendeu o próprio filho, livre, de dez anos de idade, como se fosse escravo</strong>. Gama registrou a data exata na carta a Lúcio de Mendonça — sinal de como a ferida permaneceu aberta pela vida inteira.</p>
+    <blockquote class="voz">
+      «Nunca revelou o nome do pai — nem para acusá-lo, nem para perdoá-lo. O silêncio de Luiz Gama foi, ele próprio, uma sentença: negou ao fidalgo o único bem que a elite baiana realmente prezava, o nome de família.»
+      <footer>Nota interpretativa desta apostila</footer>
+    </blockquote>
+    <p class="leve">Historiadores levantaram hipóteses sobre a identidade do pai, mas nenhuma foi comprovada. O anonimato que Gama impôs venceu: até hoje, o homem que vendeu o filho é apenas isso — o homem que vendeu o filho.</p>
+  </div>
+</article>
+
+<article class="cap" id="cap5">
+  <div class="miolo rev">
+    <span class="num">Capítulo 05 · Infância</span>
+    <h3>A infância em Salvador: a cidade mais africana das Américas</h3>
+    <p>A Salvador dos anos 1830 era uma cidade de maioria negra. Africanos de dezenas de nações — nagôs, jejes, haussás, tapas, angolas — cruzavam-se nas ladeiras entre a Cidade Alta e o porto. Ouvia-se iorubá nas ruas; o Islã era praticado por milhares de africanos letrados em árabe, os <em>malês</em>; os candomblés se organizavam nos arrabaldes; as irmandades católicas negras, como a do Rosário dos Pretos, ofereciam espaço de sociabilidade e ajuda mútua.</p>
+    <p>Foi nesse mundo que o pequeno Luiz passou os primeiros dez anos de vida. Entre o tabuleiro da mãe quitandeira e a casa do pai fidalgo, ele transitou pelos dois Brasis — o africano e o senhorial — e conheceu por dentro a cultura nagô que mais tarde reivindicaria com orgulho em seus poemas, exaltando a própria negritude numa época em que a literatura brasileira a tratava como defeito.</p>
+    <p>A década, porém, era de terror para a população negra baiana. Depois da Revolta dos Malês, a repressão foi brutal: execuções, açoites públicos, deportações em massa de africanos libertos de volta à África. Viver em Salvador sendo negro, nos anos 1830, era viver sob vigilância — e essa atmosfera de medo e resistência é o pano de fundo da infância de Gama.</p>
+  </div>
+</article>
+
+<!-- ══════════ PARTE II ══════════ -->
+<section class="parte-capa" id="parte2">
+  <div class="miolo rev">
+    <span class="rotulo">Parte II</span>
+    <h2>Cativeiro — a escravização ilegal</h2>
+    <p class="abre">Um menino livre transformado em mercadoria. A viagem forçada de Salvador a São Paulo, os oito anos de cativeiro e o encontro que mudou tudo.</p>
+  </div>
+</section>
+
+<article class="cap" id="cap6">
+  <div class="miolo rev">
+    <span class="num">Capítulo 06 · O crime</span>
+    <h3>A escravização ilegal: anatomia de um crime</h3>
+    <p>Do ponto de vista jurídico, a venda de Luiz Gama foi um crime cristalino, mesmo pelas leis do próprio Império escravista:</p>
+    <ol>
+      <li><strong>Ele nasceu livre</strong> — filho de mulher livre, pelo princípio do ventre;</li>
+      <li><strong>Pessoa livre não podia ser vendida</strong> — reduzir alguém livre à escravidão era crime previsto no Código Criminal de 1830 (art. 179: "reduzir à escravidão a pessoa livre que se achar em posse da sua liberdade");</li>
+      <li><strong>A venda ocorreu em 1840</strong> — nove anos depois da Lei de 7 de novembro de 1831, que proibia qualquer nova escravização de africanos e declarava livres os que entrassem no país a partir dali.</li>
+    </ol>
+    <p>E, no entanto, o crime aconteceu à luz do dia, com contrato, transporte marítimo e revenda — porque no Brasil escravista a cor da pele funcionava, na prática, como presunção de cativeiro. Um menino negro embarcado num navio negreiro costeiro não era interrogado: era inventariado.</p>
+    <div class="destaque">
+      <span class="titulo">Conceito-chave</span>
+      <p><strong>Escravização ilegal</strong> não era exceção — era massa. Pesquisas recentes estimam que <em>centenas de milhares</em> de africanos desembarcados após 1831 e seus descendentes viviam em cativeiro ilegal quando a escravidão acabou. Luiz Gama entendeu isso antes de todos: grande parte da escravidão brasileira era, além de imoral, <strong>juridicamente nula</strong>. Essa percepção nasceu da própria carne.</p>
+    </div>
+  </div>
+</article>
+
+<article class="cap" id="cap7">
+  <div class="miolo rev">
+    <span class="num">Capítulo 07 · A travessia</span>
+    <h3>A viagem forçada para o Sudeste</h3>
+    <p>Vendido em Salvador, o menino foi embarcado no patacho <em>Saraiva</em> e levado pela costa até o <strong>Rio de Janeiro</strong> — o mesmo trajeto de milhares de escravizados que o "comércio interprovincial" transferia do Nordeste em declínio para o Sudeste cafeeiro em expansão. No Rio, foi negociado com o alferes <strong>Antônio Pereira Cardoso</strong>, traficante que conduzia levas de cativos para revenda no interior de São Paulo.</p>
+    <p>Aqui a história ganha um detalhe extraordinário: <strong>ninguém quis comprá-lo</strong>. Depois da Revolta dos Malês, escravizados vindos da Bahia carregavam fama de rebeldes, insubmissos, perigosos — e os fazendeiros paulistas os recusavam. De fazenda em fazenda, o menino "baiano" foi sendo rejeitado, até que Cardoso desistiu de vendê-lo e o incorporou ao serviço de sua própria casa.</p>
+    <p class="leve">A ironia é amarga e perfeita: foi o medo que a elite tinha da rebeldia baiana que manteve Luiz Gama fora das fazendas de café — onde a expectativa de vida de um escravizado era curtíssima — e o colocou num ambiente doméstico urbano, onde anos depois encontraria os livros. O preconceito que o rejeitou acabou por salvá-lo.</p>
+  </div>
+</article>
+
+<article class="cap" id="cap8">
+  <div class="miolo rev">
+    <span class="num">Capítulo 08 · Cativeiro</span>
+    <h3>A vida como escravizado</h3>
+    <p>Entre 1840 e 1848 — dos dez aos dezoito anos — Luiz Gama viveu como escravizado na casa de Antônio Pereira Cardoso, primeiro em Lorena, no Vale do Paraíba, depois na capital paulista. Fez de tudo o que o serviço doméstico exigia:</p>
+    <ul>
+      <li><strong>Copeiro</strong> — servindo à mesa da família senhorial;</li>
+      <li><strong>Sapateiro</strong> — ofício que aprendeu no cativeiro e que lhe deu habilidade manual e noção de ofício;</li>
+      <li><strong>Lavagem e engomado de roupas</strong>, limpeza, recados e todo o miúdo cotidiano da casa.</li>
+    </ul>
+    <p>A escravidão doméstica urbana era menos letal que a das fazendas, mas não menos degradante: significava disponibilidade total, castigos ao alcance da mão, nenhuma esfera de vida própria. O menino que nascera livre passou a adolescência inteira sabendo — ou ao menos intuindo — que sua condição era uma mentira sustentada pela força.</p>
+  </div>
+</article>
+
+<article class="cap" id="cap9">
+  <div class="miolo rev">
+    <span class="num">Capítulo 09 · A virada</span>
+    <h3>O encontro que mudou tudo: Antônio Rodrigues do Prado Júnior</h3>
+    <p>Em 1847, um jovem estudante chamado <strong>Antônio Rodrigues do Prado Júnior</strong> hospedou-se na casa onde Gama era mantido cativo. Vindo para estudar na Faculdade de Direito do Largo de São Francisco, o hóspede fez o que quase ninguém fazia: <strong>enxergou o escravizado como pessoa</strong> — e tornou-se seu amigo.</p>
+    <p>Foi Prado Júnior quem lhe ensinou as primeiras letras. Aos <strong>dezessete anos</strong>, Luiz Gama aprendeu a ler e escrever — tarde para os padrões de qualquer época, cedo o bastante para transformar a leitura numa fome insaciável. Em poucos anos, o autodidata devoraria gramática, retórica, literatura, filosofia e, sobretudo, <strong>Direito</strong>.</p>
+    <blockquote class="voz">
+      «A alfabetização, para Luiz Gama, não foi um aprendizado: foi uma arma entregue em mãos. Tudo o que ele faria depois — a poesia, o jornalismo, as petições que libertaram centenas — nasceu naquele encontro entre um estudante generoso e um cativo que nunca deveria ter sido cativo.»
+      <footer>Síntese do capítulo</footer>
+    </blockquote>
+    <p class="leve">O episódio também explica a fé inabalável de Gama na <strong>educação como instrumento de libertação</strong> — tema constante em seus artigos e discursos até o fim da vida.</p>
+  </div>
+</article>
+
+<!-- ══════════ PARTE III ══════════ -->
+<section class="parte-capa" id="parte3">
+  <div class="miolo rev">
+    <span class="rotulo">Parte III</span>
+    <h2>Liberdade e formação</h2>
+    <p class="abre">Reconquistar-se, vestir farda, casar, copiar autos em cartório — e transformar cada experiência em escola. O autodidata em construção.</p>
+  </div>
+</section>
+
+<article class="cap" id="cap10">
+  <div class="miolo rev">
+    <span class="num">Capítulo 10 · Liberdade</span>
+    <h3>A reconquista da própria vida</h3>
+    <p>Saber ler mudou a relação de Gama com a própria história. Por volta de 1848, aos dezoito anos, ele reuniu o que precisava — indícios documentais e testemunhos de sua Bahia natal que comprovavam seu <strong>nascimento livre</strong> — e confrontou sua condição. As fontes divergem nos detalhes: a tradição conta que ele apresentou as provas, afirmou sua liberdade e <strong>deixou o cativeiro por conta própria</strong>, sem que ninguém ousasse contestá-lo juridicamente, já que a ilegalidade da venda era demonstrável.</p>
+    <p>Note-se a inversão simbólica: o Brasil escravista exigia que o negro provasse ser livre — e Gama provou. Mas ele jamais esqueceu que milhares de outros, sem letras, sem documentos e sem sorte, não podiam fazer o mesmo. Prová-lo <em>por eles</em> se tornaria o projeto de sua vida.</p>
+    <div class="destaque">
+      <span class="titulo">Atenção, estudante</span>
+      <p>Não houve "alforria" no caso de Luiz Gama — alforria é a libertação concedida a quem é juridicamente escravo. Gama nunca foi escravo perante a lei: houve o <strong>reconhecimento de uma liberdade que sempre existiu</strong>. A distinção é sutil e essencial — e era exatamente assim que ele mesmo entendia o caso.</p>
+    </div>
+  </div>
+</article>
+
+<article class="cap" id="cap11">
+  <div class="miolo rev">
+    <span class="num">Capítulo 11 · Farda</span>
+    <h3>A carreira militar: seis anos de farda e um ato de dignidade</h3>
+    <p>Livre e sem posses, o jovem Gama alistou-se em 1848 como praça na <strong>Força Pública / Guarda urbana de São Paulo</strong>, onde serviu por cerca de seis anos. A farda dava soldo, teto e um lugar no mundo — mas exigia submissão, e submissão era coisa que Luiz Gama já havia decidido nunca mais oferecer.</p>
+    <p>O fim da carreira militar diz tudo sobre o homem: em 1854, <strong>preso por insubordinação</strong> após reagir à arrogância de um oficial que o desrespeitou, foi expulso da corporação. O episódio, que num currículo comum seria mancha, na biografia de Gama é assinatura — a mesma recusa em curvar-se que o acompanharia nos tribunais, nos jornais e na política.</p>
+    <p class="leve">Ainda durante os anos de farda, casou-se (1854) com <strong>Claudina Fortunata Sampaio</strong>, com quem teria seu filho, Benedito Graco. E já rabiscava versos e frequentava rodas letradas — o soldado copiava livros à mão para poder estudá-los.</p>
+  </div>
+</article>
+
+<article class="cap" id="cap12">
+  <div class="miolo rev">
+    <span class="num">Capítulo 12 · Escrevente</span>
+    <h3>O intelectual autodidata: dos cartórios ao Direito</h3>
+    <p>Expulso da força, Gama empregou-se como <strong>escrevente</strong> (copista e amanuense) na Secretaria de Polícia de São Paulo — cargo modesto que se revelou uma universidade informal. Copiando ofícios, inquéritos e autos, ele aprendeu por dentro a máquina burocrática e judicial do Império: como se abre um processo, como se articula uma petição, onde a engrenagem range.</p>
+    <p>Ao mesmo tempo, estudava sozinho, com método e voracidade: gramática e retórica, os clássicos portugueses, os iluministas franceses, tratados de Direito civil e criminal. Chegou a frequentar como <strong>ouvinte</strong> as arcadas da Faculdade de Direito do Largo de São Francisco — onde a hostilidade racial dos "filhos-família" tornou impossível sua permanência regular. A porta da academia se fechou; ele entrou pela janela da prática.</p>
+    <h4>Influências intelectuais</h4>
+    <ul>
+      <li><strong>Direito</strong> — a legislação imperial, o direito natural, os civilistas portugueses;</li>
+      <li><strong>Filosofia política</strong> — o liberalismo radical e o republicanismo francês;</li>
+      <li><strong>Literatura</strong> — a sátira de Gregório de Matos e Bocage, os românticos brasileiros (que ele leu e depois zombou);</li>
+      <li><strong>A rua</strong> — a oralidade baiana, os provérbios, a malícia popular que tempera toda a sua escrita.</li>
+    </ul>
+  </div>
+</article>
+
+<!-- ══════════ PARTE IV ══════════ -->
+<section class="parte-capa" id="parte4">
+  <div class="miolo rev">
+    <span class="rotulo">Parte IV</span>
+    <h2>A palavra — poeta e jornalista</h2>
+    <p class="abre">Antes de vencer nos tribunais, Luiz Gama venceu no papel: a sátira que ria da hipocrisia racial do Império e a imprensa ilustrada que a expôs em caricatura.</p>
+  </div>
+</section>
+
+<article class="cap" id="cap13">
+  <div class="miolo rev">
+    <span class="num">Capítulo 13 · Poesia</span>
+    <h3>O poeta: <em>Primeiras Trovas Burlescas de Getulino</em></h3>
+    <p>Em <strong>1859</strong>, sob o pseudônimo <strong>Getulino</strong>, Luiz Gama publicou as <em>Primeiras Trovas Burlescas</em> — e fez algo inédito na literatura brasileira: um poeta negro que, em vez de esconder a cor, <strong>a proclamava com orgulho e a usava como espelho contra a sociedade</strong>. Numa época em que o romantismo idealizava a "morena" e apagava o negro real, Gama escolheu a sátira, herdeira de Gregório de Matos, para rir da elite que fingia brancura.</p>
+    <p>O poema mais célebre do livro, conhecido como <strong>"Quem sou eu?"</strong> — e apelidado de <em>"A Bodarrada"</em> —, parte de um insulto racista da época (chamar o negro de "bode") e o devolve multiplicado: se ter sangue africano é ser bode, então o Brasil inteiro é uma imensa bodarrada, pois a mestiçagem alcança nobres, padres, juízes e senhores. O riso desmonta o mito da pureza racial da elite:</p>
+    <blockquote class="voz">
+      «Se negro sou, ou sou bode, / Pouco importa. O que isto pode? / Bodes há de toda a casta [...] // Aqui, nesta boa terra, / Marram todos, tudo berra.»
+      <footer>Luiz Gama — "Quem sou eu?", Primeiras Trovas Burlescas (1859, domínio público)</footer>
+    </blockquote>
+    <h4>Temas centrais da poesia de Gama</h4>
+    <ul>
+      <li><strong>Orgulho da origem africana</strong> — exaltou a beleza negra em poemas como o dedicado à "Minha mãe", retrato amoroso de Luiza Mahin;</li>
+      <li><strong>Crítica ao racismo e à hipocrisia</strong> — a elite mestiça que se fingia branca;</li>
+      <li><strong>Sátira política</strong> — magistrados venais, políticos vazios, a corte e seus rituais;</li>
+      <li><strong>Anticolonialismo cultural</strong> — zombaria dos que imitavam tudo o que vinha da Europa.</li>
+    </ul>
+    <p class="leve">O livro teve segunda edição ampliada em 1861. A crítica do século XIX o tratou como curiosidade; a do século XXI o reconhece como fundador de uma linhagem: a literatura negra brasileira escrita em primeira pessoa e sem pedir licença.</p>
+  </div>
+</article>
+
+<article class="cap" id="cap14">
+  <div class="miolo rev">
+    <span class="num">Capítulo 14 · Imprensa</span>
+    <h3>O jornalista combativo</h3>
+    <p>A São Paulo dos anos 1860 era uma cidadezinha de estudantes e sinos — e Luiz Gama ajudou a sacudi-la fundando, com o caricaturista ítalo-brasileiro <strong>Angelo Agostini</strong> e o escritor Sizenando Nabuco, o <strong><em>Diabo Coxo</em></strong> (1864–1865), primeiro jornal ilustrado da província. Logo depois veio o <strong><em>Cabrião</em></strong> (1866–1867), ainda mais mordaz. Texto afiado de um lado, caricatura devastadora do outro: a dupla Gama–Agostini inventou em São Paulo o jornalismo satírico de combate.</p>
+    <h4>Alvos preferidos</h4>
+    <ul>
+      <li>A <strong>escravidão</strong> e os senhores "respeitáveis" que viviam dela;</li>
+      <li>A <strong>corrupção</strong> de juízes, delegados e vereadores — muitos citados quase pelo nome;</li>
+      <li>A <strong>Monarquia</strong> e seus rituais de bajulação;</li>
+      <li>O <strong>clero</strong> mundano e a hipocrisia dos costumes.</li>
+    </ul>
+    <p>Mais tarde, Gama escreveu e colaborou em folhas abertamente políticas — entre elas o <strong><em>Radical Paulistano</em></strong> (1869), órgão dos liberais radicais em cujas colunas defendeu abolição e reformas profundas, e <em>O Polichinelo</em> (1876). Sua pena tornou-se temida: processos, ameaças e inimizades poderosas não o fizeram recuar uma linha.</p>
+    <div class="destaque">
+      <span class="titulo">Por que isso importa</span>
+      <p>Num país de maioria analfabeta, o <strong>jornal ilustrado</strong> falava também a quem não lia: a caricatura era a mídia de massa do Império. Gama compreendeu isso e usou a imprensa como tribunal paralelo — quando a Justiça falhava, ele julgava os poderosos na praça pública do papel.</p>
+    </div>
+  </div>
+</article>
+
+<article class="cap" id="cap15">
+  <div class="miolo rev">
+    <span class="num">Capítulo 15 · Redes</span>
+    <h3>Maçonaria, amizades e aliados</h3>
+    <p>Nenhum abolicionista vence sozinho. Gama construiu, ao longo de três décadas, uma teia de alianças que sustentou sua luta:</p>
+    <ul>
+      <li><strong>Maçonaria</strong> — iniciado na loja <strong>América</strong>, de São Paulo, encontrou nela dinheiro, advogados e proteção política para as causas de liberdade; as lojas custeavam alforrias e amparavam libertos;</li>
+      <li><strong>Angelo Agostini</strong> — parceiro de jornais, levou depois a causa abolicionista à corte com a <em>Revista Illustrada</em>;</li>
+      <li><strong>Rui Barbosa</strong> — jovem estudante nas arcadas, aproximou-se de Gama no jornalismo radical; anos depois, coube a ele o elogio fúnebre do amigo;</li>
+      <li><strong>Estudantes das arcadas</strong> — a mesma faculdade que o rejeitou formou gerações de discípulos que o veneravam e advogavam ao seu lado;</li>
+      <li><strong>A população negra de São Paulo</strong> — sua base real: informantes, testemunhas, famílias inteiras que sabiam a quem recorrer quando alguém era mantido cativo ilegalmente.</li>
+    </ul>
+    <p class="leve">Essa capilaridade explica um mistério aparente: como um homem sem diploma, sem fortuna e sem cor "aceitável" para a elite tornou-se um dos advogados mais eficazes do Império.</p>
+  </div>
+</article>
+
+<!-- ══════════ PARTE V ══════════ -->
+<section class="parte-capa" id="parte5">
+  <div class="miolo rev">
+    <span class="rotulo">Parte V</span>
+    <h2>O Direito — o advogado dos escravizados</h2>
+    <p class="abre">Sem diploma, sem tribuna oficial, sem permissão — e ainda assim o homem que mais libertou gente na história do Judiciário brasileiro.</p>
+  </div>
+</section>
+
+<article class="cap" id="cap16">
+  <div class="miolo rev">
+    <span class="num">Capítulo 16 · Rábula</span>
+    <h3>O advogado sem diploma</h3>
+    <p>Luiz Gama nunca teve diploma de bacharel — e advogou por vinte anos. Isso era possível graças à figura do <strong>rábula</strong> (ou "advogado provisionado"): a legislação imperial permitia que pessoas sem formação acadêmica, mas de saber jurídico comprovado, obtivessem <strong>provisão</strong> para postular em juízo, sobretudo em primeira instância, nos lugares onde faltavam bacharéis.</p>
+    <p>Gama obteve sua provisão e transformou-a em artilharia. Seu método de trabalho combinava três virtudes raras:</p>
+    <ol>
+      <li><strong>Domínio técnico</strong> — conhecia a legislação escravista melhor que os desembargadores, porque a estudava para destruí-la por dentro;</li>
+      <li><strong>Investigação de fatos</strong> — levantava certidões, registros de batismo, listas de desembarque, matrículas de escravos: a prova documental era sua obsessão;</li>
+      <li><strong>Pressão pública</strong> — cada processo importante era acompanhado de artigos na imprensa; o júri sabia que a cidade estava olhando.</li>
+    </ol>
+    <div class="destaque indigo">
+      <span class="titulo">O que era um rábula?</span>
+      <p>Do latim <em>rabula</em>, "falastrão de tribunal" — nome dado com desprezo pelos bacharéis. Os rábulas eram a advocacia dos pobres: negros, brancos remediados, autodidatas. Gama assumiu o rótulo com ironia e o cobriu de glória: hoje, quando a OAB fala do rábula por excelência, fala dele.</p>
+    </div>
+  </div>
+</article>
+
+<article class="cap" id="cap17">
+  <div class="miolo rev">
+    <span class="num">Capítulo 17 · As causas</span>
+    <h3>Como libertou mais de 500 escravizados</h3>
+    <p>O número consagrado pela tradição — e repetido por seus contemporâneos — é que Luiz Gama arrancou da escravidão, pelas vias judiciais e pela mobilização, <strong>mais de quinhentas pessoas</strong>. Pesquisas recentes nos arquivos judiciais paulistas, como as de Bruno Rodrigues de Lima, vêm localizando processo por processo e indicam que o alcance real de sua atuação foi ainda maior do que a lenda.</p>
+    <p>Seu instrumento principal era a <strong>ação de liberdade</strong>: o processo civil em que o escravizado, representado por um curador, demandava contra o próprio senhor o reconhecimento de sua condição livre. Era uma guerra de papel travada em território inimigo — juízes proprietários de escravos, jurados fazendeiros — e ainda assim Gama vencia, porque escolhia o terreno: a <strong>ilegalidade documentável</strong>.</p>
+    <h4>Casos típicos que patrocinou</h4>
+    <ul>
+      <li>Africanos desembarcados <strong>depois de 1831</strong> — livres por lei, escravizados por fraude;</li>
+      <li>Pessoas <strong>nascidas livres e reduzidas ao cativeiro</strong> — o próprio drama de sua infância;</li>
+      <li>Escravizados com <strong>direito a alforria negada</strong> — pecúlio recusado, testamentos descumpridos, matrículas irregulares após a Lei do Ventre Livre;</li>
+      <li>Defesas criminais de escravizados e libertos perante o júri.</li>
+    </ul>
+  </div>
+</article>
+
+<article class="cap" id="cap18">
+  <div class="miolo rev">
+    <span class="num">Capítulo 18 · Estratégia</span>
+    <h3>Estratégias jurídicas: a lei contra a escravidão</h3>
+    <h4>1. A Lei de 7 de novembro de 1831</h4>
+    <p>Pedra angular de tudo. A chamada <strong>Lei Feijó</strong> declarava <em>livres todos os africanos que entrassem no Brasil a partir de sua data</em> e punia os importadores. A elite a tratou como "lei para inglês ver" — letra morta para acalmar a pressão britânica. Gama a ressuscitou: se a lei nunca foi revogada, então <strong>todo africano trazido depois de 1831, e todos os seus filhos, eram juridicamente livres</strong>. Cada certidão de desembarque tardio que ele encontrava era uma liberdade em potencial.</p>
+    <h4>2. A Lei do Ventre Livre (1871)</h4>
+    <p>A Lei Rio Branco libertou os nascituros e criou instrumentos que Gama explorou ao máximo: o <strong>pecúlio</strong> (direito do escravizado de comprar a própria alforria com suas economias, mesmo contra a vontade do senhor), o <strong>fundo de emancipação</strong> e a <strong>matrícula obrigatória</strong> — escravizado não matriculado no prazo legal era considerado liberto. Gama caçava matrículas vencidas como quem caça tesouros.</p>
+    <h4>3. O júri como tribuna</h4>
+    <p>Nas defesas criminais, Gama transformava o julgamento em julgamento da escravidão. É dessa arena sua tese mais radical e mais famosa, escandalosa para a época:</p>
+    <blockquote class="voz">
+      «O escravo que mata o senhor, seja em que circunstância for, mata sempre em legítima defesa.»
+      <footer>Tese sustentada por Luiz Gama — registrada por seus contemporâneos</footer>
+    </blockquote>
+    <p>O raciocínio é juridicamente devastador: a escravidão é uma agressão permanente e ilegítima contra a pessoa; logo, toda reação do agredido é defesa. Nenhum jurista do Império ousara dizer isso em voz alta.</p>
+  </div>
+</article>
+
+<article class="cap" id="cap19">
+  <div class="miolo rev">
+    <span class="num">Capítulo 19 · Política</span>
+    <h3>O abolicionista radical e o pensamento político</h3>
+    <p>Dentro do movimento abolicionista, havia gradações. Os <strong>reformistas</strong> queriam extinção lenta e indenizada; os <strong>moderados</strong> apostavam em leis graduais (Ventre Livre, Sexagenários); os <strong>radicais</strong> exigiam abolição imediata, sem indenização aos senhores — afinal, não se indeniza o ladrão pela devolução do roubo. <strong>Luiz Gama pertencia à ala radical</strong>, e foi além: admitia e legitimava a resistência dos próprios escravizados, inclusive a fuga e a revolta.</p>
+    <h4>O republicano incômodo</h4>
+    <p>Gama aderiu cedo à causa republicana: participou do movimento em São Paulo desde os anos do <em>Radical Paulistano</em> e esteve na <strong>Convenção de Itu (1873)</strong>, berço do Partido Republicano Paulista. Mas rompeu publicamente com os correligionários fazendeiros quando percebeu o inaceitável: muitos queriam a República <em>com</em> escravidão. Para Gama, a ordem das prioridades era inegociável — <strong>primeiro a liberdade dos cativos, depois a forma de governo</strong>. Preferia a solidão política à cumplicidade.</p>
+    <h4>Bandeiras permanentes</h4>
+    <ul>
+      <li><strong>Abolição imediata e sem indenização</strong>;</li>
+      <li><strong>Educação pública</strong> — a mesma alavanca que o libertara, para todos;</li>
+      <li><strong>Igualdade racial e civil</strong> — cidadania plena para a população negra;</li>
+      <li><strong>Justiça acessível</strong> — advogou de graça para pobres e perseguidos de todas as cores.</li>
+    </ul>
+  </div>
+</article>
+
+<article class="cap" id="cap20">
+  <div class="miolo rev">
+    <span class="num">Capítulo 20 · Racismo</span>
+    <h3>O racismo que enfrentou — e a resposta que deu</h3>
+    <p>Cada degrau da vida de Gama foi subido contra a resistência ativa de uma sociedade racista: a academia que o expulsou pelo constrangimento, os bacharéis que se recusavam a apertar-lhe a mão, os adversários que respondiam a seus argumentos com insultos sobre sua cor, os jornais que o caricaturavam. Ele respondeu com as duas armas que dominava — o riso e o orgulho.</p>
+    <p>Quando um deputado o atacou em razão de sua origem, Gama devolveu com a frase que virou emblema, assumindo como brasão exatamente aquilo que o Império tratava como mácula:</p>
+    <blockquote class="voz">
+      «Em mim, até a cor é um defeito, um imperdoável vício de nascença, o estigma de um crime. Mas os meus críticos esquecem que essa cor é a origem da riqueza de milhares de salteadores que me insultam; que essa cor convencional da escravidão, tão semelhante à da terra, abriga sob sua superfície escura vulcões, onde arde o fogo sagrado da liberdade.»
+      <footer>Luiz Gama — carta a Lúcio de Mendonça, 1880 (domínio público)</footer>
+    </blockquote>
+    <p class="leve">Nenhum trecho resume melhor o homem: a lucidez sobre o racismo estrutural ("a origem da riqueza dos que me insultam") e a conversão do estigma em potência.</p>
+  </div>
+</article>
+
+<article class="cap" id="cap21">
+  <div class="miolo rev">
+    <span class="num">Capítulo 21 · Família</span>
+    <h3>A família de Luiz Gama</h3>
+    <div class="ficha">
+      <div class="item"><span class="k">Esposa</span><span class="v">Claudina Fortunata Sampaio — casamento em 1854</span></div>
+      <div class="item"><span class="k">Filho</span><span class="v">Benedito Graco Pinto da Gama</span></div>
+      <div class="item"><span class="k">Mãe</span><span class="v">Luiza Mahin — procurada a vida inteira, nunca reencontrada</span></div>
+      <div class="item"><span class="k">Pai</span><span class="v">Nome jamais revelado</span></div>
+    </div>
+    <p>Claudina foi companheira de toda a vida adulta de Gama — casaram-se quando ele ainda vestia farda e permaneceram juntos até a morte dele, quase três décadas depois. O nome do filho é um programa: <strong>Benedito</strong>, santo negro do catolicismo popular, e <strong>Graco</strong>, homenagem aos irmãos Graco, os tribunos da plebe que morreram defendendo reforma agrária na Roma antiga. No batismo do filho, o pai inscreveu suas duas devoções: o povo negro e a justiça social.</p>
+    <p class="leve">A casa dos Gama, no bairro do Brás e depois na região central, funcionava também como escritório, consultório popular e ponto de socorro: era ali que batiam famílias de escravizados em busca do rábula que não cobrava dos pobres.</p>
+  </div>
+</article>
+
+<!-- ══════════ PARTE VI ══════════ -->
+<section class="parte-capa" id="parte6">
+  <div class="miolo rev">
+    <span class="rotulo">Parte VI</span>
+    <h2>Morte, funeral e legado</h2>
+    <p class="abre">Ele não viveu para ver o 13 de maio — mas o 13 de maio não existiria sem ele.</p>
+  </div>
+</section>
+
+<article class="cap" id="cap22">
+  <div class="miolo rev">
+    <span class="num">Capítulo 22 · Últimos anos</span>
+    <h3>Últimos anos e a morte de Luiz Gama</h3>
+    <p>Na virada para a década de 1880, o abolicionismo finalmente virara movimento de massas — comícios, sociedades emancipadoras, jornais por todo o país. Gama, o precursor, era agora o patriarca reverenciado da causa em São Paulo, presidindo entidades abolicionistas e trabalhando sem pausa, embora a saúde desabasse: sofria de <strong>diabetes</strong>, doença então sem tratamento eficaz.</p>
+    <p>Trabalhou até o fim — literalmente com processos de liberdade abertos sobre a mesa. Morreu em <strong>24 de agosto de 1882</strong>, aos 52 anos, em São Paulo, de complicações do diabetes. Não viu a Lei Áurea, que viria seis anos depois; mas àquela altura o edifício que ele passara a vida minando já estava condenado.</p>
+    <div class="ficha">
+      <div class="item"><span class="k">Falecimento</span><span class="v">24 de agosto de 1882 · São Paulo</span></div>
+      <div class="item"><span class="k">Causa</span><span class="v">Complicações do diabetes</span></div>
+      <div class="item"><span class="k">Idade</span><span class="v">52 anos</span></div>
+      <div class="item"><span class="k">Sepultamento</span><span class="v">Cemitério da Consolação, São Paulo</span></div>
+    </div>
+  </div>
+</article>
+
+<article class="cap" id="cap23">
+  <div class="miolo rev">
+    <span class="num">Capítulo 23 · Despedida</span>
+    <h3>O funeral que parou São Paulo</h3>
+    <p>O enterro de Luiz Gama foi um acontecimento sem precedentes na história da cidade. Uma <strong>multidão de milhares de pessoas</strong> — negros e brancos, libertos, estudantes, operários, advogados — acompanhou o cortejo do centro ao Cemitério da Consolação. O caixão <strong>não tocou em carro fúnebre</strong>: foi carregado nos braços do povo, revezando-se as mãos por todo o trajeto, num gesto espontâneo de devoção.</p>
+    <p>O comércio fechou as portas; varandas e janelas se encheram; oradores se sucederam sobre a sepultura — entre eles o jovem <strong>Rui Barbosa</strong>, que proclamou o amigo morto a encarnação da causa da liberdade. Os jornais do país inteiro noticiaram a comoção: São Paulo enterrava, com honras que o Império jamais lhe dera em vida, o filho de Luiza Mahin.</p>
+    <blockquote class="voz">
+      «O Brasil oficial negou a Luiz Gama o diploma, a tribuna e o título. O Brasil real lhe deu o que nenhum título dá: milhares de mãos disputando o peso do seu caixão.»
+      <footer>Síntese do capítulo</footer>
+    </blockquote>
+  </div>
+</article>
+
+<article class="cap" id="cap24">
+  <div class="miolo rev">
+    <span class="num">Capítulo 24 · Legado</span>
+    <h3>O legado e os reconhecimentos póstumos</h3>
+    <p>Morto aos 52 anos, Gama demorou a entrar no panteão oficial — a Primeira República preferia heróis menos incômodos. Foi o século XXI que finalmente o colocou no lugar que lhe cabia:</p>
+    <table class="tabela">
+      <tr><th>Ano</th><th>Reconhecimento</th></tr>
+      <tr><td>Século XX</td><td>Patrono da <strong>cadeira nº 15 da Academia Paulista de Letras</strong>; nome de ruas, escolas e do Instituto Luiz Gama.</td></tr>
+      <tr><td>2015</td><td>A <strong>OAB</strong> confere-lhe, em ato histórico, o <strong>título de advogado</strong> — o diploma simbólico que o Império lhe negou, 133 anos após sua morte.</td></tr>
+      <tr><td>2018</td><td>Inscrição no <strong>Livro dos Heróis e Heroínas da Pátria</strong> (o "Livro de Aço", em Brasília), como <strong>patrono da abolição da escravidão</strong> no Brasil.</td></tr>
+      <tr><td>2021</td><td>A <strong>Faculdade de Direito da USP</strong> — as mesmas arcadas que o hostilizaram — concede-lhe título honorífico póstumo, gesto de reparação histórica.</td></tr>
+      <tr><td>2021–hoje</td><td>Publicação das <strong>obras completas</strong> (organização de Bruno Rodrigues de Lima), devolvendo ao público centenas de textos dispersos em jornais do século XIX.</td></tr>
+    </table>
+    <h4>Luiz Gama na atualidade</h4>
+    <p>Hoje Gama é referência central do movimento negro, dos estudos de direito antidiscriminatório e do debate sobre reparação histórica. Sua trajetória inspira o cinema, a literatura, o teatro e a pesquisa acadêmica — e sua estratégia segue viva como lição de método: <strong>conhecer a norma melhor que o opressor e usá-la para desmontar a opressão</strong>. O "advogado dos escravizados" tornou-se, para as novas gerações, o patrono de toda advocacia que defende quem não pode pagar.</p>
+  </div>
+</article>
+
+<!-- ══════════ LINHA DO TEMPO ══════════ -->
+<section class="parte-capa" id="tempo-sec">
+  <div class="miolo rev">
+    <span class="rotulo">Referência rápida</span>
+    <h2>Linha do tempo completa</h2>
+  </div>
+  <div class="tempo rev">
+    <div class="evento"><span class="ano">1830</span><p class="fato">Nasce em Salvador, em 21 de junho, filho livre de Luiza Mahin.</p></div>
+    <div class="evento"><span class="ano">1835</span><p class="fato">Revolta dos Malês na Bahia — contexto das lutas associadas à sua mãe.</p></div>
+    <div class="evento"><span class="ano">1837–38</span><p class="fato">Sabinada; após a repressão, Luiza Mahin parte para o Rio e desaparece.</p></div>
+    <div class="evento"><span class="ano">1840</span><p class="fato">Em 10 de novembro, é <strong>vendido ilegalmente pelo pai</strong>, aos 10 anos; levado por navio ao Rio e depois a São Paulo.</p></div>
+    <div class="evento"><span class="ano">1840–48</span><p class="fato">Vive escravizado na casa de Antônio Pereira Cardoso — copeiro, sapateiro, serviços domésticos.</p></div>
+    <div class="evento"><span class="ano">1847</span><p class="fato">O estudante Antônio Rodrigues do Prado Júnior o <strong>alfabetiza, aos 17 anos</strong>.</p></div>
+    <div class="evento"><span class="ano">1848</span><p class="fato">Reúne provas do nascimento livre e <strong>reconquista a liberdade</strong>; alista-se na força policial paulista.</p></div>
+    <div class="evento"><span class="ano">1854</span><p class="fato">Casa-se com Claudina Fortunata Sampaio; preso por insubordinação, deixa a farda; torna-se escrevente da Secretaria de Polícia.</p></div>
+    <div class="evento"><span class="ano">1859</span><p class="fato">Publica <strong><em>Primeiras Trovas Burlescas de Getulino</em></strong> (2ª ed. ampliada em 1861).</p></div>
+    <div class="evento"><span class="ano">1864–67</span><p class="fato">Funda com Angelo Agostini os jornais ilustrados <strong>Diabo Coxo</strong> e <strong>Cabrião</strong>.</p></div>
+    <div class="evento"><span class="ano">1869</span><p class="fato">Atua no <strong>Radical Paulistano</strong>; consolida-se como rábula das ações de liberdade.</p></div>
+    <div class="evento"><span class="ano">1871</span><p class="fato">Lei do Ventre Livre — novo arsenal jurídico que Gama explora a fundo.</p></div>
+    <div class="evento"><span class="ano">1873</span><p class="fato">Participa da <strong>Convenção de Itu</strong>; depois rompe com republicanos escravistas.</p></div>
+    <div class="evento"><span class="ano">1870s</span><p class="fato">Auge da advocacia abolicionista: <strong>mais de 500 pessoas libertadas</strong> por suas ações.</p></div>
+    <div class="evento"><span class="ano">1880</span><p class="fato">Escreve a carta autobiográfica a Lúcio de Mendonça — principal fonte sobre sua vida.</p></div>
+    <div class="evento"><span class="ano">1882</span><p class="fato"><strong>Morre em 24 de agosto</strong>, em São Paulo; funeral com milhares de pessoas, caixão carregado nos braços do povo.</p></div>
+    <div class="evento"><span class="ano">1888</span><p class="fato">Lei Áurea abole a escravidão — seis anos após sua morte.</p></div>
+    <div class="evento"><span class="ano">2015</span><p class="fato">OAB confere-lhe o título de advogado.</p></div>
+    <div class="evento"><span class="ano">2018</span><p class="fato">Inscrito no Livro dos Heróis e Heroínas da Pátria.</p></div>
+  </div>
+</section>
+
+<!-- ══════════ CURIOSIDADES ══════════ -->
+<article class="cap" id="curiosidades">
+  <div class="miolo rev">
+    <span class="num">Extra · Curiosidades</span>
+    <h3>Dez fatos para nunca esquecer</h3>
+    <ol>
+      <li>Nasceu <strong>livre</strong> — e por isso sua venda foi crime, não "escravidão comum".</li>
+      <li><strong>Nunca revelou o nome do pai</strong> que o vendeu: o silêncio foi sua sentença.</li>
+      <li>Aprendeu a ler <strong>aos 17 anos</strong> — e virou um dos maiores escritores de seu tempo.</li>
+      <li>Não foi vendido às fazendas porque escravizados baianos tinham <strong>fama de rebeldes</strong> após a Revolta dos Malês.</li>
+      <li>Libertou <strong>mais de 500 pessoas</strong> usando as leis do próprio Império escravista.</li>
+      <li>Advogou a vida inteira <strong>sem diploma</strong>, como rábula — e de graça para os pobres.</li>
+      <li>Sustentou que o escravo que mata o senhor age <strong>em legítima defesa</strong> — a tese mais ousada do Direito imperial.</li>
+      <li>Deu ao filho o nome de um <strong>santo negro</strong> e de um <strong>tribuno da plebe romana</strong>.</li>
+      <li>Rompeu com os republicanos ao descobrir que muitos queriam <strong>República com escravidão</strong>.</li>
+      <li>Só recebeu o <strong>título de advogado da OAB em 2015</strong> — 133 anos depois de morrer.</li>
+    </ol>
+  </div>
+</article>
+
+<!-- ══════════ FRASES ══════════ -->
+<article class="cap" id="frases">
+  <div class="miolo rev">
+    <span class="num">Extra · Palavras do próprio Gama</span>
+    <h3>Frases históricas comentadas</h3>
+    <blockquote class="voz">«O escravo que mata o senhor, seja em que circunstância for, mata sempre em legítima defesa.»
+      <footer>Tese de júri</footer>
+    </blockquote>
+    <p class="leve"><strong>Comentário:</strong> inverte o eixo moral do Direito imperial — o criminoso permanente é a escravidão, não o escravizado que reage.</p>
+    <blockquote class="voz">«Em mim, até a cor é um defeito, um imperdoável vício de nascença [...] essa cor abriga vulcões, onde arde o fogo sagrado da liberdade.»
+      <footer>Carta a Lúcio de Mendonça, 1880</footer>
+    </blockquote>
+    <p class="leve"><strong>Comentário:</strong> a ironia transforma o estigma em brasão; é a certidão de nascimento do orgulho negro na prosa brasileira.</p>
+    <blockquote class="voz">«Se negro sou, ou sou bode, / Pouco importa. O que isto pode? / Bodes há de toda a casta...»
+      <footer>"Quem sou eu?" — Primeiras Trovas Burlescas, 1859</footer>
+    </blockquote>
+    <p class="leve"><strong>Comentário:</strong> a "Bodarrada" devolve o insulto racial multiplicado: se negro é "bode", o Brasil mestiço inteiro berra.</p>
+  </div>
+</article>
+
+<!-- ══════════ GLOSSÁRIO ══════════ -->
+<section class="parte-capa" id="glossario-sec">
+  <div class="miolo rev">
+    <span class="rotulo">Referência rápida</span>
+    <h2>Glossário histórico</h2>
+    <dl class="glossario">
+      <div class="termo"><dt>Alforria</dt><dd>Libertação jurídica de uma pessoa escravizada, concedida por carta, testamento ou compra (pecúlio).</dd></div>
+      <div class="termo"><dt>Ação de liberdade</dt><dd>Processo civil em que o escravizado, por meio de um curador, demandava judicialmente o reconhecimento de sua condição de pessoa livre.</dd></div>
+      <div class="termo"><dt>Rábula</dt><dd>Advogado sem diploma autorizado ("provisionado") a atuar em juízo; a advocacia possível para pobres e autodidatas no Império.</dd></div>
+      <div class="termo"><dt>Lei de 7/11/1831 (Lei Feijó)</dt><dd>Declarou livres os africanos que entrassem no Brasil a partir de sua data. Ignorada por décadas ("lei para inglês ver"), foi ressuscitada por Gama como arma de libertação.</dd></div>
+      <div class="termo"><dt>Lei do Ventre Livre (1871)</dt><dd>Libertou os filhos de escravizadas nascidos a partir dela e criou pecúlio, fundo de emancipação e matrícula obrigatória.</dd></div>
+      <div class="termo"><dt>Partus sequitur ventrem</dt><dd>"O parto segue o ventre": a condição jurídica da criança seguia a da mãe — fundamento da liberdade de nascença de Luiz Gama.</dd></div>
+      <div class="termo"><dt>Malês</dt><dd>Africanos muçulmanos da Bahia, muitos letrados em árabe; protagonizaram a revolta de 1835, a maior insurreição urbana de escravizados do país.</dd></div>
+      <div class="termo"><dt>Quitandeira</dt><dd>Vendedora de rua de alimentos e miudezas; ofício dominado por africanas em Salvador — o ofício de Luiza Mahin.</dd></div>
+      <div class="termo"><dt>Quilombo</dt><dd>Comunidade formada por pessoas fugidas da escravidão; símbolo máximo da resistência negra territorial.</dd></div>
+      <div class="termo"><dt>Sankofa</dt><dd>Símbolo adinkra (África Ocidental) do pássaro que olha para trás: "voltar e buscar o que ficou" — retomar o passado para construir o futuro. É o emblema desta apostila.</dd></div>
+    </dl>
+  </div>
+</section>
+
+<!-- ══════════ QUIZ ══════════ -->
+<section class="parte-capa" id="quiz-sec">
+  <div class="miolo rev">
+    <span class="rotulo">Fixação</span>
+    <h2>Quiz — teste o que você aprendeu</h2>
+  </div>
+  <div class="quiz rev" id="quiz">
+    <div class="pergunta" data-certa="1">
+      <p class="enunciado">1. Por que a venda de Luiz Gama pelo pai foi um crime, mesmo pelas leis do Império?</p>
+      <button class="opcao">Porque a escravidão já havia sido abolida em 1840</button>
+      <button class="opcao">Porque ele nasceu livre, filho de mulher livre, e pessoa livre não podia ser escravizada</button>
+      <button class="opcao">Porque menores de idade não podiam ser vendidos</button>
+      <p class="feedback"></p>
+    </div>
+    <div class="pergunta" data-certa="2">
+      <p class="enunciado">2. Qual lei foi a principal arma jurídica de Luiz Gama nas ações de liberdade?</p>
+      <button class="opcao">A Lei Áurea (1888)</button>
+      <button class="opcao">A Lei dos Sexagenários (1885)</button>
+      <button class="opcao">A Lei de 7 de novembro de 1831, que declarava livres os africanos chegados após essa data</button>
+      <p class="feedback"></p>
+    </div>
+    <div class="pergunta" data-certa="0">
+      <p class="enunciado">3. O que era um "rábula" no Brasil Império?</p>
+      <button class="opcao">Um advogado sem diploma, autorizado por provisão a atuar em juízo</button>
+      <button class="opcao">Um juiz de primeira instância</button>
+      <button class="opcao">Um escrivão de cartório</button>
+      <p class="feedback"></p>
+    </div>
+    <div class="pergunta" data-certa="1">
+      <p class="enunciado">4. Por que os fazendeiros paulistas se recusaram a comprar o menino Luiz?</p>
+      <button class="opcao">Porque ele já sabia ler e escrever</button>
+      <button class="opcao">Porque escravizados baianos tinham fama de rebeldes após a Revolta dos Malês</button>
+      <button class="opcao">Porque o preço pedido era alto demais</button>
+      <p class="feedback"></p>
+    </div>
+    <div class="pergunta" data-certa="2">
+      <p class="enunciado">5. Quem alfabetizou Luiz Gama, aos 17 anos?</p>
+      <button class="opcao">Sua mãe, Luiza Mahin</button>
+      <button class="opcao">Rui Barbosa</button>
+      <button class="opcao">O estudante Antônio Rodrigues do Prado Júnior</button>
+      <p class="feedback"></p>
+    </div>
+    <div class="pergunta" data-certa="0">
+      <p class="enunciado">6. Qual tese radical Gama sustentava perante o júri?</p>
+      <button class="opcao">Que o escravo que mata o senhor age sempre em legítima defesa</button>
+      <button class="opcao">Que os senhores deviam ser indenizados pela abolição</button>
+      <button class="opcao">Que apenas o Imperador podia conceder alforrias</button>
+      <p class="feedback"></p>
+    </div>
+    <div class="pergunta" data-certa="1">
+      <p class="enunciado">7. Por que Gama rompeu com parte dos republicanos paulistas?</p>
+      <button class="opcao">Porque era monarquista convicto</button>
+      <button class="opcao">Porque muitos queriam a República mantendo a escravidão</button>
+      <button class="opcao">Porque foi impedido de participar da Convenção de Itu</button>
+      <p class="feedback"></p>
+    </div>
+    <div class="pergunta" data-certa="2">
+      <p class="enunciado">8. Que reconhecimento Luiz Gama recebeu da OAB em 2015?</p>
+      <button class="opcao">A anulação da sua expulsão da Guarda</button>
+      <button class="opcao">Uma medalha de mérito jornalístico</button>
+      <button class="opcao">O título de advogado, negado em vida por falta de diploma</button>
+      <p class="feedback"></p>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ CONCLUSÃO + BIBLIOGRAFIA ══════════ -->
+<article class="cap" id="conclusao">
+  <div class="miolo rev">
+    <span class="num">Encerramento</span>
+    <h3>Conclusão</h3>
+    <p>A vida de Luiz Gama é uma aula sobre o poder combinado de três forças: a <strong>palavra</strong>, que ele conquistou aos 17 anos e transformou em poesia e imprensa; a <strong>lei</strong>, que aprendeu sozinho e virou contra o sistema que a escrevera; e a <strong>memória</strong> — de uma mãe rebelde, de uma infância roubada, de um povo inteiro — que ele carregou como combustível e não como fardo.</p>
+    <p>Ele provou, com mais de quinhentas liberdades arrancadas processo a processo, que o conhecimento é instrumento de libertação e que a justiça, mesmo capturada pelos poderosos, tem frestas por onde a dignidade passa — desde que alguém tenha a coragem e a técnica para forçá-las. É por isso que Luiz Gama não pertence apenas ao passado: pertence a toda geração que precise transformar estigma em orgulho e norma em ferramenta de justiça.</p>
+  </div>
+</article>
+
+<article class="cap" id="biblio-sec">
+  <div class="miolo rev">
+    <span class="num">Para ir além</span>
+    <h3>Bibliografia comentada</h3>
+    <table class="tabela">
+      <tr><th>Obra</th><th>Por que ler</th></tr>
+      <tr><td><strong>Lígia Fonseca Ferreira — <em>Com a palavra, Luiz Gama</em></strong></td><td>Antologia comentada de cartas e artigos; inclui a carta autobiográfica de 1880.</td></tr>
+      <tr><td><strong>Lígia Fonseca Ferreira (org.) — <em>Primeiras Trovas Burlescas &amp; outros poemas</em></strong></td><td>A poesia completa de Getulino em edição crítica acessível.</td></tr>
+      <tr><td><strong>Bruno Rodrigues de Lima (org.) — <em>Obras completas de Luiz Gama</em> (Hedra)</strong></td><td>Projeto monumental que recuperou centenas de textos dispersos; inclui <em>Lições de resistência</em>.</td></tr>
+      <tr><td><strong>Sidney Chalhoub — <em>A força da escravidão</em></strong></td><td>Explica a escravização ilegal em massa após 1831 — o contexto jurídico da luta de Gama.</td></tr>
+      <tr><td><strong>João José Reis — <em>Rebelião escrava no Brasil</em></strong></td><td>A história definitiva da Revolta dos Malês, o mundo de Luiza Mahin.</td></tr>
+    </table>
+    <p class="leve"><strong>Instituições de referência:</strong> Biblioteca Nacional · Fundação Cultural Palmares · OAB · Academia Paulista de Letras · Instituto Luiz Gama · Arquivo Público do Estado de São Paulo.</p>
+  </div>
+</article>
+
+</main>
+
+<div class="faixa" aria-hidden="true"></div>
+<footer class="fim">
+  <p class="frase">"Essa cor abriga vulcões, onde arde o fogo sagrado da liberdade."</p>
+  <p class="credito">Apostila Histórica · Luiz Gama 1830–1882 · Estudos Afro-Brasileiros</p>
+</footer>
+
+<button id="subir" aria-label="Voltar ao topo">↑</button>
+
+<script>
+// Barra de progresso
+const prog=document.getElementById('progresso');
+const subir=document.getElementById('subir');
+addEventListener('scroll',()=>{
+  const h=document.documentElement;
+  const p=h.scrollTop/(h.scrollHeight-h.clientHeight);
+  prog.style.width=(p*100)+'%';
+  subir.classList.toggle('ver',h.scrollTop>600);
+},{passive:true});
+subir.addEventListener('click',()=>scrollTo({top:0,behavior:'smooth'}));
+
+// Scroll reveal
+const io=new IntersectionObserver(es=>{
+  es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('vivo');io.unobserve(e.target);}});
+},{threshold:.08});
+document.querySelectorAll('.rev').forEach(el=>io.observe(el));
+
+// Quiz
+document.querySelectorAll('#quiz .pergunta').forEach(q=>{
+  const certa=parseInt(q.dataset.certa,10);
+  const ops=[...q.querySelectorAll('.opcao')];
+  const fb=q.querySelector('.feedback');
+  ops.forEach((btn,i)=>btn.addEventListener('click',()=>{
+    ops.forEach(b=>{b.disabled=true;b.classList.remove('certa','errada')});
+    ops[certa].classList.add('certa');
+    if(i===certa){fb.textContent='✔ Correto! Axé no conhecimento.';}
+    else{btn.classList.add('errada');fb.textContent='✘ Não é essa. A resposta correta está destacada.';}
+    fb.classList.add('mostrar');
+  }));
+});
+</script>
+<a href="../" class="kx-back" style="position:fixed;left:16px;bottom:calc(16px + env(safe-area-inset-bottom,0px));z-index:50;font:600 14px/20px var(--f-heading);color:var(--brand-tertiary);text-decoration:none;background:var(--glass-fill);border:1px solid var(--glass-stroke);border-radius:999px;padding:10px 16px;-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px)">← Materiais</a><footer class="kx-sig"><div><img class="kx-logo" src="data:image/webp;base64,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" width="40" height="40" alt=""><span><b>Kalixto — Professor • Programador • Gamer</b><small>Kalixto by Wallace Toledo · @dev.kalixto</small></span></div></footer>
+<style>
+.kx-theme{position:fixed;right:16px;bottom:calc(16px + env(safe-area-inset-bottom,0px));z-index:50;display:inline-flex;align-items:center;gap:8px;
+  font:600 14px/20px var(--f-heading,'Sora',system-ui,sans-serif);color:var(--text-primary,#fff);cursor:pointer;
+  background:var(--glass-fill,rgba(255,255,255,.06));border:1px solid var(--glass-stroke,rgba(255,255,255,.14));border-radius:999px;padding:10px 16px;
+  -webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);box-shadow:var(--glass-shadow-s,0 12px 32px rgba(0,0,0,.35))}
+.kx-theme:hover{box-shadow:0 0 32px rgba(123,46,255,.45)}
+.kx-theme:focus-visible{outline:2px solid var(--brand-tertiary,#00D9FF);outline-offset:3px}
+.kx-theme .ic{width:18px;height:18px;border-radius:50%;background:linear-gradient(90deg,#7B2EFF,#FF2DAA);flex:none}
+@media print{.kx-theme{display:none}}
+</style>
+<button class="kx-theme" id="kx-theme" type="button" aria-label="Alternar modo claro e escuro"><span class="ic" aria-hidden="true"></span><span id="kx-theme-t">Modo claro</span></button>
+<script>
+(function(){
+  var root=document.documentElement, b=document.getElementById('kx-theme'), t=document.getElementById('kx-theme-t');
+  function cur(){var a=root.getAttribute('data-theme');if(a)return a;return window.matchMedia('(prefers-color-scheme: light)').matches?'light':'dark';}
+  function paint(){t.textContent=cur()==='dark'?'Modo claro':'Modo escuro';}
+  b.addEventListener('click',function(){var n=cur()==='dark'?'light':'dark';root.setAttribute('data-theme',n);try{localStorage.setItem('kx-theme',n);}catch(e){}paint();
+    if(document.querySelector('.mermaid'))location.reload();});
+  window.matchMedia('(prefers-color-scheme: light)').addEventListener('change',paint);
+  paint();
+})();
+</script></body>
+</html>
