@@ -1,0 +1,1135 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Grandes Personalidades Negras da História do Brasil — Apostila Completa</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Yeseva+One&family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=Archivo:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --noite:#14100A;        /* fundo profundo */
+  --carvao:#231A10;       /* superfícies */
+  --carvao-2:#2E2214;
+  --papel:#F3E7CE;        /* texto principal */
+  --papel-suave:#D9C9A6;  /* texto secundário */
+  --ouro:#D9A441;
+  --ouro-claro:#EFC46B;
+  --terracota:#C05A2E;
+  --urucum:#9E2B25;
+  --verde:#4A7A55;
+  --linha:rgba(217,164,65,.22);
+  --grad-fogo:linear-gradient(120deg,#9E2B25 0%,#C05A2E 45%,#D9A441 100%);
+  --grad-terra:linear-gradient(160deg,#2E2214 0%,#3A2A16 55%,#4A3218 100%);
+  --grad-texto:linear-gradient(95deg,#EFC46B 0%,#D9A441 40%,#C05A2E 100%);
+  --sombra:0 18px 50px rgba(0,0,0,.55);
+  --raio:14px;
+  --largura:860px;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  background:var(--noite);
+  color:var(--papel);
+  font-family:'Lora',Georgia,serif;
+  font-size:17px;
+  line-height:1.75;
+  -webkit-font-smoothing:antialiased;
+}
+::selection{background:var(--terracota);color:var(--papel)}
+
+/* ---------- utilitários tipográficos ---------- */
+h1,h2,h3,h4{font-family:'Yeseva One',serif;font-weight:400;line-height:1.2}
+.eyebrow{
+  font-family:'Archivo',sans-serif;font-weight:700;font-size:.72rem;
+  letter-spacing:.28em;text-transform:uppercase;color:var(--ouro);
+}
+.grad-txt{
+  background:var(--grad-texto);
+  -webkit-background-clip:text;background-clip:text;
+  -webkit-text-fill-color:transparent;color:transparent;
+}
+p{margin-bottom:1.1em}
+strong{color:var(--ouro-claro);font-weight:600}
+em{color:var(--papel-suave)}
+
+/* ---------- barra de progresso ---------- */
+#progresso{position:fixed;top:0;left:0;height:4px;width:0;
+  background:var(--grad-fogo);z-index:999;transition:width .1s linear}
+
+/* ---------- faixa kente (assinatura visual) ---------- */
+.faixa-kente{height:14px;width:100%;background:
+  repeating-linear-gradient(90deg,
+    #9E2B25 0 34px, #D9A441 34px 44px, #14100A 44px 52px,
+    #4A7A55 52px 86px, #D9A441 86px 96px, #14100A 96px 104px,
+    #C05A2E 104px 138px, #D9A441 138px 148px, #14100A 148px 156px)}
+
+/* ---------- capa ---------- */
+header.capa{
+  position:relative;min-height:92vh;display:flex;flex-direction:column;
+  justify-content:center;align-items:center;text-align:center;
+  padding:90px 24px 70px;overflow:hidden;
+  background:
+    radial-gradient(ellipse 80% 55% at 50% -10%,rgba(192,90,46,.28),transparent 65%),
+    radial-gradient(ellipse 60% 45% at 85% 105%,rgba(158,43,37,.22),transparent 60%),
+    radial-gradient(ellipse 55% 40% at 12% 100%,rgba(74,122,85,.16),transparent 60%),
+    var(--noite);
+}
+.capa .padrao{position:absolute;inset:0;opacity:.07;pointer-events:none;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120' viewBox='0 0 120 120'%3E%3Cg fill='none' stroke='%23D9A441' stroke-width='1.4'%3E%3Cpath d='M60 12 96 60 60 108 24 60Z'/%3E%3Ccircle cx='60' cy='60' r='14'/%3E%3Cpath d='M60 46v28M46 60h28'/%3E%3C/g%3E%3C/svg%3E");
+  background-size:120px 120px}
+.capa .selo{
+  width:88px;height:88px;border-radius:50%;margin-bottom:34px;
+  display:flex;align-items:center;justify-content:center;
+  background:var(--grad-fogo);box-shadow:0 0 0 6px rgba(217,164,65,.15),var(--sombra);
+  animation:girar 24s linear infinite}
+@keyframes girar{to{transform:rotate(360deg)}}
+.capa .selo svg{width:52px;height:52px}
+.capa h1{font-size:clamp(2.1rem,5.4vw,3.9rem);max-width:900px;margin:20px 0 18px}
+.capa .sub{font-size:clamp(1rem,2vw,1.25rem);color:var(--papel-suave);
+  font-style:italic;max-width:640px;margin-bottom:44px}
+.capa .meta{display:flex;gap:14px;flex-wrap:wrap;justify-content:center}
+.capa .meta span{
+  font-family:'Archivo',sans-serif;font-size:.78rem;font-weight:600;
+  letter-spacing:.12em;text-transform:uppercase;
+  border:1px solid var(--linha);border-radius:100px;padding:9px 20px;
+  background:rgba(35,26,16,.6)}
+.seta-baixo{margin-top:56px;color:var(--ouro);font-size:1.5rem;animation:flutuar 2.4s ease-in-out infinite}
+@keyframes flutuar{0%,100%{transform:translateY(0)}50%{transform:translateY(10px)}}
+
+/* ---------- estrutura geral ---------- */
+main{max-width:var(--largura);margin:0 auto;padding:0 24px}
+section.bloco{padding:72px 0 30px}
+
+/* divisor de PARTE */
+.parte{
+  margin:90px -24px 60px;padding:70px 24px 64px;position:relative;text-align:center;
+  background:
+    linear-gradient(rgba(20,16,10,.55),rgba(20,16,10,.82)),
+    var(--grad-fogo);
+}
+.parte::before,.parte::after{content:"";position:absolute;left:0;right:0;height:14px;
+  background:repeating-linear-gradient(90deg,#14100A 0 10px,#D9A441 10px 20px)}
+.parte::before{top:0}.parte::after{bottom:0}
+.parte .eyebrow{color:var(--papel);opacity:.95}
+.parte h2{font-size:clamp(1.7rem,4vw,2.7rem);margin-top:14px;
+  color:var(--papel);text-shadow:0 3px 18px rgba(0,0,0,.55)}
+.parte .sankofa{width:44px;height:44px;margin:0 auto 16px;display:block}
+
+/* cabeçalho de capítulo */
+.cap-hero{
+  border-radius:var(--raio);padding:44px 40px;margin-bottom:42px;position:relative;overflow:hidden;
+  background:
+    linear-gradient(100deg,rgba(20,16,10,.86) 0%,rgba(20,16,10,.55) 60%,rgba(20,16,10,.25) 100%),
+    var(--grad-fogo);
+  box-shadow:var(--sombra)}
+.cap-hero .num{
+  font-family:'Archivo',sans-serif;font-weight:800;font-size:.75rem;
+  letter-spacing:.3em;text-transform:uppercase;color:var(--ouro-claro)}
+.cap-hero h3{font-size:clamp(1.6rem,3.6vw,2.4rem);margin:10px 0 8px;color:var(--papel);
+  text-shadow:0 2px 14px rgba(0,0,0,.5)}
+.cap-hero .papel-vida{font-style:italic;color:var(--papel-suave);font-size:1.05rem}
+.cap-hero .datas{
+  display:inline-block;margin-top:16px;font-family:'Archivo',sans-serif;
+  font-size:.8rem;font-weight:600;letter-spacing:.1em;
+  background:rgba(20,16,10,.55);border:1px solid rgba(243,231,206,.25);
+  border-radius:100px;padding:7px 18px}
+
+/* subtítulos internos */
+h4.sec{
+  font-size:1.35rem;margin:44px 0 16px;padding-left:16px;position:relative;color:var(--ouro-claro)}
+h4.sec::before{content:"";position:absolute;left:0;top:6px;bottom:6px;width:4px;
+  border-radius:4px;background:var(--grad-fogo)}
+
+/* caixas */
+.caixa{border-radius:var(--raio);padding:26px 28px;margin:28px 0;
+  background:var(--grad-terra);border:1px solid var(--linha)}
+.caixa .rotulo{display:flex;align-items:center;gap:10px;margin-bottom:12px}
+.caixa .rotulo .ico{width:30px;height:30px;border-radius:8px;display:flex;
+  align-items:center;justify-content:center;background:var(--grad-fogo);
+  font-size:.95rem;flex:none}
+.caixa .rotulo b{font-family:'Archivo',sans-serif;font-size:.78rem;font-weight:700;
+  letter-spacing:.2em;text-transform:uppercase;color:var(--ouro)}
+.caixa.alerta{border-color:rgba(158,43,37,.5)}
+.caixa.saber{border-color:rgba(74,122,85,.5)}
+.caixa p:last-child{margin-bottom:0}
+
+/* listas */
+ul.lista{list-style:none;margin:14px 0 22px}
+ul.lista li{padding:9px 0 9px 30px;position:relative;border-bottom:1px dashed rgba(217,164,65,.15)}
+ul.lista li:last-child{border-bottom:none}
+ul.lista li::before{content:"◆";position:absolute;left:4px;color:var(--terracota);font-size:.8rem;top:12px}
+
+/* linha do tempo */
+.timeline{margin:26px 0 10px;border-left:2px solid var(--linha);padding-left:26px}
+.timeline .evento{position:relative;padding-bottom:24px}
+.timeline .evento:last-child{padding-bottom:4px}
+.timeline .evento::before{content:"";position:absolute;left:-33px;top:6px;width:12px;height:12px;
+  border-radius:50%;background:var(--grad-fogo);box-shadow:0 0 0 4px rgba(217,164,65,.15)}
+.timeline .ano{font-family:'Archivo',sans-serif;font-weight:800;color:var(--ouro);
+  font-size:.95rem;letter-spacing:.05em}
+.timeline p{margin:2px 0 0;color:var(--papel-suave);font-size:.98rem}
+
+/* exercícios */
+details.exercicio{border:1px solid var(--linha);border-radius:var(--raio);
+  margin:14px 0;background:var(--carvao);overflow:hidden}
+details.exercicio summary{cursor:pointer;padding:18px 22px;font-weight:600;
+  list-style:none;display:flex;gap:12px;align-items:flex-start;transition:background .2s}
+details.exercicio summary::-webkit-details-marker{display:none}
+details.exercicio summary:hover{background:var(--carvao-2)}
+details.exercicio summary .tag{flex:none;font-family:'Archivo',sans-serif;font-size:.68rem;
+  font-weight:800;letter-spacing:.14em;color:var(--noite);background:var(--ouro);
+  border-radius:6px;padding:4px 9px;margin-top:2px}
+details.exercicio .resposta{padding:0 22px 20px;color:var(--papel-suave);
+  border-top:1px dashed var(--linha);padding-top:16px;margin:0 22px 20px;padding-left:0;padding-right:0}
+details.exercicio .resposta b{color:var(--verde);font-family:'Archivo',sans-serif;
+  font-size:.72rem;letter-spacing:.2em;text-transform:uppercase;display:block;margin-bottom:8px;color:var(--ouro)}
+
+/* sumário */
+.sumario{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px;margin-top:34px}
+.sumario a{
+  display:block;text-decoration:none;color:var(--papel);border:1px solid var(--linha);
+  border-radius:var(--raio);padding:20px 22px;background:var(--carvao);
+  transition:transform .2s,border-color .2s,background .2s}
+.sumario a:hover{transform:translateY(-3px);border-color:var(--ouro);background:var(--carvao-2)}
+.sumario .p-tag{font-family:'Archivo',sans-serif;font-size:.68rem;font-weight:800;
+  letter-spacing:.2em;text-transform:uppercase;color:var(--terracota);display:block;margin-bottom:6px}
+.sumario b{font-family:'Yeseva One',serif;font-weight:400;font-size:1.05rem}
+.sumario small{display:block;color:var(--papel-suave);margin-top:6px;font-size:.86rem;line-height:1.5}
+
+/* glossário */
+.glossario{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px;margin-top:26px}
+.glossario .termo{border:1px solid var(--linha);border-radius:var(--raio);
+  padding:20px 22px;background:var(--grad-terra)}
+.glossario .termo b{font-family:'Yeseva One',serif;font-weight:400;color:var(--ouro-claro);
+  display:block;margin-bottom:8px;font-size:1.08rem}
+.glossario .termo p{margin:0;font-size:.95rem;color:var(--papel-suave)}
+
+/* citação */
+blockquote{
+  margin:30px 0;padding:26px 30px;border-radius:var(--raio);position:relative;
+  background:linear-gradient(rgba(20,16,10,.72),rgba(20,16,10,.72)),var(--grad-fogo);
+  font-style:italic;font-size:1.08rem;box-shadow:var(--sombra)}
+blockquote footer{margin-top:12px;font-style:normal;font-family:'Archivo',sans-serif;
+  font-size:.78rem;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--ouro-claro)}
+
+/* rodapé */
+footer.fim{margin-top:90px;padding:60px 24px 46px;text-align:center;
+  background:linear-gradient(rgba(20,16,10,.6),rgba(20,16,10,.88)),var(--grad-fogo)}
+footer.fim .eyebrow{color:var(--papel)}
+footer.fim h2{margin:12px 0 10px;color:var(--papel)}
+footer.fim p{color:var(--papel-suave);max-width:560px;margin:0 auto}
+
+/* voltar ao topo */
+#topo-btn{position:fixed;right:22px;bottom:22px;width:48px;height:48px;border:none;
+  border-radius:50%;background:var(--grad-fogo);color:var(--papel);font-size:1.2rem;
+  cursor:pointer;opacity:0;pointer-events:none;transition:opacity .3s;box-shadow:var(--sombra);z-index:998}
+#topo-btn.on{opacity:1;pointer-events:auto}
+
+/* revelação no scroll */
+.rev{opacity:0;transform:translateY(24px);transition:opacity .7s ease,transform .7s ease}
+.rev.vis{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){
+  .rev{opacity:1;transform:none;transition:none}
+  .capa .selo,.seta-baixo{animation:none}
+  html{scroll-behavior:auto}
+}
+@media (max-width:640px){
+  body{font-size:16px}
+  .cap-hero{padding:32px 24px}
+  .parte{margin:70px -24px 46px}
+}
+</style>
+</head>
+<body>
+<div id="progresso"></div>
+
+<header class="capa">
+  <div class="padrao"></div>
+  <div class="selo" aria-hidden="true">
+    <!-- Sankofa estilizado: voltar ao passado para construir o futuro -->
+    <svg viewBox="0 0 64 64" fill="none" stroke="#F3E7CE" stroke-width="3" stroke-linecap="round">
+      <path d="M32 54 C18 54 10 44 10 32 C10 18 20 10 32 10 C44 10 52 18 52 28"/>
+      <path d="M46 20 L52 28 L58 20"/>
+      <circle cx="32" cy="32" r="5" fill="#F3E7CE" stroke="none"/>
+    </svg>
+  </div>
+  <span class="eyebrow">Apostila Completa · História do Brasil</span>
+  <h1 class="grad-txt">Grandes Personalidades Negras da História do Brasil</h1>
+  <p class="sub">Da resistência quilombola à construção do Brasil contemporâneo — uma jornada por cinco séculos de luta, criação e memória.</p>
+  <div class="meta">
+    <span>6 Partes</span><span>21 Capítulos</span><span>Linha do Tempo 1500–2026</span><span>Exercícios &amp; Glossário</span>
+  </div>
+  <div class="seta-baixo" aria-hidden="true">▼</div>
+</header>
+
+<div class="faixa-kente" aria-hidden="true"></div>
+
+<main>
+
+<!-- ===================== APRESENTAÇÃO ===================== -->
+<section class="bloco rev" id="apresentacao">
+  <span class="eyebrow">Apresentação</span>
+  <h2 class="grad-txt" style="font-size:clamp(1.6rem,3.5vw,2.3rem);margin:12px 0 22px">Por que esta apostila existe</h2>
+  <p>A história do Brasil não pode ser contada sem a população negra — e, no entanto, foi contada assim durante séculos. Os livros escolares tradicionais reduziram africanos e afro-brasileiros à condição de "mão de obra escravizada", apagando lideranças políticas, cientistas, escritoras, engenheiros, filósofas e artistas que moldaram o país em todas as suas dimensões.</p>
+  <p>Esta apostila propõe o caminho inverso, inspirado no símbolo adinkra <strong>Sankofa</strong> — o pássaro que olha para trás para apanhar o que ficou: <em>voltar ao passado para construir o futuro</em>. Estudaremos a África antes da escravidão, o sistema escravista e suas resistências, e a trajetória de vinte e uma personalidades que atravessam quilombos, tribunais, redações de jornal, universidades, palcos e parlamentos.</p>
+  <p>O estudo atende à <strong>Lei 10.639/2003</strong>, que tornou obrigatório o ensino de História e Cultura Afro-Brasileira nas escolas, e dialoga com a produção historiográfica mais recente. Cada capítulo traz contexto, biografia aprofundada, linha do tempo e exercícios.</p>
+
+  <h4 class="sec">Sumário interativo</h4>
+  <div class="sumario">
+    <a href="#parte1"><span class="p-tag">Parte I</span><b>África, Escravidão e Resistência</b><small>Reinos africanos · Tráfico atlântico · Escravidão no Brasil</small></a>
+    <a href="#parte2"><span class="p-tag">Parte II</span><b>Quilombos e Resistência Armada</b><small>Dandara · Zumbi dos Palmares</small></a>
+    <a href="#parte3"><span class="p-tag">Parte III</span><b>Revoltas e Abolicionismo</b><small>Luiza Mahin · Luiz Gama · José do Patrocínio · André Rebouças · Maria Firmina</small></a>
+    <a href="#parte4"><span class="p-tag">Parte IV</span><b>Ciência, Cultura e Educação</b><small>Machado de Assis · Teodoro Sampaio · Tia Ciata</small></a>
+    <a href="#parte5"><span class="p-tag">Parte V</span><b>Século XX e o Movimento Negro</b><small>Abdias · Carolina · Milton Santos · Lélia · Beatriz · Sueli</small></a>
+    <a href="#parte6"><span class="p-tag">Parte VI</span><b>Brasil Contemporâneo</b><small>Joaquim Barbosa · Marielle Franco · Conclusão geral</small></a>
+    <a href="#recursos"><span class="p-tag">Recursos</span><b>Glossário · Linha do Tempo · Bibliografia</b><small>Exercícios gerais e fontes comentadas</small></a>
+  </div>
+</section>
+
+<!-- ===================== PARTE I ===================== -->
+<div class="parte" id="parte1">
+  <svg class="sankofa" viewBox="0 0 64 64" fill="none" stroke="#F3E7CE" stroke-width="3" stroke-linecap="round" aria-hidden="true"><path d="M32 54 C18 54 10 44 10 32 C10 18 20 10 32 10 C44 10 52 18 52 28"/><path d="M46 20 L52 28 L58 20"/><circle cx="32" cy="32" r="5" fill="#F3E7CE" stroke="none"/></svg>
+  <span class="eyebrow">Parte I</span>
+  <h2>África, Escravidão e Resistência</h2>
+</div>
+
+<!-- Capítulo 1 -->
+<section class="bloco rev" id="cap1">
+  <div class="cap-hero">
+    <span class="num">Capítulo 01</span>
+    <h3>África Antes da Escravidão</h3>
+    <p class="papel-vida">Impérios, universidades e rotas comerciais que a narrativa colonial tentou apagar</p>
+  </div>
+
+  <p>Antes de qualquer navio negreiro cruzar o Atlântico, o continente africano abrigava <strong>civilizações complexas, letradas e economicamente poderosas</strong>. Compreender essa África é o primeiro passo para desmontar a falsa ideia — construída para justificar a escravidão — de que os africanos seriam povos "sem história".</p>
+
+  <h4 class="sec">O Império do Mali (séc. XIII–XVI)</h4>
+  <p>Fundado por <strong>Sundiata Keita</strong> por volta de 1235, o Mali controlava as rotas transaarianas de ouro e sal na África Ocidental. Seu governante mais célebre, <strong>Mansa Musa</strong> (c. 1312–1337), é frequentemente apontado como um dos homens mais ricos de toda a história. Sua peregrinação a Meca, em 1324, distribuiu tanto ouro pelo caminho que desvalorizou o metal no Egito por anos. Sob seu governo, <strong>Tombuctu</strong> tornou-se um polo de comércio e conhecimento.</p>
+
+  <h4 class="sec">O Império Songhai (séc. XV–XVI)</h4>
+  <p>Sucessor do Mali na hegemonia regional, o Songhai atingiu o auge sob <strong>Askia Muhammad</strong> (1493–1528). A cidade de Tombuctu abrigava a <strong>Universidade de Sankoré</strong>, onde milhares de estudantes debatiam astronomia, matemática, direito, medicina e teologia. Centenas de milhares de <strong>manuscritos de Tombuctu</strong> sobrevivem até hoje — prova material de uma intensa vida intelectual africana séculos antes do colonialismo.</p>
+
+  <h4 class="sec">O Reino do Congo (séc. XIV–XIX)</h4>
+  <p>Na África Central, o Reino do Congo era um Estado centralizado, com capital em <strong>Mbanza Congo</strong>, sistema tributário, província e diplomacia própria. Quando os portugueses chegaram, em 1483, negociaram com o rei <strong>Nzinga a Nkuwu</strong> de igual para igual. Seu sucessor, <strong>Afonso I</strong>, trocou cartas com o rei de Portugal denunciando, já no século XVI, os abusos do tráfico de pessoas — documentos que revelam como a escravização atlântica corroeu Estados africanos soberanos.</p>
+
+  <h4 class="sec">Cultura, ciência e comércio</h4>
+  <ul class="lista">
+    <li><strong>Metalurgia:</strong> povos africanos dominavam a fundição do ferro há milênios; os altos-fornos de regiões como a atual Tanzânia atingiam temperaturas notáveis para a época.</li>
+    <li><strong>Agricultura e pecuária:</strong> domesticação de espécies como o sorgo e o inhame, sistemas de irrigação e manejo do solo.</li>
+    <li><strong>Comércio:</strong> rotas transaarianas e do Índico ligavam a África ao mundo árabe, à Índia e à China muito antes de 1500.</li>
+    <li><strong>Arquitetura:</strong> das mesquitas de adobe de Djenné às muralhas do Grande Zimbábue, erguidas sem argamassa.</li>
+  </ul>
+
+  <div class="caixa alerta">
+    <div class="rotulo"><span class="ico">⚠</span><b>Desmontando a falsa narrativa</b></div>
+    <p>A ideia de "inferioridade africana" não é um dado científico: é uma <strong>construção ideológica</strong> criada para legitimar o tráfico e a colonização. Teorias racistas do século XIX vestiram de "ciência" o que era interesse econômico. A historiografia atual, apoiada em arqueologia e nos próprios documentos africanos, demonstra exatamente o contrário: sociedades dinâmicas, diversas e conectadas ao mundo.</p>
+  </div>
+
+  <details class="exercicio"><summary><span class="tag">Q1</span>Por que o estudo dos reinos africanos é essencial para compreender a história do Brasil?</summary><div class="resposta"><b>Caminho de resposta</b>Porque os africanos trazidos ao Brasil não eram "povos sem história": vinham de sociedades organizadas, com saberes técnicos, religiosos e políticos que foram recriados aqui — dos quilombos às religiões de matriz africana, da agricultura à música. Sem essa base, a resistência negra no Brasil parece surgir do nada, quando na verdade continua tradições africanas.</div></details>
+  <details class="exercicio"><summary><span class="tag">Q2</span>O que os manuscritos de Tombuctu provam contra a tese da "África sem escrita"?</summary><div class="resposta"><b>Caminho de resposta</b>Provam a existência de uma cultura letrada e acadêmica na África Ocidental desde a Idade Média, com produção em astronomia, direito, medicina e teologia — desmentindo materialmente a narrativa colonial de um continente "sem escrita e sem história".</div></details>
+</section>
+
+<!-- Capítulo 2 -->
+<section class="bloco rev" id="cap2">
+  <div class="cap-hero">
+    <span class="num">Capítulo 02</span>
+    <h3>O Tráfico Atlântico de Pessoas Escravizadas</h3>
+    <p class="papel-vida">A maior migração forçada da história humana — e o Brasil no centro dela</p>
+  </div>
+
+  <p>Entre os séculos XVI e XIX, cerca de <strong>12,5 milhões de africanos</strong> foram embarcados à força rumo às Américas. Desses, aproximadamente <strong>4,8 milhões desembarcaram no Brasil</strong> — algo em torno de 40% a 46% de todo o tráfico atlântico, segundo as bases de dados da historiografia contemporânea (como o projeto <em>SlaveVoyages</em>). Nenhum outro território americano recebeu tantas pessoas escravizadas.</p>
+
+  <h4 class="sec">Portugal e o comércio atlântico</h4>
+  <p>Portugal inaugurou o tráfico moderno ainda no século XV, na costa ocidental africana, e o transformou em engrenagem central de seu império. O comércio conectava três continentes: manufaturas e cachaça saíam do Brasil e da Europa para a África; pessoas escravizadas atravessavam o oceano; açúcar, ouro e café seguiam para os mercados europeus.</p>
+
+  <h4 class="sec">Rotas e portos brasileiros</h4>
+  <ul class="lista">
+    <li><strong>Costa da Mina e Golfo do Benim:</strong> origem de muitos povos iorubás (nagôs), jejes e haussás, com forte destino à Bahia.</li>
+    <li><strong>África Central (Congo e Angola):</strong> origem da maioria dos bantos, desembarcados sobretudo no Rio de Janeiro, Pernambuco e portos do Sudeste.</li>
+    <li><strong>Cais do Valongo (Rio de Janeiro):</strong> maior porto de desembarque de africanos escravizados das Américas; hoje é Patrimônio Mundial da UNESCO (2017), reconhecido como sítio de memória sensível.</li>
+  </ul>
+
+  <h4 class="sec">A travessia: o navio negreiro</h4>
+  <p>A travessia — chamada pelos traficantes de "passagem do meio" — durava semanas ou meses. Homens, mulheres e crianças viajavam acorrentados em porões superlotados, com comida escassa, doenças e violência constante. As taxas de mortalidade a bordo eram altíssimas. O poema <em>O Navio Negreiro</em> (1869), de Castro Alves, transformou esse horror em denúncia pública e tornou-se símbolo da literatura abolicionista.</p>
+
+  <div class="caixa saber">
+    <div class="rotulo"><span class="ico">✦</span><b>Consequências humanas e culturais</b></div>
+    <p>O tráfico separou famílias e destruiu comunidades na África — mas não conseguiu destruir culturas. Línguas, religiões, técnicas de trabalho, ritmos e memórias atravessaram o oceano e foram <strong>recriados no Brasil</strong>, dando origem a uma das culturas afro-diaspóricas mais vigorosas do mundo.</p>
+  </div>
+
+  <details class="exercicio"><summary><span class="tag">Q1</span>O que os números do tráfico revelam sobre a formação da sociedade brasileira?</summary><div class="resposta"><b>Caminho de resposta</b>Recebendo cerca de 4,8 milhões de africanos — quase metade de todo o tráfico atlântico —, o Brasil teve sua economia, demografia e cultura estruturadas pelo trabalho e pelos saberes de africanos e seus descendentes. A população negra não é um "capítulo" da história do Brasil: é sua base formadora.</div></details>
+  <details class="exercicio"><summary><span class="tag">Q2</span>Por que o Cais do Valongo é considerado um "sítio de memória sensível"?</summary><div class="resposta"><b>Caminho de resposta</b>Porque materializa o maior ponto de desembarque de pessoas escravizadas das Américas. Assim como outros lugares de memória dolorosa no mundo, seu reconhecimento pela UNESCO obriga o país a lembrar o crime da escravidão e a honrar as vítimas e seus descendentes.</div></details>
+</section>
+
+<!-- Capítulo 3 -->
+<section class="bloco rev" id="cap3">
+  <div class="cap-hero">
+    <span class="num">Capítulo 03</span>
+    <h3>A Escravidão no Brasil</h3>
+    <p class="papel-vida">Trabalho, violência — e resistência cotidiana em todas as frentes</p>
+  </div>
+
+  <p>A escravidão vigorou legalmente no Brasil por mais de <strong>três séculos</strong> (do século XVI a 1888) e esteve presente em todas as atividades econômicas: engenhos de açúcar no Nordeste, mineração em Minas Gerais, cafezais no Sudeste, criação de gado, portos, oficinas e serviços urbanos. Fomos o <strong>último país das Américas a abolir a escravidão</strong>.</p>
+
+  <h4 class="sec">Trabalho escravizado e violência</h4>
+  <p>A jornada nos engenhos e lavouras podia ultrapassar 14 horas. A disciplina era mantida pelo terror: açoites públicos, tronco, ferros e mutilações eram previstos e tolerados pela ordem colonial. A expectativa de vida de um trabalhador escravizado em um engenho podia ser brutalmente curta, o que tornava o sistema dependente da reposição constante pelo tráfico.</p>
+
+  <h4 class="sec">Resistência cotidiana</h4>
+  <p>A historiografia contemporânea (João José Reis, Sidney Chalhoub e outros) mostra que a resistência não se limitou às fugas e revoltas armadas. Ela era <strong>cotidiana e multiforme</strong>:</p>
+  <ul class="lista">
+    <li><strong>Corpo e trabalho:</strong> trabalho lento proposital, quebra "acidental" de ferramentas, fugas temporárias como forma de negociação.</li>
+    <li><strong>Justiça:</strong> ações de liberdade nos tribunais, compra de alforria com economias próprias, denúncias de escravização ilegal.</li>
+    <li><strong>Família e comunidade:</strong> manutenção de laços familiares, irmandades religiosas negras, redes de solidariedade urbanas.</li>
+    <li><strong>Cultura:</strong> preservação de línguas, religiões (candomblé, posteriormente umbanda), capoeira, música e culinária — a sobrevivência cultural como ato político.</li>
+    <li><strong>Quilombos:</strong> comunidades autônomas de pessoas fugidas, das quais Palmares foi a maior expressão (Parte II).</li>
+  </ul>
+
+  <div class="caixa alerta">
+    <div class="rotulo"><span class="ico">⚠</span><b>Conceito-chave</b></div>
+    <p>A pessoa escravizada nunca foi "objeto passivo". O termo atual — <strong>escravizada</strong>, e não "escrava" — marca exatamente isso: a escravidão foi uma violência <em>imposta</em> a seres humanos que jamais deixaram de agir, negociar e resistir.</p>
+  </div>
+
+  <details class="exercicio"><summary><span class="tag">Q1</span>Diferencie "resistência cotidiana" de "resistência armada", com exemplos.</summary><div class="resposta"><b>Caminho de resposta</b>Resistência armada: quilombos, revoltas como a dos Malês (1835). Resistência cotidiana: trabalho lento, quebra de ferramentas, ações judiciais de liberdade, compra de alforrias, preservação religiosa e cultural. Ambas corroíam o sistema — uma pela força, outra pelo desgaste diário e pela afirmação da humanidade dos escravizados.</div></details>
+  <details class="exercicio"><summary><span class="tag">Q2</span>Por que se diz que a preservação cultural africana foi um "ato político"?</summary><div class="resposta"><b>Caminho de resposta</b>Porque o sistema escravista tentava apagar identidades para transformar pessoas em mercadoria. Manter língua, religião, música e memória era negar essa desumanização — e criou as bases culturais do Brasil: samba, capoeira, candomblé, culinária e vocabulário de origem africana.</div></details>
+</section>
+
+<!-- ===================== PARTE II ===================== -->
+<div class="parte" id="parte2">
+  <svg class="sankofa" viewBox="0 0 64 64" fill="none" stroke="#F3E7CE" stroke-width="3" stroke-linecap="round" aria-hidden="true"><path d="M32 54 C18 54 10 44 10 32 C10 18 20 10 32 10 C44 10 52 18 52 28"/><path d="M46 20 L52 28 L58 20"/><circle cx="32" cy="32" r="5" fill="#F3E7CE" stroke="none"/></svg>
+  <span class="eyebrow">Parte II</span>
+  <h2>Quilombos e Resistência Armada</h2>
+</div>
+
+<!-- Capítulo 4: Dandara -->
+<section class="bloco rev" id="cap4">
+  <div class="cap-hero">
+    <span class="num">Capítulo 04</span>
+    <h3>Dandara dos Palmares</h3>
+    <p class="papel-vida">Guerreira e liderança de Palmares — entre a história documentada e a memória do povo negro</p>
+    <span class="datas">? — 6 de fevereiro de 1694 · Serra da Barriga</span>
+  </div>
+
+  <p>Dandara é uma das maiores figuras femininas da história do Brasil e um símbolo da resistência negra contra a escravidão. Sua trajetória, porém, exige do historiador um cuidado especial: <strong>as fontes escritas do período colonial quase não registram mulheres negras</strong>, e o que sabemos de Dandara vem sobretudo da tradição oral e da memória construída pelo movimento negro. Isso não a torna menos importante — torna-a um caso exemplar de como a história oficial silenciou as mulheres de Palmares.</p>
+
+  <h4 class="sec">Contexto: o Quilombo dos Palmares</h4>
+  <p>Palmares foi o maior e mais duradouro quilombo das Américas. Localizado na <strong>Serra da Barriga</strong>, na então Capitania de Pernambuco (atual Alagoas), resistiu por cerca de <strong>um século</strong> (do início do século XVII até 1694-1695). No auge, reunia dezenas de milhares de habitantes distribuídos em vários mocambos — aldeias fortificadas como Macaco (a capital), Andalaquituche, Subupira e outras.</p>
+  <ul class="lista">
+    <li><strong>Estrutura política:</strong> uma confederação de mocambos sob liderança central (Ganga Zumba e, depois, Zumbi), com conselhos e chefias locais — modelo inspirado em Estados centro-africanos.</li>
+    <li><strong>Economia:</strong> agricultura de mandioca, milho, feijão, banana e cana; caça, pesca, metalurgia e <em>comércio ativo</em> com moradores das vilas vizinhas, trocando excedentes por armas, sal e ferramentas.</li>
+    <li><strong>Defesa:</strong> paliçadas de madeira, fossos com estrepes (estacas pontiagudas camufladas), sentinelas e domínio das trilhas da mata — uma engenharia militar própria.</li>
+  </ul>
+
+  <h4 class="sec">Origem e hipóteses históricas</h4>
+  <p>Não há documentos que informem onde Dandara nasceu. As hipóteses correntes são duas: teria nascido <strong>no Brasil, já em Palmares ou próximo dele</strong>, ou seria <strong>africana trazida pelo tráfico</strong> ainda jovem. A tradição a descreve como mulher que dominava a <strong>capoeira</strong> e o manejo de armas, participando do planejamento das ações militares — o que é plausível, pois relatos coloniais confirmam que mulheres lutaram na defesa dos mocambos.</p>
+
+  <h4 class="sec">Liderança, batalhas e projeto político</h4>
+  <p>A memória atribui a Dandara papel de <strong>estrategista</strong>: organização das defesas, treinamento de combatentes e participação direta nas batalhas contra expedições portuguesas e holandesas. Companheira de <strong>Zumbi</strong>, com quem teria tido três filhos (Motumbo, Harmódio e Aristogíton, segundo a tradição), Dandara é lembrada também por uma posição política firme: teria se oposto ao <strong>acordo de 1678</strong> entre Ganga Zumba e o governo de Pernambuco, que oferecia liberdade apenas aos nascidos em Palmares — mantendo escravizados os demais. Para Dandara, como para Zumbi, <strong>liberdade que não fosse para todos não era liberdade</strong>.</p>
+
+  <h4 class="sec">Morte</h4>
+  <p>Segundo a tradição, em <strong>6 de fevereiro de 1694</strong>, durante a destruição da cerca do Macaco pelas tropas de Domingos Jorge Velho, Dandara, cercada, <strong>teria se lançado de uma pedreira para não ser capturada e reescravizada</strong>. O gesto entrou para a memória como afirmação radical: preferir a morte à escravidão.</p>
+
+  <div class="caixa saber">
+    <div class="rotulo"><span class="ico">✦</span><b>Legado</b></div>
+    <p>Em 2019, Dandara foi inscrita no <strong>Livro dos Heróis e Heroínas da Pátria</strong> (Lei 13.816/2019). Seu nome batiza escolas, ocupações urbanas e coletivos de mulheres negras. Historiograficamente, ela representa o desafio de recuperar as <strong>mulheres de Palmares</strong> — presentes nos combates, na agricultura e na organização social, mas apagadas pelos cronistas coloniais.</p>
+  </div>
+
+  <h4 class="sec">Linha do tempo</h4>
+  <div class="timeline">
+    <div class="evento"><span class="ano">séc. XVII</span><p>Consolidação de Palmares na Serra da Barriga; presença feminina nos mocambos.</p></div>
+    <div class="evento"><span class="ano">1678</span><p>Acordo de Ganga Zumba com Pernambuco; ala de Zumbi — à qual a tradição associa Dandara — rejeita a paz parcial.</p></div>
+    <div class="evento"><span class="ano">1694</span><p>Queda da cerca do Macaco; morte de Dandara em 6 de fevereiro, segundo a tradição.</p></div>
+    <div class="evento"><span class="ano">2019</span><p>Inscrição no Livro dos Heróis e Heroínas da Pátria.</p></div>
+  </div>
+
+  <details class="exercicio"><summary><span class="tag">Q1</span>Por que a trajetória de Dandara exige distinguir "história documentada" e "memória"?</summary><div class="resposta"><b>Caminho de resposta</b>Porque os documentos coloniais quase não registraram mulheres negras; o que sabemos de Dandara vem da tradição oral e da memória do movimento negro. O historiador trabalha com as duas dimensões: reconhece os limites das fontes e, ao mesmo tempo, entende a memória como forma legítima de reparação e identidade.</div></details>
+  <details class="exercicio"><summary><span class="tag">Q2</span>Qual o significado político da recusa ao acordo de 1678?</summary><div class="resposta"><b>Caminho de resposta</b>O acordo libertava apenas os nascidos em Palmares e devolvia os demais à escravidão. Recusá-lo significava afirmar a liberdade como direito universal, não como concessão parcial da Coroa — princípio que orientou a fase final de Palmares sob Zumbi.</div></details>
+</section>
+
+<!-- Capítulo 5: Zumbi -->
+<section class="bloco rev" id="cap5">
+  <div class="cap-hero">
+    <span class="num">Capítulo 05</span>
+    <h3>Zumbi dos Palmares</h3>
+    <p class="papel-vida">O último rei de Palmares e o maior símbolo da resistência negra brasileira</p>
+    <span class="datas">c. 1655 — 20 de novembro de 1695</span>
+  </div>
+
+  <p>Zumbi nasceu <strong>livre, em Palmares, por volta de 1655</strong> — no mesmo território que defenderia até a morte. Sua vida condensa o drama e a grandeza do maior quilombo das Américas.</p>
+
+  <h4 class="sec">Captura e educação religiosa</h4>
+  <p>Ainda criança, foi capturado numa expedição contra o quilombo e entregue ao padre <strong>Antônio Melo</strong>, em Porto Calvo. Batizado com o nome de <strong>Francisco</strong>, aprendeu português e latim e ajudava nas missas. Aos cerca de <strong>15 anos, por volta de 1670, fugiu e retornou a Palmares</strong> — uma escolha decisiva: educado à moda colonial, escolheu a liberdade quilombola.</p>
+
+  <h4 class="sec">Ascensão à liderança</h4>
+  <p>Em 1678, o governador de Pernambuco ofereceu um acordo a <strong>Ganga Zumba</strong>, líder máximo de Palmares: paz e terras em troca da submissão à Coroa e da devolução dos escravizados fugidos que não tivessem nascido no quilombo. Ganga Zumba aceitou; <strong>Zumbi recusou</strong>, liderando a ala que considerava inaceitável qualquer liberdade parcial. Com a morte de Ganga Zumba (provavelmente envenenado em meio à crise interna), Zumbi tornou-se o líder de Palmares e reorganizou sua defesa.</p>
+
+  <h4 class="sec">Organização de Palmares sob Zumbi</h4>
+  <ul class="lista">
+    <li><strong>Política:</strong> centralização militar da confederação de mocambos, mantendo conselhos e chefias locais.</li>
+    <li><strong>Economia:</strong> policultura alimentar, artesanato, metalurgia e comércio (por vezes clandestino) com povoados vizinhos.</li>
+    <li><strong>Cultura:</strong> síntese de tradições centro-africanas (bantas) com elementos indígenas e católicos — uma sociedade nova, nascida da liberdade.</li>
+    <li><strong>Defesa:</strong> guerra de guerrilha, emboscadas, mobilidade na mata e fortificações com fossos e estrepes.</li>
+  </ul>
+
+  <h4 class="sec">As guerras finais e a morte</h4>
+  <p>A partir de 1692, a Coroa contratou o bandeirante <strong>Domingos Jorge Velho</strong> para destruir Palmares. Após cerco prolongado e uso de artilharia, a capital <strong>Macaco caiu em fevereiro de 1694</strong>. Zumbi escapou ferido e manteve a resistência por mais de um ano, até ser <strong>traído por Antônio Soares</strong>, um antigo companheiro capturado que revelou seu esconderijo. Em <strong>20 de novembro de 1695</strong>, Zumbi foi morto em combate. Seu corpo foi mutilado e sua cabeça, exposta em praça pública no Recife — para "provar" que ele não era imortal, como acreditavam muitos escravizados. O efeito foi o oposto: Zumbi tornou-se eterno.</p>
+
+  <blockquote>
+    A data da morte de Zumbi, 20 de novembro, foi proposta nos anos 1970 pelo Grupo Palmares (Porto Alegre) e pelo poeta Oliveira Silveira como contraponto ao 13 de maio: em vez de celebrar a "concessão" da Lei Áurea, celebrar a luta dos próprios negros.
+    <footer>Dia Nacional de Zumbi e da Consciência Negra — feriado nacional desde a Lei 14.759/2023</footer>
+  </blockquote>
+
+  <h4 class="sec">Linha do tempo</h4>
+  <div class="timeline">
+    <div class="evento"><span class="ano">c. 1655</span><p>Nascimento em Palmares.</p></div>
+    <div class="evento"><span class="ano">c. 1662</span><p>Capturado e entregue ao padre Antônio Melo; batizado Francisco.</p></div>
+    <div class="evento"><span class="ano">c. 1670</span><p>Foge e retorna a Palmares, aos 15 anos.</p></div>
+    <div class="evento"><span class="ano">1678</span><p>Rejeita o acordo aceito por Ganga Zumba; assume a liderança na sequência.</p></div>
+    <div class="evento"><span class="ano">1694</span><p>Queda da cerca do Macaco diante das tropas de Domingos Jorge Velho.</p></div>
+    <div class="evento"><span class="ano">1695</span><p>Traído e morto em 20 de novembro; cabeça exposta no Recife.</p></div>
+    <div class="evento"><span class="ano">2023</span><p>20 de novembro torna-se feriado nacional da Consciência Negra.</p></div>
+  </div>
+
+  <details class="exercicio"><summary><span class="tag">Q1</span>Por que a fuga de Zumbi da casa do padre é considerada um ato político?</summary><div class="resposta"><b>Caminho de resposta</b>Zumbi recebeu a educação que o sistema colonial oferecia como "civilização" — e a rejeitou conscientemente para viver livre em Palmares. A fuga demonstra que a escolha pela liberdade quilombola não era "ignorância", mas decisão política de quem conhecia os dois mundos.</div></details>
+  <details class="exercicio"><summary><span class="tag">Q2</span>Explique por que o 20 de novembro substituiu simbolicamente o 13 de maio para o movimento negro.</summary><div class="resposta"><b>Caminho de resposta</b>O 13 de maio celebra a assinatura da Lei Áurea pela princesa Isabel — uma narrativa de "concessão" que apaga a luta negra. O 20 de novembro celebra Zumbi, ou seja, o protagonismo dos próprios negros na conquista da liberdade. A troca de datas é uma disputa de memória: quem é o sujeito da abolição?</div></details>
+  <details class="exercicio"><summary><span class="tag">Q3</span>A exposição da cabeça de Zumbi no Recife alcançou seu objetivo? Justifique.</summary><div class="resposta"><b>Caminho de resposta</b>Não. A intenção era aterrorizar e provar que Zumbi era mortal; o resultado histórico foi transformá-lo em mártir e no maior símbolo da resistência negra brasileira, celebrado até hoje em feriado nacional.</div></details>
+</section>
+
+<!-- ===================== PARTE III ===================== -->
+<div class="parte" id="parte3">
+  <svg class="sankofa" viewBox="0 0 64 64" fill="none" stroke="#F3E7CE" stroke-width="3" stroke-linecap="round" aria-hidden="true"><path d="M32 54 C18 54 10 44 10 32 C10 18 20 10 32 10 C44 10 52 18 52 28"/><path d="M46 20 L52 28 L58 20"/><circle cx="32" cy="32" r="5" fill="#F3E7CE" stroke="none"/></svg>
+  <span class="eyebrow">Parte III</span>
+  <h2>Revoltas e Abolicionismo</h2>
+</div>
+
+<!-- Capítulo 6: Luiza Mahin -->
+<section class="bloco rev" id="cap6">
+  <div class="cap-hero">
+    <span class="num">Capítulo 06</span>
+    <h3>Luiza Mahin</h3>
+    <p class="papel-vida">Africana livre, quituteira e figura ligada às revoltas da Bahia — mãe de Luiz Gama</p>
+    <span class="datas">início do séc. XIX · Salvador — destino incerto</span>
+  </div>
+
+  <p>Luiza Mahin é uma das maiores referências femininas da resistência negra brasileira — e também um dos casos mais fascinantes de <strong>debate historiográfico</strong>. Quase tudo o que sabemos sobre ela vem de uma única fonte: a <strong>carta autobiográfica de seu filho, Luiz Gama</strong>, escrita em 1880 ao amigo Lúcio de Mendonça.</p>
+
+  <h4 class="sec">O que diz a carta de Luiz Gama</h4>
+  <p>Gama descreve a mãe como <strong>"negra mina", africana, livre</strong>, baixa, magra e bonita, que "nunca aceitou o batismo ou a doutrina cristã" e vivia em Salvador do comércio de quitandas. Segundo o filho, ela se envolveu nas insurreições de escravizados na Bahia e, perseguida, partiu para o Rio de Janeiro — onde teria continuado a militar e, possivelmente, sido presa e deportada. Gama jamais conseguiu reencontrá-la, apesar de procurá-la por anos.</p>
+
+  <h4 class="sec">Origem africana: nagôs e cultura iorubá</h4>
+  <p>O nome "Mahin" remete aos <strong>Mahi</strong>, povo do Golfo do Benim ligado ao mundo cultural <strong>iorubá (nagô, na Bahia)</strong>. Os nagôs formavam parte expressiva da população africana de Salvador no século XIX, mantendo língua, religião dos orixás e redes de comércio — as <strong>ganhadeiras</strong>, mulheres que vendiam quitutes nas ruas, eram peça-chave da economia urbana e das redes de comunicação entre africanos.</p>
+
+  <h4 class="sec">A Revolta dos Malês (1835)</h4>
+  <p>Na madrugada de 25 de janeiro de 1835, centenas de africanos — muitos deles <strong>malês</strong>, isto é, muçulmanos — levantaram-se em armas em Salvador, no maior levante urbano de escravizados da história do Brasil. A revolta foi sufocada com violência: prisões, açoites, execuções e deportações para a África. A tradição associa Luiza Mahin à rede de apoio da revolta — as quitandeiras teriam circulado mensagens escritas em árabe entre os rebeldes. <strong>Não há documento que comprove sua participação direta</strong>, mas o cenário descrito por Gama é exatamente o das perseguições que se seguiram a 1835 e à Sabinada (1837–1838).</p>
+
+  <div class="caixa alerta">
+    <div class="rotulo"><span class="ico">⚠</span><b>Debate histórico: evidências e controvérsias</b></div>
+    <p>Historiadores como João José Reis observam que Luiza Mahin não aparece nos registros policiais e judiciais conhecidos da revolta. Isso abre duas leituras possíveis — e ambas ensinam algo: (1) ela pode ter participado sem ser identificada, como tantas mulheres invisíveis às fontes; (2) sua figura pode ter sido amplificada pela memória. Em qualquer hipótese, Luiza Mahin <strong>existiu</strong>, foi uma africana livre e rebelde aos padrões coloniais, e tornou-se símbolo legítimo da mulher negra insubmissa.</p>
+  </div>
+
+  <div class="caixa saber">
+    <div class="rotulo"><span class="ico">✦</span><b>Legado</b></div>
+    <p>Luiza Mahin dá nome a escolas, ocupações e coletivos de mulheres negras em todo o país, e sua história inspira estudos sobre as <strong>ganhadeiras e a resistência feminina urbana</strong>. Seu maior "documento vivo" foi o próprio filho: o orgulho que Luiz Gama tinha da mãe rebelde moldou o maior abolicionista negro do Brasil.</p>
+  </div>
+
+  <details class="exercicio"><summary><span class="tag">Q1</span>Qual é a principal fonte histórica sobre Luiza Mahin e quais seus limites?</summary><div class="resposta"><b>Caminho de resposta</b>A carta autobiográfica de Luiz Gama (1880). É uma fonte valiosa, mas única, escrita décadas depois e por um filho que perdeu a mãe na infância — o que exige cruzamento com o contexto (revoltas baianas, repressão, deportações) e reconhecimento das lacunas documentais.</div></details>
+  <details class="exercicio"><summary><span class="tag">Q2</span>Por que as quitandeiras eram estratégicas nas redes de resistência de Salvador?</summary><div class="resposta"><b>Caminho de resposta</b>Circulavam livremente pela cidade vendendo alimentos, conectando africanos de diferentes casas e nações, transportando informações (e, na tradição sobre 1835, mensagens) sem levantar suspeitas — uma infraestrutura de comunicação invisível ao poder colonial.</div></details>
+</section>
+
+<!-- Capítulo 7: Luiz Gama -->
+<section class="bloco rev" id="cap7">
+  <div class="cap-hero">
+    <span class="num">Capítulo 07</span>
+    <h3>Luiz Gama</h3>
+    <p class="papel-vida">Poeta, jornalista e rábula — Patrono da Abolição da Escravidão no Brasil</p>
+    <span class="datas">21 de junho de 1830, Salvador — 24 de agosto de 1882, São Paulo</span>
+  </div>
+
+  <p>A vida de Luiz Gama parece um romance: filho de africana livre, <strong>vendido ilegalmente como escravo pelo próprio pai</strong>, alfabetizou-se sozinho na adolescência, provou sua liberdade, tornou-se advogado sem diploma e <strong>libertou mais de 500 pessoas escravizadas nos tribunais</strong>.</p>
+
+  <h4 class="sec">Infância e escravização ilegal</h4>
+  <p>Luiz Gama nasceu <strong>livre</strong> em Salvador, filho de <strong>Luiza Mahin</strong> e de um pai português de família rica, cujo nome jamais revelou. Em <strong>1840, aos dez anos, o pai, endividado pelo jogo, vendeu o próprio filho</strong> — um crime, pois Gama era livre de nascimento. Levado por navio ao Rio de Janeiro e depois a Santos, subiu a serra a pé até São Paulo, onde ninguém quis "comprar o menino baiano" (havia preconceito de que baianos seriam rebeldes). Acabou como escravizado doméstico na casa do alferes Antônio Pereira Cardoso.</p>
+
+  <h4 class="sec">Alfabetização e liberdade</h4>
+  <p>Em 1847, hospedou-se na casa o estudante <strong>Antônio Rodrigues do Prado Júnior</strong>, que ensinou o jovem Luiz a ler e escrever — aos <strong>17 anos</strong>. A leitura mudou tudo: Gama reuniu provas de seu nascimento livre e, em <strong>1848, conquistou (de fato, reconquistou) sua liberdade</strong>. Serviu seis anos na Força Pública, trabalhou como escrivão e mergulhou no estudo do Direito por conta própria — a Faculdade do Largo de São Francisco não o aceitaria como aluno regular.</p>
+
+  <h4 class="sec">O rábula que libertou mais de 500 pessoas</h4>
+  <p>Como <strong>rábula</strong> (advogado licenciado sem diploma), Gama transformou o tribunal em campo de batalha abolicionista. Sua arma predileta: a <strong>Lei de 7 de novembro de 1831</strong>, que proibia o tráfico de africanos — e que fora sistematicamente ignorada ("lei para inglês ver"). Gama demonstrava que africanos trazidos após 1831 eram <em>legalmente livres</em>, assim como seus filhos. Com essa tese, venceu dezenas de ações e libertou, por via judicial, <strong>mais de 500 pessoas</strong>. Ficou célebre sua afirmação de que o escravizado que mata o senhor pratica legítima defesa — frase que escandalizou o Império.</p>
+
+  <h4 class="sec">Poeta e jornalista</h4>
+  <p>Em 1859, publicou <strong><em>Primeiras Trovas Burlescas de Getulino</em></strong>, sátira em versos que ridicularizava a elite mestiça que se fingia branca — é dele a irônica "Bodarrada", em que proclama que, se todos têm origem africana, "bodes" são todos. No jornalismo, cofundou o <em>Diabo Coxo</em> (1864, com Angelo Agostini) e escreveu no <em>Radical Paulistano</em>, unindo humor, imprensa e combate político. Republicano e abolicionista radical, influenciou toda a geração final do abolicionismo paulista, incluindo os "caifazes" de Antônio Bento.</p>
+
+  <h4 class="sec">Morte e legado</h4>
+  <p>Morreu de diabetes em <strong>24 de agosto de 1882</strong>, seis anos antes da Lei Áurea. Seu enterro parou São Paulo: milhares acompanharam o caixão carregado pelo povo. Em <strong>2015</strong>, a OAB concedeu-lhe o título simbólico de advogado; em <strong>2018</strong>, a Lei 13.629 o declarou <strong>Patrono da Abolição da Escravidão do Brasil</strong>, com inscrição no Livro dos Heróis da Pátria.</p>
+
+  <h4 class="sec">Linha do tempo</h4>
+  <div class="timeline">
+    <div class="evento"><span class="ano">1830</span><p>Nasce livre em Salvador, em 21 de junho.</p></div>
+    <div class="evento"><span class="ano">1840</span><p>Vendido ilegalmente pelo pai; levado a São Paulo.</p></div>
+    <div class="evento"><span class="ano">1847–48</span><p>Alfabetiza-se com Antônio Rodrigues do Prado Jr.; prova sua liberdade.</p></div>
+    <div class="evento"><span class="ano">1859</span><p>Publica <em>Primeiras Trovas Burlescas de Getulino</em>.</p></div>
+    <div class="evento"><span class="ano">1860s–70s</span><p>Atua como rábula; liberta mais de 500 escravizados usando a Lei de 1831.</p></div>
+    <div class="evento"><span class="ano">1882</span><p>Morre em São Paulo; enterro se torna ato público massivo.</p></div>
+    <div class="evento"><span class="ano">2018</span><p>Declarado Patrono da Abolição (Lei 13.629/2018).</p></div>
+  </div>
+
+  <details class="exercicio"><summary><span class="tag">Q1</span>Explique a estratégia jurídica de Luiz Gama baseada na Lei de 1831.</summary><div class="resposta"><b>Caminho de resposta</b>A lei de 7/11/1831 proibia o tráfico e declarava livres os africanos desembarcados a partir dela — mas foi ignorada por décadas. Gama usava a própria legalidade do Império contra o Império: provava a data de chegada dos africanos e exigia dos juízes o cumprimento da lei, libertando-os junto com seus descendentes.</div></details>
+  <details class="exercicio"><summary><span class="tag">Q2</span>O que a venda de Gama pelo próprio pai revela sobre a sociedade escravista?</summary><div class="resposta"><b>Caminho de resposta</b>Revela que a escravidão corrompia até os laços familiares: um pai branco pôde transformar o filho livre e negro em mercadoria, e a sociedade aceitou a transação sem verificar sua legalidade. Mostra também a fragilidade da liberdade dos negros livres, sempre sob risco de escravização ilegal.</div></details>
+</section>
+
+<!-- Capítulo 8: José do Patrocínio -->
+<section class="bloco rev" id="cap8">
+  <div class="cap-hero">
+    <span class="num">Capítulo 08</span>
+    <h3>José do Patrocínio</h3>
+    <p class="papel-vida">"O Tigre da Abolição" — jornalista que transformou a imprensa em trincheira</p>
+    <span class="datas">9 de outubro de 1853, Campos dos Goytacazes — 29 de janeiro de 1905, Rio de Janeiro</span>
+  </div>
+
+  <p>Filho de um vigário fazendeiro e de <strong>Justina, jovem negra quitandeira</strong>, José Carlos do Patrocínio cresceu vendo de perto a escravidão na fazenda do pai. Aos 14 anos partiu para o Rio de Janeiro, trabalhou como servente na Santa Casa e formou-se <strong>farmacêutico</strong> — mas foi na imprensa que encontrou sua verdadeira vocação.</p>
+
+  <h4 class="sec">Jornalismo de combate</h4>
+  <p>A partir de 1877, na <em>Gazeta de Notícias</em>, e sobretudo à frente da <strong><em>Gazeta da Tarde</em></strong> (1881) e depois de seu próprio jornal, <strong><em>Cidade do Rio</em></strong> (1887), Patrocínio fez algo novo no Brasil: tirou o abolicionismo dos salões e o levou às ruas. Promovia <strong>comícios, quermesses e conferências públicas</strong>, arrecadava fundos para alforrias e denunciava senhores de escravos com nome e sobrenome. Sua oratória inflamada lhe valeu o apelido de <strong>"Tigre da Abolição"</strong>.</p>
+
+  <h4 class="sec">A Confederação Abolicionista e a Lei Áurea</h4>
+  <p>Em 1883, fundou com André Rebouças e outros a <strong>Confederação Abolicionista</strong>, articulando dezenas de clubes e sociedades em campanha nacional. O movimento combinava propaganda, pressão parlamentar e ações diretas — como o apoio às fugas em massa organizadas nos anos finais. Em <strong>13 de maio de 1888</strong>, Patrocínio estava no Paço Imperial na assinatura da Lei Áurea; a cena dele saudando a princesa Isabel tornou-se uma das imagens mais conhecidas do dia.</p>
+
+  <h4 class="sec">República e últimos anos</h4>
+  <p>Monarquista por gratidão a Isabel, Patrocínio viveu tensões com o novo regime: chegou a ser <strong>desterrado para o Amazonas</strong> em 1892, durante o governo Floriano Peixoto, por críticas na imprensa. Fundador da <strong>Academia Brasileira de Letras</strong> (cadeira 21), morreu em 1905, pobre, de crise de hemoptise — reza a memória que ao final acompanhava com entusiasmo os experimentos aeronáuticos de Santos Dumont, seu último fascínio.</p>
+
+  <div class="caixa saber">
+    <div class="rotulo"><span class="ico">✦</span><b>Legado</b></div>
+    <p>Patrocínio provou que a <strong>opinião pública</strong> podia derrubar uma instituição secular. Seu jornalismo militante inaugurou no Brasil a tradição da imprensa como instrumento de mobilização por direitos — herança viva no jornalismo negro e nas mídias do movimento negro contemporâneo.</p>
+  </div>
+
+  <details class="exercicio"><summary><span class="tag">Q1</span>O que diferenciava o abolicionismo de Patrocínio do abolicionismo parlamentar?</summary><div class="resposta"><b>Caminho de resposta</b>Enquanto o abolicionismo parlamentar negociava leis graduais nos gabinetes, Patrocínio construiu um movimento de massas: comícios, jornais populares, arrecadação de alforrias e denúncia pública dos escravocratas. Ele deslocou o centro da luta do Parlamento para a rua e a opinião pública.</div></details>
+</section>
+
+<!-- Capítulo 9: André Rebouças -->
+<section class="bloco rev" id="cap9">
+  <div class="cap-hero">
+    <span class="num">Capítulo 09</span>
+    <h3>André Rebouças</h3>
+    <p class="papel-vida">Engenheiro, intelectual e abolicionista — o técnico que sonhou uma "democracia rural"</p>
+    <span class="datas">13 de janeiro de 1838, Cachoeira (BA) — 9 de maio de 1898, Funchal (Ilha da Madeira)</span>
+  </div>
+
+  <p>Neto de uma alforriada e filho do conselheiro Antônio Pereira Rebouças — advogado autodidata negro que se destacou no Império —, André Rebouças pertenceu à rara elite letrada negra do século XIX e usou sua posição para atacar o sistema que oprimia seu povo.</p>
+
+  <h4 class="sec">Formação e engenharia</h4>
+  <p>Formou-se engenheiro militar no Rio de Janeiro e complementou estudos na Europa. De volta, tornou-se um dos <strong>engenheiros mais importantes do Império</strong>:</p>
+  <ul class="lista">
+    <li><strong>Abastecimento urbano:</strong> participou das soluções para a crise de água do Rio de Janeiro, com captação em mananciais da Tijuca.</li>
+    <li><strong>Portos e docas:</strong> projetou e defendeu o sistema de docas do Rio; a empresa que organizou empregava trabalhadores livres, inclusive negros, como demonstração prática de sua causa.</li>
+    <li><strong>Ferrovias:</strong> trabalhou nos estudos da estrada de ferro Curitiba–Paranaguá, uma das obras mais ousadas da engenharia brasileira do século XIX, ao lado do irmão Antônio Rebouças Filho.</li>
+  </ul>
+
+  <h4 class="sec">Abolicionismo e projeto de reforma agrária</h4>
+  <p>Professor da Escola Politécnica, cofundador da <strong>Sociedade Brasileira Contra a Escravidão</strong> (1880) e da <strong>Confederação Abolicionista</strong> (1883), Rebouças foi o "cérebro econômico" do movimento. Sua originalidade: entender que a abolição sem terra seria incompleta. Defendia a <strong>"democracia rural"</strong> — impostos sobre latifúndios improdutivos, acesso dos libertos à propriedade e educação técnica — antecipando em mais de um século o debate sobre reparação. Foi amigo próximo de <strong>Dom Pedro II</strong> e de Joaquim Nabuco.</p>
+
+  <h4 class="sec">Exílio e morte</h4>
+  <p>Fiel à família imperial, acompanhou voluntariamente D. Pedro II ao <strong>exílio</strong> após a proclamação da República (1889). Passou por Portugal e pela África; morreu em 1898 na Ilha da Madeira, em circunstâncias tristes — caiu de um penhasco, possivelmente em suicídio, pobre e desiludido com o rumo do país que ajudara a modernizar.</p>
+
+  <div class="caixa saber">
+    <div class="rotulo"><span class="ico">✦</span><b>Legado</b></div>
+    <p>O <strong>Túnel Rebouças</strong>, no Rio, homenageia André e seu irmão. Mais importante: sua tese de que <strong>abolição sem terra e educação geraria exclusão</strong> provou-se profética — e fundamenta até hoje os debates sobre políticas de reparação no Brasil.</p>
+  </div>
+
+  <details class="exercicio"><summary><span class="tag">Q1</span>Por que Rebouças considerava a Lei Áurea insuficiente?</summary><div class="resposta"><b>Caminho de resposta</b>Porque libertava sem indenizar, sem distribuir terra e sem educar. Sua "democracia rural" propunha taxar o latifúndio e dar aos libertos meios de vida autônomos. Como nada disso foi feito, os libertos foram lançados à margem — exatamente a exclusão que Rebouças previu.</div></details>
+</section>
+
+<!-- Capítulo 10: Maria Firmina -->
+<section class="bloco rev" id="cap10">
+  <div class="cap-hero">
+    <span class="num">Capítulo 10</span>
+    <h3>Maria Firmina dos Reis</h3>
+    <p class="papel-vida">Primeira romancista negra do Brasil — professora, escritora e abolicionista maranhense</p>
+    <span class="datas">11 de outubro de 1822, São Luís (MA) — 11 de novembro de 1917, Guimarães (MA)</span>
+  </div>
+
+  <p>Num país em que mulheres não votavam e negros eram escravizados, uma <strong>mulher negra publicou um romance abolicionista em 1859</strong>. Esse fato extraordinário chama-se Maria Firmina dos Reis.</p>
+
+  <h4 class="sec">Vida e magistério</h4>
+  <p>Nascida livre em São Luís, filha de mãe possivelmente alforriada, Firmina foi criada na vila de Guimarães. Autodidata em grande parte, prestou concurso e tornou-se, em <strong>1847, professora da cadeira de primeiras letras</strong> — uma das primeiras professoras concursadas do Maranhão. Dedicou a vida inteira à educação: em <strong>1880, já aposentada, fundou uma escola mista e gratuita</strong> (meninos e meninas juntos) para crianças pobres em Maçaricó — escândalo para a época, que forçou seu fechamento pouco depois.</p>
+
+  <h4 class="sec">Úrsula (1859): contexto e importância</h4>
+  <p>Publicado sob o pseudônimo <em>"Uma Maranhense"</em>, <strong><em>Úrsula</em></strong> é considerado o <strong>primeiro romance abolicionista brasileiro e o primeiro romance publicado por uma mulher negra no país</strong>. Sua revolução está no ponto de vista: pela primeira vez, personagens escravizados — a mãe Susana, o velho Túlio — têm <strong>voz, interioridade e memória da África</strong>. Susana narra a travessia no navio negreiro em primeira pessoa, décadas antes de Castro Alves. Firmina publicou ainda o conto <em>"A Escrava"</em> (1887), poemas (<em>Cantos à beira-mar</em>) e compôs o hino da abolição maranhense.</p>
+
+  <blockquote>
+    Em <em>Úrsula</em>, a africana Susana lembra a liberdade perdida: pela primeira vez na literatura brasileira, a escravidão é narrada do ponto de vista de quem a sofreu.
+    <footer>A revolução literária de 1859</footer>
+  </blockquote>
+
+  <h4 class="sec">Esquecimento e redescoberta</h4>
+  <p>Firmina morreu em 1917, cega e pobre, praticamente esquecida. Seu romance só foi redescoberto em <strong>1962</strong>, pelo pesquisador Horácio de Almeida, e desde então tornou-se referência obrigatória nos estudos de literatura afro-brasileira e de autoria feminina — entrando, inclusive, em listas de vestibulares de todo o país.</p>
+
+  <details class="exercicio"><summary><span class="tag">Q1</span>O que torna <em>Úrsula</em> inovador em relação à literatura da época?</summary><div class="resposta"><b>Caminho de resposta</b>A perspectiva narrativa: personagens negros deixam de ser figurantes e ganham voz, memória e humanidade plena. Susana narra a África livre e o horror da travessia em primeira pessoa — um deslocamento radical do olhar, feito por uma autora negra em pleno auge da escravidão.</div></details>
+  <details class="exercicio"><summary><span class="tag">Q2</span>O que o "esquecimento" de Firmina até 1962 revela sobre o cânone literário?</summary><div class="resposta"><b>Caminho de resposta</b>Que o cânone não é neutro: seleciona segundo hierarquias de raça, gênero e região. Uma pioneira negra, mulher e maranhense ficou um século fora da história literária "oficial" — e sua redescoberta mostra que revisar o cânone é recuperar o que o racismo apagou.</div></details>
+</section>
+
+<!-- ===================== PARTE IV ===================== -->
+<div class="parte" id="parte4">
+  <svg class="sankofa" viewBox="0 0 64 64" fill="none" stroke="#F3E7CE" stroke-width="3" stroke-linecap="round" aria-hidden="true"><path d="M32 54 C18 54 10 44 10 32 C10 18 20 10 32 10 C44 10 52 18 52 28"/><path d="M46 20 L52 28 L58 20"/><circle cx="32" cy="32" r="5" fill="#F3E7CE" stroke="none"/></svg>
+  <span class="eyebrow">Parte IV</span>
+  <h2>Ciência, Cultura e Educação</h2>
+</div>
+
+<!-- Capítulo 11: Machado de Assis -->
+<section class="bloco rev" id="cap11">
+  <div class="cap-hero">
+    <span class="num">Capítulo 11</span>
+    <h3>Machado de Assis</h3>
+    <p class="papel-vida">O maior escritor da literatura brasileira — e o embranquecimento de sua imagem</p>
+    <span class="datas">21 de junho de 1839 — 29 de setembro de 1908, Rio de Janeiro</span>
+  </div>
+
+  <p>Joaquim Maria Machado de Assis nasceu no <strong>Morro do Livramento</strong>, no Rio de Janeiro, neto de alforriados, filho de um pintor de paredes negro e de uma lavadeira açoriana. Órfão cedo, pobre, epilético e gago, sem estudos formais completos, tornou-se o <strong>maior escritor da língua portuguesa no Brasil</strong> — trajetória que desmonta qualquer determinismo social.</p>
+
+  <h4 class="sec">Formação autodidata e jornalismo</h4>
+  <p>Aprendiz de tipógrafo na Imprensa Nacional aos 16 anos, revisor e depois cronista, Machado construiu sua cultura nas redações e livrarias. Estudou francês, inglês, alemão — traduziu Victor Hugo e Poe — e percorreu todos os gêneros: poesia, conto, crônica, teatro, crítica e romance. Funcionário público exemplar no Ministério da Agricultura, casou-se com a portuguesa Carolina Novais, sua grande companheira intelectual.</p>
+
+  <h4 class="sec">A revolução de 1881 e as obras principais</h4>
+  <p>Com <strong><em>Memórias Póstumas de Brás Cubas</em></strong> (1881), narrado por um defunto-autor, Machado inaugurou o Realismo no Brasil e antecipou procedimentos da literatura moderna mundial: ironia radical, capítulos fragmentados, conversa direta com o leitor. Seguiram-se <strong><em>Quincas Borba</em></strong> (1891), <strong><em>Dom Casmurro</em></strong> (1899) — com o narrador enciumado Bentinho e a eterna pergunta sobre Capitu —, <em>Esaú e Jacó</em> (1904) e <em>Memorial de Aires</em> (1908), além de contos magistrais como "O Alienista" e "Missa do Galo". Em <strong>1897, fundou e presidiu a Academia Brasileira de Letras</strong>, cargo que ocupou até a morte.</p>
+
+  <h4 class="sec">Machado e a escravidão</h4>
+  <p>Acusado no passado de "ausente" da questão racial, Machado vem sendo relido: sua crítica à escravidão é <strong>oblíqua e corrosiva</strong>. Está no menino Brás Cubas montando no escravizado Prudêncio "como cavalo"; no mesmo Prudêncio que, liberto, compra um escravo e o açoita — mostrando como a violência se reproduz; em crônicas ferinas sobre o 13 de maio; e em contos como "Pai contra mãe", em que a caça a escravizados fugidos é profissão como outra qualquer. Machado expôs a <em>naturalização</em> da crueldade — a crítica mais devastadora possível.</p>
+
+  <div class="caixa alerta">
+    <div class="rotulo"><span class="ico">⚠</span><b>Racismo e branqueamento histórico</b></div>
+    <p>Retratos retocados, estátuas de pele clareada e descrições como "moreno" construíram por décadas um <strong>Machado embranquecido</strong> — como se genialidade e negritude fossem incompatíveis. Campanhas recentes, como a <em>Machado de Assis Real</em> (2019, Zumbi dos Palmares/USP), restauraram publicamente sua imagem de <strong>homem negro</strong>, devolvendo ao escritor sua identidade e ao país um espelho incômodo.</p>
+  </div>
+
+  <details class="exercicio"><summary><span class="tag">Q1</span>Como Machado critica a escravidão sem escrever "romances de tese"?</summary><div class="resposta"><b>Caminho de resposta</b>Pela ironia e pelo detalhe: cenas em que a violência aparece como hábito banal (Brás Cubas e Prudêncio; "Pai contra mãe"). Em vez de discursar contra a escravidão, ele mostra leitores e personagens confortáveis com ela — obrigando o próprio leitor a reconhecer sua cumplicidade.</div></details>
+  <details class="exercicio"><summary><span class="tag">Q2</span>O que o embranquecimento de Machado revela sobre o racismo brasileiro?</summary><div class="resposta"><b>Caminho de resposta</b>Revela o mecanismo de dissociar excelência e negritude: quando um negro atinge o topo, o racismo "resolve" a contradição clareando sua imagem. Restaurar o Machado negro é disputar quem pode ser símbolo máximo da cultura nacional.</div></details>
+</section>
+
+<!-- Capítulo 12: Teodoro Sampaio -->
+<section class="bloco rev" id="cap12">
+  <div class="cap-hero">
+    <span class="num">Capítulo 12</span>
+    <h3>Teodoro Sampaio</h3>
+    <p class="papel-vida">Engenheiro, geógrafo e historiador — o cientista que comprou a liberdade dos irmãos</p>
+    <span class="datas">7 de janeiro de 1855, Santo Amaro (BA) — 15 de outubro de 1937, São Paulo</span>
+  </div>
+
+  <p>Teodoro Fernandes Sampaio nasceu no Engenho Canabrava, <strong>filho de Domingas da Paixão do Carmo, mulher escravizada</strong>, e — segundo a tradição biográfica — do padre Manuel Fernandes Sampaio, que o levou ainda menino ao Rio de Janeiro e garantiu sua educação. Enquanto estudava, seus três irmãos permaneciam escravizados na Bahia.</p>
+
+  <h4 class="sec">Formação e a compra das alforrias</h4>
+  <p>Formou-se <strong>engenheiro civil pela Escola Politécnica do Rio de Janeiro em 1877</strong>. Com os primeiros salários, realizou um projeto pessoal que resume o drama de sua geração: <strong>comprou, uma a uma, as alforrias dos irmãos</strong> Martinho, Ezequiel e Matias — libertando o último pouco antes da Lei Áurea. A mãe, Domingas, foi alforriada e viveu com o filho.</p>
+
+  <h4 class="sec">Obras de engenharia e cartografia</h4>
+  <ul class="lista">
+    <li><strong>Comissão Hidráulica do Império (1879–80):</strong> explorou o rio São Francisco e a viabilidade de navegação e ferrovias, sob direção do engenheiro norte-americano W. Milnor Roberts.</li>
+    <li><strong>Comissão Geográfica e Geológica de São Paulo (1886):</strong> ao lado de Orville Derby, mapeou o interior paulista, base para a expansão ferroviária e cafeeira.</li>
+    <li><strong>Saneamento e urbanismo:</strong> atuou na repartição de águas e esgotos de São Paulo e participou dos estudos que modernizaram a capital paulista; mais tarde, dirigiu obras de saneamento em Salvador.</li>
+  </ul>
+
+  <h4 class="sec">O intelectual: tupi, história e geografia</h4>
+  <p>Sampaio foi também um humanista: sua obra-prima, <strong><em>O Tupi na Geografia Nacional</em></strong> (1901), decifra a origem indígena de milhares de nomes de lugares do Brasil e permanece referência até hoje. Escreveu estudos fundamentais sobre o rio São Francisco e a Chapada Diamantina e sobre a história da Bahia. Foi sócio fundador do Instituto Geográfico e Histórico da Bahia e membro do IHGB; ao final da vida, elegeu-se <strong>deputado federal pela Bahia</strong> (1926).</p>
+
+  <div class="caixa saber">
+    <div class="rotulo"><span class="ico">✦</span><b>Legado</b></div>
+    <p>Teodoro Sampaio simboliza a <strong>ciência negra brasileira do século XIX</strong>: filho de escravizada que se tornou um dos maiores engenheiros e geógrafos do país. Ruas, escolas e um município baiano levam seu nome — e sua biografia expõe o absurdo do sistema que ele venceu: um cientista tendo de <em>comprar</em> a própria família.</p>
+  </div>
+
+  <details class="exercicio"><summary><span class="tag">Q1</span>O que a compra das alforrias dos irmãos revela sobre os limites da "ascensão individual" na escravidão?</summary><div class="resposta"><b>Caminho de resposta</b>Mesmo formado e reconhecido, Sampaio continuava preso ao sistema: sua família era propriedade de terceiros, e a única via era pagar por ela. A ascensão individual não anulava a estrutura escravista — só o dinheiro e, depois, a abolição romperam aquele cativeiro.</div></details>
+</section>
+
+<!-- Capítulo 13: Tia Ciata -->
+<section class="bloco rev" id="cap13">
+  <div class="cap-hero">
+    <span class="num">Capítulo 13</span>
+    <h3>Tia Ciata</h3>
+    <p class="papel-vida">Hilária Batista de Almeida — a Mãe do Samba Carioca e matriarca da Pequena África</p>
+    <span class="datas">13 de janeiro de 1854, Salvador — 1924, Rio de Janeiro</span>
+  </div>
+
+  <p>Poucas casas mudaram a cultura brasileira como a casa da <strong>Tia Ciata</strong>, na região da Praça Onze, no Rio de Janeiro. Ali, entre o terreiro e a sala de visitas, <strong>nasceu o samba urbano carioca</strong>.</p>
+
+  <h4 class="sec">Da Bahia à Pequena África</h4>
+  <p>Hilária Batista de Almeida chegou ao Rio por volta de <strong>1876</strong>, na grande migração de baianos que se seguiu ao declínio econômico do Recôncavo. Instalou-se na zona portuária — Saúde, Gamboa, Cidade Nova —, região que o pintor Heitor dos Prazeres batizaria de <strong>"Pequena África"</strong>: um território de casas de tias baianas, terreiros, ranchos carnavalescos e trabalhadores do cais, herdeiro direto do Cais do Valongo.</p>
+
+  <h4 class="sec">A casa da Praça Onze: religião, festa e resistência</h4>
+  <p>Ciata era <strong>quituteira</strong> renomada (seu tabuleiro de doces era famoso), <strong>ialorixá de destaque no candomblé</strong> — ligada à casa de João Alabá, dedicada a Oxum — e esposa de João Batista da Silva, funcionário público. Essa combinação lhe deu algo raro: <strong>respeitabilidade e proteção</strong> numa época em que a polícia perseguia batuques e religiões africanas. Sua casa funcionava em camadas: na sala, os bailes "civilizados"; nos fundos e no terreiro, o candomblé, a comida de santo e as <strong>rodas de samba e partido-alto</strong> que varavam as noites.</p>
+
+  <h4 class="sec">"Pelo Telefone" e o nascimento do samba</h4>
+  <p>Foi nesse ambiente que se reuniam Donga, Pixinguinha, João da Baiana, Sinhô, Heitor dos Prazeres e outros criadores. Da casa de Ciata saiu <strong>"Pelo Telefone"</strong>, registrado por <strong>Donga</strong> na Biblioteca Nacional em 1916 e estourado no carnaval de <strong>1917</strong> — considerado o <strong>primeiro samba gravado</strong>. A autoria, na verdade coletiva (como era típico das rodas), gerou polêmica entre os frequentadores: o registro individual de Donga privatizava uma criação comunitária. A polêmica em si documenta o essencial: <strong>o samba nasceu coletivo, negro e na casa das tias baianas</strong>.</p>
+
+  <div class="caixa saber">
+    <div class="rotulo"><span class="ico">✦</span><b>Legado</b></div>
+    <p>Tia Ciata representa o <strong>protagonismo feminino e religioso</strong> na criação da cultura popular brasileira: as "tias baianas" foram guardiãs que transformaram perseguição em festa nacional. A Praça Onze é hoje território simbólico do samba — reverenciado em sambas-enredo — e a casa de Ciata inspira o centro cultural "Pequena África" e projetos de memória, como o programa Casa da Tia Ciata.</p>
+  </div>
+
+  <h4 class="sec">Linha do tempo</h4>
+  <div class="timeline">
+    <div class="evento"><span class="ano">1854</span><p>Nasce em Salvador; inicia-se cedo nas tradições do candomblé.</p></div>
+    <div class="evento"><span class="ano">c. 1876</span><p>Migra para o Rio de Janeiro; estabelece-se na futura "Pequena África".</p></div>
+    <div class="evento"><span class="ano">1900s–1910s</span><p>Sua casa na Praça Onze vira epicentro de candomblé, culinária e rodas de samba.</p></div>
+    <div class="evento"><span class="ano">1916–17</span><p>"Pelo Telefone" é registrado por Donga e consagra o samba no carnaval.</p></div>
+    <div class="evento"><span class="ano">1924</span><p>Morte de Tia Ciata; seu velório reúne a comunidade negra carioca.</p></div>
+  </div>
+
+  <details class="exercicio"><summary><span class="tag">Q1</span>Por que a casa de Tia Ciata é chamada de "território de resistência"?</summary><div class="resposta"><b>Caminho de resposta</b>Porque abrigava, sob proteção social cuidadosamente construída, práticas perseguidas pela polícia: candomblé, batuques e reuniões negras. A arquitetura social da casa (baile na frente, terreiro atrás) driblava a repressão e permitiu que a cultura afro-carioca florescesse até se tornar símbolo nacional.</div></details>
+  <details class="exercicio"><summary><span class="tag">Q2</span>O que a polêmica sobre a autoria de "Pelo Telefone" ensina sobre a criação popular?</summary><div class="resposta"><b>Caminho de resposta</b>Que o samba nascia coletivamente nas rodas, sem "autor" individual — e que o mercado fonográfico, ao exigir registro, impôs uma lógica de propriedade estranha àquela comunidade. A disputa marca o encontro (e o choque) entre cultura comunitária negra e indústria cultural.</div></details>
+</section>
+
+<!-- ===================== PARTE V ===================== -->
+<div class="parte" id="parte5">
+  <svg class="sankofa" viewBox="0 0 64 64" fill="none" stroke="#F3E7CE" stroke-width="3" stroke-linecap="round" aria-hidden="true"><path d="M32 54 C18 54 10 44 10 32 C10 18 20 10 32 10 C44 10 52 18 52 28"/><path d="M46 20 L52 28 L58 20"/><circle cx="32" cy="32" r="5" fill="#F3E7CE" stroke="none"/></svg>
+  <span class="eyebrow">Parte V</span>
+  <h2>Século XX e o Movimento Negro</h2>
+</div>
+
+<!-- Capítulo 14: Abdias Nascimento -->
+<section class="bloco rev" id="cap14">
+  <div class="cap-hero">
+    <span class="num">Capítulo 14</span>
+    <h3>Abdias Nascimento</h3>
+    <p class="papel-vida">Artista, intelectual e parlamentar — o arquiteto do movimento negro no século XX</p>
+    <span class="datas">14 de março de 1914, Franca (SP) — 23 de maio de 2011, Rio de Janeiro</span>
+  </div>
+
+  <p>Poucas trajetórias atravessam tantos campos: teatro, pintura, jornalismo, universidade, Congresso Nacional e articulação pan-africana internacional. Abdias Nascimento é o <strong>principal intelectual e ativista negro brasileiro do século XX</strong>.</p>
+
+  <h4 class="sec">Juventude e primeiras militâncias</h4>
+  <p>Neto de escravizados, filho de sapateiro e de uma doceira, Abdias saiu de Franca para São Paulo, serviu no Exército e participou, nos anos 1930, da <strong>Frente Negra Brasileira</strong> — primeira grande organização política negra do país, fechada pelo Estado Novo em 1937.</p>
+
+  <h4 class="sec">O Teatro Experimental do Negro (1944)</h4>
+  <p>Em 1944, no Rio, fundou o <strong>Teatro Experimental do Negro (TEN)</strong>, com uma ideia revolucionária: o palco como instrumento de <strong>desalienação e cidadania</strong>. O TEN alfabetizava operários e domésticas, formava atores e atrizes negros (revelando nomes como Ruth de Souza e Léa Garcia), estreou no Teatro Municipal com <em>O Imperador Jones</em> (1945), publicou o jornal <em>Quilombo</em> e organizou o Congresso do Negro Brasileiro (1950). Contra a tradição de atores brancos pintados de preto, o TEN afirmou: <strong>o negro representa a si mesmo</strong>.</p>
+
+  <h4 class="sec">Exílio, produção intelectual e Quilombismo</h4>
+  <p>Perseguido pela ditadura, exilou-se em <strong>1968</strong>. Nos EUA, foi professor universitário (Universidade do Estado de Nova York, em Buffalo) e conectou-se ao pan-africanismo global, participando de congressos de cultura negra na Nigéria e no Senegal. Publicou obras contundentes, como <strong><em>O Genocídio do Negro Brasileiro</em></strong> (1978), demolindo o mito da "democracia racial", e formulou o <strong>Quilombismo</strong> (1980): um projeto político inspirado nos quilombos como modelo de organização democrática, comunitária e afrocentrada.</p>
+
+  <h4 class="sec">Atuação política e legado</h4>
+  <p>De volta ao Brasil, participou da fundação do <strong>Movimento Negro Unificado (1978)</strong> em seu entorno histórico, e elegeu-se <strong>deputado federal (1983)</strong> e depois <strong>senador da República</strong> — o primeiro parlamentar a fazer da reparação e do combate ao racismo o centro absoluto de um mandato, propondo já nos anos 1980 ações que anteciparam as cotas raciais. Criou o <strong>IPEAFRO</strong> (Instituto de Pesquisas e Estudos Afro-Brasileiros), que preserva seu acervo. Morreu em 2011, indicado ao Nobel da Paz em 2010.</p>
+
+  <details class="exercicio"><summary><span class="tag">Q1</span>Por que o TEN é considerado mais que um projeto artístico?</summary><div class="resposta"><b>Caminho de resposta</b>Porque unia arte, alfabetização e formação política: transformava trabalhadores negros em atores, autores e cidadãos conscientes, atacando ao mesmo tempo a exclusão cultural (o negro fora dos palcos) e a exclusão social (o analfabetismo). Era um projeto de cidadania por meio do teatro.</div></details>
+  <details class="exercicio"><summary><span class="tag">Q2</span>Defina "Quilombismo" com suas palavras.</summary><div class="resposta"><b>Caminho de resposta</b>Proposta política de Abdias que toma o quilombo — comunidade livre, solidária e autogerida — como modelo histórico para organizar o Estado e a sociedade brasileira sobre bases igualitárias e afrocentradas, em vez de copiar modelos eurocêntricos.</div></details>
+</section>
+
+<!-- Capítulo 15: Carolina Maria de Jesus -->
+<section class="bloco rev" id="cap15">
+  <div class="cap-hero">
+    <span class="num">Capítulo 15</span>
+    <h3>Carolina Maria de Jesus</h3>
+    <p class="papel-vida">Catadora de papel e uma das maiores escritoras brasileiras — a fome escrita em diário</p>
+    <span class="datas">14 de março de 1914, Sacramento (MG) — 13 de fevereiro de 1977, São Paulo</span>
+  </div>
+
+  <p>Com apenas <strong>dois anos de escola formal</strong>, criando três filhos sozinha na <strong>favela do Canindé</strong>, às margens do Tietê, Carolina Maria de Jesus escreveu um dos livros mais impactantes da literatura brasileira — em cadernos recolhidos do lixo.</p>
+
+  <h4 class="sec">Da coleta de papel à escrita dos diários</h4>
+  <p>Migrante mineira, neta de escravizados, Carolina sustentava a família <strong>catando papel, metal e garrafas</strong> pelas ruas de São Paulo. À noite, nos cadernos usados que encontrava, registrava o cotidiano: a fome (que chamava de "a cor amarela"), a violência, a política vista de baixo, e também poemas, contos e romances. Escrever era, em suas palavras, seu refúgio e sua dignidade.</p>
+
+  <h4 class="sec">Quarto de Despejo (1960)</h4>
+  <p>Em 1958, o jornalista <strong>Audálio Dantas</strong> conheceu Carolina numa reportagem no Canindé e descobriu os cadernos. Editado por ele, <strong><em>Quarto de Despejo: diário de uma favelada</em></strong> saiu em <strong>agosto de 1960</strong> — e explodiu: cerca de <strong>100 mil exemplares vendidos</strong> no Brasil em pouco tempo, autógrafos com filas enormes, tradução para <strong>mais de dez línguas em dezenas de países</strong>. A metáfora do título é dela: se a cidade é uma casa, a favela é o quarto de despejo, onde se jogam as pessoas descartadas.</p>
+
+  <blockquote>
+    Carolina transformou a fome em literatura e a favela em ponto de vista sobre o Brasil — invertendo quem narra e quem é narrado.
+    <footer>A revolução de Quarto de Despejo</footer>
+  </blockquote>
+
+  <h4 class="sec">Sucesso, incompreensão e redescoberta</h4>
+  <p>O sucesso, porém, veio acompanhado de incompreensão: a crítica tratava-a como "fenômeno", não como escritora; suas obras seguintes (<em>Casa de Alvenaria</em>, 1961; <em>Pedras</em>; <em>Diário de Bitita</em>, póstumo) tiveram recepção fria, e Carolina morreu em 1977, novamente na pobreza, no sítio de Parelheiros. A partir dos anos 1990–2000, a universidade e o movimento negro promoveram sua <strong>redescoberta definitiva</strong>: hoje é estudada como autora central da literatura brasileira, presente em vestibulares, biografias e edições restauradas com seu texto original.</p>
+
+  <details class="exercicio"><summary><span class="tag">Q1</span>Explique a metáfora do título "Quarto de Despejo".</summary><div class="resposta"><b>Caminho de resposta</b>Carolina compara a cidade a uma casa: os bairros ricos são a sala de visitas; a favela é o quarto de despejo, o lugar onde se guardam as coisas — e as pessoas — que a sociedade considera descartáveis. A metáfora denuncia a segregação urbana como projeto, não como acidente.</div></details>
+  <details class="exercicio"><summary><span class="tag">Q2</span>Por que a crítica da época tratou Carolina como "fenômeno" e não como escritora?</summary><div class="resposta"><b>Caminho de resposta</b>Por racismo e elitismo: uma mulher negra, favelada e semialfabetizada não cabia na imagem que a elite letrada fazia de "escritor". Valorizava-se o exotismo do caso, não a autora. A redescoberta atual corrige isso, analisando seu projeto literário consciente e sua linguagem própria.</div></details>
+</section>
+
+<!-- Capítulo 16: Milton Santos -->
+<section class="bloco rev" id="cap16">
+  <div class="cap-hero">
+    <span class="num">Capítulo 16</span>
+    <h3>Milton Santos</h3>
+    <p class="papel-vida">O maior geógrafo brasileiro — pensador do território, da globalização e da cidadania</p>
+    <span class="datas">3 de maio de 1926, Brotas de Macaúbas (BA) — 24 de junho de 2001, São Paulo</span>
+  </div>
+
+  <p>Filho de professores primários no sertão baiano, Milton Santos formou-se em <strong>Direito</strong> (UFBA), mas fez da <strong>Geografia</strong> sua vida — e a transformou mundialmente. Doutorou-se em Estrasburgo (França) e lecionou na Universidade da Bahia até 1964.</p>
+
+  <h4 class="sec">Exílio (1964–1977)</h4>
+  <p>Preso pela ditadura militar logo após o golpe, partiu para um longo <strong>exílio de treze anos</strong> que, paradoxalmente, o projetou: foi professor em <strong>Toulouse, Bordeaux, Paris (Sorbonne), MIT, Columbia, Toronto, Caracas, Dar es Salaam (Tanzânia)</strong>, entre outras. Essa experiência no "Terceiro Mundo" e nos centros globais forjou sua marca: pensar a geografia <strong>a partir dos países pobres</strong>, e não como cópia das teorias do Norte.</p>
+
+  <h4 class="sec">Produção científica: espaço, técnica e globalização</h4>
+  <ul class="lista">
+    <li><strong><em>Por uma Geografia Nova</em> (1978):</strong> escrito na volta ao Brasil, refunda a disciplina como ciência social crítica do espaço.</li>
+    <li><strong><em>O Espaço Dividido</em> (1975/1979):</strong> teoria dos "dois circuitos" da economia urbana nos países pobres — o moderno e o popular.</li>
+    <li><strong><em>A Natureza do Espaço</em> (1996):</strong> sua obra teórica máxima — o espaço como conjunto indissociável de sistemas de objetos e sistemas de ações, no "meio técnico-científico-informacional".</li>
+    <li><strong><em>Por uma outra globalização</em> (2000):</strong> best-seller que distingue a globalização como fábula, como perversidade — e como possibilidade de um mundo mais humano, construído "de baixo", pela política dos pobres.</li>
+    <li><strong><em>O Espaço do Cidadão</em> (1987):</strong> território e cidadania — onde você mora define quais direitos você de fato tem.</li>
+  </ul>
+
+  <h4 class="sec">Prêmio Vautrin Lud e legado</h4>
+  <p>Em <strong>1994</strong>, recebeu o <strong>Prêmio Vautrin Lud</strong>, considerado o "Nobel da Geografia" — até hoje o único latino-americano laureado. Professor da USP desde 1983, doutor honoris causa por cerca de vinte universidades, deu no fim da vida o depoimento-testamento do documentário <em>Encontro com Milton Santos: o mundo global visto do lado de cá</em> (Silvio Tendler, 2006). Nos últimos anos, engajou-se diretamente no debate racial, sendo um dos signatários intelectuais da luta por ações afirmativas.</p>
+
+  <details class="exercicio"><summary><span class="tag">Q1</span>Relacione os conceitos de "território" e "cidadania" em Milton Santos.</summary><div class="resposta"><b>Caminho de resposta</b>Para Milton, a cidadania é territorial: morar na periferia significa ter menos acesso a saúde, transporte, escola e justiça — logo, ser "menos cidadão". O território não é palco neutro: distribui desigualmente direitos. Por isso, transformar o território é condição para universalizar a cidadania.</div></details>
+  <details class="exercicio"><summary><span class="tag">Q2</span>O que Milton Santos quer dizer com "globalização como fábula"?</summary><div class="resposta"><b>Caminho de resposta</b>É o discurso ideológico que vende a globalização como aldeia global de oportunidades iguais para todos. Milton mostra que, na prática, ela funciona como perversidade (desemprego, pobreza, concentração), mas contém também as bases técnicas para "uma outra globalização", mais solidária, protagonizada pelos de baixo.</div></details>
+</section>
+
+<!-- Capítulo 17: Lélia Gonzalez -->
+<section class="bloco rev" id="cap17">
+  <div class="cap-hero">
+    <span class="num">Capítulo 17</span>
+    <h3>Lélia Gonzalez</h3>
+    <p class="papel-vida">Antropóloga, filósofa e ativista — a pensadora da Amefricanidade</p>
+    <span class="datas">1º de fevereiro de 1935, Belo Horizonte — 10 de julho de 1994, Rio de Janeiro</span>
+  </div>
+
+  <p>Penúltima de dezoito filhos de um ferroviário negro e de uma empregada doméstica de origem indígena, Lélia Gonzalez formou-se em <strong>História e Filosofia</strong>, fez mestrado em Comunicação e doutorado em Antropologia Política, e tornou-se professora universitária (chefiou o Departamento de Sociologia e Política da PUC-Rio) — trajetória raríssima para uma mulher negra de sua geração.</p>
+
+  <h4 class="sec">Movimento negro e feminismo negro</h4>
+  <p>Lélia foi <strong>cofundadora do Movimento Negro Unificado (MNU, 1978)</strong>, marco da reorganização política negra sob a ditadura, e do Instituto de Pesquisas das Culturas Negras (IPCN). No feminismo, fez uma intervenção decisiva: denunciou que o feminismo branco ignorava raça e que o movimento negro por vezes ignorava gênero — abrindo caminho para o <strong>feminismo negro brasileiro</strong> e para coletivos como o Nzinga, que cofundou. Candidatou-se a deputada federal (1982) e estadual (1986), levando a pauta racial à política partidária.</p>
+
+  <h4 class="sec">Amefricanidade e "pretuguês"</h4>
+  <p>Seu conceito mais influente é a <strong>Amefricanidade</strong> (a categoria "amefricano"): as Américas não são apenas extensão da Europa, mas o resultado de uma experiência histórica comum de africanos e indígenas — resistência, criação cultural e reinvenção da liberdade — que conecta o Brasil ao Caribe, aos EUA e a toda a diáspora. Com humor teórico, Lélia falava também do <strong>"pretuguês"</strong>: a africanização do português do Brasil (na fonética, no léxico, no ritmo), prova viva de que a cultura nacional é estruturalmente negra. Seu ensaio clássico <em>"Racismo e sexismo na cultura brasileira"</em> (1984) analisou os lugares impostos à mulher negra — a mulata, a doméstica, a "mãe preta" — e como desmontá-los.</p>
+
+  <div class="caixa saber">
+    <div class="rotulo"><span class="ico">✦</span><b>Legado</b></div>
+    <p>Redescoberta massivamente nos anos 2010–2020 (coletâneas como <em>Por um feminismo afro-latino-americano</em>), Lélia é hoje referência central do pensamento social brasileiro e da teoria feminista negra internacional, influenciando autoras como Sueli Carneiro e Djamila Ribeiro.</p>
+  </div>
+
+  <details class="exercicio"><summary><span class="tag">Q1</span>Explique o conceito de Amefricanidade e sua consequência política.</summary><div class="resposta"><b>Caminho de resposta</b>Amefricanidade nomeia a experiência comum dos povos africanos e indígenas nas Américas: escravização, resistência e criação de culturas próprias. Consequência: desloca a identidade do continente do eixo europeu para o eixo afro-indígena e conecta as lutas negras de todo o hemisfério como uma só diáspora.</div></details>
+</section>
+
+<!-- Capítulo 18: Beatriz Nascimento -->
+<section class="bloco rev" id="cap18">
+  <div class="cap-hero">
+    <span class="num">Capítulo 18</span>
+    <h3>Beatriz Nascimento</h3>
+    <p class="papel-vida">Historiadora dos quilombos — o quilombo como corpo, território e continuidade</p>
+    <span class="datas">12 de julho de 1942, Aracaju (SE) — 28 de janeiro de 1995, Rio de Janeiro</span>
+  </div>
+
+  <p>Maria Beatriz Nascimento migrou criança com a família de Sergipe para o Rio de Janeiro, formou-se em <strong>História pela UFRJ</strong> (1971), especializou-se na UFF e trabalhou como pesquisadora do Arquivo Nacional — uma das primeiras historiadoras negras a disputar, de dentro da academia, a narrativa sobre o próprio povo.</p>
+
+  <h4 class="sec">A pesquisa: quilombos como sistema alternativo</h4>
+  <p>Contra a visão do quilombo como episódio isolado de fuga, Beatriz o teorizou como <strong>sistema social alternativo e contínuo</strong>: das origens centro-africanas (os <em>kilombo</em> guerreiros de Angola) a Palmares, e de Palmares às <strong>favelas, terreiros, escolas de samba e territórios negros urbanos</strong> do século XX. O quilombo, para ela, não acabou: mudou de forma. É <strong>território de paz e reconstrução da pessoa negra</strong> — e também um conceito corporal: "o quilombo é o corpo", lugar onde a identidade se reintegra após a diáspora (suas reflexões sobre <em>Ôrí</em>, "cabeça" em iorubá).</p>
+
+  <h4 class="sec">Ôrí (1989) e produção acadêmica</h4>
+  <p>Beatriz escreveu ensaios seminais — como <em>"Por uma história do homem negro"</em> e <em>"O conceito de quilombo e a resistência cultural negra"</em> — e foi autora do texto e narradora do filme-ensaio <strong><em>Ôrí</em> (1989)</strong>, dirigido por Raquel Gerber: uma década de filmagens ligando movimento negro, quilombos e transatlântico Brasil–África. Denunciou também, pioneiramente, a solidão e os estereótipos impostos à mulher negra ("A mulher negra no mercado de trabalho", 1976).</p>
+
+  <h4 class="sec">Morte e legado</h4>
+  <p>Foi <strong>assassinada em janeiro de 1995</strong>, aos 52 anos, ao defender uma amiga da violência do ex-companheiro dela — morta, como notou o movimento negro, pela mesma violência de gênero que denunciava. Seu pensamento, reunido em coletâneas recentes e traduzido no exterior, fundamenta hoje o conceito constitucional de <strong>comunidades quilombolas</strong> e os estudos de territorialidade negra. Em 2021, foi reconhecida como patrona (in memoriam) de iniciativas acadêmicas e culturais em todo o país.</p>
+
+  <details class="exercicio"><summary><span class="tag">Q1</span>Como Beatriz Nascimento redefine o conceito de quilombo?</summary><div class="resposta"><b>Caminho de resposta</b>De "refúgio de fugitivos" no passado para sistema alternativo contínuo: forma negra de organizar território, vida e identidade que se atualiza nas favelas, terreiros e escolas de samba. O quilombo vira chave para ler a história negra como continuidade criativa, não como episódios derrotados.</div></details>
+</section>
+
+<!-- Capítulo 19: Sueli Carneiro -->
+<section class="bloco rev" id="cap19">
+  <div class="cap-hero">
+    <span class="num">Capítulo 19</span>
+    <h3>Sueli Carneiro</h3>
+    <p class="papel-vida">Filósofa e ativista — fundadora do Geledés e voz do "enegrecer o feminismo"</p>
+    <span class="datas">24 de junho de 1950, São Paulo — presente</span>
+  </div>
+
+  <p>Filha de um ferroviário e de uma costureira, primeira de sete irmãos, Aparecida Sueli Carneiro formou-se em <strong>Filosofia pela USP</strong> e doutorou-se em Educação na mesma universidade, tornando-se uma das principais intelectuais do Brasil contemporâneo.</p>
+
+  <h4 class="sec">Geledés — Instituto da Mulher Negra (1988)</h4>
+  <p>No ano do centenário da abolição, Sueli fundou o <strong>Geledés</strong>, primeira organização negra e feminista independente de São Paulo — o nome vem de uma sociedade secreta feminina iorubá. O instituto uniu, de forma pioneira, <strong>advocacy jurídico contra o racismo, saúde da mulher negra, formação política e comunicação</strong>; seu portal é hoje uma das maiores plataformas de conteúdo antirracista em língua portuguesa. Sueli também idealizou programas de saúde da mulher negra e participou da criação de mecanismos institucionais de defesa da mulher desde os anos 1980.</p>
+
+  <h4 class="sec">Pensamento: enegrecer o feminismo e o dispositivo de racialidade</h4>
+  <p>Em ensaios como <em>"Enegrecer o feminismo"</em> (2003), Sueli sintetiza a tarefa histórica das mulheres negras: colocar raça no centro do feminismo e gênero no centro do antirracismo — pois a experiência da mulher negra não cabe em nenhum dos dois isoladamente. Em sua tese, formulou o conceito de <strong>dispositivo de racialidade</strong> (dialogando com Foucault): o conjunto de saberes, instituições e práticas que produz o branco como norma e o negro como "outro", operando um <strong>epistemicídio</strong> — o assassinato sistemático dos saberes e da capacidade intelectual do povo negro, da escola à universidade.</p>
+
+  <div class="caixa saber">
+    <div class="rotulo"><span class="ico">✦</span><b>Legado em construção</b></div>
+    <p>Referência das políticas de ação afirmativa e do debate público sobre <strong>racismo estrutural</strong>, Sueli recebeu prêmios nacionais e internacionais de direitos humanos, teve sua obra reunida em <em>Escritos de uma vida</em> (2018) e segue ativa — prova de que esta história não é só passado: é agenda do presente.</p>
+  </div>
+
+  <details class="exercicio"><summary><span class="tag">Q1</span>O que significa "epistemicídio" no pensamento de Sueli Carneiro?</summary><div class="resposta"><b>Caminho de resposta</b>É a destruição ou desqualificação sistemática dos saberes dos povos negros e de sua condição de sujeitos de conhecimento — pela escola que apaga sua história, pela universidade que ignora seus autores, pela cultura que os trata como objeto de estudo e nunca como pensadores. Combatê-lo exige mudar currículos, cânones e instituições.</div></details>
+</section>
+
+<!-- ===================== PARTE VI ===================== -->
+<div class="parte" id="parte6">
+  <svg class="sankofa" viewBox="0 0 64 64" fill="none" stroke="#F3E7CE" stroke-width="3" stroke-linecap="round" aria-hidden="true"><path d="M32 54 C18 54 10 44 10 32 C10 18 20 10 32 10 C44 10 52 18 52 28"/><path d="M46 20 L52 28 L58 20"/><circle cx="32" cy="32" r="5" fill="#F3E7CE" stroke="none"/></svg>
+  <span class="eyebrow">Parte VI</span>
+  <h2>Brasil Contemporâneo</h2>
+</div>
+
+<!-- Capítulo 20: Joaquim Barbosa -->
+<section class="bloco rev" id="cap20">
+  <div class="cap-hero">
+    <span class="num">Capítulo 20</span>
+    <h3>Joaquim Barbosa</h3>
+    <p class="papel-vida">Primeiro ministro negro do Supremo Tribunal Federal — e seu primeiro presidente negro</p>
+    <span class="datas">7 de outubro de 1954, Paracatu (MG) — presente</span>
+  </div>
+
+  <p>Filho de um pedreiro e de uma dona de casa, mais velho de oito irmãos, Joaquim Benedito Barbosa Gomes saiu do interior de Minas para Brasília ainda adolescente. Trabalhou como <strong>faxineiro e gráfico</strong> enquanto estudava, até ingressar em <strong>Direito na Universidade de Brasília</strong>.</p>
+
+  <h4 class="sec">Carreira jurídica</h4>
+  <p>Foi oficial de chancelaria do Itamaraty (servindo na embaixada em Helsinque), advogado do Serpro e, por concurso, <strong>procurador da República</strong> (Ministério Público Federal) a partir de 1984. Estudou francês, inglês e alemão, fez <strong>mestrado e doutorado em Direito Público na Universidade Panthéon-Assas (Paris II)</strong> e foi professor visitante nos EUA. Tornou-se especialista em direito comparado e em <strong>ações afirmativas</strong>, tema de seu livro pioneiro <em>Ação afirmativa e princípio constitucional da igualdade</em> (2001).</p>
+
+  <h4 class="sec">Supremo Tribunal Federal (2003–2014)</h4>
+  <p>Indicado pelo presidente Lula, tomou posse em <strong>25 de junho de 2003</strong> como o <strong>primeiro ministro negro da história do STF</strong> — 112 anos após a criação do tribunal republicano. Como relator da <strong>Ação Penal 470 (o "Mensalão", 2012)</strong>, conduziu o julgamento penal mais midiático da história do tribunal, tornando-se figura nacionalmente conhecida. Em <strong>2012–2014, presidiu o STF e o CNJ</strong> — primeiro negro a chefiar um dos três Poderes da República — e, nessa condição, chegou a exercer interinamente a Presidência da República. Aposentou-se em 2014.</p>
+
+  <div class="caixa saber">
+    <div class="rotulo"><span class="ico">✦</span><b>Impacto histórico</b></div>
+    <p>A imagem de um homem negro de toga presidindo a mais alta corte do país teve enorme força simbólica num Judiciário até hoje majoritariamente branco. Barbosa também deixou marca doutrinária: sua defesa acadêmica das ações afirmativas antecedeu e ajudou a fundamentar a decisão unânime do STF (2012) pela constitucionalidade das cotas raciais.</p>
+  </div>
+
+  <details class="exercicio"><summary><span class="tag">Q1</span>Por que a posse de Joaquim Barbosa em 2003 é considerada um marco — e também um sintoma?</summary><div class="resposta"><b>Caminho de resposta</b>Marco: pela primeira vez um negro chegou ao STF e depois à sua presidência. Sintoma: o fato de isso só ocorrer em 2003, em um país de maioria negra, evidencia as barreiras raciais no acesso às elites do Judiciário — exatamente o racismo estrutural que suas obras acadêmicas analisam.</div></details>
+</section>
+
+<!-- Capítulo 21: Marielle Franco -->
+<section class="bloco rev" id="cap21">
+  <div class="cap-hero">
+    <span class="num">Capítulo 21</span>
+    <h3>Marielle Franco</h3>
+    <p class="papel-vida">Socióloga, vereadora e defensora de direitos humanos — semente que se multiplicou</p>
+    <span class="datas">27 de julho de 1979, Rio de Janeiro — 14 de março de 2018, Rio de Janeiro</span>
+  </div>
+
+  <p>Marielle Francisco da Silva nasceu e cresceu no <strong>Conjunto de Favelas da Maré</strong>, no Rio de Janeiro. Começou a trabalhar cedo, foi mãe aos 19 anos e ingressou no ativismo pelos direitos humanos após perder uma amiga, atingida por bala perdida em tiroteio na Maré.</p>
+
+  <h4 class="sec">Formação e militância</h4>
+  <p>Por meio de pré-vestibular comunitário, formou-se em <strong>Ciências Sociais pela PUC-Rio (com bolsa)</strong> e concluiu <strong>mestrado em Administração Pública na UFF</strong>, com a dissertação <em>"UPP — a redução da favela a três letras"</em>, análise crítica da política de segurança nas favelas cariocas. Atuou em organizações da sociedade civil e coordenou a <strong>Comissão de Defesa dos Direitos Humanos e Cidadania da Alerj</strong>, ao lado do deputado Marcelo Freixo, atendendo familiares de vítimas de violência.</p>
+
+  <h4 class="sec">Mandato na Câmara Municipal</h4>
+  <p>Em 2016, elegeu-se vereadora do Rio pelo PSOL com <strong>46.502 votos — a quinta maior votação da cidade</strong>. Mulher, negra, bissexual, favelada e mãe, levou para a Câmara pautas historicamente excluídas: projetos sobre creches noturnas ("Espaço Coruja"), saúde da mulher, visibilidade LGBTQIA+, assédio no transporte e efetivação de direitos nas favelas. Semanas antes de morrer, foi designada relatora da comissão de acompanhamento da <strong>intervenção federal na segurança do Rio</strong>, função de fiscalização crítica das forças de segurança.</p>
+
+  <h4 class="sec">Assassinato e repercussão mundial</h4>
+  <p>Na noite de <strong>14 de março de 2018</strong>, após um evento com jovens mulheres negras, Marielle e seu motorista, <strong>Anderson Gomes</strong>, foram executados a tiros no centro do Rio. O crime, cometido por ex-policiais ligados a milícias, provocou manifestações no Brasil e no mundo — de Paris a Buenos Aires — sob a pergunta <em>"Quem mandou matar Marielle?"</em>. As investigações levaram, anos depois, à condenação dos executores (2024) e à prisão e julgamento de acusados de serem os mandantes, expondo as conexões entre milícia e política no Rio de Janeiro.</p>
+
+  <div class="caixa saber">
+    <div class="rotulo"><span class="ico">✦</span><b>Legado: sementes</b></div>
+    <p>"Marielle, presente!" tornou-se grito internacional. Seu assassinato — que pretendia silenciar — multiplicou candidaturas de mulheres negras e periféricas em todo o país (o chamado "efeito semente"), inspirou o <strong>Instituto Marielle Franco</strong>, dirigido por sua família, e leis e ruas com seu nome. Marielle sintetiza, no século XXI, a mesma luta que atravessa esta apostila desde Palmares: o direito do povo negro de viver e de decidir seu destino.</p>
+  </div>
+
+  <details class="exercicio"><summary><span class="tag">Q1</span>Por que o mandato de Marielle é descrito como "corpo político coletivo"?</summary><div class="resposta"><b>Caminho de resposta</b>Porque ela representava grupos historicamente ausentes do poder — mulheres negras, faveladas, LGBTQIA+ — e construía o mandato com eles (assessoria formada por mulheres negras, pautas vindas dos territórios). Atacar Marielle foi atacar essa representação; por isso a resposta foi coletiva: mais corpos ocupando a política.</div></details>
+  <details class="exercicio"><summary><span class="tag">Q2</span>Conecte a trajetória de Marielle ao conceito de "quilombo" de Beatriz Nascimento.</summary><div class="resposta"><b>Caminho de resposta</b>A Maré, como território negro urbano, é o quilombo contemporâneo de que fala Beatriz: espaço de vida, organização e identidade. Marielle fez o caminho do território ao poder institucional levando o quilombo consigo — a continuidade da resistência negra em nova forma.</div></details>
+</section>
+
+<!-- ===================== CONCLUSÃO ===================== -->
+<section class="bloco rev" id="conclusao">
+  <div class="cap-hero">
+    <span class="num">Conclusão Geral</span>
+    <h3>O Legado da População Negra na Formação do Brasil</h3>
+    <p class="papel-vida">Vinte e uma vidas, uma mesma história em movimento</p>
+  </div>
+  <p>Percorremos cinco séculos: dos reinos africanos ao Congresso Nacional, da Serra da Barriga à Praça Onze, dos cadernos de Carolina às teses de Sueli Carneiro. O que essas trajetórias demonstram, em conjunto, é que a população negra <strong>construiu o Brasil em todas as dimensões</strong>:</p>
+  <ul class="lista">
+    <li><strong>Política:</strong> de Zumbi e Dandara a Abdias, Barbosa e Marielle — a luta por liberdade tornou-se luta por cidadania plena e representação.</li>
+    <li><strong>Economia:</strong> o trabalho escravizado ergueu açúcar, ouro e café; libertos e descendentes seguiram sustentando cidades, portos e indústrias — sem a reparação que Rebouças exigia.</li>
+    <li><strong>Literatura:</strong> Firmina fundou o romance abolicionista; Machado, o topo do cânone; Carolina, a voz da favela; Gama, a sátira militante.</li>
+    <li><strong>Ciência:</strong> Rebouças e Sampaio na engenharia; Milton Santos na geografia mundial; Lélia, Beatriz e Sueli refundando as ciências humanas.</li>
+    <li><strong>Cultura:</strong> Tia Ciata e as tias baianas geraram o samba; o candomblé, a capoeira e o "pretuguês" moldaram a identidade nacional.</li>
+    <li><strong>Educação e direitos humanos:</strong> do TEN à Lei 10.639/2003, das cotas ao Geledés — a educação antirracista como projeto de país.</li>
+  </ul>
+  <p>Estudar essas personalidades não é "história temática": é <strong>a própria história do Brasil</strong>, contada finalmente por inteiro. Sankofa: voltamos ao passado para apanhar o que ficou — e seguir adiante.</p>
+</section>
+
+<!-- ===================== RECURSOS ===================== -->
+<div class="parte" id="recursos">
+  <svg class="sankofa" viewBox="0 0 64 64" fill="none" stroke="#F3E7CE" stroke-width="3" stroke-linecap="round" aria-hidden="true"><path d="M32 54 C18 54 10 44 10 32 C10 18 20 10 32 10 C44 10 52 18 52 28"/><path d="M46 20 L52 28 L58 20"/><circle cx="32" cy="32" r="5" fill="#F3E7CE" stroke="none"/></svg>
+  <span class="eyebrow">Recursos de Estudo</span>
+  <h2>Glossário · Linha do Tempo · Exercícios · Bibliografia</h2>
+</div>
+
+<section class="bloco rev" id="glossario">
+  <h4 class="sec">Glossário</h4>
+  <div class="glossario">
+    <div class="termo"><b>Abolição</b><p>Extinção legal da escravidão. No Brasil, consumada pela Lei Áurea (13/5/1888), após leis graduais (Eusébio de Queirós, 1850; Ventre Livre, 1871; Sexagenários, 1885) e intensa luta popular.</p></div>
+    <div class="termo"><b>Quilombo</b><p>Comunidade formada por pessoas escravizadas fugidas e seus descendentes; do umbundo <em>kilombo</em>. Hoje designa também comunidades tradicionais com direitos territoriais garantidos pela Constituição de 1988 (art. 68 do ADCT).</p></div>
+    <div class="termo"><b>Racismo Estrutural</b><p>Compreensão de que o racismo não é apenas atitude individual, mas modo de funcionamento das instituições e da economia, reproduzindo desigualdades mesmo sem intenção declarada.</p></div>
+    <div class="termo"><b>Pan-Africanismo</b><p>Movimento político-intelectual que defende a unidade e a libertação dos povos africanos e de sua diáspora em todo o mundo.</p></div>
+    <div class="termo"><b>Amefricanidade</b><p>Conceito de Lélia Gonzalez: a experiência histórica comum de africanos e indígenas nas Américas, base de uma identidade afro-ameríndia do continente.</p></div>
+    <div class="termo"><b>Consciência Negra</b><p>Valorização da história, identidade e luta do povo negro. Celebrada em 20 de novembro (morte de Zumbi), feriado nacional desde 2023.</p></div>
+    <div class="termo"><b>Escravidão / Escravizado</b><p>Sistema que transforma pessoas em propriedade. O termo "escravizado" sublinha que essa condição foi imposta por violência — ninguém "é" escravo por natureza.</p></div>
+    <div class="termo"><b>República</b><p>Regime instaurado em 1889, um ano após a abolição — sem incluir os libertos: a "questão social" seguiu tratada como caso de polícia.</p></div>
+    <div class="termo"><b>Colonialismo</b><p>Dominação política, econômica e cultural de um território por potência estrangeira; matriz da escravidão atlântica e das hierarquias raciais modernas.</p></div>
+    <div class="termo"><b>Diáspora Africana</b><p>Dispersão forçada dos povos africanos pelo mundo através do tráfico — e o conjunto de culturas que esses povos criaram fora da África.</p></div>
+    <div class="termo"><b>Epistemicídio</b><p>Conceito trabalhado por Sueli Carneiro: destruição sistemática dos saberes e da condição intelectual dos povos negros pelas instituições de conhecimento.</p></div>
+    <div class="termo"><b>Sankofa</b><p>Símbolo adinkra (povos acã, Gana): o pássaro que olha para trás — "não é errado voltar para buscar o que ficou". Voltar ao passado para construir o futuro.</p></div>
+  </div>
+</section>
+
+<section class="bloco rev" id="linha-geral">
+  <h4 class="sec">Linha do tempo geral (1500–2026)</h4>
+  <div class="timeline">
+    <div class="evento"><span class="ano">séc. XVI</span><p>Início da colonização e do tráfico atlântico para o Brasil.</p></div>
+    <div class="evento"><span class="ano">c. 1600s</span><p>Formação e consolidação do Quilombo dos Palmares.</p></div>
+    <div class="evento"><span class="ano">1694–1695</span><p>Queda do Macaco; mortes de Dandara e de Zumbi (20/11/1695).</p></div>
+    <div class="evento"><span class="ano">1835</span><p>Revolta dos Malês, em Salvador — maior levante urbano de escravizados do país.</p></div>
+    <div class="evento"><span class="ano">1850–1871</span><p>Lei Eusébio de Queirós encerra o tráfico; Lei do Ventre Livre.</p></div>
+    <div class="evento"><span class="ano">1859</span><p>Maria Firmina publica <em>Úrsula</em>; Gama publica as <em>Trovas Burlescas</em>.</p></div>
+    <div class="evento"><span class="ano">1888–1889</span><p>Lei Áurea; proclamação da República — abolição sem reparação.</p></div>
+    <div class="evento"><span class="ano">1916–17</span><p>"Pelo Telefone": o samba, nascido na casa de Tia Ciata, conquista o país.</p></div>
+    <div class="evento"><span class="ano">1931–1937</span><p>Frente Negra Brasileira, primeira grande organização política negra.</p></div>
+    <div class="evento"><span class="ano">1944</span><p>Abdias Nascimento funda o Teatro Experimental do Negro.</p></div>
+    <div class="evento"><span class="ano">1960</span><p>Carolina Maria de Jesus publica <em>Quarto de Despejo</em>.</p></div>
+    <div class="evento"><span class="ano">1978</span><p>Fundação do Movimento Negro Unificado, com Lélia Gonzalez e Abdias.</p></div>
+    <div class="evento"><span class="ano">1988</span><p>Constituição criminaliza o racismo e garante terras quilombolas; Sueli Carneiro funda o Geledés.</p></div>
+    <div class="evento"><span class="ano">1994–1995</span><p>Milton Santos recebe o Vautrin Lud; morte de Lélia (1994) e de Beatriz Nascimento (1995); tricentenário de Zumbi.</p></div>
+    <div class="evento"><span class="ano">2003</span><p>Lei 10.639 (ensino de história afro-brasileira); Joaquim Barbosa toma posse no STF.</p></div>
+    <div class="evento"><span class="ano">2012</span><p>STF declara constitucionais as cotas raciais; Lei de Cotas nas federais.</p></div>
+    <div class="evento"><span class="ano">2018</span><p>Assassinato de Marielle Franco; Luiz Gama declarado Patrono da Abolição.</p></div>
+    <div class="evento"><span class="ano">2023</span><p>20 de novembro torna-se feriado nacional da Consciência Negra.</p></div>
+    <div class="evento"><span class="ano">2026</span><p>Você, estudante, continua esta história — Sankofa em movimento.</p></div>
+  </div>
+</section>
+
+<section class="bloco rev" id="exercicios-gerais">
+  <h4 class="sec">Exercícios gerais</h4>
+  <details class="exercicio"><summary><span class="tag">Obj.</span>(Objetiva) A recusa de Zumbi ao acordo de 1678 e a atuação judicial de Luiz Gama com a Lei de 1831 têm em comum: (a) o uso da violência; (b) a defesa da liberdade como direito universal, e não concessão parcial; (c) o apoio da Coroa; (d) o abandono da luta coletiva.</summary><div class="resposta"><b>Gabarito</b>Alternativa (b). Ambos rejeitam liberdades parciais/condicionais: Zumbi recusa a paz que reescravizava parte dos palmarinos; Gama exige que a lei liberte todos os africanos traficados ilegalmente e seus descendentes.</div></details>
+  <details class="exercicio"><summary><span class="tag">Disc.</span>(Discursiva) "A abolição foi incompleta." Defenda ou refute a tese usando André Rebouças, a República de 1889 e dados do Brasil atual.</summary><div class="resposta"><b>Caminho de resposta</b>Defesa: a Lei Áurea não previu terra, educação ou indenização (a "democracia rural" de Rebouças foi ignorada); a República excluiu os libertos (voto censitário/analfabetos, repressão a suas culturas); as desigualdades raciais atuais em renda, violência e representação são o desdobramento dessa abolição sem reparação — o que fundamenta políticas afirmativas.</div></details>
+  <details class="exercicio"><summary><span class="tag">Pesq.</span>(Pesquisa) Investigue uma personalidade negra da história da sua cidade ou estado e produza uma minibiografia no formato desta apostila (contexto, trajetória, linha do tempo, legado).</summary><div class="resposta"><b>Orientação</b>Fontes sugeridas: arquivos públicos estaduais, hemerotecas digitais (Biblioteca Nacional), museus locais, mestres de cultura popular, griôs e as referências da bibliografia abaixo. Atenção ao tratamento de fontes orais: identifique quem narra e em que contexto.</div></details>
+  <details class="exercicio"><summary><span class="tag">Deb.</span>(Debate em sala) "As cotas raciais reparam ou dividem?" — organize o debate com base nos conceitos de racismo estrutural (Parte V) e epistemicídio (cap. 19).</summary><div class="resposta"><b>Orientação</b>Divida grupos com papéis definidos (defesa, crítica, juízes), exija fundamentação em dados e conceitos da apostila e feche com a decisão do STF de 2012 e os resultados documentados da Lei de Cotas. O objetivo é argumentar com evidências, não vencer com opinião.</div></details>
+</section>
+
+<section class="bloco rev" id="bibliografia">
+  <h4 class="sec">Bibliografia comentada</h4>
+  <ul class="lista">
+    <li><strong>SCHWARCZ, Lilia M.; GOMES, Flávio (orgs.). <em>Dicionário da Escravidão e Liberdade</em>. Companhia das Letras, 2018</strong> — 50 verbetes dos maiores especialistas: a porta de entrada mais confiável para o tema.</li>
+    <li><strong>REIS, João José. <em>Rebelião Escrava no Brasil: a história do levante dos Malês em 1835</em>. Companhia das Letras (ed. revista)</strong> — obra definitiva sobre 1835; contexto essencial para Luiza Mahin.</li>
+    <li><strong>GOMES, Flávio. <em>Palmares: escravidão e liberdade no Atlântico Sul</em>. Contexto</strong> — síntese atualizada sobre o maior quilombo das Américas.</li>
+    <li><strong>AZEVEDO, Elciene. <em>Orfeu de Carapinha: a trajetória de Luiz Gama na imperial cidade de São Paulo</em>. Ed. Unicamp</strong> — biografia acadêmica de referência sobre Gama.</li>
+    <li><strong>ALONSO, Angela. <em>Flores, votos e balas: o movimento abolicionista brasileiro</em>. Companhia das Letras, 2015</strong> — o abolicionismo como movimento social, com Patrocínio e Rebouças em cena.</li>
+    <li><strong>REIS, Maria Firmina dos. <em>Úrsula</em> (várias edições recentes)</strong> — leia a fonte primária: o primeiro romance abolicionista brasileiro.</li>
+    <li><strong>JESUS, Carolina Maria de. <em>Quarto de Despejo</em>. Ática</strong> — o diário que virou clássico; complemente com a biografia <em>Vida por Escrito</em> (Tom Farias).</li>
+    <li><strong>NASCIMENTO, Abdias. <em>O Genocídio do Negro Brasileiro</em>. Perspectiva</strong> — o libelo que desmontou a "democracia racial".</li>
+    <li><strong>GONZALEZ, Lélia. <em>Por um feminismo afro-latino-americano</em>. Zahar, 2020</strong> — ensaios reunidos, incluindo os textos sobre amefricanidade e "pretuguês".</li>
+    <li><strong>NASCIMENTO, Beatriz. <em>Uma história feita por mãos negras</em>. Zahar, 2021</strong> — coletânea organizada por Alex Ratts; ver também o filme <em>Ôrí</em> (1989).</li>
+    <li><strong>CARNEIRO, Sueli. <em>Escritos de uma vida</em>. Jandaíra</strong> — reúne "Enegrecer o feminismo" e textos sobre epistemicídio.</li>
+    <li><strong>SANTOS, Milton. <em>Por uma outra globalização</em>. Record</strong> — a introdução ideal ao pensamento miltoniano.</li>
+    <li><strong>Documentários:</strong> <em>Ôrí</em> (Raquel Gerber, 1989); <em>Encontro com Milton Santos</em> (Silvio Tendler, 2006); <em>Marielle: The Documentary / séries documentais sobre o caso</em>; <em>AmarElo — É Tudo Pra Ontem</em> (2020).</li>
+    <li><strong>Museus e acervos digitais:</strong> Museu Afro Brasil Emanoel Araujo (SP); Instituto de Pesquisa e Memória Pretos Novos e Cais do Valongo (RJ); Memorial Quilombo dos Palmares (Serra da Barriga, AL); acervo do IPEAFRO; portal Geledés; Hemeroteca Digital da Biblioteca Nacional; base SlaveVoyages.</li>
+  </ul>
+
+  <div class="caixa">
+    <div class="rotulo"><span class="ico">✎</span><b>Anexos sugeridos para a versão impressa</b></div>
+    <p>Carta de Luiz Gama a Lúcio de Mendonça (1880) · trechos das leis abolicionistas (1831, 1850, 1871, 1885, 1888) · mapa das rotas do tráfico e dos mocambos de Palmares · fotografias históricas da Pequena África e da Praça Onze · fac-símile da partitura registrada de "Pelo Telefone" (1916, Biblioteca Nacional).</p>
+  </div>
+</section>
+
+</main>
+
+<footer class="fim">
+  <span class="eyebrow">Sankofa</span>
+  <h2>Voltar ao passado para construir o futuro</h2>
+  <p>Apostila didática — História e Cultura Afro-Brasileira (Lei 10.639/2003). Elaborada para fins educacionais.</p>
+</footer>
+<div class="faixa-kente" aria-hidden="true"></div>
+
+<button id="topo-btn" aria-label="Voltar ao topo">▲</button>
+
+<script>
+// barra de progresso
+const barra=document.getElementById('progresso');
+const topoBtn=document.getElementById('topo-btn');
+addEventListener('scroll',()=>{
+  const h=document.documentElement;
+  const p=h.scrollTop/(h.scrollHeight-h.clientHeight)*100;
+  barra.style.width=p+'%';
+  topoBtn.classList.toggle('on',h.scrollTop>600);
+},{passive:true});
+topoBtn.addEventListener('click',()=>scrollTo({top:0,behavior:'smooth'}));
+
+// revelação no scroll
+const io=new IntersectionObserver(es=>{
+  es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('vis');io.unobserve(e.target)}});
+},{threshold:.08});
+document.querySelectorAll('.rev').forEach(el=>io.observe(el));
+</script>
+</body>
+</html>
