@@ -1,0 +1,1542 @@
+<title>Apostila Master Angular 20</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&family=Sora:wght@500;700;800&display=swap" rel="stylesheet">
+<style>
+/* Layout: sidebar de sumário fixa + coluna única de leitura. Dark-first com tema claro opcional. DS Kalixto. */
+:root{
+  --bg:#050505; --bg2:#0c0a14; --surface:rgba(255,255,255,.04); --surface-2:rgba(255,255,255,.07);
+  --fg:#f3f1fa; --fg-dim:#a9a4bd; --line:rgba(255,255,255,.10);
+  --purple:#7B2EFF; --pink:#FF2DAA; --blue:#00D9FF;
+  --accent:#00D9FF; --accent-2:#FF2DAA; --link:#5fe6ff;
+  --code-bg:#0a0812; --code-fg:#e7e3f7;
+  --ok:#35e0a1; --warn:#ffb84d; --bad:#ff5c7a;
+  --grad:linear-gradient(90deg,#7B2EFF,#FF2DAA,#00D9FF);
+  --f-display:'Sora','Inter',system-ui,sans-serif; --f-body:'Inter',system-ui,sans-serif; --f-mono:'JetBrains Mono',ui-monospace,Consolas,monospace;
+  --hl-kw:#ff7ad0; --hl-str:#7ff0c4; --hl-com:#7d7898; --hl-num:#ffb84d; --hl-fn:#6fdcff; --hl-tag:#c39bff; --hl-attr:#ffd479;
+  color-scheme:dark;
+}
+@media (prefers-color-scheme: light){:root:not([data-theme="dark"]){
+  --bg:#ffffff; --bg2:#f6f3ff; --surface:rgba(123,46,255,.05); --surface-2:rgba(123,46,255,.09);
+  --fg:#14102a; --fg-dim:#5b5675; --line:rgba(20,16,42,.13);
+  --accent:#7B2EFF; --accent-2:#d4147f; --link:#5a1fd1;
+  --code-bg:#f3efff; --code-fg:#24203d; --ok:#0b8f63; --warn:#a85f00; --bad:#c4163a;
+  --hl-kw:#b0127a; --hl-str:#0b7a55; --hl-com:#7d7898; --hl-num:#a85f00; --hl-fn:#0a6f8c; --hl-tag:#5a1fd1; --hl-attr:#8a5a00;
+  color-scheme:light}}
+:root[data-theme="light"]{
+  --bg:#ffffff; --bg2:#f6f3ff; --surface:rgba(123,46,255,.05); --surface-2:rgba(123,46,255,.09);
+  --fg:#14102a; --fg-dim:#5b5675; --line:rgba(20,16,42,.13);
+  --accent:#7B2EFF; --accent-2:#d4147f; --link:#5a1fd1;
+  --code-bg:#f3efff; --code-fg:#24203d; --ok:#0b8f63; --warn:#a85f00; --bad:#c4163a;
+  --hl-kw:#b0127a; --hl-str:#0b7a55; --hl-com:#7d7898; --hl-num:#a85f00; --hl-fn:#0a6f8c; --hl-tag:#5a1fd1; --hl-attr:#8a5a00;
+  color-scheme:light}
+
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:5rem}
+body{margin:0;background:var(--bg);color:var(--fg);font:400 1.0625rem/1.75 var(--f-body);-webkit-font-smoothing:antialiased}
+a{color:var(--link);text-underline-offset:3px}
+a:focus-visible,button:focus-visible,summary:focus-visible,input:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:6px}
+
+/* topo */
+.topbar{position:sticky;top:env(safe-area-inset-top,0px);z-index:30;display:flex;align-items:center;gap:.75rem;padding:.6rem 1rem;background:color-mix(in srgb,var(--bg) 82%,transparent);backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
+.brand{font:800 1rem var(--f-display);letter-spacing:.14em;background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent;text-decoration:none}
+.topbar .sp{flex:1}
+.progress-pill{font:500 .78rem var(--f-mono);color:var(--fg-dim)}
+.btn{font:600 .85rem var(--f-body);color:var(--fg);background:var(--surface-2);border:1px solid var(--line);border-radius:999px;padding:.4rem .9rem;cursor:pointer}
+.btn:hover{border-color:var(--accent)}
+#menuBtn{display:none}
+.bar{position:absolute;left:0;bottom:-1px;height:2px;width:0;background:var(--grad)}
+
+.shell{display:grid;grid-template-columns:19rem minmax(0,1fr);max-width:82rem;margin:0 auto}
+nav.toc{position:sticky;top:3.4rem;align-self:start;max-height:calc(100vh - 3.4rem);overflow:auto;padding:1.5rem 1rem 3rem 1.25rem;border-right:1px solid var(--line);font-size:.9rem;line-height:1.4}
+nav.toc h2{font:700 .7rem var(--f-display);letter-spacing:.18em;text-transform:uppercase;color:var(--fg-dim);margin:1.2rem 0 .5rem}
+nav.toc a{display:block;color:var(--fg-dim);text-decoration:none;padding:.32rem .6rem;border-radius:8px;border-left:2px solid transparent}
+nav.toc a:hover{color:var(--fg);background:var(--surface)}
+nav.toc a.on{color:var(--fg);background:var(--surface-2);border-left-color:var(--accent-2)}
+nav.toc a i{font:500 .72rem var(--f-mono);font-style:normal;color:var(--accent);margin-right:.5rem}
+
+main{padding:0 1.25rem 6rem;min-width:0}
+.col{max-width:46rem;margin:0 auto}
+
+/* capa */
+.cover{position:relative;overflow:hidden;padding:5rem 1.25rem 4rem;border-bottom:1px solid var(--line);background:radial-gradient(60rem 28rem at 85% -10%,rgba(123,46,255,.35),transparent 60%),radial-gradient(40rem 24rem at 0% 110%,rgba(255,45,170,.22),transparent 60%),var(--bg)}
+.cover::after{content:"";position:absolute;inset:0;background-image:linear-gradient(var(--line) 1px,transparent 1px),linear-gradient(90deg,var(--line) 1px,transparent 1px);background-size:44px 44px;mask-image:linear-gradient(180deg,#000,transparent 75%);opacity:.5;pointer-events:none}
+.cover .col{position:relative;z-index:1}
+.kicker{font:700 .74rem var(--f-display);letter-spacing:.22em;text-transform:uppercase;color:var(--accent)}
+.cover h1{font:800 clamp(2.4rem,7vw,4.4rem)/1.04 var(--f-display);margin:.8rem 0 1rem;text-wrap:balance}
+.grad{background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent;background-size:200% 100%;animation:flow 9s linear infinite}
+@keyframes flow{to{background-position:200% 0}}
+.cover p.lead{font-size:1.2rem;color:var(--fg-dim);max-width:38rem}
+.meta{display:flex;flex-wrap:wrap;gap:.5rem;margin-top:1.6rem}
+.chip{font:500 .78rem var(--f-mono);padding:.3rem .7rem;border:1px solid var(--line);border-radius:999px;background:var(--surface);color:var(--fg-dim)}
+.chip b{color:var(--fg);font-weight:500}
+
+/* capítulos */
+section.ch{padding-top:4.5rem}
+.ch-head{display:flex;flex-direction:column;gap:.5rem;margin-bottom:1.5rem}
+.ch-num{font:700 .78rem var(--f-mono);color:var(--accent-2);letter-spacing:.12em}
+h2.t{font:800 clamp(1.7rem,4.2vw,2.4rem)/1.12 var(--f-display);margin:0;text-wrap:balance}
+h3{font:700 1.3rem/1.25 var(--f-display);margin:2.4rem 0 .6rem;text-wrap:balance}
+h4{font:700 1rem var(--f-display);margin:1.6rem 0 .3rem;color:var(--accent)}
+p{margin:.8rem 0}
+ul,ol{padding-left:1.3rem;margin:.8rem 0}
+li{margin:.3rem 0}
+li::marker{color:var(--accent-2)}
+code{font:500 .88em var(--f-mono);background:var(--surface-2);padding:.12em .4em;border-radius:6px;overflow-wrap:anywhere}
+.src{display:inline-flex;gap:.4rem;align-items:center;font:500 .72rem var(--f-mono);padding:.22rem .6rem;border-radius:999px;border:1px solid var(--line);color:var(--fg-dim);background:var(--surface);width:fit-content}
+.src.base{border-color:color-mix(in srgb,var(--accent) 55%,transparent);color:var(--accent)}
+.src.plus{border-color:color-mix(in srgb,var(--accent-2) 55%,transparent);color:var(--accent-2)}
+
+/* código */
+.code{margin:1.1rem 0;border:1px solid var(--line);border-radius:12px;background:var(--code-bg);overflow:hidden}
+.code header{display:flex;align-items:center;gap:.6rem;padding:.45rem .8rem;border-bottom:1px solid var(--line);font:500 .74rem var(--f-mono);color:var(--fg-dim)}
+.code header .dots{display:flex;gap:.3rem}.code header .dots i{width:.55rem;height:.55rem;border-radius:50%;background:var(--purple);opacity:.8}
+.code header .dots i:nth-child(2){background:var(--pink)}.code header .dots i:nth-child(3){background:var(--blue)}
+.code header .sp{flex:1}
+.code header button{font:500 .72rem var(--f-mono);color:var(--fg-dim);background:none;border:1px solid var(--line);border-radius:6px;padding:.15rem .5rem;cursor:pointer}
+.code header button:hover{color:var(--fg);border-color:var(--accent)}
+.code pre{margin:0;padding:.9rem 1rem;overflow-x:auto;font:400 .84rem/1.65 var(--f-mono);color:var(--code-fg);tab-size:2}
+.code pre code{background:none;padding:0;font:inherit;overflow-wrap:normal}
+.hljs-keyword,.hljs-built_in,.hljs-literal,.hljs-selector-tag{color:var(--hl-kw)}
+.hljs-string,.hljs-regexp,.hljs-template-variable{color:var(--hl-str)}
+.hljs-comment,.hljs-quote{color:var(--hl-com);font-style:italic}
+.hljs-number,.hljs-symbol{color:var(--hl-num)}
+.hljs-title,.hljs-title.function_,.hljs-function{color:var(--hl-fn)}
+.hljs-title.class_,.hljs-type,.hljs-name,.hljs-tag{color:var(--hl-tag)}
+.hljs-attr,.hljs-attribute,.hljs-selector-class,.hljs-variable,.hljs-params{color:var(--hl-attr)}
+.hljs-meta{color:var(--hl-com)}
+
+/* avisos */
+.note{margin:1.4rem 0;padding:1rem 1.1rem;border:1px solid var(--line);border-radius:12px;background:var(--surface)}
+.note strong.lbl{display:block;font:700 .72rem var(--f-display);letter-spacing:.16em;text-transform:uppercase;margin-bottom:.25rem}
+.note.dica{border-color:color-mix(in srgb,var(--blue) 50%,transparent)}.note.dica .lbl{color:var(--accent)}
+.note.atencao{border-color:color-mix(in srgb,var(--warn) 55%,transparent)}.note.atencao .lbl{color:var(--warn)}
+.note.erro{border-color:color-mix(in srgb,var(--bad) 55%,transparent)}.note.erro .lbl{color:var(--bad)}
+.note.analogia{border-color:color-mix(in srgb,var(--pink) 50%,transparent)}.note.analogia .lbl{color:var(--accent-2)}
+.note p:first-of-type{margin-top:0}.note p:last-child{margin-bottom:0}
+
+/* tabelas */
+.tw{overflow-x:auto;margin:1.2rem 0;border:1px solid var(--line);border-radius:12px}
+table{border-collapse:collapse;width:100%;min-width:30rem;font-size:.92rem;line-height:1.5}
+th,td{text-align:left;padding:.65rem .85rem;border-bottom:1px solid var(--line);vertical-align:top}
+th{font:700 .72rem var(--f-display);letter-spacing:.12em;text-transform:uppercase;color:var(--fg-dim);background:var(--surface)}
+tr:last-child td{border-bottom:0}
+
+/* árvore + diagrama */
+pre.tree{font:400 .85rem/1.6 var(--f-mono);background:var(--code-bg);border:1px solid var(--line);border-radius:12px;padding:1rem;overflow-x:auto;margin:1.1rem 0}
+.flow{display:flex;flex-wrap:wrap;gap:.5rem;align-items:center;margin:1.2rem 0}
+.flow span{padding:.5rem .85rem;border:1px solid var(--line);border-radius:10px;background:var(--surface-2);font:600 .85rem var(--f-body)}
+.flow em{font-style:normal;color:var(--accent-2);font-weight:700}
+
+/* exercícios */
+.ex{margin:1.6rem 0;border:1px solid color-mix(in srgb,var(--purple) 60%,transparent);border-radius:14px;padding:1.1rem 1.2rem;background:linear-gradient(135deg,rgba(123,46,255,.14),rgba(255,45,170,.06))}
+.ex h4{margin-top:0;color:var(--fg)}
+.ex h4::before{content:"EXERCÍCIO";font:700 .68rem var(--f-display);letter-spacing:.18em;color:var(--accent-2);display:block;margin-bottom:.3rem}
+details{margin:.8rem 0;border:1px solid var(--line);border-radius:10px;background:var(--surface)}
+details>summary{cursor:pointer;padding:.6rem .9rem;font-weight:600;font-size:.92rem;list-style:none}
+details>summary::before{content:"▸ ";color:var(--accent-2)}details[open]>summary::before{content:"▾ "}
+details>div{padding:0 .9rem .9rem}
+
+/* checklist */
+.check{list-style:none;padding:0}.check li{display:flex;gap:.6rem;align-items:flex-start}
+.check input{margin-top:.45rem;accent-color:var(--purple);width:1.05rem;height:1.05rem}
+
+/* biblioteca */
+.lib{display:grid;grid-template-columns:repeat(auto-fill,minmax(15rem,1fr));gap:.8rem;margin:1rem 0}
+.lib a{display:block;padding:.85rem 1rem;border:1px solid var(--line);border-radius:12px;background:var(--surface);text-decoration:none;color:var(--fg);min-width:0}
+.lib a:hover{border-color:var(--accent);background:var(--surface-2)}
+.lib a b{display:block;font:700 .95rem var(--f-display);color:var(--fg)}
+.lib a span{display:block;font-size:.84rem;color:var(--fg-dim);line-height:1.4;margin-top:.15rem}
+.lib a small{display:block;font:500 .7rem var(--f-mono);color:var(--accent);margin-top:.35rem;overflow-wrap:anywhere}
+
+footer{margin-top:5rem;padding-top:2rem;border-top:1px solid var(--line);font-size:.9rem;color:var(--fg-dim)}
+
+@media (max-width:60rem){
+  .shell{grid-template-columns:minmax(0,1fr)}
+  #menuBtn{display:inline-block}
+  nav.toc{position:fixed;inset:3.4rem 0 0 0;max-height:none;z-index:25;background:var(--bg);transform:translateX(-100%);transition:transform .25s;border-right:0}
+  nav.toc.open{transform:none}
+  .cover{padding-top:3.5rem}
+}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}.grad{animation:none}nav.toc{transition:none}}
+@media print{.topbar,nav.toc{display:none}.shell{display:block}}
+</style>
+<div class="topbar">
+  <button class="btn" id="menuBtn" aria-label="Abrir sumário">☰ Sumário</button>
+  <a class="brand" href="#topo">KALIXTO</a>
+  <span class="sp"></span>
+  <span class="progress-pill" id="prog" title="Itens marcados nos checklists">0 / 0</span>
+  <button class="btn" id="themeBtn" aria-label="Alternar tema">Tema</button>
+  <div class="bar" id="readbar"></div>
+</div>
+
+<div class="shell">
+<nav class="toc" id="toc" aria-label="Sumário"></nav>
+<main id="topo">
+
+<header class="cover">
+  <div class="col">
+    <div class="kicker">Apostila Master · Volume Angular</div>
+    <h1>Angular 20 <span class="grad">do zero ao projeto real</span></h1>
+    <p class="lead">Do primeiro <code>node -v</code> até formulários reativos, APIs, rotas, testes e deploy. Um guia único, em português, com código que funciona na versão 20.</p>
+    <div class="meta">
+      <span class="chip"><b>Versão</b> Angular 20</span>
+      <span class="chip"><b>Nível</b> iniciante → intermediário</span>
+      <span class="chip"><b>Linguagem</b> TypeScript</span>
+      <span class="chip"><b>Marca</b> dev-Kalixto · Professor · Programador · Gamer</span>
+    </div>
+  </div>
+</header>
+
+<div class="col">
+
+<section class="ch" id="sobre" data-title="Sobre esta apostila">
+  <div class="ch-head"><span class="ch-num">PRÉ</span><h2 class="t">Sobre esta apostila</h2></div>
+  <p>Esta é uma apostila master: junta em um só lugar o material de aula do Prof. Vitor H. V. Reis (Senac RJ) e acrescenta tudo o que falta para você sair da instalação e chegar a uma aplicação Angular completa.</p>
+  <h3>Origem do conteúdo</h3>
+  <p>Cada capítulo mostra uma etiqueta dizendo de onde veio o conteúdo:</p>
+  <p><span class="src base">BASE · material do Prof. Vitor</span> conteúdo vindo dos quatro documentos originais.<br><span class="src plus">COMPLEMENTO · Kalixto</span> conteúdo acrescentado para completar o assunto.</p>
+  <div class="tw"><table>
+    <tr><th>Documento original</th><th>Onde aparece</th></tr>
+    <tr><td>Apostila: Introdução ao Angular 20 (Windows + CMD)</td><td>Capítulos 2 e 3</td></tr>
+    <tr><td>Apostila prática: Projeto Angular 20 com Bootstrap e componente de Cadastro</td><td>Capítulos 4, 5 e 7</td></tr>
+    <tr><td>Slides: Introdução a APIs com TypeScript</td><td>Capítulo 10</td></tr>
+    <tr><td>Slides: Programação Front-End III, Reactive Forms</td><td>Capítulos 11 e 12</td></tr>
+  </table></div>
+  <div class="note atencao"><strong class="lbl">Créditos</strong><p>Os textos, exercícios e a sequência didática dos materiais-base são do Prof. Vitor H. V. Reis (<a href="https://github.com/VitorVianna/" target="_blank" rel="noopener">GitHub</a> · <a href="https://www.linkedin.com/in/vitorhvr/" target="_blank" rel="noopener">LinkedIn</a>). Esta edição reorganiza, atualiza e amplia o material para estudo.</p></div>
+  <h3>Como estudar</h3>
+  <ol>
+    <li>Siga os capítulos na ordem. Cada um assume o anterior.</li>
+    <li>Digite o código. Copiar e colar não treina a mão.</li>
+    <li>Faça os exercícios antes de abrir o gabarito.</li>
+    <li>Marque os checklists no fim dos capítulos. O contador no topo mostra seu avanço.</li>
+    <li>Quando terminar, faça o quiz, que fica em uma página separada (veja o capítulo 18), e consulte a biblioteca de referência do capítulo 20 para aprofundar.</li>
+  </ol>
+</section>
+
+<section class="ch" id="c1" data-title="O que é o Angular">
+  <div class="ch-head"><span class="ch-num">CAPÍTULO 01</span><h2 class="t">O que é o Angular</h2><span class="src plus">COMPLEMENTO · Kalixto</span></div>
+  <p>O Angular é um framework front-end mantido pelo Google, escrito em TypeScript, para construir aplicações web modernas baseadas em componentes. Ele entrega, na mesma caixa, roteamento, formulários, cliente HTTP, injeção de dependência e ferramentas de build e teste.</p>
+  <div class="note analogia"><strong class="lbl">Analogia</strong><p>Pense numa coreografia. Cada componente é um bloco de movimento (um passo, uma sequência). A aplicação é a música inteira: o <code>App</code> chama os blocos na ordem certa. Quando um bloco muda, o resto da coreografia continua de pé.</p></div>
+  <h3>Framework, biblioteca e ferramenta</h3>
+  <div class="tw"><table>
+    <tr><th></th><th>Angular</th><th>React</th><th>Vue</th></tr>
+    <tr><td>Tipo</td><td>Framework completo</td><td>Biblioteca de UI</td><td>Framework progressivo</td></tr>
+    <tr><td>Linguagem padrão</td><td>TypeScript</td><td>JavaScript ou TypeScript</td><td>JavaScript ou TypeScript</td></tr>
+    <tr><td>Roteamento, formulários, HTTP</td><td>Inclusos</td><td>Bibliotecas externas</td><td>Pacotes oficiais</td></tr>
+    <tr><td>Estilo de projeto</td><td>Opinativo, padronizado</td><td>Livre</td><td>Intermediário</td></tr>
+  </table></div>
+  <h3>O que mudou até a versão 20</h3>
+  <ul>
+    <li><strong>Standalone por padrão.</strong> Componentes declaram o que usam em <code>imports</code>. O <code>NgModule</code> deixou de ser necessário.</li>
+    <li><strong>Novo control flow.</strong> <code>@if</code>, <code>@for</code> e <code>@switch</code> no template substituem <code>*ngIf</code>, <code>*ngFor</code> e <code>*ngSwitch</code>, que estão deprecados na v20.</li>
+    <li><strong>Signals.</strong> Uma forma simples de guardar estado reativo. As APIs principais (<code>signal</code>, <code>computed</code>, <code>effect</code>, <code>linkedSignal</code>) estão estáveis na v20.</li>
+    <li><strong>Nomes de arquivo mais curtos.</strong> O CLI 20 gera <code>cadastro.ts</code> em vez de <code>cadastro.component.ts</code>, e a classe se chama <code>Cadastro</code>.</li>
+    <li><strong>Zoneless.</strong> Detecção de mudanças sem Zone.js, em prévia para desenvolvedores na v20.</li>
+  </ul>
+  <div class="note dica"><strong class="lbl">Dica</strong><p>Tutoriais antigos usam <code>@NgModule</code>, <code>*ngIf</code> e arquivos <code>.component.ts</code>. Ainda funcionam em projetos legados, mas ao estudar prefira a sintaxe moderna deste volume.</p></div>
+  <h3>Como uma aplicação Angular é montada</h3>
+  <div class="flow"><span>index.html</span><em>→</em><span>main.ts</span><em>→</em><span>bootstrapApplication</span><em>→</em><span>App (raiz)</span><em>→</em><span>componentes filhos</span></div>
+  <script type="text/plain" class="code" data-lang="typescript" data-file="src/main.ts">import { bootstrapApplication } from '@angular/platform-browser';
+import { appConfig } from './app/app.config';
+import { App } from './app/app';
+
+bootstrapApplication(App, appConfig)
+  .catch((err) => console.error(err));</script>
+</section>
+
+<section class="ch" id="c2" data-title="Ambiente de desenvolvimento">
+  <div class="ch-head"><span class="ch-num">CAPÍTULO 02</span><h2 class="t">Ambiente de desenvolvimento</h2><span class="src base">BASE · Introdução ao Angular 20 (Prof. Vitor)</span></div>
+  <p>Ao final deste capítulo você terá Node.js, npm, VS Code e Angular CLI funcionando, mesmo em um laboratório de faculdade onde o PATH não vem configurado.</p>
+  <h3>Objetivos</h3>
+  <ul>
+    <li>Instalar o Node.js (LTS) e o npm.</li>
+    <li>Verificar se o Windows reconhece os comandos no CMD.</li>
+    <li>Entender e ajustar a variável de ambiente <code>PATH</code>.</li>
+    <li>Configurar o VS Code para usar o Command Prompt quando o PowerShell estiver bloqueado.</li>
+    <li>Instalar o Angular CLI na versão 20.</li>
+  </ul>
+  <h3>Pré-requisitos</h3>
+  <ul>
+    <li>Computador com Windows (macOS e Linux têm notas ao final do capítulo).</li>
+    <li>Permissão para instalar programas, ou apoio do laboratório.</li>
+    <li>Conexão com a internet e Visual Studio Code.</li>
+  </ul>
+  <div class="note atencao"><strong class="lbl">Atenção · laboratório de faculdade</strong><p>Em muitos laboratórios o PATH do npm do usuário não vem configurado. O <code>ng</code> falha mesmo depois de instalar o Angular CLI. A seção 2.4 mostra a correção.</p></div>
+
+  <h3>2.1 Instalando o Node.js (LTS)</h3>
+  <p>O Node.js é o ambiente que executa as ferramentas do Angular, principalmente o <strong>npm</strong> (gerenciador de pacotes). Instale a versão <strong>LTS</strong> em <a href="https://nodejs.org" target="_blank" rel="noopener">nodejs.org</a>.</p>
+  <div class="note dica"><strong class="lbl">Versão exigida</strong><p>O Angular 20 pede Node.js 20.19 ou superior (ou 22.12+, ou 24+). Se o seu Node for mais antigo, o <code>ng new</code> avisa e se recusa a continuar.</p></div>
+  <p>Valide no CMD (Windows → digite <code>cmd</code> → Enter):</p>
+  <script type="text/plain" class="code" data-lang="dos" data-file="CMD">node -v
+npm -v</script>
+  <p>Se aparecer “não é reconhecido…”, o problema quase sempre é o PATH.</p>
+
+  <h3>2.2 Entendendo o PATH</h3>
+  <p>O PATH é uma lista de pastas onde o Windows procura programas quando você digita um comando. Para ver o atual:</p>
+  <script type="text/plain" class="code" data-lang="dos" data-file="CMD">echo %PATH%</script>
+  <div class="tw"><table>
+    <tr><th>Pasta</th><th>O que é</th></tr>
+    <tr><td><code>C:\Program Files\nodejs</code></td><td>Onde o Node costuma ficar</td></tr>
+    <tr><td><code>C:\Users\&lt;usuário&gt;\AppData\Roaming\npm</code></td><td>Onde os pacotes globais (como o <code>ng</code>) são instalados para o usuário</td></tr>
+  </table></div>
+  <div class="note erro"><strong class="lbl">Por que isso importa</strong><p>Se a pasta <code>Roaming\npm</code> não estiver no PATH, o pacote instala, mas o comando <code>ng</code> continua dando “não é reconhecido…”.</p></div>
+
+  <h3>2.3 Acessando a pasta AppData (oculta)</h3>
+  <ul>
+    <li><strong>Opção A:</strong> Explorador de Arquivos → Exibir → marque “Itens ocultos”.</li>
+    <li><strong>Opção B:</strong> na barra de endereço do Explorador, digite <code>%appdata%</code> e pressione Enter.</li>
+  </ul>
+
+  <h3>2.4 Adicionando ao PATH da conta (User PATH)</h3>
+  <ol>
+    <li>Pesquise no Windows “variáveis de ambiente” e abra “Editar as variáveis de ambiente do sistema”.</li>
+    <li>Clique em “Variáveis de Ambiente…”.</li>
+    <li>Em “Variáveis de usuário”, selecione <code>Path</code> e clique em “Editar”.</li>
+    <li>Clique em “Novo” e adicione <code>C:\Users\SEU_USUARIO\AppData\Roaming\npm</code>.</li>
+    <li>Se o Node não funcionar, adicione também <code>C:\Program Files\nodejs</code>.</li>
+    <li>Confirme com OK em todas as janelas.</li>
+    <li><strong>Feche o CMD e abra de novo.</strong> Isso é obrigatório.</li>
+  </ol>
+  <p>Valide em um CMD novo com <code>node -v</code> e <code>npm -v</code>.</p>
+
+  <h3>2.5 VS Code com Command Prompt</h3>
+  <p>Algumas faculdades bloqueiam o PowerShell por política. Nesses casos, use o CMD dentro do VS Code:</p>
+  <ol>
+    <li>Abra o VS Code e vá em Terminal → New Terminal.</li>
+    <li>No menu de perfis do painel do terminal, escolha <strong>Select Default Profile</strong>.</li>
+    <li>Selecione <strong>Command Prompt</strong>.</li>
+    <li>Feche o terminal atual e abra um novo.</li>
+  </ol>
+
+  <h3>2.6 Instalando o Angular CLI 20</h3>
+  <script type="text/plain" class="code" data-lang="bash" data-file="terminal">npm install -g @angular/cli@20
+ng version</script>
+  <div class="tw"><table>
+    <tr><th>Trecho</th><th>Significado</th></tr>
+    <tr><td><code>npm</code></td><td>Gerenciador de pacotes do Node</td></tr>
+    <tr><td><code>install</code></td><td>Instalar um pacote</td></tr>
+    <tr><td><code>-g</code></td><td>Global: disponível em qualquer pasta</td></tr>
+    <tr><td><code>@angular/cli@20</code></td><td>Angular CLI na versão 20</td></tr>
+  </table></div>
+
+  <h3>2.7 Extras</h3>
+  <span class="src plus">COMPLEMENTO · Kalixto</span>
+  <ul>
+    <li><strong>macOS e Linux:</strong> instale o Node pelo <a href="https://github.com/nvm-sh/nvm" target="_blank" rel="noopener">nvm</a> para trocar de versão com facilidade. Se der erro de permissão no <code>-g</code>, configure o prefixo do npm para uma pasta do seu usuário em vez de usar <code>sudo</code>.</li>
+    <li><strong>Sem permissão para instalar o CLI globalmente?</strong> Use o <code>npx</code>: <code>npx @angular/cli@20 new meu-app</code>.</li>
+    <li><strong>Extensões úteis do VS Code:</strong> Angular Language Service, ESLint, Prettier e Error Lens.</li>
+  </ul>
+  <ul class="check">
+    <li><label><input type="checkbox" data-k="c2a"> <code>node -v</code> e <code>npm -v</code> mostram versões no CMD</label></li>
+    <li><label><input type="checkbox" data-k="c2b"> Pasta <code>Roaming\npm</code> está no PATH do usuário</label></li>
+    <li><label><input type="checkbox" data-k="c2c"> VS Code abre o terminal em Command Prompt</label></li>
+    <li><label><input type="checkbox" data-k="c2d"> <code>ng version</code> mostra Angular CLI 20</label></li>
+  </ul>
+</section>
+
+<section class="ch" id="c3" data-title="Seu primeiro projeto">
+  <div class="ch-head"><span class="ch-num">CAPÍTULO 03</span><h2 class="t">Seu primeiro projeto</h2><span class="src base">BASE · Introdução ao Angular 20 (Prof. Vitor)</span></div>
+  <h3>3.1 Criando e executando</h3>
+  <script type="text/plain" class="code" data-lang="dos" data-file="CMD">mkdir projetos-angular
+cd projetos-angular
+ng new meu-primeiro-app
+cd meu-primeiro-app
+ng serve</script>
+  <p>Durante o <code>ng new</code> o CLI faz perguntas (estilos, roteamento, SSR). Siga o padrão definido pela turma. Abra <a href="http://localhost:4200/" target="_blank" rel="noopener">http://localhost:4200/</a>. Para abrir o navegador sozinho, use <code>ng serve -o</code>.</p>
+  <h3>3.2 Problemas comuns</h3>
+  <div class="tw"><table>
+    <tr><th>Sintoma</th><th>Causa e solução</th></tr>
+    <tr><td><code>ng</code> “não é reconhecido…”</td><td>Faltou <code>C:\Users\&lt;usuário&gt;\AppData\Roaming\npm</code> no PATH. Ajuste, feche e abra o CMD, teste <code>ng version</code>.</td></tr>
+    <tr><td>Porta 4200 em uso</td><td><code>ng serve --port 4300</code></td></tr>
+    <tr><td>Dependências quebradas</td><td><code>npm install</code> e depois <code>ng serve</code></td></tr>
+  </table></div>
+  <h3>3.3 Estrutura de pastas</h3>
+  <span class="src plus">COMPLEMENTO · Kalixto</span>
+  <pre class="tree">meu-primeiro-app/
+├── public/                 arquivos estáticos (favicon, imagens)
+├── src/
+│   ├── app/
+│   │   ├── app.ts          componente raiz (classe App)
+│   │   ├── app.html        template do componente raiz
+│   │   ├── app.css         estilos do componente raiz
+│   │   ├── app.spec.ts     testes do componente raiz
+│   │   ├── app.config.ts   providers globais (rotas, HTTP...)
+│   │   └── app.routes.ts   tabela de rotas
+│   ├── index.html          página única servida ao navegador
+│   ├── main.ts             ponto de entrada
+│   └── styles.css          estilos globais
+├── angular.json            configuração do workspace e do build
+├── package.json            dependências e scripts npm
+└── tsconfig.json           configuração do TypeScript</pre>
+  <h3>3.4 Comandos do CLI que você vai usar toda semana</h3>
+  <div class="tw"><table>
+    <tr><th>Comando</th><th>O que faz</th></tr>
+    <tr><td><code>ng new nome</code></td><td>Cria um projeto</td></tr>
+    <tr><td><code>ng serve</code></td><td>Servidor de desenvolvimento com recarga automática</td></tr>
+    <tr><td><code>ng generate component x</code> (<code>ng g c x</code>)</td><td>Cria um componente</td></tr>
+    <tr><td><code>ng g service x</code></td><td>Cria um serviço</td></tr>
+    <tr><td><code>ng g guard x</code> · <code>ng g pipe x</code> · <code>ng g directive x</code></td><td>Guard, pipe e diretiva</td></tr>
+    <tr><td><code>ng build</code></td><td>Gera o build de produção em <code>dist/</code></td></tr>
+    <tr><td><code>ng test</code></td><td>Roda os testes unitários</td></tr>
+    <tr><td><code>ng update</code></td><td>Atualiza Angular e dependências com migrações</td></tr>
+    <tr><td><code>ng add pacote</code></td><td>Instala e configura uma biblioteca compatível</td></tr>
+  </table></div>
+  <div class="note dica"><strong class="lbl">Dica</strong><p>Use <code>--dry-run</code> em qualquer <code>ng generate</code> para ver o que seria criado sem escrever nada.</p></div>
+  <div class="ex"><h4>Hello, Kalixto</h4><p>Edite <code>src/app/app.html</code>, apague o conteúdo gerado e escreva um <code>&lt;h1&gt;</code> com o seu nome. Salve e observe o navegador atualizar sozinho. Depois altere o valor de <code>title</code> em <code>app.ts</code> e mostre-o com <code>{{ title }}</code>.</p></div>
+  <p><strong>Próximos passos sugeridos pelo material-base:</strong> estrutura de pastas, componentes, data binding, diretivas e serviços (consumo de API). É exatamente a sequência dos próximos capítulos.</p>
+  <ul class="check">
+    <li><label><input type="checkbox" data-k="c3a"> Projeto criado com <code>ng new</code></label></li>
+    <li><label><input type="checkbox" data-k="c3b"> <code>ng serve</code> abre a página inicial no navegador</label></li>
+    <li><label><input type="checkbox" data-k="c3c"> Sei dizer para que serve cada arquivo de <code>src/app</code></label></li>
+  </ul>
+</section>
+
+<section class="ch" id="c4" data-title="Git e GitHub no projeto">
+  <div class="ch-head"><span class="ch-num">CAPÍTULO 04</span><h2 class="t">Git e GitHub no projeto</h2><span class="src base">BASE · Apostila Bootstrap e Cadastro (Prof. Vitor)</span></div>
+  <p>Todo projeto deve nascer versionado. Aqui você cria o repositório remoto e conecta o projeto Angular a ele. O projeto-exemplo é o <code>sistema-usuarios</code>, que evolui até um CRUD completo.</p>
+  <h3>4.1 Criar o repositório</h3>
+  <ol>
+    <li>Acesse sua conta no GitHub e clique em <strong>New repository</strong>.</li>
+    <li>Dê um nome, por exemplo <code>sistema-usuarios</code>.</li>
+    <li>Escolha público ou privado e clique em <strong>Create repository</strong>.</li>
+    <li>Copie a URL: <code>https://github.com/seu-usuario/sistema-usuarios.git</code></li>
+  </ol>
+  <h3>4.2 Criar o projeto Angular 20</h3>
+  <script type="text/plain" class="code" data-lang="bash" data-file="terminal">ng new sistema-usuarios
+cd sistema-usuarios</script>
+  <p>Configuração sugerida no <code>ng new</code>: <strong>Routing: Yes</strong> e <strong>Stylesheet: CSS</strong>.</p>
+  <h3>4.3 Apontar para o GitHub</h3>
+  <script type="text/plain" class="code" data-lang="bash" data-file="terminal">git remote add origin https://github.com/seu-usuario/sistema-usuarios.git
+git add .
+git commit -m "Projeto Angular 20 criado"
+git branch -M main
+git push -u origin main</script>
+  <div class="note dica"><strong class="lbl">Dica</strong><p>O <code>ng new</code> já inicializa um repositório Git local. Se ele acusar que o repositório já existe, pule o <code>git init</code> e vá direto ao <code>git remote add</code>. Em laboratório, execute <code>ng serve</code> logo após criar o projeto para confirmar que o ambiente está correto.</p></div>
+  <h3>4.4 Rotina de commits</h3>
+  <span class="src plus">COMPLEMENTO · Kalixto</span>
+  <div class="tw"><table>
+    <tr><th>Momento</th><th>Mensagem de exemplo</th></tr>
+    <tr><td>Após criar um componente</td><td><code>feat: cria componente Cadastro</code></td></tr>
+    <tr><td>Após ajustar um bug</td><td><code>fix: corrige validação de senha</code></td></tr>
+    <tr><td>Após mexer só em estilo</td><td><code>style: ajusta grid do formulário</code></td></tr>
+    <tr><td>Após atualizar documentação</td><td><code>docs: atualiza README</code></td></tr>
+  </table></div>
+  <p>Commits pequenos e frequentes facilitam voltar atrás quando algo quebra.</p>
+</section>
+<section class="ch" id="c5" data-title="Componentes">
+  <div class="ch-head"><span class="ch-num">CAPÍTULO 05</span><h2 class="t">Componentes</h2><span class="src base">BASE · Apostila Bootstrap e Cadastro</span></div>
+  <p>O Angular é baseado em componentes. Em projetos reais, separar a interface em componentes distintos melhora a organização, facilita a manutenção e prepara o sistema para crescer. No projeto-exemplo, o componente <code>App</code> é só o ponto de entrada. A tela do formulário vive em um componente próprio, o <code>Cadastro</code>.</p>
+  <h3>5.1 Anatomia de um componente</h3>
+  <p>Todo componente tem três partes: uma classe TypeScript (lógica), um template HTML (aparência) e, opcionalmente, um CSS (estilo local).</p>
+  <script type="text/plain" class="code" data-lang="typescript" data-file="src/app/cadastro/cadastro.ts">import { Component } from '@angular/core';
+
+@Component({
+  selector: 'app-cadastro',        // como o componente é chamado no HTML
+  imports: [],                     // o que o template usa (outros componentes, pipes, diretivas)
+  templateUrl: './cadastro.html',  // template
+  styleUrl: './cadastro.css'       // estilos só deste componente
+})
+export class Cadastro {
+  titulo = 'Cadastro de Usuário';
+}</script>
+  <h3>5.2 Gerando o componente</h3>
+  <script type="text/plain" class="code" data-lang="bash" data-file="terminal">ng generate component cadastro
+# ou, na forma curta
+ng g c cadastro</script>
+  <p>O comando cria a pasta <code>src/app/cadastro/</code> com quatro arquivos:</p>
+  <pre class="tree">src/app/cadastro/
+├── cadastro.ts
+├── cadastro.html
+├── cadastro.css
+└── cadastro.spec.ts</pre>
+  <h3>5.3 Usando um componente dentro de outro</h3>
+  <p>Para exibir o <code>Cadastro</code> dentro do <code>App</code>: importe a classe, coloque-a no array <code>imports</code> e use o seletor no template.</p>
+  <script type="text/plain" class="code" data-lang="typescript" data-file="src/app/app.ts">import { Component } from '@angular/core';
+import { Cadastro } from './cadastro/cadastro';
+
+@Component({
+  selector: 'app-root',
+  imports: [Cadastro],
+  templateUrl: './app.html',
+  styleUrl: './app.css'
+})
+export class App {
+  title = 'sistema-usuarios';
+}</script>
+  <script type="text/plain" class="code" data-lang="html" data-file="src/app/app.html"><app-cadastro></app-cadastro></script>
+  <div class="note atencao"><strong class="lbl">Erro comum</strong><p>Se o navegador mostrar “<code>app-cadastro</code> is not a known element”, você esqueceu de colocar o componente em <code>imports</code>.</p></div>
+  <h3>5.4 Comunicação entre componentes</h3>
+  <span class="src plus">COMPLEMENTO · Kalixto</span>
+  <p>Dados descem do pai para o filho por <code>input()</code>. Eventos sobem do filho para o pai por <code>output()</code>.</p>
+  <script type="text/plain" class="code" data-lang="typescript" data-file="src/app/cartao-aluno/cartao-aluno.ts">import { Component, input, output } from '@angular/core';
+
+@Component({
+  selector: 'app-cartao-aluno',
+  template: `
+    <article>
+      <h3>{{ nome() }}</h3>
+      <button (click)="remover.emit(nome())">Remover</button>
+    </article>
+  `
+})
+export class CartaoAluno {
+  nome = input.required<string>();   // entrada obrigatória
+  remover = output<string>();        // evento de saída
+}</script>
+  <script type="text/plain" class="code" data-lang="html" data-file="uso no template do pai"><app-cartao-aluno nome="Wallace" (remover)="excluir($event)" /></script>
+  <h3>5.5 Ciclo de vida (resumo)</h3>
+  <div class="tw"><table>
+    <tr><th>Gancho</th><th>Quando roda</th><th>Uso típico</th></tr>
+    <tr><td><code>ngOnInit</code></td><td>Depois das entradas serem definidas, uma vez</td><td>Carregar dados iniciais</td></tr>
+    <tr><td><code>ngOnChanges</code></td><td>Quando uma entrada muda</td><td>Reagir a mudanças do pai</td></tr>
+    <tr><td><code>ngAfterViewInit</code></td><td>Depois da view renderizar</td><td>Acessar elementos do DOM</td></tr>
+    <tr><td><code>ngOnDestroy</code></td><td>Antes do componente sair da tela</td><td>Cancelar inscrições e timers</td></tr>
+  </table></div>
+  <div class="ex"><h4>Componente de rodapé</h4><p>Crie um componente <code>rodape</code> com o texto “© 2026 dev-Kalixto” e exiba-o abaixo do <code>app-cadastro</code> no <code>App</code>. Depois deixe o ano vir de uma propriedade da classe.</p></div>
+</section>
+
+<section class="ch" id="c6" data-title="Templates e data binding">
+  <div class="ch-head"><span class="ch-num">CAPÍTULO 06</span><h2 class="t">Templates e data binding</h2><span class="src plus">COMPLEMENTO · Kalixto</span></div>
+  <p>O template conecta a classe ao HTML. Há quatro formas de ligação, e saber qual usar resolve metade das dúvidas de iniciantes.</p>
+  <div class="tw"><table>
+    <tr><th>Tipo</th><th>Sintaxe</th><th>Direção</th></tr>
+    <tr><td>Interpolação</td><td><code>{{ valor }}</code></td><td>classe → tela</td></tr>
+    <tr><td>Property binding</td><td><code>[disabled]="bloqueado"</code></td><td>classe → tela</td></tr>
+    <tr><td>Event binding</td><td><code>(click)="salvar()"</code></td><td>tela → classe</td></tr>
+    <tr><td>Two-way binding</td><td><code>[(ngModel)]="nome"</code></td><td>nos dois sentidos</td></tr>
+  </table></div>
+  <script type="text/plain" class="code" data-lang="html" data-file="exemplo.html"><h1>Olá, {{ nome }}!</h1>
+<img [src]="foto" [alt]="'Foto de ' + nome" />
+<button (click)="curtir()" [disabled]="curtido">Curtir</button>
+<input [(ngModel)]="nome" />   <!-- exige FormsModule em imports --></script>
+  <h3>6.1 Control flow: @if, @for e @switch</h3>
+  <p>Desde a v17 o Angular tem blocos de controle de fluxo nativos no template. Eles dispensam imports e são mais legíveis que as diretivas <code>*ngIf</code> e <code>*ngFor</code> citadas em materiais antigos.</p>
+  <script type="text/plain" class="code" data-lang="html" data-file="control-flow.html">@if (usuarios.length > 0) {
+  <ul>
+    @for (u of usuarios; track u.id) {
+      <li>{{ u.nome }}</li>
+    } @empty {
+      <li>Nenhum usuário</li>
+    }
+  </ul>
+} @else {
+  <p>Carregando...</p>
+}
+
+@switch (perfil) {
+  @case ('admin') { <p>Acesso total</p> }
+  @case ('aluno') { <p>Acesso de aluno</p> }
+  @default { <p>Visitante</p> }
+}</script>
+  <div class="note atencao"><strong class="lbl">Atenção</strong><p>O <code>track</code> do <code>@for</code> é obrigatório. Use um identificador único (<code>id</code>) para o Angular reaproveitar elementos em vez de recriar a lista inteira.</p></div>
+  <div class="tw"><table>
+    <tr><th>Antigo (deprecado na v20)</th><th>Moderno</th></tr>
+    <tr><td><code>*ngIf="x"</code></td><td><code>@if (x) { }</code></td></tr>
+    <tr><td><code>*ngFor="let i of lista"</code></td><td><code>@for (i of lista; track i.id) { }</code></td></tr>
+    <tr><td><code>[ngSwitch]</code> + <code>*ngSwitchCase</code></td><td><code>@switch</code> + <code>@case</code></td></tr>
+  </table></div>
+  <h3>6.2 Pipes</h3>
+  <p>Pipes formatam valores no template sem alterar o dado original.</p>
+  <script type="text/plain" class="code" data-lang="html" data-file="pipes.html"><p>{{ nome | uppercase }}</p>
+<p>{{ preco | currency:'BRL' }}</p>
+<p>{{ nascimento | date:'dd/MM/yyyy' }}</p>
+<p>{{ progresso | percent }}</p></script>
+  <p>Para usar um pipe, importe-o no componente: <code>imports: [UpperCasePipe, CurrencyPipe, DatePipe]</code>, todos de <code>@angular/common</code>.</p>
+  <h3>6.3 @defer: carregamento sob demanda</h3>
+  <script type="text/plain" class="code" data-lang="html" data-file="defer.html">@defer (on viewport) {
+  <app-grafico-pesado />
+} @placeholder {
+  <p>O gráfico aparece quando você rolar até aqui.</p>
+}</script>
+  <div class="ex"><h4>Lista de tarefas</h4><p>Crie um array <code>tarefas</code> na classe e mostre-o com <code>@for</code>. Adicione um botão que marca a tarefa como concluída e use <code>@if</code> para riscar o texto das concluídas.</p>
+  <details><summary>Ver gabarito</summary><div>
+  <script type="text/plain" class="code" data-lang="html" data-file="tarefas.html">@for (t of tarefas; track t.id) {
+  <li [style.text-decoration]="t.feita ? 'line-through' : 'none'">
+    {{ t.titulo }}
+    @if (!t.feita) { <button (click)="t.feita = true">Concluir</button> }
+  </li>
+}</script></div></details></div>
+</section>
+
+<section class="ch" id="c7" data-title="Bootstrap e tela de Cadastro">
+  <div class="ch-head"><span class="ch-num">CAPÍTULO 07</span><h2 class="t">Bootstrap e tela de Cadastro</h2><span class="src base">BASE · Apostila Bootstrap e Cadastro (Prof. Vitor)</span></div>
+  <p>O Bootstrap acelera a parte visual com classes prontas para formulários, botões, grades e cartões. Neste capítulo você monta o formulário de cadastro usando apenas HTML e classes do Bootstrap.</p>
+  <h3>7.1 Instalando</h3>
+  <script type="text/plain" class="code" data-lang="bash" data-file="terminal">npm install bootstrap</script>
+  <p>Importe o CSS no arquivo global de estilos:</p>
+  <script type="text/plain" class="code" data-lang="css" data-file="src/styles.css">@import 'bootstrap/dist/css/bootstrap.min.css';</script>
+  <div class="note dica"><strong class="lbl">Alternativa</strong><p>Também é possível registrar o CSS no array <code>styles</code> do <code>angular.json</code>. Para componentes interativos do Bootstrap (modal, dropdown), prefira a biblioteca <a href="https://ng-bootstrap.github.io" target="_blank" rel="noopener">ng-bootstrap</a>, feita para Angular, em vez do JavaScript original.</p></div>
+  <h3>7.2 O formulário em <code>cadastro.html</code></h3>
+  <script type="text/plain" class="code" data-lang="html" data-file="src/app/cadastro/cadastro.html"><div class="container mt-5">
+  <div class="row justify-content-center">
+    <div class="col-md-8 col-lg-6">
+      <div class="card shadow">
+        <div class="card-body">
+          <h2 class="text-center mb-4">Cadastro de Usuário</h2>
+          <form>
+            <div class="mb-3">
+              <label for="nome" class="form-label">Nome completo</label>
+              <input type="text" class="form-control" id="nome" placeholder="Digite seu nome completo" />
+            </div>
+            <div class="mb-3">
+              <label for="email" class="form-label">E-mail</label>
+              <input type="email" class="form-control" id="email" placeholder="Digite seu e-mail" />
+            </div>
+            <div class="mb-3">
+              <label for="senha" class="form-label">Senha</label>
+              <input type="password" class="form-control" id="senha" placeholder="Digite sua senha" />
+            </div>
+            <div class="mb-3">
+              <label for="telefone" class="form-label">Telefone</label>
+              <input type="text" class="form-control" id="telefone" placeholder="Digite seu telefone" />
+            </div>
+            <div class="mb-3">
+              <label for="dataNascimento" class="form-label">Data de nascimento</label>
+              <input type="date" class="form-control" id="dataNascimento" />
+            </div>
+            <div class="mb-3">
+              <label for="endereco" class="form-label">Endereço</label>
+              <input type="text" class="form-control" id="endereco" placeholder="Digite seu endereço" />
+            </div>
+            <div class="mb-3">
+              <label for="cidade" class="form-label">Cidade</label>
+              <input type="text" class="form-control" id="cidade" placeholder="Digite sua cidade" />
+            </div>
+            <div class="mb-3">
+              <label for="estado" class="form-label">Estado</label>
+              <select class="form-select" id="estado">
+                <option selected>Selecione</option>
+                <option>RJ</option>
+                <option>SP</option>
+                <option>MG</option>
+                <option>ES</option>
+              </select>
+            </div>
+            <div class="d-grid">
+              <button type="submit" class="btn btn-primary">Cadastrar</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div></script>
+  <h3>7.3 Estrutura esperada do projeto</h3>
+  <pre class="tree">src/
+└── app/
+    ├── cadastro/
+    │   ├── cadastro.html
+    │   ├── cadastro.css
+    │   ├── cadastro.spec.ts
+    │   └── cadastro.ts
+    ├── app.html
+    ├── app.css
+    ├── app.spec.ts
+    └── app.ts</pre>
+  <h3>7.4 Grid do Bootstrap</h3>
+  <span class="src plus">COMPLEMENTO · Kalixto</span>
+  <p>O grid tem 12 colunas por linha. Prefixos de tamanho (<code>col-sm-</code>, <code>col-md-</code>, <code>col-lg-</code>) definem a partir de qual largura a coluna passa a ocupar a fração indicada. Abaixo do breakpoint, as colunas empilham.</p>
+  <script type="text/plain" class="code" data-lang="html" data-file="grid.html"><div class="row">
+  <div class="col-md-6">Metade em telas médias ou maiores</div>
+  <div class="col-md-6">Metade em telas médias ou maiores</div>
+</div></script>
+  <div class="ex"><h4>Exercício proposto (material-base)</h4>
+  <ol><li>Adicione novos campos ao formulário (Endereço e Contatos).</li><li>Organize os campos em duas colunas com o grid do Bootstrap.</li></ol>
+  <details><summary>Ver gabarito parcial</summary><div>
+  <script type="text/plain" class="code" data-lang="html" data-file="duas colunas"><div class="row">
+  <div class="col-md-6 mb-3">
+    <label for="cidade" class="form-label">Cidade</label>
+    <input type="text" class="form-control" id="cidade" />
+  </div>
+  <div class="col-md-6 mb-3">
+    <label for="estado" class="form-label">Estado</label>
+    <select class="form-select" id="estado"><option>RJ</option><option>SP</option></select>
+  </div>
+</div></script></div></details></div>
+  <p>Documentação: <a href="https://getbootstrap.com/docs/5.3/forms/overview/" target="_blank" rel="noopener">Formulários</a> · <a href="https://getbootstrap.com/docs/5.3/layout/grid/" target="_blank" rel="noopener">Grid system</a>.</p>
+  <ul class="check">
+    <li><label><input type="checkbox" data-k="c7a"> Bootstrap instalado e importado em <code>styles.css</code></label></li>
+    <li><label><input type="checkbox" data-k="c7b"> Componente <code>Cadastro</code> aparece dentro do <code>App</code></label></li>
+    <li><label><input type="checkbox" data-k="c7c"> Formulário em duas colunas feito</label></li>
+    <li><label><input type="checkbox" data-k="c7d"> Projeto enviado ao GitHub</label></li>
+  </ul>
+</section>
+
+<section class="ch" id="c8" data-title="Signals e estado">
+  <div class="ch-head"><span class="ch-num">CAPÍTULO 08</span><h2 class="t">Signals e estado</h2><span class="src plus">COMPLEMENTO · Kalixto</span></div>
+  <p>Um signal é um valor que avisa o Angular quando muda. O template que o lê é atualizado sozinho, só onde precisa.</p>
+  <div class="tw"><table>
+    <tr><th>API</th><th>Para quê</th></tr>
+    <tr><td><code>signal(valor)</code></td><td>Estado que você altera</td></tr>
+    <tr><td><code>computed(() => ...)</code></td><td>Valor derivado, recalculado automaticamente</td></tr>
+    <tr><td><code>effect(() => ...)</code></td><td>Efeito colateral quando um signal muda (log, localStorage)</td></tr>
+    <tr><td><code>linkedSignal</code></td><td>Estado que reinicia quando outra fonte muda</td></tr>
+    <tr><td><code>input()</code>, <code>output()</code>, <code>model()</code></td><td>Entradas, saídas e binding bidirecional de componentes</td></tr>
+  </table></div>
+  <script type="text/plain" class="code" data-lang="typescript" data-file="src/app/contador/contador.ts">import { Component, computed, effect, signal } from '@angular/core';
+
+@Component({
+  selector: 'app-contador',
+  template: `
+    <p>Total: {{ total() }} · Dobro: {{ dobro() }}</p>
+    <button (click)="incrementar()">+1</button>
+    <button (click)="total.set(0)">Zerar</button>
+  `
+})
+export class Contador {
+  total = signal(0);
+  dobro = computed(() => this.total() * 2);
+
+  constructor() {
+    effect(() => console.log('Total mudou para', this.total()));
+  }
+
+  incrementar() {
+    this.total.update((v) => v + 1);
+  }
+}</script>
+  <div class="note dica"><strong class="lbl">Regra de bolso</strong><p>Para ler, chame como função: <code>total()</code>. Para escrever, use <code>.set()</code> ou <code>.update()</code>. Não altere o valor lendo-o e atribuindo.</p></div>
+  <div class="ex"><h4>Carrinho</h4><p>Crie um signal <code>itens</code> (array de preços) e um <code>computed</code> chamado <code>total</code> que some tudo. Adicione um botão que acrescenta um item de R$ 10.</p></div>
+</section>
+
+<section class="ch" id="c9" data-title="Serviços e injeção de dependência">
+  <div class="ch-head"><span class="ch-num">CAPÍTULO 09</span><h2 class="t">Serviços e injeção de dependência</h2><span class="src plus">COMPLEMENTO · Kalixto</span></div>
+  <p>Um serviço é uma classe que guarda lógica reutilizável (regras, acesso a dados, estado compartilhado). Componentes cuidam da tela. Serviços cuidam do resto. O Angular entrega o serviço pronto para quem pedir, e isso se chama injeção de dependência.</p>
+  <script type="text/plain" class="code" data-lang="bash" data-file="terminal">ng g service usuario</script>
+  <script type="text/plain" class="code" data-lang="typescript" data-file="src/app/usuario.ts">import { Injectable, signal } from '@angular/core';
+
+export interface Usuario { id: number; nome: string; email: string; }
+
+@Injectable({ providedIn: 'root' })   // uma única instância para toda a aplicação
+export class UsuarioService {
+  private _lista = signal<Usuario[]>([]);
+  lista = this._lista.asReadonly();
+
+  adicionar(u: Omit<Usuario, 'id'>) {
+    this._lista.update((l) => [...l, { ...u, id: Date.now() }]);
+  }
+
+  remover(id: number) {
+    this._lista.update((l) => l.filter((u) => u.id !== id));
+  }
+}</script>
+  <p>Para usar o serviço em um componente, peça-o com <code>inject()</code>:</p>
+  <script type="text/plain" class="code" data-lang="typescript" data-file="src/app/lista/lista.ts">import { Component, inject } from '@angular/core';
+import { UsuarioService } from '../usuario';
+
+@Component({
+  selector: 'app-lista',
+  template: `
+    @for (u of service.lista(); track u.id) {
+      <p>{{ u.nome }} <button (click)="service.remover(u.id)">x</button></p>
+    }
+  `
+})
+export class Lista {
+  service = inject(UsuarioService);
+}</script>
+  <div class="note analogia"><strong class="lbl">Analogia</strong><p>O serviço é a secretaria da escola de dança: guarda a lista de alunos e as regras de matrícula. Cada turma (componente) pede informação à secretaria, em vez de manter a sua própria lista.</p></div>
+  <div class="ex"><h4>Compartilhando dados</h4><p>Faça o formulário <code>Cadastro</code> chamar <code>service.adicionar()</code> ao enviar, e o componente <code>Lista</code> mostrar os usuários cadastrados na mesma tela.</p></div>
+</section>
+<section class="ch" id="c10" data-title="APIs e HttpClient">
+  <div class="ch-head"><span class="ch-num">CAPÍTULO 10</span><h2 class="t">APIs e HttpClient</h2><span class="src base">BASE · Slides: Introdução a APIs com TypeScript (Prof. Vitor)</span></div>
+  <h3>10.1 O que é uma API</h3>
+  <p><strong>API</strong> significa Application Programming Interface: um conjunto de regras para que softwares conversem entre si.</p>
+  <div class="note analogia"><strong class="lbl">Analogia do garçom</strong><p>Você faz o pedido (requisição) ao garçom e recebe a comida (resposta). Você não entra na cozinha. A API é o garçom entre o seu front-end e o servidor.</p></div>
+  <h3>10.2 Como era antes das APIs</h3>
+  <ul>
+    <li>Troca de arquivos <code>.txt</code>, <code>.xml</code> ou <code>.csv</code>.</li>
+    <li>Integração direta entre bancos de dados.</li>
+    <li><strong>Problemas:</strong> lentidão, insegurança e manutenção difícil.</li>
+    <li><strong>Exemplo:</strong> um supermercado enviando a lista de produtos por um arquivo <code>.txt</code>, que o outro sistema precisava ler e interpretar manualmente.</li>
+  </ul>
+  <h3>10.3 Benefícios de usar APIs</h3>
+  <span class="src plus">COMPLEMENTO · Kalixto</span>
+  <ul>
+    <li><strong>Padronização:</strong> contrato claro de entrada e saída (geralmente JSON).</li>
+    <li><strong>Tempo real:</strong> dados atualizados a cada requisição, sem esperar um arquivo.</li>
+    <li><strong>Segurança:</strong> autenticação, permissões e limites por rota.</li>
+    <li><strong>Reuso:</strong> o mesmo back-end atende site, app e outros sistemas.</li>
+    <li><strong>Desacoplamento:</strong> front e back evoluem separados.</li>
+  </ul>
+  <h3>10.4 Métodos HTTP</h3>
+  <div class="tw"><table>
+    <tr><th>Método</th><th>Operação</th><th>Exemplo</th><th>Corpo?</th></tr>
+    <tr><td><code>GET</code></td><td>Ler (Read)</td><td><code>GET /usuarios</code></td><td>Não</td></tr>
+    <tr><td><code>POST</code></td><td>Criar (Create)</td><td><code>POST /usuarios</code></td><td>Sim</td></tr>
+    <tr><td><code>PUT</code></td><td>Substituir (Update)</td><td><code>PUT /usuarios/7</code></td><td>Sim</td></tr>
+    <tr><td><code>PATCH</code></td><td>Alterar parte (Update)</td><td><code>PATCH /usuarios/7</code></td><td>Sim</td></tr>
+    <tr><td><code>DELETE</code></td><td>Remover (Delete)</td><td><code>DELETE /usuarios/7</code></td><td>Não</td></tr>
+  </table></div>
+  <div class="tw"><table>
+    <tr><th>Código</th><th>Significado</th></tr>
+    <tr><td>200 OK</td><td>Deu certo</td></tr>
+    <tr><td>201 Created</td><td>Recurso criado</td></tr>
+    <tr><td>204 No Content</td><td>Deu certo, sem corpo de resposta</td></tr>
+    <tr><td>400 Bad Request</td><td>Requisição inválida</td></tr>
+    <tr><td>401 / 403</td><td>Não autenticado / sem permissão</td></tr>
+    <tr><td>404 Not Found</td><td>Não existe</td></tr>
+    <tr><td>500 Internal Server Error</td><td>Erro no servidor</td></tr>
+  </table></div>
+  <h3>10.5 Tipando a resposta com TypeScript</h3>
+  <p>A API devolve JSON. Descreva o formato com uma <code>interface</code> e o editor passa a autocompletar e avisar erros.</p>
+  <script type="text/plain" class="code" data-lang="typescript" data-file="src/app/post.ts">export interface Post {
+  userId: number;
+  id: number;
+  title: string;
+  body: string;
+}</script>
+  <h3>10.6 Consumindo uma API no Angular</h3>
+  <span class="src plus">COMPLEMENTO · Kalixto</span>
+  <p>Registre o cliente HTTP uma vez, em <code>app.config.ts</code>:</p>
+  <script type="text/plain" class="code" data-lang="typescript" data-file="src/app/app.config.ts">import { ApplicationConfig } from '@angular/core';
+import { provideRouter } from '@angular/router';
+import { provideHttpClient, withFetch } from '@angular/common/http';
+import { routes } from './app.routes';
+
+export const appConfig: ApplicationConfig = {
+  providers: [provideRouter(routes), provideHttpClient(withFetch())],
+};</script>
+  <p>Crie um serviço de acesso à API usando a API pública de testes <a href="https://jsonplaceholder.typicode.com" target="_blank" rel="noopener">JSONPlaceholder</a>:</p>
+  <script type="text/plain" class="code" data-lang="typescript" data-file="src/app/post-api.ts">import { Injectable, inject } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
+import { Post } from './post';
+
+@Injectable({ providedIn: 'root' })
+export class PostApi {
+  private http = inject(HttpClient);
+  private url = 'https://jsonplaceholder.typicode.com/posts';
+
+  listar(): Observable<Post[]>            { return this.http.get<Post[]>(this.url); }
+  buscar(id: number): Observable<Post>    { return this.http.get<Post>(`${this.url}/${id}`); }
+  criar(p: Omit<Post, 'id'>)              { return this.http.post<Post>(this.url, p); }
+  atualizar(id: number, p: Partial<Post>) { return this.http.patch<Post>(`${this.url}/${id}`, p); }
+  remover(id: number)                     { return this.http.delete<void>(`${this.url}/${id}`); }
+}</script>
+  <p>No componente, converta o Observable em signal com <code>toSignal</code> e trate carregamento e erro:</p>
+  <script type="text/plain" class="code" data-lang="typescript" data-file="src/app/posts/posts.ts">import { Component, inject, signal } from '@angular/core';
+import { toSignal } from '@angular/core/rxjs-interop';
+import { catchError, of } from 'rxjs';
+import { PostApi } from '../post-api';
+
+@Component({
+  selector: 'app-posts',
+  templateUrl: './posts.html',
+})
+export class Posts {
+  private api = inject(PostApi);
+  erro = signal(false);
+
+  posts = toSignal(
+    this.api.listar().pipe(
+      catchError(() => { this.erro.set(true); return of([]); })
+    ),
+    { initialValue: null }   // null = ainda carregando
+  );
+}</script>
+  <script type="text/plain" class="code" data-lang="html" data-file="src/app/posts/posts.html">@if (erro()) {
+  <div class="alert alert-danger">Não foi possível carregar os posts.</div>
+} @else if (posts() === null) {
+  <p>Carregando...</p>
+} @else {
+  <ul class="list-group">
+    @for (p of posts(); track p.id) {
+      <li class="list-group-item">{{ p.title }}</li>
+    }
+  </ul>
+}</script>
+  <h3>10.7 Interceptors</h3>
+  <p>Um interceptor roda em toda requisição. É o lugar certo para anexar token de autenticação.</p>
+  <script type="text/plain" class="code" data-lang="typescript" data-file="src/app/auth.interceptor.ts">import { HttpInterceptorFn } from '@angular/common/http';
+
+export const authInterceptor: HttpInterceptorFn = (req, next) => {
+  const token = localStorage.getItem('token');
+  const nova = token
+    ? req.clone({ setHeaders: { Authorization: `Bearer ${token}` } })
+    : req;
+  return next(nova);
+};
+
+// em app.config.ts: provideHttpClient(withFetch(), withInterceptors([authInterceptor]))</script>
+  <div class="note atencao"><strong class="lbl">CORS</strong><p>Se o navegador bloquear com “CORS policy”, o erro não está no Angular. O servidor precisa liberar a origem do seu front-end. Em desenvolvimento, use um proxy (<code>proxy.conf.json</code>) no <code>ng serve</code>.</p></div>
+  <div class="ex"><h4>Exercício</h4>
+  <ol><li>Liste os 10 primeiros posts da JSONPlaceholder em uma tabela Bootstrap.</li><li>Adicione um botão “Excluir” que chama <code>remover(id)</code> e tira a linha da tela.</li><li>Crie um formulário que faz <code>POST</code> de um novo post e mostra o <code>id</code> devolvido.</li></ol></div>
+</section>
+
+<section class="ch" id="c11" data-title="Formulários reativos">
+  <div class="ch-head"><span class="ch-num">CAPÍTULO 11</span><h2 class="t">Formulários reativos</h2><span class="src base">BASE · Slides: Programação Front-End III, Reactive Forms (Prof. Vitor)</span></div>
+  <p>Formulários reativos são uma abordagem programática e explícita para lidar com formulários: você tem mais controle sobre estado, validações e comportamento dos campos. Em vez de definir tudo no HTML e ligar a variáveis (como nos formulários baseados em template), eles são construídos em código, no componente, com classes e objetos.</p>
+  <h3>11.1 Principais características</h3>
+  <ul>
+    <li><strong>Controle explícito:</strong> campos, validações e estado são criados no TypeScript, o que facilita testes e manutenção.</li>
+    <li><strong>Validação síncrona e assíncrona:</strong> regras fáceis de adicionar e de ler.</li>
+    <li><strong>Rastreamento de mudanças:</strong> a API mostra o estado de cada campo (sujo, válido, pronto para envio).</li>
+    <li><strong>Escalabilidade:</strong> formulários complexos ficam mais fáceis de gerenciar e evoluir.</li>
+  </ul>
+  <h3>11.2 Como funciona</h3>
+  <p>O <code>ReactiveFormsModule</code> define e gerencia o formulário, composto por três peças principais:</p>
+  <div class="tw"><table>
+    <tr><th>Classe</th><th>Papel</th></tr>
+    <tr><td><code>FormControl</code></td><td>Um campo individual</td></tr>
+    <tr><td><code>FormGroup</code></td><td>Um conjunto de controles (input, select, etc.)</td></tr>
+    <tr><td><code>FormArray</code></td><td>Campos dinâmicos ou listas de controles do mesmo tipo</td></tr>
+  </table></div>
+  <h3>11.3 Criando um formulário em 3 passos</h3>
+  <h4>Passo 1: importe o módulo necessário</h4>
+  <script type="text/plain" class="code" data-lang="typescript" data-file="formulario.ts">import { Component } from '@angular/core';
+import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
+
+@Component({
+  selector: 'app-formulario',
+  imports: [ReactiveFormsModule],
+  templateUrl: './formulario.html',
+  styleUrl: './formulario.css'
+})</script>
+  <div class="note dica"><strong class="lbl">Dica</strong><p>Nos slides o <code>FormsModule</code> também aparece no <code>imports</code>. Para formulários reativos ele não é necessário. Só o <code>ReactiveFormsModule</code> basta. O <code>FormsModule</code> serve para <code>[(ngModel)]</code>.</p></div>
+  <h4>Passo 2: defina o formulário no componente</h4>
+  <script type="text/plain" class="code" data-lang="typescript" data-file="formulario.ts">export class Formulario {
+  // construindo um formulário
+  form = new FormGroup({
+    nome:  new FormControl(''),   // campo 'nome'
+    email: new FormControl(''),   // campo 'email'
+    senha: new FormControl(''),   // campo 'senha'
+  });
+
+  // capturando o evento submit
+  onSubmit() {
+    console.log(this.form.value);
+  }
+}</script>
+  <h4>Passo 3: crie o HTML do formulário</h4>
+  <script type="text/plain" class="code" data-lang="html" data-file="formulario.html"><div class="d-flex justify-content-center align-items-center vh-100 bg-light">
+  <div class="card shadow" style="width: 22rem;">
+    <div class="card-body">
+      <h3 class="card-title text-center mb-4">Tecnologia Web 3</h3>
+      <h5 class="text-center">Criação de usuário</h5>
+      <hr />
+      <form [formGroup]="form" (ngSubmit)="onSubmit()">
+        <div class="mb-3">
+          <label for="nome" class="form-label">Entre com o seu nome:</label>
+          <input type="text" class="form-control" id="nome"
+                 placeholder="Digite seu nome" formControlName="nome" />
+        </div>
+        <div class="mb-3">
+          <label for="email" class="form-label">Entre com o seu email:</label>
+          <input type="email" class="form-control" id="email"
+                 placeholder="Digite seu email" required formControlName="email" />
+        </div>
+        <div class="mb-3">
+          <label for="password" class="form-label">Entre com a sua senha:</label>
+          <input type="password" class="form-control" id="password"
+                 placeholder="Digite sua senha" required formControlName="senha" />
+        </div>
+        <button type="submit" class="btn btn-primary w-100">Criar</button>
+      </form>
+    </div>
+  </div>
+</div></script>
+  <p>Os dois elos que ligam HTML e TypeScript: <code>[formGroup]="form"</code> no <code>&lt;form&gt;</code> e <code>formControlName="nome"</code> em cada campo.</p>
+  <h3>11.4 Vantagens dos formulários reativos</h3>
+  <ul>
+    <li><strong>Validações declarativas:</strong> as regras ficam no TypeScript, centralizadas no componente.</li>
+    <li><strong>Acompanhamento de status:</strong> <code>valid</code>, <code>invalid</code>, <code>pristine</code>, <code>dirty</code>, <code>touched</code> e <code>untouched</code> em cada controle.</li>
+    <li><strong>Manipulação programática:</strong> adicionar, remover e atualizar campos por código.</li>
+    <li><strong>Controle centralizado:</strong> nada depende de interações no template.</li>
+    <li><strong>Fácil de testar:</strong> a estrutura é código comum.</li>
+    <li><strong>Melhor para formulários complexos:</strong> campos dependentes, formulários dinâmicos e validações elaboradas.</li>
+  </ul>
+  <div class="tw"><table>
+    <tr><th>Estado</th><th>Verdadeiro quando</th></tr>
+    <tr><td><code>valid</code> / <code>invalid</code></td><td>Passa / não passa em todas as validações</td></tr>
+    <tr><td><code>pristine</code> / <code>dirty</code></td><td>Usuário ainda não alterou / já alterou o valor</td></tr>
+    <tr><td><code>touched</code> / <code>untouched</code></td><td>Campo já perdeu / ainda não perdeu o foco</td></tr>
+  </table></div>
+
+  <h3>11.5 Validação de senha com Regex</h3>
+  <p>Regras do exemplo dos slides:</p>
+  <ul>
+    <li>Entre 8 e 16 caracteres.</li>
+    <li>Pelo menos 1 número e 1 letra.</li>
+    <li>Pelo menos 1 letra maiúscula.</li>
+    <li>Pelo menos 1 caractere especial.</li>
+  </ul>
+  <script type="text/plain" class="code" data-lang="typescript" data-file="regex da senha">/^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,16}$/</script>
+  <p>“Vou ter que decorar isso tudo?” Não. O capítulo 12 desmonta essa fórmula peça por peça.</p>
+  <p><strong>Passo 1:</strong> importe <code>Validators</code> e use a fórmula como padrão do campo senha.</p>
+  <script type="text/plain" class="code" data-lang="typescript" data-file="formulario.ts">import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+
+export class Formulario {
+  passwordRegex = /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,16}$/;
+
+  // construindo um formulário
+  form = new FormGroup({
+    nome:  new FormControl(''),
+    email: new FormControl(''),
+    senha: new FormControl('', [Validators.required, Validators.pattern(this.passwordRegex)]),
+  });
+}</script>
+  <p><strong>Passo 2:</strong> crie os métodos de validação e de envio.</p>
+  <script type="text/plain" class="code" data-lang="typescript" data-file="formulario.ts">// Método de validação da senha
+validatePassword() {
+  const password = this.form.get('senha')?.value ?? '';
+  const isValid = this.passwordRegex.test(password);
+  return isValid;
+}
+
+// capturando o evento submit
+onSubmit() {
+  if (this.form.valid) {
+    console.log('Formulário válido:', this.form.value);
+  } else {
+    console.log('Formulário inválido!', this.form.value);
+  }
+}
+
+// Método para verificar se o formulário é válido
+get isFormValid() {
+  return this.form.valid;
+}</script>
+  <p><strong>Passo 3:</strong> no campo da senha, chame o método a cada digitação com <code>(input)</code>.</p>
+  <script type="text/plain" class="code" data-lang="html" data-file="formulario.html"><input type="password" class="form-control" id="password"
+       placeholder="Digite sua senha" required
+       formControlName="senha" (input)="validatePassword()" /></script>
+
+  <h3>11.6 Do jeito moderno: erros por controle e FormBuilder</h3>
+  <span class="src plus">COMPLEMENTO · Kalixto</span>
+  <p>O método <code>validatePassword()</code> acima retorna um booleano, mas o Angular já guarda o resultado de cada validador em <code>control.errors</code>. Isso permite mostrar mensagens por tipo de erro sem repetir a regex.</p>
+  <script type="text/plain" class="code" data-lang="typescript" data-file="cadastro.ts">import { Component, inject } from '@angular/core';
+import { AbstractControl, FormBuilder, ReactiveFormsModule, ValidationErrors, Validators } from '@angular/forms';
+
+// Validador personalizado de grupo: senha e confirmação precisam ser iguais
+function senhasIguais(g: AbstractControl): ValidationErrors | null {
+  const s = g.get('senha')?.value;
+  const c = g.get('confirmacao')?.value;
+  return s === c ? null : { senhasDiferentes: true };
+}
+
+@Component({
+  selector: 'app-cadastro',
+  imports: [ReactiveFormsModule],
+  templateUrl: './cadastro.html',
+})
+export class Cadastro {
+  private fb = inject(FormBuilder).nonNullable;   // controles tipados, nunca null
+
+  form = this.fb.group({
+    nome:  ['', [Validators.required, Validators.minLength(3)]],
+    email: ['', [Validators.required, Validators.email]],
+    senha: ['', [Validators.required, Validators.pattern(/^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,16}$/)]],
+    confirmacao: ['', Validators.required],
+  }, { validators: senhasIguais });
+
+  get nome()  { return this.form.controls.nome; }
+  get senha() { return this.form.controls.senha; }
+
+  enviar() {
+    if (this.form.invalid) { this.form.markAllAsTouched(); return; }
+    console.log(this.form.getRawValue());
+  }
+}</script>
+  <script type="text/plain" class="code" data-lang="html" data-file="cadastro.html"><form [formGroup]="form" (ngSubmit)="enviar()" novalidate>
+  <input class="form-control" formControlName="nome"
+         [class.is-invalid]="nome.invalid && nome.touched" />
+  @if (nome.touched && nome.errors?.['required']) {
+    <div class="invalid-feedback d-block">Informe o nome.</div>
+  }
+  @if (nome.touched && nome.errors?.['minlength']) {
+    <div class="invalid-feedback d-block">Mínimo de 3 letras.</div>
+  }
+
+  @if (form.errors?.['senhasDiferentes'] && form.controls.confirmacao.touched) {
+    <div class="invalid-feedback d-block">As senhas não conferem.</div>
+  }
+
+  <button class="btn btn-primary" [disabled]="form.invalid">Cadastrar</button>
+</form></script>
+  <h3>11.7 FormArray: campos dinâmicos</h3>
+  <script type="text/plain" class="code" data-lang="typescript" data-file="telefones.ts">import { FormArray, FormControl } from '@angular/forms';
+
+telefones = new FormArray([new FormControl('')]);
+
+adicionarTelefone() { this.telefones.push(new FormControl('')); }
+removerTelefone(i: number) { this.telefones.removeAt(i); }</script>
+  <script type="text/plain" class="code" data-lang="html" data-file="telefones.html"><div formArrayName="telefones">
+  @for (c of telefones.controls; track $index) {
+    <input class="form-control mb-2" [formControlName]="$index" />
+  }
+</div></script>
+  <h3>11.8 Formulário reativo × baseado em template</h3>
+  <div class="tw"><table>
+    <tr><th></th><th>Reativo</th><th>Template-driven</th></tr>
+    <tr><td>Onde a lógica vive</td><td>TypeScript</td><td>HTML</td></tr>
+    <tr><td>Módulo</td><td><code>ReactiveFormsModule</code></td><td><code>FormsModule</code></td></tr>
+    <tr><td>Ideal para</td><td>Formulários médios e grandes, validação elaborada</td><td>Formulários curtos e simples</td></tr>
+    <tr><td>Testabilidade</td><td>Alta</td><td>Menor</td></tr>
+  </table></div>
+
+  <div class="ex"><h4>Exercícios (material-base)</h4>
+  <ol>
+    <li>Altere o formulário para validar o campo e-mail utilizando uma fórmula Regex.</li>
+    <li>Altere o formulário para que o campo “confirmação de senha” precise ser igual ao campo “senha” para o formulário ser válido.</li>
+    <li>Mostre as regras na tela (usando listas do Bootstrap). Se a regra não for atendida, pinte-a de vermelho.</li>
+    <li>Faça o mesmo (item 3) para o campo de e-mail.</li>
+  </ol>
+  <details><summary>Dica de resolução (exercícios 2 e 3)</summary><div>
+  <p><strong>Exercício 2:</strong> use o validador de grupo <code>senhasIguais</code> da seção 11.6.</p>
+  <p><strong>Exercício 3:</strong> crie um objeto com uma regex por regra e use <code>@for</code> para desenhar a lista, trocando a classe conforme o teste passa ou não.</p>
+  <script type="text/plain" class="code" data-lang="typescript" data-file="regras.ts">regras = [
+  { texto: 'Entre 8 e 16 caracteres', re: /^.{8,16}$/ },
+  { texto: 'Pelo menos 1 letra maiúscula', re: /[A-Z]/ },
+  { texto: 'Pelo menos 1 letra minúscula', re: /[a-z]/ },
+  { texto: 'Pelo menos 1 número', re: /\d/ },
+  { texto: 'Pelo menos 1 caractere especial (@$!%*?&)', re: /[@$!%*?&]/ },
+];
+
+atende(re: RegExp) {
+  return re.test(this.form.controls.senha.value);
+}</script>
+  <script type="text/plain" class="code" data-lang="html" data-file="regras.html"><ul class="list-group mt-2">
+  @for (r of regras; track r.texto) {
+    <li class="list-group-item"
+        [class.text-success]="atende(r.re)"
+        [class.text-danger]="!atende(r.re)">{{ r.texto }}</li>
+  }
+</ul></script></div></details></div>
+  <p>Referências do material-base: <a href="https://angular.dev/guide/forms" target="_blank" rel="noopener">Formulários</a> · <a href="https://angular.dev/api/forms/PatternValidator" target="_blank" rel="noopener">PatternValidator</a>.</p>
+  <ul class="check">
+    <li><label><input type="checkbox" data-k="c11a"> Criei um <code>FormGroup</code> com três campos</label></li>
+    <li><label><input type="checkbox" data-k="c11b"> A senha só valida com a regex de 8 a 16 caracteres</label></li>
+    <li><label><input type="checkbox" data-k="c11c"> Confirmação de senha implementada</label></li>
+    <li><label><input type="checkbox" data-k="c11d"> Regras aparecem em vermelho ou verde na tela</label></li>
+  </ul>
+</section>
+
+<section class="ch" id="c12" data-title="Regex sem medo">
+  <div class="ch-head"><span class="ch-num">CAPÍTULO 12</span><h2 class="t">Regex sem medo</h2><span class="src base">BASE · Slides Reactive Forms (Prof. Vitor)</span></div>
+  <p>Regex, ou expressão regular, é uma sequência de caracteres que forma um padrão de pesquisa. Serve para encontrar, validar, substituir ou dividir textos, e existe em JavaScript, Python, Java, C# e outras linguagens.</p>
+  <h3>12.1 O que o Regex faz</h3>
+  <ul>
+    <li><strong>Encontrar padrões:</strong> achar uma sequência que corresponde ao padrão.</li>
+    <li><strong>Substituir:</strong> trocar partes de uma string com base no padrão.</li>
+    <li><strong>Validar:</strong> verificar se um e-mail, uma senha ou um CPF segue o formato.</li>
+    <li><strong>Dividir:</strong> quebrar uma string por um delimitador.</li>
+  </ul>
+  <h3>12.2 Caracteres que você precisa conhecer</h3>
+  <span class="src plus">COMPLEMENTO · Kalixto</span>
+  <div class="tw"><table>
+    <tr><th>Símbolo</th><th>Significado</th><th>Exemplo</th></tr>
+    <tr><td><code>^</code> e <code>$</code></td><td>Início e fim do texto</td><td><code>^abc$</code> só casa com “abc”</td></tr>
+    <tr><td><code>.</code></td><td>Qualquer caractere</td><td><code>a.c</code> casa com “abc”, “a1c”</td></tr>
+    <tr><td><code>[abc]</code> · <code>[A-Z]</code></td><td>Um caractere do conjunto ou faixa</td><td><code>[0-9]</code> um dígito</td></tr>
+    <tr><td><code>\d</code> · <code>\w</code> · <code>\s</code></td><td>Dígito · letra, número ou _ · espaço</td><td><code>\d\d</code> dois dígitos</td></tr>
+    <tr><td><code>*</code> · <code>+</code> · <code>?</code></td><td>0 ou mais · 1 ou mais · 0 ou 1</td><td><code>ab+</code> “ab”, “abb”</td></tr>
+    <tr><td><code>{n,m}</code></td><td>Entre n e m repetições</td><td><code>\d{8,16}</code></td></tr>
+    <tr><td><code>( )</code></td><td>Grupo</td><td><code>(ab)+</code></td></tr>
+    <tr><td><code>(?=...)</code></td><td>Lookahead: “daqui para frente existe...” sem consumir</td><td><code>(?=.*\d)</code></td></tr>
+  </table></div>
+  <h3>12.3 Desmontando a regex da senha</h3>
+  <script type="text/plain" class="code" data-lang="plaintext" data-file="peça por peça">/^                  // início
+ (?=.*[A-Z])        // existe uma maiúscula em algum lugar
+ (?=.*[a-z])        // existe uma minúscula
+ (?=.*\d)           // existe um número
+ (?=.*[@$!%*?&])    // existe um especial
+ [A-Za-z\d@$!%*?&]  // e todos os caracteres usados são desse conjunto...
+ {8,16}             // ...com 8 a 16 de comprimento
+$/                  // fim</script>
+  <p>Cada <code>(?=...)</code> é uma regra independente. Para adicionar uma regra nova, adicione outro lookahead.</p>
+  <h3>12.4 Receitas prontas</h3>
+  <div class="tw"><table>
+    <tr><th>Uso</th><th>Regex</th></tr>
+    <tr><td>E-mail simples</td><td><code>/^[^\s@]+@[^\s@]+\.[^\s@]+$/</code></td></tr>
+    <tr><td>CEP</td><td><code>/^\d{5}-?\d{3}$/</code></td></tr>
+    <tr><td>Telefone BR</td><td><code>/^\(?\d{2}\)?\s?9?\d{4}-?\d{4}$/</code></td></tr>
+    <tr><td>CPF com máscara</td><td><code>/^\d{3}\.\d{3}\.\d{3}-\d{2}$/</code></td></tr>
+  </table></div>
+  <div class="note atencao"><strong class="lbl">Cuidado</strong><p>Regex confere o <em>formato</em>, não a existência. Um CPF com formato certo pode ser inválido (dígitos verificadores). Valide dados críticos também no servidor.</p></div>
+  <p>Teste suas expressões em <a href="https://regex101.com" target="_blank" rel="noopener">regex101.com</a> antes de colocá-las no código.</p>
+  <div class="ex"><h4>Mini-laboratório</h4><p>No console do navegador, rode <code>/\d{5}-?\d{3}/.test('20010-000')</code>. Troque a entrada por valores que devem falhar e confirme que retornam <code>false</code>.</p></div>
+  <p>Referência do material-base: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_expressions" target="_blank" rel="noopener">MDN, Expressões regulares</a>.</p>
+</section>
+
+<section class="ch" id="c13" data-title="Rotas e navegação">
+  <div class="ch-head"><span class="ch-num">CAPÍTULO 13</span><h2 class="t">Rotas e navegação</h2><span class="src plus">COMPLEMENTO · Kalixto</span></div>
+  <p>Uma aplicação Angular é uma página só (SPA). O roteador troca o componente exibido conforme a URL, sem recarregar a página. É ele que transforma o <code>sistema-usuarios</code> em listagem, cadastro e edição.</p>
+  <script type="text/plain" class="code" data-lang="typescript" data-file="src/app/app.routes.ts">import { Routes } from '@angular/router';
+import { Lista } from './lista/lista';
+import { Cadastro } from './cadastro/cadastro';
+
+export const routes: Routes = [
+  { path: '', redirectTo: 'usuarios', pathMatch: 'full' },
+  { path: 'usuarios', component: Lista },
+  { path: 'usuarios/novo', component: Cadastro },
+  { path: 'usuarios/:id', component: Cadastro },          // edição
+  { path: 'admin', loadComponent: () => import('./admin/admin').then(m => m.Admin) }, // lazy
+  { path: '**', redirectTo: 'usuarios' },
+];</script>
+  <script type="text/plain" class="code" data-lang="typescript" data-file="src/app/app.ts">import { Component } from '@angular/core';
+import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
+
+@Component({
+  selector: 'app-root',
+  imports: [RouterOutlet, RouterLink, RouterLinkActive],
+  templateUrl: './app.html',
+})
+export class App {}</script>
+  <script type="text/plain" class="code" data-lang="html" data-file="src/app/app.html"><nav class="navbar navbar-dark bg-dark px-3 gap-3">
+  <a routerLink="/usuarios" routerLinkActive="fw-bold text-info">Usuários</a>
+  <a routerLink="/usuarios/novo" routerLinkActive="fw-bold text-info">Novo</a>
+</nav>
+<router-outlet />   <!-- aqui entra o componente da rota atual --></script>
+  <h3>13.1 Lendo parâmetros da rota</h3>
+  <script type="text/plain" class="code" data-lang="typescript" data-file="cadastro.ts">import { Component, inject } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+
+export class Cadastro {
+  private rota = inject(ActivatedRoute);
+  private router = inject(Router);
+  id = this.rota.snapshot.paramMap.get('id');   // null no cadastro novo
+
+  salvo() { this.router.navigate(['/usuarios']); }
+}</script>
+  <p>Dica: com <code>provideRouter(routes, withComponentInputBinding())</code> o parâmetro <code>:id</code> chega direto em um <code>input()</code> do componente.</p>
+  <h3>13.2 Guards funcionais</h3>
+  <p>Um guard decide se a navegação pode acontecer, por exemplo bloquear telas para quem não fez login.</p>
+  <script type="text/plain" class="code" data-lang="typescript" data-file="src/app/auth.guard.ts">import { inject } from '@angular/core';
+import { CanActivateFn, Router } from '@angular/router';
+
+export const authGuard: CanActivateFn = () => {
+  const logado = !!localStorage.getItem('token');
+  return logado ? true : inject(Router).createUrlTree(['/login']);
+};
+
+// na rota: { path: 'admin', component: Admin, canActivate: [authGuard] }</script>
+  <div class="ex"><h4>Fluxo completo</h4><p>Crie as rotas <code>/usuarios</code> (lista) e <code>/usuarios/novo</code> (cadastro). Ao salvar o formulário, navegue de volta para a lista.</p></div>
+</section>
+<section class="ch" id="c14" data-title="RxJS essencial">
+  <div class="ch-head"><span class="ch-num">CAPÍTULO 14</span><h2 class="t">RxJS essencial</h2><span class="src plus">COMPLEMENTO · Kalixto</span></div>
+  <p>RxJS é a biblioteca de programação reativa usada pelo Angular. Um <strong>Observable</strong> representa um fluxo de valores ao longo do tempo (uma resposta HTTP, cliques, digitação). Você só recebe os valores se se inscrever nele.</p>
+  <script type="text/plain" class="code" data-lang="typescript" data-file="exemplo.ts">import { of } from 'rxjs';
+import { map, filter } from 'rxjs/operators';
+
+of(1, 2, 3, 4)
+  .pipe(
+    filter((n) => n % 2 === 0),
+    map((n) => n * 10)
+  )
+  .subscribe((v) => console.log(v));   // 20, 40</script>
+  <div class="tw"><table>
+    <tr><th>Operador</th><th>Uso</th></tr>
+    <tr><td><code>map</code></td><td>Transforma cada valor</td></tr>
+    <tr><td><code>filter</code></td><td>Deixa passar só o que atende a condição</td></tr>
+    <tr><td><code>switchMap</code></td><td>Troca para um novo Observable e cancela o anterior (busca por digitação)</td></tr>
+    <tr><td><code>debounceTime</code></td><td>Espera o usuário parar de digitar</td></tr>
+    <tr><td><code>catchError</code></td><td>Trata falhas e devolve um valor alternativo</td></tr>
+    <tr><td><code>takeUntilDestroyed</code></td><td>Cancela a inscrição quando o componente é destruído</td></tr>
+  </table></div>
+  <h3>14.1 Busca ao digitar</h3>
+  <script type="text/plain" class="code" data-lang="typescript" data-file="busca.ts">import { Component, inject } from '@angular/core';
+import { FormControl, ReactiveFormsModule } from '@angular/forms';
+import { toSignal } from '@angular/core/rxjs-interop';
+import { HttpClient } from '@angular/common/http';
+import { debounceTime, distinctUntilChanged, switchMap } from 'rxjs';
+
+export class Busca {
+  private http = inject(HttpClient);
+  termo = new FormControl('', { nonNullable: true });
+
+  resultados = toSignal(
+    this.termo.valueChanges.pipe(
+      debounceTime(300),
+      distinctUntilChanged(),
+      switchMap((t) => this.http.get<any[]>(`https://jsonplaceholder.typicode.com/users?name_like=${t}`))
+    ),
+    { initialValue: [] }
+  );
+}</script>
+  <div class="note dica"><strong class="lbl">Dica</strong><p>Com <code>toSignal</code> e o <code>async</code> pipe você quase nunca precisa chamar <code>subscribe()</code> à mão. Menos inscrição manual, menos vazamento de memória.</p></div>
+</section>
+
+<section class="ch" id="c15" data-title="Testes, build e deploy">
+  <div class="ch-head"><span class="ch-num">CAPÍTULO 15</span><h2 class="t">Testes, build e deploy</h2><span class="src plus">COMPLEMENTO · Kalixto</span></div>
+  <h3>15.1 Testes unitários</h3>
+  <p>Cada componente gerado traz um arquivo <code>.spec.ts</code>. O Angular usa Jasmine para escrever os testes e Karma para executá-los no navegador. Rode com <code>ng test</code>.</p>
+  <script type="text/plain" class="code" data-lang="typescript" data-file="src/app/cadastro/cadastro.spec.ts">import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { Cadastro } from './cadastro';
+
+describe('Cadastro', () => {
+  let fixture: ComponentFixture<Cadastro>;
+  let comp: Cadastro;
+
+  beforeEach(async () => {
+    await TestBed.configureTestingModule({ imports: [Cadastro] }).compileComponents();
+    fixture = TestBed.createComponent(Cadastro);
+    comp = fixture.componentInstance;
+    fixture.detectChanges();
+  });
+
+  it('deve criar o componente', () => {
+    expect(comp).toBeTruthy();
+  });
+
+  it('senha fraca deixa o formulário inválido', () => {
+    comp.form.patchValue({ senha: '123' });
+    expect(comp.form.controls.senha.valid).toBeFalse();
+  });
+});</script>
+  <p>Para testes de ponta a ponta (E2E) em navegador real, veja Playwright e Cypress na biblioteca de referência.</p>
+  <h3>15.2 Build de produção</h3>
+  <script type="text/plain" class="code" data-lang="bash" data-file="terminal">ng build
+# saída em dist/sistema-usuarios/browser</script>
+  <h3>15.3 Publicando no GitHub Pages</h3>
+  <p>O GitHub Pages serve sites estáticos, o que combina com uma SPA Angular. O app fica em <code>https://usuario.github.io/nome-do-repo/</code>, então o <code>base href</code> precisa conter o nome do repositório.</p>
+  <script type="text/plain" class="code" data-lang="bash" data-file="terminal">ng build --base-href /sistema-usuarios/
+# publique o conteúdo de dist/sistema-usuarios/browser na branch gh-pages
+# (manualmente, por GitHub Actions ou com o pacote angular-cli-ghpages)</script>
+  <div class="note atencao"><strong class="lbl">Rotas em páginas estáticas</strong><p>O GitHub Pages não sabe redirecionar <code>/usuarios</code> para o <code>index.html</code>. Se você der F5 em uma rota interna, verá 404. Copie o <code>index.html</code> para <code>404.html</code> após o build, ou use rotas com hash (<code>withHashLocation()</code>).</p></div>
+  <h3>15.4 Atualizando versões</h3>
+  <script type="text/plain" class="code" data-lang="bash" data-file="terminal">ng update @angular/core @angular/cli</script>
+  <p>O <a href="https://update.angular.dev" target="_blank" rel="noopener">Angular Update Guide</a> lista os passos entre qualquer par de versões.</p>
+</section>
+
+<section class="ch" id="c16" data-title="Boas práticas">
+  <div class="ch-head"><span class="ch-num">CAPÍTULO 16</span><h2 class="t">Boas práticas</h2><span class="src plus">COMPLEMENTO · Kalixto</span></div>
+  <ul>
+    <li><strong>Um componente, uma responsabilidade.</strong> Quando o template passar de uns 150 linhas, divida.</li>
+    <li><strong>Lógica fora do componente.</strong> Regras e acesso a dados vão para serviços.</li>
+    <li><strong>Tipos em tudo.</strong> Evite <code>any</code>. Crie interfaces para as respostas da API.</li>
+    <li><strong>Signals para estado local</strong> e Observables para fluxos assíncronos.</li>
+    <li><strong>Organize por funcionalidade:</strong> <code>usuarios/</code>, <code>pedidos/</code>, cada uma com seus componentes, serviços e rotas.</li>
+    <li><strong>Lazy loading</strong> para áreas grandes ou pouco usadas.</li>
+    <li><strong>Acessibilidade:</strong> todo <code>input</code> com <code>label</code>, botões com texto claro, contraste suficiente.</li>
+    <li><strong>Formate e analise o código:</strong> Prettier e ESLint (<code>ng add angular-eslint</code>).</li>
+    <li><strong>Segredos nunca no front-end.</strong> Tudo que está no bundle é público.</li>
+  </ul>
+  <h3>Estrutura sugerida para projetos maiores</h3>
+  <pre class="tree">src/app/
+├── core/            serviços únicos (auth, interceptors, guards)
+├── shared/          componentes, pipes e diretivas reutilizáveis
+├── features/
+│   ├── usuarios/    lista, cadastro, usuario-api.ts, usuarios.routes.ts
+│   └── pedidos/
+├── app.config.ts
+└── app.routes.ts</pre>
+</section>
+
+<section class="ch" id="c17" data-title="Projeto final guiado">
+  <div class="ch-head"><span class="ch-num">CAPÍTULO 17</span><h2 class="t">Projeto final guiado</h2><span class="src plus">COMPLEMENTO · Kalixto</span></div>
+  <p>A evolução natural do <code>sistema-usuarios</code>, como o material-base anuncia: listagem, edição, exclusão, integração com API e formulários com validação. Este é o roteiro de entrega.</p>
+  <div class="tw"><table>
+    <tr><th>Etapa</th><th>Entrega</th><th>Capítulos</th></tr>
+    <tr><td>1</td><td>Projeto criado, no GitHub, com Bootstrap</td><td>2, 3, 4, 7</td></tr>
+    <tr><td>2</td><td>Componentes <code>Lista</code> e <code>Cadastro</code> com rotas</td><td>5, 13</td></tr>
+    <tr><td>3</td><td>Serviço de usuários consumindo uma API (JSONPlaceholder ou back-end próprio)</td><td>9, 10</td></tr>
+    <tr><td>4</td><td>Formulário reativo com validação de e-mail, senha e confirmação</td><td>11, 12</td></tr>
+    <tr><td>5</td><td>Editar e excluir usuários, com mensagens de sucesso e erro</td><td>10, 6</td></tr>
+    <tr><td>6</td><td>Testes de validação e publicação no GitHub Pages</td><td>15</td></tr>
+  </table></div>
+  <h3>Critérios de aceite</h3>
+  <ul class="check">
+    <li><label><input type="checkbox" data-k="c17a"> Lista carrega da API e mostra estado de carregamento e de erro</label></li>
+    <li><label><input type="checkbox" data-k="c17b"> Cadastro não envia com campos inválidos e mostra o motivo</label></li>
+    <li><label><input type="checkbox" data-k="c17c"> Edição reaproveita o mesmo componente do cadastro</label></li>
+    <li><label><input type="checkbox" data-k="c17d"> Exclusão remove o item da tela só depois da resposta da API</label></li>
+    <li><label><input type="checkbox" data-k="c17e"> Pelo menos 3 testes unitários passando</label></li>
+    <li><label><input type="checkbox" data-k="c17f"> Publicado e com README explicando como rodar</label></li>
+  </ul>
+</section>
+
+<section class="ch" id="c18" data-title="Quiz de fixação">
+  <div class="ch-head"><span class="ch-num">CAPÍTULO 18</span><h2 class="t">Quiz de fixação</h2><span class="src plus">COMPLEMENTO · Kalixto</span></div>
+  <p>O quiz desta apostila fica em uma página separada, para você estudar primeiro e testar depois. São 16 perguntas de múltipla escolha com explicação, filtro por capítulo e placar final.</p>
+  <div class="note dica"><strong class="lbl">Quiz Kalixto · Angular 20</strong><p>Termine os capítulos 1 a 17 e então abra o quiz: <a href="https://akalixtogamer-lgtm.github.io/quizestudos/quizkalixto-angular/" target="_blank" rel="noopener">akalixtogamer-lgtm.github.io/quizestudos/quizkalixto-angular</a>.</p></div>
+</section>
+
+<section class="ch" id="c19" data-title="Cheatsheet e glossário">
+  <div class="ch-head"><span class="ch-num">CAPÍTULO 19</span><h2 class="t">Cheatsheet e glossário</h2><span class="src plus">COMPLEMENTO · Kalixto</span></div>
+  <h3>Cheatsheet de templates</h3>
+  <div class="tw"><table>
+    <tr><th>Quero...</th><th>Escrevo</th></tr>
+    <tr><td>Mostrar um valor</td><td><code>{{ nome }}</code></td></tr>
+    <tr><td>Ligar um atributo</td><td><code>[src]="foto"</code></td></tr>
+    <tr><td>Reagir a um evento</td><td><code>(click)="salvar()"</code></td></tr>
+    <tr><td>Condição</td><td><code>@if (x) { } @else { }</code></td></tr>
+    <tr><td>Lista</td><td><code>@for (i of itens; track i.id) { }</code></td></tr>
+    <tr><td>Classe condicional</td><td><code>[class.ativo]="ativo"</code></td></tr>
+    <tr><td>Formulário reativo</td><td><code>[formGroup]</code> · <code>formControlName</code></td></tr>
+    <tr><td>Link de rota</td><td><code>routerLink="/usuarios"</code></td></tr>
+  </table></div>
+  <h3>Glossário</h3>
+  <div class="tw"><table>
+    <tr><th>Termo</th><th>Definição</th></tr>
+    <tr><td>SPA</td><td>Single Page Application: uma página que troca o conteúdo sem recarregar.</td></tr>
+    <tr><td>Standalone</td><td>Componente que declara suas próprias dependências, sem NgModule.</td></tr>
+    <tr><td>Binding</td><td>Ligação entre a classe do componente e o template.</td></tr>
+    <tr><td>Signal</td><td>Valor reativo que notifica quem o lê quando muda.</td></tr>
+    <tr><td>Observable</td><td>Fluxo de valores ao longo do tempo (RxJS).</td></tr>
+    <tr><td>DI</td><td>Injeção de dependência: o Angular entrega as instâncias que a classe pede.</td></tr>
+    <tr><td>Provider</td><td>Receita que diz ao Angular como criar uma dependência.</td></tr>
+    <tr><td>Guard</td><td>Função que libera ou bloqueia uma navegação.</td></tr>
+    <tr><td>Lazy loading</td><td>Carregar o código de uma rota só quando ela é visitada.</td></tr>
+    <tr><td>Interceptor</td><td>Função que roda em toda requisição HTTP.</td></tr>
+    <tr><td>PATH</td><td>Lista de pastas onde o sistema procura comandos.</td></tr>
+    <tr><td>LTS</td><td>Long Term Support: versão com suporte estendido, a indicada para instalar.</td></tr>
+    <tr><td>CORS</td><td>Regra do navegador que controla quais origens podem chamar uma API.</td></tr>
+    <tr><td>Regex</td><td>Expressão regular: padrão para encontrar e validar textos.</td></tr>
+  </table></div>
+</section>
+
+<section class="ch" id="c20" data-title="Biblioteca de referência">
+  <div class="ch-head"><span class="ch-num">CAPÍTULO 20</span><h2 class="t">Biblioteca de referência</h2><span class="src plus">COMPLEMENTO · Kalixto</span></div>
+  <p>Links para aprofundar cada assunto. Prefira sempre a documentação oficial, que acompanha a versão atual do Angular.</p>
+
+  <h3>Documentação oficial do Angular</h3>
+  <div class="lib">
+    <a href="https://angular.dev/" target="_blank" rel="noopener"><b>angular.dev</b><span>Documentação oficial, tutoriais e playground.</span><small>angular.dev</small></a>
+    <a href="https://angular.dev/tools/cli" target="_blank" rel="noopener"><b>Angular CLI</b><span>Todos os comandos e opções do <code>ng</code>.</span><small>angular.dev/tools/cli</small></a>
+    <a href="https://angular.dev/guide/components" target="_blank" rel="noopener"><b>Guia de componentes</b><span>Seletores, estilos, inputs, outputs e ciclo de vida.</span><small>angular.dev/guide/components</small></a>
+    <a href="https://angular.dev/guide/forms" target="_blank" rel="noopener"><b>Formulários</b><span>Reativos e baseados em template.</span><small>angular.dev/guide/forms</small></a>
+    <a href="https://angular.dev/api/forms/PatternValidator" target="_blank" rel="noopener"><b>PatternValidator</b><span>Validação por expressão regular.</span><small>angular.dev/api/forms/PatternValidator</small></a>
+    <a href="https://angular.dev/guide/signals" target="_blank" rel="noopener"><b>Signals</b><span>signal, computed, effect e linkedSignal.</span><small>angular.dev/guide/signals</small></a>
+    <a href="https://angular.dev/guide/http" target="_blank" rel="noopener"><b>HttpClient</b><span>Requisições, interceptors e tratamento de erros.</span><small>angular.dev/guide/http</small></a>
+    <a href="https://angular.dev/guide/routing" target="_blank" rel="noopener"><b>Roteamento</b><span>Rotas, guards, parâmetros e lazy loading.</span><small>angular.dev/guide/routing</small></a>
+    <a href="https://angular.dev/style-guide" target="_blank" rel="noopener"><b>Style Guide</b><span>Convenções oficiais de nomes e organização.</span><small>angular.dev/style-guide</small></a>
+    <a href="https://update.angular.dev" target="_blank" rel="noopener"><b>Update Guide</b><span>Passo a passo para migrar entre versões.</span><small>update.angular.dev</small></a>
+    <a href="https://blog.angular.dev" target="_blank" rel="noopener"><b>Blog do Angular</b><span>Anúncios de versões e novidades da equipe.</span><small>blog.angular.dev</small></a>
+    <a href="https://github.com/angular/angular" target="_blank" rel="noopener"><b>Repositório do Angular</b><span>Código-fonte, issues e changelog.</span><small>github.com/angular/angular</small></a>
+  </div>
+
+  <h3>Linguagens e plataforma</h3>
+  <div class="lib">
+    <a href="https://www.typescriptlang.org/docs/" target="_blank" rel="noopener"><b>TypeScript</b><span>Handbook oficial da linguagem.</span><small>typescriptlang.org/docs</small></a>
+    <a href="https://rxjs.dev" target="_blank" rel="noopener"><b>RxJS</b><span>Operadores, guias e referência da API.</span><small>rxjs.dev</small></a>
+    <a href="https://developer.mozilla.org/pt-BR/" target="_blank" rel="noopener"><b>MDN Web Docs</b><span>HTML, CSS e JavaScript em português.</span><small>developer.mozilla.org</small></a>
+    <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_expressions" target="_blank" rel="noopener"><b>MDN: Regex</b><span>Guia de expressões regulares em JavaScript.</span><small>developer.mozilla.org</small></a>
+    <a href="https://developer.mozilla.org/pt-BR/docs/Web/HTTP" target="_blank" rel="noopener"><b>MDN: HTTP</b><span>Métodos, status e cabeçalhos.</span><small>developer.mozilla.org/docs/Web/HTTP</small></a>
+    <a href="https://nodejs.org" target="_blank" rel="noopener"><b>Node.js</b><span>Download da versão LTS e documentação.</span><small>nodejs.org</small></a>
+    <a href="https://docs.npmjs.com" target="_blank" rel="noopener"><b>npm Docs</b><span>Comandos, <code>package.json</code> e publicação.</span><small>docs.npmjs.com</small></a>
+    <a href="https://github.com/nvm-sh/nvm" target="_blank" rel="noopener"><b>nvm</b><span>Gerenciador de versões do Node (macOS e Linux).</span><small>github.com/nvm-sh/nvm</small></a>
+  </div>
+
+  <h3>Interface e componentes</h3>
+  <div class="lib">
+    <a href="https://getbootstrap.com/docs/5.3/getting-started/introduction/" target="_blank" rel="noopener"><b>Bootstrap 5.3</b><span>Documentação oficial.</span><small>getbootstrap.com</small></a>
+    <a href="https://getbootstrap.com/docs/5.3/forms/overview/" target="_blank" rel="noopener"><b>Bootstrap: Formulários</b><span>Controles, validação e layouts.</span><small>getbootstrap.com/docs/5.3/forms</small></a>
+    <a href="https://getbootstrap.com/docs/5.3/layout/grid/" target="_blank" rel="noopener"><b>Bootstrap: Grid</b><span>Sistema de 12 colunas e breakpoints.</span><small>getbootstrap.com/docs/5.3/layout/grid</small></a>
+    <a href="https://ng-bootstrap.github.io" target="_blank" rel="noopener"><b>ng-bootstrap</b><span>Componentes Bootstrap escritos para Angular.</span><small>ng-bootstrap.github.io</small></a>
+    <a href="https://material.angular.dev" target="_blank" rel="noopener"><b>Angular Material</b><span>Componentes Material Design oficiais.</span><small>material.angular.dev</small></a>
+    <a href="https://material.angular.dev/cdk/categories" target="_blank" rel="noopener"><b>Angular CDK</b><span>Utilitários de acessibilidade, overlay e drag-and-drop.</span><small>material.angular.dev/cdk</small></a>
+    <a href="https://primeng.org" target="_blank" rel="noopener"><b>PrimeNG</b><span>Grande conjunto de componentes, tabelas e gráficos.</span><small>primeng.org</small></a>
+    <a href="https://tailwindcss.com/docs" target="_blank" rel="noopener"><b>Tailwind CSS</b><span>Estilização utilitária, com guia de instalação para Angular.</span><small>tailwindcss.com</small></a>
+  </div>
+
+  <h3>Estado, dados e arquitetura</h3>
+  <div class="lib">
+    <a href="https://ngrx.io" target="_blank" rel="noopener"><b>NgRx</b><span>Gerenciamento de estado e Signal Store.</span><small>ngrx.io</small></a>
+    <a href="https://nx.dev" target="_blank" rel="noopener"><b>Nx</b><span>Monorepos e organização de workspaces grandes.</span><small>nx.dev</small></a>
+    <a href="https://storybook.js.org" target="_blank" rel="noopener"><b>Storybook</b><span>Catálogo e desenvolvimento isolado de componentes.</span><small>storybook.js.org</small></a>
+    <a href="https://jsonplaceholder.typicode.com" target="_blank" rel="noopener"><b>JSONPlaceholder</b><span>API falsa gratuita para praticar requisições.</span><small>jsonplaceholder.typicode.com</small></a>
+    <a href="https://github.com/typicode/json-server" target="_blank" rel="noopener"><b>json-server</b><span>Cria uma API REST local a partir de um arquivo JSON.</span><small>github.com/typicode/json-server</small></a>
+  </div>
+
+  <h3>Qualidade, testes e ferramentas</h3>
+  <div class="lib">
+    <a href="https://angular.dev/guide/testing" target="_blank" rel="noopener"><b>Testes no Angular</b><span>TestBed, componentes, serviços e HTTP.</span><small>angular.dev/guide/testing</small></a>
+    <a href="https://jasmine.github.io" target="_blank" rel="noopener"><b>Jasmine</b><span>Framework de testes padrão do Angular.</span><small>jasmine.github.io</small></a>
+    <a href="https://playwright.dev" target="_blank" rel="noopener"><b>Playwright</b><span>Testes de ponta a ponta em navegadores reais.</span><small>playwright.dev</small></a>
+    <a href="https://www.cypress.io" target="_blank" rel="noopener"><b>Cypress</b><span>Alternativa para testes E2E.</span><small>cypress.io</small></a>
+    <a href="https://github.com/angular-eslint/angular-eslint" target="_blank" rel="noopener"><b>angular-eslint</b><span>Regras de lint específicas para Angular.</span><small>github.com/angular-eslint</small></a>
+    <a href="https://prettier.io/docs/en/" target="_blank" rel="noopener"><b>Prettier</b><span>Formatação automática de código.</span><small>prettier.io</small></a>
+    <a href="https://regex101.com" target="_blank" rel="noopener"><b>regex101</b><span>Teste e explique expressões regulares.</span><small>regex101.com</small></a>
+    <a href="https://angular.dev/tools/devtools" target="_blank" rel="noopener"><b>Angular DevTools</b><span>Extensão do navegador para inspecionar componentes.</span><small>angular.dev/tools/devtools</small></a>
+  </div>
+
+  <h3>Git e publicação</h3>
+  <div class="lib">
+    <a href="https://docs.github.com/pt/repositories" target="_blank" rel="noopener"><b>GitHub Docs: Repositórios</b><span>Criar, clonar e gerenciar repositórios.</span><small>docs.github.com/pt/repositories</small></a>
+    <a href="https://docs.github.com/pt/pages" target="_blank" rel="noopener"><b>GitHub Pages</b><span>Publicar sites estáticos grátis.</span><small>docs.github.com/pt/pages</small></a>
+    <a href="https://git-scm.com/doc" target="_blank" rel="noopener"><b>Git</b><span>Livro Pro Git e referência de comandos.</span><small>git-scm.com/doc</small></a>
+    <a href="https://www.conventionalcommits.org/pt-br/" target="_blank" rel="noopener"><b>Conventional Commits</b><span>Padrão de mensagens de commit.</span><small>conventionalcommits.org</small></a>
+  </div>
+
+  <h3>Autor do material-base</h3>
+  <div class="lib">
+    <a href="https://github.com/VitorVianna/" target="_blank" rel="noopener"><b>Prof. Vitor H. V. Reis</b><span>Repositórios das aulas no GitHub.</span><small>github.com/VitorVianna</small></a>
+    <a href="https://www.linkedin.com/in/vitorhvr/" target="_blank" rel="noopener"><b>Vitor no LinkedIn</b><span>Contato profissional do professor.</span><small>linkedin.com/in/vitorhvr</small></a>
+  </div>
+</section>
+
+<footer>
+  <p><strong class="grad" style="font-family:var(--f-display)">KALIXTO</strong> · Professor · Programador · Gamer<br>
+  Apostila Master Angular 20. Conteúdo-base: Prof. Vitor H. V. Reis (Senac RJ). Complementos, organização e design: dev-Kalixto.</p>
+</footer>
+
+</div>
+</main>
+</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+<script>
+(function(){
+  var store={get:function(k){try{return localStorage.getItem(k)}catch(e){return null}},set:function(k,v){try{localStorage.setItem(k,v)}catch(e){}}};
+
+  /* blocos de código */
+  document.querySelectorAll('script.code').forEach(function(s){
+    var src=s.textContent.replace(/^\n/,'').replace(/\s+$/,'');
+    var lang=s.dataset.lang||'plaintext', file=s.dataset.file||'';
+    var box=document.createElement('div'); box.className='code';
+    var h=document.createElement('header');
+    h.innerHTML='<span class="dots"><i></i><i></i><i></i></span><span></span><span class="sp"></span>';
+    h.children[1].textContent=file;
+    var btn=document.createElement('button'); btn.type='button'; btn.textContent='Copiar'; h.appendChild(btn);
+    var pre=document.createElement('pre'), code=document.createElement('code');
+    code.textContent=src;
+    if(window.hljs){ try{ var l=hljs.getLanguage(lang)?lang:'plaintext'; code.innerHTML=hljs.highlight(src,{language:l}).value; }catch(e){} }
+    pre.appendChild(code); box.appendChild(h); box.appendChild(pre);
+    btn.addEventListener('click',function(){
+      var ok=function(){btn.textContent='Copiado';setTimeout(function(){btn.textContent='Copiar'},1400)};
+      var fb=function(){var r=document.createRange();r.selectNodeContents(code);var sel=getSelection();sel.removeAllRanges();sel.addRange(r);btn.textContent='Selecionado';setTimeout(function(){btn.textContent='Copiar'},1400)};
+      try{navigator.clipboard.writeText(src).then(ok,fb)}catch(e){fb()}
+    });
+    s.replaceWith(box);
+  });
+
+  /* sumário */
+  var toc=document.getElementById('toc'), secs=[].slice.call(document.querySelectorAll('section.ch'));
+  var html='<h2>Conteúdo</h2>';
+  secs.forEach(function(s,i){
+    var n=s.id==='sobre'?'—':String(parseInt(s.id.slice(1),10)).padStart(2,'0');
+    html+='<a href="#'+s.id+'"><i>'+n+'</i>'+s.dataset.title+'</a>';
+  });
+  toc.innerHTML=html;
+  var links=[].slice.call(toc.querySelectorAll('a'));
+  toc.addEventListener('click',function(e){if(e.target.closest('a'))toc.classList.remove('open')});
+  document.getElementById('menuBtn').addEventListener('click',function(){toc.classList.toggle('open')});
+
+  /* scroll spy + barra de leitura */
+  var bar=document.getElementById('readbar');
+  function onScroll(){
+    var d=document.documentElement, max=d.scrollHeight-innerHeight;
+    bar.style.width=(max>0?Math.min(100,scrollY/max*100):0)+'%';
+    var cur=secs[0];
+    secs.forEach(function(s){ if(s.getBoundingClientRect().top<innerHeight*0.35) cur=s; });
+    links.forEach(function(a){ a.classList.toggle('on',a.getAttribute('href')==='#'+cur.id); });
+  }
+  addEventListener('scroll',onScroll,{passive:true}); onScroll();
+
+  /* tema */
+  var root=document.documentElement, tb=document.getElementById('themeBtn');
+  var saved=store.get('kx-theme'); if(saved) root.setAttribute('data-theme',saved);
+  tb.addEventListener('click',function(){
+    var cur=root.getAttribute('data-theme')||(matchMedia('(prefers-color-scheme: light)').matches?'light':'dark');
+    var nx=cur==='dark'?'light':'dark'; root.setAttribute('data-theme',nx); store.set('kx-theme',nx);
+  });
+
+  /* checklists */
+  var boxes=[].slice.call(document.querySelectorAll('input[data-k]')), prog=document.getElementById('prog');
+  function upd(){prog.textContent=boxes.filter(function(b){return b.checked}).length+' / '+boxes.length}
+  boxes.forEach(function(b){ b.checked=store.get('kx-'+b.dataset.k)==='1'; b.addEventListener('change',function(){store.set('kx-'+b.dataset.k,b.checked?'1':'0');upd()}); });
+  upd();
+
+})();
+</script>
