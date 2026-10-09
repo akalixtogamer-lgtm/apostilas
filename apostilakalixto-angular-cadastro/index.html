@@ -1,0 +1,307 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Angular 20 na Prática · dev-Kalixto</title>
+<meta name="description" content="Apostila prática: projeto Angular 20 com Bootstrap, componente Cadastro e evolução para CRUD, com arquitetura interativa.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&family=Space+Grotesk:wght@400;500;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-dark.min.css">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="topbar">
+  <a class="brand" href="index.html"><span class="brand-dot"></span>dev-Kalixto</a>
+  <nav class="tabs" aria-label="Seções do material">
+    <a class="tab active" href="index.html">Apostila</a>
+    <a class="tab" href="quiz.html">Quiz</a>
+  </nav>
+</header>
+
+<main class="wrap">
+
+  <section class="hero">
+    <p class="eyebrow">Programação Front-End III · Apostila prática</p>
+    <h1>Angular 20 na prática<br><span class="grad">do <code>ng new</code> ao CRUD</span></h1>
+    <p class="lead">Projeto Angular 20 com Bootstrap, organizado por componentes: começamos pelo componente <code>Cadastro</code> e evoluímos para service, listagem, rotas e bindings. Clique em qualquer etapa da arquitetura abaixo para abrir os códigos.</p>
+    <div class="meta">
+      <span><b>Tecnologia</b> Angular 20 + Bootstrap 5.3</span>
+      <span><b>Pré-requisitos</b> Node.js, Angular CLI, Git, conta no GitHub, VS Code</span>
+    </div>
+  </section>
+
+  <nav class="toc" aria-label="Sumário">
+    <a href="#arquitetura">Arquitetura</a>
+    <a href="#github">1. GitHub</a>
+    <a href="#projeto">2. Projeto</a>
+    <a href="#bootstrap">3. Bootstrap</a>
+    <a href="#componente">4. Componente</a>
+    <a href="#formulario">5. Formulário</a>
+    <a href="#app">6. App</a>
+    <a href="#service">7. Service</a>
+    <a href="#binding">8. Bindings</a>
+    <a href="#lista">9. Lista</a>
+    <a href="#rotas">10. Rotas</a>
+    <a href="#estrutura">Estrutura final</a>
+    <a href="#exercicio">Exercício</a>
+  </nav>
+
+  <!-- ARQUITETURA -->
+  <section id="arquitetura" class="block">
+    <h2><span class="num">◆</span> Arquitetura do projeto</h2>
+    <p>O mapa mostra a ordem em que você mexe no projeto. As etapas 1 a 6 vêm do roteiro da aula; as etapas 7 a 10 são a evolução para o CRUD. <b>Clique em uma etapa</b> para ver os arquivos e os comandos.</p>
+
+    <div class="arch">
+      <div class="lane">
+        <div class="lane-label c-blue">Ambiente</div>
+        <div class="lane-nodes">
+          <button class="node c-blue" data-step="github"><small>1</small>Repositório no GitHub<em>onde o código mora</em></button>
+          <button class="node c-blue" data-step="projeto"><small>2</small>Criar o projeto<em>ng new + git push</em></button>
+          <button class="node c-blue" data-step="bootstrap"><small>3</small>Bootstrap<em>npm install + styles.css</em></button>
+        </div>
+      </div>
+      <div class="lane-arrow">↓</div>
+      <div class="lane">
+        <div class="lane-label c-purple">Estrutura</div>
+        <div class="lane-nodes">
+          <button class="node c-purple" data-step="componente"><small>4</small>Componente Cadastro<em>ng g c cadastro</em></button>
+          <button class="node c-purple" data-step="formulario"><small>5</small>Formulário HTML<em>classes do Bootstrap</em></button>
+          <button class="node c-purple" data-step="app"><small>6</small>App chama Cadastro<em>imports + seletor</em></button>
+        </div>
+      </div>
+      <div class="lane-arrow">↓</div>
+      <div class="lane">
+        <div class="lane-label c-pink">Evolução CRUD</div>
+        <div class="lane-nodes four">
+          <button class="node c-pink" data-step="service"><small>7</small>Service<em>guarda os dados</em></button>
+          <button class="node c-pink" data-step="binding"><small>8</small>Bindings<em>ngModel + ngSubmit</em></button>
+          <button class="node c-pink" data-step="lista"><small>9</small>Componente Lista<em>@for + @if</em></button>
+          <button class="node c-pink" data-step="rotas"><small>10</small>Rotas<em>app.routes.ts</em></button>
+        </div>
+      </div>
+
+      <div class="flow">
+        <p class="flow-title">Em execução: como as peças conversam</p>
+        <div class="flow-row">
+          <button class="pill" data-step="rotas">URL</button><span>→</span>
+          <button class="pill" data-step="rotas">Rota</button><span>→</span>
+          <button class="pill" data-step="lista">Componente</button><span>→</span>
+          <button class="pill" data-step="service">Service</button><span>→</span>
+          <button class="pill" data-step="binding">Template</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 1 -->
+  <section id="github" class="block">
+    <h2><span class="num">1</span> Criação do repositório no GitHub</h2>
+    <p>O primeiro passo é criar um repositório remoto. Ele guarda o código-fonte e registra o histórico (versionamento) da aplicação.</p>
+    <ol class="steps">
+      <li>Acesse sua conta no GitHub e clique em <b>New repository</b>.</li>
+      <li>Dê um nome, por exemplo <code>sistema-usuarios</code>.</li>
+      <li>Escolha público ou privado. <b>Não</b> marque "Add a README": o Angular já cria os arquivos e isso evita conflito no primeiro push.</li>
+      <li>Clique em <b>Create repository</b> e copie a URL.</li>
+    </ol>
+    <div class="code" data-ref="github:0"></div>
+  </section>
+
+  <!-- 2 -->
+  <section id="projeto" class="block">
+    <h2><span class="num">2</span> Criação do projeto e ligação com o GitHub</h2>
+    <p>Gere o projeto na sua máquina. O Angular CLI pergunta o formato de estilos e se você quer roteamento; para esta apostila use <b>CSS</b> e <b>Routing: Yes</b> (vamos precisar dele na etapa 10).</p>
+    <div class="code" data-ref="projeto:0"></div>
+    <p>O <code>ng new</code> já cria um repositório Git local. Falta apontar para o remoto e enviar:</p>
+    <div class="code" data-ref="projeto:1"></div>
+    <p>Rode a aplicação e abra <code>http://localhost:4200</code>:</p>
+    <div class="code" data-ref="projeto:2"></div>
+    <div class="tip"><b>Dica de laboratório.</b> Rode o projeto logo depois de criar. Se a tela inicial do Angular aparecer, o ambiente está certo e qualquer erro posterior é do seu código, não da instalação.</div>
+  </section>
+
+  <!-- 3 -->
+  <section id="bootstrap" class="block">
+    <h2><span class="num">3</span> Instalação do Bootstrap</h2>
+    <p>O Bootstrap traz classes prontas para formulários, botões, grid e cards, acelerando a parte visual.</p>
+    <div class="code" data-ref="bootstrap:0"></div>
+    <p>Importe o CSS no arquivo de estilos globais. Assim as classes valem para a aplicação inteira:</p>
+    <div class="code" data-ref="bootstrap:1"></div>
+    <div class="tip"><b>Além da apostila.</b> O import acima traz só o CSS. Componentes que dependem de JavaScript (dropdown, modal, collapse) precisam do bundle registrado no <code>angular.json</code>. Depois de alterar o <code>angular.json</code>, pare e rode o <code>ng serve</code> de novo.</div>
+    <div class="code" data-ref="bootstrap:2"></div>
+  </section>
+
+  <!-- 4 -->
+  <section id="componente" class="block">
+    <h2><span class="num">4</span> Criação do componente Cadastro</h2>
+    <p>Como o projeto vai virar um CRUD, o formulário não fica no componente principal. Criamos um componente só para a tela de cadastro.</p>
+    <div class="code" data-ref="componente:0"></div>
+    <p>O comando cria a pasta <code>src/app/cadastro</code> com quatro arquivos. No Angular 20 os nomes ficam mais curtos: sai o sufixo <code>.component</code> e a classe se chama apenas <code>Cadastro</code>.</p>
+    <div class="code" data-ref="componente:1"></div>
+    <table class="tbl">
+      <tr><th>Arquivo</th><th>Responsabilidade</th></tr>
+      <tr><td><code>cadastro.ts</code></td><td>Lógica: dados, métodos, imports e o decorator <code>@Component</code></td></tr>
+      <tr><td><code>cadastro.html</code></td><td>O que aparece na tela (template)</td></tr>
+      <tr><td><code>cadastro.css</code></td><td>Estilo que vale só para este componente</td></tr>
+      <tr><td><code>cadastro.spec.ts</code></td><td>Testes automatizados</td></tr>
+    </table>
+  </section>
+
+  <!-- 5 -->
+  <section id="formulario" class="block">
+    <h2><span class="num">5</span> Formulário no componente Cadastro</h2>
+    <p>Substitua o conteúdo de <code>src/app/cadastro/cadastro.html</code> pelo formulário abaixo. Por enquanto é só HTML com classes do Bootstrap: ainda não salva nada (isso chega na etapa 8).</p>
+    <div class="code" data-ref="formulario:0"></div>
+    <table class="tbl">
+      <tr><th>Classe</th><th>O que faz</th></tr>
+      <tr><td><code>container mt-5</code></td><td>Centraliza o conteúdo e dá margem no topo</td></tr>
+      <tr><td><code>row justify-content-center</code></td><td>Linha do grid com conteúdo centralizado</td></tr>
+      <tr><td><code>col-md-8 col-lg-6</code></td><td>Largura responsiva: 8 de 12 colunas em telas médias, 6 em grandes</td></tr>
+      <tr><td><code>card shadow</code></td><td>Caixa com sombra em volta do formulário</td></tr>
+      <tr><td><code>mb-3</code></td><td>Espaço abaixo de cada campo</td></tr>
+      <tr><td><code>form-control</code> / <code>form-select</code></td><td>Estilo padrão de input e select</td></tr>
+      <tr><td><code>d-grid</code> + <code>btn btn-primary</code></td><td>Botão principal ocupando a largura toda</td></tr>
+    </table>
+  </section>
+
+  <!-- 6 -->
+  <section id="app" class="block">
+    <h2><span class="num">6</span> Chamada do Cadastro no componente App</h2>
+    <p>O componente <code>App</code> é a porta de entrada. Para ele exibir o <code>Cadastro</code>, são dois passos: importar a classe no <code>app.ts</code> e usar o seletor no <code>app.html</code>.</p>
+    <div class="code" data-ref="app:0"></div>
+    <div class="code" data-ref="app:1"></div>
+    <div class="tip"><b>Por que o <code>imports: [Cadastro]</code>?</b> No Angular 20 os componentes são <i>standalone</i>: cada um declara do que precisa. Se você esquecer esse import, o terminal acusa que <code>app-cadastro</code> não é um elemento conhecido.</div>
+  </section>
+
+  <!-- 7 -->
+  <section id="service" class="block evolve">
+    <p class="badge">Evolução para CRUD</p>
+    <h2><span class="num">7</span> Service: um lugar para os dados</h2>
+    <p>O formulário precisa salvar e a lista precisa ler os mesmos dados. Em vez de cada componente guardar uma cópia, criamos um <b>service</b>: uma classe única, compartilhada, que concentra os dados e a lógica.</p>
+    <p>Primeiro o modelo, que descreve o formato de um usuário:</p>
+    <div class="code" data-ref="service:0"></div>
+    <div class="code" data-ref="service:1"></div>
+    <p>Agora o service:</p>
+    <div class="code" data-ref="service:2"></div>
+    <div class="code" data-ref="service:3"></div>
+    <div class="tip"><b><code>providedIn: 'root'</code></b> faz o Angular criar uma única instância do service para a aplicação inteira. É isso que permite o Cadastro gravar e a Lista enxergar o mesmo array. Nesta fase os dados ficam na memória: recarregou a página, sumiram. Na próxima evolução o service passa a usar <code>HttpClient</code> para falar com uma API.</div>
+  </section>
+
+  <!-- 8 -->
+  <section id="binding" class="block evolve">
+    <p class="badge">Evolução para CRUD</p>
+    <h2><span class="num">8</span> Ligando o formulário aos dados (bindings)</h2>
+    <p>Os bindings fazem o HTML conversar com a classe TypeScript. São quatro formas:</p>
+    <table class="tbl">
+      <tr><th>Sintaxe</th><th>Nome</th><th>Direção</th><th>Exemplo</th></tr>
+      <tr><td><code>{{ }}</code></td><td>Interpolação</td><td>classe → tela</td><td><code>{{ usuario.nome }}</code></td></tr>
+      <tr><td><code>[ ]</code></td><td>Property binding</td><td>classe → tela</td><td><code>[disabled]="!form.valid"</code></td></tr>
+      <tr><td><code>( )</code></td><td>Event binding</td><td>tela → classe</td><td><code>(click)="remover(u.id)"</code></td></tr>
+      <tr><td><code>[( )]</code></td><td>Two-way binding</td><td>nos dois sentidos</td><td><code>[(ngModel)]="usuario.email"</code></td></tr>
+    </table>
+    <p>Para usar <code>ngModel</code> o componente precisa importar o <code>FormsModule</code>. O <code>Router</code> entra para mandar o usuário à lista depois de salvar:</p>
+    <div class="code" data-ref="binding:0"></div>
+    <p>No HTML, cada campo ganha <code>[(ngModel)]</code> e um <code>name</code> (obrigatório dentro de um <code>&lt;form&gt;</code>). O formulário passa a chamar <code>salvar()</code> no envio:</p>
+    <div class="code" data-ref="binding:1"></div>
+    <div class="tip"><b>Lembrete visual:</b> colchetes <code>[ ]</code> <i>recebem</i> dados, parênteses <code>( )</code> <i>enviam</i> eventos. Os dois juntos <code>[( )]</code>, a "banana na caixa", fazem o dado ir e voltar.</div>
+  </section>
+
+  <!-- 9 -->
+  <section id="lista" class="block evolve">
+    <p class="badge">Evolução para CRUD</p>
+    <h2><span class="num">9</span> Componente Lista com <code>@for</code> e <code>@if</code></h2>
+    <p>Esta tela mostra os usuários cadastrados e permite excluir. É aqui que aparecem os blocos de controle do template.</p>
+    <div class="code" data-ref="lista:0"></div>
+    <div class="code" data-ref="lista:1"></div>
+    <div class="code" data-ref="lista:2"></div>
+    <table class="tbl">
+      <tr><th>Bloco</th><th>Função</th></tr>
+      <tr><td><code>@if / @else</code></td><td>Mostra um trecho só se a condição for verdadeira. Quando é falsa, o trecho nem existe no HTML.</td></tr>
+      <tr><td><code>@for (u of usuarios; track u.id)</code></td><td>Repete o bloco para cada item. O <code>track</code> é obrigatório e identifica cada item para o Angular atualizar só o que mudou.</td></tr>
+      <tr><td><code>@empty</code></td><td>Opcional; aparece quando a lista está vazia.</td></tr>
+    </table>
+    <div class="tip"><b>Sintaxe antiga.</b> Em tutoriais anteriores ao Angular 17 você vai encontrar <code>*ngFor</code> e <code>*ngIf</code>. Fazem o mesmo, mas a sintaxe com <code>@</code> é a recomendada e não precisa importar nada.</div>
+  </section>
+
+  <!-- 10 -->
+  <section id="rotas" class="block evolve">
+    <p class="badge">Evolução para CRUD</p>
+    <h2><span class="num">10</span> Rotas: cada tela com sua URL</h2>
+    <p>Com duas telas, o <code>App</code> deixa de chamar o Cadastro direto e passa a exibir <b>a tela da rota atual</b> no <code>&lt;router-outlet&gt;</code>. As rotas ficam em <code>app.routes.ts</code> (criado porque respondemos Routing: Yes).</p>
+    <div class="code" data-ref="rotas:0"></div>
+    <p>O <code>app.config.ts</code> já registra as rotas com <code>provideRouter</code>; confira se está assim:</p>
+    <div class="code" data-ref="rotas:1"></div>
+    <p>No <code>App</code>, troque o import do <code>Cadastro</code> por <code>RouterOutlet</code> e <code>RouterLink</code>, e monte um menu:</p>
+    <div class="code" data-ref="rotas:2"></div>
+    <div class="code" data-ref="rotas:3"></div>
+    <div class="tip"><b>Use <code>routerLink</code>, não <code>href</code>.</b> O <code>href</code> recarrega a página inteira e o array do service volta vazio. O <code>routerLink</code> troca só o componente, sem recarregar.</div>
+  </section>
+
+  <!-- ESTRUTURA -->
+  <section id="estrutura" class="block">
+    <h2><span class="num">◆</span> Estrutura esperada do projeto</h2>
+    <p>Ao fim das 10 etapas, a pasta <code>src/app</code> fica assim (as etapas 1 a 6 sozinhas geram só <code>cadastro/</code> e os arquivos do <code>app</code>):</p>
+    <div class="code" data-ref="estrutura:0"></div>
+  </section>
+
+  <!-- EXERCÍCIO -->
+  <section id="exercicio" class="block">
+    <h2><span class="num">✎</span> Exercício proposto</h2>
+    <ol class="steps">
+      <li>Adicione novos campos ao formulário, separados em dois grupos: <b>Endereço</b> (CEP, rua, número, bairro) e <b>Contatos</b> (celular, WhatsApp, Instagram).</li>
+      <li>Organize os campos em <b>duas colunas</b> com o grid do Bootstrap.</li>
+      <li>Desafio: exiba os novos campos na tabela da Lista.</li>
+    </ol>
+    <details class="solution">
+      <summary>Ver um caminho de solução (tente antes!)</summary>
+      <p>O segredo das duas colunas é colocar os campos dentro de uma <code>row</code> e dar a cada um <code>col-md-6</code>: em telas médias e maiores cada campo ocupa metade; no celular, a largura toda.</p>
+      <div class="code" data-ref="exercicio:0"></div>
+      <p>Lembre de incluir os novos campos também na interface <code>Usuario</code> e no objeto <code>usuario</code> do <code>cadastro.ts</code>.</p>
+    </details>
+    <a class="cta" href="quiz.html">Testar o que aprendi no quiz →</a>
+  </section>
+
+  <!-- REFERÊNCIAS -->
+  <section id="referencias" class="block">
+    <h2><span class="num">◆</span> Referências</h2>
+    <ul class="refs">
+      <li><a href="https://angular.dev/" target="_blank" rel="noopener">Angular · documentação oficial</a></li>
+      <li><a href="https://angular.dev/tools/cli" target="_blank" rel="noopener">Angular CLI</a></li>
+      <li><a href="https://angular.dev/guide/components" target="_blank" rel="noopener">Angular · guia de componentes</a></li>
+      <li><a href="https://angular.dev/guide/templates" target="_blank" rel="noopener">Angular · templates e control flow</a></li>
+      <li><a href="https://angular.dev/guide/routing" target="_blank" rel="noopener">Angular · roteamento</a></li>
+      <li><a href="https://getbootstrap.com/docs/5.3/getting-started/introduction/" target="_blank" rel="noopener">Bootstrap 5.3 · introdução</a></li>
+      <li><a href="https://getbootstrap.com/docs/5.3/forms/overview/" target="_blank" rel="noopener">Bootstrap · formulários</a></li>
+      <li><a href="https://getbootstrap.com/docs/5.3/layout/grid/" target="_blank" rel="noopener">Bootstrap · grid</a></li>
+      <li><a href="https://docs.github.com/pt/repositories" target="_blank" rel="noopener">GitHub Docs · repositórios</a></li>
+    </ul>
+  </section>
+
+  <footer class="credits">
+    <p>Material baseado na apostila <i>Criação de Projeto Angular 20 com Bootstrap e Componente de Cadastro</i>, do Prof. Vitor H. V. Reis (Programação Front-End III, Senac RJ). Arquitetura interativa e etapas 7 a 10 adicionadas por Wallace Toledo · dev-Kalixto.</p>
+  </footer>
+</main>
+
+<!-- Painel de código -->
+<div class="scrim" id="scrim" hidden></div>
+<aside class="drawer" id="drawer" aria-hidden="true" aria-labelledby="dr-title">
+  <div class="dr-head">
+    <div>
+      <p class="dr-phase" id="dr-phase"></p>
+      <h3 id="dr-title"></h3>
+    </div>
+    <button class="dr-close" id="dr-close" aria-label="Fechar">✕</button>
+  </div>
+  <p class="dr-desc" id="dr-desc"></p>
+  <div class="dr-tabs" id="dr-tabs" role="tablist"></div>
+  <div class="dr-code" id="dr-code"></div>
+  <a class="dr-go" id="dr-go" href="#">Ir para a explicação completa →</a>
+</aside>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/typescript.min.js"></script>
+<script src="code.js"></script>
+<script src="app.js"></script>
+</body>
+</html>

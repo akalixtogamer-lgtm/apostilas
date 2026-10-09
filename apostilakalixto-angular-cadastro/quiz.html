@@ -1,0 +1,168 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Quiz Angular 20 · dev-Kalixto</title>
+<meta name="description" content="Quiz da apostila Angular 20 na prática: projeto, Bootstrap, componentes, service, bindings, @for, @if e rotas.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&family=Space+Grotesk:wght@400;500;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<style>
+  .qbar { display: flex; justify-content: space-between; align-items: center; gap: 12px; margin: 8px 0 14px; font: 500 14px var(--mono); color: var(--muted); }
+  .track { height: 6px; background: var(--card); border-radius: 99px; overflow: hidden; margin-bottom: 26px; }
+  .track i { display: block; height: 100%; width: 0; background: linear-gradient(90deg, var(--magenta), var(--blue)); transition: width .3s; }
+  .qcard { background: var(--bg2); border: 1px solid var(--line); border-radius: 18px; padding: 26px; }
+  .qtopic { font: 500 12px var(--mono); color: var(--blue); text-transform: uppercase; letter-spacing: 1px; margin: 0 0 8px; }
+  .qtext { font-size: 21px; font-weight: 500; margin: 0 0 18px; line-height: 1.45; }
+  .opts { display: grid; gap: 10px; }
+  .opt { text-align: left; font: 400 16px 'Space Grotesk', sans-serif; color: var(--text); background: var(--card); border: 1px solid var(--line); border-radius: 12px; padding: 13px 16px; cursor: pointer; display: flex; gap: 12px; align-items: flex-start; }
+  .opt b { font-family: var(--mono); color: var(--purple); flex: none; }
+  .opt:hover:not(:disabled) { border-color: var(--purple); }
+  .opt:disabled { cursor: default; }
+  .opt.right { border-color: var(--ok); background: rgba(52,211,153,.10); }
+  .opt.wrong { border-color: var(--bad); background: rgba(251,113,133,.10); }
+  .fb { margin-top: 18px; padding: 14px 18px; border-left: 3px solid; font-size: 16px; }
+  .fb.ok { border-color: var(--ok); background: rgba(52,211,153,.07); }
+  .fb.no { border-color: var(--bad); background: rgba(251,113,133,.07); }
+  .fb strong { display: block; margin-bottom: 4px; }
+  .fb a { font-size: 14px; }
+  .qnav { display: flex; justify-content: flex-end; margin-top: 20px; }
+  .btn { font: 500 15px 'Space Grotesk', sans-serif; color: #fff; border: 0; border-radius: 12px; padding: 11px 22px; cursor: pointer; background: linear-gradient(135deg, var(--magenta), var(--purple)); }
+  .btn:disabled { opacity: .35; cursor: default; }
+  .btn.ghost { background: var(--card); border: 1px solid var(--line); }
+  .result { text-align: center; }
+  .score { font-family: Orbitron, sans-serif; font-size: 64px; margin: 6px 0; }
+  .review { text-align: left; margin-top: 24px; }
+  .review li { margin: 8px 0; color: var(--muted); }
+  .review li.miss { color: var(--text); }
+  .actions { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; margin-top: 18px; }
+</style>
+</head>
+<body>
+
+<header class="topbar">
+  <a class="brand" href="index.html"><span class="brand-dot"></span>dev-Kalixto</a>
+  <nav class="tabs" aria-label="Seções do material">
+    <a class="tab" href="index.html">Apostila</a>
+    <a class="tab active" href="quiz.html">Quiz</a>
+  </nav>
+</header>
+
+<main class="wrap">
+  <section class="hero" style="padding-bottom:10px">
+    <p class="eyebrow">Quiz · Angular 20 na prática</p>
+    <h1 style="font-size:clamp(28px,5vw,40px)">Teste o que você <span class="grad">aprendeu</span></h1>
+    <p class="lead">12 perguntas sobre as etapas da apostila. Cada resposta mostra a explicação e o link para revisar a seção.</p>
+  </section>
+
+  <div id="quiz"></div>
+</main>
+
+<script>
+const Q = [
+  { t: 'Projeto', s: 'projeto',
+    q: 'Qual comando cria um novo projeto Angular chamado sistema-usuarios?',
+    o: ['npm create sistema-usuarios', 'ng new sistema-usuarios', 'ng generate project sistema-usuarios', 'npm install angular sistema-usuarios'],
+    c: 1, e: 'O ng new gera toda a estrutura base, instala as dependências e já inicializa um repositório Git local.' },
+  { t: 'GitHub', s: 'projeto',
+    q: 'Depois do ng new, o que o comando git remote add origin <url> faz?',
+    o: ['Envia os arquivos para o GitHub', 'Cria o repositório no GitHub', 'Liga o repositório local ao repositório remoto', 'Faz o primeiro commit'],
+    c: 2, e: 'Ele só registra o endereço remoto com o nome origin. O envio de fato acontece no git push -u origin main.' },
+  { t: 'Bootstrap', s: 'bootstrap',
+    q: 'Onde importar o CSS do Bootstrap para que as classes valham na aplicação inteira?',
+    o: ['src/styles.css', 'src/app/app.css', 'src/app/cadastro/cadastro.css', 'index.html, dentro do body'],
+    c: 0, e: 'styles.css é o arquivo de estilos globais. Os .css dos componentes valem apenas para o próprio componente.' },
+  { t: 'Componentes', s: 'componente',
+    q: 'No Angular 20, quais arquivos o ng g c cadastro cria?',
+    o: ['cadastro.component.ts, .html, .css e .spec.ts', 'cadastro.ts, cadastro.html, cadastro.css e cadastro.spec.ts', 'apenas cadastro.ts', 'cadastro.module.ts e cadastro.ts'],
+    c: 1, e: 'Na versão 20 o sufixo .component saiu dos nomes de arquivo e a classe se chama apenas Cadastro.' },
+  { t: 'Componentes', s: 'app',
+    q: 'O App usa <app-cadastro> no HTML, mas o terminal diz que o elemento não é conhecido. O que falta?',
+    o: ['Instalar o Bootstrap', 'Criar uma rota para o Cadastro', 'Adicionar Cadastro em imports: [] no app.ts', 'Renomear o seletor para cadastro'],
+    c: 2, e: 'Componentes standalone precisam declarar o que usam. Sem Cadastro no array imports, o App não reconhece o seletor app-cadastro.' },
+  { t: 'Service', s: 'service',
+    q: 'Por que usar providedIn: \'root\' no UsuarioService?',
+    o: ['Para o service rodar no servidor', 'Para existir uma única instância compartilhada por toda a aplicação', 'Para o service virar um componente', 'Para salvar os dados no navegador'],
+    c: 1, e: 'Com uma só instância, o Cadastro grava e a Lista lê o mesmo array de usuários.' },
+  { t: 'Bindings', s: 'binding',
+    q: 'Qual sintaxe faz o dado ir da tela para a classe E da classe para a tela ao mesmo tempo?',
+    o: ['{{ usuario.nome }}', '[value]="usuario.nome"', '(input)="usuario.nome"', '[(ngModel)]="usuario.nome"'],
+    c: 3, e: 'É o two-way binding, a "banana na caixa". Lembre que ele exige importar o FormsModule no componente.' },
+  { t: 'Bindings', s: 'binding',
+    q: 'Em <button [disabled]="form.invalid">, que tipo de binding é usado?',
+    o: ['Interpolação', 'Property binding', 'Event binding', 'Two-way binding'],
+    c: 1, e: 'Colchetes ligam uma propriedade do elemento a uma expressão da classe. O sentido é classe → tela.' },
+  { t: 'Bindings', s: 'binding',
+    q: 'Qual linha chama o método salvar() quando o formulário é enviado?',
+    o: ['<form [ngSubmit]="salvar()">', '<form (ngSubmit)="salvar()">', '<form {{ salvar() }}>', '<form ngSubmit="salvar">'],
+    c: 1, e: 'Parênteses indicam event binding: o evento acontece na tela e dispara um método da classe.' },
+  { t: 'Template', s: 'lista',
+    q: 'No @for, para que serve o track u.id?',
+    o: ['Ordena a lista pelo id', 'Filtra itens sem id', 'Identifica cada item para o Angular atualizar só o que mudou', 'É opcional e só serve para debug'],
+    c: 2, e: 'O track é obrigatório no @for. Com ele o Angular reaproveita os elementos que não mudaram em vez de redesenhar tudo.' },
+  { t: 'Template', s: 'lista',
+    q: 'O que acontece com o bloco do @if quando a condição é falsa?',
+    o: ['Fica escondido com display: none', 'Não é criado no HTML', 'Aparece em cinza', 'Gera um erro no console'],
+    c: 1, e: 'O @if remove o trecho do DOM. Para mostrar algo quando a lista está vazia no @for, use o bloco @empty.' },
+  { t: 'Rotas', s: 'rotas',
+    q: 'Por que usar routerLink em vez de href nos links do menu?',
+    o: ['href não funciona no Angular', 'routerLink troca só o componente sem recarregar a página', 'routerLink é mais rápido de digitar', 'href não aceita barras na URL'],
+    c: 1, e: 'Com href a página recarrega inteira e o array do service volta vazio. O routerLink navega dentro da aplicação.' }
+];
+
+const el = document.getElementById('quiz');
+let i = 0, pts = 0, answers = [];
+const L = ['A', 'B', 'C', 'D'];
+
+function esc(s) { return s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;'); }
+
+function render() {
+  const q = Q[i];
+  el.innerHTML =
+    '<div class="qbar"><span>Pergunta ' + (i + 1) + ' de ' + Q.length + '</span><span>' + pts + ' acerto(s)</span></div>' +
+    '<div class="track"><i style="width:' + (i / Q.length * 100) + '%"></i></div>' +
+    '<div class="qcard"><p class="qtopic">' + q.t + '</p><p class="qtext">' + esc(q.q) + '</p>' +
+    '<div class="opts">' + q.o.map(function (o, k) { return '<button class="opt" data-k="' + k + '"><b>' + L[k] + '</b><span>' + esc(o) + '</span></button>'; }).join('') + '</div>' +
+    '<div id="fb"></div>' +
+    '<div class="qnav"><button class="btn" id="next" disabled>' + (i === Q.length - 1 ? 'Ver resultado' : 'Próxima') + '</button></div></div>';
+  el.querySelectorAll('.opt').forEach(function (b) { b.addEventListener('click', function () { pick(Number(b.dataset.k)); }); });
+  document.getElementById('next').addEventListener('click', function () { i++; i < Q.length ? render() : result(); });
+}
+
+function pick(k) {
+  const q = Q[i], ok = k === q.c;
+  if (ok) pts++;
+  answers[i] = ok;
+  el.querySelectorAll('.opt').forEach(function (b, j) {
+    b.disabled = true;
+    if (j === q.c) b.classList.add('right');
+    else if (j === k) b.classList.add('wrong');
+  });
+  document.getElementById('fb').innerHTML =
+    '<div class="fb ' + (ok ? 'ok' : 'no') + '"><strong>' + (ok ? 'Isso mesmo!' : 'Quase. A resposta é ' + L[q.c] + '.') + '</strong>' +
+    esc(q.e) + ' <a href="index.html#' + q.s + '">Revisar a seção →</a></div>';
+  const n = document.getElementById('next');
+  n.disabled = false; n.focus();
+  el.querySelector('.qbar span:last-child').textContent = pts + ' acerto(s)';
+}
+
+function result() {
+  const pct = Math.round(pts / Q.length * 100);
+  const msg = pct === 100 ? 'Gabaritou! Pronto para o CRUD completo.' : pct >= 70 ? 'Mandou bem. Revise os pontos marcados abaixo.' : 'Vale reler a apostila e tentar de novo.';
+  el.innerHTML =
+    '<div class="track"><i style="width:100%"></i></div>' +
+    '<div class="qcard result"><p class="qtopic">Resultado</p><p class="score grad">' + pts + '/' + Q.length + '</p><p>' + msg + '</p>' +
+    '<ol class="review">' + Q.map(function (q, k) {
+      return '<li class="' + (answers[k] ? '' : 'miss') + '">' + (answers[k] ? '✓ ' : '✗ ') + esc(q.q) +
+        (answers[k] ? '' : ' <a href="index.html#' + q.s + '">revisar</a>') + '</li>';
+    }).join('') + '</ol>' +
+    '<div class="actions"><button class="btn" id="again">Refazer quiz</button><a class="btn ghost" href="index.html" style="text-decoration:none">Voltar à apostila</a></div></div>';
+  document.getElementById('again').addEventListener('click', function () { i = 0; pts = 0; answers = []; render(); });
+}
+
+render();
+</script>
+</body>
+</html>
