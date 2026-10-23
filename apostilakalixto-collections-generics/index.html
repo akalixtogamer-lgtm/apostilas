@@ -1,0 +1,1950 @@
+<!doctype html><html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><title>Collections &amp; Generics · Apostila Kalixto</title><meta name="description" content="Collections e Generics em Java: List, Set, Map, Queue, Comparator, classes e métodos genéricos, wildcards, projetos reais, exercícios, quiz e referências."><script>(function(){try{var t=localStorage.getItem('kx-theme');if(t==='light'||t==='dark')document.documentElement.setAttribute('data-theme',t);}catch(e){}})();</script><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Unbounded:wght@600;700&family=Sora:wght@600&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap"><style>/* =====================================================================
+   KALIXTO DESIGN SYSTEM — tokens espelhados do arquivo Figma
+   "Kalixto — Design System" (coleções Primitives, Theme, Spacing & Radius;
+   estilos de texto, efeitos Glass/Glow/Elevation e gradientes).
+   Tema padrão: Dark. Light via prefers-color-scheme ou data-theme.
+   ===================================================================== */
+:root{
+  /* Primitives */
+  --black-950:#050505; --gray-900:#1B1B1B; --gray-800:#2D2D2D; --gray-500:#6E6E80; --gray-300:#B3B3C2; --gray-100:#F5F7FA; --white:#FFFFFF;
+  --ink-900:#120B24; --ink-600:#4A4560;
+  --purple-700:#5A12D6; --purple-500:#7B2EFF; --purple-300:#B899FF; --purple-100:#EADFFF;
+  --pink-700:#D6127F; --pink-500:#FF2DAA; --pink-100:#FFD5F1;
+  --cyan-700:#0089A8; --cyan-500:#00D9FF; --cyan-100:#D8F7FF;
+  --gold-700:#B7791F; --gold-500:#FFC53D;
+  --green-700:#0E9F6E; --green-500:#22E3A0;
+  --amber-700:#B86E00; --amber-500:#FFB020;
+  --red-700:#D92D4A; --red-500:#FF4D6A;
+  /* Auditoria 30/09/2026 — tons 800 para o modo Light e cinzas do text/muted */
+  --gray-400:#9494A3; --gray-600:#636374;
+  --pink-800:#C11072; --cyan-800:#006E87; --gold-800:#895B17; --green-800:#0A724F; --amber-800:#925700; --red-800:#C0233D;
+
+  /* Theme · Dark (padrão) */
+  --bg-base:var(--black-950); --bg-surface:var(--gray-900); --bg-elevated:var(--gray-800);
+  --text-primary:var(--white); --text-secondary:var(--gray-300); --text-muted:var(--gray-400);
+  --brand-primary:var(--purple-500); --brand-secondary:var(--pink-500); --brand-tertiary:var(--cyan-500);
+  --accent-gold:var(--gold-500); --support-lilac:var(--purple-300);
+  --fb-success:var(--green-500); --fb-warning:var(--amber-500); --fb-error:var(--red-500); --fb-info:var(--cyan-500);
+  --glass-fill:rgba(255,255,255,.06); --glass-stroke:rgba(255,255,255,.14); --glass-tint:rgba(123,46,255,.10);
+  --glass-shadow:0 24px 64px rgba(0,0,0,.45), inset 0 1px 0 rgba(255,255,255,.12);
+  --glass-shadow-s:0 12px 32px rgba(0,0,0,.35), inset 0 1px 0 rgba(255,255,255,.10);
+  --on-accent:var(--black-950); --on-brand:var(--white);
+  --code-bg:rgba(0,0,0,.35);
+  --aura-1:rgba(123,46,255,.34); --aura-2:rgba(255,45,170,.16); --aura-3:rgba(0,217,255,.10);
+
+  /* Gradientes (Paint styles) */
+  --g-neon:linear-gradient(90deg,#7B2EFF 0%,#FF2DAA 100%);
+  --g-tech:linear-gradient(90deg,#00D9FF 0%,#7B2EFF 100%);
+  --g-ia:linear-gradient(90deg,#00D9FF 0%,#B899FF 50%,#FF2DAA 100%);
+  --g-gamer:linear-gradient(90deg,#FF2DAA 0%,#7B2EFF 50%,#00D9FF 100%);
+  --g-ancestral:linear-gradient(90deg,#FFC53D 0%,#FF2DAA 50%,#7B2EFF 100%);
+
+  /* Glow (Effect styles) */
+  --glow-purple:0 0 40px rgba(123,46,255,.55); --glow-pink:0 0 40px rgba(255,45,170,.50); --glow-cyan:0 0 40px rgba(0,217,255,.50);
+
+  /* Spacing & Radius */
+  --s1:4px; --s2:8px; --s3:12px; --s4:16px; --s6:24px; --s8:32px; --s12:48px; --s16:64px; --s24:96px;
+  --r-sm:8px; --r-md:16px; --r-alert:20px; --r-lg:24px; --r-card:28px; --r-xl:32px; --r-pill:999px;
+  --blur-sm:12px; --blur-md:24px;
+
+  /* Tipografia (Text styles) */
+  --f-display:"Unbounded","Sora",system-ui,sans-serif;
+  --f-heading:"Sora","Inter",system-ui,sans-serif;
+  --f-body:"Inter",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --f-code:"JetBrains Mono",ui-monospace,Consolas,monospace;
+  color-scheme:dark;
+}
+/* Theme · Light */
+@media (prefers-color-scheme: light){
+  :root:not([data-theme="dark"]){
+    --bg-base:var(--gray-100); --bg-surface:var(--white); --bg-elevated:var(--purple-100);
+    --text-primary:var(--ink-900); --text-secondary:var(--ink-600); --text-muted:var(--gray-600);
+    --brand-secondary:var(--pink-800); --brand-tertiary:var(--cyan-800);
+    --accent-gold:var(--gold-800); --support-lilac:var(--purple-700);
+    --fb-success:var(--green-800); --fb-warning:var(--amber-800); --fb-error:var(--red-800); --fb-info:var(--cyan-800);
+    --glass-fill:rgba(255,255,255,.55); --glass-stroke:rgba(255,255,255,.85); --glass-tint:rgba(184,153,255,.18);
+    --glass-shadow:0 24px 64px rgba(90,18,214,.10), inset 0 1px 0 rgba(255,255,255,.7);
+    --glass-shadow-s:0 12px 32px rgba(90,18,214,.08), inset 0 1px 0 rgba(255,255,255,.7);
+    --on-accent:var(--white);
+    --code-bg:rgba(255,255,255,.7);
+    --aura-1:rgba(234,223,255,.9); --aura-2:rgba(255,213,241,.8); --aura-3:rgba(216,247,255,.8);
+    color-scheme:light;
+  }
+}
+:root[data-theme="light"]{
+  --bg-base:var(--gray-100); --bg-surface:var(--white); --bg-elevated:var(--purple-100);
+  --text-primary:var(--ink-900); --text-secondary:var(--ink-600); --text-muted:var(--gray-600);
+  --brand-secondary:var(--pink-800); --brand-tertiary:var(--cyan-800);
+  --accent-gold:var(--gold-800); --support-lilac:var(--purple-700);
+  --fb-success:var(--green-800); --fb-warning:var(--amber-800); --fb-error:var(--red-800); --fb-info:var(--cyan-800);
+  --glass-fill:rgba(255,255,255,.55); --glass-stroke:rgba(255,255,255,.85); --glass-tint:rgba(184,153,255,.18);
+  --glass-shadow:0 24px 64px rgba(90,18,214,.10), inset 0 1px 0 rgba(255,255,255,.7);
+  --glass-shadow-s:0 12px 32px rgba(90,18,214,.08), inset 0 1px 0 rgba(255,255,255,.7);
+  --on-accent:var(--white);
+  --code-bg:rgba(255,255,255,.7);
+  --aura-1:rgba(234,223,255,.9); --aura-2:rgba(255,213,241,.8); --aura-3:rgba(216,247,255,.8);
+  color-scheme:light;
+}
+
+/* ---------- Base ---------- */
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important}}
+body{background:var(--bg-base);color:var(--text-primary);font:400 16px/24px var(--f-body);
+  background-image:
+    radial-gradient(900px 620px at 92% -8%,var(--aura-1),transparent 62%),
+    radial-gradient(760px 520px at -12% 38%,var(--aura-2),transparent 60%),
+    radial-gradient(700px 500px at 80% 110%,var(--aura-3),transparent 60%);
+  background-attachment:fixed}
+a{color:var(--brand-tertiary)}
+:focus-visible{outline:2px solid var(--brand-tertiary);outline-offset:3px}
+strong{font-weight:600;color:var(--text-primary)}
+
+/* ---------- Tipografia (Text styles do Figma, escalados para web) ---------- */
+.t-display{font:700 clamp(40px,7vw,72px)/1.1 var(--f-display);letter-spacing:-.02em;margin:0;text-wrap:balance}
+.t-h1{font:600 clamp(30px,4.6vw,48px)/1.16 var(--f-display);letter-spacing:-.01em;margin:0;text-wrap:balance}
+.t-h2{font:600 clamp(26px,3.6vw,36px)/1.22 var(--f-display);letter-spacing:-.01em;margin:0;text-wrap:balance}
+.t-h3{font:600 clamp(22px,2.8vw,28px)/1.28 var(--f-heading);margin:0;text-wrap:balance}
+.t-sub-l{font:600 22px/30px var(--f-heading);margin:0}
+.t-sub-m{font:600 18px/26px var(--f-heading);margin:0}
+.t-overline{font:600 13px/16px var(--f-heading);letter-spacing:.14em;text-transform:uppercase}
+.t-body-l{font:400 18px/28px var(--f-body)}
+.t-body-s{font:400 14px/20px var(--f-body)}
+.t-caption{font:500 12px/16px var(--f-body);letter-spacing:.02em}
+.t-code{font:400 13px/20px var(--f-code)}
+.grad-text{background:var(--g-neon);-webkit-background-clip:text;background-clip:text;color:transparent}
+
+/* ---------- Cabeçalho de seção (padrão das páginas do DS) ---------- */
+.kx-eyebrow{display:flex;align-items:center;gap:var(--s2);color:var(--text-muted)}
+.kx-eyebrow .num{font:600 11px/1 var(--f-heading);color:#fff;background:var(--g-neon);border-radius:var(--r-pill);padding:4px 8px;letter-spacing:.04em}
+.kx-rule{width:72px;height:2px;border-radius:2px;background:var(--g-ia);border:0;margin:0}
+
+/* ---------- Glass (Effect Glass/Dark · M | S) ---------- */
+.glass{background:var(--glass-fill);border:1px solid var(--glass-stroke);box-shadow:var(--glass-shadow);
+  -webkit-backdrop-filter:blur(var(--blur-md));backdrop-filter:blur(var(--blur-md))}
+.glass-s{background:var(--glass-fill);border:1px solid var(--glass-stroke);box-shadow:var(--glass-shadow-s);
+  -webkit-backdrop-filter:blur(var(--blur-sm));backdrop-filter:blur(var(--blur-sm))}
+
+/* ---------- Button (Primary · Secondary · Glass · Ghost) ---------- */
+.btn{display:inline-flex;align-items:center;gap:var(--s3);font:600 17px/21px var(--f-heading);text-decoration:none;cursor:pointer;
+  border-radius:var(--r-pill);padding:16px 30px;border:0;color:#fff;transition:box-shadow .2s,transform .2s,filter .2s}
+.btn .arrow{transition:transform .2s}
+.btn:hover .arrow{transform:translateX(3px)}
+.btn--primary{background:var(--g-neon)}
+.btn--primary:hover{box-shadow:var(--glow-pink)}
+.btn--secondary{background:var(--brand-primary)}
+.btn--secondary:hover{box-shadow:var(--glow-purple)}
+.btn--glass{background:var(--glass-fill);border:1px solid var(--glass-stroke);color:var(--text-primary);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px)}
+.btn--glass .arrow{color:var(--brand-tertiary)}
+.btn--ghost{background:transparent;border:1.5px solid var(--brand-tertiary);color:var(--brand-tertiary)}
+.btn--ghost:hover{box-shadow:var(--glow-cyan)}
+.btn--sm{font-size:15px;padding:12px 22px}
+
+/* ---------- Badge (Tech · Dança · IA · Gamer · Evento · Aula) ---------- */
+.badge{--c:var(--brand-tertiary);display:inline-flex;align-items:center;gap:var(--s2);padding:8px 16px 8px 14px;border-radius:var(--r-pill);
+  background:color-mix(in srgb,var(--c) 16%,transparent);border:1px solid color-mix(in srgb,var(--c) 45%,transparent);color:var(--c);
+  font:600 13px/16px var(--f-heading);letter-spacing:.06em;text-transform:uppercase;white-space:nowrap}
+.badge i{font:500 13px/16px var(--f-code);font-style:normal}
+.badge--tech{--c:var(--brand-tertiary)} .badge--danca{--c:var(--brand-secondary)} .badge--ia{--c:var(--support-lilac)}
+.badge--gamer{--c:var(--brand-primary)} .badge--evento{--c:var(--accent-gold)} .badge--aula{--c:var(--fb-success)}
+
+/* ---------- Alert (Success · Warning · Error · Info) ---------- */
+.alert{--c:var(--fb-info);display:flex;gap:var(--s4);align-items:flex-start;padding:20px 24px;border-radius:var(--r-alert);
+  background:var(--glass-fill);border:1px solid color-mix(in srgb,var(--c) 40%,transparent);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px)}
+.alert .ico{flex:none;width:28px;height:28px;border-radius:50%;background:var(--c);color:var(--on-accent);display:grid;place-items:center;font:500 15px/1 var(--f-code)}
+.alert .ttl{font:600 17px/24px var(--f-heading);margin:0 0 2px;color:var(--text-primary)}
+.alert p{margin:0;font:400 15px/22px var(--f-body);color:var(--text-secondary)}
+.alert--success{--c:var(--fb-success)} .alert--warning{--c:var(--fb-warning)} .alert--error{--c:var(--fb-error)} .alert--info{--c:var(--fb-info)}
+
+/* ---------- Destaque / Callout ---------- */
+.callout{display:flex;gap:var(--s6);border-radius:var(--r-lg);overflow:hidden}
+.callout::before{content:"";flex:none;width:4px;background:var(--g-neon)}
+.callout .in{padding:24px 32px 24px 0}
+.callout .t-overline{color:var(--brand-secondary);font-size:12px}
+.callout .q{font:600 clamp(17px,2vw,21px)/1.45 var(--f-heading);margin:8px 0 0;color:var(--text-primary)}
+
+/* ---------- Stat ---------- */
+.stat{padding:var(--s8);border-radius:var(--r-card);display:grid;gap:10px;min-width:0}
+.stat .t-overline{color:var(--text-muted);font-size:12px}
+.stat .num{font:700 clamp(40px,6vw,56px)/1 var(--f-display);background:var(--g-neon);-webkit-background-clip:text;background-clip:text;color:transparent}
+.stat .delta{font:500 13px/16px var(--f-code);color:var(--fb-success)}
+
+/* ---------- Chamada / CTA ---------- */
+.cta{border-radius:var(--r-xl);padding:36px 44px;display:flex;align-items:center;justify-content:space-between;gap:var(--s8);flex-wrap:wrap;
+  background:linear-gradient(100deg,rgba(123,46,255,.28),rgba(255,45,170,.16) 55%,rgba(255,197,61,.10)),var(--bg-surface);
+  border:1px solid var(--glass-stroke);box-shadow:var(--glass-shadow)}
+.cta h2{font:600 clamp(22px,3vw,28px)/1.25 var(--f-display);margin:0 0 6px;text-wrap:balance}
+.cta p{margin:0;color:var(--text-secondary)}
+
+/* ---------- Código ---------- */
+pre{font:400 13px/20px var(--f-code);background:var(--code-bg);border:1px solid var(--glass-stroke);border-radius:var(--r-md);padding:var(--s4) 20px;overflow-x:auto;margin:0;color:var(--text-primary)}
+code{font-family:var(--f-code);font-size:.9em;color:var(--brand-tertiary);background:color-mix(in srgb,var(--brand-tertiary) 12%,transparent);padding:1px 6px;border-radius:6px}
+pre code{background:none;color:inherit;padding:0;font-size:inherit}
+.tk-k{color:var(--brand-secondary)} .tk-s{color:var(--fb-success)} .tk-c{color:var(--text-muted)} .tk-n{color:var(--accent-gold)}
+
+/* ---------- Logo oficial ---------- */
+.kx-logo{border-radius:50%;flex:none;display:block;box-shadow:var(--glow-purple)}
+</style><style>/* =====================================================================
+   Camada de página — Apostila Kalixto (usa apenas tokens do DS acima)
+   ===================================================================== */
+html{scroll-padding-top:24px}
+body{margin:0;font:400 17px/1.72 var(--f-body);-webkit-font-smoothing:antialiased}
+::selection{background:var(--brand-primary);color:#fff}
+img{max-width:100%}
+#kx-prog{position:fixed;top:0;left:0;height:3px;width:0;background:var(--g-gamer);z-index:60}
+
+/* ---------- Hero ---------- */
+.ap-hero{max-width:1180px;margin:0 auto;padding:56px 16px 40px;position:relative}
+.ap-hero .badges{display:flex;flex-wrap:wrap;gap:var(--s2);margin-bottom:var(--s6)}
+.ap-hero h1{font:700 clamp(38px,7vw,76px)/1.04 var(--f-display);letter-spacing:-.025em;margin:0;max-width:16ch;text-wrap:balance;
+  background:var(--g-gamer);-webkit-background-clip:text;background-clip:text;color:transparent}
+.ap-hero .sub{font:400 clamp(17px,2vw,20px)/1.6 var(--f-body);color:var(--text-secondary);max-width:60ch;margin:var(--s6) 0 0}
+.ap-meta{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:var(--s3);margin-top:var(--s8)}
+.ap-meta div{padding:16px 18px;border-radius:var(--r-md)}
+.ap-meta small{display:block;font:600 11px/14px var(--f-heading);letter-spacing:.14em;text-transform:uppercase;color:var(--text-muted)}
+.ap-meta b{display:block;font:600 16px/22px var(--f-heading);margin-top:4px}
+.ap-hero .kx-rule{margin-top:var(--s12);width:100%;height:1px;opacity:.8}
+
+/* ---------- Layout com sumário ---------- */
+.ap-shell{max-width:1180px;margin:0 auto;padding:0 16px 48px;display:grid;grid-template-columns:260px minmax(0,1fr);gap:48px;align-items:start}
+.ap-toc{position:sticky;top:20px;max-height:calc(100vh - 40px);overflow:auto;padding:20px 12px 20px 16px;border-radius:var(--r-lg);scrollbar-width:thin}
+.ap-toc .t-overline{color:var(--text-muted);font-size:11px;display:block;margin:0 0 12px 8px}
+.ap-toc a{display:flex;gap:10px;align-items:baseline;color:var(--text-secondary);text-decoration:none;font:500 14px/1.35 var(--f-body);
+  padding:7px 10px;border-radius:10px;border-left:2px solid transparent}
+.ap-toc a span{font:500 11px/1 var(--f-code);color:var(--text-muted);min-width:2ch}
+.ap-toc a:hover{background:var(--glass-tint);color:var(--text-primary)}
+.ap-toc a.on{color:var(--text-primary);background:var(--glass-tint);border-left-color:var(--brand-secondary)}
+.ap-toc details summary{list-style:none;cursor:pointer}
+.ap-toc details summary::-webkit-details-marker{display:none}
+main.ap{min-width:0;max-width:78ch}
+
+/* ---------- Capítulos ---------- */
+.ap-cap{padding-top:var(--s12);margin-bottom:var(--s8)}
+.ap-cap > header{margin-bottom:var(--s6)}
+.ap-cap > header .kx-eyebrow{margin-bottom:var(--s3)}
+.ap-cap > header h2{font:600 clamp(26px,3.6vw,36px)/1.2 var(--f-display);letter-spacing:-.01em;margin:0 0 var(--s3);text-wrap:balance}
+.ap-cap > header p.lead{margin:var(--s3) 0 0;color:var(--text-secondary);font-size:18px}
+.ap-cap h3{font:600 clamp(20px,2.6vw,25px)/1.3 var(--f-heading);margin:var(--s12) 0 var(--s3);text-wrap:balance}
+.ap-cap h4{font:600 17px/1.4 var(--f-heading);color:var(--brand-tertiary);margin:var(--s8) 0 var(--s2)}
+.ap-cap p{margin:0 0 var(--s4)}
+.ap-cap ul,.ap-cap ol{margin:0 0 var(--s4);padding-left:22px}
+.ap-cap li{margin:6px 0}
+.ap-cap li::marker{color:var(--brand-secondary)}
+.ap-cap .alert,.ap-cap .callout{margin:var(--s6) 0}
+.ap-part{margin:var(--s16) 0 0;padding:32px 32px;border-radius:var(--r-card);
+  background:linear-gradient(110deg,rgba(123,46,255,.26),rgba(255,45,170,.14) 60%,rgba(0,217,255,.08)),var(--bg-surface);
+  border:1px solid var(--glass-stroke)}
+.ap-part .t-overline{color:var(--brand-secondary)}
+.ap-part h2{font:700 clamp(26px,4vw,40px)/1.12 var(--f-display);margin:8px 0 0}
+.ap-part p{margin:10px 0 0;color:var(--text-secondary)}
+
+/* ---------- Tabelas ---------- */
+.tw{overflow-x:auto;margin:var(--s6) 0;border-radius:var(--r-md);border:1px solid var(--glass-stroke);background:var(--glass-fill)}
+.tw table{border-collapse:collapse;width:100%;font-size:15px;line-height:1.5;min-width:30rem}
+.tw th{text-align:left;font:600 12px/16px var(--f-heading);letter-spacing:.1em;text-transform:uppercase;color:var(--text-secondary);
+  padding:12px 14px;border-bottom:1px solid var(--glass-stroke);background:var(--glass-tint);white-space:nowrap}
+.tw td{padding:11px 14px;border-bottom:1px solid color-mix(in srgb,var(--text-primary) 8%,transparent);vertical-align:top}
+.tw tr:last-child td{border-bottom:0}
+.tw td:first-child{font-weight:600}
+
+/* ---------- Código ---------- */
+.cb{margin:var(--s6) 0;border-radius:var(--r-md);overflow:hidden;border:1px solid var(--glass-stroke);background:var(--code-bg)}
+.cb .bar{display:flex;justify-content:space-between;align-items:center;padding:8px 10px 8px 16px;border-bottom:1px solid var(--glass-stroke);background:var(--glass-fill)}
+.cb .lang{font:500 12px/16px var(--f-code);color:var(--text-muted)}
+.cb[data-lang="Java"] .lang{color:var(--brand-secondary)}
+.cb .copy{font:600 12px/16px var(--f-heading);color:var(--text-secondary);background:transparent;border:1px solid var(--glass-stroke);border-radius:var(--r-pill);padding:5px 12px;cursor:pointer}
+.cb .copy:hover,.cb .copy.ok{color:var(--brand-tertiary);border-color:var(--brand-tertiary)}
+.cb pre{border:0;border-radius:0;background:transparent;padding:16px 18px;margin:0;font:400 13.5px/1.62 var(--f-code)}
+
+/* ---------- Cartões e grades ---------- */
+.grid2{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:var(--s4);margin:var(--s6) 0}
+.card{padding:22px 24px;border-radius:var(--r-lg)}
+.card .t-overline{color:var(--brand-tertiary);font-size:11px}
+.card h4{margin:6px 0 6px;color:var(--text-primary)}
+.card p{margin:0;color:var(--text-secondary);font-size:15px;line-height:1.55}
+.card .big{font:700 34px/1 var(--f-display);background:var(--g-neon);-webkit-background-clip:text;background-clip:text;color:transparent}
+
+/* ---------- Figuras SVG ---------- */
+figure.fig{margin:var(--s8) 0;padding:20px;border-radius:var(--r-lg)}
+figure.fig svg{width:100%;height:auto;display:block}
+figure.fig figcaption{font:500 13px/18px var(--f-body);color:var(--text-muted);margin-top:12px;text-align:center}
+.fig .s-box{fill:var(--bg-surface);stroke:var(--glass-stroke)}
+.fig .s-a{stroke:var(--brand-primary)} .fig .s-b{stroke:var(--brand-secondary)} .fig .s-c{stroke:var(--brand-tertiary)}
+.fig .f-a{fill:var(--brand-primary)} .fig .f-b{fill:var(--brand-secondary)} .fig .f-c{fill:var(--brand-tertiary)}
+.fig text{fill:var(--text-primary);font:600 13px var(--f-heading)}
+.fig text.m{fill:var(--text-secondary);font:400 12px var(--f-body)}
+.fig .ln{stroke:var(--text-muted);fill:none;stroke-width:1.6}
+
+/* ---------- Exercícios ---------- */
+.ex{margin:10px 0;border-radius:var(--r-md);border:1px solid var(--glass-stroke);background:var(--glass-fill);overflow:hidden}
+.ex summary{cursor:pointer;list-style:none;padding:14px 18px;display:flex;gap:12px;align-items:flex-start;font-weight:500}
+.ex summary::-webkit-details-marker{display:none}
+.ex summary:hover{background:var(--glass-tint)}
+.ex summary .n{flex:none;font:600 11px/1 var(--f-heading);color:#fff;background:var(--g-neon);border-radius:var(--r-pill);padding:6px 9px;margin-top:2px}
+.ex summary .lv{margin-left:auto;flex:none;font:500 11px/1 var(--f-code);color:var(--text-muted);padding-top:6px}
+.ex .ans{padding:4px 18px 18px;border-top:1px dashed var(--glass-stroke);color:var(--text-secondary)}
+.ex .ans .t-overline{display:block;color:var(--fb-success);font-size:11px;margin:12px 0 6px}
+.ex .ans pre{margin:8px 0}
+
+/* ---------- Quiz ---------- */
+.quiz-q{padding:22px 24px;border-radius:var(--r-lg);margin:var(--s4) 0}
+.quiz-q .enun{font:600 17px/1.45 var(--f-heading);margin:0 0 14px}
+.quiz-q .enun span{color:var(--brand-secondary);margin-right:6px}
+.quiz-q button{display:block;width:100%;text-align:left;margin:8px 0;padding:12px 16px;border-radius:14px;cursor:pointer;
+  font:400 15px/1.45 var(--f-body);color:var(--text-primary);background:var(--glass-fill);border:1px solid var(--glass-stroke)}
+.quiz-q button:hover:not(:disabled){border-color:var(--brand-tertiary)}
+.quiz-q button:disabled{cursor:default}
+.quiz-q button.ok{border-color:var(--fb-success);background:color-mix(in srgb,var(--fb-success) 16%,transparent)}
+.quiz-q button.no{border-color:var(--fb-error);background:color-mix(in srgb,var(--fb-error) 14%,transparent)}
+.quiz-q .fb{display:none;margin:10px 0 0;font-size:15px;color:var(--text-secondary)}
+.quiz-q .fb.show{display:block}
+.quiz-score{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;padding:18px 24px;border-radius:var(--r-lg);margin-top:var(--s4)}
+.quiz-score b{font:700 28px/1 var(--f-display)}
+
+/* ---------- Checklist ---------- */
+ul.check{list-style:none;padding:0}
+ul.check li{margin:4px 0}
+ul.check label{display:flex;gap:12px;align-items:flex-start;cursor:pointer;padding:8px 12px;border-radius:12px}
+ul.check label:hover{background:var(--glass-tint)}
+ul.check input{appearance:none;flex:none;width:18px;height:18px;margin-top:4px;border:1.5px solid var(--brand-primary);border-radius:6px;cursor:pointer}
+ul.check input:checked{background:var(--g-neon);border-color:transparent}
+ul.check input:checked + span{color:var(--text-muted);text-decoration:line-through}
+
+/* ---------- Glossário & Referências ---------- */
+dl.glos{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:var(--s3);margin:var(--s6) 0}
+dl.glos div{padding:16px 18px;border-radius:var(--r-md)}
+dl.glos dt{font:600 16px/1.3 var(--f-heading);color:var(--brand-tertiary);margin-bottom:4px}
+dl.glos dd{margin:0;font-size:15px;line-height:1.5;color:var(--text-secondary)}
+ol.refs{padding-left:0;list-style:none;counter-reset:r}
+ol.refs li{counter-increment:r;position:relative;padding:12px 0 12px 46px;border-bottom:1px solid color-mix(in srgb,var(--text-primary) 8%,transparent);font-size:15px;line-height:1.6}
+ol.refs li::before{content:counter(r,decimal-leading-zero);position:absolute;left:0;top:13px;font:600 12px/1 var(--f-code);color:var(--brand-secondary)}
+ol.refs li a{word-break:break-word}
+.refs-note{font-size:14px;color:var(--text-muted)}
+
+/* ---------- Diversos ---------- */
+.pill{display:inline-block;font:600 12px/16px var(--f-heading);padding:3px 10px;border-radius:var(--r-pill);background:var(--glass-tint);color:var(--support-lilac)}
+hr.sep{border:0;height:1px;background:var(--glass-stroke);margin:var(--s12) 0 0}
+.next{margin-top:var(--s12)}
+
+/* ---------- Responsivo ---------- */
+@media (max-width:960px){
+  .ap-shell{grid-template-columns:1fr;gap:16px}
+  .ap-toc{position:static;max-height:none}
+  main.ap{max-width:100%}
+}
+@media (max-width:560px){
+  body{font-size:16px}
+  .ap-part{padding:24px 20px}
+  .callout .in{padding:20px 20px 20px 0}
+}
+@media print{
+  .kx-theme,.ap-toc,#kx-prog,.cb .copy{display:none!important}
+  .ap-shell{display:block}
+  .ex .ans{display:block}
+}
+#sim input{display:block;width:100%;margin-top:6px;padding:10px 12px;border-radius:12px;border:1px solid var(--glass-stroke);background:var(--code-bg);color:var(--text-primary);font:500 16px/1.2 var(--f-code)}
+#sim .tw{margin:16px 0 12px}
+.kx-bar{max-width:1180px;margin:0 auto;padding:20px 16px 0;display:flex;align-items:center;gap:12px;flex-wrap:wrap;position:relative;z-index:5}
+.kx-bar b{font:600 14px/18px var(--f-heading);color:var(--text-primary)}
+.kx-bar small{display:block;font:500 12px/16px var(--f-body);color:var(--text-muted)}
+.kx-bar a{margin-left:auto;font:600 14px/20px var(--f-heading);color:var(--brand-tertiary);text-decoration:none}
+.kx-sig{max-width:1180px;margin:48px auto 96px;padding:0 16px}
+.kx-sig div{display:flex;align-items:center;gap:12px;padding:20px 24px;border-radius:28px;background:var(--glass-fill);border:1px solid var(--glass-stroke)}
+.kx-sig b{font:600 15px/20px var(--f-heading);color:var(--text-primary);display:block}
+.kx-sig small{font:500 12px/16px var(--f-body);color:var(--text-muted)}
+#dec input{display:block;width:100%;margin-top:6px;padding:14px 16px;border-radius:14px;border:1px solid var(--glass-stroke);background:var(--code-bg);color:var(--text-primary);font:500 17px/1.2 var(--f-body)}
+#dec-filters .btn.on{border-color:var(--brand-secondary);box-shadow:var(--glow-pink)}
+#dec .tw{max-height:520px;overflow:auto}
+/* ---------- Extras da apostila Collections & Generics ---------- */
+.proj{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:var(--s4);margin:var(--s6) 0}
+.proj .card{display:flex;flex-direction:column;gap:6px}
+.proj .card code{font-size:13px}
+.proj .card a{margin-top:auto;font:600 14px/20px var(--f-heading);color:var(--brand-tertiary);text-decoration:none;padding-top:8px}
+.proj .card a:hover{text-decoration:underline}
+.cmp td code{white-space:nowrap}
+.quiz-cta{display:flex;flex-wrap:wrap;gap:12px;align-items:center;justify-content:space-between;padding:20px 24px;border-radius:var(--r-lg);margin:var(--s6) 0}
+.quiz-cta p{margin:0}
+.fig .s-dash{stroke-dasharray:5 4}
+.fig text.c{font:500 12px var(--f-code);fill:var(--text-primary)}
+.fig text.s{font:600 11px var(--f-heading);letter-spacing:.08em}
+.fig .bad{fill:var(--fb-error)} .fig .s-bad{stroke:var(--fb-error)}
+.fig .good{fill:var(--fb-success)} .fig .s-good{stroke:var(--fb-success)}
+.fig .tint-a{fill:color-mix(in srgb,var(--brand-primary) 18%,transparent)}
+.fig .tint-b{fill:color-mix(in srgb,var(--brand-secondary) 16%,transparent)}
+.fig .tint-c{fill:color-mix(in srgb,var(--brand-tertiary) 16%,transparent)}
+.ex summary .tx{flex:1 1 auto;min-width:0;overflow-wrap:anywhere}
+@media (max-width:560px){.ex summary{flex-wrap:wrap}.ex summary .lv{margin-left:0;padding-top:0;flex-basis:100%;padding-left:40px}}
+ul.check label span{min-width:0;overflow-wrap:anywhere}
+.ap-cap code{overflow-wrap:anywhere}
+
+</style></head><body><div id="kx-prog" aria-hidden="true"></div><div class="kx-bar"><img class="kx-logo" src="data:image/webp;base64,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" width="40" height="40" alt="Logo Kalixto"><div><b>Dev-Kalixto</b><small>Kalixto by Wallace Toledo</small></div><a href="../">← Todos os materiais</a></div><header class="ap-hero">
+  <div class="badges"><span class="badge badge--tech"><i>&lt;/&gt;</i>Curso Java</span><span class="badge badge--aula"><i>●</i>Java SE · Orientação a Objetos</span><span class="badge badge--ia"><i>✦</i>Intermediário</span></div>
+  <h1>Collections &amp; Generics em Java</h1>
+  <p class="sub">List, Set, Map e Queue para guardar e consultar grupos de objetos, e Generics para fazer isso com segurança de tipos. Com ilustrações, exemplos executados de verdade, projetos reais que usam cada ideia, exercícios, quiz e referências.</p>
+  <div class="ap-meta">
+    <div class="glass-s"><small>Nível</small><b>Intermediário</b></div>
+    <div class="glass-s"><small>Pré-requisitos</small><b>Classes, objetos, laços</b></div>
+    <div class="glass-s"><small>Tempo de estudo</small><b>8 a 12 horas</b></div>
+    <div class="glass-s"><small>Versão do Java</small><b>Java 17+ (testado no 21)</b></div>
+  </div>
+  <hr class="kx-rule">
+</header>
+
+<div class="ap-shell">
+<nav class="ap-toc glass-s" aria-label="Sumário"><details open><summary><span class="t-overline">Nesta apostila</span></summary><div id="toc"></div></details></nav>
+<main class="ap">
+
+<div class="ap-part" style="margin-top:0"><span class="t-overline">Parte I</span><h2>Fundamentos</h2><p>Por que coleções existem, como a família se organiza e como escolher a estrutura certa.</p></div>
+
+<section class="ap-cap" id="identidade" data-toc="Cartão da apostila">
+  <header><div class="kx-eyebrow"><span class="num">00</span><span class="t-overline">Abertura</span></div><h2>Cartão de identidade da apostila</h2></header>
+  <div class="tw"><table><thead><tr><th>Campo</th><th>Conteúdo</th></tr></thead><tbody>
+    <tr><td>🎯 Objetivo central</td><td>Escolher e usar a estrutura de dados certa para cada problema, com tipos verificados pelo compilador</td></tr>
+    <tr><td>🧩 Competência desenvolvida</td><td>Modelar grupos de objetos com <code>List</code>, <code>Set</code>, <code>Map</code> e <code>Queue</code>, e escrever código reutilizável com <code>&lt;T&gt;</code></td></tr>
+    <tr><td>🛠️ Ferramentas</td><td>JDK 17 ou mais novo, qualquer IDE (IntelliJ, VS Code, Eclipse) ou só o terminal: <code>java Main.java</code></td></tr>
+    <tr><td>📦 Pacote principal</td><td><code>java.util</code></td></tr>
+    <tr><td>🎞️ Material de origem</td><td>Aula “Collections e Generics em Java” (slides), expandida com teoria, ilustrações e prática</td></tr>
+    <tr><td>✅ Critério de domínio</td><td>Resolver o projeto “Studio de Dança” e acertar 80% do quiz sem consultar</td></tr>
+  </tbody></table></div>
+  <h3>Como estudar esta apostila</h3>
+  <div class="grid2">
+    <div class="card glass-s"><span class="t-overline">1 · Leia</span><h4>Uma estrutura por vez</h4><p>List, depois Set, depois Map. Cada uma resolve um problema diferente; não tente decorar tudo de uma vez.</p></div>
+    <div class="card glass-s"><span class="t-overline">2 · Rode</span><h4>Copie e execute</h4><p>Todo exemplo marcado <code>Main.java</code> roda com <code>java Main.java</code>. A saída mostrada aqui é a saída real.</p></div>
+    <div class="card glass-s"><span class="t-overline">3 · Mude</span><h4>Quebre de propósito</h4><p>Troque <code>HashSet</code> por <code>TreeSet</code>, tire o <code>&lt;String&gt;</code>, veja o que acontece. Erro é aula.</p></div>
+    <div class="card glass-s"><span class="t-overline">4 · Confira</span><h4>Exercícios e quiz</h4><p>Faça os exercícios sem abrir a resposta e feche com o quiz de fixação.</p></div>
+  </div>
+</section>
+
+<section class="ap-cap" id="objetivos" data-toc="Objetivos">
+  <header><div class="kx-eyebrow"><span class="num">01</span><span class="t-overline">Metas</span></div><h2>Objetivos de aprendizagem</h2><p class="lead">Ao final, você será capaz de:</p></header>
+  <ol>
+    <li><strong>Explicar</strong> a diferença entre array e coleção, e por que coleções existem.</li>
+    <li><strong>Desenhar de memória</strong> a hierarquia <code>Collection</code> → <code>List</code> / <code>Set</code> / <code>Queue</code>, e explicar por que <code>Map</code> fica de fora.</li>
+    <li><strong>Escolher</strong> entre <code>ArrayList</code>, <code>HashSet</code>, <code>LinkedHashSet</code>, <code>TreeSet</code>, <code>HashMap</code>, <code>TreeMap</code> e <code>ArrayDeque</code> pelo problema, não pelo hábito.</li>
+    <li><strong>Percorrer</strong> coleções com enhanced-for, <code>forEach</code>, índice, <code>Iterator</code> e <code>entrySet()</code>.</li>
+    <li><strong>Ordenar</strong> objetos com <code>Comparable</code> e <code>Comparator.comparing()</code>.</li>
+    <li><strong>Implementar</strong> <code>equals()</code> e <code>hashCode()</code> coerentes (ou usar <code>record</code>) para que <code>HashSet</code> e <code>HashMap</code> funcionem.</li>
+    <li><strong>Criar</strong> classes e métodos genéricos, com e sem limites (<code>&lt;T extends ...&gt;</code>).</li>
+    <li><strong>Usar wildcards</strong> <code>? extends</code> e <code>? super</code> aplicando a regra PECS.</li>
+    <li><strong>Reconhecer</strong> o apagamento de tipos (<em>type erasure</em>) e as limitações que ele impõe.</li>
+    <li><strong>Evitar</strong> os erros clássicos: <code>ConcurrentModificationException</code>, <code>UnsupportedOperationException</code> e coleções sem tipo.</li>
+  </ol>
+</section>
+
+<section class="ap-cap" id="motivacao" data-toc="Por que isso existe?">
+  <header><div class="kx-eyebrow"><span class="num">02</span><span class="t-overline">Por quê</span></div><h2>Por que Collections e Generics existem?</h2></header>
+  <h3>O problema real</h3>
+  <p>Quase todo software lida com <strong>grupos de coisas</strong>: os alunos de uma turma, os itens de um carrinho, os e-mails já cadastrados, os pedidos esperando na cozinha, o estoque de cada produto. O array resolve parte disso, mas tem um defeito de nascença: <strong>o tamanho é fixo</strong>. Se você criou espaço para 30 alunos e chegou o 31º, precisa criar outro array maior e copiar tudo à mão.</p>
+  <p>Além do tamanho, cada problema pede uma operação diferente: às vezes você quer <em>manter a ordem</em>, às vezes <em>proibir repetidos</em>, às vezes <em>achar algo pela chave</em>, às vezes <em>atender por ordem de chegada</em>. Escrever essas estruturas do zero em cada projeto seria caro e cheio de bugs.</p>
+  <h3>Um pouco de história</h3>
+  <div class="tw"><table><thead><tr><th>Ano</th><th>Versão</th><th>O que mudou</th></tr></thead><tbody>
+    <tr><td>1996</td><td>JDK 1.0</td><td>Só <code>Vector</code>, <code>Hashtable</code> e <code>Stack</code>, sem interfaces comuns entre eles.</td></tr>
+    <tr><td>1998</td><td>JDK 1.2</td><td>Nasce o <strong>Java Collections Framework</strong>, projetado por Joshua Bloch: interfaces (<code>Collection</code>, <code>List</code>, <code>Set</code>, <code>Map</code>) + implementações + algoritmos (<code>Collections.sort</code>).</td></tr>
+    <tr><td>2004</td><td>J2SE 5.0</td><td>Chegam os <strong>Generics</strong> (<code>List&lt;String&gt;</code>), o enhanced-for e o autoboxing. Fim dos casts manuais.</td></tr>
+    <tr><td>2011</td><td>Java 7</td><td>Operador diamante <code>&lt;&gt;</code>: <code>new ArrayList&lt;&gt;()</code>.</td></tr>
+    <tr><td>2014</td><td>Java 8</td><td>Lambdas, <code>forEach</code>, <code>removeIf</code>, <code>Comparator.comparing</code>, <code>Map.merge</code> e Streams.</td></tr>
+    <tr><td>2017</td><td>Java 9</td><td>Fábricas imutáveis <code>List.of</code>, <code>Set.of</code>, <code>Map.of</code> (JEP 269).</td></tr>
+    <tr><td>2023</td><td>Java 21</td><td><strong>Sequenced Collections</strong> (JEP 431): <code>getFirst()</code>, <code>getLast()</code>, <code>reversed()</code>.</td></tr>
+  </tbody></table></div>
+  <div class="callout glass-s"><div class="in"><span class="t-overline">Ideia central</span><p class="q">Collections dão as estruturas prontas; Generics garantem, já na compilação, que só entra nelas o tipo certo.</p></div></div>
+  <h3>Analogias do dia a dia</h3>
+  <div class="grid2">
+    <div class="card glass-s"><span class="t-overline">List</span><h4>A chamada da turma</h4><p>Ordem importa, cada aluno tem uma posição, e dois alunos podem ter o mesmo nome.</p></div>
+    <div class="card glass-s"><span class="t-overline">Set</span><h4>A lista de convidados</h4><p>Cada pessoa aparece uma vez só. Tentar incluir de novo não muda nada.</p></div>
+    <div class="card glass-s"><span class="t-overline">Map</span><h4>O dicionário</h4><p>Você procura pela palavra (chave) e encontra o significado (valor). Palavras não se repetem.</p></div>
+    <div class="card glass-s"><span class="t-overline">Queue</span><h4>A fila do caixa</h4><p>Quem chega primeiro é atendido primeiro (FIFO). Com <code>Deque</code>, vira também pilha de pratos (LIFO).</p></div>
+  </div>
+</section>
+
+<section class="ap-cap" id="arrays" data-toc="Arrays × Collections">
+  <header><div class="kx-eyebrow"><span class="num">03</span><span class="t-overline">Ponto de partida</span></div><h2>Arrays × Collections</h2><p class="lead">O array é a fundação; a coleção é o prédio pronto em cima dela.</p></header>
+  <figure class="fig glass-s">
+    <svg viewBox="0 0 720 250" role="img" aria-label="Array de tamanho fixo comparado a ArrayList que cresce">
+      <text x="20" y="28" class="s f-b">ARRAY · TAMANHO FIXO</text>
+      <text x="20" y="50" class="c">int[] notas = new int[4];</text>
+      <g>
+        <rect x="20" y="64" width="70" height="44" rx="8" class="s-box s-b" stroke-width="1.6"/><text x="55" y="91" text-anchor="middle">8</text>
+        <rect x="96" y="64" width="70" height="44" rx="8" class="s-box s-b" stroke-width="1.6"/><text x="131" y="91" text-anchor="middle">10</text>
+        <rect x="172" y="64" width="70" height="44" rx="8" class="s-box s-b" stroke-width="1.6"/><text x="207" y="91" text-anchor="middle">7</text>
+        <rect x="248" y="64" width="70" height="44" rx="8" class="s-box s-b" stroke-width="1.6"/><text x="283" y="91" text-anchor="middle">9</text>
+        <rect x="324" y="64" width="70" height="44" rx="8" fill="none" class="s-bad s-dash" stroke-width="1.6"/><text x="359" y="91" text-anchor="middle" class="bad">✕</text>
+        <text x="410" y="84" class="m">5ª nota? Não cabe:</text><text x="410" y="102" class="m">ArrayIndexOutOfBoundsException</text>
+      </g>
+      <text x="20" y="152" class="s f-c">ARRAYLIST · CRESCE SOZINHO</text>
+      <text x="20" y="174" class="c">List&lt;Integer&gt; notas = new ArrayList&lt;&gt;();</text>
+      <g>
+        <rect x="20" y="188" width="70" height="44" rx="8" class="s-box s-c" stroke-width="1.6"/><text x="55" y="215" text-anchor="middle">8</text>
+        <rect x="96" y="188" width="70" height="44" rx="8" class="s-box s-c" stroke-width="1.6"/><text x="131" y="215" text-anchor="middle">10</text>
+        <rect x="172" y="188" width="70" height="44" rx="8" class="s-box s-c" stroke-width="1.6"/><text x="207" y="215" text-anchor="middle">7</text>
+        <rect x="248" y="188" width="70" height="44" rx="8" class="s-box s-c" stroke-width="1.6"/><text x="283" y="215" text-anchor="middle">9</text>
+        <rect x="324" y="188" width="70" height="44" rx="8" class="tint-c s-c" stroke-width="1.6"/><text x="359" y="215" text-anchor="middle">6</text>
+        <rect x="400" y="188" width="70" height="44" rx="8" fill="none" class="s-c s-dash" stroke-width="1.2"/><text x="435" y="215" text-anchor="middle" class="m">…</text>
+        <text x="490" y="208" class="m">add(6) → a lista aumenta</text><text x="490" y="226" class="m">a capacidade internamente</text>
+      </g>
+    </svg>
+    <figcaption>Figura 1 — O array tem tamanho definido na criação; a <code>ArrayList</code> usa um array por dentro e o troca por um maior quando enche.</figcaption>
+  </figure>
+  <div class="tw"><table><thead><tr><th>Critério</th><th>Array</th><th>Collection</th></tr></thead><tbody>
+    <tr><td>Tamanho</td><td>Fixo na criação</td><td>Cresce e diminui</td></tr>
+    <tr><td>Tipos primitivos</td><td>Aceita <code>int[]</code></td><td>Só objetos: <code>List&lt;Integer&gt;</code> (autoboxing)</td></tr>
+    <tr><td>Operações prontas</td><td>Quase nenhuma (<code>Arrays.sort</code>, <code>Arrays.toString</code>)</td><td><code>add</code>, <code>remove</code>, <code>contains</code>, <code>sort</code>, <code>removeIf</code>…</td></tr>
+    <tr><td>Regras de negócio</td><td>Você implementa</td><td>Prontas: sem duplicatas (<code>Set</code>), por chave (<code>Map</code>), FIFO (<code>Queue</code>)</td></tr>
+    <tr><td>Quando usar</td><td>Tamanho conhecido, desempenho extremo, primitivos</td><td>Quase todo o resto</td></tr>
+  </tbody></table></div>
+  <h3>Programe para a interface</h3>
+  <p>Repare no lado esquerdo da declaração: <code>List&lt;String&gt; nomes = new ArrayList&lt;&gt;();</code>. A variável é do tipo da <strong>interface</strong> (<code>List</code>), e só o <code>new</code> escolhe a <strong>implementação</strong> (<code>ArrayList</code>). Assim, se amanhã você precisar trocar por <code>LinkedList</code>, muda uma palavra e o resto do código continua igual.</p>
+  <div class="cb" data-lang="Java"><div class="bar"><span class="lang">Main.java</span><button class="copy" type="button">copiar</button></div><pre>import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
+public class Main {
+    public static void main(String[] args) {
+        // Array: tamanho fixo
+        String[] fixo = new String[2];
+        fixo[0] = &quot;Ana&quot;;
+        fixo[1] = &quot;Bruno&quot;;
+        System.out.println(&quot;Array: &quot; + Arrays.toString(fixo));
+
+        // Coleção: cresce conforme a necessidade
+        List&lt;String&gt; nomes = new ArrayList&lt;&gt;();
+        nomes.add(&quot;Ana&quot;);
+        nomes.add(&quot;Bruno&quot;);
+        nomes.add(&quot;Carla&quot;);   // sem precisar redimensionar nada
+        System.out.println(&quot;List: &quot; + nomes + &quot; (tamanho &quot; + nomes.size() + &quot;)&quot;);
+    }
+}
+  </pre></div><div class="cb" data-lang="Saída"><div class="bar"><span class="lang">Saída no console</span><button class="copy" type="button">copiar</button></div><pre>Array: [Ana, Bruno]
+List: [Ana, Bruno, Carla] (tamanho 3)</pre></div>
+</section>
+
+<section class="ap-cap" id="hierarquia" data-toc="Hierarquia essencial">
+  <header><div class="kx-eyebrow"><span class="num">04</span><span class="t-overline">Mapa da família</span></div><h2>Hierarquia essencial</h2><p class="lead">Interfaces definem o “contrato”; classes concretas entregam a implementação.</p></header>
+  <figure class="fig glass-s">
+    <svg viewBox="0 0 860 380" role="img" aria-label="Hierarquia do Java Collections Framework">
+      <g class="ln">
+        <path d="M270 58 V90"/>
+        <path d="M270 128 V145 H110 V170"/><path d="M270 145 H320 V170"/><path d="M270 145 H520 V170"/>
+        <path d="M110 208 V225 H55 V250"/><path d="M110 225 H165 V250"/>
+        <path d="M320 208 V225 H270 V250"/><path d="M320 225 H380 V250"/>
+        <path d="M270 288 V310"/>
+        <path d="M520 208 V225 H480 V250"/><path d="M520 225 H590 V250"/>
+        <path d="M770 128 V170"/><path d="M770 208 V230"/><path d="M770 268 V290"/>
+      </g>
+      <rect x="200" y="20" width="140" height="38" rx="10" class="tint-a s-a" stroke-width="1.6"/><text x="270" y="44" text-anchor="middle">Iterable&lt;E&gt;</text>
+      <rect x="190" y="90" width="160" height="38" rx="10" class="tint-a s-a" stroke-width="1.6"/><text x="270" y="114" text-anchor="middle">Collection&lt;E&gt;</text>
+      <rect x="50" y="170" width="120" height="38" rx="10" class="tint-a s-a" stroke-width="1.6"/><text x="110" y="194" text-anchor="middle">List&lt;E&gt;</text>
+      <rect x="260" y="170" width="120" height="38" rx="10" class="tint-a s-a" stroke-width="1.6"/><text x="320" y="194" text-anchor="middle">Set&lt;E&gt;</text>
+      <rect x="440" y="170" width="160" height="38" rx="10" class="tint-a s-a" stroke-width="1.6"/><text x="520" y="194" text-anchor="middle">Queue / Deque</text>
+      <rect x="5" y="250" width="100" height="38" rx="10" class="tint-c s-c" stroke-width="1.6"/><text x="55" y="274" text-anchor="middle">ArrayList</text>
+      <rect x="115" y="250" width="100" height="38" rx="10" class="tint-c s-c" stroke-width="1.6"/><text x="165" y="274" text-anchor="middle">LinkedList</text>
+      <rect x="225" y="250" width="90" height="38" rx="10" class="tint-c s-c" stroke-width="1.6"/><text x="270" y="274" text-anchor="middle">HashSet</text>
+      <rect x="330" y="250" width="100" height="38" rx="10" class="tint-c s-c" stroke-width="1.6"/><text x="380" y="274" text-anchor="middle">TreeSet</text>
+      <rect x="205" y="310" width="130" height="38" rx="10" class="tint-c s-c" stroke-width="1.6"/><text x="270" y="334" text-anchor="middle">LinkedHashSet</text>
+      <rect x="435" y="250" width="90" height="38" rx="10" class="tint-c s-c" stroke-width="1.6"/><text x="480" y="274" text-anchor="middle">ArrayDeque</text>
+      <rect x="535" y="250" width="110" height="38" rx="10" class="tint-c s-c" stroke-width="1.6"/><text x="590" y="274" text-anchor="middle">PriorityQueue</text>
+      <rect x="680" y="14" width="175" height="126" rx="12" fill="none" class="s-b s-dash" stroke-width="1.4"/>
+      <text x="767" y="44" text-anchor="middle" class="s f-b">FORA DE COLLECTION</text>
+      <rect x="700" y="90" width="140" height="38" rx="10" class="tint-b s-b" stroke-width="1.6"/><text x="770" y="114" text-anchor="middle">Map&lt;K,V&gt;</text>
+      <text x="767" y="66" text-anchor="middle" class="m">pares chave → valor</text>
+      <rect x="715" y="170" width="110" height="38" rx="10" class="tint-c s-c" stroke-width="1.6"/><text x="770" y="194" text-anchor="middle">HashMap</text>
+      <rect x="695" y="230" width="150" height="38" rx="10" class="tint-c s-c" stroke-width="1.6"/><text x="770" y="254" text-anchor="middle">LinkedHashMap</text>
+      <rect x="715" y="290" width="110" height="38" rx="10" class="tint-c s-c" stroke-width="1.6"/><text x="770" y="314" text-anchor="middle">TreeMap</text>
+      <rect x="20" y="350" width="14" height="14" rx="3" class="tint-a s-a"/><text x="42" y="362" class="m">interface</text>
+      <rect x="120" y="350" width="14" height="14" rx="3" class="tint-c s-c"/><text x="142" y="362" class="m">classe concreta</text>
+      <text x="470" y="320" class="m">LinkedList também implementa Deque</text>
+    </svg>
+    <figcaption>Figura 2 — Hierarquia simplificada do Java Collections Framework (pacote <code>java.util</code>). <code>LinkedHashSet</code> herda de <code>HashSet</code>, e <code>LinkedHashMap</code> herda de <code>HashMap</code>.</figcaption>
+  </figure>
+  <div class="tw"><table><thead><tr><th>Interface</th><th>Ordem</th><th>Duplicatas</th><th>Acesso típico</th></tr></thead><tbody>
+    <tr><td><code>List&lt;E&gt;</code></td><td>Sim, por posição (índice)</td><td>Permite</td><td><code>get(i)</code></td></tr>
+    <tr><td><code>Set&lt;E&gt;</code></td><td>Depende da implementação</td><td>Não permite</td><td><code>contains(x)</code></td></tr>
+    <tr><td><code>Queue&lt;E&gt;</code> / <code>Deque&lt;E&gt;</code></td><td>Ordem de chegada (ou prioridade)</td><td>Permite</td><td><code>poll()</code>, <code>peek()</code></td></tr>
+    <tr><td><code>Map&lt;K,V&gt;</code></td><td>Depende da implementação</td><td>Chaves não; valores sim</td><td><code>get(chave)</code></td></tr>
+  </tbody></table></div>
+  <div class="alert alert--warning"><span class="ico">!</span><div><p class="ttl">Pegadinha de prova</p><p><code>Map</code> <strong>não</strong> é uma <code>Collection</code>. Ele não tem <code>add()</code>, tem <code>put()</code>; e não se percorre um <code>Map</code> diretamente, e sim uma das suas “visões”: <code>keySet()</code>, <code>values()</code> ou <code>entrySet()</code>.</p></div></div>
+  <figure class="fig glass-s">
+    <svg viewBox="0 0 760 230" role="img" aria-label="Comparação visual entre List, Set e Map">
+      <text x="20" y="26" class="s f-a">LIST</text><text x="20" y="44" class="m">ordem + índice + repetidos</text>
+      <g>
+        <rect x="20" y="60" width="200" height="34" rx="8" class="s-box s-a"/><text x="34" y="82" class="c">0</text><text x="70" y="82">Ana</text>
+        <rect x="20" y="100" width="200" height="34" rx="8" class="s-box s-a"/><text x="34" y="122" class="c">1</text><text x="70" y="122">Bruno</text>
+        <rect x="20" y="140" width="200" height="34" rx="8" class="tint-a s-a"/><text x="34" y="162" class="c">2</text><text x="70" y="162">Ana</text><text x="150" y="162" class="m">repetido ok</text>
+      </g>
+      <text x="280" y="26" class="s f-b">SET</text><text x="280" y="44" class="m">sem repetidos</text>
+      <ellipse cx="380" cy="125" rx="100" ry="68" class="tint-b s-b" stroke-width="1.6"/>
+      <text x="345" y="110" text-anchor="middle">Ana</text><text x="410" y="135" text-anchor="middle">Bruno</text><text x="355" y="160" text-anchor="middle">Carla</text>
+      <text x="380" y="214" text-anchor="middle" class="m">add("Ana") de novo → false</text>
+      <text x="540" y="26" class="s f-c">MAP</text><text x="540" y="44" class="m">chave única → valor</text>
+      <g>
+        <rect x="540" y="60" width="90" height="34" rx="8" class="tint-c s-c"/><text x="585" y="82" text-anchor="middle">Mouse</text><path d="M632 77 H660" class="ln"/><rect x="662" y="60" width="70" height="34" rx="8" class="s-box s-c"/><text x="697" y="82" text-anchor="middle">12</text>
+        <rect x="540" y="100" width="90" height="34" rx="8" class="tint-c s-c"/><text x="585" y="122" text-anchor="middle">Teclado</text><path d="M632 117 H660" class="ln"/><rect x="662" y="100" width="70" height="34" rx="8" class="s-box s-c"/><text x="697" y="122" text-anchor="middle">5</text>
+        <rect x="540" y="140" width="90" height="34" rx="8" class="tint-c s-c"/><text x="585" y="162" text-anchor="middle">Monitor</text><path d="M632 157 H660" class="ln"/><rect x="662" y="140" width="70" height="34" rx="8" class="s-box s-c"/><text x="697" y="162" text-anchor="middle">5</text>
+        <text x="540" y="200" class="m">valores podem repetir; chaves não</text>
+      </g>
+    </svg>
+    <figcaption>Figura 3 — As três “personalidades” principais: List (gaveteiro numerado), Set (saco de itens únicos) e Map (dicionário).</figcaption>
+  </figure>
+</section>
+
+<div class="ap-part"><span class="t-overline">Parte II</span><h2>As coleções na prática</h2><p>List, Set, Map e Queue com exemplos completos, executados e explicados.</p></div>
+
+<section class="ap-cap" id="list" data-toc="List e ArrayList">
+  <header><div class="kx-eyebrow"><span class="num">05</span><span class="t-overline">List</span></div><h2>List e ArrayList</h2><p class="lead">Uma <code>List</code> mantém a ordem de inserção, aceita duplicatas e dá acesso por índice (começando em 0).</p></header>
+  <div class="tw"><table><thead><tr><th>Método</th><th>O que faz</th><th>Retorno</th></tr></thead><tbody>
+    <tr><td><code>add(e)</code></td><td>Adiciona no fim</td><td><code>true</code></td></tr>
+    <tr><td><code>add(i, e)</code></td><td>Insere na posição <code>i</code> e empurra o resto</td><td><code>void</code></td></tr>
+    <tr><td><code>get(i)</code></td><td>Lê a posição <code>i</code></td><td>o elemento</td></tr>
+    <tr><td><code>set(i, e)</code></td><td>Substitui a posição <code>i</code></td><td>o elemento antigo</td></tr>
+    <tr><td><code>remove(obj)</code></td><td>Remove a <strong>primeira</strong> ocorrência do objeto</td><td><code>boolean</code></td></tr>
+    <tr><td><code>remove(i)</code></td><td>Remove pela posição</td><td>o elemento removido</td></tr>
+    <tr><td><code>contains(obj)</code> / <code>indexOf(obj)</code></td><td>Procura usando <code>equals()</code></td><td><code>boolean</code> / índice ou −1</td></tr>
+    <tr><td><code>size()</code> / <code>isEmpty()</code></td><td>Tamanho / se está vazia</td><td><code>int</code> / <code>boolean</code></td></tr>
+  </tbody></table></div>
+  <div class="cb" data-lang="Java"><div class="bar"><span class="lang">Main.java</span><button class="copy" type="button">copiar</button></div><pre>import java.util.ArrayList;
+import java.util.List;
+
+public class Main {
+    public static void main(String[] args) {
+        List&lt;String&gt; alunos = new ArrayList&lt;&gt;();
+        alunos.add(&quot;Ana&quot;);
+        alunos.add(&quot;Bruno&quot;);
+        alunos.add(&quot;Ana&quot;);          // List aceita repetidos
+        alunos.set(1, &quot;Carla&quot;);     // troca &quot;Bruno&quot; por &quot;Carla&quot;
+        System.out.println(alunos.get(0));
+        System.out.println(alunos.contains(&quot;Carla&quot;));
+        System.out.println(alunos.size());
+        alunos.remove(&quot;Ana&quot;);       // remove só a PRIMEIRA &quot;Ana&quot;
+        System.out.println(alunos);
+    }
+}
+  </pre></div><div class="cb" data-lang="Saída"><div class="bar"><span class="lang">Saída no console</span><button class="copy" type="button">copiar</button></div><pre>Ana
+true
+3
+[Carla, Ana]</pre></div>
+  <h3>Lendo o exemplo linha a linha</h3>
+  <ol>
+    <li><code>List&lt;String&gt; alunos = new ArrayList&lt;&gt;();</code> — cria uma lista vazia que só aceita <code>String</code>. O <code>&lt;&gt;</code> vazio (diamante) deixa o compilador deduzir o tipo pelo lado esquerdo.</li>
+    <li>Depois dos três <code>add</code>, a lista é <code>[Ana, Bruno, Ana]</code>: a ordem é a de inserção e o repetido entrou.</li>
+    <li><code>set(1, "Carla")</code> troca a posição 1: <code>[Ana, Carla, Ana]</code>.</li>
+    <li><code>remove("Ana")</code> procura com <code>equals()</code> e remove só a primeira ocorrência: <code>[Carla, Ana]</code>.</li>
+  </ol>
+  <div class="alert alert--error"><span class="ico">!</span><div><p class="ttl">Cuidado com List&lt;Integer&gt;</p><p>Em <code>List&lt;Integer&gt; n</code>, <code>n.remove(1)</code> remove a <strong>posição</strong> 1, não o número 1. Para remover o valor, use <code>n.remove(Integer.valueOf(1))</code>.</p></div></div>
+  <h3>ArrayList × LinkedList</h3>
+  <p><code>ArrayList</code> guarda os elementos num array contíguo: ler <code>get(i)</code> é instantâneo, mas inserir no meio obriga a deslocar os vizinhos. <code>LinkedList</code> é uma lista duplamente encadeada: inserir nas pontas é barato, mas achar a posição <code>i</code> exige caminhar nó a nó. Na prática, <strong><code>ArrayList</code> é a escolha padrão</strong>; para fila ou pilha, prefira <code>ArrayDeque</code>.</p>
+</section>
+
+<section class="ap-cap" id="percorrer" data-toc="Percorrendo coleções">
+  <header><div class="kx-eyebrow"><span class="num">06</span><span class="t-overline">Iteração</span></div><h2>Percorrendo uma List</h2><p class="lead">Quatro jeitos, cada um com seu momento.</p></header>
+  <div class="cb" data-lang="Java"><div class="bar"><span class="lang">Main.java</span><button class="copy" type="button">copiar</button></div><pre>import java.util.Iterator;
+import java.util.List;
+
+public class Main {
+    public static void main(String[] args) {
+        List&lt;String&gt; nomes = List.of(&quot;Ana&quot;, &quot;Bruno&quot;, &quot;Carla&quot;);
+
+        // 1) enhanced-for: o mais legível quando você só precisa do elemento
+        for (String nome : nomes) {
+            System.out.println(nome);
+        }
+
+        // 2) forEach + method reference (Java 8+)
+        nomes.forEach(System.out::println);
+
+        // 3) índice: quando a POSIÇÃO importa
+        for (int i = 0; i &lt; nomes.size(); i++) {
+            System.out.println(i + &quot;: &quot; + nomes.get(i));
+        }
+
+        // 4) Iterator: controle total (é o que o enhanced-for usa por baixo)
+        Iterator&lt;String&gt; it = nomes.iterator();
+        while (it.hasNext()) {
+            System.out.println(&quot;-&gt; &quot; + it.next());
+        }
+    }
+}
+  </pre></div><div class="cb" data-lang="Saída"><div class="bar"><span class="lang">Saída no console</span><button class="copy" type="button">copiar</button></div><pre>Ana
+Bruno
+Carla
+Ana
+Bruno
+Carla
+0: Ana
+1: Bruno
+2: Carla
+-&gt; Ana
+-&gt; Bruno
+-&gt; Carla</pre></div>
+  <h3>Removendo enquanto percorre</h3>
+  <p>Chamar <code>lista.remove(x)</code> dentro de um enhanced-for quebra o <code>Iterator</code> escondido e lança <code>ConcurrentModificationException</code>. Há duas saídas seguras: <code>iterator.remove()</code> ou, mais simples, <code>removeIf</code>.</p>
+  <div class="cb" data-lang="Java"><div class="bar"><span class="lang">Main.java</span><button class="copy" type="button">copiar</button></div><pre>import java.util.ArrayList;
+import java.util.List;
+
+public class Main {
+    public static void main(String[] args) {
+        List&lt;Integer&gt; numeros = new ArrayList&lt;&gt;(List.of(1, 2, 3, 4, 5, 6));
+
+        try {
+            for (Integer n : numeros) {
+                if (n % 2 == 0) numeros.remove(n);   // ERRADO
+            }
+        } catch (java.util.ConcurrentModificationException e) {
+            System.out.println(&quot;Erro: &quot; + e.getClass().getSimpleName());
+        }
+
+        List&lt;Integer&gt; outros = new ArrayList&lt;&gt;(List.of(1, 2, 3, 4, 5, 6));
+        outros.removeIf(n -&gt; n % 2 == 0);           // CERTO
+        System.out.println(outros);
+    }
+}
+  </pre></div><div class="cb" data-lang="Saída"><div class="bar"><span class="lang">Saída no console</span><button class="copy" type="button">copiar</button></div><pre>Erro: ConcurrentModificationException
+[1, 3, 5]</pre></div>
+  <div class="alert alert--info"><span class="ico">i</span><div><p class="ttl">Por que <code>new ArrayList&lt;&gt;(List.of(...))</code>?</p><p><code>List.of()</code> cria uma lista <strong>imutável</strong>: <code>add</code>, <code>remove</code> e <code>removeIf</code> lançam <code>UnsupportedOperationException</code>. Para editar, copie para uma <code>ArrayList</code>.</p></div></div>
+</section>
+
+<section class="ap-cap" id="set" data-toc="Set: HashSet, LinkedHashSet, TreeSet">
+  <header><div class="kx-eyebrow"><span class="num">07</span><span class="t-overline">Set</span></div><h2>Set: elementos únicos</h2><p class="lead">Um <code>Set</code> não admite duplicatas. “Duplicata” é decidida por <code>equals()</code> e <code>hashCode()</code>.</p></header>
+  <div class="cb" data-lang="Java"><div class="bar"><span class="lang">Main.java</span><button class="copy" type="button">copiar</button></div><pre>import java.util.HashSet;
+import java.util.Set;
+
+public class Main {
+    public static void main(String[] args) {
+        Set&lt;String&gt; emails = new HashSet&lt;&gt;();
+        System.out.println(emails.add(&quot;ana@email.com&quot;));    // true: entrou
+        emails.add(&quot;bruno@email.com&quot;);
+        System.out.println(emails.add(&quot;ana@email.com&quot;));    // false: já existia
+
+        System.out.println(emails.size());
+        for (String email : emails) {
+            System.out.println(email);
+        }
+    }
+}
+  </pre></div><div class="cb" data-lang="Saída"><div class="bar"><span class="lang">Saída no console</span><button class="copy" type="button">copiar</button></div><pre>true
+false
+2
+ana@email.com
+bruno@email.com</pre></div>
+  <p>Repare que <code>add()</code> devolve <code>false</code> quando o elemento já existe. Isso é útil para validar cadastros: “se não entrou, é porque o e-mail já estava registrado”.</p>
+  <h3>Como o HashSet acha as coisas tão rápido</h3>
+  <figure class="fig glass-s">
+    <svg viewBox="0 0 720 260" role="img" aria-label="Funcionamento de hash: elemento, hashCode e balde">
+      <rect x="20" y="40" width="170" height="40" rx="10" class="tint-b s-b"/><text x="105" y="65" text-anchor="middle" class="c">"ana@email.com"</text>
+      <path d="M190 60 H250" class="ln"/><path d="M244 55 L252 60 L244 65" class="ln"/>
+      <rect x="252" y="40" width="150" height="40" rx="10" class="s-box s-a"/><text x="327" y="65" text-anchor="middle" class="c">hashCode()</text>
+      <path d="M402 60 H460" class="ln"/><path d="M454 55 L462 60 L454 65" class="ln"/>
+      <text x="470" y="56" class="m">número inteiro →</text><text x="470" y="74" class="m">vira o índice do balde</text>
+      <g>
+        <rect x="20" y="120" width="100" height="40" rx="8" class="s-box s-c"/><text x="70" y="145" text-anchor="middle" class="m">balde 0</text>
+        <rect x="130" y="120" width="100" height="40" rx="8" class="tint-c s-c"/><text x="180" y="145" text-anchor="middle" class="c">ana@…</text>
+        <rect x="240" y="120" width="100" height="40" rx="8" class="s-box s-c"/><text x="290" y="145" text-anchor="middle" class="m">balde 2</text>
+        <rect x="350" y="120" width="100" height="40" rx="8" class="tint-c s-c"/><text x="400" y="145" text-anchor="middle" class="c">bruno@…</text>
+        <rect x="460" y="120" width="100" height="40" rx="8" class="s-box s-c"/><text x="510" y="145" text-anchor="middle" class="m">balde 4</text>
+        <rect x="570" y="120" width="100" height="40" rx="8" class="s-box s-c"/><text x="620" y="145" text-anchor="middle" class="m">balde 5</text>
+        <path d="M327 80 V100 H180 V120" class="ln s-a"/>
+      </g>
+      <text x="20" y="200" class="m">1. hashCode() escolhe o balde (pulo direto, sem percorrer tudo).</text>
+      <text x="20" y="222" class="m">2. Dentro do balde, equals() confirma se é o mesmo elemento.</text>
+      <text x="20" y="244" class="m">Objetos iguais por equals() PRECISAM ter o mesmo hashCode(), senão caem em baldes diferentes.</text>
+    </svg>
+    <figcaption>Figura 4 — Tabela de dispersão (hash table), a estrutura por trás de <code>HashSet</code> e <code>HashMap</code>. Por isso <code>contains</code> custa, em média, tempo constante.</figcaption>
+  </figure>
+  <h3>LinkedHashSet × TreeSet</h3>
+  <div class="cb" data-lang="Java"><div class="bar"><span class="lang">Main.java</span><button class="copy" type="button">copiar</button></div><pre>import java.util.HashSet;
+import java.util.LinkedHashSet;
+import java.util.Set;
+import java.util.TreeSet;
+
+public class Main {
+    public static void main(String[] args) {
+        Set&lt;String&gt; insercao = new LinkedHashSet&lt;&gt;();
+        insercao.add(&quot;Zoe&quot;);
+        insercao.add(&quot;Ana&quot;);
+        insercao.add(&quot;Bruno&quot;);
+
+        Set&lt;String&gt; hash = new HashSet&lt;&gt;(insercao);
+        Set&lt;String&gt; ordenado = new TreeSet&lt;&gt;(insercao);
+
+        System.out.println(&quot;LinkedHashSet: &quot; + insercao);   // ordem de inserção
+        System.out.println(&quot;TreeSet:       &quot; + ordenado);   // ordem natural (alfabética)
+        System.out.println(&quot;HashSet:       &quot; + hash);       // ordem NÃO garantida
+    }
+}
+  </pre></div><div class="cb" data-lang="Saída"><div class="bar"><span class="lang">Saída no console</span><button class="copy" type="button">copiar</button></div><pre>LinkedHashSet: [Zoe, Ana, Bruno]
+TreeSet:       [Ana, Bruno, Zoe]
+HashSet:       [Zoe, Bruno, Ana]</pre></div>
+  <h3>Set com objetos seus: equals() e hashCode()</h3>
+  <p>Com <code>String</code> e <code>Integer</code> funciona “sozinho” porque essas classes já implementam <code>equals</code>/<code>hashCode</code>. Com uma classe sua, se você não implementar, dois objetos com os mesmos dados serão considerados <strong>diferentes</strong>. A forma moderna de resolver é usar <code>record</code> (Java 16+), que gera <code>equals</code>, <code>hashCode</code> e <code>toString</code> automaticamente.</p>
+  <div class="cb" data-lang="Java"><div class="bar"><span class="lang">Main.java</span><button class="copy" type="button">copiar</button></div><pre>import java.util.HashSet;
+import java.util.Objects;
+import java.util.Set;
+
+public class Main {
+    // Classe comum SEM equals/hashCode
+    static class AlunoSemEquals {
+        String cpf;
+        AlunoSemEquals(String cpf) { this.cpf = cpf; }
+    }
+
+    // Classe comum COM equals/hashCode coerentes
+    static class Aluno {
+        private final String cpf;
+        Aluno(String cpf) { this.cpf = cpf; }
+
+        @Override public boolean equals(Object o) {
+            if (this == o) return true;
+            if (!(o instanceof Aluno outro)) return false;
+            return cpf.equals(outro.cpf);
+        }
+        @Override public int hashCode() { return Objects.hash(cpf); }
+    }
+
+    // record: equals/hashCode/toString gerados pelo compilador
+    record AlunoRecord(String cpf, String nome) {}
+
+    public static void main(String[] args) {
+        Set&lt;AlunoSemEquals&gt; a = new HashSet&lt;&gt;();
+        a.add(new AlunoSemEquals(&quot;123&quot;));
+        a.add(new AlunoSemEquals(&quot;123&quot;));
+        System.out.println(&quot;Sem equals: &quot; + a.size());   // 2 (duplicou!)
+
+        Set&lt;Aluno&gt; b = new HashSet&lt;&gt;();
+        b.add(new Aluno(&quot;123&quot;));
+        b.add(new Aluno(&quot;123&quot;));
+        System.out.println(&quot;Com equals: &quot; + b.size());   // 1
+
+        Set&lt;AlunoRecord&gt; c = new HashSet&lt;&gt;();
+        c.add(new AlunoRecord(&quot;123&quot;, &quot;Ana&quot;));
+        c.add(new AlunoRecord(&quot;123&quot;, &quot;Ana&quot;));
+        System.out.println(&quot;Record: &quot; + c);
+    }
+}
+  </pre></div><div class="cb" data-lang="Saída"><div class="bar"><span class="lang">Saída no console</span><button class="copy" type="button">copiar</button></div><pre>Sem equals: 2
+Com equals: 1
+Record: [AlunoRecord[cpf=123, nome=Ana]]</pre></div>
+</section>
+
+<section class="ap-cap" id="map" data-toc="Map e HashMap">
+  <header><div class="kx-eyebrow"><span class="num">08</span><span class="t-overline">Map</span></div><h2>Map: chave → valor</h2><p class="lead">Um <code>Map</code> associa cada chave única a um valor. Colocar de novo a mesma chave substitui o valor antigo.</p></header>
+  <div class="cb" data-lang="Java"><div class="bar"><span class="lang">Main.java</span><button class="copy" type="button">copiar</button></div><pre>import java.util.HashMap;
+import java.util.Map;
+
+public class Main {
+    public static void main(String[] args) {
+        Map&lt;String, Integer&gt; estoque = new HashMap&lt;&gt;();
+        estoque.put(&quot;Mouse&quot;, 10);
+        estoque.put(&quot;Teclado&quot;, 5);
+        estoque.put(&quot;Mouse&quot;, 12);        // mesma chave: substitui 10 por 12
+
+        System.out.println(estoque.get(&quot;Mouse&quot;));
+        System.out.println(estoque.get(&quot;Monitor&quot;));               // null
+        System.out.println(estoque.getOrDefault(&quot;Monitor&quot;, 0));   // 0
+        System.out.println(estoque.containsKey(&quot;Teclado&quot;));
+
+        for (Map.Entry&lt;String, Integer&gt; item : estoque.entrySet()) {
+            System.out.println(item.getKey() + &quot; = &quot; + item.getValue());
+        }
+    }
+}
+  </pre></div><div class="cb" data-lang="Saída"><div class="bar"><span class="lang">Saída no console</span><button class="copy" type="button">copiar</button></div><pre>12
+null
+0
+true
+Mouse = 12
+Teclado = 5</pre></div>
+  <h3>Três formas de percorrer um Map</h3>
+  <div class="tw"><table><thead><tr><th>Visão</th><th>Tipo</th><th>Use quando…</th></tr></thead><tbody>
+    <tr><td><code>keySet()</code></td><td><code>Set&lt;K&gt;</code></td><td>Precisa só das chaves</td></tr>
+    <tr><td><code>values()</code></td><td><code>Collection&lt;V&gt;</code></td><td>Precisa só dos valores (ex.: somar o estoque)</td></tr>
+    <tr><td><code>entrySet()</code></td><td><code>Set&lt;Map.Entry&lt;K,V&gt;&gt;</code></td><td>Precisa de chave <strong>e</strong> valor; é a forma mais eficiente</td></tr>
+    <tr><td><code>forEach((k, v) -&gt; ...)</code></td><td>lambda</td><td>Atalho do Java 8 para o mesmo que <code>entrySet()</code></td></tr>
+  </tbody></table></div>
+  <h3>Métodos modernos que economizam linhas</h3>
+  <p>Contar ocorrências é um dos usos mais comuns de <code>Map</code>. Compare a versão “à moda antiga” com <code>merge</code> e <code>computeIfAbsent</code>:</p>
+  <div class="cb" data-lang="Java"><div class="bar"><span class="lang">Main.java</span><button class="copy" type="button">copiar</button></div><pre>import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+import java.util.TreeMap;
+
+public class Main {
+    public static void main(String[] args) {
+        String[] palavras = &quot;samba forró samba jazz samba forró&quot;.split(&quot; &quot;);
+
+        // Contagem com merge: se não existe, põe 1; se existe, soma 1
+        Map&lt;String, Integer&gt; contagem = new TreeMap&lt;&gt;();
+        for (String p : palavras) {
+            contagem.merge(p, 1, Integer::sum);
+        }
+        System.out.println(contagem);
+
+        // Agrupamento com computeIfAbsent: cria a lista só na primeira vez
+        Map&lt;Character, List&lt;String&gt;&gt; porInicial = new TreeMap&lt;&gt;();
+        for (String p : List.of(&quot;Ana&quot;, &quot;Bruno&quot;, &quot;Alice&quot;, &quot;Carla&quot;, &quot;Beatriz&quot;)) {
+            porInicial.computeIfAbsent(p.charAt(0), k -&gt; new ArrayList&lt;&gt;()).add(p);
+        }
+        System.out.println(porInicial);
+    }
+}
+  </pre></div><div class="cb" data-lang="Saída"><div class="bar"><span class="lang">Saída no console</span><button class="copy" type="button">copiar</button></div><pre>{forró=2, jazz=1, samba=3}
+{A=[Ana, Alice], B=[Bruno, Beatriz], C=[Carla]}</pre></div>
+  <h3>HashMap × LinkedHashMap × TreeMap</h3>
+  <p>A lógica é a mesma dos Sets (na verdade, <code>HashSet</code> usa um <code>HashMap</code> por dentro): <strong><code>HashMap</code></strong> não garante ordem e é o mais rápido; <strong><code>LinkedHashMap</code></strong> mantém a ordem de inserção; <strong><code>TreeMap</code></strong> mantém as chaves ordenadas e oferece <code>firstKey()</code>, <code>headMap()</code>, <code>ceilingKey()</code> e afins.</p>
+</section>
+
+<section class="ap-cap" id="queue" data-toc="Queue, Deque e PriorityQueue">
+  <header><div class="kx-eyebrow"><span class="num">09</span><span class="t-overline">Filas e pilhas</span></div><h2>Queue, Deque e PriorityQueue</h2><p class="lead">Quando a pergunta é “quem é o próximo?”.</p></header>
+  <figure class="fig glass-s">
+    <svg viewBox="0 0 740 250" role="img" aria-label="Fila FIFO e pilha LIFO">
+      <text x="20" y="26" class="s f-c">FILA (QUEUE) · FIFO — primeiro a entrar, primeiro a sair</text>
+      <text x="20" y="80" class="c">poll() ←</text>
+      <rect x="95" y="55" width="100" height="40" rx="8" class="tint-c s-c"/><text x="145" y="80" text-anchor="middle">Cliente A</text>
+      <rect x="205" y="55" width="100" height="40" rx="8" class="s-box s-c"/><text x="255" y="80" text-anchor="middle">Cliente B</text>
+      <rect x="315" y="55" width="100" height="40" rx="8" class="s-box s-c"/><text x="365" y="80" text-anchor="middle">Cliente C</text>
+      <text x="428" y="80" class="c">← offer()</text>
+      <text x="145" y="115" text-anchor="middle" class="m">peek() olha aqui</text>
+      <text x="20" y="160" class="s f-b">PILHA (DEQUE) · LIFO — último a entrar, primeiro a sair</text>
+      <rect x="560" y="140" width="110" height="30" rx="6" class="tint-b s-b"/><text x="615" y="160" text-anchor="middle">Prato 3</text>
+      <rect x="560" y="174" width="110" height="30" rx="6" class="s-box s-b"/><text x="615" y="194" text-anchor="middle">Prato 2</text>
+      <rect x="560" y="208" width="110" height="30" rx="6" class="s-box s-b"/><text x="615" y="228" text-anchor="middle">Prato 1</text>
+      <text x="545" y="150" text-anchor="end" class="c">push() / pop() ⇄</text>
+      <text x="20" y="196" class="m">Ctrl+Z do editor, botão “voltar” do navegador e chamadas de método</text>
+      <text x="20" y="216" class="m">funcionam como pilha. Use ArrayDeque (a classe Stack é legada).</text>
+    </svg>
+    <figcaption>Figura 5 — <code>Queue</code> atende por ordem de chegada; <code>Deque</code> (double-ended queue) mexe nas duas pontas e serve de fila ou de pilha.</figcaption>
+  </figure>
+  <div class="tw"><table><thead><tr><th>Operação</th><th>Lança exceção se falhar</th><th>Devolve valor especial</th></tr></thead><tbody>
+    <tr><td>Inserir</td><td><code>add(e)</code></td><td><code>offer(e)</code> → <code>false</code></td></tr>
+    <tr><td>Remover a cabeça</td><td><code>remove()</code></td><td><code>poll()</code> → <code>null</code></td></tr>
+    <tr><td>Espiar a cabeça</td><td><code>element()</code></td><td><code>peek()</code> → <code>null</code></td></tr>
+  </tbody></table></div>
+  <div class="cb" data-lang="Java"><div class="bar"><span class="lang">Main.java</span><button class="copy" type="button">copiar</button></div><pre>import java.util.ArrayDeque;
+import java.util.Deque;
+import java.util.PriorityQueue;
+import java.util.Queue;
+
+public class Main {
+    public static void main(String[] args) {
+        // Fila FIFO
+        Queue&lt;String&gt; fila = new ArrayDeque&lt;&gt;();
+        fila.offer(&quot;Cliente A&quot;);
+        fila.offer(&quot;Cliente B&quot;);
+        fila.offer(&quot;Cliente C&quot;);
+        System.out.println(&quot;Próximo: &quot; + fila.peek());
+        while (!fila.isEmpty()) {
+            System.out.println(&quot;Atendendo &quot; + fila.poll());
+        }
+
+        // Pilha LIFO com Deque
+        Deque&lt;String&gt; desfazer = new ArrayDeque&lt;&gt;();
+        desfazer.push(&quot;digitou &#x27;Olá&#x27;&quot;);
+        desfazer.push(&quot;apagou palavra&quot;);
+        desfazer.push(&quot;colou imagem&quot;);
+        System.out.println(&quot;Ctrl+Z desfaz: &quot; + desfazer.pop());
+
+        // Fila de prioridade: sai sempre o MENOR (ordem natural)
+        Queue&lt;Integer&gt; urgencia = new PriorityQueue&lt;&gt;();
+        urgencia.offer(5);
+        urgencia.offer(1);
+        urgencia.offer(3);
+        System.out.print(&quot;Prioridade: &quot;);
+        while (!urgencia.isEmpty()) System.out.print(urgencia.poll() + &quot; &quot;);
+        System.out.println();
+    }
+}
+  </pre></div><div class="cb" data-lang="Saída"><div class="bar"><span class="lang">Saída no console</span><button class="copy" type="button">copiar</button></div><pre>Próximo: Cliente A
+Atendendo Cliente A
+Atendendo Cliente B
+Atendendo Cliente C
+Ctrl+Z desfaz: colou imagem
+Prioridade: 1 3 5 </pre></div>
+</section>
+
+<section class="ap-cap" id="ordenacao" data-toc="Ordenação: Comparable e Comparator">
+  <header><div class="kx-eyebrow"><span class="num">10</span><span class="t-overline">Ordem</span></div><h2>Ordenação com Comparable e Comparator</h2><p class="lead">Ordem natural é a que o objeto “sabe” sozinho; o Comparator é uma regra que você entrega de fora.</p></header>
+  <div class="grid2">
+    <div class="card glass-s"><span class="t-overline">Comparable&lt;T&gt;</span><h4>Ordem natural</h4><p>A própria classe implementa <code>compareTo</code>. <code>String</code> ordena alfabeticamente, <code>Integer</code> numericamente. Só existe <strong>uma</strong> ordem natural.</p></div>
+    <div class="card glass-s"><span class="t-overline">Comparator&lt;T&gt;</span><h4>Ordem sob medida</h4><p>Um objeto separado com a regra. Você pode ter quantos quiser: por nome, por nota, por idade, invertido…</p></div>
+  </div>
+  <div class="cb" data-lang="Java"><div class="bar"><span class="lang">Main.java</span><button class="copy" type="button">copiar</button></div><pre>import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.List;
+
+public class Main {
+    record Aluno(String nome, double nota, int idade) {}
+
+    public static void main(String[] args) {
+        List&lt;String&gt; nomes = new ArrayList&lt;&gt;(List.of(&quot;Zoe&quot;, &quot;Ana&quot;, &quot;Bruno&quot;));
+        nomes.sort(Comparator.naturalOrder());
+        System.out.println(nomes);
+        nomes.sort(Comparator.reverseOrder());
+        System.out.println(nomes);
+
+        List&lt;Aluno&gt; turma = new ArrayList&lt;&gt;(List.of(
+            new Aluno(&quot;Carla&quot;, 8.5, 22),
+            new Aluno(&quot;Ana&quot;, 9.0, 19),
+            new Aluno(&quot;Bruno&quot;, 8.5, 20)
+        ));
+
+        // Maior nota primeiro; empate decidido pelo nome
+        turma.sort(Comparator.comparingDouble(Aluno::nota).reversed()
+                             .thenComparing(Aluno::nome));
+        turma.forEach(a -&gt; System.out.println(a.nome() + &quot; - &quot; + a.nota()));
+    }
+}
+  </pre></div><div class="cb" data-lang="Saída"><div class="bar"><span class="lang">Saída no console</span><button class="copy" type="button">copiar</button></div><pre>[Ana, Bruno, Zoe]
+[Zoe, Bruno, Ana]
+Ana - 9.0
+Bruno - 8.5
+Carla - 8.5</pre></div>
+  <div class="alert alert--info"><span class="ico">i</span><div><p class="ttl"><code>Collections.sort(lista)</code> ou <code>lista.sort(...)</code>?</p><p>Fazem o mesmo. <code>Collections.sort(lista)</code> usa a ordem natural; <code>lista.sort(comparator)</code> (Java 8+) é a forma mais direta quando você tem um <code>Comparator</code>. Passar <code>null</code> para <code>lista.sort</code> também usa a ordem natural.</p></div></div>
+</section>
+
+<section class="ap-cap" id="imutaveis" data-toc="Imutáveis e Sequenced Collections">
+  <header><div class="kx-eyebrow"><span class="num">11</span><span class="t-overline">Java moderno</span></div><h2>Coleções imutáveis e Sequenced Collections</h2></header>
+  <p>Coleção imutável é aquela que não pode ser alterada depois de criada. Ela evita uma classe inteira de bugs (“quem mexeu nessa lista?”) e é segura para compartilhar entre threads.</p>
+  <div class="tw"><table><thead><tr><th>Forma</th><th>O que gera</th><th>Observação</th></tr></thead><tbody>
+    <tr><td><code>List.of(a, b)</code>, <code>Set.of</code>, <code>Map.of</code></td><td>Coleção imutável nova</td><td>Não aceita <code>null</code>; <code>Set.of</code> e <code>Map.of</code> recusam repetidos</td></tr>
+    <tr><td><code>List.copyOf(outra)</code></td><td>Cópia imutável</td><td>Mudanças na original não afetam a cópia</td></tr>
+    <tr><td><code>Collections.unmodifiableList(l)</code></td><td>“Vista” somente-leitura</td><td>Se a original mudar, a vista mostra a mudança</td></tr>
+  </tbody></table></div>
+  <h3>Sequenced Collections (Java 21)</h3>
+  <p>Antes do Java 21, pegar o último elemento era diferente em cada tipo: <code>list.get(list.size() - 1)</code>, <code>deque.getLast()</code>, <code>sortedSet.last()</code>… A JEP 431 criou as interfaces <code>SequencedCollection</code>, <code>SequencedSet</code> e <code>SequencedMap</code>, com métodos uniformes para coleções que têm ordem definida.</p>
+  <div class="cb" data-lang="Java"><div class="bar"><span class="lang">Main.java</span><button class="copy" type="button">copiar</button></div><pre>import java.util.ArrayList;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.SequencedMap;
+
+public class Main {
+    public static void main(String[] args) {
+        List&lt;String&gt; ranking = new ArrayList&lt;&gt;(List.of(&quot;Ana&quot;, &quot;Bruno&quot;, &quot;Carla&quot;));
+        System.out.println(ranking.getFirst() + &quot; / &quot; + ranking.getLast());
+        System.out.println(ranking.reversed());
+
+        SequencedMap&lt;String, Integer&gt; pedidos = new LinkedHashMap&lt;&gt;();
+        pedidos.put(&quot;#101&quot;, 2);
+        pedidos.put(&quot;#102&quot;, 1);
+        pedidos.put(&quot;#103&quot;, 4);
+        System.out.println(&quot;Primeiro pedido: &quot; + pedidos.firstEntry());
+
+        List&lt;String&gt; fixa = List.of(&quot;x&quot;, &quot;y&quot;);
+        try {
+            fixa.add(&quot;z&quot;);
+        } catch (UnsupportedOperationException e) {
+            System.out.println(&quot;List.of é imutável&quot;);
+        }
+    }
+}
+  </pre></div><div class="cb" data-lang="Saída"><div class="bar"><span class="lang">Saída no console</span><button class="copy" type="button">copiar</button></div><pre>Ana / Carla
+[Carla, Bruno, Ana]
+Primeiro pedido: #101=2
+List.of é imutável</pre></div>
+</section>
+
+<div class="ap-part"><span class="t-overline">Parte III</span><h2>Generics</h2><p>Tipos como parâmetros: segurança na compilação e código reutilizável.</p></div>
+
+<section class="ap-cap" id="generics-porque" data-toc="Generics: por que usar?">
+  <header><div class="kx-eyebrow"><span class="num">12</span><span class="t-overline">Motivação</span></div><h2>Generics: por que usar?</h2><p class="lead">Mover o erro do momento em que o usuário está usando o sistema para o momento em que você está compilando.</p></header>
+  <p>Antes do Java 5, uma <code>List</code> guardava <code>Object</code>. Você podia colocar qualquer coisa, e na hora de ler precisava fazer <em>cast</em>. Se alguém tivesse colocado o tipo errado, o erro só aparecia <strong>em execução</strong>, com <code>ClassCastException</code>.</p>
+  <div class="cb" data-lang="Java"><div class="bar"><span class="lang">Antes.java</span><button class="copy" type="button">copiar</button></div><pre>// Sem generics (raw type) — compila, mas explode em execução
+List notas = new ArrayList();
+notas.add(8);
+notas.add(&quot;dez&quot;);                  // ninguém impede
+Integer n = (Integer) notas.get(1); // ClassCastException!
+  </pre></div>
+  <div class="cb" data-lang="Java"><div class="bar"><span class="lang">Depois.java</span><button class="copy" type="button">copiar</button></div><pre>// Com generics — o compilador barra o erro antes de rodar
+List&lt;Integer&gt; notas = new ArrayList&lt;&gt;();
+notas.add(8);
+notas.add(&quot;dez&quot;);      // ERRO DE COMPILAÇÃO: incompatible types
+Integer n = notas.get(0); // sem cast
+  </pre></div>
+  <h3>Generics na prática</h3>
+  <div class="cb" data-lang="Java"><div class="bar"><span class="lang">Main.java</span><button class="copy" type="button">copiar</button></div><pre>import java.util.ArrayList;
+import java.util.List;
+
+public class Main {
+    public static void main(String[] args) {
+        List&lt;Integer&gt; notas = new ArrayList&lt;&gt;();
+        notas.add(8);      // autoboxing: int 8 vira Integer
+        notas.add(10);
+        notas.add(7);
+
+        int soma = 0;
+        for (Integer nota : notas) {
+            soma += nota;  // unboxing: Integer vira int
+        }
+        System.out.println(&quot;Média: &quot; + (soma / (double) notas.size()));
+        // notas.add(&quot;dez&quot;); // erro de compilação
+    }
+}
+  </pre></div><div class="cb" data-lang="Saída"><div class="bar"><span class="lang">Saída no console</span><button class="copy" type="button">copiar</button></div><pre>Média: 8.333333333333334</pre></div>
+  <div class="grid2">
+    <div class="card glass-s"><span class="t-overline">Regra 1</span><h4>Só tipos de referência</h4><p><code>List&lt;int&gt;</code> não existe. Use os <em>wrappers</em>: <code>Integer</code>, <code>Double</code>, <code>Boolean</code>, <code>Character</code>…</p></div>
+    <div class="card glass-s"><span class="t-overline">Regra 2</span><h4>Diamante &lt;&gt;</h4><p><code>new ArrayList&lt;&gt;()</code>: o compilador infere o tipo pelo lado esquerdo. Não repita <code>&lt;Integer&gt;</code>.</p></div>
+    <div class="card glass-s"><span class="t-overline">Regra 3</span><h4>Nunca use raw type</h4><p><code>List</code> sem <code>&lt;&gt;</code> só existe por compatibilidade com código antigo. O compilador avisa: <em>unchecked</em>.</p></div>
+  </div>
+</section>
+
+<section class="ap-cap" id="classe-generica" data-toc="Classe genérica própria">
+  <header><div class="kx-eyebrow"><span class="num">13</span><span class="t-overline">Seu próprio &lt;T&gt;</span></div><h2>Classe genérica própria</h2><p class="lead"><code>&lt;T&gt;</code> é um parâmetro de tipo: um “espaço reservado” que será preenchido quando o objeto for criado.</p></header>
+  <figure class="fig glass-s">
+    <svg viewBox="0 0 720 230" role="img" aria-label="Classe genérica Caixa de T gerando Caixa de String e Caixa de Integer">
+      <rect x="250" y="20" width="220" height="70" rx="14" class="tint-a s-a s-dash" stroke-width="1.8"/>
+      <text x="360" y="50" text-anchor="middle">Caixa&lt;T&gt;</text><text x="360" y="72" text-anchor="middle" class="m">molde: T ainda é “qualquer tipo”</text>
+      <path d="M300 90 L170 140" class="ln"/><path d="M420 90 L550 140" class="ln"/>
+      <rect x="60" y="140" width="220" height="64" rx="12" class="tint-c s-c" stroke-width="1.6"/><text x="170" y="166" text-anchor="middle">Caixa&lt;String&gt;</text><text x="170" y="188" text-anchor="middle" class="c">"Olá!"</text>
+      <rect x="440" y="140" width="220" height="64" rx="12" class="tint-b s-b" stroke-width="1.6"/><text x="550" y="166" text-anchor="middle">Caixa&lt;Integer&gt;</text><text x="550" y="188" text-anchor="middle" class="c">42</text>
+      <text x="680" y="120" text-anchor="end" class="bad">guardar("dez") ✕ não compila</text>
+    </svg>
+    <figcaption>Figura 6 — Uma única classe genérica serve de molde para várias versões tipadas.</figcaption>
+  </figure>
+  <div class="cb" data-lang="Java"><div class="bar"><span class="lang">Main.java</span><button class="copy" type="button">copiar</button></div><pre>public class Main {
+    static class Caixa&lt;T&gt; {
+        private T valor;
+
+        public void guardar(T valor) {
+            this.valor = valor;
+        }
+
+        public T obter() {
+            return valor;
+        }
+    }
+
+    // Dois parâmetros de tipo
+    record Par&lt;K, V&gt;(K chave, V valor) {}
+
+    public static void main(String[] args) {
+        Caixa&lt;String&gt; texto = new Caixa&lt;&gt;();
+        texto.guardar(&quot;Olá!&quot;);
+        System.out.println(texto.obter());
+
+        Caixa&lt;Integer&gt; numero = new Caixa&lt;&gt;();
+        numero.guardar(42);
+        int dobro = numero.obter() * 2;    // sem cast
+        System.out.println(dobro);
+
+        Par&lt;String, Double&gt; nota = new Par&lt;&gt;(&quot;Ana&quot;, 9.5);
+        System.out.println(nota.chave() + &quot; tirou &quot; + nota.valor());
+    }
+}
+  </pre></div><div class="cb" data-lang="Saída"><div class="bar"><span class="lang">Saída no console</span><button class="copy" type="button">copiar</button></div><pre>Olá!
+84
+Ana tirou 9.5</pre></div>
+  <h3>Convenção de nomes</h3>
+  <div class="tw"><table><thead><tr><th>Letra</th><th>Significado</th><th>Exemplo na JDK</th></tr></thead><tbody>
+    <tr><td><code>T</code></td><td>Type (tipo genérico)</td><td><code>Optional&lt;T&gt;</code></td></tr>
+    <tr><td><code>E</code></td><td>Element (elemento de coleção)</td><td><code>List&lt;E&gt;</code></td></tr>
+    <tr><td><code>K</code>, <code>V</code></td><td>Key, Value</td><td><code>Map&lt;K,V&gt;</code></td></tr>
+    <tr><td><code>N</code></td><td>Number</td><td>—</td></tr>
+    <tr><td><code>R</code></td><td>Result (retorno)</td><td><code>Function&lt;T,R&gt;</code></td></tr>
+    <tr><td><code>S</code>, <code>U</code></td><td>2º, 3º tipo</td><td><code>BiFunction&lt;T,U,R&gt;</code></td></tr>
+  </tbody></table></div>
+</section>
+
+<section class="ap-cap" id="metodo-generico" data-toc="Métodos genéricos e limites">
+  <header><div class="kx-eyebrow"><span class="num">14</span><span class="t-overline">&lt;T&gt; no método</span></div><h2>Métodos genéricos e tipos limitados</h2><p class="lead">Um método pode declarar seu próprio <code>&lt;T&gt;</code>, mesmo dentro de uma classe que não é genérica.</p></header>
+  <div class="cb" data-lang="Java"><div class="bar"><span class="lang">Main.java</span><button class="copy" type="button">copiar</button></div><pre>import java.util.List;
+
+public class Main {
+    // &lt;T&gt; antes do retorno declara o parâmetro de tipo do método
+    public static &lt;T&gt; void exibir(T valor) {
+        System.out.println(&quot;Valor: &quot; + valor);
+    }
+
+    // Retorna o mesmo tipo que recebeu
+    public static &lt;T&gt; T primeiro(List&lt;T&gt; lista) {
+        return lista.get(0);
+    }
+
+    // Tipo LIMITADO: T precisa saber se comparar (ter compareTo)
+    public static &lt;T extends Comparable&lt;T&gt;&gt; T maior(List&lt;T&gt; lista) {
+        T m = lista.get(0);
+        for (T item : lista) {
+            if (item.compareTo(m) &gt; 0) m = item;
+        }
+        return m;
+    }
+
+    public static void main(String[] args) {
+        exibir(&quot;Java&quot;);
+        exibir(123);
+        exibir(true);
+
+        String s = primeiro(List.of(&quot;Ana&quot;, &quot;Bruno&quot;));   // sem cast
+        System.out.println(s);
+
+        System.out.println(maior(List.of(3, 9, 4)));
+        System.out.println(maior(List.of(&quot;pera&quot;, &quot;uva&quot;, &quot;abacaxi&quot;)));
+    }
+}
+  </pre></div><div class="cb" data-lang="Saída"><div class="bar"><span class="lang">Saída no console</span><button class="copy" type="button">copiar</button></div><pre>Valor: Java
+Valor: 123
+Valor: true
+Ana
+9
+uva</pre></div>
+  <p>Sem o limite <code>extends Comparable&lt;T&gt;</code>, o compilador não deixaria chamar <code>compareTo</code>, porque um <code>T</code> qualquer poderia ser, por exemplo, um <code>Thread</code>, que não sabe se comparar. O limite é uma <strong>promessa</strong> que o compilador cobra de quem chama o método.</p>
+  <div class="alert alert--info"><span class="ico">i</span><div><p class="ttl">Na assinatura real da JDK</p><p><code>Collections.max</code> é declarado como <code>&lt;T extends Object &amp; Comparable&lt;? super T&gt;&gt; T max(Collection&lt;? extends T&gt; coll)</code>. Assusta, mas ao final da próxima seção você vai conseguir ler cada pedaço.</p></div></div>
+</section>
+
+<section class="ap-cap" id="wildcards" data-toc="Wildcards e PECS">
+  <header><div class="kx-eyebrow"><span class="num">15</span><span class="t-overline">? extends · ? super</span></div><h2>Wildcards e a regra PECS</h2><p class="lead"><code>List&lt;Integer&gt;</code> <strong>não</strong> é filha de <code>List&lt;Number&gt;</code>, mesmo <code>Integer</code> sendo filho de <code>Number</code>. Os wildcards resolvem isso.</p></header>
+  <p>Por que não é filha? Se fosse, você poderia passar uma <code>List&lt;Integer&gt;</code> para um método que recebe <code>List&lt;Number&gt;</code> e ele faria <code>lista.add(3.14)</code>: um <code>Double</code> dentro de uma lista de inteiros. Para impedir isso, generics são <strong>invariantes</strong>. O coringa <code>?</code> afrouxa a regra de forma controlada.</p>
+  <figure class="fig glass-s">
+    <svg viewBox="0 0 740 320" role="img" aria-label="Regra PECS: ? extends Number e ? super Integer"><text x="180" y="22" text-anchor="middle" class="s f-c">? extends Number  ·  PRODUCER</text><g class="ln"><path d="M180 78 V110"/><path d="M180 148 V165 H100 V190"/><path d="M180 165 H260 V190"/></g><rect x="120" y="40" width="120" height="38" rx="10" fill="none" class="s-box s-dash"/><text x="180" y="64" text-anchor="middle" class="m">Object</text><rect x="120" y="110" width="120" height="38" rx="10" class="tint-c s-c" stroke-width="1.6"/><text x="180" y="134" text-anchor="middle">Number</text><rect x="40" y="190" width="120" height="38" rx="10" class="tint-c s-c" stroke-width="1.6"/><text x="100" y="214" text-anchor="middle">Integer</text><rect x="200" y="190" width="120" height="38" rx="10" class="tint-c s-c" stroke-width="1.6"/><text x="260" y="214" text-anchor="middle">Double</text><text x="180" y="256" text-anchor="middle" class="m">aceita List de Number, Integer ou Double</text><text x="180" y="276" text-anchor="middle" class="m">LER como Number ✓   adicionar ✕</text><path d="M370 30 V280" class="ln s-dash"/><text x="560" y="22" text-anchor="middle" class="s f-b">? super Integer  ·  CONSUMER</text><g class="ln"><path d="M560 78 V110"/><path d="M560 148 V165 H480 V190"/><path d="M560 165 H640 V190"/></g><rect x="500" y="40" width="120" height="38" rx="10" class="tint-b s-b" stroke-width="1.6"/><text x="560" y="64" text-anchor="middle">Object</text><rect x="500" y="110" width="120" height="38" rx="10" class="tint-b s-b" stroke-width="1.6"/><text x="560" y="134" text-anchor="middle">Number</text><rect x="420" y="190" width="120" height="38" rx="10" class="tint-b s-b" stroke-width="1.6"/><text x="480" y="214" text-anchor="middle">Integer</text><rect x="580" y="190" width="120" height="38" rx="10" fill="none" class="s-box s-dash"/><text x="640" y="214" text-anchor="middle" class="m">Double</text><text x="560" y="256" text-anchor="middle" class="m">aceita List de Integer, Number ou Object</text><text x="560" y="276" text-anchor="middle" class="m">ADICIONAR Integer ✓   ler só como Object</text><text x="370" y="310" text-anchor="middle">PECS: Producer Extends, Consumer Super</text></svg>
+    <figcaption>Figura 7 — <code>? extends</code> para quem <strong>produz</strong> dados que você lê; <code>? super</code> para quem <strong>consome</strong> dados que você escreve.</figcaption>
+  </figure>
+  <h3>? extends Number — ler números de qualquer lista numérica</h3>
+  <div class="cb" data-lang="Java"><div class="bar"><span class="lang">Main.java</span><button class="copy" type="button">copiar</button></div><pre>import java.util.List;
+
+public class Main {
+    static double somar(List&lt;? extends Number&gt; numeros) {
+        double total = 0;
+        for (Number n : numeros) {
+            total += n.doubleValue();
+        }
+        // numeros.add(1);  // não compila: a lista pode ser de Double!
+        return total;
+    }
+
+    public static void main(String[] args) {
+        System.out.println(somar(List.of(1, 2, 3)));      // List&lt;Integer&gt;
+        System.out.println(somar(List.of(1.5, 2.5)));     // List&lt;Double&gt;
+    }
+}
+  </pre></div><div class="cb" data-lang="Saída"><div class="bar"><span class="lang">Saída no console</span><button class="copy" type="button">copiar</button></div><pre>6.0
+4.0</pre></div>
+  <h3>? super Integer — escrever inteiros em listas “maiores”</h3>
+  <div class="cb" data-lang="Java"><div class="bar"><span class="lang">Main.java</span><button class="copy" type="button">copiar</button></div><pre>import java.util.ArrayList;
+import java.util.List;
+
+public class Main {
+    static void adicionarNumeros(List&lt;? super Integer&gt; destino) {
+        destino.add(10);
+        destino.add(20);
+        Object lido = destino.get(0);   // ler: só é seguro como Object
+    }
+
+    public static void main(String[] args) {
+        List&lt;Number&gt; numeros = new ArrayList&lt;&gt;();
+        adicionarNumeros(numeros);
+        System.out.println(numeros);
+
+        List&lt;Object&gt; qualquer = new ArrayList&lt;&gt;();
+        adicionarNumeros(qualquer);
+        System.out.println(qualquer);
+    }
+}
+  </pre></div><div class="cb" data-lang="Saída"><div class="bar"><span class="lang">Saída no console</span><button class="copy" type="button">copiar</button></div><pre>[10, 20]
+[10, 20]</pre></div>
+  <h3>Juntando os dois: copiar de uma lista para outra</h3>
+  <p>A JDK tem exatamente este método: <code>Collections.copy(List&lt;? super T&gt; dest, List&lt;? extends T&gt; src)</code>. A origem <strong>produz</strong> (extends), o destino <strong>consome</strong> (super).</p>
+  <div class="cb" data-lang="Java"><div class="bar"><span class="lang">Main.java</span><button class="copy" type="button">copiar</button></div><pre>import java.util.ArrayList;
+import java.util.List;
+
+public class Main {
+    static &lt;T&gt; void copiar(List&lt;? extends T&gt; origem, List&lt;? super T&gt; destino) {
+        for (T item : origem) destino.add(item);
+    }
+
+    public static void main(String[] args) {
+        List&lt;Integer&gt; inteiros = List.of(1, 2, 3);
+        List&lt;Number&gt; numeros = new ArrayList&lt;&gt;(List.of(0.5));
+        copiar(inteiros, numeros);
+        System.out.println(numeros);
+    }
+}
+  </pre></div><div class="cb" data-lang="Saída"><div class="bar"><span class="lang">Saída no console</span><button class="copy" type="button">copiar</button></div><pre>[0.5, 1, 2, 3]</pre></div>
+  <div class="tw"><table><thead><tr><th>Wildcard</th><th>Aceita</th><th>Pode ler como</th><th>Pode adicionar</th></tr></thead><tbody>
+    <tr><td><code>List&lt;?&gt;</code></td><td>Lista de qualquer tipo</td><td><code>Object</code></td><td>Só <code>null</code></td></tr>
+    <tr><td><code>List&lt;? extends Number&gt;</code></td><td><code>Number</code>, <code>Integer</code>, <code>Double</code>…</td><td><code>Number</code></td><td>Só <code>null</code></td></tr>
+    <tr><td><code>List&lt;? super Integer&gt;</code></td><td><code>Integer</code>, <code>Number</code>, <code>Object</code></td><td><code>Object</code></td><td><code>Integer</code></td></tr>
+  </tbody></table></div>
+</section>
+
+<section class="ap-cap" id="erasure" data-toc="Type erasure e limitações">
+  <header><div class="kx-eyebrow"><span class="num">16</span><span class="t-overline">Por baixo do capô</span></div><h2>Type erasure: os generics somem na execução</h2><p class="lead">Generics em Java são verificados pelo compilador e depois <strong>apagados</strong> do bytecode.</p></header>
+  <figure class="fig glass-s">
+    <svg viewBox="0 0 720 200" role="img" aria-label="Apagamento de tipos do código-fonte para o bytecode">
+      <rect x="20" y="30" width="260" height="130" rx="14" class="tint-a s-a" stroke-width="1.6"/>
+      <text x="150" y="56" text-anchor="middle" class="s f-a">CÓDIGO-FONTE (.java)</text>
+      <text x="40" y="90" class="c">List&lt;String&gt; a;</text><text x="40" y="114" class="c">List&lt;Integer&gt; b;</text><text x="40" y="138" class="c">String s = a.get(0);</text>
+      <path d="M285 95 H425" class="ln"/><path d="M418 89 L428 95 L418 101" class="ln"/>
+      <text x="355" y="85" text-anchor="middle">javac</text><text x="355" y="118" text-anchor="middle" class="m">verifica tipos</text><text x="355" y="136" text-anchor="middle" class="m">e apaga &lt;...&gt;</text>
+      <rect x="440" y="30" width="260" height="130" rx="14" class="tint-c s-c" stroke-width="1.6"/>
+      <text x="570" y="56" text-anchor="middle" class="s f-c">BYTECODE (.class)</text>
+      <text x="460" y="90" class="c">List a;</text><text x="460" y="114" class="c">List b;</text><text x="460" y="138" class="c">String s = (String) a.get(0);</text>
+      <text x="360" y="188" text-anchor="middle" class="m">Em execução, a.getClass() == b.getClass() → true</text>
+    </svg>
+    <figcaption>Figura 8 — O compilador insere os casts por você e garante que eles nunca falham; a JVM só vê <code>List</code>.</figcaption>
+  </figure>
+  <p>Isso foi uma escolha de compatibilidade: código de 2004 com generics precisava rodar junto com bibliotecas antigas sem generics. A consequência são algumas limitações:</p>
+  <div class="tw"><table><thead><tr><th>Não pode</th><th>Por quê</th><th>Alternativa</th></tr></thead><tbody>
+    <tr><td><code>new T()</code></td><td>Em execução não se sabe o que é <code>T</code></td><td>Receber um <code>Supplier&lt;T&gt;</code> ou <code>Class&lt;T&gt;</code></td></tr>
+    <tr><td><code>new T[10]</code></td><td>Mesmo motivo</td><td>Usar <code>List&lt;T&gt;</code></td></tr>
+    <tr><td><code>x instanceof List&lt;String&gt;</code></td><td>O <code>&lt;String&gt;</code> não existe em execução</td><td><code>x instanceof List&lt;?&gt;</code></td></tr>
+    <tr><td><code>List&lt;int&gt;</code></td><td>Apagado vira <code>Object</code>, e <code>int</code> não é objeto</td><td><code>List&lt;Integer&gt;</code> (ou bibliotecas como fastutil)</td></tr>
+    <tr><td><code>static T campo</code></td><td><code>static</code> é da classe, e o <code>T</code> é de cada instância</td><td>Repensar o design</td></tr>
+  </tbody></table></div>
+  <div class="cb" data-lang="Java"><div class="bar"><span class="lang">Main.java</span><button class="copy" type="button">copiar</button></div><pre>import java.util.ArrayList;
+import java.util.List;
+import java.util.function.Supplier;
+
+public class Main {
+    // Contorno para &quot;new T()&quot;: peça uma fábrica
+    static &lt;T&gt; List&lt;T&gt; criarVarios(Supplier&lt;T&gt; fabrica, int n) {
+        List&lt;T&gt; lista = new ArrayList&lt;&gt;();
+        for (int i = 0; i &lt; n; i++) lista.add(fabrica.get());
+        return lista;
+    }
+
+    public static void main(String[] args) {
+        List&lt;String&gt; a = new ArrayList&lt;&gt;();
+        List&lt;Integer&gt; b = new ArrayList&lt;&gt;();
+        System.out.println(a.getClass() == b.getClass());   // mesma classe em execução
+
+        List&lt;StringBuilder&gt; buffers = criarVarios(StringBuilder::new, 3);
+        System.out.println(buffers.size() + &quot; objetos criados&quot;);
+    }
+}
+  </pre></div><div class="cb" data-lang="Saída"><div class="bar"><span class="lang">Saída no console</span><button class="copy" type="button">copiar</button></div><pre>true
+3 objetos criados</pre></div>
+</section>
+
+<div class="ap-part"><span class="t-overline">Parte IV</span><h2>Escolha e mundo real</h2><p>Como decidir a estrutura, onde ela aparece em projetos de verdade e um projeto completo para praticar.</p></div>
+
+<section class="ap-cap" id="escolha" data-toc="Comparando implementações">
+  <header><div class="kx-eyebrow"><span class="num">17</span><span class="t-overline">Decisão</span></div><h2>Comparando implementações</h2><p class="lead">Escolha pela pergunta que o seu código mais faz.</p></header>
+  <figure class="fig glass-s">
+    <svg viewBox="0 0 760 390" role="img" aria-label="Fluxograma para escolher a coleção">
+      <g class="ln">
+        <path d="M380 59 H440"/><path d="M200 88 V120"/>
+        <path d="M380 149 H440"/><path d="M200 178 V210"/>
+        <path d="M380 239 H440"/><path d="M200 268 V290"/>
+      </g>
+      <text x="410" y="52" text-anchor="middle" class="m">sim</text><text x="212" y="109" class="m">não</text>
+      <text x="410" y="142" text-anchor="middle" class="m">sim</text><text x="212" y="199" class="m">não</text>
+      <text x="410" y="232" text-anchor="middle" class="m">sim</text><text x="212" y="283" class="m">não</text>
+      <rect x="20" y="30" width="360" height="58" rx="12" class="s-box s-a" stroke-width="1.6"/><text x="200" y="64" text-anchor="middle">Preciso achar valores por uma chave?</text>
+      <rect x="20" y="120" width="360" height="58" rx="12" class="s-box s-a" stroke-width="1.6"/><text x="200" y="154" text-anchor="middle">Preciso proibir elementos repetidos?</text>
+      <rect x="20" y="210" width="360" height="58" rx="12" class="s-box s-a" stroke-width="1.6"/><text x="200" y="236" text-anchor="middle">Processo por ordem de chegada</text><text x="200" y="256" text-anchor="middle">ou por prioridade?</text>
+      <rect x="440" y="24" width="300" height="72" rx="12" class="tint-c s-c" stroke-width="1.6"/><text x="456" y="48">Map</text><text x="456" y="70" class="m">HashMap · LinkedHashMap (ordem de</text><text x="456" y="87" class="m">inserção) · TreeMap (chaves ordenadas)</text>
+      <rect x="440" y="114" width="300" height="72" rx="12" class="tint-c s-c" stroke-width="1.6"/><text x="456" y="138">Set</text><text x="456" y="160" class="m">HashSet · LinkedHashSet (ordem de</text><text x="456" y="177" class="m">inserção) · TreeSet (ordenado)</text>
+      <rect x="440" y="204" width="300" height="72" rx="12" class="tint-c s-c" stroke-width="1.6"/><text x="456" y="228">Queue / Deque</text><text x="456" y="250" class="m">ArrayDeque (fila FIFO ou pilha LIFO)</text><text x="456" y="267" class="m">PriorityQueue (menor/maior primeiro)</text>
+      <rect x="20" y="290" width="360" height="72" rx="12" class="tint-b s-b" stroke-width="1.6"/><text x="36" y="314">List</text><text x="36" y="336" class="m">ArrayList (padrão: ordem + índice + repetidos)</text><text x="36" y="353" class="m">LinkedList só em casos bem específicos</text>
+    </svg>
+    <figcaption>Figura 9 — Fluxograma rápido de escolha. Na dúvida entre várias, comece pela implementação “Hash” ou por <code>ArrayList</code>.</figcaption>
+  </figure>
+  <div class="tw cmp"><table><thead><tr><th>Implementação</th><th>Ordem</th><th>Busca</th><th>Inserir</th><th>Quando usar</th></tr></thead><tbody>
+    <tr><td><code>ArrayList</code></td><td>Inserção</td><td><code>get(i)</code> O(1); <code>contains</code> O(n)</td><td>Fim: O(1)*; meio: O(n)</td><td>Lista de uso geral</td></tr>
+    <tr><td><code>LinkedList</code></td><td>Inserção</td><td>O(n)</td><td>Pontas: O(1)</td><td>Raramente; prefira <code>ArrayDeque</code></td></tr>
+    <tr><td><code>HashSet</code></td><td>Nenhuma garantida</td><td>O(1) médio</td><td>O(1) médio</td><td>Unicidade rápida</td></tr>
+    <tr><td><code>LinkedHashSet</code></td><td>Inserção</td><td>O(1) médio</td><td>O(1) médio</td><td>Unicidade + ordem previsível</td></tr>
+    <tr><td><code>TreeSet</code></td><td>Natural / Comparator</td><td>O(log n)</td><td>O(log n)</td><td>Unicidade + sempre ordenado</td></tr>
+    <tr><td><code>HashMap</code></td><td>Nenhuma garantida</td><td>O(1) médio</td><td>O(1) médio</td><td>Busca por chave</td></tr>
+    <tr><td><code>TreeMap</code></td><td>Chaves ordenadas</td><td>O(log n)</td><td>O(log n)</td><td>Relatórios, faixas, ranking</td></tr>
+    <tr><td><code>ArrayDeque</code></td><td>Chegada</td><td>Pontas O(1)</td><td>Pontas O(1)*</td><td>Fila e pilha</td></tr>
+    <tr><td><code>PriorityQueue</code></td><td>Prioridade</td><td><code>peek</code> O(1)</td><td>O(log n)</td><td>Agendamento, menor caminho</td></tr>
+  </tbody></table></div>
+  <p class="refs-note">* Tempo amortizado: de vez em quando o array interno precisa crescer, mas na média a operação é constante. O(1) = não depende do tamanho; O(log n) = cresce muito devagar; O(n) = proporcional ao tamanho.</p>
+</section>
+
+<section class="ap-cap" id="projetos-reais" data-toc="Projetos reais que usam">
+  <header><div class="kx-eyebrow"><span class="num">18</span><span class="t-overline">Mercado</span></div><h2>Projetos reais que usam Collections e Generics</h2><p class="lead">Não é assunto “de faculdade”: as bibliotecas que movem empresas inteiras são construídas em cima disso.</p></header>
+  <div class="proj">
+    <div class="card glass-s"><span class="t-overline">Back-end · Spring</span><h4>Spring Data JPA</h4><p>Repositórios são interfaces genéricas: <code>interface AlunoRepository extends JpaRepository&lt;Aluno, Long&gt;</code>. O <code>T</code> é a entidade e o <code>ID</code> é o tipo da chave, e consultas devolvem <code>List&lt;Aluno&gt;</code>.</p><a href="https://docs.spring.io/spring-data/jpa/reference/" target="_blank" rel="noopener">Documentação →</a></div>
+    <div class="card glass-s"><span class="t-overline">Dados em tempo real</span><h4>Apache Kafka</h4><p>Plataforma de streaming usada por grandes empresas. O cliente é genérico em chave e valor: <code>KafkaConsumer&lt;String, Pedido&gt;</code> devolve <code>ConsumerRecords&lt;K, V&gt;</code>.</p><a href="https://kafka.apache.org/documentation/" target="_blank" rel="noopener">Documentação →</a></div>
+    <div class="card glass-s"><span class="t-overline">Mobile · Android</span><h4>Room (Android Jetpack)</h4><p>A camada de banco do Android: um DAO declara <code>List&lt;User&gt; getAll()</code> e o Room gera a implementação. Listas de tela usam <code>RecyclerView.Adapter&lt;VH&gt;</code>, também genérico.</p><a href="https://developer.android.com/training/data-storage/room" target="_blank" rel="noopener">Documentação →</a></div>
+    <div class="card glass-s"><span class="t-overline">Biblioteca · Google</span><h4>Guava</h4><p>Biblioteca do Google que estende o Collections Framework com <code>ImmutableList</code>, <code>Multimap</code> (uma chave → vários valores), <code>Multiset</code> e <code>BiMap</code>.</p><a href="https://github.com/google/guava" target="_blank" rel="noopener">Repositório →</a></div>
+    <div class="card glass-s"><span class="t-overline">Mercado financeiro</span><h4>Eclipse Collections</h4><p>Nasceu dentro do Goldman Sachs como GS Collections e foi doada à Eclipse Foundation. Oferece coleções mais ricas e versões para tipos primitivos.</p><a href="https://eclipse.dev/collections/" target="_blank" rel="noopener">Site oficial →</a></div>
+    <div class="card glass-s"><span class="t-overline">APIs e JSON</span><h4>Jackson</h4><p>Converte JSON em objetos Java. Por causa do type erasure, para ler uma lista ele usa <code>new TypeReference&lt;List&lt;Aluno&gt;&gt;() {}</code>, um truque que preserva o tipo genérico.</p><a href="https://github.com/FasterXML/jackson" target="_blank" rel="noopener">Repositório →</a></div>
+    <div class="card glass-s"><span class="t-overline">Persistência</span><h4>Hibernate ORM</h4><p>Consultas tipadas devolvem coleções prontas: <code>session.createQuery("from Aluno", Aluno.class).getResultList()</code> retorna <code>List&lt;Aluno&gt;</code>, sem cast.</p><a href="https://hibernate.org/orm/" target="_blank" rel="noopener">Site oficial →</a></div>
+    <div class="card glass-s"><span class="t-overline">Games</span><h4>fastutil (Minecraft e mods)</h4><p>Coleções especializadas em primitivos (<code>Int2ObjectOpenHashMap</code>, <code>IntArrayList</code>) que evitam o custo do autoboxing. É muito usada no ecossistema do Minecraft Java Edition.</p><a href="https://fastutil.di.unimi.it/" target="_blank" rel="noopener">Site oficial →</a></div>
+  </div>
+  <div class="alert alert--success"><span class="ico">✓</span><div><p class="ttl">O que isso significa para você</p><p>Quando ler <code>JpaRepository&lt;T, ID&gt;</code>, <code>ResponseEntity&lt;List&lt;Produto&gt;&gt;</code> ou <code>Map&lt;String, Object&gt;</code> num projeto Spring, você vai saber exatamente o que está acontecendo. É isso que separa quem copia exemplos de quem entende a API.</p></div></div>
+</section>
+
+<section class="ap-cap" id="projeto" data-toc="Projeto: Studio de Dança">
+  <header><div class="kx-eyebrow"><span class="num">19</span><span class="t-overline">Mão na massa</span></div><h2>Projeto: sistema de turmas de um studio de dança</h2><p class="lead">Um programa só, usando quase tudo desta apostila: <code>record</code>, <code>Set</code>, <code>Queue</code>, <code>Map</code>, <code>Comparator</code>, <code>merge</code> e uma classe genérica.</p></header>
+  <h3>Requisitos</h3>
+  <ol>
+    <li>Cada turma tem um estilo (samba, forró, jazz funk…) e um número máximo de vagas.</li>
+    <li>Um aluno não pode ser matriculado duas vezes na mesma turma (<code>Set</code>).</li>
+    <li>Turma cheia manda o aluno para a lista de espera, por ordem de chegada (<code>Queue</code>).</li>
+    <li>Quando alguém sai, o primeiro da espera entra automaticamente.</li>
+    <li>As turmas são encontradas pelo nome do estilo, em ordem alfabética (<code>TreeMap</code>).</li>
+    <li>Relatório: alunos ordenados por idade e depois por nome (<code>Comparator</code>), e contagem por faixa etária (<code>merge</code>).</li>
+    <li>Um <code>Repositorio&lt;K, T&gt;</code> genérico guarda qualquer entidade por chave.</li>
+  </ol>
+  <div class="cb" data-lang="Java"><div class="bar"><span class="lang">Main.java</span><button class="copy" type="button">copiar</button></div><pre>import java.util.*;
+
+public class Main {
+
+    // ---------- Entidade ----------
+    record Aluno(String cpf, String nome, int idade) {
+        @Override public String toString() { return nome + &quot; (&quot; + idade + &quot;)&quot;; }
+    }
+
+    // ---------- Repositório genérico ----------
+    static class Repositorio&lt;K, T&gt; {
+        private final Map&lt;K, T&gt; dados = new LinkedHashMap&lt;&gt;();
+        void salvar(K chave, T valor) { dados.put(chave, valor); }
+        Optional&lt;T&gt; buscar(K chave) { return Optional.ofNullable(dados.get(chave)); }
+        Collection&lt;T&gt; todos() { return dados.values(); }
+    }
+
+    // ---------- Turma ----------
+    static class Turma {
+        private final String estilo;
+        private final int vagas;
+        private final Set&lt;Aluno&gt; matriculados = new LinkedHashSet&lt;&gt;();
+        private final Queue&lt;Aluno&gt; espera = new ArrayDeque&lt;&gt;();
+
+        Turma(String estilo, int vagas) { this.estilo = estilo; this.vagas = vagas; }
+
+        String matricular(Aluno a) {
+            if (matriculados.contains(a) || espera.contains(a)) return a.nome() + &quot; já está nesta turma&quot;;
+            if (matriculados.size() &lt; vagas) {
+                matriculados.add(a);
+                return a.nome() + &quot; matriculado(a) em &quot; + estilo;
+            }
+            espera.offer(a);
+            return a.nome() + &quot; foi para a espera de &quot; + estilo + &quot; (posição &quot; + espera.size() + &quot;)&quot;;
+        }
+
+        String cancelar(Aluno a) {
+            if (!matriculados.remove(a)) return a.nome() + &quot; não estava matriculado(a)&quot;;
+            Aluno proximo = espera.poll();
+            if (proximo == null) return a.nome() + &quot; saiu de &quot; + estilo;
+            matriculados.add(proximo);
+            return a.nome() + &quot; saiu; &quot; + proximo.nome() + &quot; entrou da espera&quot;;
+        }
+
+        Set&lt;Aluno&gt; alunos() { return Collections.unmodifiableSet(matriculados); }
+        int naEspera() { return espera.size(); }
+    }
+
+    static String faixa(int idade) {
+        if (idade &lt; 18) return &quot;0-17&quot;;
+        if (idade &lt; 30) return &quot;18-29&quot;;
+        return &quot;30+&quot;;
+    }
+
+    public static void main(String[] args) {
+        Repositorio&lt;String, Aluno&gt; alunos = new Repositorio&lt;&gt;();
+        alunos.salvar(&quot;111&quot;, new Aluno(&quot;111&quot;, &quot;Ana&quot;, 24));
+        alunos.salvar(&quot;222&quot;, new Aluno(&quot;222&quot;, &quot;Bruno&quot;, 31));
+        alunos.salvar(&quot;333&quot;, new Aluno(&quot;333&quot;, &quot;Carla&quot;, 17));
+        alunos.salvar(&quot;444&quot;, new Aluno(&quot;444&quot;, &quot;Diego&quot;, 24));
+        alunos.salvar(&quot;555&quot;, new Aluno(&quot;555&quot;, &quot;Eva&quot;, 45));
+
+        Map&lt;String, Turma&gt; turmas = new TreeMap&lt;&gt;();
+        turmas.put(&quot;samba&quot;, new Turma(&quot;samba&quot;, 2));
+        turmas.put(&quot;forró&quot;, new Turma(&quot;forró&quot;, 3));
+        turmas.put(&quot;jazz funk&quot;, new Turma(&quot;jazz funk&quot;, 2));
+
+        Turma samba = turmas.get(&quot;samba&quot;);
+        for (String cpf : List.of(&quot;111&quot;, &quot;222&quot;, &quot;333&quot;, &quot;111&quot;)) {
+            alunos.buscar(cpf).ifPresent(a -&gt; System.out.println(samba.matricular(a)));
+        }
+        alunos.buscar(&quot;111&quot;).ifPresent(a -&gt; System.out.println(samba.cancelar(a)));
+
+        Turma forro = turmas.get(&quot;forró&quot;);
+        for (Aluno a : alunos.todos()) forro.matricular(a);
+
+        System.out.println(&quot;\n== Turmas (ordem alfabética) ==&quot;);
+        turmas.forEach((estilo, t) -&gt;
+            System.out.println(estilo + &quot;: &quot; + t.alunos() + &quot; | espera: &quot; + t.naEspera()));
+
+        System.out.println(&quot;\n== Forró por idade e nome ==&quot;);
+        List&lt;Aluno&gt; relatorio = new ArrayList&lt;&gt;(forro.alunos());
+        relatorio.sort(Comparator.comparingInt(Aluno::idade).thenComparing(Aluno::nome));
+        relatorio.forEach(System.out::println);
+
+        System.out.println(&quot;\n== Alunos cadastrados por faixa etária ==&quot;);
+        Map&lt;String, Integer&gt; porFaixa = new TreeMap&lt;&gt;();
+        for (Aluno a : alunos.todos()) porFaixa.merge(faixa(a.idade()), 1, Integer::sum);
+        System.out.println(porFaixa);
+    }
+}
+  </pre></div><div class="cb" data-lang="Saída"><div class="bar"><span class="lang">Saída no console</span><button class="copy" type="button">copiar</button></div><pre>Ana matriculado(a) em samba
+Bruno matriculado(a) em samba
+Carla foi para a espera de samba (posição 1)
+Ana já está nesta turma
+Ana saiu; Carla entrou da espera
+
+== Turmas (ordem alfabética) ==
+forró: [Ana (24), Bruno (31), Carla (17)] | espera: 2
+jazz funk: [] | espera: 0
+samba: [Bruno (31), Carla (17)] | espera: 0
+
+== Forró por idade e nome ==
+Carla (17)
+Ana (24)
+Bruno (31)
+
+== Alunos cadastrados por faixa etária ==
+{0-17=1, 18-29=2, 30+=2}</pre></div>
+  <h3>Evoluções sugeridas</h3>
+  <ul>
+    <li>Adicione um <code>Map&lt;Aluno, Set&lt;String&gt;&gt;</code> com os estilos de cada aluno e mostre quem faz mais de uma turma.</li>
+    <li>Troque a lista de espera por uma <code>PriorityQueue</code> que dê preferência a alunos mais antigos do studio.</li>
+    <li>Crie um método genérico <code>&lt;T&gt; void imprimirTodos(Collection&lt;? extends T&gt; itens)</code> e use-o para alunos e turmas.</li>
+  </ul>
+</section>
+
+<div class="ap-part"><span class="t-overline">Parte V</span><h2>Qualidade e prática</h2><p>Os erros que todo mundo comete, o que os profissionais fazem e muitos exercícios.</p></div>
+
+<section class="ap-cap" id="erros" data-toc="Erros comuns">
+  <header><div class="kx-eyebrow"><span class="num">20</span><span class="t-overline">Armadilhas</span></div><h2>Erros comuns</h2></header>
+  <div class="tw"><table><thead><tr><th>Erro</th><th>Sintoma</th><th>Correção</th></tr></thead><tbody>
+    <tr><td>Remover dentro do enhanced-for</td><td><code>ConcurrentModificationException</code></td><td><code>removeIf</code> ou <code>iterator.remove()</code></td></tr>
+    <tr><td>Alterar <code>List.of()</code> / <code>Arrays.asList()</code></td><td><code>UnsupportedOperationException</code></td><td><code>new ArrayList&lt;&gt;(List.of(...))</code></td></tr>
+    <tr><td>Classe sem <code>equals</code>/<code>hashCode</code> em <code>HashSet</code>/<code>HashMap</code></td><td>Duplicatas “invisíveis”; <code>contains</code> retorna <code>false</code></td><td>Implementar os dois juntos, ou usar <code>record</code></td></tr>
+    <tr><td>Mudar um campo usado no <code>hashCode</code> depois de inserir</td><td>O objeto “some” do <code>HashSet</code></td><td>Chaves imutáveis</td></tr>
+    <tr><td><code>list.remove(1)</code> em <code>List&lt;Integer&gt;</code></td><td>Remove a posição 1, não o valor</td><td><code>remove(Integer.valueOf(1))</code></td></tr>
+    <tr><td>Esperar ordem do <code>HashSet</code>/<code>HashMap</code></td><td>Ordem “aleatória” e diferente entre versões</td><td><code>LinkedHash…</code> ou <code>Tree…</code></td></tr>
+    <tr><td>Usar raw type <code>List</code></td><td>Aviso <em>unchecked</em> e <code>ClassCastException</code> em execução</td><td>Sempre <code>List&lt;Tipo&gt;</code></td></tr>
+    <tr><td><code>map.get(chave)</code> sem checar</td><td><code>NullPointerException</code> no unboxing</td><td><code>getOrDefault</code> ou <code>containsKey</code></td></tr>
+    <tr><td><code>TreeSet</code> de objeto sem ordem</td><td><code>ClassCastException</code>: não é <code>Comparable</code></td><td>Implementar <code>Comparable</code> ou passar <code>Comparator</code></td></tr>
+  </tbody></table></div>
+  <div class="cb" data-lang="Java"><div class="bar"><span class="lang">Main.java</span><button class="copy" type="button">copiar</button></div><pre>import java.util.HashMap;
+import java.util.Map;
+
+public class Main {
+    public static void main(String[] args) {
+        Map&lt;String, Integer&gt; estoque = new HashMap&lt;&gt;();
+        estoque.put(&quot;Mouse&quot;, 10);
+        try {
+            int qtd = estoque.get(&quot;Monitor&quot;);   // get devolve null; unboxing de null explode
+            System.out.println(qtd);
+        } catch (NullPointerException e) {
+            System.out.println(&quot;NPE: chave não existe&quot;);
+        }
+        int seguro = estoque.getOrDefault(&quot;Monitor&quot;, 0);
+        System.out.println(&quot;Com getOrDefault: &quot; + seguro);
+    }
+}
+  </pre></div><div class="cb" data-lang="Saída"><div class="bar"><span class="lang">Saída no console</span><button class="copy" type="button">copiar</button></div><pre>NPE: chave não existe
+Com getOrDefault: 0</pre></div>
+</section>
+
+<section class="ap-cap" id="boas-praticas" data-toc="Boas práticas">
+  <header><div class="kx-eyebrow"><span class="num">21</span><span class="t-overline">Profissional</span></div><h2>Boas práticas</h2></header>
+  <ol>
+    <li><strong>Declare pela interface</strong>: <code>List&lt;T&gt;</code>, <code>Set&lt;T&gt;</code>, <code>Map&lt;K,V&gt;</code> na variável, no parâmetro e no retorno.</li>
+    <li><strong>Devolva coleção vazia, nunca <code>null</code></strong>: <code>return List.of();</code> evita <code>if (lista != null)</code> espalhado pelo código.</li>
+    <li><strong>Prefira imutáveis</strong> quando não houver motivo para alterar: <code>List.of</code>, <code>List.copyOf</code>.</li>
+    <li><strong>Não exponha a coleção interna</strong>: devolva <code>Collections.unmodifiableList(...)</code> ou uma cópia (como a <code>Turma</code> do projeto).</li>
+    <li><strong>Use <code>record</code></strong> para dados que entram em <code>Set</code> e como chave de <code>Map</code>.</li>
+    <li><strong>Nomeie no plural</strong>: <code>alunos</code>, <code>emailsCadastrados</code>, <code>estoquePorProduto</code>.</li>
+    <li><strong>Defina capacidade inicial</strong> quando souber o tamanho: <code>new ArrayList&lt;&gt;(10_000)</code>.</li>
+    <li><strong>Aplique PECS</strong> em métodos públicos que recebem coleções: deixa sua API mais flexível.</li>
+    <li><strong>Conheça <code>Collections</code> e <code>Arrays</code></strong>: <code>sort</code>, <code>shuffle</code>, <code>frequency</code>, <code>max</code>, <code>min</code>, <code>nCopies</code> já estão prontos.</li>
+  </ol>
+  <div class="cb" data-lang="Java"><div class="bar"><span class="lang">Main.java</span><button class="copy" type="button">copiar</button></div><pre>import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
+public class Main {
+    public static void main(String[] args) {
+        List&lt;String&gt; estilos = new ArrayList&lt;&gt;(List.of(&quot;samba&quot;, &quot;forró&quot;, &quot;samba&quot;, &quot;jazz&quot;, &quot;samba&quot;));
+        System.out.println(&quot;Frequência de samba: &quot; + Collections.frequency(estilos, &quot;samba&quot;));
+        System.out.println(&quot;Maior (alfabético): &quot; + Collections.max(estilos));
+        Collections.sort(estilos);
+        System.out.println(&quot;Ordenado: &quot; + estilos);
+        System.out.println(&quot;Vazia segura: &quot; + Collections.emptyList());
+    }
+}
+  </pre></div><div class="cb" data-lang="Saída"><div class="bar"><span class="lang">Saída no console</span><button class="copy" type="button">copiar</button></div><pre>Frequência de samba: 3
+Maior (alfabético): samba
+Ordenado: [forró, jazz, samba, samba, samba]
+Vazia segura: []</pre></div>
+</section>
+
+<section class="ap-cap" id="exercicios" data-toc="Exercícios">
+  <header><div class="kx-eyebrow"><span class="num">22</span><span class="t-overline">Prática</span></div><h2>Exercícios</h2><p class="lead">Tente sozinho antes de abrir a resposta. Todas as soluções em código foram executadas.</p></header>
+  <h3>Básicos</h3>
+  <details class="ex"><summary><span class="n">1</span><span class="tx">Qual estrutura aceita repetição e preserva a ordem de inserção?</span><span class="lv">básico</span></summary><div class="ans"><span class="t-overline">Resposta</span><p><code>List</code> (por exemplo, <code>ArrayList</code>). Ela guarda os elementos por posição e aceita repetidos.</p></div></details>
+  <details class="ex"><summary><span class="n">2</span><span class="tx">Qual estrutura evita duplicatas? E qual delas mantém os elementos ordenados?</span><span class="lv">básico</span></summary><div class="ans"><span class="t-overline">Resposta</span><p><code>Set</code>. O <code>TreeSet</code> mantém a ordem natural (ou a de um <code>Comparator</code>); o <code>LinkedHashSet</code> mantém a ordem de inserção; o <code>HashSet</code> não garante ordem.</p></div></details>
+  <details class="ex"><summary><span class="n">3</span><span class="tx">Qual estrutura associa chave e valor? Ela é uma <code>Collection</code>?</span><span class="lv">básico</span></summary><div class="ans"><span class="t-overline">Resposta</span><p><code>Map&lt;K,V&gt;</code>. Não: <code>Map</code> não herda de <code>Collection</code>, por isso usa <code>put</code> em vez de <code>add</code>.</p></div></details>
+  <details class="ex"><summary><span class="n">4</span><span class="tx">Por que <code>List&lt;String&gt;</code> é mais segura que <code>List</code> sem tipo?</span><span class="lv">básico</span></summary><div class="ans"><span class="t-overline">Resposta</span><p>Porque o compilador impede adicionar algo que não seja <code>String</code> e dispensa o cast na leitura. Sem tipo, o erro só aparece em execução como <code>ClassCastException</code>.</p></div></details>
+  <details class="ex"><summary><span class="n">5</span><span class="tx">Crie uma lista com 5 nomes, remova os que começam com “A” e imprima o resultado.</span><span class="lv">básico</span></summary><div class="ans"><span class="t-overline">Solução</span>
+  <div class="cb" data-lang="Java"><div class="bar"><span class="lang">Main.java</span><button class="copy" type="button">copiar</button></div><pre>import java.util.ArrayList;
+import java.util.List;
+
+public class Main {
+    public static void main(String[] args) {
+        List&lt;String&gt; nomes = new ArrayList&lt;&gt;(List.of(&quot;Ana&quot;, &quot;Bruno&quot;, &quot;Alice&quot;, &quot;Carla&quot;, &quot;Arthur&quot;));
+        nomes.removeIf(n -&gt; n.startsWith(&quot;A&quot;));
+        System.out.println(nomes);
+    }
+}
+  </pre></div><div class="cb" data-lang="Saída"><div class="bar"><span class="lang">Saída no console</span><button class="copy" type="button">copiar</button></div><pre>[Bruno, Carla]</pre></div></div></details>
+  <h3>Intermediários</h3>
+  <details class="ex"><summary><span class="n">6</span><span class="tx">Quando usar <code>HashSet</code>, <code>LinkedHashSet</code> ou <code>TreeSet</code>?</span><span class="lv">intermediário</span></summary><div class="ans"><span class="t-overline">Resposta</span><p><code>HashSet</code> quando só importa a unicidade e a velocidade; <code>LinkedHashSet</code> quando também importa a ordem de inserção (ex.: histórico sem repetição); <code>TreeSet</code> quando os elementos precisam estar sempre ordenados (ex.: ranking, palavras em ordem alfabética), pagando O(log n).</p></div></details>
+  <details class="ex"><summary><span class="n">7</span><span class="tx">Como percorrer um <code>Map</code> usando <code>entrySet()</code>? Escreva um exemplo que mostre o produto com maior estoque.</span><span class="lv">intermediário</span></summary><div class="ans"><span class="t-overline">Solução</span>
+  <div class="cb" data-lang="Java"><div class="bar"><span class="lang">Main.java</span><button class="copy" type="button">copiar</button></div><pre>import java.util.LinkedHashMap;
+import java.util.Map;
+
+public class Main {
+    public static void main(String[] args) {
+        Map&lt;String, Integer&gt; estoque = new LinkedHashMap&lt;&gt;();
+        estoque.put(&quot;Mouse&quot;, 12);
+        estoque.put(&quot;Teclado&quot;, 5);
+        estoque.put(&quot;Headset&quot;, 20);
+
+        Map.Entry&lt;String, Integer&gt; maior = null;
+        for (Map.Entry&lt;String, Integer&gt; e : estoque.entrySet()) {
+            System.out.println(e.getKey() + &quot; -&gt; &quot; + e.getValue());
+            if (maior == null || e.getValue() &gt; maior.getValue()) maior = e;
+        }
+        System.out.println(&quot;Maior estoque: &quot; + maior.getKey());
+    }
+}
+  </pre></div><div class="cb" data-lang="Saída"><div class="bar"><span class="lang">Saída no console</span><button class="copy" type="button">copiar</button></div><pre>Mouse -&gt; 12
+Teclado -&gt; 5
+Headset -&gt; 20
+Maior estoque: Headset</pre></div></div></details>
+  <details class="ex"><summary><span class="n">8</span><span class="tx">Conte quantas vezes cada letra aparece em “programação” e mostre em ordem alfabética.</span><span class="lv">intermediário</span></summary><div class="ans"><span class="t-overline">Solução</span>
+  <div class="cb" data-lang="Java"><div class="bar"><span class="lang">Main.java</span><button class="copy" type="button">copiar</button></div><pre>import java.util.Map;
+import java.util.TreeMap;
+
+public class Main {
+    public static void main(String[] args) {
+        Map&lt;Character, Integer&gt; freq = new TreeMap&lt;&gt;();
+        for (char c : &quot;programação&quot;.toCharArray()) {
+            freq.merge(c, 1, Integer::sum);
+        }
+        System.out.println(freq);
+    }
+}
+  </pre></div><div class="cb" data-lang="Saída"><div class="bar"><span class="lang">Saída no console</span><button class="copy" type="button">copiar</button></div><pre>{a=2, g=1, m=1, o=2, p=1, r=2, ã=1, ç=1}</pre></div></div></details>
+  <details class="ex"><summary><span class="n">9</span><span class="tx">Use uma pilha (<code>Deque</code>) para verificar se os parênteses de <code>"(a[b]{c})"</code> estão balanceados.</span><span class="lv">intermediário</span></summary><div class="ans"><span class="t-overline">Solução</span>
+  <div class="cb" data-lang="Java"><div class="bar"><span class="lang">Main.java</span><button class="copy" type="button">copiar</button></div><pre>import java.util.ArrayDeque;
+import java.util.Deque;
+import java.util.Map;
+
+public class Main {
+    static boolean balanceado(String s) {
+        Map&lt;Character, Character&gt; par = Map.of(&#x27;)&#x27;, &#x27;(&#x27;, &#x27;]&#x27;, &#x27;[&#x27;, &#x27;}&#x27;, &#x27;{&#x27;);
+        Deque&lt;Character&gt; pilha = new ArrayDeque&lt;&gt;();
+        for (char c : s.toCharArray()) {
+            if (c == &#x27;(&#x27; || c == &#x27;[&#x27; || c == &#x27;{&#x27;) pilha.push(c);
+            else if (par.containsKey(c)) {
+                if (pilha.isEmpty() || pilha.pop() != par.get(c)) return false;
+            }
+        }
+        return pilha.isEmpty();
+    }
+
+    public static void main(String[] args) {
+        System.out.println(balanceado(&quot;(a[b]{c})&quot;));
+        System.out.println(balanceado(&quot;(a[b)c]&quot;));
+    }
+}
+  </pre></div><div class="cb" data-lang="Saída"><div class="bar"><span class="lang">Saída no console</span><button class="copy" type="button">copiar</button></div><pre>true
+false</pre></div></div></details>
+  <details class="ex"><summary><span class="n">10</span><span class="tx">Por que este código não compila? <code>List&lt;Number&gt; n = new ArrayList&lt;Integer&gt;();</code></span><span class="lv">intermediário</span></summary><div class="ans"><span class="t-overline">Resposta</span><p>Generics são invariantes: <code>List&lt;Integer&gt;</code> não é subtipo de <code>List&lt;Number&gt;</code>. Se fosse, seria possível fazer <code>n.add(3.14)</code> numa lista de inteiros. Para aceitar “lista de algum tipo numérico” na leitura, use <code>List&lt;? extends Number&gt;</code>.</p></div></details>
+  <h3>Avançados</h3>
+  <details class="ex"><summary><span class="n">11</span><span class="tx">Escreva um método genérico <code>contarMaioresQue</code> que conte quantos elementos de uma lista são maiores que um limite, para qualquer tipo comparável.</span><span class="lv">avançado</span></summary><div class="ans"><span class="t-overline">Solução</span>
+  <div class="cb" data-lang="Java"><div class="bar"><span class="lang">Main.java</span><button class="copy" type="button">copiar</button></div><pre>import java.util.List;
+
+public class Main {
+    static &lt;T extends Comparable&lt;T&gt;&gt; int contarMaioresQue(List&lt;T&gt; lista, T limite) {
+        int n = 0;
+        for (T item : lista) if (item.compareTo(limite) &gt; 0) n++;
+        return n;
+    }
+
+    public static void main(String[] args) {
+        System.out.println(contarMaioresQue(List.of(3, 8, 10, 1), 5));
+        System.out.println(contarMaioresQue(List.of(&quot;ana&quot;, &quot;zeca&quot;, &quot;maria&quot;), &quot;joão&quot;));
+    }
+}
+  </pre></div><div class="cb" data-lang="Saída"><div class="bar"><span class="lang">Saída no console</span><button class="copy" type="button">copiar</button></div><pre>2
+2</pre></div></div></details>
+  <details class="ex"><summary><span class="n">12</span><span class="tx">Crie uma classe genérica <code>Ranking&lt;T&gt;</code> que guarda no máximo N itens e sempre devolve os N melhores segundo um <code>Comparator</code>.</span><span class="lv">avançado</span></summary><div class="ans"><span class="t-overline">Solução</span>
+  <div class="cb" data-lang="Java"><div class="bar"><span class="lang">Main.java</span><button class="copy" type="button">copiar</button></div><pre>import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.List;
+import java.util.PriorityQueue;
+
+public class Main {
+    static class Ranking&lt;T&gt; {
+        private final int limite;
+        private final Comparator&lt;T&gt; criterio;
+        private final PriorityQueue&lt;T&gt; fila;   // o PIOR fica no topo para sair primeiro
+
+        Ranking(int limite, Comparator&lt;T&gt; criterio) {
+            this.limite = limite;
+            this.criterio = criterio;
+            this.fila = new PriorityQueue&lt;&gt;(criterio);
+        }
+
+        void registrar(T item) {
+            fila.offer(item);
+            if (fila.size() &gt; limite) fila.poll();
+        }
+
+        List&lt;T&gt; melhores() {
+            List&lt;T&gt; lista = new ArrayList&lt;&gt;(fila);
+            lista.sort(criterio.reversed());
+            return lista;
+        }
+    }
+
+    record Pontuacao(String jogador, int pontos) {}
+
+    public static void main(String[] args) {
+        Ranking&lt;Pontuacao&gt; top3 = new Ranking&lt;&gt;(3, Comparator.comparingInt(Pontuacao::pontos));
+        top3.registrar(new Pontuacao(&quot;Ana&quot;, 120));
+        top3.registrar(new Pontuacao(&quot;Bruno&quot;, 300));
+        top3.registrar(new Pontuacao(&quot;Carla&quot;, 90));
+        top3.registrar(new Pontuacao(&quot;Diego&quot;, 250));
+        top3.registrar(new Pontuacao(&quot;Eva&quot;, 180));
+        top3.melhores().forEach(p -&gt; System.out.println(p.jogador() + &quot;: &quot; + p.pontos()));
+    }
+}
+  </pre></div><div class="cb" data-lang="Saída"><div class="bar"><span class="lang">Saída no console</span><button class="copy" type="button">copiar</button></div><pre>Bruno: 300
+Diego: 250
+Eva: 180</pre></div></div></details>
+  <details class="ex"><summary><span class="n">13</span><span class="tx">Agrupe uma lista de palavras por tamanho, gerando <code>Map&lt;Integer, List&lt;String&gt;&gt;</code> com chaves em ordem crescente.</span><span class="lv">avançado</span></summary><div class="ans"><span class="t-overline">Solução</span>
+  <div class="cb" data-lang="Java"><div class="bar"><span class="lang">Main.java</span><button class="copy" type="button">copiar</button></div><pre>import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+import java.util.TreeMap;
+
+public class Main {
+    public static void main(String[] args) {
+        List&lt;String&gt; palavras = List.of(&quot;set&quot;, &quot;map&quot;, &quot;list&quot;, &quot;queue&quot;, &quot;deque&quot;, &quot;tree&quot;, &quot;hash&quot;);
+        Map&lt;Integer, List&lt;String&gt;&gt; porTamanho = new TreeMap&lt;&gt;();
+        for (String p : palavras) {
+            porTamanho.computeIfAbsent(p.length(), k -&gt; new ArrayList&lt;&gt;()).add(p);
+        }
+        System.out.println(porTamanho);
+    }
+}
+  </pre></div><div class="cb" data-lang="Saída"><div class="bar"><span class="lang">Saída no console</span><button class="copy" type="button">copiar</button></div><pre>{3=[set, map], 4=[list, tree, hash], 5=[queue, deque]}</pre></div></div></details>
+  <h3>Desafio</h3>
+  <details class="ex"><summary><span class="n">★</span><span class="tx">Simule o atendimento de uma academia: alunos chegam numa fila; os do plano “premium” têm prioridade, e entre iguais vale a ordem de chegada.</span><span class="lv">desafio</span></summary><div class="ans"><span class="t-overline">Dica e solução</span><p>A <code>PriorityQueue</code> sozinha não garante a ordem de chegada entre empates; inclua um número de chegada no critério de desempate.</p>
+  <div class="cb" data-lang="Java"><div class="bar"><span class="lang">Main.java</span><button class="copy" type="button">copiar</button></div><pre>import java.util.Comparator;
+import java.util.PriorityQueue;
+
+public class Main {
+    record Chegada(String nome, boolean premium, int ordem) {}
+
+    public static void main(String[] args) {
+        PriorityQueue&lt;Chegada&gt; fila = new PriorityQueue&lt;&gt;(
+            Comparator.comparing((Chegada c) -&gt; !c.premium())   // false (premium) vem antes
+                      .thenComparingInt(Chegada::ordem));
+        String[][] dados = {{&quot;Ana&quot;, &quot;n&quot;}, {&quot;Bruno&quot;, &quot;s&quot;}, {&quot;Carla&quot;, &quot;n&quot;}, {&quot;Diego&quot;, &quot;s&quot;}};
+        int ordem = 0;
+        for (String[] d : dados) fila.offer(new Chegada(d[0], d[1].equals(&quot;s&quot;), ordem++));
+        while (!fila.isEmpty()) {
+            Chegada c = fila.poll();
+            System.out.println(c.nome() + (c.premium() ? &quot; (premium)&quot; : &quot;&quot;));
+        }
+    }
+}
+  </pre></div><div class="cb" data-lang="Saída"><div class="bar"><span class="lang">Saída no console</span><button class="copy" type="button">copiar</button></div><pre>Bruno (premium)
+Diego (premium)
+Ana
+Carla</pre></div></div></details>
+</section>
+
+<section class="ap-cap" id="entrevista" data-toc="Perguntas de entrevista">
+  <header><div class="kx-eyebrow"><span class="num">23</span><span class="t-overline">Carreira</span></div><h2>Perguntas de entrevista</h2><p class="lead">Aparecem com frequência em processos para estágio e júnior Java.</p></header>
+  <details class="ex"><summary><span class="n">?</span><span class="tx">Qual a diferença entre <code>ArrayList</code> e <code>LinkedList</code>?</span><span class="lv">clássica</span></summary><div class="ans"><p>Array dinâmico × lista duplamente encadeada. <code>ArrayList</code> tem acesso por índice O(1) e melhor uso de cache; <code>LinkedList</code> insere/remove nas pontas em O(1), mas acessar a posição i custa O(n). Na prática, <code>ArrayList</code> vence quase sempre.</p></div></details>
+  <details class="ex"><summary><span class="n">?</span><span class="tx">Como o <code>HashMap</code> funciona por dentro?</span><span class="lv">clássica</span></summary><div class="ans"><p>Um array de “baldes”. O <code>hashCode()</code> da chave escolhe o balde; colisões ficam no mesmo balde e são resolvidas com <code>equals()</code>. Quando o mapa passa de um fator de carga (0,75 por padrão), o array dobra e tudo é redistribuído. Desde o Java 8, baldes com muitas colisões viram árvores.</p></div></details>
+  <details class="ex"><summary><span class="n">?</span><span class="tx">Qual o contrato entre <code>equals()</code> e <code>hashCode()</code>?</span><span class="lv">clássica</span></summary><div class="ans"><p>Se <code>a.equals(b)</code> é <code>true</code>, então <code>a.hashCode() == b.hashCode()</code>. O contrário não é obrigatório (colisões são permitidas). Quebrar a regra faz <code>HashSet</code>/<code>HashMap</code> “perderem” objetos.</p></div></details>
+  <details class="ex"><summary><span class="n">?</span><span class="tx">O que é type erasure?</span><span class="lv">intermediária</span></summary><div class="ans"><p>O compilador verifica os tipos genéricos e os remove do bytecode, inserindo casts. Por isso não existe <code>new T()</code> nem <code>instanceof List&lt;String&gt;</code>, e <code>List&lt;String&gt;</code> e <code>List&lt;Integer&gt;</code> são a mesma classe em execução.</p></div></details>
+  <details class="ex"><summary><span class="n">?</span><span class="tx">Explique PECS.</span><span class="lv">intermediária</span></summary><div class="ans"><p>Producer Extends, Consumer Super (Joshua Bloch, <em>Effective Java</em>). Se o parâmetro produz valores que você lê, use <code>? extends T</code>; se consome valores que você escreve, use <code>? super T</code>.</p></div></details>
+  <details class="ex"><summary><span class="n">?</span><span class="tx">Diferença entre <code>Comparable</code> e <code>Comparator</code>?</span><span class="lv">clássica</span></summary><div class="ans"><p><code>Comparable</code> define a ordem natural dentro da própria classe (<code>compareTo</code>), e só existe uma. <code>Comparator</code> é uma regra externa (<code>compare</code>), e você pode ter várias.</p></div></details>
+  <details class="ex"><summary><span class="n">?</span><span class="tx"><code>Collections.unmodifiableList</code> e <code>List.copyOf</code> são a mesma coisa?</span><span class="lv">intermediária</span></summary><div class="ans"><p>Não. <code>unmodifiableList</code> é uma vista somente-leitura: mudanças na lista original aparecem nela. <code>List.copyOf</code> cria uma cópia imutável independente.</p></div></details>
+</section>
+
+<section class="ap-cap" id="quiz" data-toc="Quiz rápido">
+  <header><div class="kx-eyebrow"><span class="num">24</span><span class="t-overline">Autoavaliação</span></div><h2>Quiz rápido</h2><p class="lead">10 perguntas para conferir agora. O quiz de fixação completo, com filtro por tema, está no link abaixo.</p></header>
+  <div class="quiz-cta glass-s"><p><strong>Quiz de fixação completo</strong> · 24 questões, filtro por tema e placar por assunto.</p><a class="btn btn--primary btn--sm" href="https://akalixtogamer-lgtm.github.io/quizestudos/quizkalixto-collections-generics/" target="_blank" rel="noopener">Abrir o quiz →</a></div>
+  <div id="quiz-box" class="quiz"></div>
+  <div class="quiz-score glass-s"><span>Seu placar: <b id="quiz-pts">0</b> / <span id="quiz-tot">10</span></span><button class="btn btn--glass btn--sm" type="button" id="quiz-reset">Refazer quiz</button></div>
+</section>
+
+<section class="ap-cap" id="revisao" data-toc="Revisão">
+  <header><div class="kx-eyebrow"><span class="num">25</span><span class="t-overline">Síntese</span></div><h2>Revisão em uma página</h2></header>
+  <div class="tw"><table><thead><tr><th>#</th><th>Conceito</th><th>Resumo em uma linha</th></tr></thead><tbody>
+    <tr><td>1</td><td>Collections Framework</td><td>Interfaces + implementações + algoritmos para grupos de objetos</td></tr>
+    <tr><td>2</td><td><code>List</code></td><td>Ordem, índice e repetidos — <code>ArrayList</code></td></tr>
+    <tr><td>3</td><td><code>Set</code></td><td>Sem repetidos — Hash (rápido), LinkedHash (inserção), Tree (ordenado)</td></tr>
+    <tr><td>4</td><td><code>Map</code></td><td>Chave única → valor; fora da hierarquia <code>Collection</code></td></tr>
+    <tr><td>5</td><td><code>Queue</code>/<code>Deque</code></td><td>FIFO e LIFO com <code>ArrayDeque</code>; prioridade com <code>PriorityQueue</code></td></tr>
+    <tr><td>6</td><td><code>equals</code>/<code>hashCode</code></td><td>Definem igualdade em Hash*; implemente juntos ou use <code>record</code></td></tr>
+    <tr><td>7</td><td><code>Comparable</code>/<code>Comparator</code></td><td>Ordem natural × regra externa</td></tr>
+    <tr><td>8</td><td>Imutáveis</td><td><code>List.of</code>, <code>copyOf</code>: não aceitam alteração nem <code>null</code></td></tr>
+    <tr><td>9</td><td>Generics</td><td>Tipo como parâmetro: erro na compilação, sem cast</td></tr>
+    <tr><td>10</td><td>Tipo limitado</td><td><code>&lt;T extends Comparable&lt;T&gt;&gt;</code> garante métodos disponíveis</td></tr>
+    <tr><td>11</td><td>Wildcards</td><td><code>? extends</code> lê, <code>? super</code> escreve (PECS)</td></tr>
+    <tr><td>12</td><td>Type erasure</td><td>Generics somem no bytecode; sem <code>new T()</code></td></tr>
+  </tbody></table></div>
+</section>
+
+<section class="ap-cap" id="glossario" data-toc="Glossário">
+  <header><div class="kx-eyebrow"><span class="num">26</span><span class="t-overline">Vocabulário</span></div><h2>Glossário</h2></header>
+  <dl class="glos">
+    <div class="glass-s"><dt>Autoboxing</dt><dd>Conversão automática de primitivo para wrapper (<code>int</code> → <code>Integer</code>); o inverso é unboxing.</dd></div>
+    <div class="glass-s"><dt>Bucket (balde)</dt><dd>Posição do array interno de uma tabela hash.</dd></div>
+    <div class="glass-s"><dt>Diamante</dt><dd>O <code>&lt;&gt;</code> vazio em <code>new ArrayList&lt;&gt;()</code>, que deixa o compilador inferir o tipo.</dd></div>
+    <div class="glass-s"><dt>FIFO / LIFO</dt><dd>First In First Out (fila) / Last In First Out (pilha).</dd></div>
+    <div class="glass-s"><dt>Imutável</dt><dd>Objeto ou coleção que não pode ser alterado depois de criado.</dd></div>
+    <div class="glass-s"><dt>Invariância</dt><dd><code>List&lt;Integer&gt;</code> não é subtipo de <code>List&lt;Number&gt;</code>.</dd></div>
+    <div class="glass-s"><dt>Iterator</dt><dd>Objeto que percorre uma coleção com <code>hasNext()</code>/<code>next()</code> e permite <code>remove()</code> seguro.</dd></div>
+    <div class="glass-s"><dt>Parâmetro de tipo</dt><dd>A variável de tipo (<code>T</code>, <code>E</code>, <code>K</code>, <code>V</code>) declarada entre <code>&lt;&gt;</code>.</dd></div>
+    <div class="glass-s"><dt>PECS</dt><dd>Producer Extends, Consumer Super: regra para escolher o wildcard.</dd></div>
+    <div class="glass-s"><dt>Raw type</dt><dd>Tipo genérico usado sem argumento (<code>List</code>); existe só por compatibilidade.</dd></div>
+    <div class="glass-s"><dt>Type erasure</dt><dd>Remoção dos tipos genéricos no bytecode após a verificação do compilador.</dd></div>
+    <div class="glass-s"><dt>Wildcard</dt><dd>O coringa <code>?</code>, sozinho ou com <code>extends</code>/<code>super</code>.</dd></div>
+    <div class="glass-s"><dt>Wrapper</dt><dd>Classe que embrulha um primitivo: <code>Integer</code>, <code>Double</code>, <code>Boolean</code>…</dd></div>
+  </dl>
+</section>
+
+<section class="ap-cap" id="checklist" data-toc="Checklist">
+  <header><div class="kx-eyebrow"><span class="num">27</span><span class="t-overline">Pronto?</span></div><h2>Checklist de domínio</h2><p class="lead">Marque o que você já consegue fazer sem consultar. As marcações ficam salvas neste navegador.</p></header>
+  <ul class="check" data-key="cg">
+    <li><label><input type="checkbox"><span>Explico a diferença entre array e coleção.</span></label></li>
+    <li><label><input type="checkbox"><span>Desenho a hierarquia e sei por que <code>Map</code> fica de fora.</span></label></li>
+    <li><label><input type="checkbox"><span>Escolho entre <code>List</code>, <code>Set</code>, <code>Map</code> e <code>Queue</code> pelo problema.</span></label></li>
+    <li><label><input type="checkbox"><span>Removo elementos com segurança (<code>removeIf</code>).</span></label></li>
+    <li><label><input type="checkbox"><span>Percorro um <code>Map</code> com <code>entrySet()</code>.</span></label></li>
+    <li><label><input type="checkbox"><span>Uso <code>merge</code> e <code>computeIfAbsent</code> para contar e agrupar.</span></label></li>
+    <li><label><input type="checkbox"><span>Implemento <code>equals</code>/<code>hashCode</code> ou uso <code>record</code>.</span></label></li>
+    <li><label><input type="checkbox"><span>Ordeno objetos com <code>Comparator.comparing().thenComparing()</code>.</span></label></li>
+    <li><label><input type="checkbox"><span>Crio uma classe genérica e um método genérico com limite.</span></label></li>
+    <li><label><input type="checkbox"><span>Sei quando usar <code>? extends</code> e <code>? super</code>.</span></label></li>
+    <li><label><input type="checkbox"><span>Explico type erasure e suas limitações.</span></label></li>
+    <li><label><input type="checkbox"><span>Fiz o projeto do studio de dança e uma das evoluções.</span></label></li>
+  </ul>
+</section>
+
+<section class="ap-cap" id="referencias" data-toc="Referências">
+  <header><div class="kx-eyebrow"><span class="num">28</span><span class="t-overline">ABNT NBR 6023</span></div><h2>Referências</h2><p class="lead">Obras e documentos que sustentam esta apostila.</p></header>
+  <h3>Livros</h3>
+  <ol class="refs">
+    <li>BLOCH, Joshua. <strong>Java efetivo</strong>: as melhores práticas para a plataforma Java. 3. ed. Rio de Janeiro: Alta Books, 2019. (Capítulo 5: Genéricos — itens 26 a 33, incluindo PECS no item 31.)</li>
+    <li>DEITEL, Paul; DEITEL, Harvey. <strong>Java</strong>: como programar. 10. ed. São Paulo: Pearson Education do Brasil, 2017. (Capítulos 16 — Coleções genéricas — e 20 — Classes e métodos genéricos.)</li>
+    <li>HORSTMANN, Cay S. <strong>Core Java</strong>: volume I — fundamentals. 12. ed. Hoboken: Pearson, 2022. (Capítulos 8 — Generic programming — e 9 — Collections.)</li>
+    <li>NAFTALIN, Maurice; WADLER, Philip. <strong>Java generics and collections</strong>. Sebastopol: O'Reilly Media, 2006.</li>
+    <li>SIERRA, Kathy; BATES, Bert. <strong>Use a cabeça! Java</strong>. 2. ed. Rio de Janeiro: Alta Books, 2007.</li>
+  </ol>
+  <h3>Documentação oficial e especificações</h3>
+  <ol class="refs">
+    <li>ORACLE. <strong>The Java tutorials</strong>: Collections. Redwood City: Oracle, [s.d.]. Disponível em: <a href="https://docs.oracle.com/javase/tutorial/collections/">https://docs.oracle.com/javase/tutorial/collections/</a>. Acesso em: 23 out. 2026.</li>
+    <li>ORACLE. <strong>The Java tutorials</strong>: Generics. Redwood City: Oracle, [s.d.]. Disponível em: <a href="https://docs.oracle.com/javase/tutorial/java/generics/">https://docs.oracle.com/javase/tutorial/java/generics/</a>. Acesso em: 23 out. 2026.</li>
+    <li>ORACLE. <strong>Java SE 21 API</strong>: package java.util. Redwood City: Oracle, 2023. Disponível em: <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/package-summary.html">https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/package-summary.html</a>. Acesso em: 23 out. 2026.</li>
+    <li>ORACLE. <strong>Creating sequenced collections, sets, and maps</strong>. Java SE 25 Core Libraries. Redwood City: Oracle, 2025. Disponível em: <a href="https://docs.oracle.com/en/java/javase/25/core/creating-sequenced-collections-sets-and-maps.html">https://docs.oracle.com/en/java/javase/25/core/creating-sequenced-collections-sets-and-maps.html</a>. Acesso em: 23 out. 2026.</li>
+    <li>MARKS, Stuart. <strong>JEP 431</strong>: Sequenced Collections. OpenJDK, 2023. Disponível em: <a href="https://openjdk.org/jeps/431">https://openjdk.org/jeps/431</a>. Acesso em: 23 out. 2026.</li>
+    <li>MARKS, Stuart. <strong>JEP 269</strong>: Convenience Factory Methods for Collections. OpenJDK, 2017. Disponível em: <a href="https://openjdk.org/jeps/269">https://openjdk.org/jeps/269</a>. Acesso em: 23 out. 2026.</li>
+    <li>GOSLING, James et al. <strong>The Java language specification</strong>: Java SE 21 edition. Redwood City: Oracle, 2023. (Seção 4.5 — Parameterized types; 4.6 — Type erasure.) Disponível em: <a href="https://docs.oracle.com/javase/specs/jls/se21/html/">https://docs.oracle.com/javase/specs/jls/se21/html/</a>. Acesso em: 23 out. 2026.</li>
+  </ol>
+  <h3>Projetos citados</h3>
+  <ol class="refs">
+    <li>APACHE SOFTWARE FOUNDATION. <strong>Apache Kafka documentation</strong>. Disponível em: <a href="https://kafka.apache.org/documentation/">https://kafka.apache.org/documentation/</a>. Acesso em: 23 out. 2026.</li>
+    <li>ECLIPSE FOUNDATION. <strong>Eclipse Collections</strong>. Disponível em: <a href="https://eclipse.dev/collections/">https://eclipse.dev/collections/</a>. Acesso em: 23 out. 2026.</li>
+    <li>ECLIPSE FOUNDATION. <strong>GS Collections moves to the Eclipse Foundation</strong>. Disponível em: <a href="https://newsroom.eclipse.org/news/community-news/gs-collections-moves-eclipse-foundation">https://newsroom.eclipse.org/news/community-news/gs-collections-moves-eclipse-foundation</a>. Acesso em: 23 out. 2026.</li>
+    <li>FASTERXML. <strong>Jackson project</strong>. Disponível em: <a href="https://github.com/FasterXML/jackson">https://github.com/FasterXML/jackson</a>. Acesso em: 23 out. 2026.</li>
+    <li>GOOGLE. <strong>Guava</strong>: Google core libraries for Java. Disponível em: <a href="https://github.com/google/guava">https://github.com/google/guava</a>. Acesso em: 23 out. 2026.</li>
+    <li>GOOGLE. <strong>Save data in a local database using Room</strong>. Android Developers. Disponível em: <a href="https://developer.android.com/training/data-storage/room">https://developer.android.com/training/data-storage/room</a>. Acesso em: 23 out. 2026.</li>
+    <li>RED HAT. <strong>Hibernate ORM</strong>. Disponível em: <a href="https://hibernate.org/orm/">https://hibernate.org/orm/</a>. Acesso em: 23 out. 2026.</li>
+    <li>SPRING. <strong>Spring Data JPA reference documentation</strong>. VMware Tanzu. Disponível em: <a href="https://docs.spring.io/spring-data/jpa/reference/">https://docs.spring.io/spring-data/jpa/reference/</a>. Acesso em: 23 out. 2026.</li>
+    <li>VIGNA, Sebastiano. <strong>fastutil</strong>: fast &amp; compact type-specific collections for Java. Università degli Studi di Milano. Disponível em: <a href="https://fastutil.di.unimi.it/">https://fastutil.di.unimi.it/</a>. Acesso em: 23 out. 2026.</li>
+  </ol>
+  <h3>Como citar esta apostila</h3>
+  <div class="cb" data-lang="ABNT"><div class="bar"><span class="lang">ABNT</span><button class="copy" type="button">copiar</button></div><pre>TOLEDO, Wallace. Collections e Generics em Java. Rio de Janeiro: dev-Kalixto, 2026. Apostila. Disponível em: https://akalixtogamer-lgtm.github.io/apostilas/apostilakalixto-collections-generics/. Acesso em: [data].</pre></div>
+</section>
+
+</main>
+</div>
+<script>window.QUIZ=[
+ {q:'Qual estrutura aceita elementos repetidos e mantém a ordem de inserção?',o:['ArrayList','HashSet','TreeSet','HashMap'],c:0,e:'List (como ArrayList) guarda por posição e aceita repetidos. Sets eliminam duplicatas.'},
+ {q:'O que imprime <code>new TreeSet&lt;&gt;(List.of("Zoe","Ana","Bruno"))</code>?',o:['[Zoe, Ana, Bruno]','[Ana, Bruno, Zoe]','Ordem imprevisível','Erro de compilação'],c:1,e:'TreeSet mantém os elementos na ordem natural; para String, ordem alfabética.'},
+ {q:'Sobre <code>Map</code>, qual afirmação é verdadeira?',o:['Map herda de Collection','Map aceita chaves repetidas','Map associa chaves únicas a valores e não herda de Collection','Map só guarda String'],c:2,e:'Map é uma hierarquia separada: chaves únicas, valores podem repetir, usa put/get.'},
+ {q:'Qual método de <code>Queue</code> remove a cabeça e devolve <code>null</code> se a fila estiver vazia?',o:['peek()','remove()','poll()','pop()'],c:2,e:'poll() remove e retorna null se vazia; remove() lança exceção; peek() só espia.'},
+ {q:'O que acontece ao chamar <code>lista.remove(x)</code> dentro de um enhanced-for sobre a mesma lista?',o:['ConcurrentModificationException','Funciona normalmente','NullPointerException','Erro de compilação'],c:0,e:'O Iterator escondido detecta a modificação. Use removeIf ou iterator.remove().'},
+ {q:'Por que <code>List&lt;int&gt;</code> não compila?',o:['Porque int é palavra reservada','Generics só aceitam tipos de referência','Porque List é abstrata','Compila, sim'],c:1,e:'Parâmetros de tipo precisam ser objetos. Use List&lt;Integer&gt; e o autoboxing faz a conversão.'},
+ {q:'Um método recebe uma lista e só vai <strong>ler</strong> números dela. Qual assinatura é mais flexível?',o:['List&lt;Number&gt;','List&lt;? super Number&gt;','List&lt;Object&gt;','List&lt;? extends Number&gt;'],c:3,e:'Producer Extends: aceita List de Integer, Double, Number… e permite ler como Number.'},
+ {q:'Dois objetos <code>Aluno</code> com o mesmo CPF entram duplicados num <code>HashSet</code>. Causa mais provável?',o:['HashSet aceita duplicatas','Faltou usar TreeSet','O CPF é String','A classe não sobrescreveu equals() e hashCode()'],c:3,e:'Sem equals/hashCode, a igualdade é por referência. Implemente os dois ou use record.'},
+ {q:'O que <code>List.of(1, 2, 3).add(4)</code> causa?',o:['Lista [1, 2, 3, 4]','UnsupportedOperationException','Erro de compilação','Nada acontece'],c:1,e:'List.of cria lista imutável. Para alterar, use new ArrayList&lt;&gt;(List.of(...)).'},
+ {q:'Em <code>public static &lt;T extends Comparable&lt;T&gt;&gt; T maior(List&lt;T&gt; l)</code>, o que o limite garante?',o:['Que T é String','Que a lista não é vazia','Que T tem o método compareTo','Que T é imutável'],c:2,e:'O limite restringe T a tipos comparáveis, liberando o uso de compareTo dentro do método.'}
+];
+</script><script>(function(){
+  /* progresso de leitura */
+  var bar=document.getElementById('kx-prog');
+  function tick(){var h=document.documentElement,m=h.scrollHeight-h.clientHeight;bar.style.width=(m>0?h.scrollTop/m*100:0)+'%';}
+  document.addEventListener('scroll',tick,{passive:true});tick();
+
+  /* sumário gerado das seções */
+  var toc=document.getElementById('toc'),secs=[].slice.call(document.querySelectorAll('section.ap-cap[data-toc]'));
+  secs.forEach(function(s,i){var a=document.createElement('a');a.href='#'+s.id;
+    a.innerHTML='<span>'+String(i).padStart(2,'0')+'</span>'+s.getAttribute('data-toc');toc.appendChild(a);});
+  var links=[].slice.call(toc.querySelectorAll('a'));
+  if('IntersectionObserver' in window){
+    var ob=new IntersectionObserver(function(es){es.forEach(function(e){if(!e.isIntersecting)return;var i=secs.indexOf(e.target);
+      links.forEach(function(a,j){a.classList.toggle('on',i===j);});});},{rootMargin:'0px 0px -75% 0px'});
+    secs.forEach(function(s){ob.observe(s);});
+  }
+  if(window.matchMedia('(max-width:960px)').matches){var d=document.querySelector('.ap-toc details');if(d)d.removeAttribute('open');}
+
+  /* copiar código */
+  document.querySelectorAll('.cb .copy').forEach(function(b){b.addEventListener('click',function(){
+    var t=b.closest('.cb').querySelector('pre').innerText;
+    function ok(){b.textContent='copiado';b.classList.add('ok');setTimeout(function(){b.textContent='copiar';b.classList.remove('ok');},1600);}
+    if(navigator.clipboard)navigator.clipboard.writeText(t).then(ok,function(){});});});
+
+  /* checklists persistentes */
+  var KEY='kx-ck-'+location.pathname;
+  function load(){try{return JSON.parse(localStorage.getItem(KEY)||'{}');}catch(e){return {};}}
+  function save(o){try{localStorage.setItem(KEY,JSON.stringify(o));}catch(e){}}
+  var st=load();
+  document.querySelectorAll('ul.check').forEach(function(ul){var k=ul.getAttribute('data-key')||'x';
+    ul.querySelectorAll('input').forEach(function(inp,i){var id=k+i;if(st[id])inp.checked=true;
+      inp.addEventListener('change',function(){st[id]=inp.checked;save(st);});});});
+
+  /* quiz */
+  var box=document.getElementById('quiz-box');
+  if(box&&window.QUIZ){
+    var pts=0,el=document.getElementById('quiz-pts');
+    function render(){box.innerHTML='';pts=0;el.textContent='0';document.getElementById('quiz-tot').textContent=QUIZ.length;
+      QUIZ.forEach(function(q,qi){var d=document.createElement('div');d.className='quiz-q glass-s';
+        var h=document.createElement('p');h.className='enun';h.innerHTML='<span>'+(qi+1)+'.</span>'+q.q;d.appendChild(h);
+        var fb=document.createElement('p');fb.className='fb';
+        q.o.forEach(function(op,oi){var b=document.createElement('button');b.type='button';b.innerHTML=op;
+          b.addEventListener('click',function(){var bs=d.querySelectorAll('button');bs.forEach(function(x){x.disabled=true;});
+            bs[q.c].classList.add('ok');if(oi===q.c){pts++;el.textContent=pts;fb.innerHTML='<strong>Isso!</strong> '+q.e;}
+            else{b.classList.add('no');fb.innerHTML='<strong>Quase.</strong> '+q.e;}fb.classList.add('show');});
+          d.appendChild(b);});
+        d.appendChild(fb);box.appendChild(d);});}
+    render();document.getElementById('quiz-reset').addEventListener('click',render);
+  }
+})();
+</script><footer class="kx-sig"><div><img class="kx-logo" src="data:image/webp;base64,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" width="40" height="40" alt=""><span><b>Kalixto — Professor • Programador • Gamer</b><small>Kalixto by Wallace Toledo · @dev.kalixto</small></span></div></footer>
+<style>
+.kx-theme{position:fixed;right:16px;bottom:calc(16px + env(safe-area-inset-bottom,0px));z-index:50;display:inline-flex;align-items:center;gap:8px;
+  font:600 14px/20px var(--f-heading,'Sora',system-ui,sans-serif);color:var(--text-primary,#fff);cursor:pointer;
+  background:var(--glass-fill,rgba(255,255,255,.06));border:1px solid var(--glass-stroke,rgba(255,255,255,.14));border-radius:999px;padding:10px 16px;
+  -webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);box-shadow:var(--glass-shadow-s,0 12px 32px rgba(0,0,0,.35))}
+.kx-theme:hover{box-shadow:0 0 32px rgba(123,46,255,.45)}
+.kx-theme:focus-visible{outline:2px solid var(--brand-tertiary,#00D9FF);outline-offset:3px}
+.kx-theme .ic{width:18px;height:18px;border-radius:50%;background:linear-gradient(90deg,#7B2EFF,#FF2DAA);flex:none}
+@media print{.kx-theme{display:none}}
+</style>
+<button class="kx-theme" id="kx-theme" type="button" aria-label="Alternar modo claro e escuro"><span class="ic" aria-hidden="true"></span><span id="kx-theme-t">Modo claro</span></button>
+<script>
+(function(){
+  var root=document.documentElement, b=document.getElementById('kx-theme'), t=document.getElementById('kx-theme-t');
+  function cur(){var a=root.getAttribute('data-theme');if(a)return a;return window.matchMedia('(prefers-color-scheme: light)').matches?'light':'dark';}
+  function paint(){t.textContent=cur()==='dark'?'Modo claro':'Modo escuro';}
+  b.addEventListener('click',function(){var n=cur()==='dark'?'light':'dark';root.setAttribute('data-theme',n);try{localStorage.setItem('kx-theme',n);}catch(e){}paint();
+    if(document.querySelector('.mermaid'))location.reload();});
+  window.matchMedia('(prefers-color-scheme: light)').addEventListener('change',paint);
+  paint();
+})();
+</script></body></html>
