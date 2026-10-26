@@ -1,0 +1,1263 @@
+<!doctype html><html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><title>Portas Lógicas · Apostila Kalixto</title><meta name="description" content="As 7 portas lógicas com circuitos clicáveis, tabelas-verdade, álgebra de Boole, Karnaugh, somadores, MUX, latch e exemplos em Java, Python e JS."><meta property="og:title" content="Portas Lógicas · Apostila Kalixto"><meta property="og:description" content="Como o computador decide com 0 e 1: circuitos interativos, exercícios, quiz e código."><style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
+
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@500;600;700&family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&family=JetBrains+Mono:wght@400;600&display=swap">
+<style>
+/* Layout: coluna única de leitura (~800px); cada conceito tem um "laboratório" (circuito SVG clicável) + texto + código. Visual neon Kalixto, só tema escuro por escolha. */
+:root{
+  --bg:#0a0812; --panel:#13101f; --panel2:#1a1529; --line:#2c2443;
+  --fg:#efeaf8; --muted:#a69dc0;
+  --magenta:#ff3ea5; --purple:#9b5cff; --blue:#2fd3ff; --amber:#ffc94d;
+  --on:#3dffa0; --off:#ff4d6d; --wire-off:#4a3f66;
+  --f-display:"Chakra Petch","Segoe UI",system-ui,sans-serif;
+  --f-body:"Atkinson Hyperlegible","Segoe UI",system-ui,sans-serif;
+  --f-mono:"JetBrains Mono",ui-monospace,Consolas,monospace;
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--fg);font-family:var(--f-body);font-size:18px;line-height:1.6;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:0 64px}
+.wrap{max-width:800px;margin:0 auto}
+h1,h2,h3{font-family:var(--f-display);line-height:1.15;text-wrap:balance;margin:0}
+h2{font-size:clamp(1.6rem,4vw,2.1rem);margin-bottom:12px}
+h3{font-size:1.25rem;margin:28px 0 8px}
+p{margin:0 0 14px}
+ul,ol{margin:0 0 14px;padding-left:1.3em}
+li{margin-bottom:4px}
+a{color:var(--blue)}
+code,.mono{font-family:var(--f-mono);font-size:.88em}
+:focus-visible{outline:2px solid var(--blue);outline-offset:3px;border-radius:4px}
+.eyebrow{font-family:var(--f-display);text-transform:uppercase;letter-spacing:.14em;font-size:.78rem;color:var(--magenta);font-weight:600}
+.muted{color:var(--muted)}
+.ov{text-decoration:overline;text-decoration-thickness:2px}
+.b1{color:var(--on)} .b0{color:var(--off)}
+
+/* Hero */
+.hero{padding-block:48px 28px;border-bottom:1px solid var(--line)}
+.brand{display:flex;align-items:center;gap:10px;font-family:var(--f-display);font-weight:600;color:var(--muted);font-size:.9rem;letter-spacing:.06em;margin-bottom:22px}
+.brand b{background:linear-gradient(90deg,var(--magenta),var(--purple),var(--blue));-webkit-background-clip:text;background-clip:text;color:transparent}
+.hero h1{font-size:clamp(2.4rem,8vw,4rem);font-weight:700;letter-spacing:-.01em}
+.hero h1 span{color:var(--on);text-shadow:0 0 18px color-mix(in srgb,var(--on) 55%,transparent)}
+.hero .lede{font-size:1.15rem;color:var(--muted);max-width:62ch;margin-top:16px}
+.bits{display:flex;gap:8px;flex-wrap:wrap;margin-top:22px}
+.bit{font-family:var(--f-mono);padding:4px 12px;border:1px solid var(--line);border-radius:999px;font-size:.85rem;color:var(--muted)}
+.bit.one{color:var(--on);border-color:color-mix(in srgb,var(--on) 50%,transparent)}
+.bit.zero{color:var(--off);border-color:color-mix(in srgb,var(--off) 50%,transparent)}
+
+nav.toc{padding-block:22px;border-bottom:1px solid var(--line)}
+nav.toc ol{margin:8px 0 0;padding-left:1.4em;columns:2;column-gap:28px}
+nav.toc li{break-inside:avoid}
+nav.toc a{color:var(--fg);text-decoration:none;border-bottom:1px solid var(--line)}
+nav.toc a:hover{color:var(--blue);border-color:var(--blue)}
+@media (max-width:560px){nav.toc ol{columns:1}}
+
+section.block{padding-block:48px 8px;border-bottom:1px solid var(--line)}
+.callout{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:16px 18px;margin:16px 0}
+.callout.tip{border-color:color-mix(in srgb,var(--blue) 45%,var(--line))}
+.callout.warn{border-color:color-mix(in srgb,var(--amber) 50%,var(--line))}
+.callout strong{color:var(--blue)}
+.callout.warn strong{color:var(--amber)}
+
+/* Figuras */
+figure{margin:18px 0;background:var(--bg);border:1px solid var(--line);border-radius:14px;padding:14px}
+figure svg{width:100%;height:auto;display:block}
+figcaption{font-size:.88rem;color:var(--muted);margin-top:10px}
+figcaption b{color:var(--fg)}
+.fig-scroll{overflow-x:auto}
+.fig-scroll svg{min-width:520px}
+.status{font-family:var(--f-mono);font-size:.95rem;margin-top:8px}
+
+/* Linha do tempo */
+.timeline{list-style:none;padding:0;margin:16px 0;display:grid;gap:0;border-left:2px solid var(--line)}
+.timeline li{position:relative;padding:0 0 16px 22px;margin:0}
+.timeline li::before{content:"";position:absolute;left:-7px;top:7px;width:12px;height:12px;border-radius:50%;background:var(--purple);box-shadow:0 0 10px var(--purple)}
+.timeline .yr{font-family:var(--f-mono);color:var(--blue);font-weight:600;margin-right:8px}
+
+/* Cartão da porta */
+.gate{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:22px;margin-top:22px}
+.gate-head{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;margin-bottom:6px}
+.gate-head h3{font-size:1.7rem;margin:0;letter-spacing:.02em}
+.gate-head .pt{font-family:var(--f-display);color:var(--purple);font-size:1.05rem;font-weight:600}
+.gate-head .expr{margin-left:auto;font-family:var(--f-mono);font-size:1.1rem;color:var(--blue);background:var(--panel2);padding:2px 10px;border-radius:8px}
+.lab{display:grid;grid-template-columns:minmax(0,1.5fr) minmax(0,1fr);gap:18px;align-items:center;margin:14px 0 16px;background:var(--bg);border:1px solid var(--line);border-radius:12px;padding:12px}
+@media (max-width:600px){.lab{grid-template-columns:1fr}}
+.lab svg{width:100%;height:auto;display:block}
+.hint{font-size:.85rem;color:var(--muted);margin:-6px 0 12px}
+
+svg .body{fill:var(--panel2);stroke:var(--purple);stroke-width:3}
+svg .xorline{fill:none;stroke:var(--purple);stroke-width:3}
+svg .bubble{fill:var(--panel2);stroke:var(--purple);stroke-width:3}
+svg .wire{fill:none;stroke:var(--wire-off);stroke-width:4;stroke-linecap:round;stroke-linejoin:round;transition:stroke .2s}
+svg .wire.on{stroke:var(--on);filter:drop-shadow(0 0 4px var(--on))}
+svg .dot{fill:var(--wire-off)} svg .dot.on{fill:var(--on)}
+svg .label{fill:var(--fg);font-family:var(--f-mono);font-size:13px;text-anchor:middle}
+svg .glabel{fill:var(--muted);font-family:var(--f-mono);font-size:10px;text-anchor:middle;font-weight:600}
+svg .nlabel{fill:var(--fg);font-family:var(--f-display);font-size:15px;font-weight:600}
+svg .node{cursor:pointer}
+svg .node circle{fill:var(--off);stroke:var(--bg);stroke-width:2;transition:fill .2s}
+svg .node.on circle{fill:var(--on)}
+svg .node text{fill:#0a0812;font-family:var(--f-mono);font-weight:600;font-size:13px;text-anchor:middle;pointer-events:none}
+svg .node:focus{outline:none}
+svg .node:focus-visible circle{stroke:var(--blue);stroke-width:3}
+svg .lamp{fill:var(--off);transition:fill .2s}
+svg .lamp.on{fill:var(--on);filter:drop-shadow(0 0 8px var(--on))}
+svg .lampt{fill:#0a0812;font-family:var(--f-mono);font-weight:600;font-size:13px;text-anchor:middle;pointer-events:none}
+svg .io{fill:var(--muted);font-family:var(--f-mono);font-size:11px;text-anchor:middle}
+svg .txt{fill:var(--muted);font-family:var(--f-mono);font-size:12px}
+svg .txtb{fill:var(--fg);font-family:var(--f-display);font-size:15px;font-weight:600}
+/* interruptores */
+svg .cwire{fill:none;stroke:var(--wire-off);stroke-width:4;stroke-linecap:round;stroke-linejoin:round}
+svg .lit .cwire{stroke:var(--amber);filter:drop-shadow(0 0 3px var(--amber))}
+svg .bulb{fill:var(--panel2);stroke:var(--muted);stroke-width:3}
+svg .lit .bulb{fill:var(--amber);stroke:var(--amber);filter:drop-shadow(0 0 12px var(--amber))}
+svg .sw{cursor:pointer}
+svg .sw line{stroke:var(--off);stroke-width:5;stroke-linecap:round;transition:all .2s}
+svg .sw.on line{stroke:var(--on)}
+svg .sw circle{fill:var(--fg)}
+svg .sw:focus{outline:none}
+svg .sw:focus-visible line{stroke:var(--blue)}
+svg .sw rect{fill:transparent}
+/* chip */
+svg .chip{fill:#1d1830;stroke:var(--muted);stroke-width:2}
+svg .pin{fill:#b9b3cc}
+
+table{border-collapse:collapse;width:100%;font-variant-numeric:tabular-nums}
+.tt th,.tt td{font-family:var(--f-mono);text-align:center;padding:6px 4px;border-bottom:1px solid var(--line)}
+.tt th{color:var(--muted);font-weight:600;font-size:.85rem}
+.tt th.s{color:var(--blue)}
+.tt tbody tr{cursor:pointer;transition:background .15s}
+.tt tbody tr:hover{background:var(--panel2)}
+.tt tbody tr.cur{background:color-mix(in srgb,var(--purple) 22%,transparent)}
+.tt td.v1{color:var(--on)} .tt td.v0{color:var(--off)}
+.tt td.s{font-weight:600}
+
+.facts{display:grid;gap:10px}
+.fact{display:grid;grid-template-columns:120px minmax(0,1fr);gap:12px}
+@media (max-width:520px){.fact{grid-template-columns:1fr;gap:2px}}
+.fact dt{font-family:var(--f-display);color:var(--magenta);font-weight:600;font-size:.9rem;text-transform:uppercase;letter-spacing:.08em;padding-top:2px}
+.fact dd{margin:0;min-width:0}
+pre{background:var(--bg);border:1px solid var(--line);border-radius:10px;padding:12px 14px;overflow-x:auto;margin:0 0 14px;font-family:var(--f-mono);font-size:.84rem;line-height:1.55;tab-size:4}
+.fact pre{margin:0}
+pre .c{color:var(--muted);font-style:italic} pre .k{color:var(--magenta)} pre .n{color:var(--blue)} pre .s{color:var(--amber)}
+.code-title{display:flex;justify-content:space-between;align-items:center;gap:8px;font-family:var(--f-mono);font-size:.8rem;color:var(--muted);background:var(--panel2);border:1px solid var(--line);border-bottom:none;border-radius:10px 10px 0 0;padding:6px 12px}
+.code-title+pre{border-radius:0 0 10px 10px}
+.copy{font:inherit;font-size:.78rem;background:transparent;border:1px solid var(--line);color:var(--muted);border-radius:6px;padding:2px 8px;cursor:pointer}
+.copy:hover{color:var(--fg);border-color:var(--purple)}
+.terminal{background:#05040a;color:var(--on)}
+
+/* Tabelas gerais */
+.scroll{overflow-x:auto;border:1px solid var(--line);border-radius:12px;margin:14px 0}
+.grid-t th,.grid-t td{padding:9px 12px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}
+.grid-t thead th{background:var(--panel2);font-family:var(--f-display);font-size:.85rem;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.grid-t tr:last-child td{border-bottom:none}
+.grid-t td.m{font-family:var(--f-mono);white-space:nowrap}
+
+/* Widgets */
+.widget{display:grid;gap:14px;background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:20px;margin:16px 0}
+.widget h4{font-family:var(--f-display);margin:0;font-size:1.05rem;color:var(--blue)}
+.toggles{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.tog{font-family:var(--f-mono);font-size:1rem;font-weight:600;border:2px solid var(--off);background:transparent;color:var(--off);border-radius:10px;padding:8px 14px;cursor:pointer;min-width:52px}
+.tog.on{border-color:var(--on);color:var(--on);box-shadow:0 0 12px color-mix(in srgb,var(--on) 35%,transparent)}
+.tog small{display:block;font-size:.68rem;font-weight:400;opacity:.8}
+.rowlbl{font-family:var(--f-display);font-weight:600;min-width:84px;color:var(--muted)}
+.outs{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px}
+.out{background:var(--bg);border:1px solid var(--line);border-radius:12px;padding:12px 14px;min-width:0}
+.out .k{font-size:.78rem;color:var(--muted);text-transform:uppercase;letter-spacing:.1em;font-family:var(--f-display)}
+.out .v{font-family:var(--f-mono);font-size:1.5rem;font-weight:600;overflow-wrap:anywhere}
+.out .v.on{color:var(--on)} .out .v.off{color:var(--off)}
+.out .g{font-size:.85rem;color:var(--muted)}
+.bitrow{display:flex;gap:6px;font-family:var(--f-mono);font-size:1.2rem;flex-wrap:wrap}
+.bitrow span{width:38px;text-align:center;padding:4px 0;border-radius:8px;background:var(--bg);border:1px solid var(--line)}
+input[type=text]{font-family:var(--f-mono);font-size:1rem;background:var(--bg);color:var(--fg);border:1px solid var(--line);border-radius:10px;padding:10px 12px;width:100%}
+input[type=text]:focus{border-color:var(--purple);outline:none}
+label.f{display:grid;gap:6px;font-size:.9rem;color:var(--muted)}
+.two{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px}
+.err{color:var(--off);font-size:.9rem;min-height:1.2em;margin:0}
+.chips{display:flex;gap:6px;flex-wrap:wrap}
+.chipbtn{font-family:var(--f-mono);font-size:.82rem;background:var(--panel2);color:var(--fg);border:1px solid var(--line);border-radius:999px;padding:4px 10px;cursor:pointer}
+.chipbtn:hover{border-color:var(--purple)}
+.ttgen th,.ttgen td{font-family:var(--f-mono);text-align:center;padding:5px 8px;border-bottom:1px solid var(--line)}
+.ttgen th{color:var(--muted)}
+.ttgen th:last-child{color:var(--blue)}
+
+/* Karnaugh */
+.kmap{border-collapse:separate;border-spacing:6px;width:auto;margin:10px auto}
+.kmap th{font-family:var(--f-mono);color:var(--muted);font-weight:600;padding:4px 8px}
+.kmap td{width:64px;height:58px;text-align:center;font-family:var(--f-mono);font-size:1.3rem;border-radius:10px;background:var(--panel2);border:2px solid var(--line);position:relative}
+.kmap td small{position:absolute;top:3px;left:6px;font-size:.65rem;color:var(--muted)}
+.kmap td.g1{background:color-mix(in srgb,var(--blue) 22%,var(--panel2));border-color:var(--blue)}
+.kmap td.g2{box-shadow:inset 0 0 0 3px var(--magenta)}
+.legend{display:flex;gap:16px;flex-wrap:wrap;font-size:.9rem;justify-content:center}
+.legend i{display:inline-block;width:14px;height:14px;border-radius:4px;vertical-align:-2px;margin-right:6px}
+
+/* Exercícios */
+details{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:14px 16px;margin-top:12px}
+details summary{cursor:pointer;font-weight:700}
+details .ans{margin-top:10px;padding-top:10px;border-top:1px dashed var(--line)}
+.ex-q{margin:8px 0 6px}
+.lvl{font-family:var(--f-mono);font-size:.72rem;padding:1px 8px;border-radius:999px;margin-left:6px;vertical-align:2px;border:1px solid var(--line);color:var(--muted)}
+
+/* Quiz / mistério */
+.quiz{display:grid;gap:14px;margin-top:14px}
+.q{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:16px}
+.q p{font-weight:700;margin-bottom:10px}
+.opts{display:flex;flex-wrap:wrap;gap:8px}
+.opt{font:inherit;font-size:.95rem;background:var(--panel2);color:var(--fg);border:1px solid var(--line);border-radius:10px;padding:8px 14px;cursor:pointer}
+.opt:hover{border-color:var(--purple)}
+.opt.right{border-color:var(--on);color:var(--on)}
+.opt.wrong{border-color:var(--off);color:var(--off)}
+.fb{margin:10px 0 0;font-size:.95rem;color:var(--muted)}
+.score{font-family:var(--f-display);font-size:1.1rem;color:var(--blue)}
+.btn{font-family:var(--f-display);font-weight:600;letter-spacing:.04em;background:linear-gradient(90deg,var(--magenta),var(--purple));color:#fff;border:none;border-radius:10px;padding:10px 18px;cursor:pointer;font-size:1rem}
+.mbox{display:flex;align-items:center;gap:16px;flex-wrap:wrap}
+.qbox{font-family:var(--f-display);font-size:2.2rem;font-weight:700;width:96px;height:72px;border:3px dashed var(--purple);border-radius:14px;display:grid;place-items:center;color:var(--purple)}
+.lampb{width:44px;height:44px;border-radius:50%;background:var(--off);display:grid;place-items:center;font-family:var(--f-mono);font-weight:700;color:#0a0812;transition:background .2s}
+.lampb.on{background:var(--on);box-shadow:0 0 16px var(--on)}
+.mlog{font-family:var(--f-mono);font-size:.9rem;color:var(--muted)}
+
+/* Glossário / ferramentas */
+.gloss{display:grid;gap:0;margin:12px 0}
+.gloss div{display:grid;grid-template-columns:170px minmax(0,1fr);gap:14px;padding:10px 0;border-bottom:1px solid var(--line)}
+.gloss dt{font-family:var(--f-display);font-weight:600;color:var(--blue)}
+.gloss dd{margin:0}
+@media (max-width:520px){.gloss div{grid-template-columns:1fr;gap:2px}}
+.tools{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;margin-top:12px}
+.tool{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:14px 16px}
+.tool a{font-family:var(--f-display);font-weight:600;font-size:1.05rem}
+.tool p{margin:6px 0 0;font-size:.92rem;color:var(--muted)}
+
+footer{margin-top:56px;color:var(--muted);font-size:.9rem}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+
+</head><body>
+<div class="wrap">
+<header class="hero">
+  <div class="brand"><b>dev-Kalixto</b> · Professor · Programador · Gamer</div>
+  <div class="eyebrow">Apostila · Lógica digital</div>
+  <h1>Portas Lógicas: como o computador decide com <span>0</span> e <span>1</span></h1>
+  <p class="lede">Toda decisão de um processador, de um <code>if</code> no seu código até a soma de dois números, vira um circuito de portas lógicas. Aqui você clica nas entradas, acende os fios, monta somadores, guarda um bit na memória e leva tudo isso para o código em Java, Python e JavaScript.</p>
+  <div class="bits"><span class="bit one">1 = ligado · verdadeiro · tem corrente</span><span class="bit zero">0 = desligado · falso · sem corrente</span></div>
+</header>
+
+<nav class="toc" aria-label="Sumário">
+  <div class="eyebrow">Sumário</div>
+  <ol>
+    <li><a href="#base">O que é uma porta lógica</a></li>
+    <li><a href="#fisica">Do interruptor ao transistor</a></li>
+    <li><a href="#portas">As 7 portas, uma a uma</a></li>
+    <li><a href="#cola">Tabela de cola</a></li>
+    <li><a href="#universal">Portas universais e o chip 7400</a></li>
+    <li><a href="#algebra">Álgebra de Boole e De Morgan</a></li>
+    <li><a href="#projeto">Do problema ao circuito</a></li>
+    <li><a href="#karnaugh">Simplificando com mapa de Karnaugh</a></li>
+    <li><a href="#somador">Circuitos que somam</a></li>
+    <li><a href="#mux">Escolher e lembrar: MUX e memória</a></li>
+    <li><a href="#codigo">Portas lógicas no código</a></li>
+    <li><a href="#exemplos">Exemplos práticos de programação</a></li>
+    <li><a href="#exercicios">Exercícios com gabarito</a></li>
+    <li><a href="#quiz">Quiz e porta misteriosa</a></li>
+    <li><a href="#glossario">Glossário e ferramentas</a></li>
+  </ol>
+</nav>
+
+<!-- 1 -->
+<section class="block" id="base">
+  <div class="eyebrow">Fundamentos</div>
+  <h2>O que é uma porta lógica</h2>
+  <p>Uma porta lógica é um circuito eletrônico que recebe um ou mais sinais de entrada e devolve <strong>um</strong> sinal de saída. Cada sinal só pode ter dois valores: <strong>1</strong> (há tensão, verdadeiro) ou <strong>0</strong> (não há tensão, falso). Esse sistema de dois valores é o <strong>binário</strong>, e cada valor é um <strong>bit</strong>. Oito bits formam um <strong>byte</strong>.</p>
+  <p>As regras que dizem qual saída cada porta produz vêm da <strong>álgebra booleana</strong>. É a mesma lógica que você usa em frases como “se chover <em>e</em> eu estiver sem guarda-chuva, pego um Uber”.</p>
+  <h3>Tabela-verdade</h3>
+  <p>A tabela-verdade lista todas as combinações possíveis de entrada e a saída de cada uma. Com 2 entradas existem 2² = 4 combinações (00, 01, 10, 11). Com 3 entradas, 2³ = 8. Com <em>n</em> entradas, 2<sup>n</sup>. Para não esquecer nenhuma linha, conte em binário: 000, 001, 010, 011, 100…</p>
+  <h3>Uma linha do tempo rápida</h3>
+  <ul class="timeline">
+    <li><span class="yr">1854</span>George Boole publica a álgebra que trata verdadeiro e falso como 1 e 0.</li>
+    <li><span class="yr">1937</span>Claude Shannon mostra que circuitos de relés e interruptores executam a álgebra de Boole.</li>
+    <li><span class="yr">1947</span>O transistor é inventado no Bell Labs e substitui válvulas e relés.</li>
+    <li><span class="yr">1958–59</span>Jack Kilby e Robert Noyce criam o circuito integrado: vários transistores num único chip.</li>
+    <li><span class="yr">anos 60</span>A família de chips 7400 populariza portas lógicas prontas e baratas.</li>
+    <li><span class="yr">1971</span>O Intel 4004, primeiro microprocessador comercial, tem cerca de 2.300 transistores.</li>
+    <li><span class="yr">hoje</span>Um processador de celular tem dezenas de bilhões de transistores.</li>
+  </ul>
+  <div class="callout tip"><strong>Como usar esta apostila:</strong> sempre que vir bolinhas com 0 ou 1 num circuito, clique nelas. O fio fica verde quando o sinal é 1 e apagado quando é 0. A lâmpada da direita é a saída.</div>
+</section>
+
+<!-- 2 -->
+<section class="block" id="fisica">
+  <div class="eyebrow">Por dentro</div>
+  <h2>Do interruptor ao transistor</h2>
+  <p>Antes de existir chip, já dava para fazer lógica com interruptores e uma lâmpada. Clique nos interruptores A e B abaixo.</p>
+  <figure>
+    <div class="fig-scroll"><svg id="swSeries" viewBox="0 0 520 170" role="img" aria-label="Circuito em série com dois interruptores"></svg></div>
+    <figcaption><b>Em série = AND.</b> A corrente precisa passar por A <em>e</em> por B. Se qualquer um estiver aberto, a lâmpada apaga.</figcaption>
+  </figure>
+  <figure>
+    <div class="fig-scroll"><svg id="swParallel" viewBox="0 0 520 210" role="img" aria-label="Circuito em paralelo com dois interruptores"></svg></div>
+    <figcaption><b>Em paralelo = OR.</b> A corrente tem dois caminhos. Basta A <em>ou</em> B fechado para a lâmpada acender.</figcaption>
+  </figure>
+  <h3>O transistor: um interruptor sem dedo</h3>
+  <p>O transistor funciona como um interruptor controlado por eletricidade: uma tensão pequena na entrada (chamada <em>gate</em> ou <em>base</em>) abre ou fecha a passagem de corrente entre os outros dois terminais. Como ele não tem peça móvel, liga e desliga bilhões de vezes por segundo.</p>
+  <p>Nos chips atuais (tecnologia <strong>CMOS</strong>) cada porta usa poucos transistores:</p>
+  <div class="scroll"><table class="grid-t">
+    <thead><tr><th>Porta</th><th>Transistores em CMOS</th><th>Observação</th></tr></thead>
+    <tbody>
+      <tr><td>NOT</td><td class="m">2</td><td>A porta mais simples.</td></tr>
+      <tr><td>NAND / NOR</td><td class="m">4</td><td>Saem “naturalmente” do CMOS, por isso são a base da fabricação.</td></tr>
+      <tr><td>AND / OR</td><td class="m">6</td><td>Na prática são uma NAND ou NOR seguida de um NOT.</td></tr>
+      <tr><td>XOR</td><td class="m">8 a 12</td><td>Varia conforme o projeto do circuito.</td></tr>
+    </tbody>
+  </table></div>
+  <div class="callout"><strong>Curiosidade:</strong> uma AND custa mais transistores que uma NAND. Por isso engenheiros preferem desenhar circuitos com NAND e NOR sempre que possível.</div>
+</section>
+
+<!-- 3 -->
+<section class="block" id="portas">
+  <div class="eyebrow">Laboratório</div>
+  <h2>As 7 portas, uma a uma</h2>
+  <p class="muted">Repare que cada porta com bolinha na saída (NAND, NOR, XNOR) é a porta anterior com o resultado invertido.</p>
+  <div id="gates"></div>
+</section>
+
+<!-- 4 -->
+<section class="block" id="cola">
+  <div class="eyebrow">Resumo</div>
+  <h2>Tabela de cola</h2>
+  <p>As 6 portas de duas entradas lado a lado. Leia cada linha como “para A,B = 00, 01, 10, 11 a saída é…”.</p>
+  <div class="scroll"><table class="grid-t">
+    <thead><tr><th>Porta</th><th>Expressão</th><th>00</th><th>01</th><th>10</th><th>11</th><th>Frase para decorar</th></tr></thead>
+    <tbody id="colaBody"></tbody>
+  </table></div>
+  <p class="muted">NOT tem uma entrada só: 0 vira 1 e 1 vira 0.</p>
+  <h3>Portas com mais de duas entradas</h3>
+  <p>AND, OR, NAND e NOR aceitam 3, 4 ou mais entradas e mantêm a mesma regra: uma AND de 3 entradas só dá 1 em 111, e uma OR de 3 entradas só dá 0 em 000. Já a XOR com várias entradas dá 1 quando a <strong>quantidade de 1s é ímpar</strong>, o que é a base do bit de paridade (veja em <a href="#exemplos">Exemplos práticos</a>).</p>
+</section>
+
+<!-- 5 -->
+<section class="block" id="universal">
+  <div class="eyebrow">Conceito-chave</div>
+  <h2>Portas universais e o chip 7400</h2>
+  <p>Com <strong>apenas portas NAND</strong> dá para montar qualquer outra porta, e portanto qualquer circuito digital. O mesmo vale para NOR. Fabricar um tipo só de porta, em massa, é mais barato. A memória do seu pendrive e do SSD se chama <strong>flash NAND</strong> por ser organizada com essa lógica, e o computador de bordo das missões Apollo foi construído quase só com portas NOR.</p>
+  <div class="scroll"><table class="grid-t">
+    <thead><tr><th>Quero montar</th><th>Só com NAND</th><th>Por que funciona</th></tr></thead>
+    <tbody>
+      <tr><td><strong>NOT A</strong></td><td class="m">A NAND A</td><td>Ligando as duas entradas juntas: 0·0 = 0 → invertido 1; 1·1 = 1 → invertido 0.</td></tr>
+      <tr><td><strong>A AND B</strong></td><td class="m">(A NAND B) NAND (A NAND B)</td><td>NAND é “AND invertido”. Passando o resultado por um NOT (feito de NAND), a inversão é desfeita.</td></tr>
+      <tr><td><strong>A OR B</strong></td><td class="m">(A NAND A) NAND (B NAND B)</td><td>Pela lei de De Morgan: <span class="ov">Ā·B̄</span> = A + B. Invertemos as entradas e aplicamos NAND.</td></tr>
+      <tr><td><strong>A XOR B</strong></td><td class="m">4 NANDs</td><td>N = A NAND B; saída = (A NAND N) NAND (B NAND N).</td></tr>
+    </tbody>
+  </table></div>
+  <figure>
+    <div class="fig-scroll"><svg id="nandNot" viewBox="0 0 520 150" role="img" aria-label="Porta NOT montada com uma NAND"></svg></div>
+    <figcaption><b>NOT feito de NAND.</b> As duas entradas da NAND recebem o mesmo sinal A. Clique em A e veja a saída sempre invertida.</figcaption>
+  </figure>
+  <h3>Como uma porta aparece no mundo real</h3>
+  <p>Em laboratório de eletrônica, você não desenha a porta: compra um <strong>circuito integrado</strong> (CI). O clássico <strong>7400</strong> tem 14 pinos e 4 portas NAND independentes dentro.</p>
+  <figure>
+    <div class="fig-scroll"><svg id="chip" viewBox="0 0 560 300" role="img" aria-label="Pinagem do chip 7400 com quatro portas NAND"></svg></div>
+    <figcaption><b>Pinagem do 7400 (vista de cima).</b> O chanfro à esquerda marca o lado do pino 1. Pino 14 é a alimentação (VCC, 5 V) e o pino 7 é o terra (GND). Cada porta tem duas entradas (A, B) e uma saída (Y): por exemplo, a porta 1 usa os pinos 1, 2 e 3.</figcaption>
+  </figure>
+  <div class="scroll"><table class="grid-t">
+    <thead><tr><th>Chip</th><th>Conteúdo</th></tr></thead>
+    <tbody>
+      <tr><td class="m">7400</td><td>4 portas NAND de 2 entradas</td></tr>
+      <tr><td class="m">7402</td><td>4 portas NOR de 2 entradas</td></tr>
+      <tr><td class="m">7404</td><td>6 portas NOT (inversores)</td></tr>
+      <tr><td class="m">7408</td><td>4 portas AND de 2 entradas</td></tr>
+      <tr><td class="m">7432</td><td>4 portas OR de 2 entradas</td></tr>
+      <tr><td class="m">7486</td><td>4 portas XOR de 2 entradas</td></tr>
+    </tbody>
+  </table></div>
+</section>
+
+<!-- 6 -->
+<section class="block" id="algebra">
+  <div class="eyebrow">Matemática do circuito</div>
+  <h2>Álgebra de Boole e De Morgan</h2>
+  <p>Na notação booleana, <strong>·</strong> é E (AND), <strong>+</strong> é OU (OR) e a barra em cima (<span class="ov">A</span>), o símbolo ¬ ou o apóstrofo (A') é NÃO (NOT). Atenção: aqui 1 + 1 = 1, porque “verdadeiro OU verdadeiro” é verdadeiro. Não é a soma comum.</p>
+  <p><strong>Ordem de precedência:</strong> primeiro NOT, depois AND, por último OR. Então <code>A + B · C̄</code> é lido como <code>A + (B · (C̄))</code>, do mesmo jeito que na matemática a multiplicação vem antes da soma.</p>
+  <h3>As duas leis de De Morgan</h3>
+  <div class="scroll"><table class="grid-t">
+    <thead><tr><th>Lei</th><th>Em palavras</th></tr></thead>
+    <tbody>
+      <tr><td class="m"><span class="ov">A · B</span> = Ā + B̄</td><td>“Não (A e B)” é o mesmo que “não A ou não B”. É por isso que NAND = OR com as entradas invertidas.</td></tr>
+      <tr><td class="m"><span class="ov">A + B</span> = Ā · B̄</td><td>“Não (A ou B)” é o mesmo que “não A e não B”. É por isso que NOR = AND com as entradas invertidas.</td></tr>
+    </tbody>
+  </table></div>
+  <p>Prova pela tabela-verdade da primeira lei:</p>
+  <div class="scroll"><table class="grid-t">
+    <thead><tr><th>A</th><th>B</th><th>A·B</th><th><span class="ov">A·B</span></th><th>Ā</th><th>B̄</th><th>Ā + B̄</th></tr></thead>
+    <tbody>
+      <tr><td class="m b0">0</td><td class="m b0">0</td><td class="m b0">0</td><td class="m b1">1</td><td class="m b1">1</td><td class="m b1">1</td><td class="m b1">1</td></tr>
+      <tr><td class="m b0">0</td><td class="m b1">1</td><td class="m b0">0</td><td class="m b1">1</td><td class="m b1">1</td><td class="m b0">0</td><td class="m b1">1</td></tr>
+      <tr><td class="m b1">1</td><td class="m b0">0</td><td class="m b0">0</td><td class="m b1">1</td><td class="m b0">0</td><td class="m b1">1</td><td class="m b1">1</td></tr>
+      <tr><td class="m b1">1</td><td class="m b1">1</td><td class="m b1">1</td><td class="m b0">0</td><td class="m b0">0</td><td class="m b0">0</td><td class="m b0">0</td></tr>
+    </tbody>
+  </table></div>
+  <p class="muted">As colunas <span class="ov">A·B</span> e Ā + B̄ são idênticas, então as expressões são equivalentes.</p>
+  <div class="callout"><strong>De Morgan no dia a dia:</strong> “Não é verdade que eu fui à academia e ao trabalho hoje” significa “ou eu não fui à academia, ou não fui ao trabalho (ou nenhum dos dois)”.</div>
+  <h3>Outras leis úteis para simplificar circuitos</h3>
+  <div class="scroll"><table class="grid-t">
+    <thead><tr><th>Lei</th><th>Com AND</th><th>Com OR</th></tr></thead>
+    <tbody>
+      <tr><td>Identidade</td><td class="m">A · 1 = A</td><td class="m">A + 0 = A</td></tr>
+      <tr><td>Elemento nulo</td><td class="m">A · 0 = 0</td><td class="m">A + 1 = 1</td></tr>
+      <tr><td>Idempotência</td><td class="m">A · A = A</td><td class="m">A + A = A</td></tr>
+      <tr><td>Complemento</td><td class="m">A · Ā = 0</td><td class="m">A + Ā = 1</td></tr>
+      <tr><td>Dupla negação</td><td class="m" colspan="2"><span class="ov">Ā</span> = A</td></tr>
+      <tr><td>Comutativa</td><td class="m">A · B = B · A</td><td class="m">A + B = B + A</td></tr>
+      <tr><td>Associativa</td><td class="m">(A · B) · C = A · (B · C)</td><td class="m">(A + B) + C = A + (B + C)</td></tr>
+      <tr><td>Distributiva</td><td class="m">A · (B + C) = A·B + A·C</td><td class="m">A + B·C = (A + B)·(A + C)</td></tr>
+      <tr><td>Absorção</td><td class="m">A · (A + B) = A</td><td class="m">A + A·B = A</td></tr>
+    </tbody>
+  </table></div>
+  <h3>Exemplo de simplificação passo a passo</h3>
+  <p>Simplificar <code>S = A·B + A·B̄</code>:</p>
+<pre>S = A·B + A·B̄
+S = A·(B + B̄)      <span class="c">← distributiva (coloca A em evidência)</span>
+S = A·1            <span class="c">← complemento: B + B̄ = 1</span>
+S = A              <span class="c">← identidade</span></pre>
+  <p>Duas ANDs, um NOT e uma OR viram <strong>um fio</strong> ligado em A. Menos portas significam circuito mais barato, mais rápido e que gasta menos energia.</p>
+</section>
+
+<!-- 7 -->
+<section class="block" id="projeto">
+  <div class="eyebrow">Projeto de circuitos</div>
+  <h2>Do problema ao circuito</h2>
+  <p>Projetar um circuito digital segue sempre os mesmos passos:</p>
+  <ol>
+    <li><strong>Defina entradas e saídas</strong> e o que 1 e 0 significam para cada uma.</li>
+    <li><strong>Monte a tabela-verdade</strong> com todas as combinações.</li>
+    <li><strong>Escreva a expressão</strong>: para cada linha com saída 1, faça um AND das entradas (invertendo as que valem 0) e junte tudo com OR.</li>
+    <li><strong>Simplifique</strong> com as leis de Boole ou com o mapa de Karnaugh.</li>
+    <li><strong>Desenhe o circuito</strong> e teste.</li>
+  </ol>
+
+  <h3>Exemplo 1: alarme do cinto de segurança</h3>
+  <p>O carro apita se o motor estiver ligado (M = 1) <strong>e</strong> o cinto <strong>não</strong> estiver afivelado (C = 0). Expressão: <code>Alarme = M · C̄</code>.</p>
+  <figure>
+    <div class="fig-scroll"><div id="cCinto"></div></div>
+    <figcaption><b>NOT + AND.</b> O NOT transforma “cinto afivelado” em “cinto solto”, e a AND só apita quando as duas condições são verdadeiras.</figcaption>
+  </figure>
+
+  <h3>Exemplo 2: alarme residencial</h3>
+  <p>O alarme toca se a porta estiver aberta (P) <strong>e</strong> o sistema estiver armado (S), <strong>ou</strong> se o sensor de fumaça (F) disparar, mesmo com o sistema desarmado. Expressão: <code>Alarme = (P · S) + F</code>.</p>
+  <figure>
+    <div class="fig-scroll"><div id="cAlarme"></div></div>
+    <figcaption><b>AND + OR.</b> Teste P = 1 e S = 0: não toca. Agora ligue F: toca, independente das outras entradas.</figcaption>
+  </figure>
+
+  <h3>Exemplo 3: votação por maioria</h3>
+  <p>Três jurados (A, B, C) votam. A proposta passa se <strong>pelo menos dois</strong> votarem sim. Tabela-verdade:</p>
+  <div class="scroll"><table class="grid-t">
+    <thead><tr><th>A</th><th>B</th><th>C</th><th>Passa?</th><th>Termo</th></tr></thead>
+    <tbody>
+      <tr><td class="m b0">0</td><td class="m b0">0</td><td class="m b0">0</td><td class="m b0">0</td><td></td></tr>
+      <tr><td class="m b0">0</td><td class="m b0">0</td><td class="m b1">1</td><td class="m b0">0</td><td></td></tr>
+      <tr><td class="m b0">0</td><td class="m b1">1</td><td class="m b0">0</td><td class="m b0">0</td><td></td></tr>
+      <tr><td class="m b0">0</td><td class="m b1">1</td><td class="m b1">1</td><td class="m b1">1</td><td class="m">Ā·B·C</td></tr>
+      <tr><td class="m b1">1</td><td class="m b0">0</td><td class="m b0">0</td><td class="m b0">0</td><td></td></tr>
+      <tr><td class="m b1">1</td><td class="m b0">0</td><td class="m b1">1</td><td class="m b1">1</td><td class="m">A·B̄·C</td></tr>
+      <tr><td class="m b1">1</td><td class="m b1">1</td><td class="m b0">0</td><td class="m b1">1</td><td class="m">A·B·C̄</td></tr>
+      <tr><td class="m b1">1</td><td class="m b1">1</td><td class="m b1">1</td><td class="m b1">1</td><td class="m">A·B·C</td></tr>
+    </tbody>
+  </table></div>
+  <p>Juntando os termos com OR e simplificando, chegamos a <code>Passa = A·B + A·C + B·C</code>: “qualquer par concorda”. Teste no gerador abaixo digitando <code>AB + AC + BC</code>.</p>
+
+  <h3>Gerador de tabela-verdade</h3>
+  <div class="widget">
+    <label class="f" for="exprIn"><span>Digite uma expressão com variáveis A–Z (até 4). Operadores: <code>·</code> ou <code>&amp;</code> ou <code>AND</code> (ou letras juntas, como <code>AB</code>); <code>+</code> ou <code>|</code> ou <code>OR</code>; <code>¬</code>, <code>!</code>, <code>NOT</code> ou <code>A'</code>; <code>⊕</code>, <code>^</code> ou <code>XOR</code>.</span>
+      <input type="text" id="exprIn" value="(P · S) + F" autocomplete="off" spellcheck="false">
+    </label>
+    <div class="chips" id="exprChips"></div>
+    <p class="err" id="exprErr" aria-live="polite"></p>
+    <div class="scroll" style="margin:0"><table class="ttgen" id="exprTable"></table></div>
+    <p class="mono muted" id="exprSum" style="margin:0"></p>
+  </div>
+</section>
+
+<!-- 8 -->
+<section class="block" id="karnaugh">
+  <div class="eyebrow">Técnica</div>
+  <h2>Simplificando com mapa de Karnaugh</h2>
+  <p>O mapa de Karnaugh (mapa K) é a tabela-verdade redesenhada como uma grade, em que células vizinhas diferem em apenas um bit. As colunas seguem o <strong>código Gray</strong> (00, 01, 11, 10), não a contagem normal. Assim, quando você agrupa 1s vizinhos, a variável que muda dentro do grupo some da expressão.</p>
+  <p><strong>Regras dos grupos:</strong> só 1s; tamanhos de 1, 2, 4, 8…; retângulos; os grupos podem se sobrepor e “dar a volta” pelas bordas; faça grupos o maior possível.</p>
+  <p>Exemplo: <code>f(A,B,C)</code> vale 1 nas linhas 1, 3, 5, 6 e 7 da tabela-verdade (notação <code>Σm(1,3,5,6,7)</code>).</p>
+  <div class="scroll" style="border:none">
+  <table class="kmap" aria-label="Mapa de Karnaugh de 3 variáveis">
+    <tr><th>A \ BC</th><th>00</th><th>01</th><th>11</th><th>10</th></tr>
+    <tr><th>0</th><td><small>m0</small>0</td><td class="g1"><small>m1</small>1</td><td class="g1"><small>m3</small>1</td><td><small>m2</small>0</td></tr>
+    <tr><th>1</th><td><small>m4</small>0</td><td class="g1"><small>m5</small>1</td><td class="g1 g2"><small>m7</small>1</td><td class="g2"><small>m6</small>1</td></tr>
+  </table></div>
+  <div class="legend"><span><i style="background:var(--blue)"></i>Grupo de 4: C = 1 em todas → <b>C</b></span><span><i style="background:var(--magenta)"></i>Grupo de 2: A = 1 e B = 1 → <b>A·B</b></span></div>
+  <p style="margin-top:14px">Resultado: <code>f = C + A·B</code>. Sem o mapa, a expressão “bruta” teria 5 termos de 3 variáveis cada. Confira no gerador de tabela-verdade digitando <code>C + AB</code>.</p>
+</section>
+
+<!-- 9 -->
+<section class="block" id="somador">
+  <div class="eyebrow">Aritmética</div>
+  <h2>Circuitos que somam</h2>
+  <p>Em binário, 0+0 = 0, 0+1 = 1, 1+0 = 1 e 1+1 = <strong>10</strong> (lê-se “um-zero”, que vale 2). O dígito da direita é a <strong>Soma</strong> e o da esquerda é o <strong>vai-um</strong> (carry). Compare com a tabela de cola: a Soma (0,1,1,0) é exatamente a <strong>XOR</strong>, e o vai-um (0,0,0,1) é exatamente a <strong>AND</strong>.</p>
+  <h3>Meio somador (half adder)</h3>
+  <figure>
+    <div class="fig-scroll"><div id="cHalf"></div></div>
+    <figcaption><b>XOR + AND.</b> <span id="halfLine" class="mono">0 + 0 = 00 em binário = 0</span></figcaption>
+  </figure>
+  <h3>Somador completo (full adder)</h3>
+  <p>O meio somador não sabe receber o vai-um de uma coluna anterior. O <strong>somador completo</strong> tem 3 entradas (A, B e Cin, o vai-um que chega) e duas saídas: <code>S = A ⊕ B ⊕ Cin</code> e <code>Cout = A·B + Cin·(A ⊕ B)</code>.</p>
+  <figure>
+    <div class="fig-scroll"><div id="cFull"></div></div>
+    <figcaption><b>2 XOR, 2 AND e 1 OR.</b> Ligue as três entradas: 1 + 1 + 1 = 11 em binário (3), então S = 1 e Cout = 1.</figcaption>
+  </figure>
+  <h3>Somador de 4 bits (ripple carry)</h3>
+  <p>Encadeando 4 somadores completos, o Cout de cada coluna entra como Cin da próxima, como o “vai-um” que você faz na conta de papel. Clique nos bits para montar os números (o bit da esquerda vale 8, depois 4, 2 e 1).</p>
+  <div class="widget" id="ripple">
+    <div class="toggles"><span class="rowlbl">A</span><span id="rA" class="toggles"></span><span class="mono muted" id="rAd"></span></div>
+    <div class="toggles"><span class="rowlbl">B</span><span id="rB" class="toggles"></span><span class="mono muted" id="rBd"></span></div>
+    <div class="toggles"><span class="rowlbl">Vai-um</span><div class="bitrow" id="rC"></div></div>
+    <div class="toggles"><span class="rowlbl">Soma</span><div class="bitrow" id="rS"></div></div>
+    <div class="outs">
+      <div class="out"><div class="k">Resultado</div><div class="v" id="rRes">0</div><div class="g" id="rResG">em decimal</div></div>
+      <div class="out"><div class="k">Comparador A = B?</div><div class="v" id="rEq">sim</div><div class="g">4 XNOR + 1 AND</div></div>
+    </div>
+  </div>
+  <p>Esse mesmo bloco, ampliado para 32 ou 64 bits, fica dentro da <strong>ULA</strong> (unidade lógica e aritmética) do processador. A subtração usa o mesmo somador com um truque chamado <em>complemento de dois</em>: inverte os bits de B com XOR e soma 1.</p>
+</section>
+
+<!-- 10 -->
+<section class="block" id="mux">
+  <div class="eyebrow">Controle e memória</div>
+  <h2>Escolher e lembrar: MUX e memória</h2>
+  <h3>Multiplexador 2:1 (MUX)</h3>
+  <p>O MUX é uma “chave seletora”: recebe dois dados (A e B) e um sinal de seleção (S). Se S = 0, a saída é A; se S = 1, a saída é B. Expressão: <code>Y = A·S̄ + B·S</code>. É o circuito por trás de um <code>if/else</code> em hardware.</p>
+  <figure>
+    <div class="fig-scroll"><div id="cMux"></div></div>
+    <figcaption><b>NOT + 2 AND + OR.</b> Coloque A = 1 e B = 0 e alterne S: a saída segue a entrada escolhida.</figcaption>
+  </figure>
+  <h3>Latch SR: guardando 1 bit</h3>
+  <p>Até aqui, a saída dependia só das entradas do momento (circuitos <strong>combinacionais</strong>). Se ligarmos a saída de uma porta de volta na entrada de outra, o circuito passa a <strong>lembrar</strong> (circuito <strong>sequencial</strong>). O latch SR usa duas NOR cruzadas.</p>
+  <figure>
+    <div class="fig-scroll"><div id="cLatch"></div></div>
+    <figcaption><b>Duas NOR com realimentação.</b> Dê um pulso em S (liga e desliga): Q vira 1 e <em>continua</em> 1. Dê um pulso em R: Q volta a 0 e fica. <span class="mono" id="latchSt"></span></figcaption>
+  </figure>
+  <div class="scroll"><table class="grid-t">
+    <thead><tr><th>S</th><th>R</th><th>Q</th><th>O que acontece</th></tr></thead>
+    <tbody>
+      <tr><td class="m">0</td><td class="m">0</td><td class="m">mantém</td><td>Memória: guarda o último valor.</td></tr>
+      <tr><td class="m">1</td><td class="m">0</td><td class="m b1">1</td><td><em>Set</em>: grava 1.</td></tr>
+      <tr><td class="m">0</td><td class="m">1</td><td class="m b0">0</td><td><em>Reset</em>: grava 0.</td></tr>
+      <tr><td class="m">1</td><td class="m">1</td><td class="m">proibido</td><td>Q e Q̄ ficam 0 ao mesmo tempo, o que não faz sentido.</td></tr>
+    </tbody>
+  </table></div>
+  <p>Acrescentando um sinal de <strong>clock</strong> (o “relógio” que marca o ritmo do processador, medido em GHz), o latch vira um <strong>flip-flop</strong>. Milhões de flip-flops formam os registradores e a memória cache do processador.</p>
+</section>
+
+<!-- 11 -->
+<section class="block" id="codigo">
+  <div class="eyebrow">Programação</div>
+  <h2>Portas lógicas no seu código</h2>
+  <p>Você já usa portas lógicas quando escreve condições. Existem dois tipos de operador: os <strong>lógicos</strong>, que trabalham com <code>true</code>/<code>false</code>, e os <strong>bit a bit</strong>, que aplicam a porta em cada bit de um número inteiro.</p>
+  <div class="scroll"><table class="grid-t">
+    <thead><tr><th>Porta</th><th>Lógico (Java/JS)</th><th>Python</th><th>Bit a bit</th></tr></thead>
+    <tbody>
+      <tr><td>AND</td><td class="m">a &amp;&amp; b</td><td class="m">a and b</td><td class="m">a &amp; b</td></tr>
+      <tr><td>OR</td><td class="m">a || b</td><td class="m">a or b</td><td class="m">a | b</td></tr>
+      <tr><td>NOT</td><td class="m">!a</td><td class="m">not a</td><td class="m">~a</td></tr>
+      <tr><td>XOR</td><td class="m">a ^ b · a != b</td><td class="m">a != b</td><td class="m">a ^ b</td></tr>
+      <tr><td>NAND</td><td class="m">!(a &amp;&amp; b)</td><td class="m">not (a and b)</td><td class="m">~(a &amp; b)</td></tr>
+      <tr><td>NOR</td><td class="m">!(a || b)</td><td class="m">not (a or b)</td><td class="m">~(a | b)</td></tr>
+      <tr><td>XNOR</td><td class="m">a == b</td><td class="m">a == b</td><td class="m">~(a ^ b)</td></tr>
+    </tbody>
+  </table></div>
+  <h3>Operadores bit a bit</h3>
+  <div class="code-title"><span>exemplo · Java/JS</span></div>
+<pre data-hl>//   12 = 1100
+//   10 = 1010
+12 &amp; 10   // 1000 = 8    (AND: 1 só onde os dois têm 1)
+12 | 10   // 1110 = 14   (OR: 1 onde qualquer um tem 1)
+12 ^ 10   // 0110 = 6    (XOR: 1 onde os bits são diferentes)
+~12       // -13         (NOT: inverte todos os 32 bits do int)
+12 &lt;&lt; 1   // 11000 = 24  (desloca para a esquerda = multiplica por 2)
+12 &gt;&gt; 2   // 0011 = 3    (desloca para a direita = divide por 4)</pre>
+  <div class="callout warn"><strong>Pegadinha:</strong> em Java, Python e JS o <code>^</code> é XOR, não potência. <code>2 ^ 3</code> dá 1. Para potência use <code>Math.pow(2, 3)</code> em Java ou <code>2 ** 3</code> em Python e JS.</div>
+
+  <h3>Simulando todas as portas em Java</h3>
+  <div class="code-title"><span>PortasLogicas.java</span><button class="copy">Copiar</button></div>
+<pre data-hl>public class PortasLogicas {
+
+    static boolean and(boolean a, boolean b)  { return a &amp;&amp; b; }
+    static boolean or(boolean a, boolean b)   { return a || b; }
+    static boolean not(boolean a)             { return !a; }
+    static boolean nand(boolean a, boolean b) { return !(a &amp;&amp; b); }
+    static boolean nor(boolean a, boolean b)  { return !(a || b); }
+    static boolean xor(boolean a, boolean b)  { return a ^ b; }
+    static boolean xnor(boolean a, boolean b) { return a == b; }
+
+    static int bit(boolean v) { return v ? 1 : 0; }
+
+    public static void main(String[] args) {
+        boolean[] valores = {false, true};
+        System.out.println("A B | AND OR NAND NOR XOR XNOR");
+        for (boolean a : valores) {
+            for (boolean b : valores) {
+                System.out.printf("%d %d |  %d   %d   %d    %d   %d   %d%n",
+                    bit(a), bit(b), bit(and(a, b)), bit(or(a, b)),
+                    bit(nand(a, b)), bit(nor(a, b)), bit(xor(a, b)), bit(xnor(a, b)));
+            }
+        }
+    }
+}</pre>
+  <div class="code-title"><span>saída no terminal</span></div>
+<pre class="terminal">A B | AND OR NAND NOR XOR XNOR
+0 0 |  0   0   1    1   0   1
+0 1 |  0   1   1    0   1   0
+1 0 |  0   1   1    0   1   0
+1 1 |  1   1   0    0   0   1</pre>
+
+  <h3>Gerador de tabela-verdade em Python</h3>
+  <div class="code-title"><span>tabela_verdade.py</span><button class="copy">Copiar</button></div>
+<pre data-hl>from itertools import product
+
+def tabela_verdade(expressao, variaveis):
+    print(" ".join(variaveis), "| S")
+    for valores in product([0, 1], repeat=len(variaveis)):
+        contexto = dict(zip(variaveis, valores))
+        s = int(expressao(**contexto))
+        print(" ".join(map(str, valores)), "|", s)
+
+# Alarme = (P · S) + F
+tabela_verdade(lambda P, S, F: (P and S) or F, ["P", "S", "F"])
+
+# Votação por maioria
+tabela_verdade(lambda A, B, C: (A and B) or (A and C) or (B and C), ["A", "B", "C"])</pre>
+
+  <h3>Tudo a partir de NAND, em Python</h3>
+  <div class="code-title"><span>so_nand.py</span><button class="copy">Copiar</button></div>
+<pre data-hl>def nand(a, b): return 1 - (a &amp; b)
+
+def not_(a):    return nand(a, a)
+def and_(a, b): return not_(nand(a, b))
+def or_(a, b):  return nand(not_(a), not_(b))
+
+def xor_(a, b):
+    n = nand(a, b)
+    return nand(nand(a, n), nand(b, n))   # XOR com 4 NANDs
+
+for a in (0, 1):
+    for b in (0, 1):
+        print(a, b, "->", and_(a, b), or_(a, b), xor_(a, b))</pre>
+
+  <div class="callout tip"><strong>Curto-circuito:</strong> em <code>a &amp;&amp; b</code>, se <code>a</code> for falso o Java nem avalia <code>b</code>, porque o AND já é 0. Em <code>a || b</code>, se <code>a</code> for verdadeiro, <code>b</code> é ignorado. Isso permite escrever <code>if (lista != null &amp;&amp; lista.size() &gt; 0)</code> sem risco de erro. Já <code>&amp;</code> e <code>|</code> com booleanos avaliam os dois lados sempre.</div>
+</section>
+
+<!-- 12 -->
+<section class="block" id="exemplos">
+  <div class="eyebrow">Aplicações</div>
+  <h2>Exemplos práticos de programação</h2>
+
+  <h3>1. Regras de acesso com AND, OR e NOT</h3>
+  <div class="code-title"><span>Acesso.java</span><button class="copy">Copiar</button></div>
+<pre data-hl>boolean pagou = true;
+boolean matriculado = true;
+boolean bloqueado = false;
+boolean ehAdmin = false;
+
+// entra se (pagou E matriculado E NÃO bloqueado) OU é admin
+boolean podeEntrar = (pagou &amp;&amp; matriculado &amp;&amp; !bloqueado) || ehAdmin;
+
+// De Morgan: as duas linhas abaixo são equivalentes
+boolean negado1 = !(pagou &amp;&amp; matriculado);
+boolean negado2 = !pagou || !matriculado;</pre>
+
+  <h3>2. Poderes de um personagem com bitmask (games)</h3>
+  <p>Jogos guardam vários estados ligados/desligados num único número: cada bit é uma “flag”. OR liga, AND com NOT desliga, AND testa e XOR alterna.</p>
+  <div class="widget" id="flags">
+    <h4>Estado do jogador</h4>
+    <div class="toggles" id="flagBtns"></div>
+    <div class="outs">
+      <div class="out"><div class="k">estado (binário)</div><div class="v" id="flagBin">0000</div><div class="g" id="flagDec">= 0 em decimal</div></div>
+      <div class="out"><div class="k">tomaDano()</div><div class="v" id="flagDmg">true</div><div class="g">!ESCUDO &amp;&amp; (ENVENENADO || !INVISIVEL)</div></div>
+    </div>
+  </div>
+  <div class="code-title"><span>Jogador.java</span><button class="copy">Copiar</button></div>
+<pre data-hl>public class Jogador {
+    static final int VOANDO     = 1;   // 0001
+    static final int INVISIVEL  = 2;   // 0010
+    static final int ENVENENADO = 4;   // 0100
+    static final int ESCUDO     = 8;   // 1000
+
+    int estado = 0;
+
+    void ganhar(int poder)   { estado |= poder; }    // OR liga o bit
+    void perder(int poder)   { estado &amp;= ~poder; }   // AND + NOT desliga
+    void alternar(int poder) { estado ^= poder; }    // XOR inverte
+    boolean tem(int poder)   { return (estado &amp; poder) != 0; }  // AND testa
+
+    boolean tomaDano() {
+        // NÃO tem escudo E (está envenenado OU NÃO está invisível)
+        return !tem(ESCUDO) &amp;&amp; (tem(ENVENENADO) || !tem(INVISIVEL));
+    }
+}</pre>
+  <p>O mesmo princípio aparece nas permissões do Linux: <code>chmod 755</code> significa 7 = <code>111</code> (ler, escrever, executar) para o dono e 5 = <code>101</code> (ler e executar) para os outros. Para saber se há permissão de escrita, o sistema faz <code>permissao &amp; 0b010</code>.</p>
+
+  <h3>3. Truques clássicos com bits</h3>
+  <div class="code-title"><span>Truques.java</span><button class="copy">Copiar</button></div>
+<pre data-hl>int n = 7;
+boolean impar = (n &amp; 1) == 1;        // último bit 1 → número ímpar
+
+int x = 5, y = 9;                     // trocar valores sem variável auxiliar
+x = x ^ y;
+y = x ^ y;                            // y = 5
+x = x ^ y;                            // x = 9
+
+int potenciaDe2 = 1 &lt;&lt; 5;             // 32
+boolean ehPotenciaDe2 = n &gt; 0 &amp;&amp; (n &amp; (n - 1)) == 0;</pre>
+
+  <h3>4. Somar sem usar o “+” (o meio somador em código)</h3>
+  <div class="code-title"><span>somar.js</span><button class="copy">Copiar</button></div>
+<pre data-hl>function somar(a, b) {
+  while (b !== 0) {
+    const vaiUm = a &amp; b;   // AND: onde nasce o vai-um
+    a = a ^ b;            // XOR: soma sem o vai-um
+    b = vaiUm &lt;&lt; 1;       // o vai-um anda uma casa para a esquerda
+  }
+  return a;
+}
+
+console.log(somar(6, 3));   // 9
+console.log(somar(13, 7));  // 20</pre>
+  <div class="code-title"><span>SomadorCompleto.java</span><button class="copy">Copiar</button></div>
+<pre data-hl>static int[] somadorCompleto(int a, int b, int cin) {
+    int s    = a ^ b ^ cin;
+    int cout = (a &amp; b) | (cin &amp; (a ^ b));
+    return new int[]{s, cout};
+}</pre>
+
+  <h3>5. Bit de paridade: detectando erro na transmissão</h3>
+  <p>Ao enviar dados, o remetente acrescenta 1 bit para que a quantidade de 1s fique par. Se um bit trocar no caminho, o destinatário percebe. O cálculo é um XOR de todos os bits.</p>
+  <div class="code-title"><span>paridade.py</span><button class="copy">Copiar</button></div>
+<pre data-hl>def bit_paridade(bits: str) -> int:
+    p = 0
+    for b in bits:
+        p ^= int(b)   # XOR acumulado
+    return p          # 0 = quantidade par de 1s
+
+print(bit_paridade("1011001"))  # 0  (quatro 1s)
+print(bit_paridade("1011000"))  # 1  (três 1s)</pre>
+
+  <h3>6. Cifra XOR: criptografia com uma porta</h3>
+  <p>XOR tem uma propriedade especial: <code>(texto ⊕ chave) ⊕ chave = texto</code>. Aplicar a mesma chave duas vezes desfaz a cifra. Experimente:</p>
+  <div class="widget">
+    <div class="two">
+      <label class="f" for="xText">Mensagem<input type="text" id="xText" value="Kalixto" maxlength="40" autocomplete="off"></label>
+      <label class="f" for="xKey">Chave<input type="text" id="xKey" value="Rio" maxlength="16" autocomplete="off"></label>
+    </div>
+    <div class="scroll" style="margin:0"><table class="ttgen" id="xTable"></table></div>
+    <div class="outs">
+      <div class="out"><div class="k">Cifrado (hexadecimal)</div><div class="v" id="xHex" style="font-size:1.05rem"></div></div>
+      <div class="out"><div class="k">Decifrado (XOR de novo)</div><div class="v on" id="xDec" style="font-size:1.05rem"></div></div>
+    </div>
+  </div>
+  <div class="code-title"><span>cifra_xor.py</span><button class="copy">Copiar</button></div>
+<pre data-hl>def cifra_xor(texto: bytes, chave: bytes) -> bytes:
+    return bytes(b ^ chave[i % len(chave)] for i, b in enumerate(texto))
+
+segredo = cifra_xor("Kalixto".encode(), b"K3y")
+print(segredo.hex())                         # texto embaralhado
+print(cifra_xor(segredo, b"K3y").decode())   # Kalixto</pre>
+  <div class="callout warn"><strong>Atenção:</strong> a cifra XOR com chave curta repetida é fácil de quebrar e não serve para proteger senhas reais. O XOR, porém, é peça central de algoritmos sérios como o AES.</div>
+</section>
+
+<!-- 13 -->
+<section class="block" id="exercicios">
+  <div class="eyebrow">Prática</div>
+  <h2>Exercícios com gabarito</h2>
+  <p class="muted">Tente resolver antes de abrir a resposta. Use o gerador de tabela-verdade para conferir.</p>
+
+  <details><summary>1. Tabela-verdade com 3 entradas <span class="lvl">básico</span></summary>
+    <p class="ex-q">Monte a tabela-verdade de <code>S = (A · B) + C</code>. Quantas linhas ela tem e em quantas S = 1?</p>
+    <div class="ans"><p>São 2³ = <strong>8 linhas</strong>. S = 1 sempre que C = 1 (4 linhas) e também em A=1, B=1, C=0. Total: <strong>5 linhas com S = 1</strong>. Só dá 0 em 000, 010, 100.</p></div>
+  </details>
+  <details><summary>2. Qual é a porta? <span class="lvl">básico</span></summary>
+    <p class="ex-q">Um circuito dá 1 apenas quando as duas entradas são diferentes. Que porta é essa? E se desse 1 apenas quando fossem iguais?</p>
+    <div class="ans"><p>Diferentes: <strong>XOR</strong>. Iguais: <strong>XNOR</strong>.</p></div>
+  </details>
+  <details><summary>3. NOT feito de NOR <span class="lvl">básico</span></summary>
+    <p class="ex-q">Como fazer uma porta NOT usando apenas uma porta NOR?</p>
+    <div class="ans"><p>Ligue A nas duas entradas: <code>A NOR A</code>. Se A = 0, 0+0 = 0, invertido dá 1. Se A = 1, 1+1 = 1, invertido dá 0.</p></div>
+  </details>
+  <details><summary>4. Simplificação <span class="lvl">médio</span></summary>
+    <p class="ex-q">Simplifique <code>A + A · B</code> e <code>(A + B)·(A + B̄)</code>.</p>
+    <div class="ans"><p><code>A + A·B = A</code> (absorção). <code>(A + B)·(A + B̄) = A + B·B̄ = A + 0 = A</code> (distributiva do OR e complemento). As duas viram <strong>um fio</strong> ligado em A.</p></div>
+  </details>
+  <details><summary>5. Bit a bit <span class="lvl">básico</span></summary>
+    <p class="ex-q">Calcule em Java: <code>5 &amp; 3</code>, <code>5 | 3</code>, <code>5 ^ 3</code> e <code>5 &lt;&lt; 1</code>.</p>
+    <div class="ans"><p>5 = 101 e 3 = 011. AND: 001 = <strong>1</strong>. OR: 111 = <strong>7</strong>. XOR: 110 = <strong>6</strong>. Deslocamento: 1010 = <strong>10</strong>.</p></div>
+  </details>
+  <details><summary>6. De Morgan no código <span class="lvl">médio</span></summary>
+    <p class="ex-q">Reescreva sem o NOT na frente dos parênteses: <code>!(idade &gt;= 18 || autorizado)</code></p>
+    <div class="ans"><p><code>idade &lt; 18 &amp;&amp; !autorizado</code>. A negação entra nos parênteses, o OR vira AND e cada termo é invertido.</p></div>
+  </details>
+  <details><summary>7. Projeto: luz automática <span class="lvl">médio</span></summary>
+    <p class="ex-q">A luz do corredor acende se houver movimento (M) e estiver escuro (E), ou se o botão manual (B) for apertado. Escreva a expressão e diga quais portas usar.</p>
+    <div class="ans"><p><code>Luz = (M · E) + B</code>. Uma <strong>AND</strong> para M e E e uma <strong>OR</strong> juntando com B. É a mesma estrutura do alarme residencial.</p></div>
+  </details>
+  <details><summary>8. Multiplexador <span class="lvl">médio</span></summary>
+    <p class="ex-q">Num MUX 2:1 com A = 1, B = 0 e S = 1, qual é a saída Y? E com S = 0?</p>
+    <div class="ans"><p>S = 1 seleciona B, então <strong>Y = 0</strong>. S = 0 seleciona A, então <strong>Y = 1</strong>. Pela expressão: Y = 1·0 + 0·1 = 0.</p></div>
+  </details>
+  <details><summary>9. Mapa de Karnaugh <span class="lvl">desafio</span></summary>
+    <p class="ex-q">Simplifique <code>f(A,B,C) = Σm(0, 2, 4, 6)</code>.</p>
+    <div class="ans"><p>m0 = 000, m2 = 010, m4 = 100, m6 = 110. Em todos, <strong>C = 0</strong> e A e B variam. No mapa, as colunas BC = 00 e BC = 10 são vizinhas pela borda e formam um grupo de 4. Resultado: <strong>f = C̄</strong>.</p></div>
+  </details>
+  <details><summary>10. Somador de 4 bits <span class="lvl">médio</span></summary>
+    <p class="ex-q">Some <code>0110 + 0011</code> coluna por coluna, anotando o vai-um.</p>
+    <div class="ans"><p>Bit 0: 0+1 = 1, vai 0. Bit 1: 1+1 = 0, vai 1. Bit 2: 1+0+1 = 0, vai 1. Bit 3: 0+0+1 = 1, vai 0. Resultado: <strong>1001</strong> = 9 (6 + 3). Confira no somador de 4 bits.</p></div>
+  </details>
+  <details><summary>11. Bitmask <span class="lvl">médio</span></summary>
+    <p class="ex-q">Com as constantes da classe <code>Jogador</code>, se <code>estado = 5</code>, quais poderes estão ativos? O jogador toma dano?</p>
+    <div class="ans"><p>5 = <code>0101</code>: <strong>VOANDO</strong> (1) e <strong>ENVENENADO</strong> (4). Sem escudo e envenenado, então <code>tomaDano()</code> é <strong>true</strong>.</p></div>
+  </details>
+  <details><summary>12. Código: maioria em Java <span class="lvl">desafio</span></summary>
+    <p class="ex-q">Escreva um método <code>maioria(boolean a, boolean b, boolean c)</code> que retorne true se pelo menos dois forem true.</p>
+    <div class="ans"><pre data-hl>static boolean maioria(boolean a, boolean b, boolean c) {
+    return (a &amp;&amp; b) || (a &amp;&amp; c) || (b &amp;&amp; c);
+}</pre></div>
+  </details>
+</section>
+
+<!-- 14 -->
+<section class="block" id="quiz">
+  <div class="eyebrow">Teste</div>
+  <h2>Quiz e porta misteriosa</h2>
+  <div class="quiz" id="quizBox"></div>
+  <p class="score" id="score" style="margin-top:14px"></p>
+
+  <h3 style="margin-top:34px">Desafio da porta misteriosa</h3>
+  <p>Há uma porta escondida na caixa. Mude as entradas, observe a lâmpada e descubra qual é. Quantas combinações você precisou testar?</p>
+  <div class="widget">
+    <div class="mbox">
+      <button class="tog" id="mA" aria-pressed="false">A = 0</button>
+      <button class="tog" id="mB" aria-pressed="false">B = 0</button>
+      <div class="qbox" aria-hidden="true">?</div>
+      <div class="lampb" id="mL" aria-live="polite">0</div>
+    </div>
+    <div class="mlog" id="mLog">Testadas: nenhuma ainda</div>
+    <div class="opts" id="mOpts"></div>
+    <p class="fb" id="mFb" aria-live="polite"></p>
+    <div><button class="btn" id="mNew">Sortear outra porta</button></div>
+  </div>
+</section>
+
+<!-- 15 -->
+<section class="block" id="glossario" style="border-bottom:none">
+  <div class="eyebrow">Referência</div>
+  <h2>Glossário e ferramentas</h2>
+  <dl class="gloss">
+    <div><dt>Bit</dt><dd>Menor unidade de informação: 0 ou 1.</dd></div>
+    <div><dt>Byte</dt><dd>Conjunto de 8 bits. Representa de 0 a 255.</dd></div>
+    <div><dt>Booleano</dt><dd>Tipo de dado com dois valores, verdadeiro ou falso (<code>boolean</code> em Java, <code>bool</code> em Python).</dd></div>
+    <div><dt>Tabela-verdade</dt><dd>Lista de todas as combinações de entrada com a saída correspondente.</dd></div>
+    <div><dt>Transistor</dt><dd>Interruptor eletrônico controlado por tensão. É o tijolo de toda porta lógica.</dd></div>
+    <div><dt>CI</dt><dd>Circuito integrado: chip com muitos transistores e portas dentro, como o 7400.</dd></div>
+    <div><dt>Combinacional</dt><dd>Circuito cuja saída depende só das entradas atuais (somador, MUX).</dd></div>
+    <div><dt>Sequencial</dt><dd>Circuito com memória: a saída depende também do estado anterior (latch, flip-flop).</dd></div>
+    <div><dt>Latch / Flip-flop</dt><dd>Circuitos que guardam 1 bit. O flip-flop só muda no pulso do clock.</dd></div>
+    <div><dt>Clock</dt><dd>Sinal que pulsa em ritmo fixo e sincroniza o processador. 3 GHz = 3 bilhões de pulsos por segundo.</dd></div>
+    <div><dt>ULA</dt><dd>Unidade lógica e aritmética: a parte do processador que soma, compara e faz operações bit a bit.</dd></div>
+    <div><dt>Bitmask</dt><dd>Número em que cada bit representa uma opção ligada ou desligada.</dd></div>
+    <div><dt>Mapa de Karnaugh</dt><dd>Grade em código Gray usada para simplificar expressões booleanas visualmente.</dd></div>
+  </dl>
+  <h3>Para praticar montando circuitos</h3>
+  <div class="tools">
+    <div class="tool"><a href="https://circuitverse.org/simulator" target="_blank" rel="noopener">CircuitVerse</a><p>Simulador no navegador, gratuito, ótimo para montar os circuitos desta apostila.</p></div>
+    <div class="tool"><a href="https://github.com/logisim-evolution/logisim-evolution" target="_blank" rel="noopener">Logisim Evolution</a><p>Programa para instalar, muito usado em faculdades de computação.</p></div>
+    <div class="tool"><a href="https://www.falstad.com/circuit/" target="_blank" rel="noopener">Falstad Circuit</a><p>Mostra a corrente animada, inclusive nos transistores.</p></div>
+    <div class="tool"><a href="https://nandgame.com/" target="_blank" rel="noopener">Nandgame</a><p>Jogo em que você constrói um computador inteiro começando só com NAND.</p></div>
+  </div>
+</section>
+
+<footer>Apostila dev-Kalixto · Portas Lógicas</footer>
+</div>
+
+<script>
+/* ===== Portas (cartões) ===== */
+const GATES = [
+  {id:'and', name:'AND', pt:'E', expr:'A · B', f:(a,b)=>a&b,
+   desc:'A saída só é 1 quando <strong>todas</strong> as entradas são 1. Basta uma entrada em 0 para a saída ser 0.',
+   analogia:'Dois interruptores em <strong>série</strong>: a lâmpada só acende se os dois estiverem ligados.',
+   exemplo:'Você só entra na aula se pagou a mensalidade <strong>E</strong> está matriculado. A catraca da academia só libera com biometria válida <strong>E</strong> plano ativo.',
+   code:'a &amp;&amp; b   <span class="c">// Java/JS</span>\na and b    <span class="c"># Python</span>', frase:'Tudo 1? Então 1.'},
+  {id:'nand', name:'NAND', pt:'NÃO-E', expr:'<span class="ov">A · B</span>', f:(a,b)=>1-(a&b),
+   desc:'É a AND com a saída invertida (a bolinha na ponta indica inversão). A saída só é 0 quando todas as entradas são 1.',
+   analogia:'Uma luz de “ainda falta algo” que só apaga quando todas as etapas foram cumpridas.',
+   exemplo:'Base da memória flash NAND (pendrives e SSDs) e porta universal: monta qualquer outra.',
+   code:'!(a &amp;&amp; b)  <span class="c">// Java/JS</span>\nnot (a and b) <span class="c"># Python</span>', frase:'O contrário da AND.'},
+  {id:'or', name:'OR', pt:'OU', expr:'A + B', f:(a,b)=>a|b,
+   desc:'A saída é 1 quando <strong>pelo menos uma</strong> entrada é 1. Só dá 0 quando todas são 0.',
+   analogia:'Dois interruptores em <strong>paralelo</strong>: qualquer um deles acende a lâmpada.',
+   exemplo:'A campainha toca se apertarem o botão da frente <strong>OU</strong> o dos fundos. Você entra no app com senha <strong>OU</strong> com digital.',
+   code:'a || b    <span class="c">// Java/JS</span>\na or b    <span class="c"># Python</span>', frase:'Algum 1? Então 1.'},
+  {id:'nor', name:'NOR', pt:'NÃO-OU', expr:'<span class="ov">A + B</span>', f:(a,b)=>1-(a|b),
+   desc:'É a OR invertida. A saída só é 1 quando <strong>todas</strong> as entradas são 0.',
+   analogia:'Uma luz verde de “tudo certo” que só acende se nenhum sensor detectar problema.',
+   exemplo:'Também é universal. O computador de bordo da Apollo foi construído quase só com portas NOR.',
+   code:'!(a || b)   <span class="c">// Java/JS</span>\nnot (a or b) <span class="c"># Python</span>', frase:'Tudo 0? Então 1.'},
+  {id:'xor', name:'XOR', pt:'OU-EXCLUSIVO', expr:'A ⊕ B', f:(a,b)=>a^b,
+   desc:'A saída é 1 quando as entradas são <strong>diferentes</strong>. “Um ou outro, mas não os dois.”',
+   analogia:'O interruptor de escada (three-way): mexer em qualquer um dos dois troca o estado da luz.',
+   exemplo:'Calcula o dígito da soma binária e é usado em criptografia e detecção de erros (paridade).',
+   code:'a ^ b     <span class="c">// Java/JS (bits ou boolean)</span>\na != b    <span class="c"># Python com booleanos</span>', frase:'Diferentes? Então 1.'},
+  {id:'xnor', name:'XNOR', pt:'NÃO-OU-EXCLUSIVO', expr:'<span class="ov">A ⊕ B</span>', f:(a,b)=>1-(a^b),
+   desc:'É a XOR invertida. A saída é 1 quando as entradas são <strong>iguais</strong>. Funciona como um comparador de igualdade.',
+   analogia:'Um juiz que só aprova quando os dois votos coincidem.',
+   exemplo:'Comparadores de senha e de endereços de memória conferem bit a bit com XNOR (veja o comparador no somador de 4 bits).',
+   code:'a == b    <span class="c">// Java/JS/Python</span>', frase:'Iguais? Então 1.'},
+  {id:'not', name:'NOT', pt:'NÃO · INVERSOR', expr:'Ā', f:(a)=>1-a, one:true,
+   desc:'Tem uma entrada só e inverte o sinal: 0 vira 1 e 1 vira 0.',
+   analogia:'O sensor de luz do poste: quando há luz do dia (1), a lâmpada fica apagada (0).',
+   exemplo:'“Se <strong>NÃO</strong> estiver chovendo, vou à praia.” Em código: <code>if (!chovendo)</code>.',
+   code:'!a        <span class="c">// Java/JS</span>\nnot a     <span class="c"># Python</span>', frase:'Inverte.'}
+];
+
+function gateSVG(g){
+  const inv = ['nand','nor','xnor','not'].includes(g.id);
+  let body='', inX=55, outX=130, cx=88;
+  if(g.id==='and'||g.id==='nand'){ body='<path class="body" d="M55 15H95A35 35 0 0 1 95 85H55Z"/>'; }
+  else if(g.id==='not'){ body='<path class="body" d="M55 18V82L118 50Z"/>'; outX=118; cx=76; }
+  else { body='<path class="body" d="M48 15Q68 50 48 85Q105 85 138 50Q105 15 48 15Z"/>'; inX=62; outX=138; cx=90;
+    if(g.id.startsWith('x')) body='<path class="xorline" d="M36 15Q56 50 36 85"/>'+body; }
+  let bubble='';
+  if(inv){ bubble=`<circle class="bubble" cx="${outX+6}" cy="50" r="6"/>`; outX+=12; }
+  const ys = g.one?[50]:[30,70];
+  const labels = g.one?['A']:['A','B'];
+  const lbl = {and:'A·B',nand:'A·B',or:'A+B',nor:'A+B',xor:'A⊕B',xnor:'A⊕B',not:'A'}[g.id];
+  let s=`<svg viewBox="0 0 210 100" role="img" aria-label="Símbolo da porta ${g.name}">`;
+  ys.forEach((y,i)=>{ s+=`<line class="wire in${i}" x1="24" y1="${y}" x2="${inX}" y2="${y}"/>`; });
+  s+=`<line class="wire outw" x1="${outX}" y1="50" x2="182" y2="50"/>`;
+  s+=body+bubble+`<text class="label" x="${cx}" y="55">${lbl}</text>`;
+  ys.forEach((y,i)=>{ s+=`<g class="node" data-i="${i}" tabindex="0" role="button" aria-label="Alternar entrada ${labels[i]}"><circle cx="14" cy="${y}" r="11"/><text x="14" y="${y+4.5}">0</text></g><text class="io" x="14" y="${y<50?y-15:y+23}">${labels[i]}</text>`; });
+  s+=`<circle class="lamp" cx="194" cy="50" r="11"/><text class="lampt" x="194" y="54.5">0</text><text class="io" x="194" y="78">S</text></svg>`;
+  return s;
+}
+function rows(g){ return g.one?[[0],[1]]:[[0,0],[0,1],[1,0],[1,1]]; }
+function onKey(el,fn){ el.addEventListener('click',fn); el.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();fn();}}); }
+
+const host=document.getElementById('gates');
+GATES.forEach(g=>{
+  const el=document.createElement('article'); el.className='gate'; el.id=g.id;
+  const head = g.one?'<th>A</th>':'<th>A</th><th>B</th>';
+  const body = rows(g).map((r,k)=>`<tr data-k="${k}">${r.map(v=>`<td class="v${v}">${v}</td>`).join('')}<td class="s v${g.f(...r)}">${g.f(...r)}</td></tr>`).join('');
+  el.innerHTML=`<div class="gate-head"><h3>${g.name}</h3><span class="pt">${g.pt}</span><span class="expr">S = ${g.expr}</span></div>
+  <div class="lab">${gateSVG(g)}<table class="tt"><thead><tr>${head}<th class="s">S</th></tr></thead><tbody>${body}</tbody></table></div>
+  <p class="hint">Clique em ${g.one?'A':'A ou B'} no circuito, ou em uma linha da tabela.</p>
+  <dl class="facts">
+    <div class="fact"><dt>Regra</dt><dd>${g.desc}</dd></div>
+    <div class="fact"><dt>Analogia</dt><dd>${g.analogia}</dd></div>
+    <div class="fact"><dt>No mundo real</dt><dd>${g.exemplo}</dd></div>
+    <div class="fact"><dt>No código</dt><dd><pre>${g.code}</pre></dd></div>
+  </dl>`;
+  host.appendChild(el);
+  const st={v:g.one?[0]:[0,0]};
+  const render=()=>{
+    const out=g.f(...st.v);
+    st.v.forEach((v,i)=>{
+      const n=el.querySelector(`.node[data-i="${i}"]`); n.classList.toggle('on',!!v); n.querySelector('text').textContent=v;
+      el.querySelector(`.in${i}`).classList.toggle('on',!!v);
+    });
+    el.querySelector('.outw').classList.toggle('on',!!out);
+    el.querySelector('.lamp').classList.toggle('on',!!out);
+    el.querySelector('.lampt').textContent=out;
+    const k = g.one?st.v[0]:st.v[0]*2+st.v[1];
+    el.querySelectorAll('tbody tr').forEach(tr=>tr.classList.toggle('cur',+tr.dataset.k===k));
+  };
+  el.querySelectorAll('.node').forEach(n=>onKey(n,()=>{const i=+n.dataset.i; st.v[i]=1-st.v[i]; render();}));
+  el.querySelectorAll('tbody tr').forEach(tr=>tr.addEventListener('click',()=>{st.v=rows(g)[+tr.dataset.k].slice();render();}));
+  render();
+});
+
+document.getElementById('colaBody').innerHTML = GATES.filter(g=>!g.one).map(g=>
+  `<tr><td><strong>${g.name}</strong></td><td class="m">${g.expr}</td>${[[0,0],[0,1],[1,0],[1,1]].map(r=>{const v=g.f(...r);return `<td class="m b${v}">${v}</td>`}).join('')}<td>${g.frase}</td></tr>`).join('');
+
+/* ===== Motor de circuitos ===== */
+const SHAPES={and:{d:'M0 5H40A30 30 0 0 1 40 65H0Z',o:70,cx:27},or:{d:'M-6 5Q12 35 -6 65Q45 65 72 35Q45 5 -6 5Z',o:72,cx:30},not:{d:'M0 8V62L52 35Z',o:52,cx:17}};
+const BASE={and:'and',nand:'and',or:'or',nor:'or',xor:'or',xnor:'or',not:'not'};
+const INV=new Set(['nand','nor','xnor','not']);
+const FN={and:(a,b)=>a&b,nand:(a,b)=>1-(a&b),or:(a,b)=>a|b,nor:(a,b)=>1-(a|b),xor:(a,b)=>a^b,xnor:(a,b)=>1-(a^b),not:a=>1-a};
+
+function circuit(hostId, C, onChange){
+  const hostEl=document.getElementById(hostId);
+  const sig=Object.assign({}, C.init||{}); C.inputs.forEach(i=>sig[i.n]=0);
+  let s=`<svg viewBox="0 0 ${C.w} ${C.h}" role="img" aria-label="${C.label}" style="min-width:${Math.min(C.w,560)}px">`;
+  C.wires.forEach(w=>{ s+=`<polyline class="wire" data-s="${w[0]}" points="${w.slice(1).map(p=>p.join(',')).join(' ')}"/>`; });
+  (C.dots||[]).forEach(([x,y,n])=>{ s+=`<circle class="dot" data-s="${n}" cx="${x}" cy="${y}" r="5"/>`; });
+  C.gates.forEach(g=>{ const sh=SHAPES[BASE[g.t]];
+    s+=`<g transform="translate(${g.x} ${g.y})">${g.t.startsWith('x')?'<path class="xorline" d="M-16 5Q2 35 -16 65"/>':''}<path class="body" d="${sh.d}"/>${INV.has(g.t)?`<circle class="bubble" cx="${sh.o+6}" cy="35" r="6"/>`:''}<text class="glabel" x="${sh.cx}" y="39">${g.t.toUpperCase()}</text></g>`; });
+  C.inputs.forEach(i=>{ s+=`<g class="node" data-n="${i.n}" tabindex="0" role="button" aria-label="Alternar entrada ${i.n}"><circle cx="${i.x}" cy="${i.y}" r="11"/><text x="${i.x}" y="${i.y+4.5}">0</text></g><text class="nlabel" x="${i.x-18}" y="${i.y+5}" text-anchor="end">${i.n}</text>`; });
+  C.outs.forEach(o=>{ s+=`<circle class="lamp" data-s="${o.s}" cx="${o.x}" cy="${o.y}" r="11"/><text class="lampt" data-t="${o.s}" x="${o.x}" y="${o.y+4.5}">0</text><text class="nlabel" x="${o.x+18}" y="${o.y+5}">${o.n}</text>`; });
+  s+='</svg>';
+  hostEl.innerHTML=s;
+  const svg=hostEl.querySelector('svg');
+  const evalC=()=>{ for(let k=0;k<4;k++) C.gates.forEach(g=>{ sig[g.id]=FN[g.t](...g.in.map(n=>sig[n])); }); };
+  const render=()=>{ evalC();
+    svg.querySelectorAll('[data-s]').forEach(el=>el.classList.toggle('on',!!sig[el.dataset.s]));
+    svg.querySelectorAll('[data-t]').forEach(el=>el.textContent=sig[el.dataset.t]);
+    svg.querySelectorAll('.node').forEach(n=>{const v=sig[n.dataset.n]; n.classList.toggle('on',!!v); n.querySelector('text').textContent=v;});
+    onChange&&onChange(sig); };
+  svg.querySelectorAll('.node').forEach(n=>onKey(n,()=>{ sig[n.dataset.n]=1-sig[n.dataset.n]; render(); }));
+  render();
+}
+
+circuit('cCinto',{w:470,h:160,label:'Circuito do alarme do cinto',
+  inputs:[{n:'M',x:44,y:55},{n:'C',x:44,y:120}],
+  gates:[{id:'nc',t:'not',x:110,y:85,in:['C']},{id:'al',t:'and',x:240,y:35,in:['M','nc']}],
+  wires:[['M',[55,55],[242,55]],['C',[55,120],[112,120]],['nc',[174,120],[205,120],[205,85],[242,85]],['al',[310,70],[379,70]]],
+  outs:[{n:'Alarme',s:'al',x:390,y:70}]});
+
+circuit('cAlarme',{w:530,h:180,label:'Circuito do alarme residencial',
+  inputs:[{n:'P',x:44,y:55},{n:'S',x:44,y:85},{n:'F',x:44,y:145}],
+  gates:[{id:'ps',t:'and',x:120,y:35,in:['P','S']},{id:'al',t:'or',x:290,y:95,in:['ps','F']}],
+  wires:[['P',[55,55],[122,55]],['S',[55,85],[122,85]],['ps',[190,70],[240,70],[240,115],[292,115]],['F',[55,145],[292,145]],['al',[362,130],[429,130]]],
+  outs:[{n:'Alarme',s:'al',x:440,y:130}]});
+
+circuit('nandNot',{w:420,h:130,label:'NOT feito com NAND',
+  inputs:[{n:'A',x:44,y:65}],
+  gates:[{id:'n',t:'nand',x:180,y:30,in:['A','A']}],
+  wires:[['A',[55,65],[130,65]],['A',[130,65],[130,50],[182,50]],['A',[130,65],[130,80],[182,80]],['n',[262,65],[339,65]]],
+  dots:[[130,65,'A']],
+  outs:[{n:'Ā',s:'n',x:350,y:65}]});
+
+circuit('cHalf',{w:450,h:220,label:'Meio somador',
+  inputs:[{n:'A',x:44,y:50},{n:'B',x:44,y:190}],
+  gates:[{id:'s',t:'xor',x:160,y:30,in:['A','B']},{id:'c',t:'and',x:160,y:140,in:['A','B']}],
+  wires:[['A',[55,50],[162,50]],['A',[80,50],[80,160],[162,160]],['B',[55,190],[162,190]],['B',[110,190],[110,80],[162,80]],['s',[232,65],[349,65]],['c',[230,175],[349,175]]],
+  dots:[[80,50,'A'],[110,190,'B']],
+  outs:[{n:'Soma',s:'s',x:360,y:65},{n:'Vai-um',s:'c',x:360,y:175}]},
+  sig=>{ document.getElementById('halfLine').textContent=`${sig.A} + ${sig.B} = ${sig.c}${sig.s} em binário = ${sig.A+sig.B}`; });
+
+circuit('cFull',{w:660,h:330,label:'Somador completo',
+  inputs:[{n:'A',x:44,y:40},{n:'B',x:44,y:70},{n:'Cin',x:44,y:140}],
+  gates:[{id:'x1',t:'xor',x:150,y:20,in:['A','B']},{id:'s',t:'xor',x:330,y:60,in:['x1','Cin']},
+         {id:'a2',t:'and',x:330,y:170,in:['x1','Cin']},{id:'a1',t:'and',x:330,y:260,in:['A','B']},{id:'co',t:'or',x:460,y:230,in:['a2','a1']}],
+  wires:[['A',[55,40],[152,40]],['A',[75,40],[75,280],[332,280]],['B',[55,70],[152,70]],['B',[100,70],[100,310],[332,310]],
+         ['Cin',[55,140],[280,140],[280,110],[332,110]],['Cin',[280,140],[280,220],[332,220]],
+         ['x1',[222,55],[260,55],[260,80],[332,80]],['x1',[260,80],[260,190],[332,190]],
+         ['a2',[400,205],[430,205],[430,250],[462,250]],['a1',[400,295],[440,295],[440,280],[462,280]],
+         ['s',[402,95],[579,95]],['co',[532,265],[579,265]]],
+  dots:[[75,40,'A'],[100,70,'B'],[280,140,'Cin'],[260,80,'x1']],
+  outs:[{n:'S',s:'s',x:590,y:95},{n:'Cout',s:'co',x:590,y:265}]});
+
+circuit('cMux',{w:590,h:260,label:'Multiplexador 2 para 1',
+  inputs:[{n:'A',x:44,y:40},{n:'B',x:44,y:150},{n:'S',x:44,y:230}],
+  gates:[{id:'ns',t:'not',x:110,y:195,in:['S']},{id:'a1',t:'and',x:260,y:20,in:['A','ns']},{id:'a2',t:'and',x:260,y:130,in:['B','S']},{id:'y',t:'or',x:400,y:80,in:['a1','a2']}],
+  wires:[['A',[55,40],[262,40]],['B',[55,150],[262,150]],['S',[55,230],[112,230]],['S',[80,230],[80,180],[262,180]],
+         ['ns',[174,230],[220,230],[220,70],[262,70]],['a1',[330,55],[365,55],[365,100],[402,100]],['a2',[330,165],[375,165],[375,130],[402,130]],['y',[472,115],[529,115]]],
+  dots:[[80,230,'S']],
+  outs:[{n:'Y',s:'y',x:540,y:115}]});
+
+circuit('cLatch',{w:480,h:220,label:'Latch SR com duas portas NOR',init:{q:0,qn:1},
+  inputs:[{n:'R',x:44,y:45},{n:'S',x:44,y:185}],
+  gates:[{id:'q',t:'nor',x:180,y:25,in:['R','qn']},{id:'qn',t:'nor',x:180,y:135,in:['S','q']}],
+  wires:[['R',[55,45],[182,45]],['S',[55,185],[182,185]],
+         ['q',[264,60],[409,60]],['q',[300,60],[300,110],[140,110],[140,155],[182,155]],
+         ['qn',[264,170],[409,170]],['qn',[320,170],[320,125],[120,125],[120,75],[182,75]]],
+  dots:[[300,60,'q'],[320,170,'qn']],
+  outs:[{n:'Q',s:'q',x:420,y:60},{n:'Q̄',s:'qn',x:420,y:170}]},
+  sig=>{ const t = sig.S&&sig.R ? 'Estado proibido (S = R = 1).' : sig.S ? 'Gravando 1.' : sig.R ? 'Gravando 0.' : `Guardando Q = ${sig.q}.`;
+         document.getElementById('latchSt').textContent=t; });
+
+/* ===== Interruptores ===== */
+function swCircuit(id, parallel){
+  const svg=document.getElementById(id); const st={A:0,B:0};
+  const sw=(n,x,y)=>`<g class="sw" data-n="${n}" tabindex="0" role="button" aria-label="Alternar interruptor ${n}"><rect x="${x-6}" y="${y-36}" width="66" height="50"/><circle cx="${x}" cy="${y}" r="5"/><circle cx="${x+50}" cy="${y}" r="5"/><line x1="${x}" y1="${y}" x2="${x+44}" y2="${y-24}"/><text class="txtb" x="${x+25}" y="${y+28}" text-anchor="middle" style="fill:var(--fg)">${n}</text></g>`;
+  const batt=(x,y1,y2)=>{const m=(y1+y2)/2; return `<line class="cwire" x1="${x}" y1="${y1}" x2="${x}" y2="${m-8}"/><line class="cwire" x1="${x}" y1="${m+8}" x2="${x}" y2="${y2}"/><line x1="${x-18}" y1="${m-8}" x2="${x+18}" y2="${m-8}" stroke="var(--fg)" stroke-width="4"/><line x1="${x-9}" y1="${m+8}" x2="${x+9}" y2="${m+8}" stroke="var(--fg)" stroke-width="6"/><text class="txt" x="${x-26}" y="${m+4}" text-anchor="end">pilha</text>`;};
+  const bulb=(x,y)=>`<circle class="bulb" cx="${x}" cy="${y}" r="18"/><path d="M${x-9} ${y-9}L${x+9} ${y+9}M${x+9} ${y-9}L${x-9} ${y+9}" stroke="var(--bg)" stroke-width="3"/><text class="txt" x="${x+28}" y="${y+4}">lâmpada</text>`;
+  let s='<g class="circ">';
+  if(!parallel){
+    s+=batt(70,40,140)+`<path class="cwire" d="M70 40H150 M200 40H290 M340 40H420V72 M420 108V140H70"/>`+bulb(420,90)+sw('A',150,40)+sw('B',290,40);
+  } else {
+    s+=batt(70,40,180)+`<path class="cwire" d="M70 40H180 M230 40H420V92 M420 128V180H70 M130 40V115H180 M230 115H300V40"/>`+bulb(420,110)+sw('A',180,40)+sw('B',180,115);
+  }
+  s+='</g>'; svg.innerHTML=s;
+  const g=svg.querySelector('.circ');
+  const render=()=>{ ['A','B'].forEach(n=>{ const el=svg.querySelector(`.sw[data-n="${n}"]`); el.classList.toggle('on',!!st[n]);
+      const l=el.querySelector('line'); const x1=+l.getAttribute('x1'), y1=+l.getAttribute('y1');
+      l.setAttribute('x2', st[n]? x1+50 : x1+44); l.setAttribute('y2', st[n]? y1 : y1-24); });
+    const lit = parallel ? (st.A|st.B) : (st.A&st.B); g.classList.toggle('lit',!!lit); };
+  svg.querySelectorAll('.sw').forEach(el=>onKey(el,()=>{ st[el.dataset.n]=1-st[el.dataset.n]; render(); }));
+  render();
+}
+swCircuit('swSeries',false); swCircuit('swParallel',true);
+
+/* ===== Chip 7400 ===== */
+(function(){
+  const svg=document.getElementById('chip'); const xs=[110,166,222,278,334,390,446];
+  const top=[['14','VCC'],['13','4B'],['12','4A'],['11','4Y'],['10','3B'],['9','3A'],['8','3Y']];
+  const bot=[['1','1A'],['2','1B'],['3','1Y'],['4','2A'],['5','2B'],['6','2Y'],['7','GND']];
+  let s=`<rect class="chip" x="80" y="90" width="400" height="120" rx="8"/><path d="M80 130A20 20 0 0 1 80 170" fill="var(--bg)" stroke="var(--muted)" stroke-width="2"/>`;
+  xs.forEach((x,i)=>{
+    s+=`<rect class="pin" x="${x-8}" y="64" width="16" height="26" rx="2"/><text class="txt" x="${x}" y="112" text-anchor="middle">${top[i][0]}</text><text class="txtb" x="${x}" y="52" text-anchor="middle" style="fill:${top[i][1]==='VCC'?'var(--amber)':'var(--fg)'}">${top[i][1]}</text>`;
+    s+=`<rect class="pin" x="${x-8}" y="210" width="16" height="26" rx="2"/><text class="txt" x="${x}" y="200" text-anchor="middle">${bot[i][0]}</text><text class="txtb" x="${x}" y="262" text-anchor="middle" style="fill:${bot[i][1]==='GND'?'var(--blue)':'var(--fg)'}">${bot[i][1]}</text>`;
+  });
+  s+=`<text x="280" y="148" text-anchor="middle" style="fill:var(--fg);font-family:var(--f-display);font-weight:700;font-size:26px">SN7400</text><text class="txt" x="280" y="170" text-anchor="middle">4 × NAND de 2 entradas</text>`;
+  s+=`<circle cx="96" cy="180" r="5" fill="var(--muted)"/><text class="txt" x="20" y="290">● marca o pino 1 · A e B = entradas · Y = saída</text>`;
+  svg.innerHTML=s;
+})();
+
+/* ===== Gerador de tabela-verdade ===== */
+function compile(src){
+  const toks=[]; let i=0; const s=src.replace(/\s+/g,' ');
+  const ops={'·':'&','*':'&','&':'&','+':'|','|':'|','¬':'!','!':'!','~':'!','⊕':'^','^':'^','(':'(',')':')',"'":"'",'’':"'",'0':'0','1':'1'};
+  while(i<s.length){ const ch=s[i];
+    if(ch===' '){i++;continue;}
+    if(/[A-Za-z]/.test(ch)){ let j=i; while(j<s.length&&/[A-Za-z]/.test(s[j]))j++; const w=s.slice(i,j).toUpperCase();
+      const W={AND:'&',OR:'|',NOT:'!',XOR:'^'};
+      if(W[w]) toks.push(W[w]); else { for(const c of w) toks.push('v'+c); } i=j; continue; }
+    if(ops[ch]){ toks.push(ops[ch]); i++; continue; }
+    throw new Error(`Símbolo não reconhecido: “${ch}”`);
+  }
+  let p=0; const vars=new Set();
+  const peek=()=>toks[p]; const startsPrim=t=>t&&(t[0]==='v'||t==='('||t==='!'||t==='0'||t==='1');
+  function pOr(){ let l=pXor(); while(peek()==='|'){p++; const a=l,b=pXor(); l=e=>a(e)|b(e);} return l; }
+  function pXor(){ let l=pAnd(); while(peek()==='^'){p++; const a=l,b=pAnd(); l=e=>a(e)^b(e);} return l; }
+  function pAnd(){ let l=pNot(); while(peek()==='&'||startsPrim(peek())){ if(peek()==='&')p++; const a=l,b=pNot(); l=e=>a(e)&b(e);} return l; }
+  function pNot(){ if(peek()==='!'){p++; const x=pNot(); return e=>1-x(e);} let x=pPrim(); while(peek()==="'"){p++; const y=x; x=e=>1-y(e);} return x; }
+  function pPrim(){ const t=toks[p++];
+    if(t===undefined) throw new Error('A expressão terminou antes da hora.');
+    if(t[0]==='v'){ const v=t[1]; vars.add(v); return e=>e[v]; }
+    if(t==='0') return ()=>0; if(t==='1') return ()=>1;
+    if(t==='('){ const x=pOr(); if(toks[p++]!==')') throw new Error('Falta fechar um parêntese.'); return x; }
+    throw new Error(`Operador “${t==='&'?'AND':t==='|'?'OR':t==='^'?'XOR':t}” sem nada antes dele.`);
+  }
+  if(!toks.length) throw new Error('Digite uma expressão.');
+  const f=pOr(); if(p<toks.length) throw new Error('Sobrou algo no final (parêntese a mais?).');
+  const vs=[...vars]; if(vs.length>4) throw new Error('Use no máximo 4 variáveis.');
+  return {f,vs};
+}
+function genTable(){
+  const inp=document.getElementById('exprIn'), err=document.getElementById('exprErr'), tb=document.getElementById('exprTable'), sum=document.getElementById('exprSum');
+  try{ const {f,vs}=compile(inp.value); err.textContent='';
+    const n=vs.length, ms=[]; let h=`<thead><tr>${vs.map(v=>`<th>${v}</th>`).join('')}<th>S</th></tr></thead><tbody>`;
+    for(let k=0;k<(1<<n);k++){ const e={}; vs.forEach((v,i)=>e[v]=(k>>(n-1-i))&1); const o=f(e); if(o) ms.push(k);
+      h+=`<tr>${vs.map(v=>`<td class="b${e[v]}">${e[v]}</td>`).join('')}<td class="b${o}"><b>${o}</b></td></tr>`; }
+    tb.innerHTML=h+'</tbody>'; sum.textContent = n? `S = 1 em ${ms.length} de ${1<<n} linhas · Σm(${ms.join(', ')})` : `Expressão constante: S = ${f({})}`;
+  }catch(x){ err.textContent=x.message; }
+}
+const EX=['(P · S) + F','AB + AC + BC','C + AB','A ⊕ B ⊕ C','NOT (A AND B)',"A' + B'",'A·B + A·B\''];
+document.getElementById('exprChips').innerHTML=EX.map(e=>`<button class="chipbtn" type="button">${e}</button>`).join('');
+document.querySelectorAll('#exprChips .chipbtn').forEach(b=>b.addEventListener('click',()=>{document.getElementById('exprIn').value=b.textContent;genTable();}));
+document.getElementById('exprIn').addEventListener('input',genTable); genTable();
+
+/* ===== Toggle helper ===== */
+function mkTog(btn,label,cb){ let v=0; const set=x=>{v=x;btn.classList.toggle('on',!!v);btn.setAttribute('aria-pressed',!!v);btn.innerHTML=label(v);};
+  btn.addEventListener('click',()=>{set(1-v);cb&&cb();}); set(0); return {get:()=>v,set}; }
+
+/* ===== Somador de 4 bits ===== */
+(function(){
+  const mk=(hostId)=>{ const h=document.getElementById(hostId); return [8,4,2,1].map(w=>{ const b=document.createElement('button'); b.className='tog'; h.appendChild(b);
+    return {w, t:mkTog(b,v=>`${v}<small>${w}</small>`,up)}; }); };
+  let A,B; A=mk('rA'); B=mk('rB');
+  function up(){ if(!A||!B) return;
+    const a=A.map(x=>x.t.get()), b=B.map(x=>x.t.get()); // índice 0 = bit 3
+    const s=[0,0,0,0]; const c=[0,0,0,0]; let carry=0;
+    for(let i=3;i>=0;i--){ const x=a[i]^b[i]; s[i]=x^carry; carry=(a[i]&b[i])|(carry&x); c[i]=carry; }
+    const av=parseInt(a.join(''),2), bv=parseInt(b.join(''),2);
+    document.getElementById('rAd').textContent=`= ${av}`; document.getElementById('rBd').textContent=`= ${bv}`;
+    document.getElementById('rC').innerHTML=c.map(v=>`<span class="b${v}">${v}</span>`).join('');
+    document.getElementById('rS').innerHTML=`<span class="b${carry}">${carry}</span>`+s.map(v=>`<span class="b${v}">${v}</span>`).join('');
+    document.getElementById('rRes').textContent=`${carry}${s.join('')} = ${av+bv}`;
+    document.getElementById('rResG').textContent=`${av} + ${bv} em decimal`+(carry?' (estourou 4 bits: o 5º bit é o vai-um final)':'');
+    const eq=a.every((v,i)=>v===b[i]); const E=document.getElementById('rEq'); E.textContent=eq?'sim':'não'; E.className='v '+(eq?'on':'off'); }
+  up();
+})();
+
+/* ===== Flags do jogador ===== */
+(function(){
+  const F=[['VOANDO',1],['INVISIVEL',2],['ENVENENADO',4],['ESCUDO',8]]; let estado=0; const h=document.getElementById('flagBtns');
+  F.forEach(([n,v])=>{ const b=document.createElement('button'); b.className='tog'; h.appendChild(b);
+    mkTog(b,on=>`${n}<small>${on?'tem':'não tem'} · ${v}</small>`,()=>{ estado^=v; up(); }); });
+  function up(){ const tem=v=>(estado&v)!==0; document.getElementById('flagBin').textContent=estado.toString(2).padStart(4,'0');
+    document.getElementById('flagDec').textContent=`= ${estado} em decimal`;
+    const d=!tem(8)&&(tem(4)||!tem(2)); const D=document.getElementById('flagDmg'); D.textContent=d; D.className='v '+(d?'off':'on'); }
+  up();
+})();
+
+/* ===== Cifra XOR ===== */
+(function(){
+  const t=document.getElementById('xText'), k=document.getElementById('xKey');
+  const bin=n=>n.toString(2).padStart(8,'0');
+  function up(){ const enc=new TextEncoder(); const tb=[...enc.encode(t.value)], kb=[...enc.encode(k.value||'\0')];
+    const c=tb.map((b,i)=>b^kb[i%kb.length]);
+    document.getElementById('xHex').textContent=c.map(x=>x.toString(16).padStart(2,'0')).join(' ')||'—';
+    const back=c.map((b,i)=>b^kb[i%kb.length]); document.getElementById('xDec').textContent=new TextDecoder().decode(new Uint8Array(back))||'—';
+    const n=Math.min(tb.length,4); let h='<thead><tr><th>Letra</th><th>Mensagem</th><th>⊕ Chave</th><th>= Cifrado</th></tr></thead><tbody>';
+    for(let i=0;i<n;i++){ const ch=String.fromCharCode(tb[i]); h+=`<tr><td>${ch.replace(/[<>&]/g,'?')}</td><td>${bin(tb[i])}</td><td class="muted">${bin(kb[i%kb.length])}</td><td style="color:var(--blue)">${bin(c[i])}</td></tr>`; }
+    document.getElementById('xTable').innerHTML=h+'</tbody>'; }
+  t.addEventListener('input',up); k.addEventListener('input',up); up();
+})();
+
+/* ===== Quiz ===== */
+const QUIZ=[
+  {q:'Qual porta só dá 1 quando todas as entradas são 1?', o:['OR','AND','XOR','NOR'], a:1, e:'AND: basta um 0 para a saída virar 0.'},
+  {q:'Qual a saída da XOR para A = 1 e B = 1?', o:['0','1'], a:0, e:'XOR só dá 1 quando as entradas são diferentes. 1 e 1 são iguais.'},
+  {q:'Quantas linhas tem a tabela-verdade de um circuito com 4 entradas?', o:['4','8','16','32'], a:2, e:'2⁴ = 16 combinações.'},
+  {q:'Dois interruptores em paralelo comandando uma lâmpada se comportam como qual porta?', o:['AND','OR','NOT','XNOR'], a:1, e:'Em paralelo, qualquer caminho fechado acende a lâmpada: OR.'},
+  {q:'Por que a NAND é chamada de porta universal?', o:['É a mais rápida','Com ela dá para montar qualquer outra porta','Tem 3 entradas','Funciona sem energia'], a:1, e:'NOT, AND, OR e qualquer circuito podem ser feitos só com NAND.'},
+  {q:'Pela lei de De Morgan, NOT (A + B) é igual a:', o:['Ā + B̄','Ā · B̄','A · B','A ⊕ B'], a:1, e:'A negação entra nos parênteses e o OR vira AND.'},
+  {q:'Em Java, quanto vale 6 ^ 3?', o:['216','9','5','7'], a:2, e:'110 XOR 011 = 101, que é 5. ^ não é potência em Java.'},
+  {q:'No meio somador, de qual porta sai o vai-um?', o:['XOR','OR','AND','NOT'], a:2, e:'O vai-um só acontece em 1 + 1, que é exatamente a tabela da AND.'},
+  {q:'Qual circuito é capaz de guardar 1 bit?', o:['Meio somador','Multiplexador','Latch SR','Comparador'], a:2, e:'A realimentação entre as duas NOR faz o latch lembrar o último valor.'},
+  {q:'Num jogo, estado = 0b0110. Qual operação liga o bit 0001 sem mexer nos outros?', o:['estado & 1','estado | 1','estado ^ 6','~estado'], a:1, e:'OR com a máscara liga o bit e mantém o resto: 0110 | 0001 = 0111.'}
+];
+let score=0; const qb=document.getElementById('quizBox'), sc=document.getElementById('score');
+const setScore=()=>sc.textContent=`Acertos: ${score} de ${QUIZ.length}`; setScore();
+QUIZ.forEach((it,qi)=>{
+  const d=document.createElement('div'); d.className='q';
+  d.innerHTML=`<p>${qi+1}. ${it.q}</p><div class="opts">${it.o.map((o,i)=>`<button class="opt" data-i="${i}">${o}</button>`).join('')}</div><p class="fb" aria-live="polite"></p>`;
+  let done=false;
+  d.querySelectorAll('.opt').forEach(b=>b.addEventListener('click',()=>{
+    if(done) return; done=true; const i=+b.dataset.i;
+    d.querySelectorAll('.opt')[it.a].classList.add('right');
+    if(i===it.a){score++; d.querySelector('.fb').textContent='Certo! '+it.e;}
+    else {b.classList.add('wrong'); d.querySelector('.fb').textContent='Não foi dessa vez. '+it.e;}
+    setScore();
+  }));
+  qb.appendChild(d);
+});
+
+/* ===== Porta misteriosa ===== */
+const TWO=GATES.filter(g=>!g.one); let secret, tested=new Set();
+const mA=mkTog(document.getElementById('mA'),v=>`A = ${v}`,upM), mB=mkTog(document.getElementById('mB'),v=>`B = ${v}`,upM);
+function upM(){ if(!secret) return; const a=mA.get(),b=mB.get(),o=secret.f(a,b); const L=document.getElementById('mL'); L.textContent=o; L.classList.toggle('on',!!o);
+  tested.add(`${a}${b}→${o}`); document.getElementById('mLog').textContent='Testadas: '+[...tested].join('  ·  '); }
+document.getElementById('mOpts').innerHTML=TWO.map(g=>`<button class="opt" data-g="${g.id}">${g.name}</button>`).join('');
+document.querySelectorAll('#mOpts .opt').forEach(b=>b.addEventListener('click',()=>{
+  const fb=document.getElementById('mFb'); document.querySelectorAll('#mOpts .opt').forEach(x=>x.classList.remove('right','wrong'));
+  if(b.dataset.g===secret.id){ b.classList.add('right'); fb.textContent=`Acertou! Era ${secret.name}. Você testou ${tested.size} de 4 combinações.`; }
+  else { b.classList.add('wrong'); fb.textContent='Ainda não. Teste mais combinações e compare com a tabela de cola.'; }
+}));
+function newM(){ let n; do{ n=TWO[Math.floor(Math.random()*TWO.length)]; }while(secret&&n.id===secret.id); secret=n; tested=new Set();
+  mA.set(0); mB.set(0); document.getElementById('mFb').textContent=''; document.querySelectorAll('#mOpts .opt').forEach(x=>x.classList.remove('right','wrong')); upM(); }
+document.getElementById('mNew').addEventListener('click',newM); newM();
+
+/* ===== Realce de código + copiar ===== */
+(function(){
+  const KW=/\b(public|static|final|class|int|boolean|void|return|if|else|for|while|new|def|import|from|in|print|True|False|true|false|let|const|function|and|or|not|bytes|str|String|System)\b/;
+  const RE=/(\/\/.*|#.*)|("(?:[^"\\\n]|\\.)*"|'(?:[^'\\\n]|\\.)*')|\b(public|static|final|class|int|boolean|void|return|if|else|for|while|new|def|import|from|in|print|True|False|true|false|let|const|function|and|or|not|bytes|str|String|System)\b|\b(0b[01]+|\d+)\b/g;
+  const esc=t=>t.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+  document.querySelectorAll('pre[data-hl]').forEach(pre=>{
+    const raw=pre.textContent; pre.dataset.raw=raw; let out='',last=0;
+    for(const m of raw.matchAll(RE)){ out+=esc(raw.slice(last,m.index));
+      const cls=m[1]?'c':m[2]?'s':m[3]?'k':'n'; out+=`<span class="${cls}">${esc(m[0])}</span>`; last=m.index+m[0].length; }
+    pre.innerHTML=out+esc(raw.slice(last));
+  });
+  document.querySelectorAll('.copy').forEach(btn=>btn.addEventListener('click',()=>{
+    const pre=btn.parentElement.nextElementSibling; const txt=pre.dataset.raw||pre.textContent;
+    const done=()=>{btn.textContent='Copiado'; setTimeout(()=>btn.textContent='Copiar',1500);};
+    try{ navigator.clipboard.writeText(txt).then(done,()=>{ const r=document.createRange(); r.selectNodeContents(pre); const s=getSelection(); s.removeAllRanges(); s.addRange(r); btn.textContent='Selecionado: Ctrl+C'; }); }
+    catch(e){ const r=document.createRange(); r.selectNodeContents(pre); const s=getSelection(); s.removeAllRanges(); s.addRange(r); }
+  }));
+})();
+</script>
+
+</body></html>
