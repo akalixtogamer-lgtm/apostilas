@@ -1,8 +1,9 @@
-<!doctype html><html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><title>Portas Lógicas · Apostila Kalixto</title><meta name="description" content="As 7 portas lógicas com circuitos clicáveis, tabelas-verdade, álgebra de Boole, Karnaugh, somadores, MUX, latch e exemplos em Java, Python e JS."><meta property="og:title" content="Portas Lógicas · Apostila Kalixto"><meta property="og:description" content="Como o computador decide com 0 e 1: circuitos interativos, exercícios, quiz e código."><style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
+<!DOCTYPE html>
+<html class="kxc-raiz" data-theme="dark" lang="pt-BR"><head><meta charset="utf-8"/><meta content="width=device-width,initial-scale=1,viewport-fit=cover" name="viewport"/><title>Portas Lógicas · Apostila Kalixto</title><meta content="As 7 portas lógicas com circuitos clicáveis, tabelas-verdade, álgebra de Boole, Karnaugh, somadores, MUX, latch e exemplos em Java, Python e JS." name="description"/><meta content="Portas Lógicas · Apostila Kalixto" property="og:title"/><meta content="Como o computador decide com 0 e 1: circuitos interativos, exercícios, quiz e código." property="og:description"/><style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 
-<meta name="claude:viewport-fit-sides" content="cover">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@500;600;700&family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&family=JetBrains+Mono:wght@400;600&display=swap">
+<meta content="cover" name="claude:viewport-fit-sides"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@500;600;700&amp;family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&amp;family=JetBrains+Mono:wght@400;600&amp;display=swap" rel="stylesheet"/>
 <style>
 /* Layout: coluna única de leitura (~800px); cada conceito tem um "laboratório" (circuito SVG clicável) + texto + código. Visual neon Kalixto, só tema escuro por escolha. */
 :root{
@@ -231,17 +232,773 @@ footer{margin-top:56px;color:var(--muted);font-size:.9rem}
 @media (prefers-reduced-motion:reduce){*{transition:none!important}}
 </style>
 
-</head><body>
-<div class="wrap">
-<header class="hero">
+<link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@600;700&amp;family=Sora:wght@600&amp;family=Inter:wght@400;500;600&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet"/><style id="kx-console">
+/* =====================================================================
+   KALIXTO DESIGN SYSTEM — tokens espelhados do arquivo Figma
+   "Kalixto — Design System" (coleções Primitives, Theme, Spacing & Radius;
+   estilos de texto, efeitos Glass/Glow/Elevation e gradientes).
+   Tema padrão: Dark. Light via prefers-color-scheme ou data-theme.
+   ===================================================================== */
+:root{
+  /* Primitives */
+  --black-950:#050505; --gray-900:#1B1B1B; --gray-800:#2D2D2D; --gray-500:#6E6E80; --gray-300:#B3B3C2; --gray-100:#F5F7FA; --white:#FFFFFF;
+  --ink-900:#120B24; --ink-600:#4A4560;
+  --purple-700:#5A12D6; --purple-500:#7B2EFF; --purple-300:#B899FF; --purple-100:#EADFFF;
+  --pink-700:#D6127F; --pink-500:#FF2DAA; --pink-100:#FFD5F1;
+  --cyan-700:#0089A8; --cyan-500:#00D9FF; --cyan-100:#D8F7FF;
+  --gold-700:#B7791F; --gold-500:#FFC53D;
+  --green-700:#0E9F6E; --green-500:#22E3A0;
+  --amber-700:#B86E00; --amber-500:#FFB020;
+  --red-700:#D92D4A; --red-500:#FF4D6A;
+  /* Auditoria 30/09/2026 — tons 800 para o modo Light e cinzas do text/muted */
+  --gray-400:#9494A3; --gray-600:#636374;
+  --pink-800:#C11072; --cyan-800:#006E87; --gold-800:#895B17; --green-800:#0A724F; --amber-800:#925700; --red-800:#C0233D;
+
+  /* Theme · Dark (padrão) */
+  --bg-base:var(--black-950); --bg-surface:var(--gray-900); --bg-elevated:var(--gray-800);
+  --text-primary:var(--white); --text-secondary:var(--gray-300); --text-muted:var(--gray-400);
+  --brand-primary:var(--purple-500); --brand-secondary:var(--pink-500); --brand-tertiary:var(--cyan-500);
+  --accent-gold:var(--gold-500); --support-lilac:var(--purple-300);
+  --fb-success:var(--green-500); --fb-warning:var(--amber-500); --fb-error:var(--red-500); --fb-info:var(--cyan-500);
+  --glass-fill:rgba(255,255,255,.06); --glass-stroke:rgba(255,255,255,.14); --glass-tint:rgba(123,46,255,.10);
+  --glass-shadow:0 24px 64px rgba(0,0,0,.45), inset 0 1px 0 rgba(255,255,255,.12);
+  --glass-shadow-s:0 12px 32px rgba(0,0,0,.35), inset 0 1px 0 rgba(255,255,255,.10);
+  --on-accent:var(--black-950); --on-brand:var(--white);
+  --code-bg:rgba(0,0,0,.35);
+  --aura-1:rgba(123,46,255,.34); --aura-2:rgba(255,45,170,.16); --aura-3:rgba(0,217,255,.10);
+
+  /* Gradientes (Paint styles) */
+  --g-neon:linear-gradient(90deg,#7B2EFF 0%,#FF2DAA 100%);
+  --g-tech:linear-gradient(90deg,#00D9FF 0%,#7B2EFF 100%);
+  --g-ia:linear-gradient(90deg,#00D9FF 0%,#B899FF 50%,#FF2DAA 100%);
+  --g-gamer:linear-gradient(90deg,#FF2DAA 0%,#7B2EFF 50%,#00D9FF 100%);
+  --g-ancestral:linear-gradient(90deg,#FFC53D 0%,#FF2DAA 50%,#7B2EFF 100%);
+
+  /* Glow (Effect styles) */
+  --glow-purple:0 0 40px rgba(123,46,255,.55); --glow-pink:0 0 40px rgba(255,45,170,.50); --glow-cyan:0 0 40px rgba(0,217,255,.50);
+
+  /* Spacing & Radius */
+  --s1:4px; --s2:8px; --s3:12px; --s4:16px; --s6:24px; --s8:32px; --s12:48px; --s16:64px; --s24:96px;
+  --r-sm:8px; --r-md:16px; --r-alert:20px; --r-lg:24px; --r-card:28px; --r-xl:32px; --r-pill:999px;
+  --blur-sm:12px; --blur-md:24px;
+
+  /* Tipografia (Text styles) */
+  --f-display:"Unbounded","Sora",system-ui,sans-serif;
+  --f-heading:"Sora","Inter",system-ui,sans-serif;
+  --f-body:"Inter",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --f-code:"JetBrains Mono",ui-monospace,Consolas,monospace;
+  color-scheme:dark;
+}
+/* Theme · Light */
+@media (prefers-color-scheme: light){
+  :root:not([data-theme="dark"]){
+    --bg-base:var(--gray-100); --bg-surface:var(--white); --bg-elevated:var(--purple-100);
+    --text-primary:var(--ink-900); --text-secondary:var(--ink-600); --text-muted:var(--gray-600);
+    --brand-secondary:var(--pink-800); --brand-tertiary:var(--cyan-800);
+    --accent-gold:var(--gold-800); --support-lilac:var(--purple-700);
+    --fb-success:var(--green-800); --fb-warning:var(--amber-800); --fb-error:var(--red-800); --fb-info:var(--cyan-800);
+    --glass-fill:rgba(255,255,255,.55); --glass-stroke:rgba(255,255,255,.85); --glass-tint:rgba(184,153,255,.18);
+    --glass-shadow:0 24px 64px rgba(90,18,214,.10), inset 0 1px 0 rgba(255,255,255,.7);
+    --glass-shadow-s:0 12px 32px rgba(90,18,214,.08), inset 0 1px 0 rgba(255,255,255,.7);
+    --on-accent:var(--white);
+    --code-bg:rgba(255,255,255,.7);
+    --aura-1:rgba(234,223,255,.9); --aura-2:rgba(255,213,241,.8); --aura-3:rgba(216,247,255,.8);
+    color-scheme:light;
+  }
+}
+:root[data-theme="light"]{
+  --bg-base:var(--gray-100); --bg-surface:var(--white); --bg-elevated:var(--purple-100);
+  --text-primary:var(--ink-900); --text-secondary:var(--ink-600); --text-muted:var(--gray-600);
+  --brand-secondary:var(--pink-800); --brand-tertiary:var(--cyan-800);
+  --accent-gold:var(--gold-800); --support-lilac:var(--purple-700);
+  --fb-success:var(--green-800); --fb-warning:var(--amber-800); --fb-error:var(--red-800); --fb-info:var(--cyan-800);
+  --glass-fill:rgba(255,255,255,.55); --glass-stroke:rgba(255,255,255,.85); --glass-tint:rgba(184,153,255,.18);
+  --glass-shadow:0 24px 64px rgba(90,18,214,.10), inset 0 1px 0 rgba(255,255,255,.7);
+  --glass-shadow-s:0 12px 32px rgba(90,18,214,.08), inset 0 1px 0 rgba(255,255,255,.7);
+  --on-accent:var(--white);
+  --code-bg:rgba(255,255,255,.7);
+  --aura-1:rgba(234,223,255,.9); --aura-2:rgba(255,213,241,.8); --aura-3:rgba(216,247,255,.8);
+  color-scheme:light;
+}
+
+/* ponte: variáveis desta apostila -> tokens do Kalixto DS */
+:root:not(#kx){--bg:var(--bg-base);--panel:var(--glass-fill);--panel2:color-mix(in srgb,var(--text-primary) 10%,transparent);--line:var(--glass-stroke);--fg:var(--text-primary);--muted:var(--text-secondary);--magenta:var(--brand-secondary);--purple:var(--purple-300);--blue:var(--brand-tertiary);--f-display:"Unbounded","Sora",system-ui,sans-serif;--f-body:"Inter",system-ui,-apple-system,"Segoe UI",sans-serif;--f-mono:"JetBrains Mono",ui-monospace,Consolas,monospace}
+/* ============================================================
+   CONSOLE KALIXTO — layout de referência (apostilakalixto-console-git-gh)
+   TOKENS — ponte para o Kalixto Design System
+   ============================================================ */
+:root{
+  --fundo-base:var(--bg-base); --fundo-nevoa:var(--bg-surface);
+  --neon-ciano:var(--brand-tertiary); --neon-magenta:var(--brand-secondary);
+  --neon-violeta:var(--brand-primary); --neon-azul:var(--brand-tertiary);
+  --vidro:var(--glass-fill); --vidro-alto:color-mix(in srgb,var(--text-primary) 10%,transparent);
+  --vidro-borda:var(--glass-stroke);
+  --texto:var(--text-primary); --texto-suave:var(--text-secondary);
+  --raio-painel:28px; --raio-modulo:16px; --desfoque:22px;
+  --fonte-display:var(--f-display); --fonte-texto:var(--f-body); --fonte-codigo:var(--f-code);
+}
+
+*,*::before,*::after{ box-sizing:border-box; }
+
+html{
+  scroll-behavior:smooth;
+  /* impede o iOS de reescalar a tipografia ao girar o aparelho */
+  -webkit-text-size-adjust:100%;
+  text-size-adjust:100%;
+}
+
+html.kxc-raiz{ background:var(--bg-base) !important; }
+html body.kxc{
+  margin:0; min-height:100vh; min-height:100dvh;
+  background:none !important; color:var(--texto);
+  -webkit-font-smoothing:antialiased; overflow-x:hidden;
+  -webkit-tap-highlight-color:transparent;
+}
+
+/* alvos de toque nunca abaixo de 44px e sem seleção acidental ao segurar */
+.flutuante,.modulo__copiar,.indice__fechar{
+  min-height:44px;
+  -webkit-user-select:none;
+  user-select:none;
+  touch-action:manipulation;   /* remove o atraso de 300ms do duplo toque */
+}
+
+/* ============================================================
+   CENA — névoa de fundo e bolhas decorativas de vidro
+   ============================================================ */
+.cena{ position:fixed; inset:0; z-index:0; overflow:hidden; pointer-events:none; }
+
+.cena__nevoa{
+  position:absolute;border-radius:50%; filter:blur(120px); opacity:.55;
+}
+.cena__nevoa--ciano   { width:46vw; height:46vw; top:-14vw; left:-10vw;background:var(--neon-ciano); opacity:.20; }
+.cena__nevoa--magenta { width:42vw; height:42vw; bottom:-16vw; right:-8vw;background:var(--neon-magenta); opacity:.22; }
+.cena__nevoa--violeta { width:52vw; height:52vw; top:35%; left:30%;background:var(--neon-violeta); opacity:.16; }
+
+.cena__bolha{
+  position:absolute;border-radius:50%;background:linear-gradient(140deg, color-mix(in srgb,var(--text-primary) 16.0%,transparent), color-mix(in srgb,var(--text-primary) 2.0%,transparent) 55%);border:1px solid rgba(255,255,255,.12);
+  -webkit-backdrop-filter:blur(6px);
+  backdrop-filter:blur(6px);
+  box-shadow:inset 0 6px 18px rgba(255,255,255,.14), 0 12px 40px rgba(0,0,0,.35);
+}
+.cena__bolha--1{ width:86px;  height:86px;  top:12%;  right:8%; }
+.cena__bolha--2{ width:38px;  height:38px;  top:26%;  right:16%; }
+.cena__bolha--3{ width:120px; height:120px; bottom:14%; left:5%; }
+.cena__bolha--4{ width:52px;  height:52px;  bottom:30%; left:13%; }
+.cena__bolha--5{ width:26px;  height:26px;  top:52%;  left:4%; }
+
+/* ============================================================
+   ESTRUTURA
+   ============================================================ */
+.moldura{
+  position:relative; z-index:1;
+  max-width:1120px;
+  margin:0 auto;
+  padding:56px 24px 140px;
+}
+
+/* ---------- Cabeçalho / HUD ---------- */
+.hud{ margin-bottom:40px; }
+
+.hud__marca{
+  display:inline-flex; align-items:center; gap:10px;
+  font-family:var(--fonte-codigo); font-size:.78rem; font-weight:700;
+  letter-spacing:.06em;color:var(--texto-suave);
+  padding:7px 14px 7px 10px;border-radius:999px;background:var(--vidro);border:1px solid var(--vidro-borda);
+  -webkit-backdrop-filter:blur(var(--desfoque));
+  backdrop-filter:blur(var(--desfoque));
+}
+.hud__ponto{
+  width:8px; height:8px;border-radius:50%;background:var(--neon-ciano);
+  box-shadow:0 0 12px var(--neon-ciano);
+}
+
+.hud__titulo{
+  font-family:var(--fonte-display);
+  font-weight:700;
+  font-size:clamp(2.3rem, 6vw, 3.9rem);
+  line-height:1.02;
+  letter-spacing:-.03em;
+  margin:22px 0 12px;background:linear-gradient(100deg, var(--neon-ciano) 0%, var(--text-primary) 42%, var(--neon-magenta) 100%);
+  -webkit-background-clip:text; background-clip:text;color:transparent;
+}
+
+.hud__resumo{
+  max-width:56ch;color:var(--texto-suave);
+  font-size:1.02rem;
+  margin:0 0 28px;
+}
+
+/* ---------- Barra de busca de vidro ---------- */
+.busca{
+  display:flex; align-items:center; gap:12px;
+  max-width:520px;
+  padding:14px 18px;border-radius:999px;background:var(--vidro);border:1px solid var(--vidro-borda);
+  -webkit-backdrop-filter:blur(var(--desfoque));
+  backdrop-filter:blur(var(--desfoque));
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.16), 0 18px 40px rgba(0,0,0,.4);
+  transition:border-color .25s, box-shadow .25s;
+}
+.busca:focus-within{border-color:rgba(53,240,228,.6);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.2), 0 0 0 4px rgba(53,240,228,.12), 0 18px 40px rgba(0,0,0,.4);
+}
+.busca__icone{ flex:none; opacity:.65; }
+.busca__campo{
+  flex:1; min-width:0;background:none;border:0;outline:none;color:var(--texto);
+  font-family:var(--fonte-texto);
+  /* 16px é o mínimo que evita o zoom automático do Safari ao focar o campo */
+  font-size:16px;
+  -webkit-appearance:none; appearance:none;border-radius:0;
+}
+.busca__campo::-webkit-search-cancel-button{
+  -webkit-appearance:none;
+  width:16px; height:16px;background:currentColor;
+  opacity:.45;
+  -webkit-mask:url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2.4' stroke-linecap='round'%3E%3Cpath d='M6 6l12 12M18 6L6 18'/%3E%3C/svg%3E") center/contain no-repeat;
+  cursor:pointer;
+}
+.busca__campo::placeholder{color:var(--text-primary); }
+.busca__contagem{
+  font-family:var(--fonte-codigo); font-size:.76rem;color:var(--texto-suave); white-space:nowrap;
+}
+
+/* ============================================================
+   PAINEL DE VIDRO — um bloco por família de comandos
+   ============================================================ */
+.bloco{
+  position:relative;
+  display:grid;
+  grid-template-columns:230px 1fr;
+  gap:36px;
+  padding:36px;
+  margin-bottom:34px;border-radius:var(--raio-painel);background:linear-gradient(150deg, color-mix(in srgb,var(--text-primary) 7.5%,transparent), color-mix(in srgb,var(--text-primary) 2.0%,transparent) 60%);border:1px solid var(--vidro-borda);
+  -webkit-backdrop-filter:blur(var(--desfoque));
+  backdrop-filter:blur(var(--desfoque));
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.18), 0 30px 70px rgba(0,0,0,.45);
+}
+/* borda iluminada em néon — ciano no bloco Git, magenta no bloco gh */
+.bloco::before{
+  content:'';
+  position:absolute; inset:-1px;border-radius:inherit;
+  padding:1px;background:linear-gradient(135deg, var(--luz) 0%, transparent 38%, transparent 62%, var(--luz-2) 100%);
+  -webkit-mask:linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite:xor; mask-composite:exclude;
+  pointer-events:none;
+}
+.bloco--git{ --luz:var(--neon-ciano);   --luz-2:var(--neon-azul); }
+.bloco--gh { --luz:var(--neon-magenta); --luz-2:var(--neon-violeta); }
+
+/* ---------- Coluna do emblema + linhas de dados ---------- */
+.bloco__coluna{ position:relative; }
+
+.bloco__emblema{
+  position:sticky; top:32px;
+  width:150px; height:150px;
+  filter:drop-shadow(0 18px 34px rgba(0,0,0,.5)) drop-shadow(0 0 26px var(--luz));
+}
+
+.bloco__rotulo{
+  margin:22px 0 4px;
+  font-family:var(--fonte-display); font-weight:700;
+  font-size:1.32rem; letter-spacing:-.02em;
+}
+.bloco__nota{
+  margin:0;
+  font-size:.86rem;color:var(--texto-suave);
+  max-width:24ch;
+}
+
+/* linhas de dados que ligam o emblema à lista */
+.bloco__fios{
+  position:absolute; top:0; right:-38px; width:60px; height:100%;
+  overflow:visible; pointer-events:none;
+}
+.bloco__fio{
+  fill:none;
+  stroke:var(--luz);
+  stroke-width:1.2;
+  opacity:.5;
+  stroke-dasharray:5 9;
+  animation:correr 3.6s linear infinite;
+}
+@keyframes correr{ to{ stroke-dashoffset:-56; } }
+
+/* ---------- Módulos flutuantes de comando ---------- */
+.lista{ list-style:none; margin:0; padding:0; display:grid; gap:12px; }
+
+.modulo{
+  position:relative;
+  display:grid;
+  grid-template-columns:1fr auto;
+  align-items:start;
+  gap:16px;
+  padding:16px 18px;border-radius:var(--raio-modulo);background:var(--vidro);border:1px solid rgba(255,255,255,.10);
+  -webkit-backdrop-filter:blur(14px);
+  backdrop-filter:blur(14px);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.14), 0 10px 26px rgba(0,0,0,.3);
+  transition:background .22s, border-color .22s, transform .22s;
+}
+/* realce só onde existe cursor; no toque isso ficaria "grudado" após o tap */
+@media (hover:hover){
+  .modulo:hover{background:var(--vidro-alto);border-color:color-mix(in srgb, var(--luz) 50%, transparent);
+    transform:translateX(4px);
+  }
+}
+.modulo:focus-within{background:var(--vidro-alto);border-color:color-mix(in srgb, var(--luz) 50%, transparent);
+}
+.modulo:active{background:var(--vidro-alto); }
+.modulo[hidden]{ display:none; }
+
+.modulo__comando{
+  font-family:var(--fonte-codigo); font-weight:700;
+  font-size:.96rem; letter-spacing:-.01em;color:var(--luz);
+  word-break:break-word;
+}
+.modulo__descricao{
+  grid-column:1 / -1;
+  margin:6px 0 0;
+  font-size:.9rem;color:var(--texto-suave);
+  max-width:68ch;
+}
+.modulo__exemplo{
+  grid-column:1 / -1;
+  margin:12px 0 0;
+  padding:11px 14px;border-radius:10px;background:rgba(0,0,0,.34);border:1px solid rgba(255,255,255,.08);
+  font-family:var(--fonte-codigo); font-size:.83rem;color:var(--text-primary);
+  white-space:pre-wrap;
+  overflow-x:auto;
+  -webkit-overflow-scrolling:touch;
+  overscroll-behavior-x:contain;
+}
+body:not(.detalhado) .modulo__exemplo{ display:none; }
+
+.modulo__copiar{
+  flex:none;
+  display:inline-flex; align-items:center; justify-content:center; gap:6px;
+  min-width:76px; min-height:44px;
+  padding:6px 16px;border-radius:999px;background:color-mix(in srgb,var(--text-primary) 6.0%,transparent);border:1px solid rgba(255,255,255,.14);color:var(--texto-suave);
+  font-family:var(--fonte-texto); font-size:.82rem;
+  cursor:pointer;
+  transition:color .2s, border-color .2s, background .2s, transform .12s;
+}
+@media (hover:hover){
+  .modulo__copiar:hover{color:var(--texto);border-color:var(--luz);background:color-mix(in srgb,var(--text-primary) 12.0%,transparent); }
+}
+.modulo__copiar:active{color:var(--texto);border-color:var(--luz);background:color-mix(in srgb,var(--text-primary) 16.0%,transparent);
+  transform:scale(.94);
+}
+.modulo__copiar[data-feito="1"]{color:var(--luz);border-color:var(--luz); }
+.modulo__copiar:focus-visible,
+.busca__campo:focus-visible,
+.flutuante:focus-visible{outline:2px solid var(--neon-ciano); outline-offset:3px; }
+
+/* estado vazio da busca */
+.vazio{
+  display:none;
+  padding:22px;border-radius:var(--raio-modulo);border:1px dashed rgba(255,255,255,.18);color:var(--texto-suave);
+  font-size:.92rem;
+}
+.bloco--sem-resultado .vazio{ display:block; }
+
+/* ============================================================
+   BOTÃO FLUTUANTE — alterna os exemplos de uso
+   ============================================================ */
+.flutuante{
+  position:fixed; z-index:5;
+  /* sobe acima da barra de gestos do iPhone e da barra do Android */
+  right:calc(20px + env(safe-area-inset-right));
+  bottom:calc(20px + env(safe-area-inset-bottom));
+  width:64px; height:64px;
+  display:grid; place-items:center;border-radius:50%;
+  cursor:pointer;color:var(--texto);background:linear-gradient(145deg, color-mix(in srgb,var(--text-primary) 18.0%,transparent), color-mix(in srgb,var(--text-primary) 4.0%,transparent));border:1px solid rgba(255,255,255,.22);
+  -webkit-backdrop-filter:blur(16px);
+  backdrop-filter:blur(16px);
+  box-shadow:inset 0 2px 0 rgba(255,255,255,.28),
+             0 0 26px rgba(255,61,190,.35),
+             0 16px 36px rgba(0,0,0,.5);
+  transition:transform .3s cubic-bezier(.2,.9,.3,1.4), box-shadow .3s;
+}
+@media (hover:hover){
+  .flutuante:hover{ box-shadow:inset 0 2px 0 rgba(255,255,255,.32), 0 0 34px rgba(53,240,228,.45), 0 16px 36px rgba(0,0,0,.5); }
+}
+.flutuante:active{ transform:scale(.92); }
+.flutuante__cruz{ transition:transform .3s cubic-bezier(.2,.9,.3,1.4); }
+body.detalhado .flutuante__cruz{ transform:rotate(45deg); }
+
+.flutuante__dica{
+  position:absolute; right:74px; top:50%; transform:translateY(-50%);
+  padding:7px 13px;border-radius:999px;background:color-mix(in srgb,var(--brand-primary) 12%,var(--bg-surface));border:1px solid var(--vidro-borda);
+  font-size:.78rem; white-space:nowrap;
+  opacity:0; pointer-events:none; transition:opacity .2s;
+}
+@media (hover:hover){
+  .flutuante:hover .flutuante__dica{ opacity:1; }
+}
+/* no celular a dica aparece sozinha nos primeiros segundos e ao tocar */
+.flutuante--apresenta .flutuante__dica,
+.flutuante:active .flutuante__dica{ opacity:1; }
+
+/* aviso de cópia */
+.aviso{
+  position:fixed; z-index:6;
+  left:50%;
+  bottom:calc(30px + env(safe-area-inset-bottom));
+  transform:translate(-50%, 20px);
+  max-width:calc(100vw - 40px);
+  text-align:center;
+  padding:11px 20px;border-radius:999px;background:color-mix(in srgb,var(--brand-primary) 12%,var(--bg-surface));border:1px solid rgba(53,240,228,.5);
+  box-shadow:0 0 24px rgba(53,240,228,.28);
+  font-family:var(--fonte-codigo); font-size:.82rem;
+  opacity:0; pointer-events:none;
+  transition:opacity .25s, transform .25s;
+}
+.aviso.aviso--visivel{ opacity:1; transform:translate(-50%, 0); }
+
+/* ============================================================
+   RESPONSIVO
+   ============================================================ */
+@media (max-width:840px){
+  .moldura{
+    padding:34px 16px 132px;
+    padding-left:calc(16px + env(safe-area-inset-left));
+    padding-right:calc(16px + env(safe-area-inset-right));
+    padding-bottom:calc(132px + env(safe-area-inset-bottom));
+  }
+  .bloco{ grid-template-columns:1fr; gap:20px; padding:24px 18px; }
+  .bloco__fios{ display:none; }
+
+  /* emblema e título lado a lado: economiza altura na vertical do celular */
+  .bloco__coluna{
+    display:grid;
+    grid-template-columns:76px 1fr;
+    align-items:center;
+    column-gap:16px;
+  }
+  .bloco__emblema{ position:static; width:76px; height:76px; grid-row:span 2; }
+  .bloco__rotulo{ margin:0; font-size:1.18rem; align-self:end; }
+  .bloco__nota{ max-width:none; align-self:start; font-size:.82rem; }
+
+  .modulo{ grid-template-columns:1fr auto; align-items:center; padding:14px 15px; }
+  .modulo__comando{ font-size:.92rem; }
+  .modulo__copiar{ min-width:0; width:44px; padding:0; font-size:0; }
+  .modulo__copiar::after{
+    content:'';
+    width:16px; height:16px;background:currentColor;
+    -webkit-mask:url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2' stroke-linejoin='round'%3E%3Crect x='9' y='9' width='11' height='11' rx='2'/%3E%3Cpath d='M5 15V5a2 2 0 0 1 2-2h10'/%3E%3C/svg%3E") center/contain no-repeat;
+          mask:url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2' stroke-linejoin='round'%3E%3Crect x='9' y='9' width='11' height='11' rx='2'/%3E%3Cpath d='M5 15V5a2 2 0 0 1 2-2h10'/%3E%3C/svg%3E") center/contain no-repeat;
+  }
+  .busca{ max-width:none; padding:12px 16px; }
+  .hud{ margin-bottom:28px; }
+}
+
+/* telas estreitas: menos camadas de desfoque, que pesam na GPU do celular */
+@media (max-width:600px){
+  :root{ --desfoque:12px; }
+  .cena__bolha{ -webkit-backdrop-filter:none; backdrop-filter:none; }
+  .cena__nevoa{ filter:blur(80px); }
+  .cena__bolha--2,
+  .cena__bolha--5{ display:none; }
+  .modulo{ -webkit-backdrop-filter:blur(8px); backdrop-filter:blur(8px); }
+}
+
+/* celular deitado: o painel volta a ter duas colunas */
+@media (max-width:840px) and (orientation:landscape){
+  .bloco{ grid-template-columns:190px 1fr; }
+  .bloco__coluna{ grid-template-columns:1fr; }
+  .bloco__emblema{ grid-row:auto; }
+  .bloco__rotulo{ margin-top:14px; }
+}
+
+@media (prefers-reduced-motion:reduce){
+  *{ animation:none !important; transition:none !important; }
+}
+/* ============================================================
+   CONSOLE KALIXTO — extensões para apostilas
+   O layout de referência tem dois painéis de comandos; aqui cada
+   capítulo vira um painel de vidro (.bloco) com emblema numerado
+   na coluna e o conteúdo original na direita.
+   ============================================================ */
+
+/* ---------- Cena atrás do conteúdo, sem criar camadas novas ---------- */
+body.kxc > .cena{ z-index:-1; }
+
+/* ---------- Utilitários do refactor ---------- */
+.kx-oculto{ display:none !important; }
+
+/* contêineres antigos (shell, grid com sidebar) deixam de impor largura */
+body.kxc .kx-plano{
+  display:block !important;
+  width:auto !important; max-width:none !important; min-width:0 !important;
+  margin:0 !important; padding:0 !important;
+  background:none !important; border:0 !important; box-shadow:none !important;
+  transform:none !important; overflow:visible !important;
+  -webkit-backdrop-filter:none !important; backdrop-filter:none !important;
+}
+
+body.kxc .moldura{
+  display:block !important;
+  position:relative; z-index:1;
+  width:auto !important; max-width:1120px !important;
+  margin:0 auto !important;
+  padding:0 24px 140px !important;
+  background:none !important; border:0 !important; box-shadow:none !important;
+}
+body.kxc .moldura--hud{ padding:56px 24px 0 !important; }
+
+/* ---------- HUD ---------- */
+body.kxc .hud__titulo{
+  font-family:var(--fonte-display) !important;
+  font-weight:700 !important;
+  font-size:clamp(2.1rem, 5.6vw, 3.7rem) !important;
+  line-height:1.04 !important;
+  letter-spacing:-.03em !important;
+  margin:22px 0 12px !important;
+  padding:0 !important;
+  text-align:left !important; text-transform:none !important;
+  max-width:none !important;
+  background:linear-gradient(100deg, var(--neon-ciano) 0%, var(--text-primary) 42%, var(--neon-magenta) 100%) !important;
+  -webkit-background-clip:text !important; background-clip:text !important;
+  color:transparent !important; -webkit-text-fill-color:transparent !important;
+  text-wrap:balance; text-shadow:none !important;
+}
+body.kxc .hud__titulo *{
+  color:inherit !important; background:none !important;
+  -webkit-text-fill-color:inherit !important; font:inherit !important;
+}
+body.kxc .hud__resumo{
+  max-width:62ch; color:var(--texto-suave);
+  font:400 1.02rem/1.6 var(--fonte-texto);
+  margin:0 0 28px; text-align:left;
+}
+.hud__extras{
+  display:flex; flex-wrap:wrap; gap:10px;
+  margin:0 0 26px;
+}
+.hud__ficha{
+  display:inline-flex; align-items:baseline; gap:8px;
+  padding:8px 14px; border-radius:999px;
+  background:var(--vidro); border:1px solid var(--vidro-borda);
+  font:500 .8rem/1.3 var(--fonte-texto); color:var(--texto-suave);
+  -webkit-backdrop-filter:blur(12px); backdrop-filter:blur(12px);
+}
+.hud__ficha b{ font:600 .8rem/1.3 var(--fonte-codigo); color:var(--neon-ciano); }
+
+body.kxc .hud__marca{ display:inline-flex !important; width:auto !important; max-width:100%; margin:0 !important; text-transform:none !important; }
+body.kxc .hud{ display:block !important; text-align:left !important; padding:0 !important; border:0 !important; background:none !important; min-height:0 !important; }
+
+/* ---------- Divisor de parte ---------- */
+body.kxc .kx-parte{
+  display:block !important;
+  position:relative;
+  max-width:none !important;
+  margin:54px 0 22px !important;
+  padding:0 0 0 18px !important;
+  background:none !important; border:0 !important; box-shadow:none !important;
+  border-left:3px solid var(--neon-magenta) !important;
+  border-radius:0 !important;
+  text-align:left !important; min-height:0 !important;
+}
+body.kxc .kx-parte::before, body.kxc .kx-parte::after{ content:none !important; }
+body.kxc .kx-parte > svg{ display:none !important; }
+body.kxc .kx-parte > *{ max-width:none !important; margin-left:0 !important; margin-right:0 !important; padding-left:0 !important; padding-right:0 !important; opacity:1 !important; transform:none !important; }
+body.kxc .kx-parte :is(h1,h2,h3){
+  font:700 clamp(1.3rem,2.6vw,1.75rem)/1.2 var(--fonte-display) !important;
+  letter-spacing:-.02em !important; margin:4px 0 !important; text-align:left !important;
+}
+body.kxc .kx-parte p{ margin:4px 0 0 !important; color:var(--texto-suave); max-width:70ch; text-align:left !important; }
+
+/* ---------- Painel por capítulo ---------- */
+body.kxc .bloco{
+  display:grid !important;
+  grid-template-columns:230px minmax(0,1fr) !important;
+  gap:36px !important;
+  width:auto !important; max-width:none !important; min-height:0 !important;
+  padding:36px !important;
+  margin:0 0 34px !important;
+  border:1px solid var(--vidro-borda) !important;
+  border-radius:var(--raio-painel) !important;
+  background:linear-gradient(150deg, color-mix(in srgb,var(--text-primary) 7.5%,transparent), color-mix(in srgb,var(--text-primary) 2%,transparent) 60%) !important;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.18), 0 30px 70px rgba(0,0,0,.45) !important;
+  opacity:1 !important; transform:none !important;
+  scroll-margin-top:20px;
+}
+body.kxc .bloco[hidden]{ display:none !important; }
+:root[data-theme="light"] body.kxc .bloco{ box-shadow:inset 0 1px 0 rgba(255,255,255,.7), 0 24px 60px rgba(90,18,214,.12) !important; }
+@media (prefers-color-scheme: light){
+  :root:not([data-theme="dark"]) body.kxc .bloco{ box-shadow:inset 0 1px 0 rgba(255,255,255,.7), 0 24px 60px rgba(90,18,214,.12) !important; }
+}
+
+/* quatro circuitos de luz, alternando capítulo a capítulo */
+.bloco--c1{ --luz:var(--neon-ciano);    --luz-2:var(--neon-violeta); }
+.bloco--c2{ --luz:var(--neon-magenta);  --luz-2:var(--neon-violeta); }
+.bloco--c3{ --luz:var(--accent-gold);   --luz-2:var(--neon-magenta); }
+.bloco--c4{ --luz:var(--fb-success);    --luz-2:var(--neon-ciano); }
+
+body.kxc .bloco__coluna{ position:relative; min-width:0; }
+.bloco__fixo{ position:sticky; top:28px; }
+body.kxc .bloco__fixo .bloco__emblema{ position:static; display:block; }
+.bloco__numero{
+  font-family:var(--fonte-display); font-weight:700; font-size:40px;
+  letter-spacing:-.04em; fill:var(--text-primary);
+}
+.bloco__marca{
+  display:block; margin:20px 0 0;
+  font:600 .7rem/1.3 var(--fonte-codigo); letter-spacing:.12em; text-transform:uppercase;
+  color:var(--luz);
+}
+body.kxc .bloco__marca *{ font:inherit !important; color:inherit !important; background:none !important; padding:0 !important; margin:0 !important; border:0 !important; -webkit-text-fill-color:currentColor !important; }
+body.kxc .bloco__rotulo{
+  display:block !important;
+  margin:8px 0 4px !important; padding:0 !important;
+  font-family:var(--fonte-display) !important; font-weight:700 !important;
+  font-size:1.18rem !important; line-height:1.25 !important; letter-spacing:-.02em !important;
+  text-align:left !important; text-transform:none !important;
+  color:var(--texto) !important; -webkit-text-fill-color:currentColor !important;
+  background:none !important; border:0 !important; max-width:none !important;
+  overflow-wrap:break-word; hyphens:auto; text-wrap:balance;
+}
+body.kxc .bloco__rotulo::before, body.kxc .bloco__rotulo::after{ content:none !important; }
+body.kxc .bloco__rotulo *{ font-family:inherit !important; font-size:inherit !important; color:inherit !important; background:none !important; -webkit-text-fill-color:currentColor !important; }
+body.kxc .bloco__nota{
+  margin:8px 0 0 !important; padding:0 !important;
+  font:400 .86rem/1.5 var(--fonte-texto) !important; color:var(--texto-suave) !important;
+  max-width:26ch; text-align:left !important;
+}
+
+body.kxc .bloco__conteudo{ min-width:0; position:relative; }
+body.kxc .bloco__conteudo > :first-child{ margin-top:0 !important; }
+body.kxc .bloco__conteudo > :last-child{ margin-bottom:0 !important; }
+/* nada dentro do painel estoura a coluna */
+body.kxc .bloco__conteudo :is(pre,table,img,svg,video,iframe,canvas){ max-width:100%; }
+body.kxc .bloco__conteudo pre{ overflow-x:auto; }
+body.kxc .bloco__conteudo > *{ min-width:0; max-width:100%; }
+body.kxc .bloco__conteudo > * > *{ min-width:0; }
+body.kxc .bloco__conteudo :not(pre) > code{ overflow-wrap:anywhere; }
+body.kxc .bloco__conteudo :is(.tbl-wrap,.table-wrap,.tablewrap,.scroll){ overflow-x:auto; max-width:100%; }
+
+/* painel em coluna única: emblema e título lado a lado, conteúdo com a largura toda */
+body.kxc .bloco--largo{ grid-template-columns:minmax(0,1fr) !important; gap:24px !important; }
+.bloco--largo .bloco__fixo{ position:static; display:grid; grid-template-columns:76px minmax(0,1fr); column-gap:16px; align-items:center; }
+body.kxc .bloco--largo .bloco__emblema{ width:76px; height:76px; grid-row:1 / span 2; }
+.bloco--largo .bloco__marca{ margin:0; align-self:end; }
+body.kxc .bloco--largo .bloco__rotulo{ margin:2px 0 0 !important; align-self:start; }
+.bloco--largo .bloco__fios{ display:none; }
+
+/* ---------- Estado vazio da busca ---------- */
+body.kxc .moldura > .vazio{ margin:0 0 34px; }
+body.kxc.kx-sem-resultado .moldura > .vazio{ display:block; }
+
+/* ---------- Botão flutuante + índice de capítulos ---------- */
+body.kxc .flutuante{ z-index:60; bottom:calc(80px + env(safe-area-inset-bottom,0px)); }
+body.kx-indice-aberto .flutuante__cruz{ transform:rotate(45deg); }
+body.kx-indice-aberto .flutuante__dica{ opacity:0 !important; }
+
+.indice{
+  position:fixed; z-index:59;
+  right:calc(20px + env(safe-area-inset-right));
+  bottom:calc(156px + env(safe-area-inset-bottom,0px));
+  width:min(360px, calc(100vw - 40px));
+  max-height:min(62vh, 560px);
+  display:flex; flex-direction:column;
+  border-radius:24px;
+  background:color-mix(in srgb,var(--brand-primary) 10%,var(--bg-surface));
+  border:1px solid var(--vidro-borda);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.16), 0 30px 70px rgba(0,0,0,.55);
+  opacity:0; transform:translateY(12px) scale(.98); pointer-events:none;
+  transition:opacity .22s, transform .22s;
+}
+body.kx-indice-aberto .indice{ opacity:1; transform:none; pointer-events:auto; }
+.indice__topo{
+  flex:none; margin:0; padding:16px 20px 12px;
+  font:700 .78rem/1 var(--fonte-codigo); letter-spacing:.1em; text-transform:uppercase;
+  color:var(--texto-suave); border-bottom:1px solid var(--vidro-borda);
+}
+.indice__lista{ list-style:none; margin:0; padding:8px; overflow-y:auto; overscroll-behavior:contain; }
+.indice__lista li{ margin:0; padding:0; }
+.indice__parte{
+  padding:12px 12px 4px !important;
+  font:600 .68rem/1.3 var(--fonte-codigo); letter-spacing:.1em; text-transform:uppercase;
+  color:var(--neon-magenta);
+}
+.indice__link{
+  display:grid; grid-template-columns:30px 1fr; gap:10px; align-items:baseline;
+  padding:9px 12px; border-radius:12px; min-height:40px;
+  font:500 .88rem/1.35 var(--fonte-texto); color:var(--texto) !important; text-decoration:none !important;
+}
+.indice__link b{ font:600 .74rem/1.35 var(--fonte-codigo); color:var(--neon-ciano); }
+.indice__link:hover, .indice__link:focus-visible{ background:var(--vidro-alto); }
+.indice__link:focus-visible{ outline:2px solid var(--neon-ciano); outline-offset:-2px; }
+
+/* ---------- Barra e assinatura ---------- */
+body.kxc .kx-bar, body.kxc .kx-sig{ position:relative; z-index:2; }
+body.kxc .kx-bar{ max-width:1120px; margin:0 auto; padding:20px 24px 0; display:flex; align-items:center; gap:12px; flex-wrap:wrap; }
+body.kxc .kx-bar .kx-logo, body.kxc .kx-sig .kx-logo{ border-radius:50%; flex:none; display:block; box-shadow:0 0 40px rgba(123,46,255,.55); }
+body.kxc .kx-bar b{ font:600 14px/18px var(--f-heading); color:var(--text-primary); }
+body.kxc .kx-bar small{ display:block; font:500 12px/16px var(--f-body); color:var(--text-muted); }
+body.kxc .kx-bar a{ margin-left:auto; font:600 14px/20px var(--f-heading); color:var(--brand-tertiary); text-decoration:none; }
+body.kxc .kx-sig{ max-width:1120px; margin:0 auto 96px; padding:0 24px; }
+body.kxc .kx-sig div{ display:flex; align-items:center; gap:12px; padding:20px 24px; border-radius:28px; background:var(--glass-fill); border:1px solid var(--glass-stroke); }
+body.kxc .kx-sig b{ font:600 15px/20px var(--f-heading); color:var(--text-primary); display:block; }
+body.kxc .kx-sig small{ font:500 12px/16px var(--f-body); color:var(--text-muted); }
+
+/* ---------- Responsivo ---------- */
+@media (max-width:840px){
+  body.kxc .moldura{
+    padding:0 16px 132px !important;
+    padding-left:calc(16px + env(safe-area-inset-left)) !important;
+    padding-right:calc(16px + env(safe-area-inset-right)) !important;
+  }
+  body.kxc .moldura--hud{ padding-top:34px !important; padding-bottom:0 !important; }
+  body.kxc .bloco{
+    grid-template-columns:minmax(0,1fr) !important; gap:20px !important; padding:24px 18px !important;
+    -webkit-backdrop-filter:none; backdrop-filter:none;
+  }
+  body.kxc .bloco__coluna{ display:block; }
+  .bloco__fixo{
+    position:static;
+    display:grid; grid-template-columns:76px minmax(0,1fr); column-gap:16px; align-items:center;
+  }
+  body.kxc .bloco__fixo .bloco__emblema{ width:76px; height:76px; grid-row:1 / span 2; }
+  .bloco__marca{ margin:0; align-self:end; }
+  body.kxc .bloco__rotulo{ align-self:start; }
+  body.kxc .bloco__rotulo{ margin:2px 0 0 !important; font-size:1.08rem !important; }
+  body.kxc .bloco__nota{ max-width:none; grid-column:2; }
+  body.kxc .kx-bar{ padding:16px 16px 0; }
+  body.kxc .kx-sig{ padding:0 16px; }
+}
+@media (max-width:840px) and (orientation:landscape){
+  body.kxc .bloco{ grid-template-columns:minmax(0,1fr) !important; }
+}
+@media print{
+  .cena, .flutuante, .indice, .busca, .aviso{ display:none !important; }
+  body.kxc .bloco{ display:block !important; box-shadow:none !important; break-inside:auto; }
+  .bloco__fixo{ position:static; }
+  .bloco__emblema, .bloco__fios{ display:none !important; }
+}
+</style></head><body class="kxc"><div aria-hidden="true" class="cena">
+  <div class="cena__nevoa cena__nevoa--ciano"></div>
+  <div class="cena__nevoa cena__nevoa--magenta"></div>
+  <div class="cena__nevoa cena__nevoa--violeta"></div>
+  <div class="cena__bolha cena__bolha--1"></div>
+  <div class="cena__bolha cena__bolha--2"></div>
+  <div class="cena__bolha cena__bolha--3"></div>
+  <div class="cena__bolha cena__bolha--4"></div>
+  <div class="cena__bolha cena__bolha--5"></div>
+</div><div class="kx-bar"><img alt="Logo Kalixto" class="kx-logo" height="40" src="data:image/webp;base64,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" width="40"/><div><b>Dev-Kalixto</b><small>Kalixto by Wallace Toledo</small></div><a href="../">← Todos os materiais</a></div><div class="moldura moldura--hud"><header class="hud"><span class="hud__marca"><span class="hud__ponto"></span>dev-Kalixto</span><h1 class="hud__titulo">Portas Lógicas: como o computador decide com  <span>0</span> e  <span>1</span></h1><p class="hud__resumo">Toda decisão de um processador, de um if no seu código até a soma de dois números, vira um circuito de portas lógicas. Aqui você clica nas entradas, acende os fios, monta somadores, guarda um bit na memória e leva tudo isso para o código em Java, Python e JavaScript.</p><div class="busca">
+  <svg aria-hidden="true" class="busca__icone" fill="none" height="18" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" width="18"><circle cx="11" cy="11" r="7"></circle><path d="M20 20l-3.5-3.5"></path></svg>
+  <input aria-label="Filtrar seções" autocapitalize="none" autocomplete="off" autocorrect="off" class="busca__campo" data-nome="seções" enterkeyhint="search" id="kx-busca" inputmode="search" placeholder="Filtrar seções por palavra" spellcheck="false" type="search"/>
+  <span class="busca__contagem" id="kx-contagem"></span>
+</div></header></div>
+<div class="wrap moldura">
+<header class="hero kx-oculto">
   <div class="brand"><b>dev-Kalixto</b> · Professor · Programador · Gamer</div>
   <div class="eyebrow">Apostila · Lógica digital</div>
-  <h1>Portas Lógicas: como o computador decide com <span>0</span> e <span>1</span></h1>
+  
   <p class="lede">Toda decisão de um processador, de um <code>if</code> no seu código até a soma de dois números, vira um circuito de portas lógicas. Aqui você clica nas entradas, acende os fios, monta somadores, guarda um bit na memória e leva tudo isso para o código em Java, Python e JavaScript.</p>
   <div class="bits"><span class="bit one">1 = ligado · verdadeiro · tem corrente</span><span class="bit zero">0 = desligado · falso · sem corrente</span></div>
 </header>
 
-<nav class="toc" aria-label="Sumário">
+<nav aria-label="Sumário" class="toc kx-oculto">
   <div class="eyebrow">Sumário</div>
   <ol>
     <li><a href="#base">O que é uma porta lógica</a></li>
@@ -263,9 +1020,34 @@ footer{margin-top:56px;color:var(--muted);font-size:.9rem}
 </nav>
 
 <!-- 1 -->
-<section class="block" id="base">
-  <div class="eyebrow">Fundamentos</div>
-  <h2>O que é uma porta lógica</h2>
+<section class="block bloco bloco--c1" data-item="" id="base"><div class="bloco__coluna"><div class="bloco__fixo"><svg aria-label="Seção 01" class="bloco__emblema" height="150" role="img" viewBox="0 0 120 120" width="150">
+  <defs>
+    <linearGradient id="kxv1" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity=".85"></stop>
+      <stop offset="45%" stop-opacity=".55" style="stop-color:var(--luz)"></stop>
+      <stop offset="100%" stop-opacity=".35" style="stop-color:var(--luz-2)"></stop>
+    </linearGradient>
+    <radialGradient cx="35%" cy="28%" id="kxb1">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity=".95"></stop>
+      <stop offset="55%" stop-opacity=".45" style="stop-color:var(--luz)"></stop>
+      <stop offset="100%" stop-color="#0d0a1d" stop-opacity=".15"></stop>
+    </radialGradient>
+  </defs>
+  <rect fill="url(#kxv1)" height="104" opacity=".16" rx="30" stroke-opacity=".45" stroke-width="1.2" style="stroke:var(--luz)" width="104" x="8" y="8"></rect>
+  <path d="M26 92 H70" fill="none" stroke-linecap="round" stroke-opacity=".8" stroke-width="3" style="stroke:var(--luz)"></path>
+  <path d="M26 82 H52" fill="none" stroke-linecap="round" stroke-opacity=".75" stroke-width="3" style="stroke:var(--luz-2)"></path>
+  <text class="bloco__numero" x="26" y="66">01</text>
+  <circle cx="90" cy="32" fill="url(#kxb1)" r="9" stroke="#ffffff" stroke-opacity=".5"></circle>
+  <circle cx="90" cy="88" fill="url(#kxb1)" r="5" stroke="#ffffff" stroke-opacity=".4"></circle>
+  <ellipse cx="46" cy="26" fill="#ffffff" opacity=".10" rx="18" ry="9" transform="rotate(-28 46 26)"></ellipse>
+</svg><span class="bloco__marca">Fundamentos</span><h2 class="bloco__rotulo">O que é uma porta lógica</h2></div><svg aria-hidden="true" class="bloco__fios" preserveAspectRatio="none" viewBox="0 0 60 400">
+  <path class="bloco__fio" d="M0 60 C 30 60, 30 20, 60 20"></path>
+  <path class="bloco__fio" d="M0 60 C 30 60, 30 120, 60 120"></path>
+  <path class="bloco__fio" d="M0 60 C 34 60, 34 230, 60 230"></path>
+  <path class="bloco__fio" d="M0 60 C 34 60, 34 340, 60 340"></path>
+</svg></div><div class="bloco__conteudo">
+  
+  
   <p>Uma porta lógica é um circuito eletrônico que recebe um ou mais sinais de entrada e devolve <strong>um</strong> sinal de saída. Cada sinal só pode ter dois valores: <strong>1</strong> (há tensão, verdadeiro) ou <strong>0</strong> (não há tensão, falso). Esse sistema de dois valores é o <strong>binário</strong>, e cada valor é um <strong>bit</strong>. Oito bits formam um <strong>byte</strong>.</p>
   <p>As regras que dizem qual saída cada porta produz vêm da <strong>álgebra booleana</strong>. É a mesma lógica que você usa em frases como “se chover <em>e</em> eu estiver sem guarda-chuva, pego um Uber”.</p>
   <h3>Tabela-verdade</h3>
@@ -281,19 +1063,44 @@ footer{margin-top:56px;color:var(--muted);font-size:.9rem}
     <li><span class="yr">hoje</span>Um processador de celular tem dezenas de bilhões de transistores.</li>
   </ul>
   <div class="callout tip"><strong>Como usar esta apostila:</strong> sempre que vir bolinhas com 0 ou 1 num circuito, clique nelas. O fio fica verde quando o sinal é 1 e apagado quando é 0. A lâmpada da direita é a saída.</div>
-</section>
+</div></section>
 
 <!-- 2 -->
-<section class="block" id="fisica">
-  <div class="eyebrow">Por dentro</div>
-  <h2>Do interruptor ao transistor</h2>
+<section class="block bloco bloco--c2" data-item="" id="fisica"><div class="bloco__coluna"><div class="bloco__fixo"><svg aria-label="Seção 02" class="bloco__emblema" height="150" role="img" viewBox="0 0 120 120" width="150">
+  <defs>
+    <linearGradient id="kxv2" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity=".85"></stop>
+      <stop offset="45%" stop-opacity=".55" style="stop-color:var(--luz)"></stop>
+      <stop offset="100%" stop-opacity=".35" style="stop-color:var(--luz-2)"></stop>
+    </linearGradient>
+    <radialGradient cx="35%" cy="28%" id="kxb2">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity=".95"></stop>
+      <stop offset="55%" stop-opacity=".45" style="stop-color:var(--luz)"></stop>
+      <stop offset="100%" stop-color="#0d0a1d" stop-opacity=".15"></stop>
+    </radialGradient>
+  </defs>
+  <rect fill="url(#kxv2)" height="104" opacity=".16" rx="30" stroke-opacity=".45" stroke-width="1.2" style="stroke:var(--luz)" width="104" x="8" y="8"></rect>
+  <path d="M26 92 H70" fill="none" stroke-linecap="round" stroke-opacity=".8" stroke-width="3" style="stroke:var(--luz)"></path>
+  <path d="M26 82 H52" fill="none" stroke-linecap="round" stroke-opacity=".75" stroke-width="3" style="stroke:var(--luz-2)"></path>
+  <text class="bloco__numero" x="26" y="66">02</text>
+  <circle cx="90" cy="32" fill="url(#kxb2)" r="9" stroke="#ffffff" stroke-opacity=".5"></circle>
+  <circle cx="90" cy="88" fill="url(#kxb2)" r="5" stroke="#ffffff" stroke-opacity=".4"></circle>
+  <ellipse cx="46" cy="26" fill="#ffffff" opacity=".10" rx="18" ry="9" transform="rotate(-28 46 26)"></ellipse>
+</svg><span class="bloco__marca">Por dentro</span><h2 class="bloco__rotulo">Do interruptor ao transistor</h2></div><svg aria-hidden="true" class="bloco__fios" preserveAspectRatio="none" viewBox="0 0 60 400">
+  <path class="bloco__fio" d="M0 60 C 30 60, 30 20, 60 20"></path>
+  <path class="bloco__fio" d="M0 60 C 30 60, 30 120, 60 120"></path>
+  <path class="bloco__fio" d="M0 60 C 34 60, 34 230, 60 230"></path>
+  <path class="bloco__fio" d="M0 60 C 34 60, 34 340, 60 340"></path>
+</svg></div><div class="bloco__conteudo">
+  
+  
   <p>Antes de existir chip, já dava para fazer lógica com interruptores e uma lâmpada. Clique nos interruptores A e B abaixo.</p>
   <figure>
-    <div class="fig-scroll"><svg id="swSeries" viewBox="0 0 520 170" role="img" aria-label="Circuito em série com dois interruptores"></svg></div>
+    <div class="fig-scroll"><svg aria-label="Circuito em série com dois interruptores" id="swSeries" role="img" viewBox="0 0 520 170"></svg></div>
     <figcaption><b>Em série = AND.</b> A corrente precisa passar por A <em>e</em> por B. Se qualquer um estiver aberto, a lâmpada apaga.</figcaption>
   </figure>
   <figure>
-    <div class="fig-scroll"><svg id="swParallel" viewBox="0 0 520 210" role="img" aria-label="Circuito em paralelo com dois interruptores"></svg></div>
+    <div class="fig-scroll"><svg aria-label="Circuito em paralelo com dois interruptores" id="swParallel" role="img" viewBox="0 0 520 210"></svg></div>
     <figcaption><b>Em paralelo = OR.</b> A corrente tem dois caminhos. Basta A <em>ou</em> B fechado para a lâmpada acender.</figcaption>
   </figure>
   <h3>O transistor: um interruptor sem dedo</h3>
@@ -309,20 +1116,70 @@ footer{margin-top:56px;color:var(--muted);font-size:.9rem}
     </tbody>
   </table></div>
   <div class="callout"><strong>Curiosidade:</strong> uma AND custa mais transistores que uma NAND. Por isso engenheiros preferem desenhar circuitos com NAND e NOR sempre que possível.</div>
-</section>
+</div></section>
 
 <!-- 3 -->
-<section class="block" id="portas">
-  <div class="eyebrow">Laboratório</div>
-  <h2>As 7 portas, uma a uma</h2>
+<section class="block bloco bloco--c3" data-item="" id="portas"><div class="bloco__coluna"><div class="bloco__fixo"><svg aria-label="Seção 03" class="bloco__emblema" height="150" role="img" viewBox="0 0 120 120" width="150">
+  <defs>
+    <linearGradient id="kxv3" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity=".85"></stop>
+      <stop offset="45%" stop-opacity=".55" style="stop-color:var(--luz)"></stop>
+      <stop offset="100%" stop-opacity=".35" style="stop-color:var(--luz-2)"></stop>
+    </linearGradient>
+    <radialGradient cx="35%" cy="28%" id="kxb3">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity=".95"></stop>
+      <stop offset="55%" stop-opacity=".45" style="stop-color:var(--luz)"></stop>
+      <stop offset="100%" stop-color="#0d0a1d" stop-opacity=".15"></stop>
+    </radialGradient>
+  </defs>
+  <rect fill="url(#kxv3)" height="104" opacity=".16" rx="30" stroke-opacity=".45" stroke-width="1.2" style="stroke:var(--luz)" width="104" x="8" y="8"></rect>
+  <path d="M26 92 H70" fill="none" stroke-linecap="round" stroke-opacity=".8" stroke-width="3" style="stroke:var(--luz)"></path>
+  <path d="M26 82 H52" fill="none" stroke-linecap="round" stroke-opacity=".75" stroke-width="3" style="stroke:var(--luz-2)"></path>
+  <text class="bloco__numero" x="26" y="66">03</text>
+  <circle cx="90" cy="32" fill="url(#kxb3)" r="9" stroke="#ffffff" stroke-opacity=".5"></circle>
+  <circle cx="90" cy="88" fill="url(#kxb3)" r="5" stroke="#ffffff" stroke-opacity=".4"></circle>
+  <ellipse cx="46" cy="26" fill="#ffffff" opacity=".10" rx="18" ry="9" transform="rotate(-28 46 26)"></ellipse>
+</svg><span class="bloco__marca">Laboratório</span><h2 class="bloco__rotulo">As 7 portas, uma a uma</h2></div><svg aria-hidden="true" class="bloco__fios" preserveAspectRatio="none" viewBox="0 0 60 400">
+  <path class="bloco__fio" d="M0 60 C 30 60, 30 20, 60 20"></path>
+  <path class="bloco__fio" d="M0 60 C 30 60, 30 120, 60 120"></path>
+  <path class="bloco__fio" d="M0 60 C 34 60, 34 230, 60 230"></path>
+  <path class="bloco__fio" d="M0 60 C 34 60, 34 340, 60 340"></path>
+</svg></div><div class="bloco__conteudo">
+  
+  
   <p class="muted">Repare que cada porta com bolinha na saída (NAND, NOR, XNOR) é a porta anterior com o resultado invertido.</p>
   <div id="gates"></div>
-</section>
+</div></section>
 
 <!-- 4 -->
-<section class="block" id="cola">
-  <div class="eyebrow">Resumo</div>
-  <h2>Tabela de cola</h2>
+<section class="block bloco bloco--c4" data-item="" id="cola"><div class="bloco__coluna"><div class="bloco__fixo"><svg aria-label="Seção 04" class="bloco__emblema" height="150" role="img" viewBox="0 0 120 120" width="150">
+  <defs>
+    <linearGradient id="kxv4" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity=".85"></stop>
+      <stop offset="45%" stop-opacity=".55" style="stop-color:var(--luz)"></stop>
+      <stop offset="100%" stop-opacity=".35" style="stop-color:var(--luz-2)"></stop>
+    </linearGradient>
+    <radialGradient cx="35%" cy="28%" id="kxb4">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity=".95"></stop>
+      <stop offset="55%" stop-opacity=".45" style="stop-color:var(--luz)"></stop>
+      <stop offset="100%" stop-color="#0d0a1d" stop-opacity=".15"></stop>
+    </radialGradient>
+  </defs>
+  <rect fill="url(#kxv4)" height="104" opacity=".16" rx="30" stroke-opacity=".45" stroke-width="1.2" style="stroke:var(--luz)" width="104" x="8" y="8"></rect>
+  <path d="M26 92 H70" fill="none" stroke-linecap="round" stroke-opacity=".8" stroke-width="3" style="stroke:var(--luz)"></path>
+  <path d="M26 82 H52" fill="none" stroke-linecap="round" stroke-opacity=".75" stroke-width="3" style="stroke:var(--luz-2)"></path>
+  <text class="bloco__numero" x="26" y="66">04</text>
+  <circle cx="90" cy="32" fill="url(#kxb4)" r="9" stroke="#ffffff" stroke-opacity=".5"></circle>
+  <circle cx="90" cy="88" fill="url(#kxb4)" r="5" stroke="#ffffff" stroke-opacity=".4"></circle>
+  <ellipse cx="46" cy="26" fill="#ffffff" opacity=".10" rx="18" ry="9" transform="rotate(-28 46 26)"></ellipse>
+</svg><span class="bloco__marca">Resumo</span><h2 class="bloco__rotulo">Tabela de cola</h2></div><svg aria-hidden="true" class="bloco__fios" preserveAspectRatio="none" viewBox="0 0 60 400">
+  <path class="bloco__fio" d="M0 60 C 30 60, 30 20, 60 20"></path>
+  <path class="bloco__fio" d="M0 60 C 30 60, 30 120, 60 120"></path>
+  <path class="bloco__fio" d="M0 60 C 34 60, 34 230, 60 230"></path>
+  <path class="bloco__fio" d="M0 60 C 34 60, 34 340, 60 340"></path>
+</svg></div><div class="bloco__conteudo">
+  
+  
   <p>As 6 portas de duas entradas lado a lado. Leia cada linha como “para A,B = 00, 01, 10, 11 a saída é…”.</p>
   <div class="scroll"><table class="grid-t">
     <thead><tr><th>Porta</th><th>Expressão</th><th>00</th><th>01</th><th>10</th><th>11</th><th>Frase para decorar</th></tr></thead>
@@ -331,12 +1188,37 @@ footer{margin-top:56px;color:var(--muted);font-size:.9rem}
   <p class="muted">NOT tem uma entrada só: 0 vira 1 e 1 vira 0.</p>
   <h3>Portas com mais de duas entradas</h3>
   <p>AND, OR, NAND e NOR aceitam 3, 4 ou mais entradas e mantêm a mesma regra: uma AND de 3 entradas só dá 1 em 111, e uma OR de 3 entradas só dá 0 em 000. Já a XOR com várias entradas dá 1 quando a <strong>quantidade de 1s é ímpar</strong>, o que é a base do bit de paridade (veja em <a href="#exemplos">Exemplos práticos</a>).</p>
-</section>
+</div></section>
 
 <!-- 5 -->
-<section class="block" id="universal">
-  <div class="eyebrow">Conceito-chave</div>
-  <h2>Portas universais e o chip 7400</h2>
+<section class="block bloco bloco--c1" data-item="" id="universal"><div class="bloco__coluna"><div class="bloco__fixo"><svg aria-label="Seção 05" class="bloco__emblema" height="150" role="img" viewBox="0 0 120 120" width="150">
+  <defs>
+    <linearGradient id="kxv5" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity=".85"></stop>
+      <stop offset="45%" stop-opacity=".55" style="stop-color:var(--luz)"></stop>
+      <stop offset="100%" stop-opacity=".35" style="stop-color:var(--luz-2)"></stop>
+    </linearGradient>
+    <radialGradient cx="35%" cy="28%" id="kxb5">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity=".95"></stop>
+      <stop offset="55%" stop-opacity=".45" style="stop-color:var(--luz)"></stop>
+      <stop offset="100%" stop-color="#0d0a1d" stop-opacity=".15"></stop>
+    </radialGradient>
+  </defs>
+  <rect fill="url(#kxv5)" height="104" opacity=".16" rx="30" stroke-opacity=".45" stroke-width="1.2" style="stroke:var(--luz)" width="104" x="8" y="8"></rect>
+  <path d="M26 92 H70" fill="none" stroke-linecap="round" stroke-opacity=".8" stroke-width="3" style="stroke:var(--luz)"></path>
+  <path d="M26 82 H52" fill="none" stroke-linecap="round" stroke-opacity=".75" stroke-width="3" style="stroke:var(--luz-2)"></path>
+  <text class="bloco__numero" x="26" y="66">05</text>
+  <circle cx="90" cy="32" fill="url(#kxb5)" r="9" stroke="#ffffff" stroke-opacity=".5"></circle>
+  <circle cx="90" cy="88" fill="url(#kxb5)" r="5" stroke="#ffffff" stroke-opacity=".4"></circle>
+  <ellipse cx="46" cy="26" fill="#ffffff" opacity=".10" rx="18" ry="9" transform="rotate(-28 46 26)"></ellipse>
+</svg><span class="bloco__marca">Conceito-chave</span><h2 class="bloco__rotulo">Portas universais e o chip 7400</h2></div><svg aria-hidden="true" class="bloco__fios" preserveAspectRatio="none" viewBox="0 0 60 400">
+  <path class="bloco__fio" d="M0 60 C 30 60, 30 20, 60 20"></path>
+  <path class="bloco__fio" d="M0 60 C 30 60, 30 120, 60 120"></path>
+  <path class="bloco__fio" d="M0 60 C 34 60, 34 230, 60 230"></path>
+  <path class="bloco__fio" d="M0 60 C 34 60, 34 340, 60 340"></path>
+</svg></div><div class="bloco__conteudo">
+  
+  
   <p>Com <strong>apenas portas NAND</strong> dá para montar qualquer outra porta, e portanto qualquer circuito digital. O mesmo vale para NOR. Fabricar um tipo só de porta, em massa, é mais barato. A memória do seu pendrive e do SSD se chama <strong>flash NAND</strong> por ser organizada com essa lógica, e o computador de bordo das missões Apollo foi construído quase só com portas NOR.</p>
   <div class="scroll"><table class="grid-t">
     <thead><tr><th>Quero montar</th><th>Só com NAND</th><th>Por que funciona</th></tr></thead>
@@ -348,13 +1230,13 @@ footer{margin-top:56px;color:var(--muted);font-size:.9rem}
     </tbody>
   </table></div>
   <figure>
-    <div class="fig-scroll"><svg id="nandNot" viewBox="0 0 520 150" role="img" aria-label="Porta NOT montada com uma NAND"></svg></div>
+    <div class="fig-scroll"><svg aria-label="Porta NOT montada com uma NAND" id="nandNot" role="img" viewBox="0 0 520 150"></svg></div>
     <figcaption><b>NOT feito de NAND.</b> As duas entradas da NAND recebem o mesmo sinal A. Clique em A e veja a saída sempre invertida.</figcaption>
   </figure>
   <h3>Como uma porta aparece no mundo real</h3>
   <p>Em laboratório de eletrônica, você não desenha a porta: compra um <strong>circuito integrado</strong> (CI). O clássico <strong>7400</strong> tem 14 pinos e 4 portas NAND independentes dentro.</p>
   <figure>
-    <div class="fig-scroll"><svg id="chip" viewBox="0 0 560 300" role="img" aria-label="Pinagem do chip 7400 com quatro portas NAND"></svg></div>
+    <div class="fig-scroll"><svg aria-label="Pinagem do chip 7400 com quatro portas NAND" id="chip" role="img" viewBox="0 0 560 300"></svg></div>
     <figcaption><b>Pinagem do 7400 (vista de cima).</b> O chanfro à esquerda marca o lado do pino 1. Pino 14 é a alimentação (VCC, 5 V) e o pino 7 é o terra (GND). Cada porta tem duas entradas (A, B) e uma saída (Y): por exemplo, a porta 1 usa os pinos 1, 2 e 3.</figcaption>
   </figure>
   <div class="scroll"><table class="grid-t">
@@ -368,12 +1250,37 @@ footer{margin-top:56px;color:var(--muted);font-size:.9rem}
       <tr><td class="m">7486</td><td>4 portas XOR de 2 entradas</td></tr>
     </tbody>
   </table></div>
-</section>
+</div></section>
 
 <!-- 6 -->
-<section class="block" id="algebra">
-  <div class="eyebrow">Matemática do circuito</div>
-  <h2>Álgebra de Boole e De Morgan</h2>
+<section class="block bloco bloco--c2" data-item="" id="algebra"><div class="bloco__coluna"><div class="bloco__fixo"><svg aria-label="Seção 06" class="bloco__emblema" height="150" role="img" viewBox="0 0 120 120" width="150">
+  <defs>
+    <linearGradient id="kxv6" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity=".85"></stop>
+      <stop offset="45%" stop-opacity=".55" style="stop-color:var(--luz)"></stop>
+      <stop offset="100%" stop-opacity=".35" style="stop-color:var(--luz-2)"></stop>
+    </linearGradient>
+    <radialGradient cx="35%" cy="28%" id="kxb6">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity=".95"></stop>
+      <stop offset="55%" stop-opacity=".45" style="stop-color:var(--luz)"></stop>
+      <stop offset="100%" stop-color="#0d0a1d" stop-opacity=".15"></stop>
+    </radialGradient>
+  </defs>
+  <rect fill="url(#kxv6)" height="104" opacity=".16" rx="30" stroke-opacity=".45" stroke-width="1.2" style="stroke:var(--luz)" width="104" x="8" y="8"></rect>
+  <path d="M26 92 H70" fill="none" stroke-linecap="round" stroke-opacity=".8" stroke-width="3" style="stroke:var(--luz)"></path>
+  <path d="M26 82 H52" fill="none" stroke-linecap="round" stroke-opacity=".75" stroke-width="3" style="stroke:var(--luz-2)"></path>
+  <text class="bloco__numero" x="26" y="66">06</text>
+  <circle cx="90" cy="32" fill="url(#kxb6)" r="9" stroke="#ffffff" stroke-opacity=".5"></circle>
+  <circle cx="90" cy="88" fill="url(#kxb6)" r="5" stroke="#ffffff" stroke-opacity=".4"></circle>
+  <ellipse cx="46" cy="26" fill="#ffffff" opacity=".10" rx="18" ry="9" transform="rotate(-28 46 26)"></ellipse>
+</svg><span class="bloco__marca">Matemática do circuito</span><h2 class="bloco__rotulo">Álgebra de Boole e De Morgan</h2></div><svg aria-hidden="true" class="bloco__fios" preserveAspectRatio="none" viewBox="0 0 60 400">
+  <path class="bloco__fio" d="M0 60 C 30 60, 30 20, 60 20"></path>
+  <path class="bloco__fio" d="M0 60 C 30 60, 30 120, 60 120"></path>
+  <path class="bloco__fio" d="M0 60 C 34 60, 34 230, 60 230"></path>
+  <path class="bloco__fio" d="M0 60 C 34 60, 34 340, 60 340"></path>
+</svg></div><div class="bloco__conteudo">
+  
+  
   <p>Na notação booleana, <strong>·</strong> é E (AND), <strong>+</strong> é OU (OR) e a barra em cima (<span class="ov">A</span>), o símbolo ¬ ou o apóstrofo (A') é NÃO (NOT). Atenção: aqui 1 + 1 = 1, porque “verdadeiro OU verdadeiro” é verdadeiro. Não é a soma comum.</p>
   <p><strong>Ordem de precedência:</strong> primeiro NOT, depois AND, por último OR. Então <code>A + B · C̄</code> é lido como <code>A + (B · (C̄))</code>, do mesmo jeito que na matemática a multiplicação vem antes da soma.</p>
   <h3>As duas leis de De Morgan</h3>
@@ -418,12 +1325,37 @@ S = A·(B + B̄)      <span class="c">← distributiva (coloca A em evidência)<
 S = A·1            <span class="c">← complemento: B + B̄ = 1</span>
 S = A              <span class="c">← identidade</span></pre>
   <p>Duas ANDs, um NOT e uma OR viram <strong>um fio</strong> ligado em A. Menos portas significam circuito mais barato, mais rápido e que gasta menos energia.</p>
-</section>
+</div></section>
 
 <!-- 7 -->
-<section class="block" id="projeto">
-  <div class="eyebrow">Projeto de circuitos</div>
-  <h2>Do problema ao circuito</h2>
+<section class="block bloco bloco--c3" data-item="" id="projeto"><div class="bloco__coluna"><div class="bloco__fixo"><svg aria-label="Seção 07" class="bloco__emblema" height="150" role="img" viewBox="0 0 120 120" width="150">
+  <defs>
+    <linearGradient id="kxv7" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity=".85"></stop>
+      <stop offset="45%" stop-opacity=".55" style="stop-color:var(--luz)"></stop>
+      <stop offset="100%" stop-opacity=".35" style="stop-color:var(--luz-2)"></stop>
+    </linearGradient>
+    <radialGradient cx="35%" cy="28%" id="kxb7">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity=".95"></stop>
+      <stop offset="55%" stop-opacity=".45" style="stop-color:var(--luz)"></stop>
+      <stop offset="100%" stop-color="#0d0a1d" stop-opacity=".15"></stop>
+    </radialGradient>
+  </defs>
+  <rect fill="url(#kxv7)" height="104" opacity=".16" rx="30" stroke-opacity=".45" stroke-width="1.2" style="stroke:var(--luz)" width="104" x="8" y="8"></rect>
+  <path d="M26 92 H70" fill="none" stroke-linecap="round" stroke-opacity=".8" stroke-width="3" style="stroke:var(--luz)"></path>
+  <path d="M26 82 H52" fill="none" stroke-linecap="round" stroke-opacity=".75" stroke-width="3" style="stroke:var(--luz-2)"></path>
+  <text class="bloco__numero" x="26" y="66">07</text>
+  <circle cx="90" cy="32" fill="url(#kxb7)" r="9" stroke="#ffffff" stroke-opacity=".5"></circle>
+  <circle cx="90" cy="88" fill="url(#kxb7)" r="5" stroke="#ffffff" stroke-opacity=".4"></circle>
+  <ellipse cx="46" cy="26" fill="#ffffff" opacity=".10" rx="18" ry="9" transform="rotate(-28 46 26)"></ellipse>
+</svg><span class="bloco__marca">Projeto de circuitos</span><h2 class="bloco__rotulo">Do problema ao circuito</h2></div><svg aria-hidden="true" class="bloco__fios" preserveAspectRatio="none" viewBox="0 0 60 400">
+  <path class="bloco__fio" d="M0 60 C 30 60, 30 20, 60 20"></path>
+  <path class="bloco__fio" d="M0 60 C 30 60, 30 120, 60 120"></path>
+  <path class="bloco__fio" d="M0 60 C 34 60, 34 230, 60 230"></path>
+  <path class="bloco__fio" d="M0 60 C 34 60, 34 340, 60 340"></path>
+</svg></div><div class="bloco__conteudo">
+  
+  
   <p>Projetar um circuito digital segue sempre os mesmos passos:</p>
   <ol>
     <li><strong>Defina entradas e saídas</strong> e o que 1 e 0 significam para cada uma.</li>
@@ -467,41 +1399,91 @@ S = A              <span class="c">← identidade</span></pre>
   <h3>Gerador de tabela-verdade</h3>
   <div class="widget">
     <label class="f" for="exprIn"><span>Digite uma expressão com variáveis A–Z (até 4). Operadores: <code>·</code> ou <code>&amp;</code> ou <code>AND</code> (ou letras juntas, como <code>AB</code>); <code>+</code> ou <code>|</code> ou <code>OR</code>; <code>¬</code>, <code>!</code>, <code>NOT</code> ou <code>A'</code>; <code>⊕</code>, <code>^</code> ou <code>XOR</code>.</span>
-      <input type="text" id="exprIn" value="(P · S) + F" autocomplete="off" spellcheck="false">
+      <input autocomplete="off" id="exprIn" spellcheck="false" type="text" value="(P · S) + F"/>
     </label>
     <div class="chips" id="exprChips"></div>
-    <p class="err" id="exprErr" aria-live="polite"></p>
+    <p aria-live="polite" class="err" id="exprErr"></p>
     <div class="scroll" style="margin:0"><table class="ttgen" id="exprTable"></table></div>
     <p class="mono muted" id="exprSum" style="margin:0"></p>
   </div>
-</section>
+</div></section>
 
 <!-- 8 -->
-<section class="block" id="karnaugh">
-  <div class="eyebrow">Técnica</div>
-  <h2>Simplificando com mapa de Karnaugh</h2>
+<section class="block bloco bloco--c4" data-item="" id="karnaugh"><div class="bloco__coluna"><div class="bloco__fixo"><svg aria-label="Seção 08" class="bloco__emblema" height="150" role="img" viewBox="0 0 120 120" width="150">
+  <defs>
+    <linearGradient id="kxv8" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity=".85"></stop>
+      <stop offset="45%" stop-opacity=".55" style="stop-color:var(--luz)"></stop>
+      <stop offset="100%" stop-opacity=".35" style="stop-color:var(--luz-2)"></stop>
+    </linearGradient>
+    <radialGradient cx="35%" cy="28%" id="kxb8">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity=".95"></stop>
+      <stop offset="55%" stop-opacity=".45" style="stop-color:var(--luz)"></stop>
+      <stop offset="100%" stop-color="#0d0a1d" stop-opacity=".15"></stop>
+    </radialGradient>
+  </defs>
+  <rect fill="url(#kxv8)" height="104" opacity=".16" rx="30" stroke-opacity=".45" stroke-width="1.2" style="stroke:var(--luz)" width="104" x="8" y="8"></rect>
+  <path d="M26 92 H70" fill="none" stroke-linecap="round" stroke-opacity=".8" stroke-width="3" style="stroke:var(--luz)"></path>
+  <path d="M26 82 H52" fill="none" stroke-linecap="round" stroke-opacity=".75" stroke-width="3" style="stroke:var(--luz-2)"></path>
+  <text class="bloco__numero" x="26" y="66">08</text>
+  <circle cx="90" cy="32" fill="url(#kxb8)" r="9" stroke="#ffffff" stroke-opacity=".5"></circle>
+  <circle cx="90" cy="88" fill="url(#kxb8)" r="5" stroke="#ffffff" stroke-opacity=".4"></circle>
+  <ellipse cx="46" cy="26" fill="#ffffff" opacity=".10" rx="18" ry="9" transform="rotate(-28 46 26)"></ellipse>
+</svg><span class="bloco__marca">Técnica</span><h2 class="bloco__rotulo">Simplificando com mapa de Karnaugh</h2></div><svg aria-hidden="true" class="bloco__fios" preserveAspectRatio="none" viewBox="0 0 60 400">
+  <path class="bloco__fio" d="M0 60 C 30 60, 30 20, 60 20"></path>
+  <path class="bloco__fio" d="M0 60 C 30 60, 30 120, 60 120"></path>
+  <path class="bloco__fio" d="M0 60 C 34 60, 34 230, 60 230"></path>
+  <path class="bloco__fio" d="M0 60 C 34 60, 34 340, 60 340"></path>
+</svg></div><div class="bloco__conteudo">
+  
+  
   <p>O mapa de Karnaugh (mapa K) é a tabela-verdade redesenhada como uma grade, em que células vizinhas diferem em apenas um bit. As colunas seguem o <strong>código Gray</strong> (00, 01, 11, 10), não a contagem normal. Assim, quando você agrupa 1s vizinhos, a variável que muda dentro do grupo some da expressão.</p>
   <p><strong>Regras dos grupos:</strong> só 1s; tamanhos de 1, 2, 4, 8…; retângulos; os grupos podem se sobrepor e “dar a volta” pelas bordas; faça grupos o maior possível.</p>
   <p>Exemplo: <code>f(A,B,C)</code> vale 1 nas linhas 1, 3, 5, 6 e 7 da tabela-verdade (notação <code>Σm(1,3,5,6,7)</code>).</p>
   <div class="scroll" style="border:none">
-  <table class="kmap" aria-label="Mapa de Karnaugh de 3 variáveis">
-    <tr><th>A \ BC</th><th>00</th><th>01</th><th>11</th><th>10</th></tr>
+  <table aria-label="Mapa de Karnaugh de 3 variáveis" class="kmap">
+    <tbody><tr><th>A \ BC</th><th>00</th><th>01</th><th>11</th><th>10</th></tr>
     <tr><th>0</th><td><small>m0</small>0</td><td class="g1"><small>m1</small>1</td><td class="g1"><small>m3</small>1</td><td><small>m2</small>0</td></tr>
     <tr><th>1</th><td><small>m4</small>0</td><td class="g1"><small>m5</small>1</td><td class="g1 g2"><small>m7</small>1</td><td class="g2"><small>m6</small>1</td></tr>
-  </table></div>
+  </tbody></table></div>
   <div class="legend"><span><i style="background:var(--blue)"></i>Grupo de 4: C = 1 em todas → <b>C</b></span><span><i style="background:var(--magenta)"></i>Grupo de 2: A = 1 e B = 1 → <b>A·B</b></span></div>
   <p style="margin-top:14px">Resultado: <code>f = C + A·B</code>. Sem o mapa, a expressão “bruta” teria 5 termos de 3 variáveis cada. Confira no gerador de tabela-verdade digitando <code>C + AB</code>.</p>
-</section>
+</div></section>
 
 <!-- 9 -->
-<section class="block" id="somador">
-  <div class="eyebrow">Aritmética</div>
-  <h2>Circuitos que somam</h2>
+<section class="block bloco bloco--c1" data-item="" id="somador"><div class="bloco__coluna"><div class="bloco__fixo"><svg aria-label="Seção 09" class="bloco__emblema" height="150" role="img" viewBox="0 0 120 120" width="150">
+  <defs>
+    <linearGradient id="kxv9" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity=".85"></stop>
+      <stop offset="45%" stop-opacity=".55" style="stop-color:var(--luz)"></stop>
+      <stop offset="100%" stop-opacity=".35" style="stop-color:var(--luz-2)"></stop>
+    </linearGradient>
+    <radialGradient cx="35%" cy="28%" id="kxb9">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity=".95"></stop>
+      <stop offset="55%" stop-opacity=".45" style="stop-color:var(--luz)"></stop>
+      <stop offset="100%" stop-color="#0d0a1d" stop-opacity=".15"></stop>
+    </radialGradient>
+  </defs>
+  <rect fill="url(#kxv9)" height="104" opacity=".16" rx="30" stroke-opacity=".45" stroke-width="1.2" style="stroke:var(--luz)" width="104" x="8" y="8"></rect>
+  <path d="M26 92 H70" fill="none" stroke-linecap="round" stroke-opacity=".8" stroke-width="3" style="stroke:var(--luz)"></path>
+  <path d="M26 82 H52" fill="none" stroke-linecap="round" stroke-opacity=".75" stroke-width="3" style="stroke:var(--luz-2)"></path>
+  <text class="bloco__numero" x="26" y="66">09</text>
+  <circle cx="90" cy="32" fill="url(#kxb9)" r="9" stroke="#ffffff" stroke-opacity=".5"></circle>
+  <circle cx="90" cy="88" fill="url(#kxb9)" r="5" stroke="#ffffff" stroke-opacity=".4"></circle>
+  <ellipse cx="46" cy="26" fill="#ffffff" opacity=".10" rx="18" ry="9" transform="rotate(-28 46 26)"></ellipse>
+</svg><span class="bloco__marca">Aritmética</span><h2 class="bloco__rotulo">Circuitos que somam</h2></div><svg aria-hidden="true" class="bloco__fios" preserveAspectRatio="none" viewBox="0 0 60 400">
+  <path class="bloco__fio" d="M0 60 C 30 60, 30 20, 60 20"></path>
+  <path class="bloco__fio" d="M0 60 C 30 60, 30 120, 60 120"></path>
+  <path class="bloco__fio" d="M0 60 C 34 60, 34 230, 60 230"></path>
+  <path class="bloco__fio" d="M0 60 C 34 60, 34 340, 60 340"></path>
+</svg></div><div class="bloco__conteudo">
+  
+  
   <p>Em binário, 0+0 = 0, 0+1 = 1, 1+0 = 1 e 1+1 = <strong>10</strong> (lê-se “um-zero”, que vale 2). O dígito da direita é a <strong>Soma</strong> e o da esquerda é o <strong>vai-um</strong> (carry). Compare com a tabela de cola: a Soma (0,1,1,0) é exatamente a <strong>XOR</strong>, e o vai-um (0,0,0,1) é exatamente a <strong>AND</strong>.</p>
   <h3>Meio somador (half adder)</h3>
   <figure>
     <div class="fig-scroll"><div id="cHalf"></div></div>
-    <figcaption><b>XOR + AND.</b> <span id="halfLine" class="mono">0 + 0 = 00 em binário = 0</span></figcaption>
+    <figcaption><b>XOR + AND.</b> <span class="mono" id="halfLine">0 + 0 = 00 em binário = 0</span></figcaption>
   </figure>
   <h3>Somador completo (full adder)</h3>
   <p>O meio somador não sabe receber o vai-um de uma coluna anterior. O <strong>somador completo</strong> tem 3 entradas (A, B e Cin, o vai-um que chega) e duas saídas: <code>S = A ⊕ B ⊕ Cin</code> e <code>Cout = A·B + Cin·(A ⊕ B)</code>.</p>
@@ -512,8 +1494,8 @@ S = A              <span class="c">← identidade</span></pre>
   <h3>Somador de 4 bits (ripple carry)</h3>
   <p>Encadeando 4 somadores completos, o Cout de cada coluna entra como Cin da próxima, como o “vai-um” que você faz na conta de papel. Clique nos bits para montar os números (o bit da esquerda vale 8, depois 4, 2 e 1).</p>
   <div class="widget" id="ripple">
-    <div class="toggles"><span class="rowlbl">A</span><span id="rA" class="toggles"></span><span class="mono muted" id="rAd"></span></div>
-    <div class="toggles"><span class="rowlbl">B</span><span id="rB" class="toggles"></span><span class="mono muted" id="rBd"></span></div>
+    <div class="toggles"><span class="rowlbl">A</span><span class="toggles" id="rA"></span><span class="mono muted" id="rAd"></span></div>
+    <div class="toggles"><span class="rowlbl">B</span><span class="toggles" id="rB"></span><span class="mono muted" id="rBd"></span></div>
     <div class="toggles"><span class="rowlbl">Vai-um</span><div class="bitrow" id="rC"></div></div>
     <div class="toggles"><span class="rowlbl">Soma</span><div class="bitrow" id="rS"></div></div>
     <div class="outs">
@@ -522,12 +1504,37 @@ S = A              <span class="c">← identidade</span></pre>
     </div>
   </div>
   <p>Esse mesmo bloco, ampliado para 32 ou 64 bits, fica dentro da <strong>ULA</strong> (unidade lógica e aritmética) do processador. A subtração usa o mesmo somador com um truque chamado <em>complemento de dois</em>: inverte os bits de B com XOR e soma 1.</p>
-</section>
+</div></section>
 
 <!-- 10 -->
-<section class="block" id="mux">
-  <div class="eyebrow">Controle e memória</div>
-  <h2>Escolher e lembrar: MUX e memória</h2>
+<section class="block bloco bloco--c2" data-item="" id="mux"><div class="bloco__coluna"><div class="bloco__fixo"><svg aria-label="Seção 10" class="bloco__emblema" height="150" role="img" viewBox="0 0 120 120" width="150">
+  <defs>
+    <linearGradient id="kxv10" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity=".85"></stop>
+      <stop offset="45%" stop-opacity=".55" style="stop-color:var(--luz)"></stop>
+      <stop offset="100%" stop-opacity=".35" style="stop-color:var(--luz-2)"></stop>
+    </linearGradient>
+    <radialGradient cx="35%" cy="28%" id="kxb10">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity=".95"></stop>
+      <stop offset="55%" stop-opacity=".45" style="stop-color:var(--luz)"></stop>
+      <stop offset="100%" stop-color="#0d0a1d" stop-opacity=".15"></stop>
+    </radialGradient>
+  </defs>
+  <rect fill="url(#kxv10)" height="104" opacity=".16" rx="30" stroke-opacity=".45" stroke-width="1.2" style="stroke:var(--luz)" width="104" x="8" y="8"></rect>
+  <path d="M26 92 H70" fill="none" stroke-linecap="round" stroke-opacity=".8" stroke-width="3" style="stroke:var(--luz)"></path>
+  <path d="M26 82 H52" fill="none" stroke-linecap="round" stroke-opacity=".75" stroke-width="3" style="stroke:var(--luz-2)"></path>
+  <text class="bloco__numero" x="26" y="66">10</text>
+  <circle cx="90" cy="32" fill="url(#kxb10)" r="9" stroke="#ffffff" stroke-opacity=".5"></circle>
+  <circle cx="90" cy="88" fill="url(#kxb10)" r="5" stroke="#ffffff" stroke-opacity=".4"></circle>
+  <ellipse cx="46" cy="26" fill="#ffffff" opacity=".10" rx="18" ry="9" transform="rotate(-28 46 26)"></ellipse>
+</svg><span class="bloco__marca">Controle e memória</span><h2 class="bloco__rotulo">Escolher e lembrar: MUX e memória</h2></div><svg aria-hidden="true" class="bloco__fios" preserveAspectRatio="none" viewBox="0 0 60 400">
+  <path class="bloco__fio" d="M0 60 C 30 60, 30 20, 60 20"></path>
+  <path class="bloco__fio" d="M0 60 C 30 60, 30 120, 60 120"></path>
+  <path class="bloco__fio" d="M0 60 C 34 60, 34 230, 60 230"></path>
+  <path class="bloco__fio" d="M0 60 C 34 60, 34 340, 60 340"></path>
+</svg></div><div class="bloco__conteudo">
+  
+  
   <h3>Multiplexador 2:1 (MUX)</h3>
   <p>O MUX é uma “chave seletora”: recebe dois dados (A e B) e um sinal de seleção (S). Se S = 0, a saída é A; se S = 1, a saída é B. Expressão: <code>Y = A·S̄ + B·S</code>. É o circuito por trás de um <code>if/else</code> em hardware.</p>
   <figure>
@@ -550,12 +1557,37 @@ S = A              <span class="c">← identidade</span></pre>
     </tbody>
   </table></div>
   <p>Acrescentando um sinal de <strong>clock</strong> (o “relógio” que marca o ritmo do processador, medido em GHz), o latch vira um <strong>flip-flop</strong>. Milhões de flip-flops formam os registradores e a memória cache do processador.</p>
-</section>
+</div></section>
 
 <!-- 11 -->
-<section class="block" id="codigo">
-  <div class="eyebrow">Programação</div>
-  <h2>Portas lógicas no seu código</h2>
+<section class="block bloco bloco--c3" data-item="" id="codigo"><div class="bloco__coluna"><div class="bloco__fixo"><svg aria-label="Seção 11" class="bloco__emblema" height="150" role="img" viewBox="0 0 120 120" width="150">
+  <defs>
+    <linearGradient id="kxv11" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity=".85"></stop>
+      <stop offset="45%" stop-opacity=".55" style="stop-color:var(--luz)"></stop>
+      <stop offset="100%" stop-opacity=".35" style="stop-color:var(--luz-2)"></stop>
+    </linearGradient>
+    <radialGradient cx="35%" cy="28%" id="kxb11">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity=".95"></stop>
+      <stop offset="55%" stop-opacity=".45" style="stop-color:var(--luz)"></stop>
+      <stop offset="100%" stop-color="#0d0a1d" stop-opacity=".15"></stop>
+    </radialGradient>
+  </defs>
+  <rect fill="url(#kxv11)" height="104" opacity=".16" rx="30" stroke-opacity=".45" stroke-width="1.2" style="stroke:var(--luz)" width="104" x="8" y="8"></rect>
+  <path d="M26 92 H70" fill="none" stroke-linecap="round" stroke-opacity=".8" stroke-width="3" style="stroke:var(--luz)"></path>
+  <path d="M26 82 H52" fill="none" stroke-linecap="round" stroke-opacity=".75" stroke-width="3" style="stroke:var(--luz-2)"></path>
+  <text class="bloco__numero" x="26" y="66">11</text>
+  <circle cx="90" cy="32" fill="url(#kxb11)" r="9" stroke="#ffffff" stroke-opacity=".5"></circle>
+  <circle cx="90" cy="88" fill="url(#kxb11)" r="5" stroke="#ffffff" stroke-opacity=".4"></circle>
+  <ellipse cx="46" cy="26" fill="#ffffff" opacity=".10" rx="18" ry="9" transform="rotate(-28 46 26)"></ellipse>
+</svg><span class="bloco__marca">Programação</span><h2 class="bloco__rotulo">Portas lógicas no seu código</h2></div><svg aria-hidden="true" class="bloco__fios" preserveAspectRatio="none" viewBox="0 0 60 400">
+  <path class="bloco__fio" d="M0 60 C 30 60, 30 20, 60 20"></path>
+  <path class="bloco__fio" d="M0 60 C 30 60, 30 120, 60 120"></path>
+  <path class="bloco__fio" d="M0 60 C 34 60, 34 230, 60 230"></path>
+  <path class="bloco__fio" d="M0 60 C 34 60, 34 340, 60 340"></path>
+</svg></div><div class="bloco__conteudo">
+  
+  
   <p>Você já usa portas lógicas quando escreve condições. Existem dois tipos de operador: os <strong>lógicos</strong>, que trabalham com <code>true</code>/<code>false</code>, e os <strong>bit a bit</strong>, que aplicam a porta em cada bit de um número inteiro.</p>
   <div class="scroll"><table class="grid-t">
     <thead><tr><th>Porta</th><th>Lógico (Java/JS)</th><th>Python</th><th>Bit a bit</th></tr></thead>
@@ -571,7 +1603,7 @@ S = A              <span class="c">← identidade</span></pre>
   </table></div>
   <h3>Operadores bit a bit</h3>
   <div class="code-title"><span>exemplo · Java/JS</span></div>
-<pre data-hl>//   12 = 1100
+<pre data-hl="">//   12 = 1100
 //   10 = 1010
 12 &amp; 10   // 1000 = 8    (AND: 1 só onde os dois têm 1)
 12 | 10   // 1110 = 14   (OR: 1 onde qualquer um tem 1)
@@ -583,7 +1615,7 @@ S = A              <span class="c">← identidade</span></pre>
 
   <h3>Simulando todas as portas em Java</h3>
   <div class="code-title"><span>PortasLogicas.java</span><button class="copy">Copiar</button></div>
-<pre data-hl>public class PortasLogicas {
+<pre data-hl="">public class PortasLogicas {
 
     static boolean and(boolean a, boolean b)  { return a &amp;&amp; b; }
     static boolean or(boolean a, boolean b)   { return a || b; }
@@ -616,7 +1648,7 @@ S = A              <span class="c">← identidade</span></pre>
 
   <h3>Gerador de tabela-verdade em Python</h3>
   <div class="code-title"><span>tabela_verdade.py</span><button class="copy">Copiar</button></div>
-<pre data-hl>from itertools import product
+<pre data-hl="">from itertools import product
 
 def tabela_verdade(expressao, variaveis):
     print(" ".join(variaveis), "| S")
@@ -633,7 +1665,7 @@ tabela_verdade(lambda A, B, C: (A and B) or (A and C) or (B and C), ["A", "B", "
 
   <h3>Tudo a partir de NAND, em Python</h3>
   <div class="code-title"><span>so_nand.py</span><button class="copy">Copiar</button></div>
-<pre data-hl>def nand(a, b): return 1 - (a &amp; b)
+<pre data-hl="">def nand(a, b): return 1 - (a &amp; b)
 
 def not_(a):    return nand(a, a)
 def and_(a, b): return not_(nand(a, b))
@@ -645,19 +1677,44 @@ def xor_(a, b):
 
 for a in (0, 1):
     for b in (0, 1):
-        print(a, b, "->", and_(a, b), or_(a, b), xor_(a, b))</pre>
+        print(a, b, "-&gt;", and_(a, b), or_(a, b), xor_(a, b))</pre>
 
   <div class="callout tip"><strong>Curto-circuito:</strong> em <code>a &amp;&amp; b</code>, se <code>a</code> for falso o Java nem avalia <code>b</code>, porque o AND já é 0. Em <code>a || b</code>, se <code>a</code> for verdadeiro, <code>b</code> é ignorado. Isso permite escrever <code>if (lista != null &amp;&amp; lista.size() &gt; 0)</code> sem risco de erro. Já <code>&amp;</code> e <code>|</code> com booleanos avaliam os dois lados sempre.</div>
-</section>
+</div></section>
 
 <!-- 12 -->
-<section class="block" id="exemplos">
-  <div class="eyebrow">Aplicações</div>
-  <h2>Exemplos práticos de programação</h2>
+<section class="block bloco bloco--c4" data-item="" id="exemplos"><div class="bloco__coluna"><div class="bloco__fixo"><svg aria-label="Seção 12" class="bloco__emblema" height="150" role="img" viewBox="0 0 120 120" width="150">
+  <defs>
+    <linearGradient id="kxv12" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity=".85"></stop>
+      <stop offset="45%" stop-opacity=".55" style="stop-color:var(--luz)"></stop>
+      <stop offset="100%" stop-opacity=".35" style="stop-color:var(--luz-2)"></stop>
+    </linearGradient>
+    <radialGradient cx="35%" cy="28%" id="kxb12">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity=".95"></stop>
+      <stop offset="55%" stop-opacity=".45" style="stop-color:var(--luz)"></stop>
+      <stop offset="100%" stop-color="#0d0a1d" stop-opacity=".15"></stop>
+    </radialGradient>
+  </defs>
+  <rect fill="url(#kxv12)" height="104" opacity=".16" rx="30" stroke-opacity=".45" stroke-width="1.2" style="stroke:var(--luz)" width="104" x="8" y="8"></rect>
+  <path d="M26 92 H70" fill="none" stroke-linecap="round" stroke-opacity=".8" stroke-width="3" style="stroke:var(--luz)"></path>
+  <path d="M26 82 H52" fill="none" stroke-linecap="round" stroke-opacity=".75" stroke-width="3" style="stroke:var(--luz-2)"></path>
+  <text class="bloco__numero" x="26" y="66">12</text>
+  <circle cx="90" cy="32" fill="url(#kxb12)" r="9" stroke="#ffffff" stroke-opacity=".5"></circle>
+  <circle cx="90" cy="88" fill="url(#kxb12)" r="5" stroke="#ffffff" stroke-opacity=".4"></circle>
+  <ellipse cx="46" cy="26" fill="#ffffff" opacity=".10" rx="18" ry="9" transform="rotate(-28 46 26)"></ellipse>
+</svg><span class="bloco__marca">Aplicações</span><h2 class="bloco__rotulo">Exemplos práticos de programação</h2></div><svg aria-hidden="true" class="bloco__fios" preserveAspectRatio="none" viewBox="0 0 60 400">
+  <path class="bloco__fio" d="M0 60 C 30 60, 30 20, 60 20"></path>
+  <path class="bloco__fio" d="M0 60 C 30 60, 30 120, 60 120"></path>
+  <path class="bloco__fio" d="M0 60 C 34 60, 34 230, 60 230"></path>
+  <path class="bloco__fio" d="M0 60 C 34 60, 34 340, 60 340"></path>
+</svg></div><div class="bloco__conteudo">
+  
+  
 
   <h3>1. Regras de acesso com AND, OR e NOT</h3>
   <div class="code-title"><span>Acesso.java</span><button class="copy">Copiar</button></div>
-<pre data-hl>boolean pagou = true;
+<pre data-hl="">boolean pagou = true;
 boolean matriculado = true;
 boolean bloqueado = false;
 boolean ehAdmin = false;
@@ -680,7 +1737,7 @@ boolean negado2 = !pagou || !matriculado;</pre>
     </div>
   </div>
   <div class="code-title"><span>Jogador.java</span><button class="copy">Copiar</button></div>
-<pre data-hl>public class Jogador {
+<pre data-hl="">public class Jogador {
     static final int VOANDO     = 1;   // 0001
     static final int INVISIVEL  = 2;   // 0010
     static final int ENVENENADO = 4;   // 0100
@@ -702,7 +1759,7 @@ boolean negado2 = !pagou || !matriculado;</pre>
 
   <h3>3. Truques clássicos com bits</h3>
   <div class="code-title"><span>Truques.java</span><button class="copy">Copiar</button></div>
-<pre data-hl>int n = 7;
+<pre data-hl="">int n = 7;
 boolean impar = (n &amp; 1) == 1;        // último bit 1 → número ímpar
 
 int x = 5, y = 9;                     // trocar valores sem variável auxiliar
@@ -715,7 +1772,7 @@ boolean ehPotenciaDe2 = n &gt; 0 &amp;&amp; (n &amp; (n - 1)) == 0;</pre>
 
   <h3>4. Somar sem usar o “+” (o meio somador em código)</h3>
   <div class="code-title"><span>somar.js</span><button class="copy">Copiar</button></div>
-<pre data-hl>function somar(a, b) {
+<pre data-hl="">function somar(a, b) {
   while (b !== 0) {
     const vaiUm = a &amp; b;   // AND: onde nasce o vai-um
     a = a ^ b;            // XOR: soma sem o vai-um
@@ -727,7 +1784,7 @@ boolean ehPotenciaDe2 = n &gt; 0 &amp;&amp; (n &amp; (n - 1)) == 0;</pre>
 console.log(somar(6, 3));   // 9
 console.log(somar(13, 7));  // 20</pre>
   <div class="code-title"><span>SomadorCompleto.java</span><button class="copy">Copiar</button></div>
-<pre data-hl>static int[] somadorCompleto(int a, int b, int cin) {
+<pre data-hl="">static int[] somadorCompleto(int a, int b, int cin) {
     int s    = a ^ b ^ cin;
     int cout = (a &amp; b) | (cin &amp; (a ^ b));
     return new int[]{s, cout};
@@ -736,7 +1793,7 @@ console.log(somar(13, 7));  // 20</pre>
   <h3>5. Bit de paridade: detectando erro na transmissão</h3>
   <p>Ao enviar dados, o remetente acrescenta 1 bit para que a quantidade de 1s fique par. Se um bit trocar no caminho, o destinatário percebe. O cálculo é um XOR de todos os bits.</p>
   <div class="code-title"><span>paridade.py</span><button class="copy">Copiar</button></div>
-<pre data-hl>def bit_paridade(bits: str) -> int:
+<pre data-hl="">def bit_paridade(bits: str) -&gt; int:
     p = 0
     for b in bits:
         p ^= int(b)   # XOR acumulado
@@ -749,8 +1806,8 @@ print(bit_paridade("1011000"))  # 1  (três 1s)</pre>
   <p>XOR tem uma propriedade especial: <code>(texto ⊕ chave) ⊕ chave = texto</code>. Aplicar a mesma chave duas vezes desfaz a cifra. Experimente:</p>
   <div class="widget">
     <div class="two">
-      <label class="f" for="xText">Mensagem<input type="text" id="xText" value="Kalixto" maxlength="40" autocomplete="off"></label>
-      <label class="f" for="xKey">Chave<input type="text" id="xKey" value="Rio" maxlength="16" autocomplete="off"></label>
+      <label class="f" for="xText">Mensagem<input autocomplete="off" id="xText" maxlength="40" type="text" value="Kalixto"/></label>
+      <label class="f" for="xKey">Chave<input autocomplete="off" id="xKey" maxlength="16" type="text" value="Rio"/></label>
     </div>
     <div class="scroll" style="margin:0"><table class="ttgen" id="xTable"></table></div>
     <div class="outs">
@@ -759,19 +1816,44 @@ print(bit_paridade("1011000"))  # 1  (três 1s)</pre>
     </div>
   </div>
   <div class="code-title"><span>cifra_xor.py</span><button class="copy">Copiar</button></div>
-<pre data-hl>def cifra_xor(texto: bytes, chave: bytes) -> bytes:
+<pre data-hl="">def cifra_xor(texto: bytes, chave: bytes) -&gt; bytes:
     return bytes(b ^ chave[i % len(chave)] for i, b in enumerate(texto))
 
 segredo = cifra_xor("Kalixto".encode(), b"K3y")
 print(segredo.hex())                         # texto embaralhado
 print(cifra_xor(segredo, b"K3y").decode())   # Kalixto</pre>
   <div class="callout warn"><strong>Atenção:</strong> a cifra XOR com chave curta repetida é fácil de quebrar e não serve para proteger senhas reais. O XOR, porém, é peça central de algoritmos sérios como o AES.</div>
-</section>
+</div></section>
 
 <!-- 13 -->
-<section class="block" id="exercicios">
-  <div class="eyebrow">Prática</div>
-  <h2>Exercícios com gabarito</h2>
+<section class="block bloco bloco--c1" data-item="" id="exercicios"><div class="bloco__coluna"><div class="bloco__fixo"><svg aria-label="Seção 13" class="bloco__emblema" height="150" role="img" viewBox="0 0 120 120" width="150">
+  <defs>
+    <linearGradient id="kxv13" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity=".85"></stop>
+      <stop offset="45%" stop-opacity=".55" style="stop-color:var(--luz)"></stop>
+      <stop offset="100%" stop-opacity=".35" style="stop-color:var(--luz-2)"></stop>
+    </linearGradient>
+    <radialGradient cx="35%" cy="28%" id="kxb13">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity=".95"></stop>
+      <stop offset="55%" stop-opacity=".45" style="stop-color:var(--luz)"></stop>
+      <stop offset="100%" stop-color="#0d0a1d" stop-opacity=".15"></stop>
+    </radialGradient>
+  </defs>
+  <rect fill="url(#kxv13)" height="104" opacity=".16" rx="30" stroke-opacity=".45" stroke-width="1.2" style="stroke:var(--luz)" width="104" x="8" y="8"></rect>
+  <path d="M26 92 H70" fill="none" stroke-linecap="round" stroke-opacity=".8" stroke-width="3" style="stroke:var(--luz)"></path>
+  <path d="M26 82 H52" fill="none" stroke-linecap="round" stroke-opacity=".75" stroke-width="3" style="stroke:var(--luz-2)"></path>
+  <text class="bloco__numero" x="26" y="66">13</text>
+  <circle cx="90" cy="32" fill="url(#kxb13)" r="9" stroke="#ffffff" stroke-opacity=".5"></circle>
+  <circle cx="90" cy="88" fill="url(#kxb13)" r="5" stroke="#ffffff" stroke-opacity=".4"></circle>
+  <ellipse cx="46" cy="26" fill="#ffffff" opacity=".10" rx="18" ry="9" transform="rotate(-28 46 26)"></ellipse>
+</svg><span class="bloco__marca">Prática</span><h2 class="bloco__rotulo">Exercícios com gabarito</h2></div><svg aria-hidden="true" class="bloco__fios" preserveAspectRatio="none" viewBox="0 0 60 400">
+  <path class="bloco__fio" d="M0 60 C 30 60, 30 20, 60 20"></path>
+  <path class="bloco__fio" d="M0 60 C 30 60, 30 120, 60 120"></path>
+  <path class="bloco__fio" d="M0 60 C 34 60, 34 230, 60 230"></path>
+  <path class="bloco__fio" d="M0 60 C 34 60, 34 340, 60 340"></path>
+</svg></div><div class="bloco__conteudo">
+  
+  
   <p class="muted">Tente resolver antes de abrir a resposta. Use o gerador de tabela-verdade para conferir.</p>
 
   <details><summary>1. Tabela-verdade com 3 entradas <span class="lvl">básico</span></summary>
@@ -820,16 +1902,41 @@ print(cifra_xor(segredo, b"K3y").decode())   # Kalixto</pre>
   </details>
   <details><summary>12. Código: maioria em Java <span class="lvl">desafio</span></summary>
     <p class="ex-q">Escreva um método <code>maioria(boolean a, boolean b, boolean c)</code> que retorne true se pelo menos dois forem true.</p>
-    <div class="ans"><pre data-hl>static boolean maioria(boolean a, boolean b, boolean c) {
+    <div class="ans"><pre data-hl="">static boolean maioria(boolean a, boolean b, boolean c) {
     return (a &amp;&amp; b) || (a &amp;&amp; c) || (b &amp;&amp; c);
 }</pre></div>
   </details>
-</section>
+</div></section>
 
 <!-- 14 -->
-<section class="block" id="quiz">
-  <div class="eyebrow">Teste</div>
-  <h2>Quiz e porta misteriosa</h2>
+<section class="block bloco bloco--c2" data-item="" id="quiz"><div class="bloco__coluna"><div class="bloco__fixo"><svg aria-label="Seção 14" class="bloco__emblema" height="150" role="img" viewBox="0 0 120 120" width="150">
+  <defs>
+    <linearGradient id="kxv14" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity=".85"></stop>
+      <stop offset="45%" stop-opacity=".55" style="stop-color:var(--luz)"></stop>
+      <stop offset="100%" stop-opacity=".35" style="stop-color:var(--luz-2)"></stop>
+    </linearGradient>
+    <radialGradient cx="35%" cy="28%" id="kxb14">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity=".95"></stop>
+      <stop offset="55%" stop-opacity=".45" style="stop-color:var(--luz)"></stop>
+      <stop offset="100%" stop-color="#0d0a1d" stop-opacity=".15"></stop>
+    </radialGradient>
+  </defs>
+  <rect fill="url(#kxv14)" height="104" opacity=".16" rx="30" stroke-opacity=".45" stroke-width="1.2" style="stroke:var(--luz)" width="104" x="8" y="8"></rect>
+  <path d="M26 92 H70" fill="none" stroke-linecap="round" stroke-opacity=".8" stroke-width="3" style="stroke:var(--luz)"></path>
+  <path d="M26 82 H52" fill="none" stroke-linecap="round" stroke-opacity=".75" stroke-width="3" style="stroke:var(--luz-2)"></path>
+  <text class="bloco__numero" x="26" y="66">14</text>
+  <circle cx="90" cy="32" fill="url(#kxb14)" r="9" stroke="#ffffff" stroke-opacity=".5"></circle>
+  <circle cx="90" cy="88" fill="url(#kxb14)" r="5" stroke="#ffffff" stroke-opacity=".4"></circle>
+  <ellipse cx="46" cy="26" fill="#ffffff" opacity=".10" rx="18" ry="9" transform="rotate(-28 46 26)"></ellipse>
+</svg><span class="bloco__marca">Teste</span><h2 class="bloco__rotulo">Quiz e porta misteriosa</h2></div><svg aria-hidden="true" class="bloco__fios" preserveAspectRatio="none" viewBox="0 0 60 400">
+  <path class="bloco__fio" d="M0 60 C 30 60, 30 20, 60 20"></path>
+  <path class="bloco__fio" d="M0 60 C 30 60, 30 120, 60 120"></path>
+  <path class="bloco__fio" d="M0 60 C 34 60, 34 230, 60 230"></path>
+  <path class="bloco__fio" d="M0 60 C 34 60, 34 340, 60 340"></path>
+</svg></div><div class="bloco__conteudo">
+  
+  
   <div class="quiz" id="quizBox"></div>
   <p class="score" id="score" style="margin-top:14px"></p>
 
@@ -837,22 +1944,47 @@ print(cifra_xor(segredo, b"K3y").decode())   # Kalixto</pre>
   <p>Há uma porta escondida na caixa. Mude as entradas, observe a lâmpada e descubra qual é. Quantas combinações você precisou testar?</p>
   <div class="widget">
     <div class="mbox">
-      <button class="tog" id="mA" aria-pressed="false">A = 0</button>
-      <button class="tog" id="mB" aria-pressed="false">B = 0</button>
-      <div class="qbox" aria-hidden="true">?</div>
-      <div class="lampb" id="mL" aria-live="polite">0</div>
+      <button aria-pressed="false" class="tog" id="mA">A = 0</button>
+      <button aria-pressed="false" class="tog" id="mB">B = 0</button>
+      <div aria-hidden="true" class="qbox">?</div>
+      <div aria-live="polite" class="lampb" id="mL">0</div>
     </div>
     <div class="mlog" id="mLog">Testadas: nenhuma ainda</div>
     <div class="opts" id="mOpts"></div>
-    <p class="fb" id="mFb" aria-live="polite"></p>
+    <p aria-live="polite" class="fb" id="mFb"></p>
     <div><button class="btn" id="mNew">Sortear outra porta</button></div>
   </div>
-</section>
+</div></section>
 
 <!-- 15 -->
-<section class="block" id="glossario" style="border-bottom:none">
-  <div class="eyebrow">Referência</div>
-  <h2>Glossário e ferramentas</h2>
+<section class="block bloco bloco--c3" data-item="" id="glossario" style="border-bottom:none"><div class="bloco__coluna"><div class="bloco__fixo"><svg aria-label="Seção 15" class="bloco__emblema" height="150" role="img" viewBox="0 0 120 120" width="150">
+  <defs>
+    <linearGradient id="kxv15" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity=".85"></stop>
+      <stop offset="45%" stop-opacity=".55" style="stop-color:var(--luz)"></stop>
+      <stop offset="100%" stop-opacity=".35" style="stop-color:var(--luz-2)"></stop>
+    </linearGradient>
+    <radialGradient cx="35%" cy="28%" id="kxb15">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity=".95"></stop>
+      <stop offset="55%" stop-opacity=".45" style="stop-color:var(--luz)"></stop>
+      <stop offset="100%" stop-color="#0d0a1d" stop-opacity=".15"></stop>
+    </radialGradient>
+  </defs>
+  <rect fill="url(#kxv15)" height="104" opacity=".16" rx="30" stroke-opacity=".45" stroke-width="1.2" style="stroke:var(--luz)" width="104" x="8" y="8"></rect>
+  <path d="M26 92 H70" fill="none" stroke-linecap="round" stroke-opacity=".8" stroke-width="3" style="stroke:var(--luz)"></path>
+  <path d="M26 82 H52" fill="none" stroke-linecap="round" stroke-opacity=".75" stroke-width="3" style="stroke:var(--luz-2)"></path>
+  <text class="bloco__numero" x="26" y="66">15</text>
+  <circle cx="90" cy="32" fill="url(#kxb15)" r="9" stroke="#ffffff" stroke-opacity=".5"></circle>
+  <circle cx="90" cy="88" fill="url(#kxb15)" r="5" stroke="#ffffff" stroke-opacity=".4"></circle>
+  <ellipse cx="46" cy="26" fill="#ffffff" opacity=".10" rx="18" ry="9" transform="rotate(-28 46 26)"></ellipse>
+</svg><span class="bloco__marca">Referência</span><h2 class="bloco__rotulo">Glossário e ferramentas</h2></div><svg aria-hidden="true" class="bloco__fios" preserveAspectRatio="none" viewBox="0 0 60 400">
+  <path class="bloco__fio" d="M0 60 C 30 60, 30 20, 60 20"></path>
+  <path class="bloco__fio" d="M0 60 C 30 60, 30 120, 60 120"></path>
+  <path class="bloco__fio" d="M0 60 C 34 60, 34 230, 60 230"></path>
+  <path class="bloco__fio" d="M0 60 C 34 60, 34 340, 60 340"></path>
+</svg></div><div class="bloco__conteudo">
+  
+  
   <dl class="gloss">
     <div><dt>Bit</dt><dd>Menor unidade de informação: 0 ou 1.</dd></div>
     <div><dt>Byte</dt><dd>Conjunto de 8 bits. Representa de 0 a 255.</dd></div>
@@ -870,15 +2002,15 @@ print(cifra_xor(segredo, b"K3y").decode())   # Kalixto</pre>
   </dl>
   <h3>Para praticar montando circuitos</h3>
   <div class="tools">
-    <div class="tool"><a href="https://circuitverse.org/simulator" target="_blank" rel="noopener">CircuitVerse</a><p>Simulador no navegador, gratuito, ótimo para montar os circuitos desta apostila.</p></div>
-    <div class="tool"><a href="https://github.com/logisim-evolution/logisim-evolution" target="_blank" rel="noopener">Logisim Evolution</a><p>Programa para instalar, muito usado em faculdades de computação.</p></div>
-    <div class="tool"><a href="https://www.falstad.com/circuit/" target="_blank" rel="noopener">Falstad Circuit</a><p>Mostra a corrente animada, inclusive nos transistores.</p></div>
-    <div class="tool"><a href="https://nandgame.com/" target="_blank" rel="noopener">Nandgame</a><p>Jogo em que você constrói um computador inteiro começando só com NAND.</p></div>
+    <div class="tool"><a href="https://circuitverse.org/simulator" rel="noopener" target="_blank">CircuitVerse</a><p>Simulador no navegador, gratuito, ótimo para montar os circuitos desta apostila.</p></div>
+    <div class="tool"><a href="https://github.com/logisim-evolution/logisim-evolution" rel="noopener" target="_blank">Logisim Evolution</a><p>Programa para instalar, muito usado em faculdades de computação.</p></div>
+    <div class="tool"><a href="https://www.falstad.com/circuit/" rel="noopener" target="_blank">Falstad Circuit</a><p>Mostra a corrente animada, inclusive nos transistores.</p></div>
+    <div class="tool"><a href="https://nandgame.com/" rel="noopener" target="_blank">Nandgame</a><p>Jogo em que você constrói um computador inteiro começando só com NAND.</p></div>
   </div>
-</section>
+</div></section>
 
 <footer>Apostila dev-Kalixto · Portas Lógicas</footer>
-</div>
+<p class="vazio">Nenhum resultado nos seções. Tente outra palavra.</p></div>
 
 <script>
 /* ===== Portas (cartões) ===== */
@@ -1260,4 +2392,78 @@ document.getElementById('mNew').addEventListener('click',newM); newM();
 })();
 </script>
 
-</body></html>
+
+<footer class="kx-sig"><div><img alt="" class="kx-logo" height="40" src="data:image/webp;base64,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" width="40"/><span><b>Kalixto — Professor • Programador • Gamer</b><small>Kalixto by Wallace Toledo · @dev.kalixto</small></span></div></footer><button aria-controls="kx-indice" aria-expanded="false" aria-label="Abrir índice" class="flutuante" id="kx-alternar" type="button">
+  <span class="flutuante__dica">Índice</span>
+  <svg aria-hidden="true" class="flutuante__cruz" fill="none" height="22" stroke="currentColor" stroke-linecap="round" stroke-width="2" viewBox="0 0 24 24" width="22"><path d="M12 5v14M5 12h14"></path></svg>
+</button><nav aria-label="Índice de seções" class="indice" id="kx-indice"><p class="indice__topo">Índice · 15 seções</p><ul class="indice__lista"><li><a class="indice__link" href="#base"><b>01</b><span>O que é uma porta lógica</span></a></li><li><a class="indice__link" href="#fisica"><b>02</b><span>Do interruptor ao transistor</span></a></li><li><a class="indice__link" href="#portas"><b>03</b><span>As 7 portas, uma a uma</span></a></li><li><a class="indice__link" href="#cola"><b>04</b><span>Tabela de cola</span></a></li><li><a class="indice__link" href="#universal"><b>05</b><span>Portas universais e o chip 7400</span></a></li><li><a class="indice__link" href="#algebra"><b>06</b><span>Álgebra de Boole e De Morgan</span></a></li><li><a class="indice__link" href="#projeto"><b>07</b><span>Do problema ao circuito</span></a></li><li><a class="indice__link" href="#karnaugh"><b>08</b><span>Simplificando com mapa de Karnaugh</span></a></li><li><a class="indice__link" href="#somador"><b>09</b><span>Circuitos que somam</span></a></li><li><a class="indice__link" href="#mux"><b>10</b><span>Escolher e lembrar: MUX e memória</span></a></li><li><a class="indice__link" href="#codigo"><b>11</b><span>Portas lógicas no seu código</span></a></li><li><a class="indice__link" href="#exemplos"><b>12</b><span>Exemplos práticos de programação</span></a></li><li><a class="indice__link" href="#exercicios"><b>13</b><span>Exercícios com gabarito</span></a></li><li><a class="indice__link" href="#quiz"><b>14</b><span>Quiz e porta misteriosa</span></a></li><li><a class="indice__link" href="#glossario"><b>15</b><span>Glossário e ferramentas</span></a></li></ul></nav><script id="kx-console-js">
+/* Console Kalixto — busca por capítulo e índice flutuante */
+(function(){
+  var campo = document.getElementById('kx-busca');
+  var contador = document.getElementById('kx-contagem');
+  var itens = [].slice.call(document.querySelectorAll('.bloco[data-item]'));
+  var partes = [].slice.call(document.querySelectorAll('.kx-parte'));
+  var nome = (campo && campo.dataset.nome) || 'capítulos';
+  var textos = null;
+
+  function filtrar(){
+    var termo = campo.value.trim().toLowerCase();
+    if (termo && !textos) textos = itens.map(function(i){ return i.textContent.toLowerCase(); });
+    var visiveis = 0;
+    itens.forEach(function(item, n){
+      var bate = !termo || textos[n].indexOf(termo) !== -1;
+      item.hidden = !bate;
+      if (bate) visiveis++;
+    });
+    partes.forEach(function(p){ p.hidden = !!termo; });
+    document.body.classList.toggle('kx-sem-resultado', visiveis === 0);
+    contador.textContent = termo ? visiveis + '/' + itens.length : itens.length + ' ' + nome;
+  }
+  if (campo){
+    campo.addEventListener('input', filtrar);
+    campo.addEventListener('keydown', function(e){
+      if (e.key === 'Enter'){ e.preventDefault(); campo.blur(); }
+    });
+    filtrar();
+  }
+
+  /* ---------- Botão flutuante: abre o índice ---------- */
+  var botao = document.getElementById('kx-alternar');
+  var indice = document.getElementById('kx-indice');
+  if (!botao || !indice) return;
+  var dica = botao.querySelector('.flutuante__dica');
+
+  function abrir(sim){
+    document.body.classList.toggle('kx-indice-aberto', sim);
+    botao.setAttribute('aria-expanded', String(sim));
+    botao.setAttribute('aria-label', sim ? 'Fechar índice' : 'Abrir índice');
+    if (dica) dica.textContent = sim ? 'Fechar' : 'Índice';
+    indice.inert = !sim;
+  }
+  abrir(false);
+
+  if (window.matchMedia('(hover:none)').matches){
+    botao.classList.add('flutuante--apresenta');
+    setTimeout(function(){ botao.classList.remove('flutuante--apresenta'); }, 3200);
+  }
+  botao.addEventListener('click', function(){
+    if (navigator.vibrate) { try { navigator.vibrate(12); } catch(e){} }
+    abrir(!document.body.classList.contains('kx-indice-aberto'));
+  });
+  indice.addEventListener('click', function(e){
+    var link = e.target.closest('a');
+    if (!link) return;
+    /* capítulo escondido pela busca volta a aparecer antes de rolar até ele */
+    if (campo && campo.value){ campo.value = ''; filtrar(); }
+    abrir(false);
+  });
+  document.addEventListener('keydown', function(e){
+    if (e.key === 'Escape' && document.body.classList.contains('kx-indice-aberto')){ abrir(false); botao.focus(); }
+  });
+  document.addEventListener('click', function(e){
+    if (!document.body.classList.contains('kx-indice-aberto')) return;
+    if (indice.contains(e.target) || botao.contains(e.target)) return;
+    abrir(false);
+  });
+})();
+</script></body></html>

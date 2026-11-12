@@ -1,0 +1,263 @@
+/* ============================================================
+   CONSOLE KALIXTO — extensões para apostilas
+   O layout de referência tem dois painéis de comandos; aqui cada
+   capítulo vira um painel de vidro (.bloco) com emblema numerado
+   na coluna e o conteúdo original na direita.
+   ============================================================ */
+
+/* ---------- Cena atrás do conteúdo, sem criar camadas novas ---------- */
+body.kxc > .cena{ z-index:-1; }
+
+/* ---------- Utilitários do refactor ---------- */
+.kx-oculto{ display:none !important; }
+
+/* contêineres antigos (shell, grid com sidebar) deixam de impor largura */
+body.kxc .kx-plano{
+  display:block !important;
+  width:auto !important; max-width:none !important; min-width:0 !important;
+  margin:0 !important; padding:0 !important;
+  background:none !important; border:0 !important; box-shadow:none !important;
+  transform:none !important; overflow:visible !important;
+  -webkit-backdrop-filter:none !important; backdrop-filter:none !important;
+}
+
+body.kxc .moldura{
+  display:block !important;
+  position:relative; z-index:1;
+  width:auto !important; max-width:1120px !important;
+  margin:0 auto !important;
+  padding:0 24px 140px !important;
+  background:none !important; border:0 !important; box-shadow:none !important;
+}
+body.kxc .moldura--hud{ padding:56px 24px 0 !important; }
+
+/* ---------- HUD ---------- */
+body.kxc .hud__titulo{
+  font-family:var(--fonte-display) !important;
+  font-weight:700 !important;
+  font-size:clamp(2.1rem, 5.6vw, 3.7rem) !important;
+  line-height:1.04 !important;
+  letter-spacing:-.03em !important;
+  margin:22px 0 12px !important;
+  padding:0 !important;
+  text-align:left !important; text-transform:none !important;
+  max-width:none !important;
+  background:linear-gradient(100deg, var(--neon-ciano) 0%, var(--text-primary) 42%, var(--neon-magenta) 100%) !important;
+  -webkit-background-clip:text !important; background-clip:text !important;
+  color:transparent !important; -webkit-text-fill-color:transparent !important;
+  text-wrap:balance; text-shadow:none !important;
+}
+body.kxc .hud__titulo *{
+  color:inherit !important; background:none !important;
+  -webkit-text-fill-color:inherit !important; font:inherit !important;
+}
+body.kxc .hud__resumo{
+  max-width:62ch; color:var(--texto-suave);
+  font:400 1.02rem/1.6 var(--fonte-texto);
+  margin:0 0 28px; text-align:left;
+}
+.hud__extras{
+  display:flex; flex-wrap:wrap; gap:10px;
+  margin:0 0 26px;
+}
+.hud__ficha{
+  display:inline-flex; align-items:baseline; gap:8px;
+  padding:8px 14px; border-radius:999px;
+  background:var(--vidro); border:1px solid var(--vidro-borda);
+  font:500 .8rem/1.3 var(--fonte-texto); color:var(--texto-suave);
+  -webkit-backdrop-filter:blur(12px); backdrop-filter:blur(12px);
+}
+.hud__ficha b{ font:600 .8rem/1.3 var(--fonte-codigo); color:var(--neon-ciano); }
+
+body.kxc .hud__marca{ display:inline-flex !important; width:auto !important; max-width:100%; margin:0 !important; text-transform:none !important; }
+body.kxc .hud{ display:block !important; text-align:left !important; padding:0 !important; border:0 !important; background:none !important; min-height:0 !important; }
+
+/* ---------- Divisor de parte ---------- */
+body.kxc .kx-parte{
+  display:block !important;
+  position:relative;
+  max-width:none !important;
+  margin:54px 0 22px !important;
+  padding:0 0 0 18px !important;
+  background:none !important; border:0 !important; box-shadow:none !important;
+  border-left:3px solid var(--neon-magenta) !important;
+  border-radius:0 !important;
+  text-align:left !important; min-height:0 !important;
+}
+body.kxc .kx-parte::before, body.kxc .kx-parte::after{ content:none !important; }
+body.kxc .kx-parte > svg{ display:none !important; }
+body.kxc .kx-parte > *{ max-width:none !important; margin-left:0 !important; margin-right:0 !important; padding-left:0 !important; padding-right:0 !important; opacity:1 !important; transform:none !important; }
+body.kxc .kx-parte :is(h1,h2,h3){
+  font:700 clamp(1.3rem,2.6vw,1.75rem)/1.2 var(--fonte-display) !important;
+  letter-spacing:-.02em !important; margin:4px 0 !important; text-align:left !important;
+}
+body.kxc .kx-parte p{ margin:4px 0 0 !important; color:var(--texto-suave); max-width:70ch; text-align:left !important; }
+
+/* ---------- Painel por capítulo ---------- */
+body.kxc .bloco{
+  display:grid !important;
+  grid-template-columns:230px minmax(0,1fr) !important;
+  gap:36px !important;
+  width:auto !important; max-width:none !important; min-height:0 !important;
+  padding:36px !important;
+  margin:0 0 34px !important;
+  border:1px solid var(--vidro-borda) !important;
+  border-radius:var(--raio-painel) !important;
+  background:linear-gradient(150deg, color-mix(in srgb,var(--text-primary) 7.5%,transparent), color-mix(in srgb,var(--text-primary) 2%,transparent) 60%) !important;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.18), 0 30px 70px rgba(0,0,0,.45) !important;
+  opacity:1 !important; transform:none !important;
+  scroll-margin-top:20px;
+}
+body.kxc .bloco[hidden]{ display:none !important; }
+:root[data-theme="light"] body.kxc .bloco{ box-shadow:inset 0 1px 0 rgba(255,255,255,.7), 0 24px 60px rgba(90,18,214,.12) !important; }
+@media (prefers-color-scheme: light){
+  :root:not([data-theme="dark"]) body.kxc .bloco{ box-shadow:inset 0 1px 0 rgba(255,255,255,.7), 0 24px 60px rgba(90,18,214,.12) !important; }
+}
+
+/* quatro circuitos de luz, alternando capítulo a capítulo */
+.bloco--c1{ --luz:var(--neon-ciano);    --luz-2:var(--neon-violeta); }
+.bloco--c2{ --luz:var(--neon-magenta);  --luz-2:var(--neon-violeta); }
+.bloco--c3{ --luz:var(--accent-gold);   --luz-2:var(--neon-magenta); }
+.bloco--c4{ --luz:var(--fb-success);    --luz-2:var(--neon-ciano); }
+
+body.kxc .bloco__coluna{ position:relative; min-width:0; }
+.bloco__fixo{ position:sticky; top:28px; }
+body.kxc .bloco__fixo .bloco__emblema{ position:static; display:block; }
+.bloco__numero{
+  font-family:var(--fonte-display); font-weight:700; font-size:40px;
+  letter-spacing:-.04em; fill:var(--text-primary);
+}
+.bloco__marca{
+  display:block; margin:20px 0 0;
+  font:600 .7rem/1.3 var(--fonte-codigo); letter-spacing:.12em; text-transform:uppercase;
+  color:var(--luz);
+}
+body.kxc .bloco__marca *{ font:inherit !important; color:inherit !important; background:none !important; padding:0 !important; margin:0 !important; border:0 !important; -webkit-text-fill-color:currentColor !important; }
+body.kxc .bloco__rotulo{
+  display:block !important;
+  margin:8px 0 4px !important; padding:0 !important;
+  font-family:var(--fonte-display) !important; font-weight:700 !important;
+  font-size:1.18rem !important; line-height:1.25 !important; letter-spacing:-.02em !important;
+  text-align:left !important; text-transform:none !important;
+  color:var(--texto) !important; -webkit-text-fill-color:currentColor !important;
+  background:none !important; border:0 !important; max-width:none !important;
+  overflow-wrap:break-word; hyphens:auto; text-wrap:balance;
+}
+body.kxc .bloco__rotulo::before, body.kxc .bloco__rotulo::after{ content:none !important; }
+body.kxc .bloco__rotulo *{ font-family:inherit !important; font-size:inherit !important; color:inherit !important; background:none !important; -webkit-text-fill-color:currentColor !important; }
+body.kxc .bloco__nota{
+  margin:8px 0 0 !important; padding:0 !important;
+  font:400 .86rem/1.5 var(--fonte-texto) !important; color:var(--texto-suave) !important;
+  max-width:26ch; text-align:left !important;
+}
+
+body.kxc .bloco__conteudo{ min-width:0; position:relative; }
+body.kxc .bloco__conteudo > :first-child{ margin-top:0 !important; }
+body.kxc .bloco__conteudo > :last-child{ margin-bottom:0 !important; }
+/* nada dentro do painel estoura a coluna */
+body.kxc .bloco__conteudo :is(pre,table,img,svg,video,iframe,canvas){ max-width:100%; }
+body.kxc .bloco__conteudo pre{ overflow-x:auto; }
+body.kxc .bloco__conteudo > *{ min-width:0; max-width:100%; }
+body.kxc .bloco__conteudo > * > *{ min-width:0; }
+body.kxc .bloco__conteudo :not(pre) > code{ overflow-wrap:anywhere; }
+body.kxc .bloco__conteudo :is(.tbl-wrap,.table-wrap,.tablewrap,.scroll){ overflow-x:auto; max-width:100%; }
+
+/* painel em coluna única: emblema e título lado a lado, conteúdo com a largura toda */
+body.kxc .bloco--largo{ grid-template-columns:minmax(0,1fr) !important; gap:24px !important; }
+.bloco--largo .bloco__fixo{ position:static; display:grid; grid-template-columns:76px minmax(0,1fr); column-gap:16px; align-items:center; }
+body.kxc .bloco--largo .bloco__emblema{ width:76px; height:76px; grid-row:1 / span 2; }
+.bloco--largo .bloco__marca{ margin:0; align-self:end; }
+body.kxc .bloco--largo .bloco__rotulo{ margin:2px 0 0 !important; align-self:start; }
+.bloco--largo .bloco__fios{ display:none; }
+
+/* ---------- Estado vazio da busca ---------- */
+body.kxc .moldura > .vazio{ margin:0 0 34px; }
+body.kxc.kx-sem-resultado .moldura > .vazio{ display:block; }
+
+/* ---------- Botão flutuante + índice de capítulos ---------- */
+body.kxc .flutuante{ z-index:60; bottom:calc(80px + env(safe-area-inset-bottom,0px)); }
+body.kx-indice-aberto .flutuante__cruz{ transform:rotate(45deg); }
+body.kx-indice-aberto .flutuante__dica{ opacity:0 !important; }
+
+.indice{
+  position:fixed; z-index:59;
+  right:calc(20px + env(safe-area-inset-right));
+  bottom:calc(156px + env(safe-area-inset-bottom,0px));
+  width:min(360px, calc(100vw - 40px));
+  max-height:min(62vh, 560px);
+  display:flex; flex-direction:column;
+  border-radius:24px;
+  background:color-mix(in srgb,var(--brand-primary) 10%,var(--bg-surface));
+  border:1px solid var(--vidro-borda);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.16), 0 30px 70px rgba(0,0,0,.55);
+  opacity:0; transform:translateY(12px) scale(.98); pointer-events:none;
+  transition:opacity .22s, transform .22s;
+}
+body.kx-indice-aberto .indice{ opacity:1; transform:none; pointer-events:auto; }
+.indice__topo{
+  flex:none; margin:0; padding:16px 20px 12px;
+  font:700 .78rem/1 var(--fonte-codigo); letter-spacing:.1em; text-transform:uppercase;
+  color:var(--texto-suave); border-bottom:1px solid var(--vidro-borda);
+}
+.indice__lista{ list-style:none; margin:0; padding:8px; overflow-y:auto; overscroll-behavior:contain; }
+.indice__lista li{ margin:0; padding:0; }
+.indice__parte{
+  padding:12px 12px 4px !important;
+  font:600 .68rem/1.3 var(--fonte-codigo); letter-spacing:.1em; text-transform:uppercase;
+  color:var(--neon-magenta);
+}
+.indice__link{
+  display:grid; grid-template-columns:30px 1fr; gap:10px; align-items:baseline;
+  padding:9px 12px; border-radius:12px; min-height:40px;
+  font:500 .88rem/1.35 var(--fonte-texto); color:var(--texto) !important; text-decoration:none !important;
+}
+.indice__link b{ font:600 .74rem/1.35 var(--fonte-codigo); color:var(--neon-ciano); }
+.indice__link:hover, .indice__link:focus-visible{ background:var(--vidro-alto); }
+.indice__link:focus-visible{ outline:2px solid var(--neon-ciano); outline-offset:-2px; }
+
+/* ---------- Barra e assinatura ---------- */
+body.kxc .kx-bar, body.kxc .kx-sig{ position:relative; z-index:2; }
+body.kxc .kx-bar{ max-width:1120px; margin:0 auto; padding:20px 24px 0; display:flex; align-items:center; gap:12px; flex-wrap:wrap; }
+body.kxc .kx-bar .kx-logo, body.kxc .kx-sig .kx-logo{ border-radius:50%; flex:none; display:block; box-shadow:0 0 40px rgba(123,46,255,.55); }
+body.kxc .kx-bar b{ font:600 14px/18px var(--f-heading); color:var(--text-primary); }
+body.kxc .kx-bar small{ display:block; font:500 12px/16px var(--f-body); color:var(--text-muted); }
+body.kxc .kx-bar a{ margin-left:auto; font:600 14px/20px var(--f-heading); color:var(--brand-tertiary); text-decoration:none; }
+body.kxc .kx-sig{ max-width:1120px; margin:0 auto 96px; padding:0 24px; }
+body.kxc .kx-sig div{ display:flex; align-items:center; gap:12px; padding:20px 24px; border-radius:28px; background:var(--glass-fill); border:1px solid var(--glass-stroke); }
+body.kxc .kx-sig b{ font:600 15px/20px var(--f-heading); color:var(--text-primary); display:block; }
+body.kxc .kx-sig small{ font:500 12px/16px var(--f-body); color:var(--text-muted); }
+
+/* ---------- Responsivo ---------- */
+@media (max-width:840px){
+  body.kxc .moldura{
+    padding:0 16px 132px !important;
+    padding-left:calc(16px + env(safe-area-inset-left)) !important;
+    padding-right:calc(16px + env(safe-area-inset-right)) !important;
+  }
+  body.kxc .moldura--hud{ padding-top:34px !important; padding-bottom:0 !important; }
+  body.kxc .bloco{
+    grid-template-columns:minmax(0,1fr) !important; gap:20px !important; padding:24px 18px !important;
+    -webkit-backdrop-filter:none; backdrop-filter:none;
+  }
+  body.kxc .bloco__coluna{ display:block; }
+  .bloco__fixo{
+    position:static;
+    display:grid; grid-template-columns:76px minmax(0,1fr); column-gap:16px; align-items:center;
+  }
+  body.kxc .bloco__fixo .bloco__emblema{ width:76px; height:76px; grid-row:1 / span 2; }
+  .bloco__marca{ margin:0; align-self:end; }
+  body.kxc .bloco__rotulo{ align-self:start; }
+  body.kxc .bloco__rotulo{ margin:2px 0 0 !important; font-size:1.08rem !important; }
+  body.kxc .bloco__nota{ max-width:none; grid-column:2; }
+  body.kxc .kx-bar{ padding:16px 16px 0; }
+  body.kxc .kx-sig{ padding:0 16px; }
+}
+@media (max-width:840px) and (orientation:landscape){
+  body.kxc .bloco{ grid-template-columns:minmax(0,1fr) !important; }
+}
+@media print{
+  .cena, .flutuante, .indice, .busca, .aviso{ display:none !important; }
+  body.kxc .bloco{ display:block !important; box-shadow:none !important; break-inside:auto; }
+  .bloco__fixo{ position:static; }
+  .bloco__emblema, .bloco__fios{ display:none !important; }
+}
