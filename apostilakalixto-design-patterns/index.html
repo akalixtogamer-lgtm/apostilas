@@ -8,9 +8,7 @@
   Referência de terminologia/agrupamento: refactoring.guru/pt-br/design-patterns
   Conteúdo 100% autoral. Java como linguagem principal.
 ================================================================================
--->
-<html lang="pt-BR">
-<head><script>(function(){try{var t=localStorage.getItem('kx-theme');if(t==='light'||t==='dark')document.documentElement.setAttribute('data-theme',t);}catch(e){}})();</script><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Unbounded:wght@600;700&family=Sora:wght@600&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap"><style>/* =====================================================================
+--><html class="kxc-raiz" lang="pt-BR"><head><script>(function(){try{var t=localStorage.getItem('kx-theme');if(t==='light'||t==='dark')document.documentElement.setAttribute('data-theme',t);}catch(e){}})();</script><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@600;700&amp;family=Sora:wght@600&amp;family=Inter:wght@400;500;600&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet"/><style>/* =====================================================================
    KALIXTO DESIGN SYSTEM — tokens espelhados do arquivo Figma
    "Kalixto — Design System" (coleções Primitives, Theme, Spacing & Radius;
    estilos de texto, efeitos Glass/Glow/Elevation e gradientes).
@@ -222,13 +220,13 @@ em{color:var(--brand-secondary)}
 pre{max-width:100%;overflow-x:auto}
 
 .code,.uml,pre{--bg-base:#050505;--bg-surface:#1B1B1B;--bg-elevated:#2D2D2D;--text-primary:#FFFFFF;--text-secondary:#B3B3C2;--text-muted:#9494A3;--brand-primary:#7B2EFF;--brand-secondary:#FF2DAA;--brand-tertiary:#00D9FF;--accent-gold:#FFC53D;--support-lilac:#B899FF;--fb-success:#22E3A0;--fb-warning:#FFB020;--fb-error:#FF4D6A;--fb-info:#00D9FF;--glass-fill:rgba(255,255,255,.06);--glass-stroke:rgba(255,255,255,.14);--code-bg:transparent;color-scheme:dark;color:var(--text-primary);--kx-magenta:var(--brand-secondary);--kx-magenta-2:var(--brand-secondary);--kx-purple:var(--brand-primary);--kx-purple-2:var(--brand-primary);--kx-blue:var(--brand-tertiary);--kx-cyan:var(--brand-tertiary);--kx-amber:var(--fb-warning);--kx-green:var(--fb-success);--kx-red:var(--fb-error);--dpk-900:var(--bg-base);--dpk-850:var(--bg-base);--dpk-800:var(--bg-surface);--dpk-700:var(--bg-surface);--dpk-600:var(--bg-elevated);--line:var(--glass-stroke);--line-soft:var(--glass-stroke);--paper:var(--bg-surface);--paper-2:var(--bg-elevated);--txt:var(--text-primary);--txt-soft:var(--text-secondary);--txt-dim:var(--text-muted)}</style>
-<meta charset="UTF-8"/>
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<meta name="description" content="Apostila Kalixto de Design Patterns: do zero ao profissional. Fundamentos, SOLID e padrões criacionais com Java comentado, analogias, UML textual, exercícios e quizzes."/>
-<meta name="author" content="Kalixto"/>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<meta content="Apostila Kalixto de Design Patterns: do zero ao profissional. Fundamentos, SOLID e padrões criacionais com Java comentado, analogias, UML textual, exercícios e quizzes." name="description"/>
+<meta content="Kalixto" name="author"/>
 <title>Design Patterns do Zero · Vol. 1 · Apostila Kalixto</title>
-<link rel="preconnect" href="https://fonts.googleapis.com"/>
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
 
 <style>
 /* ════════════════════════════════════════════════════════════════════════════
@@ -468,24 +466,691 @@ tr:nth-child(even) td{background:color-mix(in srgb,var(--text-primary) 2.0%,tran
   .rev{opacity:1;transform:none}
 }
 </style>
-</head>
-<body><div class="kx-bar"><img class="kx-logo" src="data:image/webp;base64,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" width="40" height="40" alt="Logo Kalixto"><div><b>Dev-Kalixto</b><small>Kalixto by Wallace Toledo</small></div><a href="../">← Todos os materiais</a></div>
+<style id="kx-console">
+/* ============================================================
+   CONSOLE KALIXTO — layout de referência (apostilakalixto-console-git-gh)
+   TOKENS — ponte para o Kalixto Design System
+   ============================================================ */
+:root{
+  --fundo-base:var(--bg-base); --fundo-nevoa:var(--bg-surface);
+  --neon-ciano:var(--brand-tertiary); --neon-magenta:var(--brand-secondary);
+  --neon-violeta:var(--brand-primary); --neon-azul:var(--brand-tertiary);
+  --vidro:var(--glass-fill); --vidro-alto:color-mix(in srgb,var(--text-primary) 10%,transparent);
+  --vidro-borda:var(--glass-stroke);
+  --texto:var(--text-primary); --texto-suave:var(--text-secondary);
+  --raio-painel:28px; --raio-modulo:16px; --desfoque:22px;
+  --fonte-display:var(--f-display); --fonte-texto:var(--f-body); --fonte-codigo:var(--f-code);
+}
+
+*,*::before,*::after{ box-sizing:border-box; }
+
+html{
+  scroll-behavior:smooth;
+  /* impede o iOS de reescalar a tipografia ao girar o aparelho */
+  -webkit-text-size-adjust:100%;
+  text-size-adjust:100%;
+}
+
+html.kxc-raiz{ background:var(--bg-base) !important; }
+html body.kxc{
+  margin:0; min-height:100vh; min-height:100dvh;
+  background:none !important; color:var(--texto);
+  -webkit-font-smoothing:antialiased; overflow-x:hidden;
+  -webkit-tap-highlight-color:transparent;
+}
+
+/* alvos de toque nunca abaixo de 44px e sem seleção acidental ao segurar */
+.flutuante,.modulo__copiar,.indice__fechar{
+  min-height:44px;
+  -webkit-user-select:none;
+  user-select:none;
+  touch-action:manipulation;   /* remove o atraso de 300ms do duplo toque */
+}
+
+/* ============================================================
+   CENA — névoa de fundo e bolhas decorativas de vidro
+   ============================================================ */
+.cena{ position:fixed; inset:0; z-index:0; overflow:hidden; pointer-events:none; }
+
+.cena__nevoa{
+  position:absolute;border-radius:50%; filter:blur(120px); opacity:.55;
+}
+.cena__nevoa--ciano   { width:46vw; height:46vw; top:-14vw; left:-10vw;background:var(--neon-ciano); opacity:.20; }
+.cena__nevoa--magenta { width:42vw; height:42vw; bottom:-16vw; right:-8vw;background:var(--neon-magenta); opacity:.22; }
+.cena__nevoa--violeta { width:52vw; height:52vw; top:35%; left:30%;background:var(--neon-violeta); opacity:.16; }
+
+.cena__bolha{
+  position:absolute;border-radius:50%;background:linear-gradient(140deg, color-mix(in srgb,var(--text-primary) 16.0%,transparent), color-mix(in srgb,var(--text-primary) 2.0%,transparent) 55%);border:1px solid rgba(255,255,255,.12);
+  -webkit-backdrop-filter:blur(6px);
+  backdrop-filter:blur(6px);
+  box-shadow:inset 0 6px 18px rgba(255,255,255,.14), 0 12px 40px rgba(0,0,0,.35);
+}
+.cena__bolha--1{ width:86px;  height:86px;  top:12%;  right:8%; }
+.cena__bolha--2{ width:38px;  height:38px;  top:26%;  right:16%; }
+.cena__bolha--3{ width:120px; height:120px; bottom:14%; left:5%; }
+.cena__bolha--4{ width:52px;  height:52px;  bottom:30%; left:13%; }
+.cena__bolha--5{ width:26px;  height:26px;  top:52%;  left:4%; }
+
+/* ============================================================
+   ESTRUTURA
+   ============================================================ */
+.moldura{
+  position:relative; z-index:1;
+  max-width:1120px;
+  margin:0 auto;
+  padding:56px 24px 140px;
+}
+
+/* ---------- Cabeçalho / HUD ---------- */
+.hud{ margin-bottom:40px; }
+
+.hud__marca{
+  display:inline-flex; align-items:center; gap:10px;
+  font-family:var(--fonte-codigo); font-size:.78rem; font-weight:700;
+  letter-spacing:.06em;color:var(--texto-suave);
+  padding:7px 14px 7px 10px;border-radius:999px;background:var(--vidro);border:1px solid var(--vidro-borda);
+  -webkit-backdrop-filter:blur(var(--desfoque));
+  backdrop-filter:blur(var(--desfoque));
+}
+.hud__ponto{
+  width:8px; height:8px;border-radius:50%;background:var(--neon-ciano);
+  box-shadow:0 0 12px var(--neon-ciano);
+}
+
+.hud__titulo{
+  font-family:var(--fonte-display);
+  font-weight:700;
+  font-size:clamp(2.3rem, 6vw, 3.9rem);
+  line-height:1.02;
+  letter-spacing:-.03em;
+  margin:22px 0 12px;background:linear-gradient(100deg, var(--neon-ciano) 0%, var(--text-primary) 42%, var(--neon-magenta) 100%);
+  -webkit-background-clip:text; background-clip:text;color:transparent;
+}
+
+.hud__resumo{
+  max-width:56ch;color:var(--texto-suave);
+  font-size:1.02rem;
+  margin:0 0 28px;
+}
+
+/* ---------- Barra de busca de vidro ---------- */
+.busca{
+  display:flex; align-items:center; gap:12px;
+  max-width:520px;
+  padding:14px 18px;border-radius:999px;background:var(--vidro);border:1px solid var(--vidro-borda);
+  -webkit-backdrop-filter:blur(var(--desfoque));
+  backdrop-filter:blur(var(--desfoque));
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.16), 0 18px 40px rgba(0,0,0,.4);
+  transition:border-color .25s, box-shadow .25s;
+}
+.busca:focus-within{border-color:rgba(53,240,228,.6);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.2), 0 0 0 4px rgba(53,240,228,.12), 0 18px 40px rgba(0,0,0,.4);
+}
+.busca__icone{ flex:none; opacity:.65; }
+.busca__campo{
+  flex:1; min-width:0;background:none;border:0;outline:none;color:var(--texto);
+  font-family:var(--fonte-texto);
+  /* 16px é o mínimo que evita o zoom automático do Safari ao focar o campo */
+  font-size:16px;
+  -webkit-appearance:none; appearance:none;border-radius:0;
+}
+.busca__campo::-webkit-search-cancel-button{
+  -webkit-appearance:none;
+  width:16px; height:16px;background:currentColor;
+  opacity:.45;
+  -webkit-mask:url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2.4' stroke-linecap='round'%3E%3Cpath d='M6 6l12 12M18 6L6 18'/%3E%3C/svg%3E") center/contain no-repeat;
+  cursor:pointer;
+}
+.busca__campo::placeholder{color:var(--text-primary); }
+.busca__contagem{
+  font-family:var(--fonte-codigo); font-size:.76rem;color:var(--texto-suave); white-space:nowrap;
+}
+
+/* ============================================================
+   PAINEL DE VIDRO — um bloco por família de comandos
+   ============================================================ */
+.bloco{
+  position:relative;
+  display:grid;
+  grid-template-columns:230px 1fr;
+  gap:36px;
+  padding:36px;
+  margin-bottom:34px;border-radius:var(--raio-painel);background:linear-gradient(150deg, color-mix(in srgb,var(--text-primary) 7.5%,transparent), color-mix(in srgb,var(--text-primary) 2.0%,transparent) 60%);border:1px solid var(--vidro-borda);
+  -webkit-backdrop-filter:blur(var(--desfoque));
+  backdrop-filter:blur(var(--desfoque));
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.18), 0 30px 70px rgba(0,0,0,.45);
+}
+/* borda iluminada em néon — ciano no bloco Git, magenta no bloco gh */
+.bloco::before{
+  content:'';
+  position:absolute; inset:-1px;border-radius:inherit;
+  padding:1px;background:linear-gradient(135deg, var(--luz) 0%, transparent 38%, transparent 62%, var(--luz-2) 100%);
+  -webkit-mask:linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite:xor; mask-composite:exclude;
+  pointer-events:none;
+}
+.bloco--git{ --luz:var(--neon-ciano);   --luz-2:var(--neon-azul); }
+.bloco--gh { --luz:var(--neon-magenta); --luz-2:var(--neon-violeta); }
+
+/* ---------- Coluna do emblema + linhas de dados ---------- */
+.bloco__coluna{ position:relative; }
+
+.bloco__emblema{
+  position:sticky; top:32px;
+  width:150px; height:150px;
+  filter:drop-shadow(0 18px 34px rgba(0,0,0,.5)) drop-shadow(0 0 26px var(--luz));
+}
+
+.bloco__rotulo{
+  margin:22px 0 4px;
+  font-family:var(--fonte-display); font-weight:700;
+  font-size:1.32rem; letter-spacing:-.02em;
+}
+.bloco__nota{
+  margin:0;
+  font-size:.86rem;color:var(--texto-suave);
+  max-width:24ch;
+}
+
+/* linhas de dados que ligam o emblema à lista */
+.bloco__fios{
+  position:absolute; top:0; right:-38px; width:60px; height:100%;
+  overflow:visible; pointer-events:none;
+}
+.bloco__fio{
+  fill:none;
+  stroke:var(--luz);
+  stroke-width:1.2;
+  opacity:.5;
+  stroke-dasharray:5 9;
+  animation:correr 3.6s linear infinite;
+}
+@keyframes correr{ to{ stroke-dashoffset:-56; } }
+
+/* ---------- Módulos flutuantes de comando ---------- */
+.lista{ list-style:none; margin:0; padding:0; display:grid; gap:12px; }
+
+.modulo{
+  position:relative;
+  display:grid;
+  grid-template-columns:1fr auto;
+  align-items:start;
+  gap:16px;
+  padding:16px 18px;border-radius:var(--raio-modulo);background:var(--vidro);border:1px solid rgba(255,255,255,.10);
+  -webkit-backdrop-filter:blur(14px);
+  backdrop-filter:blur(14px);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.14), 0 10px 26px rgba(0,0,0,.3);
+  transition:background .22s, border-color .22s, transform .22s;
+}
+/* realce só onde existe cursor; no toque isso ficaria "grudado" após o tap */
+@media (hover:hover){
+  .modulo:hover{background:var(--vidro-alto);border-color:color-mix(in srgb, var(--luz) 50%, transparent);
+    transform:translateX(4px);
+  }
+}
+.modulo:focus-within{background:var(--vidro-alto);border-color:color-mix(in srgb, var(--luz) 50%, transparent);
+}
+.modulo:active{background:var(--vidro-alto); }
+.modulo[hidden]{ display:none; }
+
+.modulo__comando{
+  font-family:var(--fonte-codigo); font-weight:700;
+  font-size:.96rem; letter-spacing:-.01em;color:var(--luz);
+  word-break:break-word;
+}
+.modulo__descricao{
+  grid-column:1 / -1;
+  margin:6px 0 0;
+  font-size:.9rem;color:var(--texto-suave);
+  max-width:68ch;
+}
+.modulo__exemplo{
+  grid-column:1 / -1;
+  margin:12px 0 0;
+  padding:11px 14px;border-radius:10px;background:rgba(0,0,0,.34);border:1px solid rgba(255,255,255,.08);
+  font-family:var(--fonte-codigo); font-size:.83rem;color:var(--text-primary);
+  white-space:pre-wrap;
+  overflow-x:auto;
+  -webkit-overflow-scrolling:touch;
+  overscroll-behavior-x:contain;
+}
+body:not(.detalhado) .modulo__exemplo{ display:none; }
+
+.modulo__copiar{
+  flex:none;
+  display:inline-flex; align-items:center; justify-content:center; gap:6px;
+  min-width:76px; min-height:44px;
+  padding:6px 16px;border-radius:999px;background:color-mix(in srgb,var(--text-primary) 6.0%,transparent);border:1px solid rgba(255,255,255,.14);color:var(--texto-suave);
+  font-family:var(--fonte-texto); font-size:.82rem;
+  cursor:pointer;
+  transition:color .2s, border-color .2s, background .2s, transform .12s;
+}
+@media (hover:hover){
+  .modulo__copiar:hover{color:var(--texto);border-color:var(--luz);background:color-mix(in srgb,var(--text-primary) 12.0%,transparent); }
+}
+.modulo__copiar:active{color:var(--texto);border-color:var(--luz);background:color-mix(in srgb,var(--text-primary) 16.0%,transparent);
+  transform:scale(.94);
+}
+.modulo__copiar[data-feito="1"]{color:var(--luz);border-color:var(--luz); }
+.modulo__copiar:focus-visible,
+.busca__campo:focus-visible,
+.flutuante:focus-visible{outline:2px solid var(--neon-ciano); outline-offset:3px; }
+
+/* estado vazio da busca */
+.vazio{
+  display:none;
+  padding:22px;border-radius:var(--raio-modulo);border:1px dashed rgba(255,255,255,.18);color:var(--texto-suave);
+  font-size:.92rem;
+}
+.bloco--sem-resultado .vazio{ display:block; }
+
+/* ============================================================
+   BOTÃO FLUTUANTE — alterna os exemplos de uso
+   ============================================================ */
+.flutuante{
+  position:fixed; z-index:5;
+  /* sobe acima da barra de gestos do iPhone e da barra do Android */
+  right:calc(20px + env(safe-area-inset-right));
+  bottom:calc(20px + env(safe-area-inset-bottom));
+  width:64px; height:64px;
+  display:grid; place-items:center;border-radius:50%;
+  cursor:pointer;color:var(--texto);background:linear-gradient(145deg, color-mix(in srgb,var(--text-primary) 18.0%,transparent), color-mix(in srgb,var(--text-primary) 4.0%,transparent));border:1px solid rgba(255,255,255,.22);
+  -webkit-backdrop-filter:blur(16px);
+  backdrop-filter:blur(16px);
+  box-shadow:inset 0 2px 0 rgba(255,255,255,.28),
+             0 0 26px rgba(255,61,190,.35),
+             0 16px 36px rgba(0,0,0,.5);
+  transition:transform .3s cubic-bezier(.2,.9,.3,1.4), box-shadow .3s;
+}
+@media (hover:hover){
+  .flutuante:hover{ box-shadow:inset 0 2px 0 rgba(255,255,255,.32), 0 0 34px rgba(53,240,228,.45), 0 16px 36px rgba(0,0,0,.5); }
+}
+.flutuante:active{ transform:scale(.92); }
+.flutuante__cruz{ transition:transform .3s cubic-bezier(.2,.9,.3,1.4); }
+body.detalhado .flutuante__cruz{ transform:rotate(45deg); }
+
+.flutuante__dica{
+  position:absolute; right:74px; top:50%; transform:translateY(-50%);
+  padding:7px 13px;border-radius:999px;background:color-mix(in srgb,var(--brand-primary) 12%,var(--bg-surface));border:1px solid var(--vidro-borda);
+  font-size:.78rem; white-space:nowrap;
+  opacity:0; pointer-events:none; transition:opacity .2s;
+}
+@media (hover:hover){
+  .flutuante:hover .flutuante__dica{ opacity:1; }
+}
+/* no celular a dica aparece sozinha nos primeiros segundos e ao tocar */
+.flutuante--apresenta .flutuante__dica,
+.flutuante:active .flutuante__dica{ opacity:1; }
+
+/* aviso de cópia */
+.aviso{
+  position:fixed; z-index:6;
+  left:50%;
+  bottom:calc(30px + env(safe-area-inset-bottom));
+  transform:translate(-50%, 20px);
+  max-width:calc(100vw - 40px);
+  text-align:center;
+  padding:11px 20px;border-radius:999px;background:color-mix(in srgb,var(--brand-primary) 12%,var(--bg-surface));border:1px solid rgba(53,240,228,.5);
+  box-shadow:0 0 24px rgba(53,240,228,.28);
+  font-family:var(--fonte-codigo); font-size:.82rem;
+  opacity:0; pointer-events:none;
+  transition:opacity .25s, transform .25s;
+}
+.aviso.aviso--visivel{ opacity:1; transform:translate(-50%, 0); }
+
+/* ============================================================
+   RESPONSIVO
+   ============================================================ */
+@media (max-width:840px){
+  .moldura{
+    padding:34px 16px 132px;
+    padding-left:calc(16px + env(safe-area-inset-left));
+    padding-right:calc(16px + env(safe-area-inset-right));
+    padding-bottom:calc(132px + env(safe-area-inset-bottom));
+  }
+  .bloco{ grid-template-columns:1fr; gap:20px; padding:24px 18px; }
+  .bloco__fios{ display:none; }
+
+  /* emblema e título lado a lado: economiza altura na vertical do celular */
+  .bloco__coluna{
+    display:grid;
+    grid-template-columns:76px 1fr;
+    align-items:center;
+    column-gap:16px;
+  }
+  .bloco__emblema{ position:static; width:76px; height:76px; grid-row:span 2; }
+  .bloco__rotulo{ margin:0; font-size:1.18rem; align-self:end; }
+  .bloco__nota{ max-width:none; align-self:start; font-size:.82rem; }
+
+  .modulo{ grid-template-columns:1fr auto; align-items:center; padding:14px 15px; }
+  .modulo__comando{ font-size:.92rem; }
+  .modulo__copiar{ min-width:0; width:44px; padding:0; font-size:0; }
+  .modulo__copiar::after{
+    content:'';
+    width:16px; height:16px;background:currentColor;
+    -webkit-mask:url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2' stroke-linejoin='round'%3E%3Crect x='9' y='9' width='11' height='11' rx='2'/%3E%3Cpath d='M5 15V5a2 2 0 0 1 2-2h10'/%3E%3C/svg%3E") center/contain no-repeat;
+          mask:url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2' stroke-linejoin='round'%3E%3Crect x='9' y='9' width='11' height='11' rx='2'/%3E%3Cpath d='M5 15V5a2 2 0 0 1 2-2h10'/%3E%3C/svg%3E") center/contain no-repeat;
+  }
+  .busca{ max-width:none; padding:12px 16px; }
+  .hud{ margin-bottom:28px; }
+}
+
+/* telas estreitas: menos camadas de desfoque, que pesam na GPU do celular */
+@media (max-width:600px){
+  :root{ --desfoque:12px; }
+  .cena__bolha{ -webkit-backdrop-filter:none; backdrop-filter:none; }
+  .cena__nevoa{ filter:blur(80px); }
+  .cena__bolha--2,
+  .cena__bolha--5{ display:none; }
+  .modulo{ -webkit-backdrop-filter:blur(8px); backdrop-filter:blur(8px); }
+}
+
+/* celular deitado: o painel volta a ter duas colunas */
+@media (max-width:840px) and (orientation:landscape){
+  .bloco{ grid-template-columns:190px 1fr; }
+  .bloco__coluna{ grid-template-columns:1fr; }
+  .bloco__emblema{ grid-row:auto; }
+  .bloco__rotulo{ margin-top:14px; }
+}
+
+@media (prefers-reduced-motion:reduce){
+  *{ animation:none !important; transition:none !important; }
+}
+/* ============================================================
+   CONSOLE KALIXTO — extensões para apostilas
+   O layout de referência tem dois painéis de comandos; aqui cada
+   capítulo vira um painel de vidro (.bloco) com emblema numerado
+   na coluna e o conteúdo original na direita.
+   ============================================================ */
+
+/* ---------- Cena atrás do conteúdo, sem criar camadas novas ---------- */
+body.kxc > .cena{ z-index:-1; }
+
+/* ---------- Utilitários do refactor ---------- */
+.kx-oculto{ display:none !important; }
+
+/* contêineres antigos (shell, grid com sidebar) deixam de impor largura */
+body.kxc .kx-plano{
+  display:block !important;
+  width:auto !important; max-width:none !important; min-width:0 !important;
+  margin:0 !important; padding:0 !important;
+  background:none !important; border:0 !important; box-shadow:none !important;
+  transform:none !important; overflow:visible !important;
+  -webkit-backdrop-filter:none !important; backdrop-filter:none !important;
+}
+
+body.kxc .moldura{
+  display:block !important;
+  position:relative; z-index:1;
+  width:auto !important; max-width:1120px !important;
+  margin:0 auto !important;
+  padding:0 24px 140px !important;
+  background:none !important; border:0 !important; box-shadow:none !important;
+}
+body.kxc .moldura--hud{ padding:56px 24px 0 !important; }
+
+/* ---------- HUD ---------- */
+body.kxc .hud__titulo{
+  font-family:var(--fonte-display) !important;
+  font-weight:700 !important;
+  font-size:clamp(2.1rem, 5.6vw, 3.7rem) !important;
+  line-height:1.04 !important;
+  letter-spacing:-.03em !important;
+  margin:22px 0 12px !important;
+  padding:0 !important;
+  text-align:left !important; text-transform:none !important;
+  max-width:none !important;
+  background:linear-gradient(100deg, var(--neon-ciano) 0%, var(--text-primary) 42%, var(--neon-magenta) 100%) !important;
+  -webkit-background-clip:text !important; background-clip:text !important;
+  color:transparent !important; -webkit-text-fill-color:transparent !important;
+  text-wrap:balance; text-shadow:none !important;
+}
+body.kxc .hud__titulo *{
+  color:inherit !important; background:none !important;
+  -webkit-text-fill-color:inherit !important; font:inherit !important;
+}
+body.kxc .hud__resumo{
+  max-width:62ch; color:var(--texto-suave);
+  font:400 1.02rem/1.6 var(--fonte-texto);
+  margin:0 0 28px; text-align:left;
+}
+.hud__extras{
+  display:flex; flex-wrap:wrap; gap:10px;
+  margin:0 0 26px;
+}
+.hud__ficha{
+  display:inline-flex; align-items:baseline; gap:8px;
+  padding:8px 14px; border-radius:999px;
+  background:var(--vidro); border:1px solid var(--vidro-borda);
+  font:500 .8rem/1.3 var(--fonte-texto); color:var(--texto-suave);
+  -webkit-backdrop-filter:blur(12px); backdrop-filter:blur(12px);
+}
+.hud__ficha b{ font:600 .8rem/1.3 var(--fonte-codigo); color:var(--neon-ciano); }
+
+body.kxc .hud__marca{ display:inline-flex !important; width:auto !important; max-width:100%; margin:0 !important; text-transform:none !important; }
+body.kxc .hud{ display:block !important; text-align:left !important; padding:0 !important; border:0 !important; background:none !important; min-height:0 !important; }
+
+/* ---------- Divisor de parte ---------- */
+body.kxc .kx-parte{
+  display:block !important;
+  position:relative;
+  max-width:none !important;
+  margin:54px 0 22px !important;
+  padding:0 0 0 18px !important;
+  background:none !important; border:0 !important; box-shadow:none !important;
+  border-left:3px solid var(--neon-magenta) !important;
+  border-radius:0 !important;
+  text-align:left !important; min-height:0 !important;
+}
+body.kxc .kx-parte::before, body.kxc .kx-parte::after{ content:none !important; }
+body.kxc .kx-parte > svg{ display:none !important; }
+body.kxc .kx-parte > *{ max-width:none !important; margin-left:0 !important; margin-right:0 !important; padding-left:0 !important; padding-right:0 !important; opacity:1 !important; transform:none !important; }
+body.kxc .kx-parte :is(h1,h2,h3){
+  font:700 clamp(1.3rem,2.6vw,1.75rem)/1.2 var(--fonte-display) !important;
+  letter-spacing:-.02em !important; margin:4px 0 !important; text-align:left !important;
+}
+body.kxc .kx-parte p{ margin:4px 0 0 !important; color:var(--texto-suave); max-width:70ch; text-align:left !important; }
+
+/* ---------- Painel por capítulo ---------- */
+body.kxc .bloco{
+  display:grid !important;
+  grid-template-columns:230px minmax(0,1fr) !important;
+  gap:36px !important;
+  width:auto !important; max-width:none !important; min-height:0 !important;
+  padding:36px !important;
+  margin:0 0 34px !important;
+  border:1px solid var(--vidro-borda) !important;
+  border-radius:var(--raio-painel) !important;
+  background:linear-gradient(150deg, color-mix(in srgb,var(--text-primary) 7.5%,transparent), color-mix(in srgb,var(--text-primary) 2%,transparent) 60%) !important;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.18), 0 30px 70px rgba(0,0,0,.45) !important;
+  opacity:1 !important; transform:none !important;
+  scroll-margin-top:20px;
+}
+body.kxc .bloco[hidden]{ display:none !important; }
+:root[data-theme="light"] body.kxc .bloco{ box-shadow:inset 0 1px 0 rgba(255,255,255,.7), 0 24px 60px rgba(90,18,214,.12) !important; }
+@media (prefers-color-scheme: light){
+  :root:not([data-theme="dark"]) body.kxc .bloco{ box-shadow:inset 0 1px 0 rgba(255,255,255,.7), 0 24px 60px rgba(90,18,214,.12) !important; }
+}
+
+/* quatro circuitos de luz, alternando capítulo a capítulo */
+.bloco--c1{ --luz:var(--neon-ciano);    --luz-2:var(--neon-violeta); }
+.bloco--c2{ --luz:var(--neon-magenta);  --luz-2:var(--neon-violeta); }
+.bloco--c3{ --luz:var(--accent-gold);   --luz-2:var(--neon-magenta); }
+.bloco--c4{ --luz:var(--fb-success);    --luz-2:var(--neon-ciano); }
+
+body.kxc .bloco__coluna{ position:relative; min-width:0; }
+.bloco__fixo{ position:sticky; top:28px; }
+body.kxc .bloco__fixo .bloco__emblema{ position:static; display:block; }
+.bloco__numero{
+  font-family:var(--fonte-display); font-weight:700; font-size:40px;
+  letter-spacing:-.04em; fill:var(--text-primary);
+}
+.bloco__marca{
+  display:block; margin:20px 0 0;
+  font:600 .7rem/1.3 var(--fonte-codigo); letter-spacing:.12em; text-transform:uppercase;
+  color:var(--luz);
+}
+body.kxc .bloco__marca *{ font:inherit !important; color:inherit !important; background:none !important; padding:0 !important; margin:0 !important; border:0 !important; -webkit-text-fill-color:currentColor !important; }
+body.kxc .bloco__rotulo{
+  display:block !important;
+  margin:8px 0 4px !important; padding:0 !important;
+  font-family:var(--fonte-display) !important; font-weight:700 !important;
+  font-size:1.18rem !important; line-height:1.25 !important; letter-spacing:-.02em !important;
+  text-align:left !important; text-transform:none !important;
+  color:var(--texto) !important; -webkit-text-fill-color:currentColor !important;
+  background:none !important; border:0 !important; max-width:none !important;
+  overflow-wrap:break-word; hyphens:auto; text-wrap:balance;
+}
+body.kxc .bloco__rotulo::before, body.kxc .bloco__rotulo::after{ content:none !important; }
+body.kxc .bloco__rotulo *{ font-family:inherit !important; font-size:inherit !important; color:inherit !important; background:none !important; -webkit-text-fill-color:currentColor !important; }
+body.kxc .bloco__nota{
+  margin:8px 0 0 !important; padding:0 !important;
+  font:400 .86rem/1.5 var(--fonte-texto) !important; color:var(--texto-suave) !important;
+  max-width:26ch; text-align:left !important;
+}
+
+body.kxc .bloco__conteudo{ min-width:0; position:relative; }
+body.kxc .bloco__conteudo > :first-child{ margin-top:0 !important; }
+body.kxc .bloco__conteudo > :last-child{ margin-bottom:0 !important; }
+/* nada dentro do painel estoura a coluna */
+body.kxc .bloco__conteudo :is(pre,table,img,svg,video,iframe,canvas){ max-width:100%; }
+body.kxc .bloco__conteudo pre{ overflow-x:auto; }
+body.kxc .bloco__conteudo > *{ min-width:0; max-width:100%; }
+body.kxc .bloco__conteudo > * > *{ min-width:0; }
+body.kxc .bloco__conteudo :not(pre) > code{ overflow-wrap:anywhere; }
+body.kxc .bloco__conteudo :is(.tbl-wrap,.table-wrap,.tablewrap,.scroll){ overflow-x:auto; max-width:100%; }
+
+/* painel em coluna única: emblema e título lado a lado, conteúdo com a largura toda */
+body.kxc .bloco--largo{ grid-template-columns:minmax(0,1fr) !important; gap:24px !important; }
+.bloco--largo .bloco__fixo{ position:static; display:grid; grid-template-columns:76px minmax(0,1fr); column-gap:16px; align-items:center; }
+body.kxc .bloco--largo .bloco__emblema{ width:76px; height:76px; grid-row:1 / span 2; }
+.bloco--largo .bloco__marca{ margin:0; align-self:end; }
+body.kxc .bloco--largo .bloco__rotulo{ margin:2px 0 0 !important; align-self:start; }
+.bloco--largo .bloco__fios{ display:none; }
+
+/* ---------- Estado vazio da busca ---------- */
+body.kxc .moldura > .vazio{ margin:0 0 34px; }
+body.kxc.kx-sem-resultado .moldura > .vazio{ display:block; }
+
+/* ---------- Botão flutuante + índice de capítulos ---------- */
+body.kxc .flutuante{ z-index:60; bottom:calc(80px + env(safe-area-inset-bottom,0px)); }
+body.kx-indice-aberto .flutuante__cruz{ transform:rotate(45deg); }
+body.kx-indice-aberto .flutuante__dica{ opacity:0 !important; }
+
+.indice{
+  position:fixed; z-index:59;
+  right:calc(20px + env(safe-area-inset-right));
+  bottom:calc(156px + env(safe-area-inset-bottom,0px));
+  width:min(360px, calc(100vw - 40px));
+  max-height:min(62vh, 560px);
+  display:flex; flex-direction:column;
+  border-radius:24px;
+  background:color-mix(in srgb,var(--brand-primary) 10%,var(--bg-surface));
+  border:1px solid var(--vidro-borda);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.16), 0 30px 70px rgba(0,0,0,.55);
+  opacity:0; transform:translateY(12px) scale(.98); pointer-events:none;
+  transition:opacity .22s, transform .22s;
+}
+body.kx-indice-aberto .indice{ opacity:1; transform:none; pointer-events:auto; }
+.indice__topo{
+  flex:none; margin:0; padding:16px 20px 12px;
+  font:700 .78rem/1 var(--fonte-codigo); letter-spacing:.1em; text-transform:uppercase;
+  color:var(--texto-suave); border-bottom:1px solid var(--vidro-borda);
+}
+.indice__lista{ list-style:none; margin:0; padding:8px; overflow-y:auto; overscroll-behavior:contain; }
+.indice__lista li{ margin:0; padding:0; }
+.indice__parte{
+  padding:12px 12px 4px !important;
+  font:600 .68rem/1.3 var(--fonte-codigo); letter-spacing:.1em; text-transform:uppercase;
+  color:var(--neon-magenta);
+}
+.indice__link{
+  display:grid; grid-template-columns:30px 1fr; gap:10px; align-items:baseline;
+  padding:9px 12px; border-radius:12px; min-height:40px;
+  font:500 .88rem/1.35 var(--fonte-texto); color:var(--texto) !important; text-decoration:none !important;
+}
+.indice__link b{ font:600 .74rem/1.35 var(--fonte-codigo); color:var(--neon-ciano); }
+.indice__link:hover, .indice__link:focus-visible{ background:var(--vidro-alto); }
+.indice__link:focus-visible{ outline:2px solid var(--neon-ciano); outline-offset:-2px; }
+
+/* ---------- Barra e assinatura ---------- */
+body.kxc .kx-bar, body.kxc .kx-sig{ position:relative; z-index:2; }
+body.kxc .kx-bar{ max-width:1120px; margin:0 auto; padding:20px 24px 0; display:flex; align-items:center; gap:12px; flex-wrap:wrap; }
+body.kxc .kx-bar .kx-logo, body.kxc .kx-sig .kx-logo{ border-radius:50%; flex:none; display:block; box-shadow:0 0 40px rgba(123,46,255,.55); }
+body.kxc .kx-bar b{ font:600 14px/18px var(--f-heading); color:var(--text-primary); }
+body.kxc .kx-bar small{ display:block; font:500 12px/16px var(--f-body); color:var(--text-muted); }
+body.kxc .kx-bar a{ margin-left:auto; font:600 14px/20px var(--f-heading); color:var(--brand-tertiary); text-decoration:none; }
+body.kxc .kx-sig{ max-width:1120px; margin:0 auto 96px; padding:0 24px; }
+body.kxc .kx-sig div{ display:flex; align-items:center; gap:12px; padding:20px 24px; border-radius:28px; background:var(--glass-fill); border:1px solid var(--glass-stroke); }
+body.kxc .kx-sig b{ font:600 15px/20px var(--f-heading); color:var(--text-primary); display:block; }
+body.kxc .kx-sig small{ font:500 12px/16px var(--f-body); color:var(--text-muted); }
+
+/* ---------- Responsivo ---------- */
+@media (max-width:840px){
+  body.kxc .moldura{
+    padding:0 16px 132px !important;
+    padding-left:calc(16px + env(safe-area-inset-left)) !important;
+    padding-right:calc(16px + env(safe-area-inset-right)) !important;
+  }
+  body.kxc .moldura--hud{ padding-top:34px !important; padding-bottom:0 !important; }
+  body.kxc .bloco{
+    grid-template-columns:minmax(0,1fr) !important; gap:20px !important; padding:24px 18px !important;
+    -webkit-backdrop-filter:none; backdrop-filter:none;
+  }
+  body.kxc .bloco__coluna{ display:block; }
+  .bloco__fixo{
+    position:static;
+    display:grid; grid-template-columns:76px minmax(0,1fr); column-gap:16px; align-items:center;
+  }
+  body.kxc .bloco__fixo .bloco__emblema{ width:76px; height:76px; grid-row:1 / span 2; }
+  .bloco__marca{ margin:0; align-self:end; }
+  body.kxc .bloco__rotulo{ align-self:start; }
+  body.kxc .bloco__rotulo{ margin:2px 0 0 !important; font-size:1.08rem !important; }
+  body.kxc .bloco__nota{ max-width:none; grid-column:2; }
+  body.kxc .kx-bar{ padding:16px 16px 0; }
+  body.kxc .kx-sig{ padding:0 16px; }
+}
+@media (max-width:840px) and (orientation:landscape){
+  body.kxc .bloco{ grid-template-columns:minmax(0,1fr) !important; }
+}
+@media print{
+  .cena, .flutuante, .indice, .busca, .aviso{ display:none !important; }
+  body.kxc .bloco{ display:block !important; box-shadow:none !important; break-inside:auto; }
+  .bloco__fixo{ position:static; }
+  .bloco__emblema, .bloco__fios{ display:none !important; }
+}
+body.kxc .calmtog{right:auto !important;left:16px !important}
+</style></head>
+<body class="kxc"><div aria-hidden="true" class="cena">
+  <div class="cena__nevoa cena__nevoa--ciano"></div>
+  <div class="cena__nevoa cena__nevoa--magenta"></div>
+  <div class="cena__nevoa cena__nevoa--violeta"></div>
+  <div class="cena__bolha cena__bolha--1"></div>
+  <div class="cena__bolha cena__bolha--2"></div>
+  <div class="cena__bolha cena__bolha--3"></div>
+  <div class="cena__bolha cena__bolha--4"></div>
+  <div class="cena__bolha cena__bolha--5"></div>
+</div><div class="kx-bar"><img alt="Logo Kalixto" class="kx-logo" height="40" src="data:image/webp;base64,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" width="40"/><div><b>Dev-Kalixto</b><small>Kalixto by Wallace Toledo</small></div><a href="../">← Todos os materiais</a></div><div class="moldura moldura--hud"><header class="hud"><span class="hud__marca"><span class="hud__ponto"></span>dev-Kalixto</span><h1 class="hud__titulo">Design Patterns do Zero ao Profissional</h1><p class="hud__resumo">Padrões de Projeto explicados como se fosse a sua primeira aula — com analogias do dia a dia, Java comentado linha a linha, UML em texto, exercícios e desafios. Da base de POO ao raciocínio de arquiteto.</p><div class="busca">
+  <svg aria-hidden="true" class="busca__icone" fill="none" height="18" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" width="18"><circle cx="11" cy="11" r="7"></circle><path d="M20 20l-3.5-3.5"></path></svg>
+  <input aria-label="Filtrar capítulos" autocapitalize="none" autocomplete="off" autocorrect="off" class="busca__campo" data-nome="capítulos" enterkeyhint="search" id="kx-busca" inputmode="search" placeholder="Filtrar capítulos por palavra" spellcheck="false" type="search"/>
+  <span class="busca__contagem" id="kx-contagem"></span>
+</div></header></div>
 <div id="bar"></div>
 
-<section class="cover" id="topo">
-  <div class="ring glowy"><svg class="kx-mark" viewBox="0 0 100 100" role="img" aria-label="Logo Kalixto" xmlns="http://www.w3.org/2000/svg">
+<section class="cover kx-oculto" id="topo">
+  <div class="ring glowy"><svg aria-label="Logo Kalixto" class="kx-mark" role="img" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
   <defs>
-    <linearGradient id="kxg" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0" stop-color="#FF2D8A"/><stop offset=".55" stop-color="#A855F7"/><stop offset="1" stop-color="#2E8BFF"/>
+    <linearGradient id="kxg" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0" stop-color="#FF2D8A"></stop><stop offset=".55" stop-color="#A855F7"></stop><stop offset="1" stop-color="#2E8BFF"></stop>
     </linearGradient>
   </defs>
-  <path d="M50 6 L86 26 L86 74 L50 94 L14 74 L14 26 Z" fill="none" stroke="url(#kxg)" stroke-width="3"/>
-  <path d="M50 16 L77 31 L77 69 L50 84 L23 69 L23 31 Z" fill="none" stroke="#FF2D8A" stroke-width="1" opacity=".35"/>
-  <path d="M38 30 L38 70 M38 50 L60 30 M38 50 L60 70" fill="none" stroke="url(#kxg)" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
-  <circle cx="38" cy="30" r="3.4" fill="#22D3EE"/><circle cx="60" cy="30" r="3.4" fill="#FF2D8A"/><circle cx="60" cy="70" r="3.4" fill="#A855F7"/>
+  <path d="M50 6 L86 26 L86 74 L50 94 L14 74 L14 26 Z" fill="none" stroke="url(#kxg)" stroke-width="3"></path>
+  <path d="M50 16 L77 31 L77 69 L50 84 L23 69 L23 31 Z" fill="none" opacity=".35" stroke="#FF2D8A" stroke-width="1"></path>
+  <path d="M38 30 L38 70 M38 50 L60 30 M38 50 L60 70" fill="none" stroke="url(#kxg)" stroke-linecap="round" stroke-linejoin="round" stroke-width="6"></path>
+  <circle cx="38" cy="30" fill="#22D3EE" r="3.4"></circle><circle cx="60" cy="30" fill="#FF2D8A" r="3.4"></circle><circle cx="60" cy="70" fill="#A855F7" r="3.4"></circle>
 </svg></div>
   <div class="eyebrow">Apostila Kalixto · Volume 1</div>
-  <h1>Design Patterns<br>do Zero ao Profissional</h1>
+  
   <p class="sub">Padrões de Projeto explicados como se fosse a sua primeira aula — com analogias do dia a dia, Java comentado linha a linha, UML em texto, exercícios e desafios. Da base de POO ao raciocínio de arquiteto.</p>
   <div class="meta">
     <span><b>Autor:</b> Kalixto</span>
@@ -495,30 +1160,55 @@ tr:nth-child(even) td{background:color-mix(in srgb,var(--text-primary) 2.0%,tran
   </div>
   <div class="scroll">role para começar ↓</div>
 </section>
-<div class="topbar"><svg class="kx-mark" viewBox="0 0 100 100" role="img" aria-label="Logo Kalixto" xmlns="http://www.w3.org/2000/svg">
+<div class="topbar kx-oculto"><svg aria-label="Logo Kalixto" class="kx-mark" role="img" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
   <defs>
-    <linearGradient id="kxg" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0" stop-color="#FF2D8A"/><stop offset=".55" stop-color="#A855F7"/><stop offset="1" stop-color="#2E8BFF"/>
+    <linearGradient id="kxg" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0" stop-color="#FF2D8A"></stop><stop offset=".55" stop-color="#A855F7"></stop><stop offset="1" stop-color="#2E8BFF"></stop>
     </linearGradient>
   </defs>
-  <path d="M50 6 L86 26 L86 74 L50 94 L14 74 L14 26 Z" fill="none" stroke="url(#kxg)" stroke-width="3"/>
-  <path d="M50 16 L77 31 L77 69 L50 84 L23 69 L23 31 Z" fill="none" stroke="#FF2D8A" stroke-width="1" opacity=".35"/>
-  <path d="M38 30 L38 70 M38 50 L60 30 M38 50 L60 70" fill="none" stroke="url(#kxg)" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
-  <circle cx="38" cy="30" r="3.4" fill="#22D3EE"/><circle cx="60" cy="30" r="3.4" fill="#FF2D8A"/><circle cx="60" cy="70" r="3.4" fill="#A855F7"/>
-</svg><b>Design Patterns &middot; Vol.1</b><button class="burger" aria-label="menu">&#9776;</button></div><div class="shell"><aside class="rail"><div class="brand"><svg class="kx-mark" viewBox="0 0 100 100" role="img" aria-label="Logo Kalixto" xmlns="http://www.w3.org/2000/svg">
+  <path d="M50 6 L86 26 L86 74 L50 94 L14 74 L14 26 Z" fill="none" stroke="url(#kxg)" stroke-width="3"></path>
+  <path d="M50 16 L77 31 L77 69 L50 84 L23 69 L23 31 Z" fill="none" opacity=".35" stroke="#FF2D8A" stroke-width="1"></path>
+  <path d="M38 30 L38 70 M38 50 L60 30 M38 50 L60 70" fill="none" stroke="url(#kxg)" stroke-linecap="round" stroke-linejoin="round" stroke-width="6"></path>
+  <circle cx="38" cy="30" fill="#22D3EE" r="3.4"></circle><circle cx="60" cy="30" fill="#FF2D8A" r="3.4"></circle><circle cx="60" cy="70" fill="#A855F7" r="3.4"></circle>
+</svg><b>Design Patterns · Vol.1</b><button aria-label="menu" class="burger">☰</button></div><div class="shell kx-plano"><aside class="rail kx-oculto"><div class="brand"><svg aria-label="Logo Kalixto" class="kx-mark" role="img" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
   <defs>
-    <linearGradient id="kxg" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0" stop-color="#FF2D8A"/><stop offset=".55" stop-color="#A855F7"/><stop offset="1" stop-color="#2E8BFF"/>
+    <linearGradient id="kxg" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0" stop-color="#FF2D8A"></stop><stop offset=".55" stop-color="#A855F7"></stop><stop offset="1" stop-color="#2E8BFF"></stop>
     </linearGradient>
   </defs>
-  <path d="M50 6 L86 26 L86 74 L50 94 L14 74 L14 26 Z" fill="none" stroke="url(#kxg)" stroke-width="3"/>
-  <path d="M50 16 L77 31 L77 69 L50 84 L23 69 L23 31 Z" fill="none" stroke="#FF2D8A" stroke-width="1" opacity=".35"/>
-  <path d="M38 30 L38 70 M38 50 L60 30 M38 50 L60 70" fill="none" stroke="url(#kxg)" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
-  <circle cx="38" cy="30" r="3.4" fill="#22D3EE"/><circle cx="60" cy="30" r="3.4" fill="#FF2D8A"/><circle cx="60" cy="70" r="3.4" fill="#A855F7"/>
-</svg><div><b>Design Patterns</b><small>Kalixto &middot; Vol. 1</small></div></div><nav><a href="#topo">Capa</a><a href="#prefacio">Pref&aacute;cio</a><a href="#sumario">Sum&aacute;rio</a><div class="grp">Parte 1 &middot; Fundamentos</div><a href="#c1">1. O que s&atilde;o patterns</a><a href="#c2">2. O problema antes</a><a href="#c3">3. Conceitos de POO</a><a href="#c4">4. SOLID</a><div class="grp">Parte 2 &middot; Introdu&ccedil;&atilde;o</div><a href="#c5">5. O que &eacute; um pattern</a><a href="#c6">6. Classifica&ccedil;&atilde;o</a><div class="grp">Parte 3 &middot; Criacionais</div><a href="#singleton">Singleton</a><a href="#factory">Factory Method</a><a href="#abstractfactory">Abstract Factory</a><a href="#builder">Builder</a><a href="#prototype">Prototype</a><a href="#fecho">Fecho do volume</a><div class="grp">Pr&oacute;ximos volumes</div><a href="#" class="soon">Estruturais</a><a href="#" class="soon">Comportamentais</a><a href="#" class="soon">Projetos pr&aacute;ticos</a><a href="#" class="soon">Entrevistas + Quiz</a></nav></aside><main><div class="wrap">
-<section id="prefacio">
-  <div class="eyebrow">Antes de começar</div>
-  <h1 class="ch">Prefácio</h1>
+  <path d="M50 6 L86 26 L86 74 L50 94 L14 74 L14 26 Z" fill="none" stroke="url(#kxg)" stroke-width="3"></path>
+  <path d="M50 16 L77 31 L77 69 L50 84 L23 69 L23 31 Z" fill="none" opacity=".35" stroke="#FF2D8A" stroke-width="1"></path>
+  <path d="M38 30 L38 70 M38 50 L60 30 M38 50 L60 70" fill="none" stroke="url(#kxg)" stroke-linecap="round" stroke-linejoin="round" stroke-width="6"></path>
+  <circle cx="38" cy="30" fill="#22D3EE" r="3.4"></circle><circle cx="60" cy="30" fill="#FF2D8A" r="3.4"></circle><circle cx="60" cy="70" fill="#A855F7" r="3.4"></circle>
+</svg><div><b>Design Patterns</b><small>Kalixto · Vol. 1</small></div></div><nav><a href="#topo">Capa</a><a href="#prefacio">Prefácio</a><a href="#sumario">Sumário</a><div class="grp">Parte 1 · Fundamentos</div><a href="#c1">1. O que são patterns</a><a href="#c2">2. O problema antes</a><a href="#c3">3. Conceitos de POO</a><a href="#c4">4. SOLID</a><div class="grp">Parte 2 · Introdução</div><a href="#c5">5. O que é um pattern</a><a href="#c6">6. Classificação</a><div class="grp">Parte 3 · Criacionais</div><a href="#singleton">Singleton</a><a href="#factory">Factory Method</a><a href="#abstractfactory">Abstract Factory</a><a href="#builder">Builder</a><a href="#prototype">Prototype</a><a href="#fecho">Fecho do volume</a><div class="grp">Próximos volumes</div><a class="soon" href="#">Estruturais</a><a class="soon" href="#">Comportamentais</a><a class="soon" href="#">Projetos práticos</a><a class="soon" href="#">Entrevistas + Quiz</a></nav></aside><main class="kx-plano"><div class="wrap moldura">
+<section class="bloco bloco--c1" data-item="" id="prefacio"><div class="bloco__coluna"><div class="bloco__fixo"><svg aria-label="Capítulo 01" class="bloco__emblema" height="150" role="img" viewBox="0 0 120 120" width="150">
+  <defs>
+    <linearGradient id="kxv1" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity=".85"></stop>
+      <stop offset="45%" stop-opacity=".55" style="stop-color:var(--luz)"></stop>
+      <stop offset="100%" stop-opacity=".35" style="stop-color:var(--luz-2)"></stop>
+    </linearGradient>
+    <radialGradient cx="35%" cy="28%" id="kxb1">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity=".95"></stop>
+      <stop offset="55%" stop-opacity=".45" style="stop-color:var(--luz)"></stop>
+      <stop offset="100%" stop-color="#0d0a1d" stop-opacity=".15"></stop>
+    </radialGradient>
+  </defs>
+  <rect fill="url(#kxv1)" height="104" opacity=".16" rx="30" stroke-opacity=".45" stroke-width="1.2" style="stroke:var(--luz)" width="104" x="8" y="8"></rect>
+  <path d="M26 92 H70" fill="none" stroke-linecap="round" stroke-opacity=".8" stroke-width="3" style="stroke:var(--luz)"></path>
+  <path d="M26 82 H52" fill="none" stroke-linecap="round" stroke-opacity=".75" stroke-width="3" style="stroke:var(--luz-2)"></path>
+  <text class="bloco__numero" x="26" y="66">01</text>
+  <circle cx="90" cy="32" fill="url(#kxb1)" r="9" stroke="#ffffff" stroke-opacity=".5"></circle>
+  <circle cx="90" cy="88" fill="url(#kxb1)" r="5" stroke="#ffffff" stroke-opacity=".4"></circle>
+  <ellipse cx="46" cy="26" fill="#ffffff" opacity=".10" rx="18" ry="9" transform="rotate(-28 46 26)"></ellipse>
+</svg><span class="bloco__marca">Antes de começar</span><h1 class="ch bloco__rotulo">Prefácio</h1></div><svg aria-hidden="true" class="bloco__fios" preserveAspectRatio="none" viewBox="0 0 60 400">
+  <path class="bloco__fio" d="M0 60 C 30 60, 30 20, 60 20"></path>
+  <path class="bloco__fio" d="M0 60 C 30 60, 30 120, 60 120"></path>
+  <path class="bloco__fio" d="M0 60 C 34 60, 34 230, 60 230"></path>
+  <path class="bloco__fio" d="M0 60 C 34 60, 34 340, 60 340"></path>
+</svg></div><div class="bloco__conteudo">
+  
+  
   <p class="lead">Esta apostila foi escrita para uma pessoa específica: você, que talvez nunca tenha ouvido o termo "Design Pattern" e quer sair daqui sabendo reconhecer, implementar e — o mais importante — <em>decidir quando usar</em> cada padrão.</p>
 
   <h2>O que você vai aprender</h2>
@@ -543,11 +1233,36 @@ tr:nth-child(even) td{background:color-mix(in srgb,var(--text-primary) 2.0%,tran
   <p>Os exercícios têm um campo <strong>Entrega</strong>: ele descreve o artefato concreto que você deve produzir (uma classe, um diagrama, um trecho de código). Trate cada entrega como se fosse para um cliente. Os <strong>projetos práticos</strong> (volumes finais) juntam vários padrões num sistema só — é onde a teoria vira músculo.</p>
 
   <div class="box curio glowy"><div class="bt"><span class="ic">?</span>Pré-requisito honesto</div><p>Você precisa saber o básico de <b>lógica de programação</b> e ter visto Java ao menos uma vez (variáveis, classes, métodos). Se POO ainda assusta, relaxe: o Capítulo 3 reconstrói tudo do zero antes de tocarmos em qualquer padrão.</p></div>
-</section>
+</div></section>
 
-<section id="sumario">
-  <div class="eyebrow">Mapa da obra</div>
-  <h1 class="ch">Sumário completo</h1>
+<section class="bloco bloco--c2" data-item="" id="sumario"><div class="bloco__coluna"><div class="bloco__fixo"><svg aria-label="Capítulo 02" class="bloco__emblema" height="150" role="img" viewBox="0 0 120 120" width="150">
+  <defs>
+    <linearGradient id="kxv2" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity=".85"></stop>
+      <stop offset="45%" stop-opacity=".55" style="stop-color:var(--luz)"></stop>
+      <stop offset="100%" stop-opacity=".35" style="stop-color:var(--luz-2)"></stop>
+    </linearGradient>
+    <radialGradient cx="35%" cy="28%" id="kxb2">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity=".95"></stop>
+      <stop offset="55%" stop-opacity=".45" style="stop-color:var(--luz)"></stop>
+      <stop offset="100%" stop-color="#0d0a1d" stop-opacity=".15"></stop>
+    </radialGradient>
+  </defs>
+  <rect fill="url(#kxv2)" height="104" opacity=".16" rx="30" stroke-opacity=".45" stroke-width="1.2" style="stroke:var(--luz)" width="104" x="8" y="8"></rect>
+  <path d="M26 92 H70" fill="none" stroke-linecap="round" stroke-opacity=".8" stroke-width="3" style="stroke:var(--luz)"></path>
+  <path d="M26 82 H52" fill="none" stroke-linecap="round" stroke-opacity=".75" stroke-width="3" style="stroke:var(--luz-2)"></path>
+  <text class="bloco__numero" x="26" y="66">02</text>
+  <circle cx="90" cy="32" fill="url(#kxb2)" r="9" stroke="#ffffff" stroke-opacity=".5"></circle>
+  <circle cx="90" cy="88" fill="url(#kxb2)" r="5" stroke="#ffffff" stroke-opacity=".4"></circle>
+  <ellipse cx="46" cy="26" fill="#ffffff" opacity=".10" rx="18" ry="9" transform="rotate(-28 46 26)"></ellipse>
+</svg><span class="bloco__marca">Mapa da obra</span><h1 class="ch bloco__rotulo">Sumário completo</h1></div><svg aria-hidden="true" class="bloco__fios" preserveAspectRatio="none" viewBox="0 0 60 400">
+  <path class="bloco__fio" d="M0 60 C 30 60, 30 20, 60 20"></path>
+  <path class="bloco__fio" d="M0 60 C 30 60, 30 120, 60 120"></path>
+  <path class="bloco__fio" d="M0 60 C 34 60, 34 230, 60 230"></path>
+  <path class="bloco__fio" d="M0 60 C 34 60, 34 340, 60 340"></path>
+</svg></div><div class="bloco__conteudo">
+  
+  
   <p class="lead">Este é o índice da apostila inteira. O <strong>Volume 1</strong> (este arquivo) cobre os Fundamentos e os Padrões Criacionais. Os demais blocos chegam nos próximos volumes.</p>
 
   <h3>Volume 1 — neste arquivo</h3>
@@ -559,11 +1274,36 @@ tr:nth-child(even) td{background:color-mix(in srgb,var(--text-primary) 2.0%,tran
 
   <h3>Próximos volumes</h3>
   <div class="tbl glowy"><table><thead><tr><th>Volume</th><th>Conteúdo</th></tr></thead><tbody><tr><td>2</td><td>Parte 4 — Padrões Estruturais (Adapter, Bridge, Composite, Decorator, Facade, Flyweight, Proxy)</td></tr><tr><td>3</td><td>Parte 5 — Padrões Comportamentais (Chain of Responsibility, Command, Interpreter, Iterator, Mediator, Memento, Observer, State, Strategy, Template Method, Visitor)</td></tr><tr><td>4</td><td>Partes 6–10 — Comparações, padrões em sistemas reais, em frameworks, refatoração e criação dos seus próprios padrões</td></tr><tr><td>5</td><td>Partes 11–12 — Projeto guiado (Gestão Acadêmica) e projeto-desafio (Delivery)</td></tr><tr><td>6</td><td>Partes 13–20 — Mapa mental, 50 erros comuns, 100 perguntas de entrevista, 100 questões de quiz, 60 exercícios de fixação, 10 estudos de caso, resumo executivo e guia de consulta rápida</td></tr><tr><td>Apêndices</td><td>Glossário completo e bibliografia</td></tr></tbody></table></div>
-</section>
-<div class="part rev"><div class="pnum">Parte 1</div><h2>Fundamentos</h2><p>Antes de correr para os padrões, a gente constrói o chão: de onde eles vieram, que dor resolvem, a POO que sustenta tudo e os princípios SOLID que são a "gramática" do bom projeto.</p></div>
-<section id="c1">
-  <div class="eyebrow">Parte 1 · Capítulo 1</div>
-  <h1 class="ch">O que são Design Patterns</h1>
+</div></section>
+<div class="part rev kx-parte"><div class="pnum">Parte 1</div><h2>Fundamentos</h2><p>Antes de correr para os padrões, a gente constrói o chão: de onde eles vieram, que dor resolvem, a POO que sustenta tudo e os princípios SOLID que são a "gramática" do bom projeto.</p></div>
+<section class="bloco bloco--c3" data-item="" id="c1"><div class="bloco__coluna"><div class="bloco__fixo"><svg aria-label="Capítulo 03" class="bloco__emblema" height="150" role="img" viewBox="0 0 120 120" width="150">
+  <defs>
+    <linearGradient id="kxv3" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity=".85"></stop>
+      <stop offset="45%" stop-opacity=".55" style="stop-color:var(--luz)"></stop>
+      <stop offset="100%" stop-opacity=".35" style="stop-color:var(--luz-2)"></stop>
+    </linearGradient>
+    <radialGradient cx="35%" cy="28%" id="kxb3">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity=".95"></stop>
+      <stop offset="55%" stop-opacity=".45" style="stop-color:var(--luz)"></stop>
+      <stop offset="100%" stop-color="#0d0a1d" stop-opacity=".15"></stop>
+    </radialGradient>
+  </defs>
+  <rect fill="url(#kxv3)" height="104" opacity=".16" rx="30" stroke-opacity=".45" stroke-width="1.2" style="stroke:var(--luz)" width="104" x="8" y="8"></rect>
+  <path d="M26 92 H70" fill="none" stroke-linecap="round" stroke-opacity=".8" stroke-width="3" style="stroke:var(--luz)"></path>
+  <path d="M26 82 H52" fill="none" stroke-linecap="round" stroke-opacity=".75" stroke-width="3" style="stroke:var(--luz-2)"></path>
+  <text class="bloco__numero" x="26" y="66">03</text>
+  <circle cx="90" cy="32" fill="url(#kxb3)" r="9" stroke="#ffffff" stroke-opacity=".5"></circle>
+  <circle cx="90" cy="88" fill="url(#kxb3)" r="5" stroke="#ffffff" stroke-opacity=".4"></circle>
+  <ellipse cx="46" cy="26" fill="#ffffff" opacity=".10" rx="18" ry="9" transform="rotate(-28 46 26)"></ellipse>
+</svg><span class="bloco__marca">Parte 1 · Capítulo 1</span><h1 class="ch bloco__rotulo">O que são Design Patterns</h1></div><svg aria-hidden="true" class="bloco__fios" preserveAspectRatio="none" viewBox="0 0 60 400">
+  <path class="bloco__fio" d="M0 60 C 30 60, 30 20, 60 20"></path>
+  <path class="bloco__fio" d="M0 60 C 30 60, 30 120, 60 120"></path>
+  <path class="bloco__fio" d="M0 60 C 34 60, 34 230, 60 230"></path>
+  <path class="bloco__fio" d="M0 60 C 34 60, 34 340, 60 340"></path>
+</svg></div><div class="bloco__conteudo">
+  
+  
   <p class="lead">Um <strong>design pattern</strong> (padrão de projeto) é uma solução testada e reaproveitável para um problema que aparece de novo e de novo no projeto de software. Não é um código pronto para copiar — é uma <em>receita</em> de como organizar suas classes e objetos.</p>
 
   <div class="box ana glowy"><div class="bt"><span class="ic">≈</span>Padrão é planta de casa, não casa pronta</div><p>Um arquiteto não desenha cada casa do zero. Ele tem <b>plantas</b> reaproveitáveis: "casa térrea com quintal", "sobrado geminado". A planta resolve o problema estrutural; cada construtor adapta acabamento, cor e tamanho. Um design pattern é a planta — você adapta ao seu código.</p></div>
@@ -592,11 +1332,36 @@ tr:nth-child(even) td{background:color-mix(in srgb,var(--text-primary) 2.0%,tran
   <div class="ex glowy"><div class="xh"><span class="tag">básico</span>Exercício 1.1 — Caça aos padrões</div><div class="xb"><p>Sem saber ainda os nomes, pense em 3 aplicativos que você usa (ex.: iFood, Spotify, WhatsApp). Para cada um, escreva uma situação em que o app precisa de "muitas variações da mesma coisa" (vários tipos de pagamento, vários tipos de notificação...). Guarde essa lista — vamos voltar nela.</p><div class="deliver"><b>Entrega:</b> uma lista com 3 apps e 1 situação de "variação" por app.</div></div></div>
 
   <div class="loop"><div class="lt">Loop Kalixto de Aprendizagem</div><div class="steps"><span class="st a">Entender</span><span class="ar">→</span><span class="st b">Reconhecer</span><span class="ar">→</span><span class="st c">Implementar</span><span class="ar">→</span><span class="st d">Refatorar</span><span class="ar">↺</span><span class="st a">Repetir</span></div></div>
-</section>
+</div></section>
 
-<section id="c2">
-  <div class="eyebrow">Parte 1 · Capítulo 2</div>
-  <h1 class="ch">O problema antes dos padrões</h1>
+<section class="bloco bloco--c4" data-item="" id="c2"><div class="bloco__coluna"><div class="bloco__fixo"><svg aria-label="Capítulo 04" class="bloco__emblema" height="150" role="img" viewBox="0 0 120 120" width="150">
+  <defs>
+    <linearGradient id="kxv4" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity=".85"></stop>
+      <stop offset="45%" stop-opacity=".55" style="stop-color:var(--luz)"></stop>
+      <stop offset="100%" stop-opacity=".35" style="stop-color:var(--luz-2)"></stop>
+    </linearGradient>
+    <radialGradient cx="35%" cy="28%" id="kxb4">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity=".95"></stop>
+      <stop offset="55%" stop-opacity=".45" style="stop-color:var(--luz)"></stop>
+      <stop offset="100%" stop-color="#0d0a1d" stop-opacity=".15"></stop>
+    </radialGradient>
+  </defs>
+  <rect fill="url(#kxv4)" height="104" opacity=".16" rx="30" stroke-opacity=".45" stroke-width="1.2" style="stroke:var(--luz)" width="104" x="8" y="8"></rect>
+  <path d="M26 92 H70" fill="none" stroke-linecap="round" stroke-opacity=".8" stroke-width="3" style="stroke:var(--luz)"></path>
+  <path d="M26 82 H52" fill="none" stroke-linecap="round" stroke-opacity=".75" stroke-width="3" style="stroke:var(--luz-2)"></path>
+  <text class="bloco__numero" x="26" y="66">04</text>
+  <circle cx="90" cy="32" fill="url(#kxb4)" r="9" stroke="#ffffff" stroke-opacity=".5"></circle>
+  <circle cx="90" cy="88" fill="url(#kxb4)" r="5" stroke="#ffffff" stroke-opacity=".4"></circle>
+  <ellipse cx="46" cy="26" fill="#ffffff" opacity=".10" rx="18" ry="9" transform="rotate(-28 46 26)"></ellipse>
+</svg><span class="bloco__marca">Parte 1 · Capítulo 2</span><h1 class="ch bloco__rotulo">O problema antes dos padrões</h1></div><svg aria-hidden="true" class="bloco__fios" preserveAspectRatio="none" viewBox="0 0 60 400">
+  <path class="bloco__fio" d="M0 60 C 30 60, 30 20, 60 20"></path>
+  <path class="bloco__fio" d="M0 60 C 30 60, 30 120, 60 120"></path>
+  <path class="bloco__fio" d="M0 60 C 34 60, 34 230, 60 230"></path>
+  <path class="bloco__fio" d="M0 60 C 34 60, 34 340, 60 340"></path>
+</svg></div><div class="bloco__conteudo">
+  
+  
   <p class="lead">Para valorizar a cura, primeiro a doença. Antes de pensar em estrutura, programava-se "no impulso" — e o resultado tem nome: <em>código espaguete</em>.</p>
 
   <h2>Os quatro vilões</h2>
@@ -631,11 +1396,36 @@ tr:nth-child(even) td{background:color-mix(in srgb,var(--text-primary) 2.0%,tran
   <div class="ex glowy"><div class="xh"><span class="tag">básico</span>Exercício 2.1 — Diagnóstico</div><div class="xb"><p>Releia o método <code>pagar</code> acima. Liste pelo menos <b>três</b> problemas concretos que ele tem e, para cada um, escreva em uma frase como você <i>imagina</i> que poderia melhorar (sem usar nome de padrão ainda).</p><div class="deliver"><b>Entrega:</b> uma lista de 3 problemas + 3 ideias de melhoria.</div></div></div>
 
   <div class="loop"><div class="lt">Loop Kalixto de Aprendizagem</div><div class="steps"><span class="st a">Entender</span><span class="ar">→</span><span class="st b">Reconhecer</span><span class="ar">→</span><span class="st c">Implementar</span><span class="ar">→</span><span class="st d">Refatorar</span><span class="ar">↺</span><span class="st a">Repetir</span></div></div>
-</section>
+</div></section>
 
-<section id="c3">
-  <div class="eyebrow">Parte 1 · Capítulo 3</div>
-  <h1 class="ch">Conceitos obrigatórios de POO</h1>
+<section class="bloco bloco--c1" data-item="" id="c3"><div class="bloco__coluna"><div class="bloco__fixo"><svg aria-label="Capítulo 05" class="bloco__emblema" height="150" role="img" viewBox="0 0 120 120" width="150">
+  <defs>
+    <linearGradient id="kxv5" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity=".85"></stop>
+      <stop offset="45%" stop-opacity=".55" style="stop-color:var(--luz)"></stop>
+      <stop offset="100%" stop-opacity=".35" style="stop-color:var(--luz-2)"></stop>
+    </linearGradient>
+    <radialGradient cx="35%" cy="28%" id="kxb5">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity=".95"></stop>
+      <stop offset="55%" stop-opacity=".45" style="stop-color:var(--luz)"></stop>
+      <stop offset="100%" stop-color="#0d0a1d" stop-opacity=".15"></stop>
+    </radialGradient>
+  </defs>
+  <rect fill="url(#kxv5)" height="104" opacity=".16" rx="30" stroke-opacity=".45" stroke-width="1.2" style="stroke:var(--luz)" width="104" x="8" y="8"></rect>
+  <path d="M26 92 H70" fill="none" stroke-linecap="round" stroke-opacity=".8" stroke-width="3" style="stroke:var(--luz)"></path>
+  <path d="M26 82 H52" fill="none" stroke-linecap="round" stroke-opacity=".75" stroke-width="3" style="stroke:var(--luz-2)"></path>
+  <text class="bloco__numero" x="26" y="66">05</text>
+  <circle cx="90" cy="32" fill="url(#kxb5)" r="9" stroke="#ffffff" stroke-opacity=".5"></circle>
+  <circle cx="90" cy="88" fill="url(#kxb5)" r="5" stroke="#ffffff" stroke-opacity=".4"></circle>
+  <ellipse cx="46" cy="26" fill="#ffffff" opacity=".10" rx="18" ry="9" transform="rotate(-28 46 26)"></ellipse>
+</svg><span class="bloco__marca">Parte 1 · Capítulo 3</span><h1 class="ch bloco__rotulo">Conceitos obrigatórios de POO</h1></div><svg aria-hidden="true" class="bloco__fios" preserveAspectRatio="none" viewBox="0 0 60 400">
+  <path class="bloco__fio" d="M0 60 C 30 60, 30 20, 60 20"></path>
+  <path class="bloco__fio" d="M0 60 C 30 60, 30 120, 60 120"></path>
+  <path class="bloco__fio" d="M0 60 C 34 60, 34 230, 60 230"></path>
+  <path class="bloco__fio" d="M0 60 C 34 60, 34 340, 60 340"></path>
+</svg></div><div class="bloco__conteudo">
+  
+  
   <p class="lead">Padrões são feitos de Orientação a Objetos. Se algum termo abaixo estiver nebuloso, este capítulo é o seu chão firme. Vamos rápido, mas sem pular ninguém.</p>
 
   <h2>Classe e objeto</h2>
@@ -715,11 +1505,36 @@ Composicao:   A &lt;#&gt;-- B      (A "tem" B; B morre com A)         [losango c
   <div class="quiz glowy"><div class="qh"><span class="ic">◇</span>Quiz — POO essencial</div><div class="q"><div class="qt">Qual pilar permite que <code>a.emitirSom()</code> rode versões diferentes conforme o objeto real?</div><button class="opt" data-ok="0"><b>a)</b> Encapsulamento</button><button class="opt" data-ok="1"><b>b)</b> Polimorfismo</button><button class="opt" data-ok="0"><b>c)</b> Abstração</button><div class="fb good"><b>Isso!</b> Polimorfismo é o mesmo método assumindo formas diferentes em tempo de execução.</div><div class="fb bad">Quase. Encapsulamento é esconder estado; o que muda o comportamento conforme o objeto é o <b>polimorfismo</b>.</div></div><div class="q"><div class="qt">Casa "tem" cômodos, e sem a casa os cômodos deixam de existir. Que relação é essa?</div><button class="opt" data-ok="0"><b>a)</b> Agregação</button><button class="opt" data-ok="1"><b>b)</b> Composição</button><button class="opt" data-ok="0"><b>c)</b> Dependência</button><div class="fb good"><b>Exato.</b> Parte que morre com o todo = composição (losango cheio).</div><div class="fb bad">Na agregação as partes sobrevivem sozinhas. Aqui elas morrem com o todo → <b>composição</b>.</div></div><div class="q"><div class="qt">Você precisa apenas garantir que várias classes saibam "pagar(valor)", sem compartilhar código. Use:</div><button class="opt" data-ok="1"><b>a)</b> Interface</button><button class="opt" data-ok="0"><b>b)</b> Classe abstrata com tudo implementado</button><button class="opt" data-ok="0"><b>c)</b> Herança múltipla de classes</button><div class="fb good"><b>Boa.</b> Só contrato, sem código compartilhado → interface.</div><div class="fb bad">Se não há código a compartilhar, classe abstrata é exagero. O contrato puro é uma <b>interface</b>.</div></div></div>
 
   <div class="loop"><div class="lt">Loop Kalixto de Aprendizagem</div><div class="steps"><span class="st a">Entender</span><span class="ar">→</span><span class="st b">Reconhecer</span><span class="ar">→</span><span class="st c">Implementar</span><span class="ar">→</span><span class="st d">Refatorar</span><span class="ar">↺</span><span class="st a">Repetir</span></div></div>
-</section>
+</div></section>
 
-<section id="c4">
-  <div class="eyebrow">Parte 1 · Capítulo 4</div>
-  <h1 class="ch">SOLID — a gramática do bom projeto</h1>
+<section class="bloco bloco--c2" data-item="" id="c4"><div class="bloco__coluna"><div class="bloco__fixo"><svg aria-label="Capítulo 06" class="bloco__emblema" height="150" role="img" viewBox="0 0 120 120" width="150">
+  <defs>
+    <linearGradient id="kxv6" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity=".85"></stop>
+      <stop offset="45%" stop-opacity=".55" style="stop-color:var(--luz)"></stop>
+      <stop offset="100%" stop-opacity=".35" style="stop-color:var(--luz-2)"></stop>
+    </linearGradient>
+    <radialGradient cx="35%" cy="28%" id="kxb6">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity=".95"></stop>
+      <stop offset="55%" stop-opacity=".45" style="stop-color:var(--luz)"></stop>
+      <stop offset="100%" stop-color="#0d0a1d" stop-opacity=".15"></stop>
+    </radialGradient>
+  </defs>
+  <rect fill="url(#kxv6)" height="104" opacity=".16" rx="30" stroke-opacity=".45" stroke-width="1.2" style="stroke:var(--luz)" width="104" x="8" y="8"></rect>
+  <path d="M26 92 H70" fill="none" stroke-linecap="round" stroke-opacity=".8" stroke-width="3" style="stroke:var(--luz)"></path>
+  <path d="M26 82 H52" fill="none" stroke-linecap="round" stroke-opacity=".75" stroke-width="3" style="stroke:var(--luz-2)"></path>
+  <text class="bloco__numero" x="26" y="66">06</text>
+  <circle cx="90" cy="32" fill="url(#kxb6)" r="9" stroke="#ffffff" stroke-opacity=".5"></circle>
+  <circle cx="90" cy="88" fill="url(#kxb6)" r="5" stroke="#ffffff" stroke-opacity=".4"></circle>
+  <ellipse cx="46" cy="26" fill="#ffffff" opacity=".10" rx="18" ry="9" transform="rotate(-28 46 26)"></ellipse>
+</svg><span class="bloco__marca">Parte 1 · Capítulo 4</span><h1 class="ch bloco__rotulo">SOLID — a gramática do bom projeto</h1></div><svg aria-hidden="true" class="bloco__fios" preserveAspectRatio="none" viewBox="0 0 60 400">
+  <path class="bloco__fio" d="M0 60 C 30 60, 30 20, 60 20"></path>
+  <path class="bloco__fio" d="M0 60 C 30 60, 30 120, 60 120"></path>
+  <path class="bloco__fio" d="M0 60 C 34 60, 34 230, 60 230"></path>
+  <path class="bloco__fio" d="M0 60 C 34 60, 34 340, 60 340"></path>
+</svg></div><div class="bloco__conteudo">
+  
+  
   <p class="lead">SOLID são cinco princípios que mantêm o código flexível e fácil de manter. Eles não são padrões, mas são o <em>porquê</em> por trás de quase todos. Se você entender SOLID, os padrões deixam de ser mágica.</p>
 
   <div class="tbl glowy"><table><thead><tr><th>Letra</th><th>Princípio</th><th>Em uma frase</th></tr></thead><tbody><tr><td>S</td><td>Single Responsibility</td><td>Uma classe, um motivo para mudar.</td></tr><tr><td>O</td><td>Open/Closed</td><td>Aberto para extensão, fechado para modificação.</td></tr><tr><td>L</td><td>Liskov Substitution</td><td>Filho deve poder substituir o pai sem surpresas.</td></tr><tr><td>I</td><td>Interface Segregation</td><td>Muitas interfaces pequenas &gt; uma gigante.</td></tr><tr><td>D</td><td>Dependency Inversion</td><td>Dependa de abstrações, não de implementações.</td></tr></tbody></table></div>
@@ -800,14 +1615,39 @@ Composicao:   A &lt;#&gt;-- B      (A "tem" B; B morre com A)         [losango c
   <div class="quiz glowy"><div class="qh"><span class="ic">◇</span>Quiz — SOLID</div><div class="q"><div class="qt">"Adicionar um novo tipo sem editar o código que já existe" é a ideia de qual letra?</div><button class="opt" data-ok="0"><b>a)</b> S</button><button class="opt" data-ok="1"><b>b)</b> O</button><button class="opt" data-ok="0"><b>c)</b> D</button><div class="fb good"><b>Certo.</b> Open/Closed: aberto para extensão, fechado para modificação.</div><div class="fb bad">Reveja: estender sem modificar é o <b>O</b> de Open/Closed.</div></div><div class="q"><div class="qt">Uma interface <code>Funcionario</code> que obriga um robô a implementar <code>tirarFerias()</code> viola:</div><button class="opt" data-ok="1"><b>a)</b> Interface Segregation (I)</button><button class="opt" data-ok="0"><b>b)</b> Liskov (L)</button><button class="opt" data-ok="0"><b>c)</b> Single Responsibility (S)</button><div class="fb good"><b>Isso.</b> Interface gorda forçando método inútil → quebra o I.</div><div class="fb bad">O problema é obrigar a implementar o que não se usa: isso é o <b>I</b>, Interface Segregation.</div></div><div class="q"><div class="qt">Receber um <code>Repositorio</code> (interface) pelo construtor em vez de dar <code>new MySQLRepo()</code> dentro da classe é aplicar:</div><button class="opt" data-ok="1"><b>a)</b> Dependency Inversion (D)</button><button class="opt" data-ok="0"><b>b)</b> Single Responsibility (S)</button><button class="opt" data-ok="0"><b>c)</b> Open/Closed só</button><div class="fb good"><b>Perfeito.</b> Depender da abstração e injetá-la é o D (com Injeção de Dependência).</div><div class="fb bad">O foco aqui é depender de abstração, não de detalhe concreto → <b>D</b>, Dependency Inversion.</div></div></div>
 
   <div class="loop"><div class="lt">Loop Kalixto de Aprendizagem</div><div class="steps"><span class="st a">Entender</span><span class="ar">→</span><span class="st b">Reconhecer</span><span class="ar">→</span><span class="st c">Implementar</span><span class="ar">→</span><span class="st d">Refatorar</span><span class="ar">↺</span><span class="st a">Repetir</span></div></div>
-</section>
-<div class="part rev"><div class="pnum">Parte 2</div><h2>Introdução aos Design Patterns</h2><p>Agora que o chão está firme, formalizamos o que é um padrão, do que ele é feito e como os 23 se organizam em três famílias.</p></div>
-<section id="c5">
-  <div class="eyebrow">Parte 2 · Capítulo 5</div>
-  <h1 class="ch">O que é um pattern (de verdade)</h1>
+</div></section>
+<div class="part rev kx-parte"><div class="pnum">Parte 2</div><h2>Introdução aos Design Patterns</h2><p>Agora que o chão está firme, formalizamos o que é um padrão, do que ele é feito e como os 23 se organizam em três famílias.</p></div>
+<section class="bloco bloco--c3" data-item="" id="c5"><div class="bloco__coluna"><div class="bloco__fixo"><svg aria-label="Capítulo 07" class="bloco__emblema" height="150" role="img" viewBox="0 0 120 120" width="150">
+  <defs>
+    <linearGradient id="kxv7" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity=".85"></stop>
+      <stop offset="45%" stop-opacity=".55" style="stop-color:var(--luz)"></stop>
+      <stop offset="100%" stop-opacity=".35" style="stop-color:var(--luz-2)"></stop>
+    </linearGradient>
+    <radialGradient cx="35%" cy="28%" id="kxb7">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity=".95"></stop>
+      <stop offset="55%" stop-opacity=".45" style="stop-color:var(--luz)"></stop>
+      <stop offset="100%" stop-color="#0d0a1d" stop-opacity=".15"></stop>
+    </radialGradient>
+  </defs>
+  <rect fill="url(#kxv7)" height="104" opacity=".16" rx="30" stroke-opacity=".45" stroke-width="1.2" style="stroke:var(--luz)" width="104" x="8" y="8"></rect>
+  <path d="M26 92 H70" fill="none" stroke-linecap="round" stroke-opacity=".8" stroke-width="3" style="stroke:var(--luz)"></path>
+  <path d="M26 82 H52" fill="none" stroke-linecap="round" stroke-opacity=".75" stroke-width="3" style="stroke:var(--luz-2)"></path>
+  <text class="bloco__numero" x="26" y="66">07</text>
+  <circle cx="90" cy="32" fill="url(#kxb7)" r="9" stroke="#ffffff" stroke-opacity=".5"></circle>
+  <circle cx="90" cy="88" fill="url(#kxb7)" r="5" stroke="#ffffff" stroke-opacity=".4"></circle>
+  <ellipse cx="46" cy="26" fill="#ffffff" opacity=".10" rx="18" ry="9" transform="rotate(-28 46 26)"></ellipse>
+</svg><span class="bloco__marca">Parte 2 · Capítulo 5</span><h1 class="ch bloco__rotulo">O que é um pattern (de verdade)</h1></div><svg aria-hidden="true" class="bloco__fios" preserveAspectRatio="none" viewBox="0 0 60 400">
+  <path class="bloco__fio" d="M0 60 C 30 60, 30 20, 60 20"></path>
+  <path class="bloco__fio" d="M0 60 C 30 60, 30 120, 60 120"></path>
+  <path class="bloco__fio" d="M0 60 C 34 60, 34 230, 60 230"></path>
+  <path class="bloco__fio" d="M0 60 C 34 60, 34 340, 60 340"></path>
+</svg></div><div class="bloco__conteudo">
+  
+  
   <p class="lead">Um padrão não é uma biblioteca nem um trecho de código que você importa. É a <strong>descrição de uma solução</strong> para um problema recorrente, que você adapta ao seu contexto.</p>
 
-  <div class="box key glowy"><div class="bt"><span class="ic">★</span>A equação para nunca esquecer</div><p><b>Pattern ≠ código pronto.</b> &nbsp; <b>Pattern = solução recorrente + estrutura + nome.</b> Dois desenvolvedores podem implementar o mesmo padrão com códigos diferentes — e ainda assim ser o mesmo padrão.</p></div>
+  <div class="box key glowy"><div class="bt"><span class="ic">★</span>A equação para nunca esquecer</div><p><b>Pattern ≠ código pronto.</b>   <b>Pattern = solução recorrente + estrutura + nome.</b> Dois desenvolvedores podem implementar o mesmo padrão com códigos diferentes — e ainda assim ser o mesmo padrão.</p></div>
 
   <h2>Do que um padrão é feito</h2>
   <p>No livro do GoF, todo padrão é descrito por quatro elementos. Você vai reconhecê-los em cada capítulo desta apostila:</p>
@@ -820,11 +1660,36 @@ Composicao:   A &lt;#&gt;-- B      (A "tem" B; B morre com A)         [losango c
   <div class="resumo glowy"><div class="rh"><span>◈</span>Resumo do capítulo</div><div class="rb"><ul><li>Pattern é solução descrita e adaptável, não código importável.</li><li>Todo padrão tem nome, problema, solução (estrutura) e consequências.</li><li>Benefícios: reuso, vocabulário comum, flexibilidade.</li><li>Aviso: padrão sem problema real = complexidade desnecessária.</li></ul></div></div>
 
   <div class="loop"><div class="lt">Loop Kalixto de Aprendizagem</div><div class="steps"><span class="st a">Entender</span><span class="ar">→</span><span class="st b">Reconhecer</span><span class="ar">→</span><span class="st c">Implementar</span><span class="ar">→</span><span class="st d">Refatorar</span><span class="ar">↺</span><span class="st a">Repetir</span></div></div>
-</section>
+</div></section>
 
-<section id="c6">
-  <div class="eyebrow">Parte 2 · Capítulo 6</div>
-  <h1 class="ch">Classificação dos padrões</h1>
+<section class="bloco bloco--c4" data-item="" id="c6"><div class="bloco__coluna"><div class="bloco__fixo"><svg aria-label="Capítulo 08" class="bloco__emblema" height="150" role="img" viewBox="0 0 120 120" width="150">
+  <defs>
+    <linearGradient id="kxv8" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity=".85"></stop>
+      <stop offset="45%" stop-opacity=".55" style="stop-color:var(--luz)"></stop>
+      <stop offset="100%" stop-opacity=".35" style="stop-color:var(--luz-2)"></stop>
+    </linearGradient>
+    <radialGradient cx="35%" cy="28%" id="kxb8">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity=".95"></stop>
+      <stop offset="55%" stop-opacity=".45" style="stop-color:var(--luz)"></stop>
+      <stop offset="100%" stop-color="#0d0a1d" stop-opacity=".15"></stop>
+    </radialGradient>
+  </defs>
+  <rect fill="url(#kxv8)" height="104" opacity=".16" rx="30" stroke-opacity=".45" stroke-width="1.2" style="stroke:var(--luz)" width="104" x="8" y="8"></rect>
+  <path d="M26 92 H70" fill="none" stroke-linecap="round" stroke-opacity=".8" stroke-width="3" style="stroke:var(--luz)"></path>
+  <path d="M26 82 H52" fill="none" stroke-linecap="round" stroke-opacity=".75" stroke-width="3" style="stroke:var(--luz-2)"></path>
+  <text class="bloco__numero" x="26" y="66">08</text>
+  <circle cx="90" cy="32" fill="url(#kxb8)" r="9" stroke="#ffffff" stroke-opacity=".5"></circle>
+  <circle cx="90" cy="88" fill="url(#kxb8)" r="5" stroke="#ffffff" stroke-opacity=".4"></circle>
+  <ellipse cx="46" cy="26" fill="#ffffff" opacity=".10" rx="18" ry="9" transform="rotate(-28 46 26)"></ellipse>
+</svg><span class="bloco__marca">Parte 2 · Capítulo 6</span><h1 class="ch bloco__rotulo">Classificação dos padrões</h1></div><svg aria-hidden="true" class="bloco__fios" preserveAspectRatio="none" viewBox="0 0 60 400">
+  <path class="bloco__fio" d="M0 60 C 30 60, 30 20, 60 20"></path>
+  <path class="bloco__fio" d="M0 60 C 30 60, 30 120, 60 120"></path>
+  <path class="bloco__fio" d="M0 60 C 34 60, 34 230, 60 230"></path>
+  <path class="bloco__fio" d="M0 60 C 34 60, 34 340, 60 340"></path>
+</svg></div><div class="bloco__conteudo">
+  
+  
   <p class="lead">Os 23 padrões do GoF se dividem em três famílias, conforme o tipo de problema que atacam: como <em>criar</em>, como <em>compor</em> e como <em>fazer objetos colaborarem</em>.</p>
 
   <div class="tbl glowy"><table><thead><tr><th>Família</th><th>Pergunta que responde</th><th>Padrões</th></tr></thead><tbody><tr><td><b style="color:#FF2D8A">Criacionais</b></td><td>Como criar objetos de forma flexível?</td><td>Singleton, Factory Method, Abstract Factory, Builder, Prototype</td></tr><tr><td><b style="color:#A855F7">Estruturais</b></td><td>Como montar objetos em estruturas maiores?</td><td>Adapter, Bridge, Composite, Decorator, Facade, Flyweight, Proxy</td></tr><tr><td><b style="color:#2E8BFF">Comportamentais</b></td><td>Como objetos colaboram e dividem responsabilidades?</td><td>Chain of Responsibility, Command, Interpreter, Iterator, Mediator, Memento, Observer, State, Strategy, Template Method, Visitor</td></tr></tbody></table></div>
@@ -847,11 +1712,36 @@ Composicao:   A &lt;#&gt;-- B      (A "tem" B; B morre com A)         [losango c
   <div class="resumo glowy"><div class="rh"><span>◈</span>Resumo do capítulo</div><div class="rb"><ul><li>Três famílias: criacionais (criar), estruturais (compor), comportamentais (colaborar).</li><li>5 criacionais, 7 estruturais, 11 comportamentais = 23.</li><li>Comece pelos criacionais: eles ensinam "programe para a interface, não para a implementação".</li></ul></div></div>
 
   <div class="loop"><div class="lt">Loop Kalixto de Aprendizagem</div><div class="steps"><span class="st a">Entender</span><span class="ar">→</span><span class="st b">Reconhecer</span><span class="ar">→</span><span class="st c">Implementar</span><span class="ar">→</span><span class="st d">Refatorar</span><span class="ar">↺</span><span class="st a">Repetir</span></div></div>
-</section>
-<div class="part rev"><div class="pnum">Parte 3</div><h2>Padrões Criacionais</h2><p>Cinco padrões que tratam de uma coisa só: criar objetos sem amarrar seu código a classes concretas. Cada um segue a mesma receita didática — conceito, analogia, problema, solução, código comentado, erros, quando usar/evitar, exercício e desafio.</p></div>
-<section id="singleton">
-  <div class="eyebrow">Parte 3 · Criacional</div>
-  <h1 class="ch">Singleton</h1>
+</div></section>
+<div class="part rev kx-parte"><div class="pnum">Parte 3</div><h2>Padrões Criacionais</h2><p>Cinco padrões que tratam de uma coisa só: criar objetos sem amarrar seu código a classes concretas. Cada um segue a mesma receita didática — conceito, analogia, problema, solução, código comentado, erros, quando usar/evitar, exercício e desafio.</p></div>
+<section class="bloco bloco--c1" data-item="" id="singleton"><div class="bloco__coluna"><div class="bloco__fixo"><svg aria-label="Capítulo 09" class="bloco__emblema" height="150" role="img" viewBox="0 0 120 120" width="150">
+  <defs>
+    <linearGradient id="kxv9" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity=".85"></stop>
+      <stop offset="45%" stop-opacity=".55" style="stop-color:var(--luz)"></stop>
+      <stop offset="100%" stop-opacity=".35" style="stop-color:var(--luz-2)"></stop>
+    </linearGradient>
+    <radialGradient cx="35%" cy="28%" id="kxb9">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity=".95"></stop>
+      <stop offset="55%" stop-opacity=".45" style="stop-color:var(--luz)"></stop>
+      <stop offset="100%" stop-color="#0d0a1d" stop-opacity=".15"></stop>
+    </radialGradient>
+  </defs>
+  <rect fill="url(#kxv9)" height="104" opacity=".16" rx="30" stroke-opacity=".45" stroke-width="1.2" style="stroke:var(--luz)" width="104" x="8" y="8"></rect>
+  <path d="M26 92 H70" fill="none" stroke-linecap="round" stroke-opacity=".8" stroke-width="3" style="stroke:var(--luz)"></path>
+  <path d="M26 82 H52" fill="none" stroke-linecap="round" stroke-opacity=".75" stroke-width="3" style="stroke:var(--luz-2)"></path>
+  <text class="bloco__numero" x="26" y="66">09</text>
+  <circle cx="90" cy="32" fill="url(#kxb9)" r="9" stroke="#ffffff" stroke-opacity=".5"></circle>
+  <circle cx="90" cy="88" fill="url(#kxb9)" r="5" stroke="#ffffff" stroke-opacity=".4"></circle>
+  <ellipse cx="46" cy="26" fill="#ffffff" opacity=".10" rx="18" ry="9" transform="rotate(-28 46 26)"></ellipse>
+</svg><span class="bloco__marca">Parte 3 · Criacional</span><h1 class="ch bloco__rotulo">Singleton</h1></div><svg aria-hidden="true" class="bloco__fios" preserveAspectRatio="none" viewBox="0 0 60 400">
+  <path class="bloco__fio" d="M0 60 C 30 60, 30 20, 60 20"></path>
+  <path class="bloco__fio" d="M0 60 C 30 60, 30 120, 60 120"></path>
+  <path class="bloco__fio" d="M0 60 C 34 60, 34 230, 60 230"></path>
+  <path class="bloco__fio" d="M0 60 C 34 60, 34 340, 60 340"></path>
+</svg></div><div class="bloco__conteudo">
+  
+  
   <p class="lead"><strong>Conceito:</strong> garante que uma classe tenha <em>uma única instância</em> em todo o sistema e oferece um ponto global de acesso a ela.</p>
 
   <div class="box ana glowy"><div class="bt"><span class="ic">≈</span>O presidente do país</div><p>Por mais que existam milhões de cidadãos, há <b>um</b> presidente por vez. Não importa quem pergunte "quem é o presidente?", a resposta aponta sempre para a mesma pessoa. O Singleton é isso: por mais que o código peça a instância, recebe sempre a mesma.</p></div>
@@ -934,11 +1824,36 @@ export <span class="kw">function</span> <span class="fn">getConfig</span>() {
   <div class="quiz glowy"><div class="qh"><span class="ic">◇</span>Quiz — Singleton</div><div class="q"><div class="qt">O que torna o construtor de um Singleton especial?</div><button class="opt" data-ok="0"><b>a)</b> Ele é <code>public</code> e estático</button><button class="opt" data-ok="1"><b>b)</b> Ele é <code>private</code></button><button class="opt" data-ok="0"><b>c)</b> Ele não existe</button><div class="fb good"><b>Certo.</b> Construtor privado impede que outros criem instâncias com <code>new</code>.</div><div class="fb bad">O segredo é o construtor <b>privado</b>: só a própria classe pode se instanciar.</div></div><div class="q"><div class="qt">Qual é a crítica mais comum ao Singleton?</div><button class="opt" data-ok="0"><b>a)</b> É lento</button><button class="opt" data-ok="1"><b>b)</b> Vira estado global e dificulta testes</button><button class="opt" data-ok="0"><b>c)</b> Ocupa muita memória</button><div class="fb good"><b>Exato.</b> Abusado, ele acopla o sistema todo e prejudica testes.</div><div class="fb bad">A dor real não é desempenho: é virar <b>estado global</b>, acoplando tudo e travando testes.</div></div></div>
 
   <div class="loop"><div class="lt">Loop Kalixto de Aprendizagem</div><div class="steps"><span class="st a">Entender</span><span class="ar">→</span><span class="st b">Reconhecer</span><span class="ar">→</span><span class="st c">Implementar</span><span class="ar">→</span><span class="st d">Refatorar</span><span class="ar">↺</span><span class="st a">Repetir</span></div></div>
-</section>
+</div></section>
 
-<section id="factory">
-  <div class="eyebrow">Parte 3 · Criacional</div>
-  <h1 class="ch">Factory Method</h1>
+<section class="bloco bloco--c2" data-item="" id="factory"><div class="bloco__coluna"><div class="bloco__fixo"><svg aria-label="Capítulo 10" class="bloco__emblema" height="150" role="img" viewBox="0 0 120 120" width="150">
+  <defs>
+    <linearGradient id="kxv10" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity=".85"></stop>
+      <stop offset="45%" stop-opacity=".55" style="stop-color:var(--luz)"></stop>
+      <stop offset="100%" stop-opacity=".35" style="stop-color:var(--luz-2)"></stop>
+    </linearGradient>
+    <radialGradient cx="35%" cy="28%" id="kxb10">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity=".95"></stop>
+      <stop offset="55%" stop-opacity=".45" style="stop-color:var(--luz)"></stop>
+      <stop offset="100%" stop-color="#0d0a1d" stop-opacity=".15"></stop>
+    </radialGradient>
+  </defs>
+  <rect fill="url(#kxv10)" height="104" opacity=".16" rx="30" stroke-opacity=".45" stroke-width="1.2" style="stroke:var(--luz)" width="104" x="8" y="8"></rect>
+  <path d="M26 92 H70" fill="none" stroke-linecap="round" stroke-opacity=".8" stroke-width="3" style="stroke:var(--luz)"></path>
+  <path d="M26 82 H52" fill="none" stroke-linecap="round" stroke-opacity=".75" stroke-width="3" style="stroke:var(--luz-2)"></path>
+  <text class="bloco__numero" x="26" y="66">10</text>
+  <circle cx="90" cy="32" fill="url(#kxb10)" r="9" stroke="#ffffff" stroke-opacity=".5"></circle>
+  <circle cx="90" cy="88" fill="url(#kxb10)" r="5" stroke="#ffffff" stroke-opacity=".4"></circle>
+  <ellipse cx="46" cy="26" fill="#ffffff" opacity=".10" rx="18" ry="9" transform="rotate(-28 46 26)"></ellipse>
+</svg><span class="bloco__marca">Parte 3 · Criacional</span><h1 class="ch bloco__rotulo">Factory Method</h1></div><svg aria-hidden="true" class="bloco__fios" preserveAspectRatio="none" viewBox="0 0 60 400">
+  <path class="bloco__fio" d="M0 60 C 30 60, 30 20, 60 20"></path>
+  <path class="bloco__fio" d="M0 60 C 30 60, 30 120, 60 120"></path>
+  <path class="bloco__fio" d="M0 60 C 34 60, 34 230, 60 230"></path>
+  <path class="bloco__fio" d="M0 60 C 34 60, 34 340, 60 340"></path>
+</svg></div><div class="bloco__conteudo">
+  
+  
   <p class="lead"><strong>Conceito:</strong> define um método para criar objetos, mas deixa as <em>subclasses</em> decidirem qual classe concreta instanciar. Você cria "produtos" sem dar <code>new</code> da classe concreta no meio do código.</p>
 
   <div class="box ana glowy"><div class="bt"><span class="ic">≈</span>A fábrica de documentos</div><p>Você pede ao seu editor "novo documento". Dependendo do programa, sai um <code>.docx</code>, um <code>.pdf</code> ou um <code>.txt</code>. Você não diz <i>como</i> criar — você pede, e a fábrica certa entrega o produto certo. O <code>new</code> fica escondido dentro da fábrica.</p></div>
@@ -948,12 +1863,12 @@ export <span class="kw">function</span> <span class="fn">getConfig</span>() {
 
   <h2>Solução</h2>
   <p>Centralize a criação em um <strong>método fábrica</strong>. O código cliente conversa com a <em>interface</em> do produto; a decisão de qual concreto criar mora num único lugar.</p>
-  <div class="uml"><div class="cap">estrutura</div><pre>   <<interface>>            Criador (abstrato)
-    Transporte      <----   + criar() : Transporte   (factory method)
+  <div class="uml"><div class="cap">estrutura</div><pre>   &lt;<interface>&gt;            Criador (abstrato)
+    Transporte      &lt;----   + criar() : Transporte   (factory method)
         ^                          ^
    +----+----+              +------+------+
  Carro     Navio        CriadorCarro   CriadorNavio
- (produtos concretos)   (sobrescrevem criar())</pre></div>
+ (produtos concretos)   (sobrescrevem criar())</interface></pre></div>
 
   <h2>Código Java comentado</h2>
   <div class="code"><div class="hd"><span class="dot d1"></span><span class="dot d2"></span><span class="dot d3"></span><span class="lng">java</span></div><pre><code><span class="cm">// 1) Produto: a interface que o cliente conhece.</span>
@@ -1021,11 +1936,36 @@ Transporte t = TransporteFactory.<span class="fn">criar</span>(<span class="st">
   <div class="resumo glowy"><div class="rh"><span>◈</span>Resumo do capítulo</div><div class="rb"><ul><li>Factory Method delega a criação de UM produto para subclasses/fábricas.</li><li>O cliente fala com a interface do produto; o new fica escondido.</li><li>Honra o Open/Closed: novo tipo = nova classe, sem editar o existente.</li><li>A "Simple Factory" (método estático com switch) é a variação prática mais comum.</li></ul></div></div>
 
   <div class="loop"><div class="lt">Loop Kalixto de Aprendizagem</div><div class="steps"><span class="st a">Entender</span><span class="ar">→</span><span class="st b">Reconhecer</span><span class="ar">→</span><span class="st c">Implementar</span><span class="ar">→</span><span class="st d">Refatorar</span><span class="ar">↺</span><span class="st a">Repetir</span></div></div>
-</section>
+</div></section>
 
-<section id="abstractfactory">
-  <div class="eyebrow">Parte 3 · Criacional</div>
-  <h1 class="ch">Abstract Factory</h1>
+<section class="bloco bloco--c3" data-item="" id="abstractfactory"><div class="bloco__coluna"><div class="bloco__fixo"><svg aria-label="Capítulo 11" class="bloco__emblema" height="150" role="img" viewBox="0 0 120 120" width="150">
+  <defs>
+    <linearGradient id="kxv11" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity=".85"></stop>
+      <stop offset="45%" stop-opacity=".55" style="stop-color:var(--luz)"></stop>
+      <stop offset="100%" stop-opacity=".35" style="stop-color:var(--luz-2)"></stop>
+    </linearGradient>
+    <radialGradient cx="35%" cy="28%" id="kxb11">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity=".95"></stop>
+      <stop offset="55%" stop-opacity=".45" style="stop-color:var(--luz)"></stop>
+      <stop offset="100%" stop-color="#0d0a1d" stop-opacity=".15"></stop>
+    </radialGradient>
+  </defs>
+  <rect fill="url(#kxv11)" height="104" opacity=".16" rx="30" stroke-opacity=".45" stroke-width="1.2" style="stroke:var(--luz)" width="104" x="8" y="8"></rect>
+  <path d="M26 92 H70" fill="none" stroke-linecap="round" stroke-opacity=".8" stroke-width="3" style="stroke:var(--luz)"></path>
+  <path d="M26 82 H52" fill="none" stroke-linecap="round" stroke-opacity=".75" stroke-width="3" style="stroke:var(--luz-2)"></path>
+  <text class="bloco__numero" x="26" y="66">11</text>
+  <circle cx="90" cy="32" fill="url(#kxb11)" r="9" stroke="#ffffff" stroke-opacity=".5"></circle>
+  <circle cx="90" cy="88" fill="url(#kxb11)" r="5" stroke="#ffffff" stroke-opacity=".4"></circle>
+  <ellipse cx="46" cy="26" fill="#ffffff" opacity=".10" rx="18" ry="9" transform="rotate(-28 46 26)"></ellipse>
+</svg><span class="bloco__marca">Parte 3 · Criacional</span><h1 class="ch bloco__rotulo">Abstract Factory</h1></div><svg aria-hidden="true" class="bloco__fios" preserveAspectRatio="none" viewBox="0 0 60 400">
+  <path class="bloco__fio" d="M0 60 C 30 60, 30 20, 60 20"></path>
+  <path class="bloco__fio" d="M0 60 C 30 60, 30 120, 60 120"></path>
+  <path class="bloco__fio" d="M0 60 C 34 60, 34 230, 60 230"></path>
+  <path class="bloco__fio" d="M0 60 C 34 60, 34 340, 60 340"></path>
+</svg></div><div class="bloco__conteudo">
+  
+  
   <p class="lead"><strong>Conceito:</strong> cria <em>famílias</em> de objetos relacionados sem especificar suas classes concretas. É um "Factory Method elevado": em vez de um produto, uma fábrica produz um conjunto coerente de produtos.</p>
 
   <div class="box ana glowy"><div class="bt"><span class="ic">≈</span>Montadora de móveis por estilo</div><p>Você escolhe um estilo: "Vitoriano" ou "Moderno". Ao escolher, ganha um <b>conjunto combinando</b> — cadeira, sofá e mesa, todos no mesmo estilo. Você nunca mistura cadeira vitoriana com mesa moderna. A fábrica garante a coerência da família.</p></div>
@@ -1034,13 +1974,13 @@ Transporte t = TransporteFactory.<span class="fn">criar</span>(<span class="st">
   <p>Seu app precisa de temas (claro/escuro). Cada tema tem botão, caixa de texto e menu próprios. Se você criar cada componente com <code>if (tema == escuro)</code> espalhado, vai acabar com um botão escuro dentro de um menu claro. Você precisa garantir <strong>famílias consistentes</strong>.</p>
 
   <h2>Solução</h2>
-  <div class="uml"><div class="cap">estrutura</div><pre>      <<interface>> FabricaUI
+  <div class="uml"><div class="cap">estrutura</div><pre>      &lt;<interface>&gt; FabricaUI
       + criarBotao() : Botao
       + criarCheckbox() : Checkbox
             ^                ^
    FabricaClaro          FabricaEscuro
    (Botao/CheckboxClaro) (Botao/CheckboxEscuro)
-   --- cada fabrica produz a FAMILIA inteira no mesmo estilo ---</pre></div>
+   --- cada fabrica produz a FAMILIA inteira no mesmo estilo ---</interface></pre></div>
 
   <div class="code"><div class="hd"><span class="dot d1"></span><span class="dot d2"></span><span class="dot d3"></span><span class="lng">java</span></div><pre><code><span class="cm">// Produtos abstratos (a familia)</span>
 <span class="kw">public</span> <span class="kw">interface</span> Botao   { <span class="kw">void</span> <span class="fn">render</span>(); }
@@ -1099,11 +2039,36 @@ FabricaUI fabrica = <span class="kw">new</span> <span class="fn">FabricaEscura</
   <div class="resumo glowy"><div class="rh"><span>◈</span>Resumo do capítulo</div><div class="rb"><ul><li>Abstract Factory cria famílias de objetos que precisam combinar.</li><li>Garante coerência: nunca mistura produtos de famílias diferentes.</li><li>Usa composição (passa-se a fábrica); Factory Method usa herança.</li><li>Custo: adicionar um produto novo obriga mexer em todas as fábricas.</li></ul></div></div>
 
   <div class="loop"><div class="lt">Loop Kalixto de Aprendizagem</div><div class="steps"><span class="st a">Entender</span><span class="ar">→</span><span class="st b">Reconhecer</span><span class="ar">→</span><span class="st c">Implementar</span><span class="ar">→</span><span class="st d">Refatorar</span><span class="ar">↺</span><span class="st a">Repetir</span></div></div>
-</section>
+</div></section>
 
-<section id="builder">
-  <div class="eyebrow">Parte 3 · Criacional</div>
-  <h1 class="ch">Builder</h1>
+<section class="bloco bloco--c4" data-item="" id="builder"><div class="bloco__coluna"><div class="bloco__fixo"><svg aria-label="Capítulo 12" class="bloco__emblema" height="150" role="img" viewBox="0 0 120 120" width="150">
+  <defs>
+    <linearGradient id="kxv12" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity=".85"></stop>
+      <stop offset="45%" stop-opacity=".55" style="stop-color:var(--luz)"></stop>
+      <stop offset="100%" stop-opacity=".35" style="stop-color:var(--luz-2)"></stop>
+    </linearGradient>
+    <radialGradient cx="35%" cy="28%" id="kxb12">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity=".95"></stop>
+      <stop offset="55%" stop-opacity=".45" style="stop-color:var(--luz)"></stop>
+      <stop offset="100%" stop-color="#0d0a1d" stop-opacity=".15"></stop>
+    </radialGradient>
+  </defs>
+  <rect fill="url(#kxv12)" height="104" opacity=".16" rx="30" stroke-opacity=".45" stroke-width="1.2" style="stroke:var(--luz)" width="104" x="8" y="8"></rect>
+  <path d="M26 92 H70" fill="none" stroke-linecap="round" stroke-opacity=".8" stroke-width="3" style="stroke:var(--luz)"></path>
+  <path d="M26 82 H52" fill="none" stroke-linecap="round" stroke-opacity=".75" stroke-width="3" style="stroke:var(--luz-2)"></path>
+  <text class="bloco__numero" x="26" y="66">12</text>
+  <circle cx="90" cy="32" fill="url(#kxb12)" r="9" stroke="#ffffff" stroke-opacity=".5"></circle>
+  <circle cx="90" cy="88" fill="url(#kxb12)" r="5" stroke="#ffffff" stroke-opacity=".4"></circle>
+  <ellipse cx="46" cy="26" fill="#ffffff" opacity=".10" rx="18" ry="9" transform="rotate(-28 46 26)"></ellipse>
+</svg><span class="bloco__marca">Parte 3 · Criacional</span><h1 class="ch bloco__rotulo">Builder</h1></div><svg aria-hidden="true" class="bloco__fios" preserveAspectRatio="none" viewBox="0 0 60 400">
+  <path class="bloco__fio" d="M0 60 C 30 60, 30 20, 60 20"></path>
+  <path class="bloco__fio" d="M0 60 C 30 60, 30 120, 60 120"></path>
+  <path class="bloco__fio" d="M0 60 C 34 60, 34 230, 60 230"></path>
+  <path class="bloco__fio" d="M0 60 C 34 60, 34 340, 60 340"></path>
+</svg></div><div class="bloco__conteudo">
+  
+  
   <p class="lead"><strong>Conceito:</strong> constrói um objeto complexo passo a passo, separando a montagem da representação final. Ideal quando há muitos parâmetros, vários opcionais.</p>
 
   <div class="box ana glowy"><div class="bt"><span class="ic">≈</span>Montando um lanche</div><p>No balcão você fala: "pão, hambúrguer, sem cebola, com queijo extra, sem molho". Você monta o lanche <b>passo a passo</b>, escolhendo só o que quer. No fim, recebe o lanche pronto. O Builder é esse balcão para objetos.</p></div>
@@ -1114,9 +2079,9 @@ FabricaUI fabrica = <span class="kw">new</span> <span class="fn">FabricaEscura</
 Pizza p = <span class="kw">new</span> <span class="fn">Pizza</span>(<span class="st">"grande"</span>, <span class="kw">true</span>, <span class="kw">false</span>, <span class="kw">true</span>, <span class="kw">true</span>, <span class="kw">false</span>, <span class="nm">2</span>);</code></pre></div>
 
   <h2>Solução</h2>
-  <div class="uml"><div class="cap">estrutura</div><pre>  Cliente ---> PizzaBuilder.tamanho(...).comQueijo()....build()
+  <div class="uml"><div class="cap">estrutura</div><pre>  Cliente ---&gt; PizzaBuilder.tamanho(...).comQueijo()....build()
                      |                                     |
-                     +---- monta passo a passo ------------+--> Pizza pronta</pre></div>
+                     +---- monta passo a passo ------------+--&gt; Pizza pronta</pre></div>
 
   <div class="code"><div class="hd"><span class="dot d1"></span><span class="dot d2"></span><span class="dot d3"></span><span class="lng">java · builder fluente</span></div><pre><code><span class="kw">public</span> <span class="kw">class</span> Pizza {
     <span class="kw">private</span> <span class="kw">final</span> <span class="ty">String</span> tamanho;      <span class="cm">// obrigatorio</span>
@@ -1170,11 +2135,36 @@ Pizza p = <span class="kw">new</span> Pizza.<span class="fn">Builder</span>(<spa
   <div class="resumo glowy"><div class="rh"><span>◈</span>Resumo do capítulo</div><div class="rb"><ul><li>Builder monta objetos complexos passo a passo, separando montagem de resultado.</li><li>Mata o "construtor telescópico" e permite imutabilidade.</li><li>Métodos retornam this para encadeamento fluente.</li><li>Builder = como montar; Factory = qual criar.</li></ul></div></div>
 
   <div class="loop"><div class="lt">Loop Kalixto de Aprendizagem</div><div class="steps"><span class="st a">Entender</span><span class="ar">→</span><span class="st b">Reconhecer</span><span class="ar">→</span><span class="st c">Implementar</span><span class="ar">→</span><span class="st d">Refatorar</span><span class="ar">↺</span><span class="st a">Repetir</span></div></div>
-</section>
+</div></section>
 
-<section id="prototype">
-  <div class="eyebrow">Parte 3 · Criacional</div>
-  <h1 class="ch">Prototype</h1>
+<section class="bloco bloco--c1" data-item="" id="prototype"><div class="bloco__coluna"><div class="bloco__fixo"><svg aria-label="Capítulo 13" class="bloco__emblema" height="150" role="img" viewBox="0 0 120 120" width="150">
+  <defs>
+    <linearGradient id="kxv13" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity=".85"></stop>
+      <stop offset="45%" stop-opacity=".55" style="stop-color:var(--luz)"></stop>
+      <stop offset="100%" stop-opacity=".35" style="stop-color:var(--luz-2)"></stop>
+    </linearGradient>
+    <radialGradient cx="35%" cy="28%" id="kxb13">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity=".95"></stop>
+      <stop offset="55%" stop-opacity=".45" style="stop-color:var(--luz)"></stop>
+      <stop offset="100%" stop-color="#0d0a1d" stop-opacity=".15"></stop>
+    </radialGradient>
+  </defs>
+  <rect fill="url(#kxv13)" height="104" opacity=".16" rx="30" stroke-opacity=".45" stroke-width="1.2" style="stroke:var(--luz)" width="104" x="8" y="8"></rect>
+  <path d="M26 92 H70" fill="none" stroke-linecap="round" stroke-opacity=".8" stroke-width="3" style="stroke:var(--luz)"></path>
+  <path d="M26 82 H52" fill="none" stroke-linecap="round" stroke-opacity=".75" stroke-width="3" style="stroke:var(--luz-2)"></path>
+  <text class="bloco__numero" x="26" y="66">13</text>
+  <circle cx="90" cy="32" fill="url(#kxb13)" r="9" stroke="#ffffff" stroke-opacity=".5"></circle>
+  <circle cx="90" cy="88" fill="url(#kxb13)" r="5" stroke="#ffffff" stroke-opacity=".4"></circle>
+  <ellipse cx="46" cy="26" fill="#ffffff" opacity=".10" rx="18" ry="9" transform="rotate(-28 46 26)"></ellipse>
+</svg><span class="bloco__marca">Parte 3 · Criacional</span><h1 class="ch bloco__rotulo">Prototype</h1></div><svg aria-hidden="true" class="bloco__fios" preserveAspectRatio="none" viewBox="0 0 60 400">
+  <path class="bloco__fio" d="M0 60 C 30 60, 30 20, 60 20"></path>
+  <path class="bloco__fio" d="M0 60 C 30 60, 30 120, 60 120"></path>
+  <path class="bloco__fio" d="M0 60 C 34 60, 34 230, 60 230"></path>
+  <path class="bloco__fio" d="M0 60 C 34 60, 34 340, 60 340"></path>
+</svg></div><div class="bloco__conteudo">
+  
+  
   <p class="lead"><strong>Conceito:</strong> cria novos objetos <em>clonando</em> um objeto existente (o protótipo), em vez de instanciar do zero. Útil quando criar é caro ou quando você quer copiar um estado já configurado.</p>
 
   <div class="box ana glowy"><div class="bt"><span class="ic">≈</span>Ctrl+C, Ctrl+V de um documento modelo</div><p>Você tem um documento-modelo todo formatado. Para um novo, você <b>duplica</b> o modelo e altera o conteúdo — em vez de formatar tudo de novo. O Prototype é esse "duplicar e ajustar".</p></div>
@@ -1183,10 +2173,10 @@ Pizza p = <span class="kw">new</span> Pizza.<span class="fn">Builder</span>(<spa
   <p>Montar um objeto pode ser caro (consulta a banco, cálculo pesado, muitos passos). Se você precisa de vários parecidos, refazer tudo a cada vez é desperdício. Além disso, às vezes você só tem o objeto em mãos e nem conhece a classe concreta para dar <code>new</code>.</p>
 
   <h2>Solução</h2>
-  <div class="uml"><div class="cap">estrutura</div><pre>  <<interface>> Prototipo
+  <div class="uml"><div class="cap">estrutura</div><pre>  &lt;<interface>&gt; Prototipo
   + clonar() : Prototipo
         ^
-   FormaConcreta  ---- clonar() devolve uma COPIA de si mesma</pre></div>
+   FormaConcreta  ---- clonar() devolve uma COPIA de si mesma</interface></pre></div>
 
   <div class="code"><div class="hd"><span class="dot d1"></span><span class="dot d2"></span><span class="dot d3"></span><span class="lng">java</span></div><pre><code><span class="cm">// 1) Contrato de clonagem.</span>
 <span class="kw">public</span> <span class="kw">interface</span> Prototipo {
@@ -1232,11 +2222,36 @@ novo.<span class="fn">setNome</span>(<span class="st">"Guerreiro 2"</span>);  <s
   <div class="resumo glowy"><div class="rh"><span>◈</span>Resumo do capítulo</div><div class="rb"><ul><li>Prototype cria objetos clonando um protótipo já configurado.</li><li>Bom quando criar do zero é caro ou você só tem a instância.</li><li>O risco central é cópia rasa: faça cópia profunda de campos mutáveis.</li><li>Em Java, prefira um método clonar() próprio a Cloneable.</li></ul></div></div>
 
   <div class="loop"><div class="lt">Loop Kalixto de Aprendizagem</div><div class="steps"><span class="st a">Entender</span><span class="ar">→</span><span class="st b">Reconhecer</span><span class="ar">→</span><span class="st c">Implementar</span><span class="ar">→</span><span class="st d">Refatorar</span><span class="ar">↺</span><span class="st a">Repetir</span></div></div>
-</section>
+</div></section>
 
-<section id="fecho">
-  <div class="eyebrow">Fim do Volume 1</div>
-  <h1 class="ch">Você fechou os Fundamentos + Criacionais</h1>
+<section class="bloco bloco--c2" data-item="" id="fecho"><div class="bloco__coluna"><div class="bloco__fixo"><svg aria-label="Capítulo 14" class="bloco__emblema" height="150" role="img" viewBox="0 0 120 120" width="150">
+  <defs>
+    <linearGradient id="kxv14" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity=".85"></stop>
+      <stop offset="45%" stop-opacity=".55" style="stop-color:var(--luz)"></stop>
+      <stop offset="100%" stop-opacity=".35" style="stop-color:var(--luz-2)"></stop>
+    </linearGradient>
+    <radialGradient cx="35%" cy="28%" id="kxb14">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity=".95"></stop>
+      <stop offset="55%" stop-opacity=".45" style="stop-color:var(--luz)"></stop>
+      <stop offset="100%" stop-color="#0d0a1d" stop-opacity=".15"></stop>
+    </radialGradient>
+  </defs>
+  <rect fill="url(#kxv14)" height="104" opacity=".16" rx="30" stroke-opacity=".45" stroke-width="1.2" style="stroke:var(--luz)" width="104" x="8" y="8"></rect>
+  <path d="M26 92 H70" fill="none" stroke-linecap="round" stroke-opacity=".8" stroke-width="3" style="stroke:var(--luz)"></path>
+  <path d="M26 82 H52" fill="none" stroke-linecap="round" stroke-opacity=".75" stroke-width="3" style="stroke:var(--luz-2)"></path>
+  <text class="bloco__numero" x="26" y="66">14</text>
+  <circle cx="90" cy="32" fill="url(#kxb14)" r="9" stroke="#ffffff" stroke-opacity=".5"></circle>
+  <circle cx="90" cy="88" fill="url(#kxb14)" r="5" stroke="#ffffff" stroke-opacity=".4"></circle>
+  <ellipse cx="46" cy="26" fill="#ffffff" opacity=".10" rx="18" ry="9" transform="rotate(-28 46 26)"></ellipse>
+</svg><span class="bloco__marca">Fim do Volume 1</span><h1 class="ch bloco__rotulo">Você fechou os Fundamentos + Criacionais</h1></div><svg aria-hidden="true" class="bloco__fios" preserveAspectRatio="none" viewBox="0 0 60 400">
+  <path class="bloco__fio" d="M0 60 C 30 60, 30 20, 60 20"></path>
+  <path class="bloco__fio" d="M0 60 C 30 60, 30 120, 60 120"></path>
+  <path class="bloco__fio" d="M0 60 C 34 60, 34 230, 60 230"></path>
+  <path class="bloco__fio" d="M0 60 C 34 60, 34 340, 60 340"></path>
+</svg></div><div class="bloco__conteudo">
+  
+  
   <p class="lead">Recapitulando o que está na sua mão agora: a história e o porquê dos padrões, a POO que os sustenta, os princípios SOLID e os cinco padrões criacionais — Singleton, Factory Method, Abstract Factory, Builder e Prototype.</p>
 
   <div class="box key glowy"><div class="bt"><span class="ic">★</span>O reflexo que você leva daqui</div><p><b>Programe para uma interface, não para uma implementação.</b> Todos os criacionais ensinam isso. Se você sair deste volume com esse reflexo, os padrões estruturais e comportamentais vão parecer naturais.</p></div>
@@ -1246,8 +2261,8 @@ novo.<span class="fn">setNome</span>(<span class="st">"Guerreiro 2"</span>);  <s
   <div class="box tip glowy"><div class="bt"><span class="ic">✓</span>Próximo volume</div><p>No <b>Volume 2</b> entramos nos <b>Padrões Estruturais</b> (Adapter, Decorator, Facade, Proxy e cia.): como compor objetos em estruturas maiores sem virar espaguete. Mesma receita didática, mesmo Loop Kalixto.</p></div>
 
   <div class="loop"><div class="lt">Loop Kalixto de Aprendizagem</div><div class="steps"><span class="st a">Entender</span><span class="ar">→</span><span class="st b">Reconhecer</span><span class="ar">→</span><span class="st c">Implementar</span><span class="ar">→</span><span class="st d">Refatorar</span><span class="ar">↺</span><span class="st a">Repetir</span></div></div>
-</section>
-</div></main></div><div class="scrim"></div><button class="calmtog">modo calmo</button>
+</div></section>
+<p class="vazio">Nenhum resultado nos capítulos. Tente outra palavra.</p></div></main></div><div class="scrim kx-oculto"></div><button class="calmtog">modo calmo</button>
 
 <script>
 /* progress bar */
@@ -1296,7 +2311,7 @@ document.querySelectorAll('.q').forEach(function(q){
 var ro=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');ro.unobserve(e.target);}});},{rootMargin:'0px 0px -8% 0px'});
 document.querySelectorAll('.rev').forEach(function(el){ro.observe(el);});
 </script>
-<footer class="kx-sig"><div><img class="kx-logo" src="data:image/webp;base64,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" width="40" height="40" alt=""><span><b>Kalixto — Professor • Programador • Gamer</b><small>Kalixto by Wallace Toledo · @dev.kalixto</small></span></div></footer>
+<footer class="kx-sig"><div><img alt="" class="kx-logo" height="40" src="data:image/webp;base64,UklGRsIvAABXRUJQVlA4WAoAAAAQAAAAjwAAjwAAQUxQSPsJAAABsIb/nyFJ0u/3/0dEZg17jPXZtm3btm3b9q11HN7eeOa0Otu+tb3bU5nx/7+o6u7qqoy5txExAehU4oCV5SIBEoSAhMw0lOUgAVBIEYqIatAYYggaZCiHoyikiGhMVZ2iCgkApGpMvSpFFVJIFoKgiGisFlQCANpbunLN+kMOWbd6xdJaAECqBXVUUZLdxRlIigZNdQUAB9/lkc9586eP27hj76k//elP9mz77jGfftMzH3HH1QBQ1TGIkJwFwQ4ZJClkCDEIwNs/8xMbzjxnv49w+r+nfvejT70FgBBiUArJIV1LUFRCUkAPfcQXf3nOtA/mpmmadsamaZrsg9eedernH7ZagVAFEZLsDHIYKaKpJ0iHPuGkc/vu7m3TZjOfs1lum9bdvf+Pox+1LkLrKNIhM5KioVasetDnz/XBbObzajn74N8++YDFiD1VIcEOIEAABCWkiLUv35PdzczH1Mzc+5ufuwhVCioEOMBJAkFSKCEqVr/tl+7WmI+1NeZ+6ut60BREhMREEwRJkVALVrz2H+5tYz721pjb716+DFoHFXKiABAUTT0sf8Yf3b01n0hr3f0XT1yIOoqQJDgZBECKaCV4wA53N59cM3f/9p0RahWCmEgCBEkNNdZ/+irP5hNu5ue8awpVEIITMUjRUAU88lfurXdg437qAxFTEJITQYqGGoveN+1t9k7M2a96+0LUQYQc4HiRorGHW290z96Vlt1PPBi9KEJivAlQNCY85N9u5h1q5r+6K3pRSYIAx4UgKUn50su89Y5t/aynI0ZVEuNKABTRShZ+vO+td27j175PNSpJcDwAQlRrWXyMe/YOzu6frkISIcaVoGilyze4m3dydj9yKiWVcSGoWunyzZ7NO9pa/1IKlQpAzhMBQESTLPmON97d1rafDBpVSMw/KZrCgqO9tQ5zM/8IU9R544BIqMNH3bzbzZvXswpKcN5EYo1Xtbnr3Oy6p6MOIphPAiC1xiMuzdk7P9t590CtJAGOCgCpCTf/j2cvYOt/ur5UQhLzSJGgU9/31ovY+nd6MQgxeoISEj7q5oU0fymSkhwVIaI1HnO1FeSCu7MSkqMhIJLCob/z7MU037s4RiVGTIrW+Jw1XpC2fTtqFRmZJj7ocssF8Wxn3Q7VyESCTP3AGy9q4yemEIQjITXyGW5e2Nw8FHFUqrr8N5aL42f2QhDOjRSt8GYvsPlLEUcBSIxr/ulWol8ujYHknCg9vCNbiax5GWoRzJFkCit/7q0XOPu+qaDkHCDaw2v2t15is/1PQyUyB0rQZTu9KZI3fnydwlxEEh4+bVYmy+ffEXE2JMGg6TPeeKEbf4NG4UyDEnjofz2XKttPV1DJ2ZABT3HzYud8ZwSZncbwTSuY+cdldmTQ9Wd70X61IOhsIAmPa73oV92JkeAQgtLDF92K5m9CEoIDoISKP/NcMvPvoVISM0Tc+uyyZf/TKo2z0BrP2u9WMvMrHoZKAA6RHj7lrRc9+7vRE2IotdJN3pSt8eNQ6zBKkLWneVu63UvCDGDCnc/yXLbW/3ILRHKI1HhEv3TmF98HaRilwrM9W+GsfTwqYogmvN0bL3zrr0KlA6RG/Wz5+v5eJBkAVXvHHgh8hlE4IIFLNpSv8SProBgmK7Z5W76TF+kwBK7ZdyCwaUqCDDBy/akHAttWUgEQDDj4zPK1vns1AgYl4KCfHhhQOcDIdaeWr/HtKyXIgARZs/dAYOOUKgFCAldsOxA4eVEIBAEGLtngTfmOrIJgqGrv2PL1/dOMOoQa5ePla/ydqGaQhDcWz7K/BJUMgVR4pmcrnPcfgySc6RH7PZct+8X3QUVwSMKdzypd63+5BSIxVKKuPs3bsjW+a3HQGag1vu1N6Y5CJUMISg8f9lw2s7eiHgZAajz5OreSZb/0/kicRcAtzvJctj8sjUFmoGjFn5XNfDMq5Qyg1Pi0WcncXoHEmSiMeHDjRb/6doiCWYrqmv+6lcv85wtUCc4m6tfL9lYEFcySEvHwojW3QxTOwIHA9f/wXKrWfjjFIACHDFI0fdLbUjX+CkmBBDibhPtfa1ambOffDlGI2UvQqW3elKnxI6sUhORsKFrjJfvbImW/5pGohJgjJYaVZ3ou045FMYxCarymb1Ye8+uegko5J1BCWPMPL9JPUwqUUWgK7/QCmz8BUUjMnRLkNn8yK032vb2gI+CQIK/10li+5l6IwrkNUgJv9Xtvy9L4p1MMQoySFI316xuzkrT+55sgKkcDUEM8ZK+3BbGcX4KeCgFwFBCp8OxrLRfEty6IUQWjJiTEZd93K4b5ebeRJCRHBUIiHniJWzmeh6Qk5pGiIb2vGI1/PqYgxLyKKA7e7VaE1k9bK1GHkCMhAFAC7n2B5wK0fvatUQUFCWLUBEgN9Vv3m3We+UUPRK1CABwZAYASdNUGz53n089CrSKYf1ICb/krz91m1r4BKQhJAJwfUCTgnv9167TWvpY0KofNK0GQEvCsy9w6zLK/TaOSxPwTBCkxvmbac3f5j369fSGFBDgGgxRZ9IHp3Lp105Xbj/nuzkUgMb6kau/9/ensXZz9HY89aePWBBkvUfTeO533e+6atmmue+ijTt6yIYAYWwIgRdNbr9h2jnfxwx970tZvC8CxGUoJuPl5x27ZZm7WFWbuR736VW+41UtO3vptghhzKg//556dH3nDJe7WEe5Xv+GIw6532O2/+bU/fR3jTzJ+wb++6ctfO7v1TjS79E8nfuxrJ5144o4TT7EngGMHCG/91/O+8uVPvPubl+bJM3P/7be2bDhlz84fn/4X/9LisSMAKO78Q7vwP//5T3Z3N5scM3e/+Kzf/fWvvz7zzJ/u2/XN5y3FhAqWPuRNb3zzW1529LS7e2uTYa2773nUHW9zw0OPOGTNmrUrpxTghIAYvvDxH/zUz1r3Jo9f7rv3T3tSD7MXYmIGRVRALH/hj69zb/J45b77FdufUyPEGFRFhIOYXAIkKaoxRix+4rGXuJvZuJiZ+7lHPbJCikFEhOhOikioE+o7vPanPmjZ5sUsmw/+8DW3jki1qgjRqQRFJNQRWH73D/72and3a5qczeZiltumNXf3y3/6ntstB2IVVEh0LkGKhBgJLL7L60/5y+U+tO33+03Ttm3TNP1+v/Whl/xh0+tvUxFMSUWE6CBwUERCiIHAqoe/67i9f7u09Tn3L/rzziPf9oApQEKIQURIguhokhQVCalSAEtved/Hv+y9nz3q5M07du3etuGkIz/9npc97t43WwQgVCmKipAgALCjABAgqRJSr1YMsl40tXLV6hVLF1XEYOj1UlChgCCIzuaQQYKkiIZYVVUKQUUIiGpMKaUYREghCKKMBMAZVUQHQwg6VCgcBFFMghhKEjOSJCgASBAAUXpijsT/jwBWUDggoCUAAJBpAJ0BKpAAkAA+QRqIRCKhoR1uXsQoBAS2AGXRAL8A52jano/57+wHsMVv/Ff2n9Xf2X3T8+vU3k+c9f8H7a/m7/r/Uf+jvYA/V3/b/2/8PfjM9S/9v/5H4zfAD+g/4b/if4D3iP9R/0P8p7l/8J6gH9D/r3rZ/9D2Fv3K9gX+d/5T/0euV/5v9f8Fn9Z/2n7WfAP/NP7b/5Pz/+QD/qeoB6mX8A7AD+Kfgt+l/jJ/afxl/YD1L/IPnX8n/df3H/wHty/2Hcs6S/XH1N/k/3m/X/3n92/Xv/f/3rxJ+MP9/9vnyEfk/86/zn9g/dH3Q/kP2D7jbZv8t/2/1S9wL2Y+m/7z+8ePdqO+Af+r/ffgB/nv9X/4/qv/n//B4ov4L/Lf8P/VfAD/Pf7j/wf79+af0y/0//q/0H5te1b6N/8n+f+AX+Yf1P/g/37/Kfth85P/t9yX7i+yV+sn3/vd3Ame3YRPG9TC3U66UKlv9eYeCKRsZxuW/BY13Ubzr5EycQTk8IyIIapoSdcfB9HVt38pLf7G2kSJwcJhETupUc0mYNXlAW/ADMeE8H7jMK6BdE9bk7KT3zMaizZpajzlxOE7cLEPpjE7pPFqbiI93wVGhsqQxqzDBQpU90di2xmqV59t813x811fuo0GTZDq0JxHZxglee96jlRq6LoPdYA7FO08iA7s5FmFtoE+MbKp4OKeeIHPhbhbS4bJ0M5IIxTdXR4/FXQliM7CPIbofz7isSfZcqBoYR2vQKxGnFIZs5WW35tMCaW2WijPE4sF1qtNbgTgxeTogE/gfABa2/e92qwQZBjqZFXLsuRa1L1azi1FjEWZb4P/DxZ95J5GNgzVwW2ZsP9Uuf6XrA9bRkrXuECQ2MSKhRd9Yi+l8DEgMAjDy/SCJKpArCf9aGzmaafKtpEduJtmKI7c8nUXJ9sc4lVvyOQOzaWblfxW8ThPU1GNsGdkfbx/uN5pRy4R2HyXpf/54YyqSJQTY3e5EH0NE6B91KAPex2axf9DHyeD4KCfTYNCMaJzH9ZJ8ghcHkw31MnKcvBw/xQWMPcTHR/Wt+Jx2k222wYlucCvs/b5xnEtYzkl1qQNP2zqul+Cbu90homsuEgH4x43sjUU67QNbRFkAAAA/v8NZV/d5PsdGR5mbzoaUaTBohjhEBHR24g95yXpv8Q7380PJVGVtWrbkJOwPfXPT36vI/4YCwlwT9aM15f9oHzM80khZr/2nw0JKf3qd3oX40g9a9YFq4+MxM7rT6xTkFU37XPI00nYjQStyzDBuNIm4wTLtYJe4TI1B0Xivvz1JRb0UHcq+RTV8Pu5aKxlF2WZzTrnQeSooA42XjQqv0VFaoHFdEPlqJJOb6iNHpj8W99iAogtnmNci9QqUrN+a0CqmvQGD866N3qrYX3cEiw9tL/XN1g9Bw4L/Fml/uH4KpMx9OAE4LEX3EZUSWbb9piXz9UD88VkMzAc8W//CucI+52HmaLeKAo7drRPdkaecmxgmmZJOt/1YAaMFADLMCSAurOQ1ee1PjU3Xqkd6XdVOjQe6y4/4vohxvKeeP99VU4N1YvMsU/BFSy8UCoPHYjDXlKw9diC95BItTrqLObSh6O/DkKYY9CvDUS0tb4Jwf4rW00aTcaiUMsyp2GA1xkDqbL4WcIj8+f/8eX7EXFn3mLXc9DGs95EF5iy2EIig8U8LwA7/tkhv/pjXAAmKYn1GyjFKcJfL5dvzdqrZMLQ5qsMiZxaLjvQIV+004xuggZkKlUs8s2d7YgOtnclHYSTDKsnJOYV+HbCveQ7ptUImvuEkK0l6bMu1Qq3qJi/XUxeODROhWfEzQWK3uayuAbhvSlbpZOnvIqt5OaPSm911J+dy/TYSHylFcWq6uJPnGieD1IuSaFHXOxz9j7Gdga9W2oHbvde60tCCAo0fbleEkQzH1EeEu3eJHjpLHqVWyNuMo50ugVADTIr5IExjvmEjhyV7EiPM7VsCzh63GKGNZENVPe/O7ZgnVEPbfDvjtEJ7T+qrDVwClNBplC315AMszqBkHEhoa7iDgP3o7J3twqTGMh7X6teM++XQvVD+3VXM3CpF68/e9eSV6IGq1Mfl2KjjLIwBSYx/9ZDntHhUptU6Df6Zv2lpJ4MM8YxcOspsCyimLIsErwlJd2t6WriLU+wAcPkQNc4Skyn0SXDwjd3iBos1i9CTazQ3UlJkUXyPTZiVVQWSHzUTwTWuQcw8Seg9XKCY+1ys9O3Zbu+U1t8f1Zf+ifL6y1ddl6GEteFHdC8v8TAEOfnPQdD47Jxq0cf0H56t0isO28r7IVP6hDv5tnnsBkInRrLp9XhbKO367fXyCFlQWytNxt3hAMHXAMyhNC4u0vDsDTsiJXJ0cDEdS4ZKvH8dmXxP1VHmZOydlxQVfkNb9vS219hgG6xX8D0mQmFnZ0GGECJP0h2b51IgURbjJ7NEmbhSkMou8dBDHewp/Ndx9YnY11UgJX1Li5u/vM1mXKgGKrkfyVStpPwMk/XRkCNjfpWVS375ccPLX++aTjF1/nsWOiirBA4J/gEweLR7fy5XNU2MGQqMK3dwgYWIBDTjGcrwOdnb25BTBXr+byHDS/IMZyTc9YfrZYbe3bpqlQLMTI4YpNKIs+CJMy7Im43XIf6LY1uhCbOhr+Q/RVS5R6Fs/GGN3NDN58T5Wtpexw88gndacj94Wl2x1noVzvU20CkQqIZhIPXQoIbYlPWtAaj86h2e60JOUQOOR+PDrZDdzvd/llcMLylbfZiqC6/Vtc5Rl/9jjGhwO3fI71f4VHAzXSTHeCVJHiyDIysCZX7OpruZV6/IR6Uv/5vYMaF4ZksLCCjvGq9LwqpxGL0EqQtAKEbwQSOY1ekLJoF8sXTfy2e9OpsBGfg6UJobWEQlT3LOVg+TcG9Hy9mg2pfueJSvuRg5zm2zNzkOU4eJEq1h+t27YvEaSzmJbAhsZqBIHjenGJ+C+W3YyaEmyQhhy8n+pJ8kiqKGVlcaSh4gzNWJUGxRptIwGORgo1ahKdCLk5jNdjdy3veStZW30OOXLpokDdjDg7U3ynHO4k44FpLgyTW5nNEHU3pnz2CtkmWFD/Gf0nIluHTkL3We1Rt6chZJjXnntggHx6vqk8g3EUb2Wan+PvR2ShVX5k4f3YdxvcW35g0oRl9ZtwI0SwrqSGCwqvpgajzd/pF5aNUCFGI8Zv+dKmAeP+adM9JC7CDbRjUmbtqTvZOD78sKn8qNB/RIAtuivR7czWjB8Y/9PzSaKPTYWFglovcyLDynJd5FAp6Ga4TJAOgyuDhfimIxUkqAKN3gklFmHyIRCVv1k0nyCDNgybFSkUViYVtjrnnR0wWGFA6P9NVFnOeihoCVfXZFBJRaNBR8+bF3iuO+RH6ZBMn3t5Ky+CNXCXy+38FBIrz4lMQUv4L3wxQTNoZ5flosyf9xNsKY+47KqOfv4ZYETL3ViL/aWYiWU/epPENS+Zyd0KuSxNahvBIW1fNAxc7vc6CcKzwZoFt0YaYXRAY/eN77Pf2eYXVJd+nJCYGV3oEqrq3MvLUx0Qi4l3KGYeZN45CMaGjHwRbHKt5YdO+BnP5BncUYvlrU+lnvfYIOqSVO14gmPeNx/po2kAq2O2y1aTDxg5B5qqfQZDFTOkcFLn1lRNd43swatloA+Vvjkboqh6WEsmlJqAH/4mEpESlW91K1baZMRkfBispbTL9e7EySvLlVwymL7zjkLEnIHv03LgTm9D8K/qeESHOJqr8RVlCUznqFU6C5vz/4Xaf0qfZkemr+/U4ngqSDMsjcPv1ln7SIq9BPHtuJt+u1R6MCDbKEe+DXb5rHLgST4J+Hi5j8M6ik4x/TUgxvvE58g4V27SxmBaLEgxpOj+bfr6O9yZbpmbLJTT5b1O3a2pwXTRCn8QcriDEqSW5zAHu6/BE70/GTr/dV4Z29VgMDhzZs3Yz5rpl8C/y46xmNUTAeYJg/Vb0smdv2rk9LJxo3rDIyJ5DJlyyNAz15/ZZveyJZkTehR6O10Zbz0ALrFDlltkFnTGpm+YN5VskAEFWxoq0UOa9OuSEzq/hHII+ZLT1dSSv+1V0MnprI44gBOG5ijIey3R4i5KLSaN/pjq9b0xCsVBCSt984VAYzaXfyS7KTd+m/fnMkDgoYrdZC24TCYABGhJaPYMPRbTJ1k/aFWMdz7QZnCwk0G8uHzqzP6r+nJIXh7yobvwLFQuuER7DfmgcUQ59bSlUFX8QVk2tuK7Bp8U0cnUisMqkST9BetOl7umR+3mJcWdMdlKjPi6ZUrYqg5MdCxJ/+8C7LYgME0Y+DhiQq9i1uzuJ8ZbiVBhn1qEdcwe9GytCJ9CO8IK/LjEyp9jYC6ZbijDXZOt8cw+Vj2RMeMhOqObudl6Recx3sCyqRPCx5Y2EHrjzta7FTKhoNGBSuWffvK/PJFCQ3g/58R7lUZo/1QD1DpSmxjvSj3H++V+0PLSD0Ns2hEijVuQzjz5rgqtO1en9HkPyQtIhX/DJCRPvV80KivKzqiVRV4wm5eyAQMq5XM1Xuh+TTZP/d2MKJw33P72QdcLywmLLk7Pr4S1SgKPj9ly305nibeewb3LzdyTrOmp7jMOr5A9gTzgL7on9yO5gDh6+SaLpQAjlaPpqGnJc/92kdXP8op6usvNKc7Xbmt+cJlS8IWn5lA0wI4Db4JtRL+IS8QLk16vNCHthOJchhPXRhFgsNvl/Ux0A/q0kMuHhtVVizx1vIvp+vsypNobnOmXI/KRrB/hcdcwP9+4lv0/eKoNpJ+gihe1mS/bVJ5i50C8QRF7aHSdU5ysNkJ8nL43qt2Hh+id0TlqFX+UdkBq0i2T5PWfxvsdynEnTLwicbjSgbbbdIlUFrNYgkIlFiLUJn5tkzonBYYBELkp+wp8LuGXALuLBY6KlGP4aao7zmdcCdHAB+VqecQZxXdNcWAk0WHIs/CKHOMvvpIr+KWhg9Xi/K4+99O3jb3k+D0mO8iKu0L+6aqgHGPOWBtFpV67YmS+b1IoS66hK46AoL3oah5lG9bOiKSLcMjb9pRjFQ5guJB/2KdoUSywbjRQZ5IRRxf09RNjWZkqsub79Q1EhpvY1P6KoFgbMrmuvQemn4VLM8+WXDIwOxQ/J0JvpCwxIM6MN4anJPjWFzhf4ABH54TLFrtw3AD+RaVi/7nM9N/0DEdaUK66u6M6EcJxyEsgzlw6D1CRAcipKARVxdOJo/rIqUxjT32vY0pnd0oL5DurztL4M8KEUj6hbE+RvI8doN/+4OWnG8fH7q2enRkIXfIBawrgIZ2rTTXJoHIEv0ujFFnFZnx2W6L8KUICKvvokmFUIpOXCrbo5a8ZymLl3CRPfHZmswKts4D0N+TSX2jf9iYDVn6jYTyMd5aHk+h73IDRZKaHS6T4sf/2FBhYMkYfFAdzhCOv22m4PvGIE933fCE986ssx5Ts0zG9ihfLc0FlHVBhjUBg5b9PTSUtQryNJqXcePeb7Zjm+itC5XEpmuulBaeTTyJiQvIyPX1vxSik6mI8LaV/wUwvs6cXoXBL4+H6Mq3ijuzy9fuOpvHxxIvZ2CJDVvZJiQ8iXVaBMOHeH7ezLzwzYGeQAOkT2XZxs1tNIBZg6e/E2FXSJ5DtSbjND66iEC13ohldGVrTBXq3PHdTRVydBnJTgKLY7bgWPcogDtVc0S9e31hpscAgDdH2GdNEf9MyoWz48TCyI/0eAJdXbeUBHFTUAZjSFaS7yqcdaIobjQ/c8cDD65PTT6wx7xi6ajsZnosWncyp7lNCJO9o9SL2RcslWSDBOgU6Du8inFVuKMhv5U14RsRuYOMEHfOZ5fLWd4jlRDyGkpeTNnyue8MHE0XDIbxs69SAj52fyUAXqHufsml3/IgFsATsne5VFi+rOV/icfex1SvcNn8QGP7VqXp1xWHyzYrz1287TdPwlMlKWQZZGgSPlSL985pWtjxpb3mEDV8s/N2dciCKwlRfqEE8cRBlybvndQBWx8op4uvx0aFUK9425vh4GBbLs1Y7OpIJtpdy0MchGgUl8h2E6VSlkHntCLQ2A7J01GBLVxy6fEy6F1Xc7sZI5sLUGtxyeMndMy1ebtF43apwDG5xaesJY2Bl36LkDbQAy60R3WiQh0Rs2S+bxjQVd+Z8XKqRBFG18b4flZ3wn1v8eE9BvDCdt/++A4LIzi+bunOECsPTcuGpwV503p+mM1hzcFf2aJw/5JiwbBBjb/cS+BYeaOKHLYO8OH3tX5gAU5d+qSHnr1f5VH4BYeo0oesV8lbqwARygvjOWGdLV5taC9ZbX25uZoyzyIYKMwDNH4DFGZ0fcvMrU5TZEcrT4hmR60QJZYRHwYfzDDu8Y183GNPOa5xmdx+9fSfFuk5kkVhxQO5rEfpkqn45tiCz6ygbO4srTTFHoxBNu10pKbdQVA1cci2adentxx8rj0wVbDkDdG2zoyIiZAzFmZUGscOvDwcDvmZnA1ISIwGfl6DvAjA9G50qSd9sQ4VMM62oRIUIWCq1VSDi6F3pk7XYY07p3JmkJJ9twsy+WrJF6lV6SeThb7b1GZhNwRhJX4DkW6hNiI8fzY0XlnzUpfARWbrBOn7syD6SDJwjK/0/ZzkYZCns2WnxzbPombZSqkn3gkViTzMIVchJnLWeUGm9Zr3Zt6zTTM3PtI8I/UkDmOUYtpspw1DqOg14b7cFWjQHskBbP0Fj3FheNMhhNbZQ11l12eQ+Bvb21LFmSbrI0UhXsVj/Q9NiCYW3MdOuhYip8MVG7/icRHihOtJCvvhpjfF6ONI9BEqoR6ehH+SKjWHx3j9qs0tMF+j6HnTGA/kJIj4ggqArc8nDbXMUsV+osfmUO/q7v5AamKMGnCryDtPFAOiAKprIDxAwF2C75Vo/VHP8oy5txvj65e6Fi0ZZgoXAl91mtyoPmL8xU3BIf2OrVD/2mX46cC4o6oYHBTQeZspH9+ycHNpsBsZBXg/EigvBTvOMXX4q6XblZs9lb83GgzdJHwwg3ryCLXgXVrebi6nCs2WXluRGjy4XSrE2tCrMfNUHqYUfGqCY797SZi60tIF/0mgiagnT4RqAbUSZuY6joO65JLnnAcoCsEjPoNZ/cZxHO9VKPSJNptrkbi+56CbJwozSiGuHmOsEh7pZQ9vg45nhLW/p/2e3hEZGG1Z/fB0BdxSfNqHUmjE16WrJs3PnUQVHDMGU9ZC/Gpnk5WD/l4aWt179+zM+D6LyrglQZBIABXqSvMxGiQfOgBix4qlKUcrGoy7h2aV6Ir3EsimDioFgCqqwic8qBirEXz7CdR61uMDVmMkkf0lrWo5onZ9scToxHbhMlZrHHAoK55QVu7VtYnGo4qiOtVK7CqkQbtISpgO0crnXFnSy3Q2HWwgn6dyHHMR3Dg2uqpG2T5686Lau1xAU+34P9kaLqcOa/76+dk5Nb0bdV8awwHfc7yvpcuET8BmKUoB/TEtDEyuULcyCkBE2HwsCb8+cFyPaq+flR+BeXJQUEn+nP2M8ZPJMGjlo003hc5BgnxoMxaHbRgFoIv5UfUt3qlO72fCSrq0atZeDfrISfOJxiorgVJsX5clo3XL1jQTR70Yqyd+bdIke7mXbSrbMn1ay+wXvA27KhoXpV/KRucj7XlkJrAqJT1JpvLPXqO/xHOGZ2z7EN3Ka8tWz5NSRdX8kj82VXAmVbAkSIe7tBrBkMZaCNByGjU3d+ro6Nc7wTvPR02YMAJMmrOxaikkKyZakobnNL0g/v6Zf/yNHrmA/+uZg3lVFtgv0C19ZclxHce9TbEFZm+8zyyKhQxmzKOYP/O9Euoi3rDizg3nV5HOJN9+huaQhkryHJbUtN3IKvcdu7IGQ+GK+LsoZuYktExEEPHvKK/q0W3QZu3PY9PX4gHGvcUeLSENMTAo4wyohQY/c7yiQKDAq7AMT+pAXwV18lK3+n0oZOxdxHHDfRTerTVo+DNqBRj8f/D7TI5EgxVXbH7RInv+PAQXJSil+bD1yQXdCfN2z+Owl77LPXlKp08k9WaJSOZl/gH0g6XSd89SjY6xKBWAL0UFocDsc8hJrkrW5L7+hFa/GcQ0zRAZEqGlJ/t8qVUTkppvHl0yO8nWJECQKyaFj4wNanDj60jOUaeftWX5D9y/A+PcLtl5ncAnUOSjnW3BRCyHhO21nnDexSZ4UWUtEBAC7UEL3A4Dx6rgE4tQwKOCvlKX3BTKS4QAFrY67wKnNxPWmRSQmhPrGiFp20KB+AxDcCwLthRX4sBHJocDSIB7wBkRqYlc8guCNIXq11I50A8Zn6G6Fx1k3OIB7izIFQ/dQFNZ0AinXsIr8oqOP4GKTxH/IwIEzST+MKUMur+VaH1+EbJShOUkVk3cKwdIIKn+Eeqw309ZmOAZ/Cse9DxGzsPvr099qmMixOcBT1CMOVvxoA5x4L6BALV5H/jUM7hDAB3L39ApLhwpAD+41EMl8odnVFGn4FnGn/IC8w/28P7T6eH8BbsCralpqzFJ9u8gUvbPjSOas2qpVVzQX7ZM5wuIodAR8X0oGm0BzrKb7ZMDCf+DxKijGWO+jvAcWDHPEVo8JUW6Hv01XcQP1DPENkRMWyj9j4GYAgW5loCCYQhMHP1Crl/84fZaUKj++NJtbSHXRLdqDbI3OzlRZw8eULJOmhcl8iaNvr4aANZcUZIV8zXy9H9CT9siUaM11lOE5jM1Hj4LtX8bVHXi5Jv0YEW20hCpFtwXDD+UfZ3It/h6thU4GHLX7/wJHI0xiDE85WUMUtd43h+z4m2L7q0HKI+R1WTIWqoPoInsDievNIqBlbdLGy+SLfVuhFz6n1qMpL/nOpYy/1jVCTyyjbpeoF8uFzx78nwFmcWWiBVqMgAMIZMp9rhfoQ4XAfqc3e/P0q40VwtpmfoNi1G2Nsmytag0ET/LkZNNShcTWLqaJUbUGVuV+278ebwD5KQMOaDr/nXjjXRzGrpfMZSxUW3L0iD71FUixPDLD/hQaq59E/LCE/hVxVwle6HPBwL2tmYRpufMBfQysyNjNpuytTvxOEKwepJ5aEenllZAvfC3ts6HDMLgM2/Ke0A9i2qVBb5Mv49fDPmrbM6mlfxGPYqLCeeSxp4llMw1idptIWSMoBiQR0Hq2bRtTvFZu54ofE8v+yqVdwY5M1eWp+VN6N8Gek4+PMRGKtLPoT50T+phyzwsJHm/mIlpn/RV66kn8HBvnqzW1EAQ8+GckaejNa2dmH9AfRmQSjQaf6NCzJ9Fkb4cPoFB6jJGjwy5kMsQ0RCZvGCbg7uYP0LSUuXX4RxLDrSmuxw4th5LAreMFVQFKoM9fkarkY8CgXh+P9Pf5fzO74pOz87udq9aOq1cf+1kXwCXFmsekZx5v2pAtGau+eggr9BFOBI9gxcqGhAfWdhfBiv3YRySUl++QOF6LgTPxvHwgj3/BYdzKK2c3Iy5YbzTmSNZQwRzTT3/LnhXqRqENbMLeZG6x1yllEp3a8QlDLGRDrsFLcKZDftlhyz8uAM4mszCKcvFc+g3TzTtchZTAD1aTW9Bp++Z7n/E7FqqEtkdyLx/IGdE1Z+ViRyceCwfWFpoqDWgDfdDkR5U9ECxebaVxy8YOSjSdAuxm1OGydMSZFbPIB+Nly3sSeb2MeVp/bch1fU5sn0JQxsmHHTwkncnlFFU/o8Dr/OoFvU/bpGxiJwI7sGPIlmizvx4WFbhPp2brfZtuAq9H6rCWjdcQPUBg6wvGiSDIctZeT3tmtc5t3pa5ABX9H8twiVzCicXmj3F+SvKTAdz6zH8M5+tk08XTL3QX6LrcZghyJ3GXyeU42SD4msOE7kC/3Ozixlv2X7ym4YB1K9N2v4dxYssy7BALRKUZEJ2tsPmHOeXBOSYZCqaGTeuPXTIb0H5c+eC2mElLxoil43Klpr+31J1wQpUqr2I8n0Dhmt8zjaLLvvJprvYPJBAv7EEkN6KfjBqTjXXCrrIOUYmFl1+mnbvf5oT8eys560/6eOSCR6/2sFDVEEKGFr6Nr5krzppDDLud3J0HinRzgVAXHjMZqNLnsHvyNhWDvFsQu2ucpH/ZL+XOJyMb0fIXURNTv6D5xkk0+6iVmAM04vHQvuY1Mv517B5xtY+MSWF8M/4PXCpkE4f50k+EXDw7m46csIHbykCSxfHdZeFG0gOkxWopLTO3vkgVkzuO8oWT9iBL5j0IFy9ntUHFpiZdod+ELeDwhLtVx80OH06BQzBH8RjAfZOJp0ENVFhiey1GgVKB1bLKmjT6tSepshbDuEMU+exE6ywre2tGpi4eYxe3giVj3/pCcUqdrzTSqYw4MnhcPv77OrJEjLSwS9024S9op3mFEDmuGwtfQSCRt+//ReUTUrapoigjTmDxDe5F3Xmm19c1eMxDW6rrK09vdJnvs3Ka/JL602R+opEwP+WMAcHbu0OvZkJvf5jCOVF+QqomAcjyIxmt9Q0qvlCmz4el6EayMYDiH8/TJkXztwHAufYRH5OTPn6HJXo24uX3tNqrf41Ram847J0PP6FYo4tg9hyPIJoCdJ9j1q91U8mn3BTEWQlEG0v5Q4l/EUrlVYkFL2SVflhQ5al5JGcNZqxn95hhwihPiTjwyf9uipTe6auGE7A4nrwt4Sf+oEMhLoeygLOvy2I5NsR27pGN9ow5KnuS1WMzzH3rjcPnAXA7+B/XdlfQ+SKXr9tBWaqYsM5r3jCoGQ5Ewp8NLW+yp37aBOa64pWWgCs29hPQcsI8EtESUkdGc7yHk4eD1ur4R1dBaQytQqUuj6OzCYpoFd1LpsfHsHJbgwyU/UR/H1nD5W2bYd2CIBlKQc/anckd5qTOkZ/bNwqXzIdb3efv+qggrwe5Yl0QE9wB/tavh/T5s5iL8KaYk1cnyD2Rb/S+Wg3UE4wVu1yimaI/upQ9+MExN06qsGlswaqaxOKHrdArabm9LPdebU6ucAOTBp/XYC+WmUyam2b7tsFB6TGYmg4xiSC+s/lHFfKoiFZLQL0T/hK2vKgL/0OWEsKO6X95B4kYaIXfvRFEbV1p6M+QTgmXsSmtbMsIycEkccry0IVCZ+dX9BoHfu3c16AeMppg81sWftvj/+Z/DtMVmvtFZJ744brYrGYQsHd2XqghV3FWiqnoHRIj8Vrze48Apzc48xgj8OSFgfJSp6hbvC3ukQiG6MZmBP8qNw76HeDtis+NOb81LVqT+xgncgyKASj8T2/WSdp7rLOS5J2J9fhtL95velX4ghfDqr+NIwvEZUiGE0OKRtb2MFlmYukuhP7sSG/A+D8BnKhfhdtG2Ujb0MUfCSieRkNPy6JjrkfvZHsI+MDTuTlXe28z7Z2Ncl7EE+JBOjalsyTrLm/phC8LkHBmoL4SVokyO5DHpeYrJmSJthR95VBqQYvQNS0GYWXWzjuQ4KP/JdY/PSJjHjYdkO2eDzMjLEUitoVLa8YFBDUoxQ7zC/Vrp95Dxd81aQGXghNO3WfrH273tUSiHj2948FTfOqZZnIRXFDQxpZ1DsuYA/E3HJXdbKbZssrpOPBpP8K2Y/jTaQaobwXCs7yxjivLArR1FCoQ6uVA8ggC/TFk3Kyy7VMtfUkniLHspjLc5GkC19PPqZ0NDbeuznrmMVtmTfyeJ+el96cwkj8VuMmWlcBMr97EdvSxmxwhP8wbQwOtHkYHllxmHeglYJm/H8VAx5ZyveU7dMPkHOaRqvPwfvcFvx+l7wRbUTEW8gvYf6Tk7qzLF4i+lkhbFgWlf+I1ID96Tm5o8JccL9UBtxPE1kAbvXZdEHEdTFaHE/+hG0EW8+kYzadG+6bOkefasmXlvv5ddnQS3yscCN+9SdMPiZdOp+o9V38GZfbcdplV/nPMp7tXxyf/8KTCcB0D9NYWh3274Pgesy7tZU8Lnklx7m3wvAD5fY+cnOuumgj5t66k5eQgawsuqSXc8R37SX8qeQ9E4z7H3gMP9a3fyk6YiEiZIVl/EEpVRCndKM2WJ79/ryXf6J07zhg1Cobw+4oBKaMfJt9JwS6zWeOMya9x9QZiD9up/dbEaeTfOLw7vi7CWe3fUL13p0+/4ltU6sCHdVYacE4ULUmsBmi35SeaFOnmNC1Zu+XsZvYJhzskAxaci+WesMgAXVs8qd8cd/WTS+ct3WPsZN44WbZIqcPfCxY6/PlPf9yKip7yuXMGeUwOPKqP0/sPM3/CguwKBzu5lkgX2ubzC6tNVpRnqHmDyz8hUbgIdOH7ez9hpJpnipX+/9mn5bpP8IxUM0N2bDtDN0/mRGl/VvL5O9gUuudSFjz2Bji3N+iH2e/SrRAzBvA6vFeF5fT/Ep1bPs2JsyIZfBvTg3hRuRDchljHlYGaNGIgLIKgonetKio9gbXzzq51ZowpaFvwmOuPME0ZcbT9Gxgs1bs1xc5pa22dJNhbkVOQvLv7qUGubKPcVy4qHDNLlkmOROdJeteBh3ho+i+P/E2vxGRlH2NBfNtPryngWVAmoQ/AAuWNkvw1ARJ/w8F6dwQa7mxkg48A1Zf/CuhnIOlpp7rrZpkc5zQWIKDG7ThiL0fLAhcKOk/VTZfWh7aVa+jQKfTlVAS041hPk9jG1jEXYOXfXO2FGbj8Ji54sZtlTKYWTwZL8uh33TjS/+iyk3WFdm6bHt76eKRlnOsAUnQs1WcSKt4V4GF34D9OlIdoABMcfXdtKoqKAirLy9dGtXdkQkeCtgQPzM6H0Trut+PwrMwIXbAF74fuYMZFsfnZHBMrkL6r04HbpTbqvOFUQyPhBqj/35OONBwu1Beceez+aLaUfGL8X/EzV/TfndrU3sUhx+aq+eFlkBxAZS2d2URQOIxg3skBs4amZDsDkAAFKAAAA" width="40"/><span><b>Kalixto — Professor • Programador • Gamer</b><small>Kalixto by Wallace Toledo · @dev.kalixto</small></span></div></footer>
 <style>
 .kx-theme{position:fixed;right:16px;bottom:calc(16px + env(safe-area-inset-bottom,0px));z-index:50;display:inline-flex;align-items:center;gap:8px;
   font:600 14px/20px var(--f-heading,'Sora',system-ui,sans-serif);color:var(--text-primary,#fff);cursor:pointer;
@@ -1307,7 +2322,7 @@ document.querySelectorAll('.rev').forEach(function(el){ro.observe(el);});
 .kx-theme .ic{width:18px;height:18px;border-radius:50%;background:linear-gradient(90deg,#7B2EFF,#FF2DAA);flex:none}
 @media print{.kx-theme{display:none}}
 </style>
-<button class="kx-theme" id="kx-theme" type="button" aria-label="Alternar modo claro e escuro"><span class="ic" aria-hidden="true"></span><span id="kx-theme-t">Modo claro</span></button>
+<button aria-label="Alternar modo claro e escuro" class="kx-theme" id="kx-theme" type="button"><span aria-hidden="true" class="ic"></span><span id="kx-theme-t">Modo claro</span></button>
 <script>
 (function(){
   var root=document.documentElement, b=document.getElementById('kx-theme'), t=document.getElementById('kx-theme-t');
@@ -1317,5 +2332,79 @@ document.querySelectorAll('.rev').forEach(function(el){ro.observe(el);});
     if(document.querySelector('.mermaid'))location.reload();});
   window.matchMedia('(prefers-color-scheme: light)').addEventListener('change',paint);
   paint();
+})();
+</script>
+<button aria-controls="kx-indice" aria-expanded="false" aria-label="Abrir índice" class="flutuante" id="kx-alternar" type="button">
+  <span class="flutuante__dica">Índice</span>
+  <svg aria-hidden="true" class="flutuante__cruz" fill="none" height="22" stroke="currentColor" stroke-linecap="round" stroke-width="2" viewBox="0 0 24 24" width="22"><path d="M12 5v14M5 12h14"></path></svg>
+</button><nav aria-label="Índice de capítulos" class="indice" id="kx-indice"><p class="indice__topo">Índice · 14 capítulos</p><ul class="indice__lista"><li><a class="indice__link" href="#prefacio"><b>01</b><span>Prefácio</span></a></li><li><a class="indice__link" href="#sumario"><b>02</b><span>Sumário completo</span></a></li><li class="indice__parte">Fundamentos</li><li><a class="indice__link" href="#c1"><b>03</b><span>O que são Design Patterns</span></a></li><li><a class="indice__link" href="#c2"><b>04</b><span>O problema antes dos padrões</span></a></li><li><a class="indice__link" href="#c3"><b>05</b><span>Conceitos obrigatórios de POO</span></a></li><li><a class="indice__link" href="#c4"><b>06</b><span>SOLID — a gramática do bom projeto</span></a></li><li class="indice__parte">Introdução aos Design Patterns</li><li><a class="indice__link" href="#c5"><b>07</b><span>O que é um pattern (de verdade)</span></a></li><li><a class="indice__link" href="#c6"><b>08</b><span>Classificação dos padrões</span></a></li><li class="indice__parte">Padrões Criacionais</li><li><a class="indice__link" href="#singleton"><b>09</b><span>Singleton</span></a></li><li><a class="indice__link" href="#factory"><b>10</b><span>Factory Method</span></a></li><li><a class="indice__link" href="#abstractfactory"><b>11</b><span>Abstract Factory</span></a></li><li><a class="indice__link" href="#builder"><b>12</b><span>Builder</span></a></li><li><a class="indice__link" href="#prototype"><b>13</b><span>Prototype</span></a></li><li><a class="indice__link" href="#fecho"><b>14</b><span>Você fechou os Fundamentos + Criacionais</span></a></li></ul></nav><script id="kx-console-js">
+/* Console Kalixto — busca por capítulo e índice flutuante */
+(function(){
+  var campo = document.getElementById('kx-busca');
+  var contador = document.getElementById('kx-contagem');
+  var itens = [].slice.call(document.querySelectorAll('.bloco[data-item]'));
+  var partes = [].slice.call(document.querySelectorAll('.kx-parte'));
+  var nome = (campo && campo.dataset.nome) || 'capítulos';
+  var textos = null;
+
+  function filtrar(){
+    var termo = campo.value.trim().toLowerCase();
+    if (termo && !textos) textos = itens.map(function(i){ return i.textContent.toLowerCase(); });
+    var visiveis = 0;
+    itens.forEach(function(item, n){
+      var bate = !termo || textos[n].indexOf(termo) !== -1;
+      item.hidden = !bate;
+      if (bate) visiveis++;
+    });
+    partes.forEach(function(p){ p.hidden = !!termo; });
+    document.body.classList.toggle('kx-sem-resultado', visiveis === 0);
+    contador.textContent = termo ? visiveis + '/' + itens.length : itens.length + ' ' + nome;
+  }
+  if (campo){
+    campo.addEventListener('input', filtrar);
+    campo.addEventListener('keydown', function(e){
+      if (e.key === 'Enter'){ e.preventDefault(); campo.blur(); }
+    });
+    filtrar();
+  }
+
+  /* ---------- Botão flutuante: abre o índice ---------- */
+  var botao = document.getElementById('kx-alternar');
+  var indice = document.getElementById('kx-indice');
+  if (!botao || !indice) return;
+  var dica = botao.querySelector('.flutuante__dica');
+
+  function abrir(sim){
+    document.body.classList.toggle('kx-indice-aberto', sim);
+    botao.setAttribute('aria-expanded', String(sim));
+    botao.setAttribute('aria-label', sim ? 'Fechar índice' : 'Abrir índice');
+    if (dica) dica.textContent = sim ? 'Fechar' : 'Índice';
+    indice.inert = !sim;
+  }
+  abrir(false);
+
+  if (window.matchMedia('(hover:none)').matches){
+    botao.classList.add('flutuante--apresenta');
+    setTimeout(function(){ botao.classList.remove('flutuante--apresenta'); }, 3200);
+  }
+  botao.addEventListener('click', function(){
+    if (navigator.vibrate) { try { navigator.vibrate(12); } catch(e){} }
+    abrir(!document.body.classList.contains('kx-indice-aberto'));
+  });
+  indice.addEventListener('click', function(e){
+    var link = e.target.closest('a');
+    if (!link) return;
+    /* capítulo escondido pela busca volta a aparecer antes de rolar até ele */
+    if (campo && campo.value){ campo.value = ''; filtrar(); }
+    abrir(false);
+  });
+  document.addEventListener('keydown', function(e){
+    if (e.key === 'Escape' && document.body.classList.contains('kx-indice-aberto')){ abrir(false); botao.focus(); }
+  });
+  document.addEventListener('click', function(e){
+    if (!document.body.classList.contains('kx-indice-aberto')) return;
+    if (indice.contains(e.target) || botao.contains(e.target)) return;
+    abrir(false);
+  });
 })();
 </script></body></html>

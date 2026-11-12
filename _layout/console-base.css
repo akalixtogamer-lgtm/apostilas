@@ -1,0 +1,389 @@
+/* ============================================================
+   CONSOLE KALIXTO — layout de referência (apostilakalixto-console-git-gh)
+   TOKENS — ponte para o Kalixto Design System
+   ============================================================ */
+:root{
+  --fundo-base:var(--bg-base); --fundo-nevoa:var(--bg-surface);
+  --neon-ciano:var(--brand-tertiary); --neon-magenta:var(--brand-secondary);
+  --neon-violeta:var(--brand-primary); --neon-azul:var(--brand-tertiary);
+  --vidro:var(--glass-fill); --vidro-alto:color-mix(in srgb,var(--text-primary) 10%,transparent);
+  --vidro-borda:var(--glass-stroke);
+  --texto:var(--text-primary); --texto-suave:var(--text-secondary);
+  --raio-painel:28px; --raio-modulo:16px; --desfoque:22px;
+  --fonte-display:var(--f-display); --fonte-texto:var(--f-body); --fonte-codigo:var(--f-code);
+}
+
+*,*::before,*::after{ box-sizing:border-box; }
+
+html{
+  scroll-behavior:smooth;
+  /* impede o iOS de reescalar a tipografia ao girar o aparelho */
+  -webkit-text-size-adjust:100%;
+  text-size-adjust:100%;
+}
+
+html.kxc-raiz{ background:var(--bg-base) !important; }
+html body.kxc{
+  margin:0; min-height:100vh; min-height:100dvh;
+  background:none !important; color:var(--texto);
+  -webkit-font-smoothing:antialiased; overflow-x:hidden;
+  -webkit-tap-highlight-color:transparent;
+}
+
+/* alvos de toque nunca abaixo de 44px e sem seleção acidental ao segurar */
+.flutuante,.modulo__copiar,.indice__fechar{
+  min-height:44px;
+  -webkit-user-select:none;
+  user-select:none;
+  touch-action:manipulation;   /* remove o atraso de 300ms do duplo toque */
+}
+
+/* ============================================================
+   CENA — névoa de fundo e bolhas decorativas de vidro
+   ============================================================ */
+.cena{ position:fixed; inset:0; z-index:0; overflow:hidden; pointer-events:none; }
+
+.cena__nevoa{
+  position:absolute;border-radius:50%; filter:blur(120px); opacity:.55;
+}
+.cena__nevoa--ciano   { width:46vw; height:46vw; top:-14vw; left:-10vw;background:var(--neon-ciano); opacity:.20; }
+.cena__nevoa--magenta { width:42vw; height:42vw; bottom:-16vw; right:-8vw;background:var(--neon-magenta); opacity:.22; }
+.cena__nevoa--violeta { width:52vw; height:52vw; top:35%; left:30%;background:var(--neon-violeta); opacity:.16; }
+
+.cena__bolha{
+  position:absolute;border-radius:50%;background:linear-gradient(140deg, color-mix(in srgb,var(--text-primary) 16.0%,transparent), color-mix(in srgb,var(--text-primary) 2.0%,transparent) 55%);border:1px solid rgba(255,255,255,.12);
+  -webkit-backdrop-filter:blur(6px);
+  backdrop-filter:blur(6px);
+  box-shadow:inset 0 6px 18px rgba(255,255,255,.14), 0 12px 40px rgba(0,0,0,.35);
+}
+.cena__bolha--1{ width:86px;  height:86px;  top:12%;  right:8%; }
+.cena__bolha--2{ width:38px;  height:38px;  top:26%;  right:16%; }
+.cena__bolha--3{ width:120px; height:120px; bottom:14%; left:5%; }
+.cena__bolha--4{ width:52px;  height:52px;  bottom:30%; left:13%; }
+.cena__bolha--5{ width:26px;  height:26px;  top:52%;  left:4%; }
+
+/* ============================================================
+   ESTRUTURA
+   ============================================================ */
+.moldura{
+  position:relative; z-index:1;
+  max-width:1120px;
+  margin:0 auto;
+  padding:56px 24px 140px;
+}
+
+/* ---------- Cabeçalho / HUD ---------- */
+.hud{ margin-bottom:40px; }
+
+.hud__marca{
+  display:inline-flex; align-items:center; gap:10px;
+  font-family:var(--fonte-codigo); font-size:.78rem; font-weight:700;
+  letter-spacing:.06em;color:var(--texto-suave);
+  padding:7px 14px 7px 10px;border-radius:999px;background:var(--vidro);border:1px solid var(--vidro-borda);
+  -webkit-backdrop-filter:blur(var(--desfoque));
+  backdrop-filter:blur(var(--desfoque));
+}
+.hud__ponto{
+  width:8px; height:8px;border-radius:50%;background:var(--neon-ciano);
+  box-shadow:0 0 12px var(--neon-ciano);
+}
+
+.hud__titulo{
+  font-family:var(--fonte-display);
+  font-weight:700;
+  font-size:clamp(2.3rem, 6vw, 3.9rem);
+  line-height:1.02;
+  letter-spacing:-.03em;
+  margin:22px 0 12px;background:linear-gradient(100deg, var(--neon-ciano) 0%, var(--text-primary) 42%, var(--neon-magenta) 100%);
+  -webkit-background-clip:text; background-clip:text;color:transparent;
+}
+
+.hud__resumo{
+  max-width:56ch;color:var(--texto-suave);
+  font-size:1.02rem;
+  margin:0 0 28px;
+}
+
+/* ---------- Barra de busca de vidro ---------- */
+.busca{
+  display:flex; align-items:center; gap:12px;
+  max-width:520px;
+  padding:14px 18px;border-radius:999px;background:var(--vidro);border:1px solid var(--vidro-borda);
+  -webkit-backdrop-filter:blur(var(--desfoque));
+  backdrop-filter:blur(var(--desfoque));
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.16), 0 18px 40px rgba(0,0,0,.4);
+  transition:border-color .25s, box-shadow .25s;
+}
+.busca:focus-within{border-color:rgba(53,240,228,.6);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.2), 0 0 0 4px rgba(53,240,228,.12), 0 18px 40px rgba(0,0,0,.4);
+}
+.busca__icone{ flex:none; opacity:.65; }
+.busca__campo{
+  flex:1; min-width:0;background:none;border:0;outline:none;color:var(--texto);
+  font-family:var(--fonte-texto);
+  /* 16px é o mínimo que evita o zoom automático do Safari ao focar o campo */
+  font-size:16px;
+  -webkit-appearance:none; appearance:none;border-radius:0;
+}
+.busca__campo::-webkit-search-cancel-button{
+  -webkit-appearance:none;
+  width:16px; height:16px;background:currentColor;
+  opacity:.45;
+  -webkit-mask:url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2.4' stroke-linecap='round'%3E%3Cpath d='M6 6l12 12M18 6L6 18'/%3E%3C/svg%3E") center/contain no-repeat;
+  cursor:pointer;
+}
+.busca__campo::placeholder{color:var(--text-primary); }
+.busca__contagem{
+  font-family:var(--fonte-codigo); font-size:.76rem;color:var(--texto-suave); white-space:nowrap;
+}
+
+/* ============================================================
+   PAINEL DE VIDRO — um bloco por família de comandos
+   ============================================================ */
+.bloco{
+  position:relative;
+  display:grid;
+  grid-template-columns:230px 1fr;
+  gap:36px;
+  padding:36px;
+  margin-bottom:34px;border-radius:var(--raio-painel);background:linear-gradient(150deg, color-mix(in srgb,var(--text-primary) 7.5%,transparent), color-mix(in srgb,var(--text-primary) 2.0%,transparent) 60%);border:1px solid var(--vidro-borda);
+  -webkit-backdrop-filter:blur(var(--desfoque));
+  backdrop-filter:blur(var(--desfoque));
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.18), 0 30px 70px rgba(0,0,0,.45);
+}
+/* borda iluminada em néon — ciano no bloco Git, magenta no bloco gh */
+.bloco::before{
+  content:'';
+  position:absolute; inset:-1px;border-radius:inherit;
+  padding:1px;background:linear-gradient(135deg, var(--luz) 0%, transparent 38%, transparent 62%, var(--luz-2) 100%);
+  -webkit-mask:linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite:xor; mask-composite:exclude;
+  pointer-events:none;
+}
+.bloco--git{ --luz:var(--neon-ciano);   --luz-2:var(--neon-azul); }
+.bloco--gh { --luz:var(--neon-magenta); --luz-2:var(--neon-violeta); }
+
+/* ---------- Coluna do emblema + linhas de dados ---------- */
+.bloco__coluna{ position:relative; }
+
+.bloco__emblema{
+  position:sticky; top:32px;
+  width:150px; height:150px;
+  filter:drop-shadow(0 18px 34px rgba(0,0,0,.5)) drop-shadow(0 0 26px var(--luz));
+}
+
+.bloco__rotulo{
+  margin:22px 0 4px;
+  font-family:var(--fonte-display); font-weight:700;
+  font-size:1.32rem; letter-spacing:-.02em;
+}
+.bloco__nota{
+  margin:0;
+  font-size:.86rem;color:var(--texto-suave);
+  max-width:24ch;
+}
+
+/* linhas de dados que ligam o emblema à lista */
+.bloco__fios{
+  position:absolute; top:0; right:-38px; width:60px; height:100%;
+  overflow:visible; pointer-events:none;
+}
+.bloco__fio{
+  fill:none;
+  stroke:var(--luz);
+  stroke-width:1.2;
+  opacity:.5;
+  stroke-dasharray:5 9;
+  animation:correr 3.6s linear infinite;
+}
+@keyframes correr{ to{ stroke-dashoffset:-56; } }
+
+/* ---------- Módulos flutuantes de comando ---------- */
+.lista{ list-style:none; margin:0; padding:0; display:grid; gap:12px; }
+
+.modulo{
+  position:relative;
+  display:grid;
+  grid-template-columns:1fr auto;
+  align-items:start;
+  gap:16px;
+  padding:16px 18px;border-radius:var(--raio-modulo);background:var(--vidro);border:1px solid rgba(255,255,255,.10);
+  -webkit-backdrop-filter:blur(14px);
+  backdrop-filter:blur(14px);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.14), 0 10px 26px rgba(0,0,0,.3);
+  transition:background .22s, border-color .22s, transform .22s;
+}
+/* realce só onde existe cursor; no toque isso ficaria "grudado" após o tap */
+@media (hover:hover){
+  .modulo:hover{background:var(--vidro-alto);border-color:color-mix(in srgb, var(--luz) 50%, transparent);
+    transform:translateX(4px);
+  }
+}
+.modulo:focus-within{background:var(--vidro-alto);border-color:color-mix(in srgb, var(--luz) 50%, transparent);
+}
+.modulo:active{background:var(--vidro-alto); }
+.modulo[hidden]{ display:none; }
+
+.modulo__comando{
+  font-family:var(--fonte-codigo); font-weight:700;
+  font-size:.96rem; letter-spacing:-.01em;color:var(--luz);
+  word-break:break-word;
+}
+.modulo__descricao{
+  grid-column:1 / -1;
+  margin:6px 0 0;
+  font-size:.9rem;color:var(--texto-suave);
+  max-width:68ch;
+}
+.modulo__exemplo{
+  grid-column:1 / -1;
+  margin:12px 0 0;
+  padding:11px 14px;border-radius:10px;background:rgba(0,0,0,.34);border:1px solid rgba(255,255,255,.08);
+  font-family:var(--fonte-codigo); font-size:.83rem;color:var(--text-primary);
+  white-space:pre-wrap;
+  overflow-x:auto;
+  -webkit-overflow-scrolling:touch;
+  overscroll-behavior-x:contain;
+}
+body:not(.detalhado) .modulo__exemplo{ display:none; }
+
+.modulo__copiar{
+  flex:none;
+  display:inline-flex; align-items:center; justify-content:center; gap:6px;
+  min-width:76px; min-height:44px;
+  padding:6px 16px;border-radius:999px;background:color-mix(in srgb,var(--text-primary) 6.0%,transparent);border:1px solid rgba(255,255,255,.14);color:var(--texto-suave);
+  font-family:var(--fonte-texto); font-size:.82rem;
+  cursor:pointer;
+  transition:color .2s, border-color .2s, background .2s, transform .12s;
+}
+@media (hover:hover){
+  .modulo__copiar:hover{color:var(--texto);border-color:var(--luz);background:color-mix(in srgb,var(--text-primary) 12.0%,transparent); }
+}
+.modulo__copiar:active{color:var(--texto);border-color:var(--luz);background:color-mix(in srgb,var(--text-primary) 16.0%,transparent);
+  transform:scale(.94);
+}
+.modulo__copiar[data-feito="1"]{color:var(--luz);border-color:var(--luz); }
+.modulo__copiar:focus-visible,
+.busca__campo:focus-visible,
+.flutuante:focus-visible{outline:2px solid var(--neon-ciano); outline-offset:3px; }
+
+/* estado vazio da busca */
+.vazio{
+  display:none;
+  padding:22px;border-radius:var(--raio-modulo);border:1px dashed rgba(255,255,255,.18);color:var(--texto-suave);
+  font-size:.92rem;
+}
+.bloco--sem-resultado .vazio{ display:block; }
+
+/* ============================================================
+   BOTÃO FLUTUANTE — alterna os exemplos de uso
+   ============================================================ */
+.flutuante{
+  position:fixed; z-index:5;
+  /* sobe acima da barra de gestos do iPhone e da barra do Android */
+  right:calc(20px + env(safe-area-inset-right));
+  bottom:calc(20px + env(safe-area-inset-bottom));
+  width:64px; height:64px;
+  display:grid; place-items:center;border-radius:50%;
+  cursor:pointer;color:var(--texto);background:linear-gradient(145deg, color-mix(in srgb,var(--text-primary) 18.0%,transparent), color-mix(in srgb,var(--text-primary) 4.0%,transparent));border:1px solid rgba(255,255,255,.22);
+  -webkit-backdrop-filter:blur(16px);
+  backdrop-filter:blur(16px);
+  box-shadow:inset 0 2px 0 rgba(255,255,255,.28),
+             0 0 26px rgba(255,61,190,.35),
+             0 16px 36px rgba(0,0,0,.5);
+  transition:transform .3s cubic-bezier(.2,.9,.3,1.4), box-shadow .3s;
+}
+@media (hover:hover){
+  .flutuante:hover{ box-shadow:inset 0 2px 0 rgba(255,255,255,.32), 0 0 34px rgba(53,240,228,.45), 0 16px 36px rgba(0,0,0,.5); }
+}
+.flutuante:active{ transform:scale(.92); }
+.flutuante__cruz{ transition:transform .3s cubic-bezier(.2,.9,.3,1.4); }
+body.detalhado .flutuante__cruz{ transform:rotate(45deg); }
+
+.flutuante__dica{
+  position:absolute; right:74px; top:50%; transform:translateY(-50%);
+  padding:7px 13px;border-radius:999px;background:color-mix(in srgb,var(--brand-primary) 12%,var(--bg-surface));border:1px solid var(--vidro-borda);
+  font-size:.78rem; white-space:nowrap;
+  opacity:0; pointer-events:none; transition:opacity .2s;
+}
+@media (hover:hover){
+  .flutuante:hover .flutuante__dica{ opacity:1; }
+}
+/* no celular a dica aparece sozinha nos primeiros segundos e ao tocar */
+.flutuante--apresenta .flutuante__dica,
+.flutuante:active .flutuante__dica{ opacity:1; }
+
+/* aviso de cópia */
+.aviso{
+  position:fixed; z-index:6;
+  left:50%;
+  bottom:calc(30px + env(safe-area-inset-bottom));
+  transform:translate(-50%, 20px);
+  max-width:calc(100vw - 40px);
+  text-align:center;
+  padding:11px 20px;border-radius:999px;background:color-mix(in srgb,var(--brand-primary) 12%,var(--bg-surface));border:1px solid rgba(53,240,228,.5);
+  box-shadow:0 0 24px rgba(53,240,228,.28);
+  font-family:var(--fonte-codigo); font-size:.82rem;
+  opacity:0; pointer-events:none;
+  transition:opacity .25s, transform .25s;
+}
+.aviso.aviso--visivel{ opacity:1; transform:translate(-50%, 0); }
+
+/* ============================================================
+   RESPONSIVO
+   ============================================================ */
+@media (max-width:840px){
+  .moldura{
+    padding:34px 16px 132px;
+    padding-left:calc(16px + env(safe-area-inset-left));
+    padding-right:calc(16px + env(safe-area-inset-right));
+    padding-bottom:calc(132px + env(safe-area-inset-bottom));
+  }
+  .bloco{ grid-template-columns:1fr; gap:20px; padding:24px 18px; }
+  .bloco__fios{ display:none; }
+
+  /* emblema e título lado a lado: economiza altura na vertical do celular */
+  .bloco__coluna{
+    display:grid;
+    grid-template-columns:76px 1fr;
+    align-items:center;
+    column-gap:16px;
+  }
+  .bloco__emblema{ position:static; width:76px; height:76px; grid-row:span 2; }
+  .bloco__rotulo{ margin:0; font-size:1.18rem; align-self:end; }
+  .bloco__nota{ max-width:none; align-self:start; font-size:.82rem; }
+
+  .modulo{ grid-template-columns:1fr auto; align-items:center; padding:14px 15px; }
+  .modulo__comando{ font-size:.92rem; }
+  .modulo__copiar{ min-width:0; width:44px; padding:0; font-size:0; }
+  .modulo__copiar::after{
+    content:'';
+    width:16px; height:16px;background:currentColor;
+    -webkit-mask:url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2' stroke-linejoin='round'%3E%3Crect x='9' y='9' width='11' height='11' rx='2'/%3E%3Cpath d='M5 15V5a2 2 0 0 1 2-2h10'/%3E%3C/svg%3E") center/contain no-repeat;
+          mask:url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2' stroke-linejoin='round'%3E%3Crect x='9' y='9' width='11' height='11' rx='2'/%3E%3Cpath d='M5 15V5a2 2 0 0 1 2-2h10'/%3E%3C/svg%3E") center/contain no-repeat;
+  }
+  .busca{ max-width:none; padding:12px 16px; }
+  .hud{ margin-bottom:28px; }
+}
+
+/* telas estreitas: menos camadas de desfoque, que pesam na GPU do celular */
+@media (max-width:600px){
+  :root{ --desfoque:12px; }
+  .cena__bolha{ -webkit-backdrop-filter:none; backdrop-filter:none; }
+  .cena__nevoa{ filter:blur(80px); }
+  .cena__bolha--2,
+  .cena__bolha--5{ display:none; }
+  .modulo{ -webkit-backdrop-filter:blur(8px); backdrop-filter:blur(8px); }
+}
+
+/* celular deitado: o painel volta a ter duas colunas */
+@media (max-width:840px) and (orientation:landscape){
+  .bloco{ grid-template-columns:190px 1fr; }
+  .bloco__coluna{ grid-template-columns:1fr; }
+  .bloco__emblema{ grid-row:auto; }
+  .bloco__rotulo{ margin-top:14px; }
+}
+
+@media (prefers-reduced-motion:reduce){
+  *{ animation:none !important; transition:none !important; }
+}
